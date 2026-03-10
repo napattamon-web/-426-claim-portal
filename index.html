@@ -2,323 +2,216 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8" />
-  <title>426 SHOP — แจ้งเคลม / ย้ายกลุ่ม</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+  <title>426 SHOP | ระบบแจ้งเคลม & สถานะเรียลไทม์</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     :root {
-      --bg: #f7f1ea;
-      --card-bg: #fff8f1;
-      --accent-soft: #f3d7c2;
-      --accent-strong: #c48a6f;
-      --accent-strong-dark: #a26a51;
-      --border-soft: #e4cdb9;
-      --text-main: #4b3429;
-      --text-muted: #8d796b;
-      --input-bg: #fffdf8;
-      --error: #c0392b;
-      --success: #1e8449;
-      --shadow-soft: 0 18px 45px rgba(142, 85, 52, 0.18);
-      --radius-xl: 28px;
-      --radius-lg: 20px;
-      --radius-md: 12px;
+      --bg: #fdf7f2;
+      --bg-soft: #f9eee5;
+      --card-bg: rgba(255, 255, 255, 0.9);
+      --primary: #c69a7b;
+      --primary-soft: #e3c4a8;
+      --accent: #f4b89b;
+      --accent-soft: #ffe1cf;
+      --text-main: #4b3427;
+      --text-soft: #7a5a45;
+      --border-soft: rgba(199, 154, 123, 0.25);
+      --shadow-soft: 0 18px 45px rgba(79, 52, 35, 0.18);
+      --radius-lg: 22px;
+      --radius-md: 16px;
       --radius-pill: 999px;
+      --transition-fast: 0.18s ease-out;
+      --transition-med: 0.28s ease-out;
     }
 
     * {
       box-sizing: border-box;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        sans-serif;
     }
 
     body {
       margin: 0;
-      padding: 0;
       min-height: 100vh;
-      background:
-        radial-gradient(circle at top left, #fbe6cf 0, #f7f1ea 40%, #f4eadf 100%);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #ffe9d2 0, #fdf7f2 40%, #f8efe8 100%);
       color: var(--text-main);
-      overflow-x: hidden;
-    }
-
-    /* พื้นหลังลูกเล่นวงกลม */
-    .bg-bubble {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(0);
-      opacity: 0.4;
-      z-index: 0;
-      pointer-events: none;
-      mix-blend-mode: multiply;
-      animation: float 18s ease-in-out infinite alternate;
-    }
-    .bg-bubble.b1 {
-      width: 220px;
-      height: 220px;
-      background: #f6cfac;
-      top: -60px;
-      right: -40px;
-    }
-    .bg-bubble.b2 {
-      width: 180px;
-      height: 180px;
-      background: #f1dcc5;
-      bottom: -50px;
-      left: -30px;
-      animation-duration: 22s;
-    }
-    .bg-bubble.b3 {
-      width: 140px;
-      height: 140px;
-      background: #fbe6cf;
-      top: 40%;
-      left: 10%;
-      animation-duration: 26s;
-    }
-
-    @keyframes float {
-      0% {
-        transform: translate3d(0, 0, 0) scale(1);
-      }
-      50% {
-        transform: translate3d(10px, -18px, 0) scale(1.02);
-      }
-      100% {
-        transform: translate3d(-8px, 10px, 0) scale(1.04);
-      }
-    }
-
-    @keyframes fadeInUp {
-      0% {
-        opacity: 0;
-        transform: translate3d(0, 10px, 0);
-      }
-      100% {
-        opacity: 1;
-        transform: translate3d(0, 0, 0);
-      }
-    }
-
-    .page {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 28px 16px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .shell {
-      width: 100%;
-      max-width: 1040px;
-      background: radial-gradient(circle at top left, rgba(255,255,255,0.96), rgba(255,248,241,0.96));
-      border-radius: var(--radius-xl);
-      box-shadow: var(--shadow-soft);
-      padding: 22px 22px 24px;
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.9);
-      position: relative;
-      overflow: hidden;
-      animation: fadeInUp 0.5s ease-out;
-    }
-
-    .shell::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(244, 205, 173, 0.45), transparent 40%);
-      opacity: 0.18;
-      pointer-events: none;
-    }
-
-    .shell-inner {
-      position: relative;
-      z-index: 1;
-    }
-
-    .header {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      margin-bottom: 16px;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
-
-    .header-main {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .logo-badge {
-      width: 56px;
-      height: 56px;
-      border-radius: 20px;
-      background: conic-gradient(from 160deg, #fce5d2, #f3c39b, #e6b28d, #fce5d2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      color: #5a3a26;
-      font-size: 22px;
-      box-shadow: 0 10px 22px rgba(151, 95, 61, 0.35);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .logo-badge span {
-      position: relative;
-      z-index: 1;
-    }
-
-    .logo-badge::before {
-      content: "";
-      position: absolute;
-      inset: 2px;
-      border-radius: inherit;
-      background: radial-gradient(circle at top left, #fffaf5, #f2c9aa);
-    }
-
-    .logo-badge::after {
-      content: "♡";
-      position: absolute;
-      right: -4px;
-      top: -6px;
-      font-size: 13px;
-      background: #fff;
-      border-radius: 999px;
-      padding: 0 6px;
-      border: 1px solid rgba(196, 138, 111, 0.5);
-      color: var(--accent-strong);
-      box-shadow: 0 4px 10px rgba(149, 96, 64, 0.25);
-    }
-
-    .title-wrap h1 {
-      margin: 0;
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: 0.02em;
-      color: #3f2b1e;
-    }
-
-    .title-wrap p {
-      margin: 3px 0 0;
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-
-    .header-right {
       display: flex;
       flex-direction: column;
-      align-items: flex-end;
-      gap: 4px;
     }
 
-    .pill-badge {
-      font-size: 11px;
-      padding: 4px 10px;
+    /* ===== TOP BAR ===== */
+    .shell {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 16px 40px;
+      width: 100%;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .bear-logo {
+      position: relative;
+      width: 52px;
+      height: 52px;
+      border-radius: 24px;
+      background: radial-gradient(circle at 30% 30%, #f6d2af 0, #e3b78f 45%, #c18c66 100%);
+      box-shadow: 0 8px 18px rgba(90, 60, 38, 0.25);
+      animation: bearFloat 4s ease-in-out infinite;
+    }
+
+    .bear-ear {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #f6d2af 0, #d19a71 90%);
+      top: -6px;
+      box-shadow: 0 4px 8px rgba(90, 60, 38, 0.25);
+    }
+
+    .bear-ear.left {
+      left: 4px;
+    }
+
+    .bear-ear.right {
+      right: 4px;
+    }
+
+    .bear-face {
+      position: absolute;
+      inset: 12px;
+      border-radius: 18px;
+      background: radial-gradient(circle at 30% 30%, #fef5ee 0, #f3ddc7 85%);
+    }
+
+    .bear-eye {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: #3d281a;
+      border-radius: 50%;
+      top: 14px;
+      box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
+    }
+
+    .bear-eye.left {
+      left: 11px;
+    }
+
+    .bear-eye.right {
+      right: 11px;
+    }
+
+    .bear-nose {
+      position: absolute;
+      width: 10px;
+      height: 8px;
+      border-radius: 50% 50% 60% 60%;
+      background: #3d281a;
+      left: 50%;
+      top: 22px;
+      transform: translateX(-50%);
+    }
+
+    .bear-mouth {
+      position: absolute;
+      width: 18px;
+      height: 10px;
+      border-bottom: 2px solid rgba(80, 48, 32, 0.6);
+      border-radius: 0 0 80px 80px;
+      left: 50%;
+      top: 26px;
+      transform: translateX(-50%);
+    }
+
+    @keyframes bearFloat {
+      0%, 100% {
+        transform: translateY(0) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-4px) rotate(-1.5deg);
+      }
+    }
+
+    .brand-text-main {
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text-main);
+    }
+
+    .brand-text-sub {
+      font-size: 0.82rem;
+      color: var(--text-soft);
+    }
+
+    .tag-pill {
+      padding: 6px 14px;
       border-radius: var(--radius-pill);
-      background: rgba(244, 205, 173, 0.35);
-      color: var(--accent-strong-dark);
-      border: 1px solid rgba(196, 138, 111, 0.6);
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px dashed rgba(198, 154, 123, 0.6);
+      font-size: 0.75rem;
+      color: var(--text-soft);
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      position: relative;
-      overflow: hidden;
+      backdrop-filter: blur(12px);
     }
 
-    .pill-badge::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, rgba(255,255,255,.7), transparent 60%);
-      opacity: 0;
-      transform: translateX(-100%);
-      animation: shimmer 3.4s ease-in-out infinite;
+    .dot-live {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #ff5b5b;
+      box-shadow: 0 0 0 0 rgba(255, 91, 91, 0.6);
+      animation: livePulse 1.2s infinite;
     }
 
-    @keyframes shimmer {
+    @keyframes livePulse {
       0% {
-        opacity: 0;
-        transform: translateX(-100%);
-      }
-      35% {
-        opacity: 1;
-        transform: translateX(0%);
+        box-shadow: 0 0 0 0 rgba(255, 91, 91, 0.6);
       }
       70% {
-        opacity: 0;
-        transform: translateX(100%);
+        box-shadow: 0 0 0 10px rgba(255, 91, 91, 0);
       }
       100% {
-        opacity: 0;
-        transform: translateX(100%);
+        box-shadow: 0 0 0 0 rgba(255, 91, 91, 0);
       }
     }
 
-    .steps {
-      display: flex;
-      gap: 4px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .step-pill {
-      font-size: 10px;
-      padding: 3px 8px;
-      border-radius: var(--radius-pill);
-      background: rgba(255, 255, 255, 0.8);
-      border: 1px dashed rgba(213, 174, 144, 0.8);
-      color: var(--text-muted);
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .step-pill span.num {
-      width: 14px;
-      height: 14px;
-      border-radius: 999px;
-      background: rgba(244, 205, 173, 0.7);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 9px;
-      font-weight: 700;
-      color: #4f3626;
-    }
-
-    .layout {
+    /* ===== LAYOUT ===== */
+    .grid {
       display: grid;
-      grid-template-columns: minmax(0, 3.2fr) minmax(0, 2.3fr);
-      gap: 18px;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+      gap: 20px;
+      align-items: flex-start;
     }
 
-    @media (max-width: 860px) {
-      .shell {
-        border-radius: 22px;
-        padding: 18px 16px 20px;
-      }
-      .layout {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .header {
-        align-items: flex-start;
-      }
-      .header-right {
-        align-items: flex-start;
+    @media (max-width: 880px) {
+      .grid {
+        grid-template-columns: 1fr;
       }
     }
 
     .card {
       background: var(--card-bg);
-      border-radius: 22px;
-      padding: 18px 16px 16px;
+      border-radius: var(--radius-lg);
+      padding: 18px 18px 20px;
+      box-shadow: var(--shadow-soft);
       border: 1px solid var(--border-soft);
-      box-shadow: 0 14px 32px rgba(142, 85, 52, 0.12);
+      backdrop-filter: blur(18px);
       position: relative;
       overflow: hidden;
     }
@@ -326,1017 +219,972 @@
     .card::before {
       content: "";
       position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at top right, rgba(255, 255, 255, 0.9), transparent 55%),
-        radial-gradient(circle at bottom left, rgba(253, 238, 222, 0.8), transparent 60%);
-      opacity: 0.9;
+      width: 120px;
+      height: 120px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.9), rgba(255, 204, 170, 0.4), transparent 70%);
+      opacity: 0.4;
+      top: -40px;
+      right: -40px;
       pointer-events: none;
-    }
-
-    .card-inner {
-      position: relative;
-      z-index: 1;
     }
 
     .card-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 10px;
       gap: 12px;
-      flex-wrap: wrap;
+      margin-bottom: 8px;
     }
 
-    .card-header h2 {
-      margin: 0;
-      font-size: 16px;
-      font-weight: 750;
-      color: #3f2b1e;
+    .card-title {
+      font-size: 1rem;
+      font-weight: 650;
       display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .badge-soft {
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(199, 154, 123, 0.12);
+      color: var(--text-soft);
+      border: 1px solid rgba(199, 154, 123, 0.28);
+      display: inline-flex;
       align-items: center;
       gap: 6px;
     }
 
-    .card-header h2 span.emoji {
-      font-size: 16px;
+    .small-note {
+      margin: 4px 0 10px;
+      font-size: 0.78rem;
+      color: var(--text-soft);
     }
 
-    .pill {
-      font-size: 11px;
-      padding: 3px 10px;
-      border-radius: var(--radius-pill);
-      background: rgba(244, 205, 173, 0.5);
-      color: var(--accent-strong-dark);
-      border: 1px dashed rgba(196, 138, 111, 0.55);
-      white-space: nowrap;
-    }
-
-    .hint {
-      margin: 0 0 6px;
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-
+    /* ===== FORM ===== */
     .form-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      gap: 10px 12px;
-      margin-top: 8px;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 14px;
     }
 
     @media (max-width: 720px) {
       .form-grid {
-        grid-template-columns: minmax(0, 1fr);
+        grid-template-columns: 1fr;
       }
     }
 
-    .field {
+    .form-group {
       display: flex;
       flex-direction: column;
       gap: 4px;
-      font-size: 13px;
       position: relative;
-      padding: 2px 1px;
-      border-radius: 12px;
-      transition: background 0.12s ease, box-shadow 0.12s ease, transform 0.12s ease;
     }
 
-    .field:focus-within {
-      background: rgba(255, 255, 255, 0.8);
-      box-shadow: 0 0 0 1px rgba(196, 138, 111, 0.3);
-      transform: translateY(-1px);
-    }
-
-    .field label {
-      font-weight: 600;
-      color: #5a3a26;
+    label {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-soft);
       display: flex;
       align-items: center;
       gap: 4px;
     }
 
-    .field label span.req {
-      color: var(--error);
-      font-size: 11px;
-    }
-
-    .sub-label {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .field-icon-wrap {
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
-
-    .field-icon-wrap input[type="text"],
-    .field-icon-wrap input[type="email"],
-    .field-icon-wrap input[type="date"] {
-      width: 100%;
-      padding-left: 30px;
-    }
-
-    .field-icon {
-      position: absolute;
-      left: 8px;
-      font-size: 12px;
-      opacity: 0.7;
+    .required {
+      color: #e35d5d;
     }
 
     input[type="text"],
     input[type="email"],
     input[type="date"],
+    input[type="file"],
+    select,
     textarea {
-      border-radius: 10px;
-      border: 1px solid var(--border-soft);
-      background: var(--input-bg);
-      padding: 8px 10px;
-      font-size: 13px;
-      color: var(--text-main);
+      border-radius: 999px;
+      border: 1px solid rgba(199, 154, 123, 0.4);
+      padding: 9px 12px;
+      font-size: 0.85rem;
       outline: none;
-      transition: border 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+      background: rgba(255, 255, 255, 0.8);
+      color: var(--text-main);
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
     }
 
-    input[type="date"] {
-      font-family: inherit;
+    textarea {
+      border-radius: 14px;
+      resize: vertical;
+      min-height: 70px;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 1px rgba(198, 154, 123, 0.4), 0 8px 18px rgba(90, 60, 38, 0.18);
+      background: #fff;
+      transform: translateY(-1px);
     }
 
     input::placeholder,
     textarea::placeholder {
-      color: #c3aa94;
+      color: #c4a28b;
     }
 
-    input:focus,
-    textarea:focus {
-      border-color: rgba(196, 138, 111, 0.9);
-      box-shadow: 0 0 0 1px rgba(196, 138, 111, 0.28);
-      background: #fff;
+    input[type="file"] {
+      padding: 6px 10px;
+      font-size: 0.8rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(255, 241, 226, 0.9), rgba(248, 224, 197, 0.9));
     }
 
-    textarea {
-      resize: vertical;
-      min-height: 60px;
+    .helper-text {
+      font-size: 0.7rem;
+      color: var(--text-soft);
     }
 
-    .row-full {
-      grid-column: 1 / -1;
-    }
-
-    .actions {
+    .row-inline {
       display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 10px;
       align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+      flex-wrap: wrap;
     }
 
-    .actions-right {
-      margin-left: auto;
+    .checkbox-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(199, 154, 123, 0.5);
+      font-size: 0.78rem;
+      cursor: pointer;
+    }
+
+    .checkbox-pill input {
+      accent-color: var(--primary);
     }
 
     .btn {
       border-radius: var(--radius-pill);
       border: none;
-      padding: 8px 18px;
-      font-size: 13px;
+      padding: 9px 18px;
+      font-size: 0.9rem;
       font-weight: 600;
+      cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      cursor: pointer;
-      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease, filter 0.12s ease;
+      gap: 7px;
+      transition: transform var(--transition-med), box-shadow var(--transition-med), background var(--transition-med), opacity var(--transition-med);
       white-space: nowrap;
     }
 
     .btn-primary {
-      background: linear-gradient(138deg, var(--accent-strong), var(--accent-strong-dark));
-      color: #fff7f0;
-      box-shadow: 0 7px 18px rgba(128, 74, 46, 0.55);
+      background: linear-gradient(135deg, #c69a7b, #e4bfa1);
+      color: #fff;
+      box-shadow: 0 10px 20px rgba(103, 65, 43, 0.35);
     }
 
     .btn-primary:hover {
       transform: translateY(-1px);
-      box-shadow: 0 11px 26px rgba(128, 74, 46, 0.6);
-      filter: brightness(1.03);
+      box-shadow: 0 14px 26px rgba(103, 65, 43, 0.38);
     }
 
     .btn-primary:active {
       transform: translateY(0);
-      box-shadow: 0 5px 12px rgba(128, 74, 46, 0.45);
-      filter: brightness(0.98);
+      box-shadow: 0 7px 18px rgba(103, 65, 43, 0.28);
     }
 
     .btn-ghost {
-      background: rgba(255, 255, 255, 0.7);
-      color: var(--accent-strong-dark);
-      border: 1px dashed rgba(196, 138, 111, 0.7);
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--text-soft);
+      border: 1px dashed rgba(198, 154, 123, 0.7);
+      padding-inline: 12px;
     }
 
     .btn-ghost:hover {
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 246, 235, 0.95);
+      transform: translateY(-1px);
     }
 
-    .btn-small {
-      padding: 5px 11px;
-      font-size: 11px;
-      box-shadow: none;
-    }
-
-    .btn:disabled {
-      opacity: 0.7;
+    .btn[disabled] {
+      opacity: 0.6;
       cursor: default;
       transform: none;
       box-shadow: none;
-      filter: none;
     }
 
-    .btn .dot-grid {
-      display: inline-flex;
-      gap: 2px;
-    }
-
-    .btn .dot-grid span {
-      width: 4px;
-      height: 4px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.88);
-      opacity: 0.3;
-      animation: pulseDot 1.2s ease-in-out infinite;
-    }
-    .btn .dot-grid span:nth-child(2) {
-      animation-delay: 0.15s;
-    }
-    .btn .dot-grid span:nth-child(3) {
-      animation-delay: 0.3s;
-    }
-
-    @keyframes pulseDot {
-      0%, 100% {
-        opacity: 0.3;
-        transform: translateY(0);
-      }
-      50% {
-        opacity: 1;
-        transform: translateY(-2px);
-      }
-    }
-
-    .status-box {
-      margin-top: 10px;
-      padding: 10px 10px 9px;
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.96);
-      border: 1px dashed rgba(196, 138, 111, 0.55);
-      font-size: 12px;
-      color: var(--text-main);
-      white-space: pre-line;
+    /* ===== TERMS CARD ===== */
+    .terms-card {
+      margin-top: 12px;
+      padding: 10px 11px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, rgba(243, 209, 179, 0.35), rgba(255, 255, 255, 0.9));
+      border: 1px solid rgba(199, 154, 123, 0.45);
+      font-size: 0.78rem;
+      color: var(--text-soft);
       position: relative;
       overflow: hidden;
     }
 
-    .status-box::before {
+    .terms-card::before {
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(120deg, rgba(253, 235, 217, 0.8), transparent 50%);
+      background: linear-gradient(120deg, rgba(255, 255, 255, 0.5), transparent 45%, rgba(255, 255, 255, 0.6), transparent 70%);
       opacity: 0;
-      transition: opacity 0.2s ease;
+      transform: translateX(-40%);
       pointer-events: none;
+      animation: shimmer 7s infinite;
     }
 
-    .status-box.highlight::before {
-      opacity: 1;
+    @keyframes shimmer {
+      0%, 40% {
+        opacity: 0;
+        transform: translateX(-40%);
+      }
+      45% {
+        opacity: 1;
+      }
+      70%, 100% {
+        opacity: 0;
+        transform: translateX(120%);
+      }
     }
 
-    .status-box.empty {
-      color: var(--text-muted);
-      font-style: italic;
-    }
-
-    .status-label {
-      font-size: 11px;
+    .terms-title {
       font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--text-muted);
       margin-bottom: 4px;
       display: flex;
       align-items: center;
       gap: 6px;
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: #f5b872;
-      box-shadow: 0 0 0 4px rgba(245, 184, 114, 0.35);
-    }
-
-    .text-success {
-      color: var(--success);
-    }
-
-    .text-error {
-      color: var(--error);
-    }
-
-    .tiny {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .tiny a {
-      color: var(--accent-strong-dark);
-      text-decoration: none;
-      border-bottom: 1px dotted rgba(196, 138, 111, 0.5);
-    }
-
-    .tiny a:hover {
-      border-bottom-style: solid;
-    }
-
-    .copy-btn {
-      font-size: 11px;
-      padding: 4px 10px;
-      border-radius: var(--radius-pill);
-      border: none;
-      background: rgba(244, 205, 173, 0.5);
-      color: var(--accent-strong-dark);
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      transition: background 0.12s ease, transform 0.12s ease;
-    }
-
-    .copy-btn:hover {
-      background: rgba(244, 205, 173, 0.85);
-      transform: translateY(-1px);
-    }
-
-    .copy-btn:active {
-      transform: translateY(0);
-    }
-
-    .right-card-section {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .tag-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 4px;
-    }
-
-    .tag-chip {
-      font-size: 11px;
-      padding: 3px 9px;
-      border-radius: var(--radius-pill);
-      background: rgba(255, 255, 255, 0.96);
-      color: var(--accent-strong-dark);
-      border: 1px solid rgba(226, 188, 158, 0.9);
     }
 
     .terms-list {
-      list-style: none;
-      margin: 6px 0 0;
       padding-left: 16px;
+      margin: 2px 0 4px;
     }
 
     .terms-list li {
-      font-size: 12px;
-      color: var(--text-main);
-      margin-bottom: 4px;
-      position: relative;
+      margin-bottom: 2px;
     }
 
-    .terms-list li::before {
-      content: "•";
-      position: absolute;
-      left: -10px;
-      color: var(--accent-strong);
+    /* ===== STATUS PANEL ===== */
+    .status-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
     }
 
+    .status-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .chip-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 0.76rem;
+      border: 1px solid rgba(199, 154, 123, 0.45);
+      background: rgba(255, 255, 255, 0.95);
+      cursor: pointer;
+    }
+
+    .chip-toggle input {
+      accent-color: var(--primary);
+    }
+
+    .filter-input {
+      min-width: 150px;
+    }
+
+    .status-table-wrap {
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(199, 154, 123, 0.35);
+      overflow: hidden;
+      max-height: 410px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .status-scroll {
+      overflow: auto;
+      max-height: 370px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+    }
+
+    thead {
+      background: linear-gradient(135deg, #f6e4d1, #fcefe2);
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    th,
+    td {
+      padding: 7px 8px;
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    th {
+      font-weight: 600;
+      color: var(--text-soft);
+      border-bottom: 1px solid rgba(199, 154, 123, 0.4);
+      position: sticky;
+      top: 0;
+      background: inherit;
+    }
+
+    tbody tr:nth-child(even) {
+      background: rgba(249, 237, 225, 0.45);
+    }
+
+    tbody tr:nth-child(odd) {
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    .pill-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.72rem;
+      border-radius: var(--radius-pill);
+      padding: 3px 9px;
+      border: 1px solid rgba(199, 154, 123, 0.35);
+      background: #fff8f1;
+      color: var(--text-soft);
+    }
+
+    .pill-status.ok {
+      background: #e6f7ec;
+      border-color: #8cc8a1;
+      color: #317854;
+    }
+
+    .pill-status.done {
+      background: #e1f0ff;
+      border-color: #8ab5e2;
+      color: #265789;
+    }
+
+    .btn-icon {
+      border: none;
+      background: none;
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .btn-icon:hover {
+      background: rgba(199, 154, 123, 0.15);
+      transform: translateY(-1px);
+      box-shadow: 0 3px 8px rgba(90, 60, 38, 0.2);
+    }
+
+    .btn-icon span {
+      font-size: 0.9rem;
+    }
+
+    .status-empty {
+      text-align: center;
+      padding: 22px 10px;
+      font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+
+    .footer-note {
+      text-align: center;
+      font-size: 0.72rem;
+      color: #b38a6e;
+      margin-top: 18px;
+    }
+
+    /* ===== TOAST ===== */
     .toast {
       position: fixed;
-      bottom: 14px;
       left: 50%;
-      transform: translateX(-50%);
-      padding: 8px 14px;
+      bottom: 20px;
+      transform: translateX(-50%) translateY(120%);
+      padding: 9px 16px;
       border-radius: var(--radius-pill);
-      background: rgba(63, 43, 30, 0.96);
+      background: rgba(60, 40, 25, 0.94);
       color: #fff;
-      font-size: 12px;
-      box-shadow: 0 12px 24px rgba(63, 43, 30, 0.45);
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.16s ease, transform 0.16s ease;
-      z-index: 99;
+      z-index: 999;
+      transition: transform 0.24s ease-out, opacity 0.24s ease-out;
     }
 
     .toast.show {
       opacity: 1;
-      transform: translateX(-50%) translateY(-2px);
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
     }
 
-    /* สถานะโหลดแบบเส้นน่ารัก */
-    .top-loader {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 0;
-      height: 3px;
-      background: linear-gradient(90deg, #fbe6cf, #f2b48a, #c48a6f);
-      box-shadow: 0 0 10px rgba(196, 138, 111, 0.8);
-      border-radius: 0 0 8px 0;
-      transition: width 0.28s ease-out, opacity 0.3s ease;
-      opacity: 0;
-      z-index: 3;
+    .toast-success {
+      border: 1px solid #96cba5;
     }
 
-    .top-loader.active {
-      opacity: 1;
-      width: 70%;
+    .toast-error {
+      border: 1px solid #f38b8b;
     }
 
-    .top-loader.done {
-      width: 100%;
-      opacity: 1;
+    .pill-badge {
+      padding: 2px 7px;
+      border-radius: var(--radius-pill);
+      font-size: 0.7rem;
+      background: rgba(255, 255, 255, 0.1);
     }
   </style>
 </head>
 <body>
-  <!-- ลูกเล่นพื้นหลัง -->
-  <div class="bg-bubble b1"></div>
-  <div class="bg-bubble b2"></div>
-  <div class="bg-bubble b3"></div>
-
-  <div class="page">
-    <div class="shell">
-      <div class="top-loader" id="topLoader"></div>
-
-      <div class="shell-inner">
-        <header class="header">
-          <div class="header-main">
-            <div class="logo-badge"><span>426</span></div>
-            <div class="title-wrap">
-              <h1>426 SHOP — แจ้งเคลม / ย้ายกลุ่มออนไลน์</h1>
-              <p>กรอกข้อมูลสั้น ๆ ระบบจะบันทึกลง Google Sheet ให้ แล้วค่อยให้หลังบ้านจัดคิวตามเงื่อนไขเดิมของร้านค่ะ</p>
-            </div>
+  <div class="shell">
+    <!-- HEADER -->
+    <header>
+      <div class="brand">
+        <div class="bear-logo" aria-hidden="true">
+          <div class="bear-ear left"></div>
+          <div class="bear-ear right"></div>
+          <div class="bear-face">
+            <div class="bear-eye left"></div>
+            <div class="bear-eye right"></div>
+            <div class="bear-nose"></div>
+            <div class="bear-mouth"></div>
           </div>
-
-          <div class="header-right">
-            <div class="pill-badge">
-              <span style="font-size:12px;">✨</span>
-              <span><b>426 Care</b> เคลม/ย้ายกลุ่มออโต้</span>
-            </div>
-            <div class="steps">
-              <div class="step-pill">
-                <span class="num">1</span> กรอกข้อมูล
-              </div>
-              <div class="step-pill">
-                <span class="num">2</span> ระบบบันทึกลงชีต
-              </div>
-              <div class="step-pill">
-                <span class="num">3</span> เช็คสถานะได้ทุกเมื่อ
-              </div>
-            </div>
-          </div>
-        </header>
-
-        <main class="layout">
-          <!-- ซ้าย: ฟอร์มแจ้งเคลม -->
-          <section class="card">
-            <div class="card-inner">
-              <div class="card-header">
-                <h2>แบบฟอร์มแจ้งเคลม / ย้ายกลุ่ม <span class="emoji">🍮</span></h2>
-                <span class="pill">ระบบคิดสิทธิ์เคลมตามกติกาเดิมให้อัตโนมัติ</span>
-              </div>
-
-              <p class="hint">กรุณากรอก <b>อีเมลที่สมัคร</b>, <b>วันหมดอายุ</b> และ <b>วันที่ซื้อ/ต่ออายุล่าสุด</b> เพื่อให้ระบบเช็กสิทธิ์ได้ถูกต้องนะคะ</p>
-
-              <form id="claimForm">
-                <div class="form-grid">
-                  <div class="field">
-                    <label for="name">
-                      ชื่อเล่น / ชื่อลูกค้า
-                      <span class="sub-label">(ไม่บังคับ)</span>
-                    </label>
-                    <div class="field-icon-wrap">
-                      <span class="field-icon">👤</span>
-                      <input type="text" id="name" name="name" placeholder="เช่น แอมป์, เบียร์" />
-                    </div>
-                  </div>
-
-                  <div class="field">
-                    <label for="email">
-                      อีเมลที่ใช้สมัคร
-                      <span class="req">*</span>
-                    </label>
-                    <div class="field-icon-wrap">
-                      <span class="field-icon">✉️</span>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="your@email.com"
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  <div class="field">
-                    <label for="expDate">
-                      วันหมดอายุปัจจุบัน
-                      <span class="req">*</span>
-                    </label>
-                    <span class="sub-label">เลือกจากปฏิทิน หรือพิมพ์รูปแบบ YYYY-MM-DD</span>
-                    <div class="field-icon-wrap">
-                      <span class="field-icon">📆</span>
-                      <input type="date" id="expDate" name="expDate" required />
-                    </div>
-                  </div>
-
-                  <div class="field">
-                    <label for="buyDate">
-                      วันที่ซื้อ / ต่ออายุล่าสุด
-                      <span class="req">*</span>
-                    </label>
-                    <span class="sub-label">ใช้วันต่ออายุรอบล่าสุดที่คุณโอนให้ร้าน</span>
-                    <div class="field-icon-wrap">
-                      <span class="field-icon">🧾</span>
-                      <input type="date" id="buyDate" name="buyDate" required />
-                    </div>
-                  </div>
-
-                  <div class="field row-full">
-                    <label for="note">
-                      รายละเอียดเพิ่มเติม
-                      <span class="sub-label">(ถ้ามี เช่น “หลุดจากกลุ่มเดิม”, “ขอเปลี่ยนอีเมล”)</span>
-                    </label>
-                    <textarea
-                      id="note"
-                      name="note"
-                      placeholder="เล่าเพิ่มเติมนิดหน่อยให้แอดมินเข้าใจเคสของคุณได้ง่ายขึ้นค่ะ"
-                    ></textarea>
-                  </div>
-
-                  <div class="field row-full">
-                    <label>
-                      สลิปโอน (ในกรณีไม่เข้าเงื่อนไขเคลมฟรี)
-                    </label>
-                    <span class="sub-label">
-                      หน้าเว็บนี้จะบันทึกข้อมูลลง Google Sheet ก่อน
-                      สลิปสามารถส่งเพิ่มผ่าน LINE ร้านตามขั้นตอนที่แอดมินแจ้งได้ค่ะ
-                    </span>
-                    <input
-                      type="file"
-                      id="slip"
-                      name="slip"
-                      accept="image/*"
-                      disabled
-                      style="margin-top:4px; opacity:0.6; cursor:not-allowed;"
-                    />
-                    <span class="tiny">
-                      * ถ้าระบบแจ้งว่าเข้ากลุ่ม <b>แพ็กดูแล 19฿</b> หรือมีค่าใช้จ่าย
-                      สามารถแนบสลิปใน LINE เพื่อให้บอทฝั่งไลน์บันทึกลง Drive ตามระบบเดิมได้เลยค่ะ
-                    </span>
-                  </div>
-                </div>
-
-                <div class="actions">
-                  <button type="submit" class="btn btn-primary" id="submitBtn">
-                    <span id="submitBtnText">ส่งคำขอเคลม</span>
-                    <span id="submitBtnSpinner" style="display:none; font-size:11px;">
-                      <span class="dot-grid">
-                        <span></span><span></span><span></span>
-                      </span>
-                    </span>
-                  </button>
-
-                  <button type="button" class="btn btn-ghost" id="checkStatusAfterBtn">
-                    เช็คสถานะล่าสุดจากอีเมลนี้
-                  </button>
-
-                  <span class="tiny">
-                    ระบบจะบันทึกลง Google Sheet และจัดคิวตามเวลาที่ส่งเข้ามาค่ะ
-                  </span>
-                </div>
-              </form>
-
-              <div class="status-box" id="resultBox">
-                <div class="status-label">
-                  <span class="status-dot"></span>
-                  สรุปผลการส่งคำขอ
-                </div>
-                <div id="resultContent" class="status-box empty">
-                  ยังไม่มีข้อมูลการส่งเคลมในรอบนี้ค่ะ
-                </div>
-                <div style="margin-top:6px; display:flex; justify-content:space-between; align-items:center; gap:6px;">
-                  <button type="button" class="copy-btn" id="copyResultBtn">
-                    ⧉ คัดลอกข้อความให้ลูกค้า
-                  </button>
-                  <span class="tiny">สามารถคัดลอกข้อความนี้ไปส่งให้ลูกค้าเก็บเป็นหลักฐานได้เลยค่ะ</span>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- ขวา: เช็คสถานะ + เงื่อนไขเคลม -->
-          <section class="right-card-section">
-            <!-- เช็คสถานะ -->
-            <div class="card">
-              <div class="card-inner">
-                <div class="card-header">
-                  <h2>เช็คสถานะเคลม <span class="emoji">📡</span></h2>
-                  <span class="pill">ดึงข้อมูลแบบเรียลไทม์จาก Google Sheet</span>
-                </div>
-
-                <p class="hint">กรอกอีเมลที่เคยแจ้งเคลมไว้ ระบบจะค้นหารายการล่าสุดจาก Google Sheet ให้ค่ะ</p>
-
-                <div class="field" style="margin-top:6px;">
-                  <label for="statusEmail">อีเมลที่เคยแจ้งเคลม</label>
-                  <div class="field-icon-wrap">
-                    <span class="field-icon">🔍</span>
-                    <input
-                      type="email"
-                      id="statusEmail"
-                      placeholder="your@email.com"
-                    />
-                  </div>
-                </div>
-
-                <div class="actions" style="margin-top:8px;">
-                  <button type="button" class="btn btn-primary" id="checkStatusBtn">
-                    <span id="checkStatusText">เช็คสถานะตอนนี้</span>
-                    <span id="checkStatusSpinner" style="display:none; font-size:11px;">
-                      <span class="dot-grid">
-                        <span></span><span></span><span></span>
-                      </span>
-                    </span>
-                  </button>
-                </div>
-
-                <div class="status-box" id="statusBox">
-                  <div class="status-label">
-                    <span class="status-dot"></span>
-                    สถานะจากระบบ
-                  </div>
-                  <div id="statusContent" class="status-box empty">
-                    ยังไม่ได้เช็คสถานะค่ะ
-                  </div>
-                  <div style="margin-top:6px; display:flex; justify-content:space-between; align-items:center; gap:6px;">
-                    <button type="button" class="copy-btn" id="copyStatusBtn">
-                      ⧉ คัดลอกสรุปสถานะ
-                    </button>
-                    <span class="tiny">ข้อมูลนี้ดึงจาก Google Sheet ตามรายการล่าสุดของอีเมลนั้นค่ะ</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- เงื่อนไขการรับเคลมแบบเดิม -->
-            <div class="card">
-              <div class="card-inner">
-                <div class="card-header">
-                  <h2>เงื่อนไขการรับเคลม (สรุป) <span class="emoji">☕</span></h2>
-                </div>
-
-                <p class="hint">
-                  สรุปจากระบบเดิมของ 426 SHOP — ฝั่งหลังบ้านจะตัดสินสิทธิ์เคลมตามกติกานี้ให้อัตโนมัติค่ะ
-                </p>
-
-                <ul class="terms-list">
-                  <li>หาก <b>วันที่ซื้อ/ต่ออายุอยู่ในปี 2026 ขึ้นไป</b> จะเข้าข่ายเคลมฟรีตามเงื่อนไขของร้าน</li>
-                  <li>หากซื้อ/ต่ออายุใน <b>ปี 2025</b> จะใช้รูปแบบ <b>แพ็กดูแล 19 บาทต่อรอบเคลม</b></li>
-                  <li>บางเคสที่เหลือวันใช้งานเยอะมาก ระบบจะมีตัวเลือกให้ลูกค้า
-                    <b>“ลดวันเหลือครึ่งหนึ่ง”</b> เพื่อแลกกับการเคลมฟรีในรอบนั้น</li>
-                  <li>คำขอจะถูกจัดคิวตามเวลาที่ส่งเข้ามา และสามารถเช็คสถานะได้จากกล่องด้านบน</li>
-                  <li>หากระบบขึ้นว่าต้องใช้แพ็กดูแล 19 บาท สามารถโอนและแนบสลิปทาง LINE เพื่อให้บอทเดิมบันทึกลง Drive ตามระบบเก่าได้เลยค่ะ</li>
-                </ul>
-
-                <div class="tag-list">
-                  <span class="tag-chip">ปี 2026+ เคลมฟรี</span>
-                  <span class="tag-chip">ปี 2025 แพ็กดูแล 19฿</span>
-                  <span class="tag-chip">จัดคิวตามเวลาแจ้งเข้ามา</span>
-                </div>
-
-                <p class="tiny" style="margin-top:8px;">
-                  * ข้อสรุปนี้เป็นเพียงสรุปแบบย่อ ระบบจริงจะใช้เงื่อนไขเต็มจากสคริปต์เดิมของร้านในการตัดสินอีกทีหนึ่งค่ะ
-                </p>
-              </div>
-            </div>
-          </section>
-        </main>
+        </div>
+        <div>
+          <div class="brand-text-main">426 SHOP</div>
+          <div class="brand-text-sub">หน้ารวมเคลม / ย้ายกลุ่ม & ต่ออายุ เชื่อม Google Sheet</div>
+        </div>
       </div>
+
+      <div class="tag-pill">
+        <div class="dot-live"></div>
+        <span>สถานะเคลมเรียลไทม์</span>
+      </div>
+    </header>
+
+    <div class="grid">
+      <!-- LEFT: CLAIM FORM -->
+      <section class="card" aria-label="แบบฟอร์มแจ้งเคลม">
+        <div class="card-header">
+          <div class="card-title">
+            📝 แจ้งเคลม / ย้ายกลุ่ม
+          </div>
+          <span class="badge-soft">บันทึกลง Google Sheet อัตโนมัติ</span>
+        </div>
+        <p class="small-note">
+          กรอกข้อมูลให้ครบ แล้วกด “ส่งคำขอเคลม” ระบบจะส่งข้อมูลไปยัง Google Apps Script และบันทึกลงชีตแจ้งย้าย / เคลม ตามเงื่อนไขเดิมของร้าน
+        </p>
+
+        <form id="claimForm">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="email">อีเมลที่สมัคร <span class="required">*</span></label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="your@email.com"
+                required
+              />
+              <div class="helper-text">ต้องตรงกับที่อยู่ใน Google Sheet (ครอบครัว / โปรย้ายกลุ่ม)</div>
+            </div>
+
+            <div class="form-group">
+              <label for="expireDate">วันหมดอายุล่าสุด <span class="required">*</span></label>
+              <input
+                id="expireDate"
+                name="expireDate"
+                type="date"
+                required
+              />
+              <div class="helper-text">เลือกจากปฏิทินเพื่อแปลงรูปแบบวันที่ให้ตรงกับชีต</div>
+            </div>
+
+            <div class="form-group">
+              <label for="purchaseDate">วันที่ซื้อ / ต่ออายุล่าสุด <span class="required">*</span></label>
+              <input
+                id="purchaseDate"
+                name="purchaseDate"
+                type="date"
+                required
+              />
+              <div class="helper-text">ใช้ตรวจสิทธิ์เคลมฟรี / แพ็กดูแล 19 บาท ตามกติกาเดิม</div>
+            </div>
+
+            <div class="form-group">
+              <label for="claimType">ประเภทคำขอ</label>
+              <select id="claimType" name="claimType">
+                <option value="claim">เคลม / ย้ายกลุ่ม</option>
+                <option value="renew">ต่ออายุ + แนบสลิป</option>
+              </select>
+              <div class="helper-text">ใช้ tag นี้ฝั่ง Apps Script เพื่อแยกการประมวลผลได้</div>
+            </div>
+
+            <div class="form-group">
+              <label for="slip">สลิปโอน (ถ้ามี)</label>
+              <input
+                id="slip"
+                name="slip"
+                type="file"
+                accept="image/*"
+              />
+              <div class="helper-text">ถ้าไม่เข้าเงื่อนไขเคลมฟรี ลูกค้าแนบสลิปแพ็กดูแล 19 บาทได้เลย</div>
+            </div>
+
+            <div class="form-group">
+              <label for="note">โน้ตถึงแอดมิน</label>
+              <textarea
+                id="note"
+                name="note"
+                placeholder="ตัวอย่าง: เครื่องเด้งออกเอง / ต้องการย้ายจากเมลเดิมไปเมลใหม่ ..."
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="row-inline">
+            <label class="checkbox-pill">
+              <input type="checkbox" id="agree" required />
+              <span>ยืนยันว่าอ่านเงื่อนไขเคลมแล้ว</span>
+            </label>
+
+            <button type="submit" class="btn btn-primary" id="submitBtn">
+              <span>ส่งคำขอเคลม</span> <span>📨</span>
+            </button>
+
+            <button type="button" class="btn btn-ghost" id="resetBtn">
+              ล้างฟอร์ม
+            </button>
+          </div>
+
+          <div class="terms-card">
+            <div class="terms-title">
+              📌 สรุปเงื่อนไขเคลม (ตามระบบเดิม)
+            </div>
+            <ul class="terms-list">
+              <li>ซื้อใหม่ / ต่ออายุ ตั้งแต่ปี <strong>2026</strong> ขึ้นไป → เข้าข่ายเคลมฟรี (ตามเงื่อนไขระบบ)</li>
+              <li>ซื้อในปี <strong>2025</strong> → เคลมผ่านแพ็กดูแล <strong>19 บาท / รอบเคลม</strong></li>
+              <li>บางกรณีที่เหลือวันใช้งานเยอะ ระบบเสนอตัวเลือก “ลดวันเหลือครึ่งนึง” แทนจ่าย 19 บาท</li>
+            </ul>
+            <div class="helper-text">
+              ฝั่ง Apps Script จะใช้วันที่ซื้อ + วันหมดอายุเพื่อตัดสินใจตามกติกาที่ตั้งไว้ (ไม่มีการคำนวณซ้ำฝั่งหน้าเว็บ)
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <!-- RIGHT: REALTIME STATUS -->
+      <section class="card" aria-label="สถานะเคลมเรียลไทม์">
+        <div class="status-header-row">
+          <div>
+            <div class="card-title">📡 สถานะเคลม / ย้ายกลุ่ม (เรียลไทม์)</div>
+            <p class="small-note" id="lastUpdated">
+              กำลังโหลดข้อมูลจาก Google Sheet...
+            </p>
+          </div>
+          <div class="status-controls">
+            <label class="chip-toggle">
+              <input type="checkbox" id="autoRefreshToggle" checked />
+              <span>รีเฟรชอัตโนมัติ</span>
+            </label>
+
+            <div class="form-group" style="margin: 0;">
+              <input
+                type="text"
+                id="filterInput"
+                class="filter-input"
+                placeholder="ค้นหาอีเมล / สถานะ / คิว..."
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="status-table-wrap">
+          <div class="status-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>คิว</th>
+                  <th>อีเมล</th>
+                  <th>วันหมดอายุ</th>
+                  <th>สถานะ</th>
+                  <th>อัปเดต</th>
+                  <th>คัดลอก</th>
+                </tr>
+              </thead>
+              <tbody id="statusBody">
+                <tr>
+                  <td colspan="6" class="status-empty">
+                    กำลังดึงข้อมูลจาก Google Sheet ...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="row-inline" style="margin-top: 10px; justify-content: space-between;">
+          <span class="helper-text">
+            แถวในตารางนี้มาจากชีต <strong>“แจ้งย้าย”</strong> (หรือชีตที่คุณออกแบบให้ Web App ส่งไป)
+          </span>
+          <button class="btn btn-ghost" type="button" id="copyAllBtn">
+            คัดลอกสถานะทั้งหมด
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <div class="footer-note">
+      🐻 หน้าเว็บนี้ทำงานร่วมกับ Google Apps Script Web App — โปรดตั้งค่า URL และรูปแบบ JSON ให้ตรงกับระบบเคลมเดิมของร้าน
     </div>
   </div>
 
-  <div class="toast" id="toast">คัดลอกสำเร็จแล้วค่ะ 💛</div>
+  <!-- TOAST -->
+  <div class="toast toast-success" id="toast">
+    <span id="toastIcon">✅</span>
+    <span id="toastMessage">บันทึกสำเร็จ</span>
+    <span class="pill-badge" id="toastBadge">NOW</span>
+  </div>
 
   <script>
-    // 👇 ใส่ URL ของ Google Apps Script Web App ตรงนี้
-    // ตัวอย่าง: const API_URL = "https://script.google.com/macros/s/XXXXXXXX/exec";
-    const API_URL = "https://script.google.com/macros/s/XXXXXXXX/exec";
+    // === TODO: ตั้งค่า URL Web App ของ Google Apps Script ที่เชื่อมกับชีตของร้าน ===
+    // ให้ Apps Script ตอบ JSON ตามโค้ดด้านล่าง (mode=createClaim / listClaims)
+    const SCRIPT_URL = "https://script.google.com/macros/s/YOUR_WEB_APP_ID/exec";
 
     const claimForm = document.getElementById("claimForm");
     const submitBtn = document.getElementById("submitBtn");
-    const submitBtnText = document.getElementById("submitBtnText");
-    const submitBtnSpinner = document.getElementById("submitBtnSpinner");
-
-    const resultBox = document.getElementById("resultBox");
-    const resultContent = document.getElementById("resultContent");
-    const copyResultBtn = document.getElementById("copyResultBtn");
-
-    const statusEmailInput = document.getElementById("statusEmail");
-    const checkStatusBtn = document.getElementById("checkStatusBtn");
-    const checkStatusText = document.getElementById("checkStatusText");
-    const checkStatusSpinner = document.getElementById("checkStatusSpinner");
-    const checkStatusAfterBtn = document.getElementById("checkStatusAfterBtn");
-    const statusBox = document.getElementById("statusBox");
-    const statusContent = document.getElementById("statusContent");
-    const copyStatusBtn = document.getElementById("copyStatusBtn");
+    const resetBtn = document.getElementById("resetBtn");
+    const statusBody = document.getElementById("statusBody");
+    const lastUpdatedEl = document.getElementById("lastUpdated");
+    const autoRefreshToggle = document.getElementById("autoRefreshToggle");
+    const filterInput = document.getElementById("filterInput");
+    const copyAllBtn = document.getElementById("copyAllBtn");
 
     const toastEl = document.getElementById("toast");
-    const topLoader = document.getElementById("topLoader");
+    const toastIconEl = document.getElementById("toastIcon");
+    const toastMsgEl = document.getElementById("toastMessage");
+    const toastBadgeEl = document.getElementById("toastBadge");
 
-    let lastSubmittedEmail = "";
+    let allRows = [];
+    let refreshTimer = null;
+    let lastRenderHash = "";
 
-    function showToast(message) {
-      toastEl.textContent = message;
+    function showToast(message, type = "success") {
+      toastMsgEl.textContent = message;
+      if (type === "success") {
+        toastIconEl.textContent = "✅";
+        toastEl.classList.remove("toast-error");
+        toastEl.classList.add("toast-success");
+        toastBadgeEl.textContent = "OK";
+      } else {
+        toastIconEl.textContent = "⚠️";
+        toastEl.classList.remove("toast-success");
+        toastEl.classList.add("toast-error");
+        toastBadgeEl.textContent = "ERR";
+      }
       toastEl.classList.add("show");
-      setTimeout(() => toastEl.classList.remove("show"), 1900);
+      setTimeout(() => {
+        toastEl.classList.remove("show");
+      }, 2800);
     }
 
-    function setSubmitting(isSubmitting) {
-      submitBtn.disabled = isSubmitting;
-      submitBtnSpinner.style.display = isSubmitting ? "inline-block" : "none";
-      submitBtnText.textContent = isSubmitting ? "กำลังส่งคำขอ..." : "ส่งคำขอเคลม";
-
-      if (isSubmitting) {
-        topLoader.classList.add("active");
-        topLoader.classList.remove("done");
-      } else {
-        topLoader.classList.add("done");
-        setTimeout(() => {
-          topLoader.classList.remove("active", "done");
-        }, 450);
-      }
-    }
-
-    function setCheckingStatus(isChecking) {
-      checkStatusBtn.disabled = isChecking;
-      checkStatusSpinner.style.display = isChecking ? "inline-block" : "none";
-      checkStatusText.textContent = isChecking ? "กำลังดึงข้อมูล..." : "เช็คสถานะตอนนี้";
-
-      if (isChecking) {
-        topLoader.classList.add("active");
-        topLoader.classList.remove("done");
-      } else {
-        topLoader.classList.add("done");
-        setTimeout(() => {
-          topLoader.classList.remove("active", "done");
-        }, 450);
-      }
-    }
-
-    function highlightStatusBox(box) {
-      box.classList.add("highlight");
-      setTimeout(() => box.classList.remove("highlight"), 520);
-    }
-
-    function buildClaimSummaryText(data) {
-      const email = data.email || "-";
-      const queue = data.queue || "-";
-      const status = data.status || "รอดำเนินการ";
-      const extra = data.messageExtra || "";
-
-      let statusLabel = status;
-      let statusEmoji = "⏳";
-
-      if (/ฟรี/i.test(status)) statusEmoji = "✨";
-      else if (/แพ็กดูแล|มีค่าใช้จ่าย/i.test(status)) statusEmoji = "🧾";
-      else if (/สำเร็จ|เรียบร้อย|อนุมัติ/i.test(status)) statusEmoji = "✅";
-
-      let text = `สรุปการแจ้งเคลม / ย้ายกลุ่ม\n\n` +
-        `• อีเมล: ${email}\n` +
-        `• คิว: ${queue}\n` +
-        `• สถานะ: ${statusEmoji} ${statusLabel}`;
-
-      if (extra) {
-        text += `\n\nเพิ่มเติมจากระบบ:\n${extra}`;
-      }
-
-      text += `\n\n*ข้อความนี้สร้างจากหน้าเคลมออนไลน์ของ 426 SHOP เพื่อให้ลูกค้าเก็บไว้เป็นหลักฐานค่ะ`;
-      return text;
-    }
-
-    function renderResultBoxFromData(data) {
-      const summary = buildClaimSummaryText(data);
-      lastSubmittedEmail = data.email || "";
-      resultContent.classList.remove("empty");
-      resultContent.innerText = summary;
-      highlightStatusBox(resultBox);
-    }
-
-    function renderErrorResult(message) {
-      resultContent.classList.remove("empty");
-      resultContent.innerHTML = `<span class="text-error">⚠ ${message}</span>`;
-      highlightStatusBox(resultBox);
-    }
-
-    function renderStatusBoxNotFound(email) {
-      const text =
-        `ไม่พบคำขอเคลมของอีเมลนี้ใน Google Sheet ค่ะ\n` +
-        `• อีเมล: ${email || "-"}\n\n` +
-        `กรุณาตรวจสอบสะกดอีเมล หรือส่งคำขอใหม่จากแบบฟอร์มด้านซ้ายอีกครั้งนะคะ`;
-      statusContent.classList.remove("empty");
-      statusContent.innerText = text;
-      highlightStatusBox(statusBox);
-    }
-
-    function renderStatusBoxFromData(data) {
-      const email = data.email || "-";
-      const queue = data.queue || "-";
-      const status = data.status || "รอดำเนินการ";
-      const exp = data.exp || "-";
-      const updated = data.updated ? new Date(data.updated).toLocaleString("th-TH") : "-";
-
-      let statusEmoji = "⏳";
-      if (/ฟรี/i.test(status)) statusEmoji = "✨";
-      else if (/แพ็กดูแล|ค่าใช้จ่าย/i.test(status)) statusEmoji = "🧾";
-      else if (/ดึงเมลแล้ว|สำเร็จ|เรียบร้อย|อนุมัติ/i.test(status)) statusEmoji = "✅";
-
-      const text =
-        `ข้อมูลล่าสุดจาก Google Sheet\n\n` +
-        `• อีเมล: ${email}\n` +
-        `• คิว: ${queue}\n` +
-        `• สถานะ: ${statusEmoji} ${status}\n` +
-        `• วันหมดอายุ (ที่บันทึกตอนแจ้งเคลม): ${exp}\n` +
-        `• อัปเดตล่าสุด: ${updated}`;
-
-      statusContent.classList.remove("empty");
-      statusContent.innerText = text;
-      highlightStatusBox(statusBox);
-    }
-
-    async function submitClaimForm(event) {
-      event.preventDefault();
-
-      const email = document.getElementById("email").value.trim();
-      const expDate = document.getElementById("expDate").value.trim();
-      const buyDate = document.getElementById("buyDate").value.trim();
-      const note = document.getElementById("note").value.trim();
-      const name = document.getElementById("name").value.trim();
-
-      if (!email || !expDate || !buyDate) {
-        renderErrorResult("กรุณากรอกอีเมล / วันหมดอายุ / วันที่ซื้อให้ครบก่อนนะคะ");
-        showToast("ยังกรอกข้อมูลไม่ครบค่ะ");
-        return;
-      }
-
-      setSubmitting(true);
-
+    function toTHDateTime(isoOrStr) {
+      if (!isoOrStr) return "-";
       try {
-        const params = new URLSearchParams();
-        params.append("action", "submitClaim");
-        params.append("email", email);
-        params.append("expDate", expDate);
-        params.append("buyDate", buyDate);
-        params.append("note", name ? `ชื่อ: ${name}\n${note}` : note);
+        const d = new Date(isoOrStr);
+        if (Number.isNaN(d.getTime())) return isoOrStr;
+        const pad = (n) => String(n).padStart(2, "0");
+        return (
+          pad(d.getDate()) +
+          "/" +
+          pad(d.getMonth() + 1) +
+          "/" +
+          d.getFullYear() +
+          " " +
+          pad(d.getHours()) +
+          ":" +
+          pad(d.getMinutes())
+        );
+      } catch (e) {
+        return isoOrStr;
+      }
+    }
 
-        const res = await fetch(API_URL, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
-          },
-          body: params,
-        });
+    function toTHDate(isoOrStr) {
+      if (!isoOrStr) return "-";
+      try {
+        const d = new Date(isoOrStr);
+        if (Number.isNaN(d.getTime())) return isoOrStr;
+        const pad = (n) => String(n).padStart(2, "0");
+        return pad(d.getDate()) + "/" + pad(d.getMonth() + 1) + "/" + d.getFullYear();
+      } catch (e) {
+        return isoOrStr;
+      }
+    }
 
-        const data = await res.json();
-
-        if (!data.ok) {
-          renderErrorResult(data.message || "เกิดข้อผิดพลาดจากฝั่งเซิร์ฟเวอร์ค่ะ");
-          showToast("ส่งไม่สำเร็จ ลองใหม่อีกครั้งนะคะ");
-          return;
+    function copyToClipboard(text) {
+      if (!text) return;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard
+          .writeText(text)
+          .then(() => showToast("คัดลอกไปยังคลิปบอร์ดแล้ว"))
+          .catch(() => showToast("คัดลอกไม่สำเร็จ ลองอีกครั้งค่ะ", "error"));
+      } else {
+        // fallback
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        try {
+          document.execCommand("copy");
+          showToast("คัดลอกไปยังคลิปบอร์ดแล้ว");
+        } catch (e) {
+          showToast("คัดลอกไม่สำเร็จ ลองอีกครั้งค่ะ", "error");
         }
-
-        renderResultBoxFromData(data);
-        statusEmailInput.value = data.email || email;
-        showToast("บันทึกคำขอเคลมแล้วค่ะ 💛");
-
-      } catch (err) {
-        console.error(err);
-        renderErrorResult("ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ได้ในตอนนี้ กรุณาลองใหม่อีกครั้งค่ะ");
-        showToast("มีข้อผิดพลาดในการเชื่อมต่อค่ะ");
-      } finally {
-        setSubmitting(false);
+        document.body.removeChild(ta);
       }
     }
 
-    async function checkStatus(emailInput) {
-      const email = (emailInput || "").trim();
-      if (!email) {
-        statusContent.classList.remove("empty");
-        statusContent.innerHTML = `<span class="text-error">⚠ กรุณากรอกอีเมลที่จะใช้เช็คสถานะก่อนค่ะ</span>`;
-        highlightStatusBox(statusBox);
-        showToast("ยังไม่ได้กรอกอีเมลเช็คสถานะค่ะ");
+    function renderStatusTable() {
+      const filter = filterInput.value.trim().toLowerCase();
+      let rows = allRows;
+
+      if (filter) {
+        rows = rows.filter((r) =>
+          [r.queue, r.email, r.expireDate, r.status]
+            .join(" ")
+            .toLowerCase()
+            .includes(filter)
+        );
+      }
+
+      if (!rows.length) {
+        statusBody.innerHTML = `
+          <tr>
+            <td colspan="6" class="status-empty">
+              ยังไม่มีข้อมูลจาก Google Sheet หรือไม่พบผลลัพธ์ตามที่ค้นหา
+            </td>
+          </tr>`;
         return;
       }
 
-      setCheckingStatus(true);
+      const hash = JSON.stringify(rows);
+      if (hash === lastRenderHash) return;
+      lastRenderHash = hash;
 
+      const html = rows
+        .map((r) => {
+          const statusClass =
+            /ดึงเมลแล้ว|เสร็จ/i.test(r.status || "") ? "done" :
+            /กำลังดำเนินการ|รอดำเนินการ/i.test(r.status || "") ? "ok" :
+            "";
+          const statusLabel = r.status || "-";
+          const exp = r.expireDateDisplay || r.expireDate || "-";
+          const updated = r.updatedAtDisplay || toTHDateTime(r.updatedAt);
+
+          const copyText =
+            `คิวที่ ${r.queue ?? "-"}\n` +
+            `อีเมล: ${r.email ?? "-"}\n` +
+            `วันหมดอายุ: ${exp}\n` +
+            `สถานะ: ${statusLabel}\n` +
+            `อัปเดตล่าสุด: ${updated}`;
+
+          return `
+            <tr>
+              <td>${r.queue ?? "-"}</td>
+              <td>${r.email ?? "-"}</td>
+              <td>${exp}</td>
+              <td>
+                <span class="pill-status ${statusClass}">
+                  ${statusLabel}
+                </span>
+              </td>
+              <td>${updated}</td>
+              <td>
+                <button type="button" class="btn-icon" onclick='copyToClipboard(${JSON.stringify(
+                  copyText
+                )})' title="คัดลอกเพื่อนำไปแจ้งลูกค้า">
+                  <span>📋</span>
+                </button>
+              </td>
+            </tr>
+          `;
+        })
+        .join("");
+      statusBody.innerHTML = html;
+    }
+
+    async function loadClaims(showToastOnError = false) {
       try {
-        const url = new URL(API_URL);
-        url.searchParams.set("action", "checkStatus");
-        url.searchParams.set("email", email);
-
-        const res = await fetch(url.toString(), {
+        lastUpdatedEl.textContent = "กำลังโหลดสถานะเคลมจาก Google Sheet ...";
+        const res = await fetch(`${SCRIPT_URL}?mode=listClaims`, {
           method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
         });
+
+        if (!res.ok) {
+          throw new Error("HTTP " + res.status);
+        }
+
         const data = await res.json();
-
-        if (!data.ok) {
-          statusContent.classList.remove("empty");
-          statusContent.innerHTML = `<span class="text-error">⚠ ${data.message || "เกิดข้อผิดพลาดจากฝั่งเซิร์ฟเวอร์ค่ะ"}</span>`;
-          highlightStatusBox(statusBox);
-          showToast("เช็คสถานะไม่สำเร็จค่ะ");
-          return;
+        // รูปแบบ JSON ที่คาดหวังจาก Apps Script:
+        // { ok: true, rows: [{queue,email,expireDate,status,updatedAt}, ...] }
+        if (!data || !Array.isArray(data.rows)) {
+          throw new Error("รูปแบบข้อมูลไม่ตรงที่คาดหวัง");
         }
-
-        if (!data.found) {
-          renderStatusBoxNotFound(email);
-          showToast("ไม่พบรายการของอีเมลนี้");
-          return;
-        }
-
-        renderStatusBoxFromData(data);
-        showToast("ดึงสถานะล่าสุดแล้วค่ะ ✨");
-
+        allRows = data.rows;
+        renderStatusTable();
+        const now = new Date();
+        lastUpdatedEl.textContent = "อัปเดตล่าสุด: " + toTHDateTime(now);
       } catch (err) {
         console.error(err);
-        statusContent.classList.remove("empty");
-        statusContent.innerHTML = `<span class="text-error">⚠ ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์เพื่อตรวจสอบสถานะได้ในตอนนี้ค่ะ</span>`;
-        highlightStatusBox(statusBox);
-        showToast("เชื่อมต่อไม่สำเร็จค่ะ");
-      } finally {
-        setCheckingStatus(false);
+        lastUpdatedEl.textContent =
+          "ดึงข้อมูลไม่สำเร็จ ตรวจสอบ Web App URL / CORS / สิทธิ์การเข้าถึง";
+        if (showToastOnError) {
+          showToast("โหลดสถานะเคลมไม่สำเร็จ", "error");
+        }
       }
     }
 
-    async function copyTextFromElement(el) {
-      const text = el.innerText.trim();
-      if (!text) {
-        showToast("ยังไม่มีข้อความให้คัดลอกค่ะ");
+    function startAutoRefresh() {
+      if (refreshTimer) clearInterval(refreshTimer);
+      if (!autoRefreshToggle.checked) return;
+      refreshTimer = setInterval(() => loadClaims(false), 15000);
+    }
+
+    // FORM SUBMIT
+    claimForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (!claimForm.reportValidity()) return;
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "กำลังส่ง...";
+
+      try {
+        const formData = new FormData();
+        formData.append("mode", "createClaim");
+        formData.append("email", document.getElementById("email").value.trim());
+        formData.append(
+          "expireDate",
+          document.getElementById("expireDate").value
+        );
+        formData.append(
+          "purchaseDate",
+          document.getElementById("purchaseDate").value
+        );
+        formData.append(
+          "claimType",
+          document.getElementById("claimType").value
+        );
+        formData.append(
+          "note",
+          document.getElementById("note").value.trim()
+        );
+
+        const slipFile = document.getElementById("slip").files[0];
+        if (slipFile) {
+          formData.append("slip", slipFile);
+        }
+
+        const res = await fetch(SCRIPT_URL, {
+          method: "POST",
+          body: formData,
+        });
+
+        if (!res.ok) {
+          throw new Error("HTTP " + res.status);
+        }
+
+        const data = await res.json();
+        // คาดหวังจาก Apps Script:
+        // { ok:true, queue:123, free:true/false, message:"..." }
+        if (!data.ok) {
+          throw new Error(data.message || "เกิดข้อผิดพลาดจากฝั่งเซิร์ฟเวอร์");
+        }
+
+        const queueText = data.queue ? `คิวที่ ${data.queue}` : "บันทึกคิวเรียบร้อยแล้ว";
+        showToast(queueText + " — บันทึกลงชีตสำเร็จ");
+
+        // เคลียร์ฟอร์ม (ยกเว้นเมล ถ้าอยากจำเอาไว้ให้เติมกลับเองได้)
+        claimForm.reset();
+
+        // รีโหลดสถานะ
+        loadClaims(false);
+      } catch (err) {
+        console.error(err);
+        showToast("ส่งคำขอเคลมไม่สำเร็จ กรุณาลองอีกครั้ง", "error");
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "ส่งคำขอเคลม";
+      }
+    });
+
+    resetBtn.addEventListener("click", () => {
+      claimForm.reset();
+    });
+
+    autoRefreshToggle.addEventListener("change", () => {
+      startAutoRefresh();
+    });
+
+    filterInput.addEventListener("input", () => {
+      renderStatusTable();
+    });
+
+    copyAllBtn.addEventListener("click", () => {
+      if (!allRows.length) {
+        showToast("ยังไม่มีข้อมูลให้คัดลอก", "error");
         return;
       }
-      try {
-        await navigator.clipboard.writeText(text);
-        showToast("คัดลอกข้อความให้เรียบร้อยแล้วค่ะ 💛");
-      } catch (err) {
-        console.error(err);
-        showToast("เบราว์เซอร์ไม่อนุญาตให้คัดลอกอัตโนมัติค่ะ");
-      }
-    }
-
-    // ตั้งค่าวันเริ่มต้น (ช่วยให้กรอกง่ายขึ้น)
-    (function presetDates() {
-      const today = new Date();
-      const isoToday = today.toISOString().slice(0, 10);
-      const expInput = document.getElementById("expDate");
-      const buyInput = document.getElementById("buyDate");
-
-      if (!expInput.value) expInput.value = isoToday;
-      if (!buyInput.value) buyInput.value = isoToday;
-    })();
-
-    // Event listeners
-    claimForm.addEventListener("submit", submitClaimForm);
-
-    checkStatusBtn.addEventListener("click", () => {
-      checkStatus(statusEmailInput.value);
+      const text = allRows
+        .map((r) => {
+          const exp = r.expireDateDisplay || r.expireDate || "-";
+          const updated = r.updatedAtDisplay || toTHDateTime(r.updatedAt);
+          return (
+            `คิวที่ ${r.queue ?? "-"} | ` +
+            `อีเมล: ${r.email ?? "-"} | ` +
+            `วันหมดอายุ: ${exp} | ` +
+            `สถานะ: ${r.status ?? "-"} | ` +
+            `อัปเดตล่าสุด: ${updated}`
+          );
+        })
+        .join("\n");
+      copyToClipboard(text);
     });
 
-    checkStatusAfterBtn.addEventListener("click", () => {
-      const email = document.getElementById("email").value || lastSubmittedEmail;
-      statusEmailInput.value = email;
-      checkStatus(email);
-    });
-
-    copyResultBtn.addEventListener("click", () => {
-      copyTextFromElement(resultContent);
-    });
-
-    copyStatusBtn.addEventListener("click", () => {
-      copyTextFromElement(statusContent);
-    });
+    // INITIAL
+    loadClaims(false);
+    startAutoRefresh();
   </script>
 </body>
 </html>
