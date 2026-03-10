@@ -530,7 +530,6 @@
       display: flex;
       gap: 6px;
       justify-content: center;
-      flex-wrap: wrap;
     }
 
     .year-btn {
@@ -545,7 +544,6 @@
       cursor: pointer;
       text-align: center;
       transition: all 0.18s ease;
-      min-width: 80px;
     }
 
     body.theme-dark .year-btn {
@@ -604,7 +602,6 @@
       display: flex;
       justify-content: center;
       gap: 6px;
-      flex-wrap: wrap;
     }
 
     .bank-label {
@@ -1076,36 +1073,6 @@
       white-space: nowrap;
     }
 
-    .live-status-text--synced {
-      padding: 3px 8px;
-      border-radius: 999px;
-      border: 1px solid #c3dfd2;
-      background: #e7f4ee;
-      color: #356655;
-      font-weight: 500;
-    }
-
-    .live-status-text--pending {
-      padding: 3px 8px;
-      border-radius: 999px;
-      border: 1px solid #f0d48a;
-      background: #fff8e1;
-      color: #a67816;
-      font-weight: 500;
-    }
-
-    body.theme-dark .live-status-text--synced {
-      border-color: #3e6d5b;
-      background: #223831;
-      color: #c1e4d5;
-    }
-
-    body.theme-dark .live-status-text--pending {
-      border-color: #f0d48a;
-      background: #3b321c;
-      color: #ffe4a3;
-    }
-
     .live-empty {
       font-size: 0.8rem;
       color: var(--text-sub);
@@ -1241,6 +1208,37 @@
       margin-right: 4px;
     }
 
+    /* สเตตัสแบบกรอบน่ารัก */
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      border: 1px solid transparent;
+      line-height: 1.3;
+    }
+    .status-pill--green {
+      background: #e7f4ee;
+      border-color: #c3dfd2;
+      color: #356655;
+    }
+    .status-pill--yellow {
+      background: #fff8e1;
+      border-color: #ffecb3;
+      color: #8a6d1e;
+    }
+    body.theme-dark .status-pill--green {
+      background: #223831;
+      border-color: #3e6d5b;
+      color: #c1e4d5;
+    }
+    body.theme-dark .status-pill--yellow {
+      background: #3a321d;
+      border-color: #85733a;
+      color: #ffe9a6;
+    }
+
     @media (max-width: 480px) {
       .app {
         padding: 10px 12px 14px;
@@ -1296,7 +1294,7 @@
       </div>
 
       <div class="claim-time-note" id="claimTimeNote">
-        กำลังตรวจสอบเวลารับเคลมจากระบบ...
+        รับเคลมเฉพาะวันจันทร์–เสาร์ เวลา 07.00–19.00 น.
       </div>
 
       <div class="card-desc">
@@ -1321,7 +1319,8 @@
           <div class="col">
             <div class="field-label">ปีที่สมัคร</div>
             <div class="year-pill-row" id="yearRow">
-              <!-- ปุ่มปีจะถูกสร้างจาก config ที่มาจากชีต -->
+              <button type="button" class="year-btn" data-year="2568">2568</button>
+              <button type="button" class="year-btn" data-year="2569">2569</button>
             </div>
             <input type="hidden" id="signupYear" />
           </div>
@@ -1335,34 +1334,32 @@
 
       <div class="form-group" id="paymentSection" style="display:none;">
         <div class="payment-card">
-          <div class="payment-title" id="pack19Title">
-            แพ็กดูแล 19 บาท (สำหรับรอบเคลมนี้)
-          </div>
-          <div>เลือกปีสมัครที่กำหนดใช้แพ็กดูแล ระบบจะให้ใช้แพ็กดูแลเพื่อรับเข้าคิวเคลมทันทีหลังแนบสลิป</div>
+          <div class="payment-title">แพ็กดูแล 19 บาท (สำหรับรอบเคลมนี้)</div>
+          <div>เลือกปีสมัคร 2568 ระบบให้ใช้แพ็กดูแล 19 บาท เพื่อรับเข้าคิวเคลมทันทีหลังแนบสลิป</div>
           <div class="bank-lines">
             <div class="bank-line">
               <span class="bank-label">ชื่อบัญชี</span>
-              <span class="bank-value" id="bankAccountName">-</span>
+              <span class="bank-value">นภัทรธมณฑ์ ฤทธิ์ชัยศักดิ์</span>
             </div>
             <div class="bank-line">
               <span class="bank-label">ธนาคาร</span>
-              <span class="bank-value" id="bankName">-</span>
+              <span class="bank-value">กสิกรไทย</span>
             </div>
             <div class="bank-line">
               <span class="bank-label">เลขบัญชี</span>
-              <span class="bank-value" id="bankAccountNumber">-</span>
+              <span class="bank-value">062-879-4251</span>
             </div>
           </div>
           <button type="button" class="small-copy-btn" id="btnCopyAccount">
             คัดลอกเลขบัญชี
           </button>
           <div class="file-wrap">
-            <span>แนบสลิปโอนเงิน <span id="pack19AmountText">19</span> บาท</span>
+            <span>แนบสลิปโอนเงิน 19 บาท</span>
             <input type="file" id="slipInput" accept="image/*" />
-            <span style="opacity:0.8;">ระบบจะใช้สลิปนี้ในการยืนยันแพ็กดูแลสำหรับปีที่กำหนดใช้แพ็กดูแล</span>
+            <span style="opacity:0.8;">ระบบจะใช้สลิปนี้ในการยืนยันแพ็กดูแลสำหรับปี 2568</span>
           </div>
-          <div class="payment-note-red" id="pack19NoteRed">
-            หากไม่แนบสลิป ระบบจะยังไม่รับเข้าระบบเคลมสำหรับปีที่กำหนดใช้แพ็กดูแล
+          <div class="payment-note-red">
+            หากไม่แนบสลิป ระบบจะยังไม่รับเข้าระบบเคลมสำหรับปี 2568
           </div>
         </div>
       </div>
@@ -1423,20 +1420,9 @@
   </div>
 
   <script>
-    // ใช้ Web App URL ของคุณโดยตรง
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxK7lv-bK4G-dT7YL6g-t4vuigK9CArv1wh4K1zgi36kIbsDJQEsbgsUHcB5_ELHRYd/exec";
+    // ใช้ Web App URL ของคุณโดยตรง (ฝั่งชีตสามารถเปลี่ยนข้อความ / สเตตัสได้ทั้งหมดจาก JSON ที่ส่งกลับ)
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx9prfkdJfV2Vz6O1zMKuzHxAgZaeips_oW_0HaQwCaYEoJ151Y44-RFnsidaunrwzh/exec";
     const STATUS_POLL_INTERVAL = 30000;
-
-    // ค่า default ของช่วงเวลารับเคลม + config จากชีต
-    let claimStartHour = 7;
-    let claimEndHour = 19;
-    let claimEnabled = true;
-
-    // config ปีสมัคร + ปีที่ใช้แพ็กดูแล
-    let signupYearsConfig = [];
-    let pack19YearsConfig = [];
-    let pack19Enabled = true;
-    let pack19Amount = 19;
 
     const btnSubmit = document.getElementById("btnSubmit");
     const btnClear = document.getElementById("btnClear");
@@ -1471,26 +1457,9 @@
     const onlineDot = document.getElementById("onlineDot");
     const onlineText = document.getElementById("onlineText");
 
-    const bankAccountNameEl = document.getElementById("bankAccountName");
-    const bankNameEl = document.getElementById("bankName");
-    const bankAccountNumberEl = document.getElementById("bankAccountNumber");
-    const pack19TitleEl = document.getElementById("pack19Title");
-    const pack19AmountTextEl = document.getElementById("pack19AmountText");
-    const pack19NoteRedEl = document.getElementById("pack19NoteRed");
-
     let isLoading = false;
     let liveTimerId = null;
     let isClaimOpen = true;
-
-    // tips default (จะถูก override จากชีตถ้ามี)
-    const tips = [
-      "ใช้อีเมลเดียวกับที่สมัครสมาชิกไว้ เพื่อให้ระบบค้นหาเจอง่ายที่สุดค่ะ",
-      "อย่าลืมเลือกปีสมัครให้ตรงก่อนส่งคำขอเคลมนะคะ",
-      "เลือกปีที่ต้องใช้แพ็กดูแล ระบบจะแสดงเลขบัญชีและให้แนบสลิปอัตโนมัติ",
-      "สถานะเมลวันนี้จะแสดงด้านล่างสุดแบบเรียลไทม์ ไม่ต้องค้นหาเอง",
-      "มีอะไรอยากฝากถึงแอดมิน พิมพ์ในกรอบเล็กๆ ด้านล่างได้เลยค่ะ"
-    ];
-    let tipIndex = 0;
 
     function setStepState(state) {
       const steps = document.querySelectorAll(".step-pill");
@@ -1550,28 +1519,15 @@
       localStorage.setItem("theme", newTheme);
     });
 
-    function formatHourToText(h) {
-      const n = parseInt(h, 10);
-      if (isNaN(n)) return "";
-      return String(n).padStart(2, "0") + ".00";
-    }
-
-    function getClaimTimeRangeText() {
-      return formatHourToText(claimStartHour) + "–" + formatHourToText(claimEndHour);
-    }
-
     function isWithinClaimWindow() {
-      if (!claimEnabled) return false;
       const now = new Date();
       const hour = now.getHours();
-      return hour >= claimStartHour && hour < claimEndHour;
+      return hour >= 7 && hour < 19;
     }
 
     function updateClaimWindowState() {
       const open = isWithinClaimWindow();
       isClaimOpen = open;
-
-      const timeRangeText = getClaimTimeRangeText();
 
       if (onlineStatus && onlineDot && onlineText) {
         if (open) {
@@ -1581,178 +1537,57 @@
         } else {
           onlineStatus.classList.add("closed");
           onlineDot.classList.add("offline");
-          onlineText.textContent = claimEnabled
-            ? "สถานะ: ปิดรับเคลม"
-            : "สถานะ: ปิดระบบเคลมชั่วคราว";
+          onlineText.textContent = "สถานะ: ปิดรับเคลม";
         }
       }
 
       if (claimTimeNote) {
-        if (!claimEnabled) {
-          claimTimeNote.classList.add("closed");
-          claimTimeNote.textContent =
-            "ขณะนี้ระบบเคลมถูกปิดชั่วคราว กรุณาติดต่อแอดมินร้าน 426 SHOP เพื่อสอบถามเพิ่มเติมค่ะ";
-        } else if (open) {
+        if (open) {
           claimTimeNote.classList.remove("closed");
           claimTimeNote.textContent =
-            "รับเคลมเฉพาะวันจันทร์–เสาร์ เวลา " + timeRangeText + " น.";
+            "รับเคลมเฉพาะวันจันทร์–เสาร์ เวลา 07.00–19.00 น.";
         } else {
           claimTimeNote.classList.add("closed");
           claimTimeNote.textContent =
-            "ขณะนี้อยู่นอกเวลารับเคลม กรุณากลับมาเคลมในวันถัดไปช่วงเวลา " + timeRangeText + " น.";
+            "ขณะนี้อยู่นอกเวลารับเคลม กรุณากลับมาเคลมในวันถัดไปช่วงเวลา 07.00–19.00 น.";
         }
       }
     }
 
-    // สร้างปุ่มปีจาก config
-    function renderYearButtons() {
-      if (!yearRow) return;
+    yearRow.querySelectorAll(".year-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        yearRow.querySelectorAll(".year-btn").forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        const year = btn.dataset.year;
+        signupYearInput.value = year;
 
-      yearRow.innerHTML = "";
-
-      const years = signupYearsConfig && signupYearsConfig.length
-        ? signupYearsConfig
-        : ["2568", "2569"];
-
-      years.forEach((y) => {
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.className = "year-btn";
-        btn.dataset.year = y;
-        btn.textContent = y;
-        yearRow.appendChild(btn);
+        if (year === "2568") {
+          paymentSection.style.display = "block";
+          if (slipInput) slipInput.required = true;
+        } else {
+          paymentSection.style.display = "none";
+          if (slipInput) {
+            slipInput.required = false;
+            slipInput.value = "";
+          }
+        }
       });
-
-      attachYearButtonHandlers();
-    }
-
-    function attachYearButtonHandlers() {
-      yearRow.querySelectorAll(".year-btn").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          yearRow.querySelectorAll(".year-btn").forEach((b) => b.classList.remove("active"));
-          btn.classList.add("active");
-          const year = btn.dataset.year;
-          signupYearInput.value = year;
-
-          const requiresPack19 =
-            pack19Enabled && pack19YearsConfig.indexOf(year) !== -1;
-
-          if (requiresPack19) {
-            paymentSection.style.display = "block";
-            if (slipInput) slipInput.required = true;
-          } else {
-            paymentSection.style.display = "none";
-            if (slipInput) {
-              slipInput.required = false;
-              slipInput.value = "";
-            }
-          }
-        });
-      });
-    }
-
-    // ดึง config จาก Google Sheet ผ่าน Apps Script
-    function loadClaimConfig() {
-      if (!SCRIPT_URL) {
-        updateClaimWindowState();
-        return;
-      }
-      fetch(SCRIPT_URL + "?action=config")
-        .then((res) => {
-          if (!res.ok) throw new Error("HTTP " + res.status);
-          return res.json();
-        })
-        .then((data) => {
-          if (data) {
-            const start = parseInt(data.claimStartHour, 10);
-            const end = parseInt(data.claimEndHour, 10);
-            if (!isNaN(start)) claimStartHour = start;
-            if (!isNaN(end)) claimEndHour = end;
-
-            claimEnabled = data.claimEnabled !== false;
-
-            signupYearsConfig = Array.isArray(data.signupYears)
-              ? data.signupYears
-              : [];
-            pack19YearsConfig = Array.isArray(data.pack19Years)
-              ? data.pack19Years
-              : [];
-            pack19Enabled = data.pack19Enabled !== false;
-            if (!isNaN(parseInt(data.pack19Amount, 10))) {
-              pack19Amount = parseInt(data.pack19Amount, 10);
-            }
-
-            if (pack19TitleEl && data.pack19Title) {
-              pack19TitleEl.textContent = data.pack19Title;
-            }
-            if (pack19AmountTextEl) {
-              pack19AmountTextEl.textContent = pack19Amount;
-            }
-            if (pack19NoteRedEl) {
-              pack19NoteRedEl.textContent =
-                "หากไม่แนบสลิป ระบบจะยังไม่รับเข้าระบบเคลมสำหรับปีที่กำหนดใช้แพ็กดูแล " +
-                pack19Amount +
-                " บาท";
-            }
-
-            // ถ้ามี tips จากชีตให้ override
-            if (Array.isArray(data.tips) && data.tips.length) {
-              tips.length = 0;
-              data.tips.forEach((t) => tips.push(t));
-              tipIndex = 0;
-            }
-
-            renderYearButtons();
-          } else {
-            if (!signupYearsConfig.length) {
-              signupYearsConfig = ["2568", "2569"];
-              renderYearButtons();
-            }
-          }
-          updateClaimWindowState();
-        })
-        .catch((err) => {
-          console.warn("Cannot load claim config:", err);
-          if (!signupYearsConfig.length) {
-            signupYearsConfig = ["2568", "2569"];
-            renderYearButtons();
-          }
-          updateClaimWindowState();
-        });
-    }
-
-    function loadBankInfo() {
-      if (!SCRIPT_URL) return;
-      fetch(SCRIPT_URL + "?action=getBank")
-        .then((res) => {
-          if (!res.ok) throw new Error("HTTP " + res.status);
-          return res.json();
-        })
-        .then((data) => {
-          if (!data) return;
-          if (bankAccountNameEl && data.accountName) {
-            bankAccountNameEl.textContent = data.accountName;
-          }
-          if (bankNameEl && data.bankName) {
-            bankNameEl.textContent = data.bankName;
-          }
-          if (bankAccountNumberEl && data.accountNumber) {
-            bankAccountNumberEl.textContent = data.accountNumber;
-          }
-        })
-        .catch((err) => {
-          console.warn("Cannot load bank info:", err);
-        });
-    }
+    });
 
     if (btnCopyAccount) {
       btnCopyAccount.addEventListener("click", () => {
-        const accNo = bankAccountNumberEl
-          ? bankAccountNumberEl.textContent.trim()
-          : "062-879-4251";
-        copyToClipboard(btnCopyAccount, accNo);
+        copyToClipboard(btnCopyAccount, "062-879-4251");
       });
     }
+
+    const tips = [
+      "ใช้อีเมลเดียวกับที่สมัครสมาชิกไว้ เพื่อให้ระบบค้นหาเจอง่ายที่สุดค่ะ",
+      "อย่าลืมเลือกปีสมัครให้ตรง: 2568 หรือ 2569 ก่อนส่งคำขอเคลมนะคะ",
+      "เลือกปี 2568 ระบบจะแสดงเลขบัญชีและให้แนบสลิป 19฿",
+      "สถานะเมลวันนี้จะแสดงด้านล่างสุดแบบเรียลไทม์ ไม่ต้องค้นหาเอง",
+      "มีอะไรอยากฝากถึงแอดมิน พิมพ์ในกรอบเล็กๆ ด้านล่างได้เลยค่ะ"
+    ];
+    let tipIndex = 0;
 
     function rotateTip() {
       if (!tipBubble || !tipText) return;
@@ -1780,12 +1615,7 @@
     window.addEventListener("load", () => {
       setStepState("idle");
       emailInput.focus();
-
-      // โหลด config เวลารับเคลมจาก Sheet + ปีสมัคร +แพ็ก 19
-      loadClaimConfig();
-      // โหลดข้อมูลบัญชีจากชีต
-      loadBankInfo();
-
+      updateClaimWindowState();
       setInterval(updateClaimWindowState, 60000);
 
       fetchTodayStatus(true);
@@ -1827,10 +1657,7 @@
     function handleSubmit() {
       updateClaimWindowState();
       if (!isClaimOpen) {
-        const timeRangeText = getClaimTimeRangeText();
-        status.textContent = claimEnabled
-          ? "วันนี้ปิดรับแล้ว กรุณากลับมาเคลมในวันถัดไปช่วงเวลา " + timeRangeText + " น."
-          : "ขณะนี้ระบบเคลมถูกปิดชั่วคราว กรุณาติดต่อแอดมินร้าน 426 SHOP เพื่อสอบถามเพิ่มเติมค่ะ";
+        status.textContent = "วันนี้ปิดรับแล้ว กรุณากลับมาเคลมในวันถัดไปช่วงเวลา 07.00–19.00 น.";
         status.classList.add("status-error");
         setStepState("idle");
         return;
@@ -1860,22 +1687,13 @@
         return;
       }
       if (!year) {
-        status.textContent = "กรุณาเลือกปีที่สมัครให้เรียบร้อยก่อนส่งคำขอ";
+        status.textContent = "กรุณาเลือกปีที่สมัคร (2568 หรือ 2569) ให้เรียบร้อยก่อนส่งคำขอ";
         status.classList.add("status-error");
         setStepState("idle");
         return;
       }
-
-      const requiresPack19 =
-        pack19Enabled && pack19YearsConfig.indexOf(year) !== -1;
-
-      if (requiresPack19 && slipInput && !slipInput.files.length) {
-        status.textContent =
-          "ปีสมัคร " +
-          year +
-          " กำหนดใช้แพ็กดูแล " +
-          pack19Amount +
-          " บาท กรุณาแนบสลิปก่อนส่งคำขอเคลมค่ะ";
+      if (year === "2568" && slipInput && !slipInput.files.length) {
+        status.textContent = "เลือกปีสมัคร 2568 แล้ว กรุณาแจ้งสลิปก่อนส่งคำขอเคลมค่ะ";
         status.classList.add("status-error");
         setStepState("idle");
         return;
@@ -1973,6 +1791,23 @@
       return shortName + "@" + domain;
     }
 
+    // แปลงข้อความสเตตัสให้เป็นกรอบสีตามคำจากชีต
+    function decorateStatusText(text) {
+      const t = (text || "").trim();
+      if (!t) return "-";
+
+      let cls = "";
+      if (t.includes("ดึงเมลแล้ว")) {
+        cls = "status-pill status-pill--green";
+      } else if (t.includes("รอดำเนินการ")) {
+        cls = "status-pill status-pill--yellow";
+      }
+
+      if (!cls) return t; // สเตตัสอื่น ๆ แสดงปกติ (แก้ได้จากชีตตามข้อความที่ส่งมา)
+
+      return `<span class="${cls}">${t}</span>`;
+    }
+
     function renderLiveStatus(summary) {
       if (!liveStatusCard) return;
 
@@ -2011,18 +1846,9 @@
         const row = document.createElement("div");
         row.className = "live-item";
 
-        let statusClass = "live-status-text";
-        const key = (statusText || "").trim();
-
-        if (key.indexOf("ดึงเมลแล้ว") === 0) {
-          statusClass += " live-status-text--synced";
-        } else if (key.indexOf("รอดำเนินการ") === 0) {
-          statusClass += " live-status-text--pending";
-        }
-
         row.innerHTML = `
           <span class="live-email">${email}</span>
-          <span class="${statusClass}">${statusText}</span>
+          <span class="live-status-text">${decorateStatusText(statusText)}</span>
         `;
         liveListEl.appendChild(row);
       });
@@ -2072,11 +1898,7 @@
         year: res.signupYear || localEntry.year,
         signupYear: res.signupYear || localEntry.year,
         queueNo: res.queueNo || "",
-        claimType:
-          res.claimType ||
-          (pack19Enabled && pack19YearsConfig.indexOf(localEntry.year) !== -1
-            ? "paid"
-            : "free"),
+        claimType: res.claimType || (localEntry.year === "2568" ? "paid" : "free"),
         statusText:
           res.statusText ||
           res.message ||
@@ -2092,7 +1914,7 @@
 
       let claimLabel = "เคลมฟรีตามเงื่อนไข";
       if (current.claimType === "paid") {
-        claimLabel = "แพ็กดูแล " + pack19Amount + " บาท";
+        claimLabel = "แพ็กดูแล 19 บาท";
       } else if (current.claimType === "family") {
         claimLabel = "อยู่ในกลุ่มครอบครัวของร้านปกติ";
       }
@@ -2121,9 +1943,7 @@
       let extraHint = "";
       if (current.claimType === "paid") {
         extraHint =
-          "กรณีนี้ระบบใช้แพ็กดูแล " +
-          pack19Amount +
-          " บาทจากสลิปที่แนบ หากมีข้อสงสัยสามารถแคปหน้าจอนี้ส่งให้แอดมินได้เลยค่ะ";
+          "กรณีนี้ระบบใช้แพ็กดูแล 19 บาทจากสลิปที่แนบ หากมีข้อสงสัยสามารถแคปหน้าจอนี้ส่งให้แอดมินได้เลยค่ะ";
       } else if (current.claimType === "family") {
         extraHint =
           "อีเมลนี้อยู่ในกลุ่มครอบครัวของร้านปกติอยู่แล้ว ระบบจะดูแลสิทธิ์ให้ในกลุ่มเดิมอย่างต่อเนื่องค่ะ";
@@ -2169,7 +1989,7 @@
         else if (rawType === "family") claimType = "family";
 
         let tagText = "เคลมฟรี";
-        if (claimType === "paid") tagText = "แพ็กดูแล " + pack19Amount + " บาท";
+        if (claimType === "paid") tagText = "แพ็กดูแล 19 บาท";
         else if (claimType === "family") tagText = "กลุ่มครอบครัวร้านปกติ";
 
         const safeEmail = item.email || "-";
@@ -2195,7 +2015,7 @@
             <span>สมัครเมื่อ: ${safeYear}</span>
             <span>คิวเคลม: ${safeQueue}</span>
           </div>
-          <div class="item-body">${safeStatus}</div>
+          <div class="item-body">${decorateStatusText(safeStatus)}</div>
           <button class="btn-copy">
             <span>คัดลอกรายละเอียดคำขอ</span>
           </button>
@@ -2224,7 +2044,7 @@
 
     function buildCopyText(entry) {
       let claimLabel = "เคลมฟรี";
-      if (entry.claimType === "paid") claimLabel = "แพ็กดูแล " + pack19Amount + " บาท";
+      if (entry.claimType === "paid") claimLabel = "แพ็กดูแล 19 บาท";
       else if (entry.claimType === "family") claimLabel = "กลุ่มครอบครัวร้านปกติ";
 
       return [
