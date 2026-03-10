@@ -350,11 +350,22 @@
       align-items: center;
       justify-content: center;
       max-width: 100%;
+      text-align: center;
+      white-space: normal;
     }
 
     body.theme-dark .claim-time-note {
       background: #25262c;
       border-color: #3a3c45;
+    }
+
+    .claim-time-note--blink {
+      animation: claimBounce 1.6s ease-in-out infinite;
+    }
+
+    @keyframes claimBounce {
+      0%, 100% { transform: translateY(0); box-shadow: 0 0 0 0 rgba(133,184,166,0.35); }
+      50%      { transform: translateY(-2px); box-shadow: 0 0 0 6px rgba(133,184,166,0); }
     }
 
     .card-desc {
@@ -394,6 +405,11 @@
       transition: all 0.25s ease;
     }
 
+    .input-field--small {
+      padding: 6px 9px;
+      border-radius: 12px;
+    }
+
     body.theme-dark .input-field {
       background: #232429;
       border-color: #32343b;
@@ -425,7 +441,7 @@
       resize: none;
       line-height: 1.5;
       padding-top: 2px;
-      min-height: 80px;
+      min-height: 70px;
     }
 
     /* IMPORTANT NOTE (แดงกระพริบ) */
@@ -453,16 +469,6 @@
     @keyframes importantBlink {
       0%, 100% { box-shadow: 0 0 0 0 rgba(241,154,154,0.45); }
       50%      { box-shadow: 0 0 0 6px rgba(241,154,154,0); }
-    }
-
-    .important-note--sub {
-      margin-top: 4px;
-      font-size: 0.76rem;
-      border-radius: 10px;
-      padding: 5px 9px;
-      border: 1px dashed #f19a9a;
-      background: #fff8f8;
-      color: #c34040;
     }
 
     /* YEAR BUTTONS */
@@ -555,6 +561,31 @@
 
     .bank-value {
       color: var(--text-sub);
+    }
+
+    .btn-copy-account {
+      margin-top: 4px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      border: 1px solid #dad3cc;
+      background: #ffffff;
+      font-size: 0.76rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .btn-copy-account:hover {
+      border-color: var(--accent);
+      background: #f4faf7;
+    }
+
+    body.theme-dark .btn-copy-account {
+      background: #26272d;
+      border-color: #3b3d45;
+      color: #f2f3f6;
     }
 
     .file-wrap {
@@ -675,160 +706,6 @@
     .warn-text-icon {
       font-size: 0.9rem;
       margin-top: 1px;
-    }
-
-    /* LIVE STATUS CARD – ดึงเมลเรียลไทม์ */
-    .live-status-card {
-      margin-top: 10px;
-      padding: 9px 10px 9px;
-      border-radius: 14px;
-      background: #f7f1eb;
-      border: 1px solid #e1d6ca;
-      font-size: 0.78rem;
-      line-height: 1.5;
-    }
-
-    body.theme-dark .live-status-card {
-      background: #26272e;
-      border-color: #3a3c45;
-    }
-
-    .live-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 6px;
-    }
-
-    .live-title-left {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .live-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: #4caf50;
-      box-shadow: 0 0 0 4px rgba(76,175,80,0.18);
-      animation: livePulse 1.4s ease-in-out infinite;
-    }
-
-    @keyframes livePulse {
-      0%, 100% { transform: scale(1); box-shadow: 0 0 0 4px rgba(76,175,80,0.18); }
-      50%       { transform: scale(1.2); box-shadow: 0 0 0 7px rgba(76,175,80,0); }
-    }
-
-    .live-title-text {
-      font-weight: 600;
-    }
-
-    .live-date {
-      color: var(--text-sub);
-      font-size: 0.74rem;
-      white-space: nowrap;
-    }
-
-    .live-summary-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 4px;
-      margin-bottom: 5px;
-    }
-
-    .live-pill {
-      padding: 3px 8px;
-      border-radius: 999px;
-      border: 1px solid #e3d8cc;
-      background: #ffffff;
-      white-space: nowrap;
-    }
-
-    .live-pill-free {
-      background: #e7f4ee;
-      border-color: #c3dfd2;
-    }
-
-    .live-pill-paid {
-      background: #fff4e7;
-      border-color: #f0c2a0;
-    }
-
-    body.theme-dark .live-pill {
-      background: #232429;
-      border-color: #3a3c45;
-    }
-
-    body.theme-dark .live-pill-free {
-      background: #223831;
-      border-color: #3e6d5b;
-    }
-
-    body.theme-dark .live-pill-paid {
-      background: #3b2a21;
-      border-color: #f0c2a0;
-    }
-
-    .live-list {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-      margin-top: 2px;
-      max-height: 210px;
-      overflow-y: auto;
-    }
-
-    .live-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .live-email {
-      font-weight: 500;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      max-width: 200px;
-    }
-
-    .live-meta {
-      display: flex;
-      gap: 6px;
-      align-items: center;
-      font-size: 0.74rem;
-      color: var(--text-sub);
-      white-space: nowrap;
-    }
-
-    .live-badge {
-      padding: 2px 6px;
-      border-radius: 999px;
-      border: 1px solid #e3ddd5;
-      font-size: 0.72rem;
-    }
-
-    .live-badge.free {
-      background: #e7f4ee;
-      border-color: #c3dfd2;
-    }
-
-    .live-badge.paid {
-      background: #fff4e7;
-      border-color: #f0c2a0;
-    }
-
-    body.theme-dark .live-badge.free {
-      background: #223831;
-      border-color: #3e6d5b;
-    }
-
-    body.theme-dark .live-badge.paid {
-      background: #3b2a21;
-      border-color: #f0c2a0;
     }
 
     /* STATUS */
@@ -1036,6 +913,160 @@
       border-color: #3a3c45;
     }
 
+    /* LIVE STATUS CARD – อยู่ล่างสุด */
+    .live-status-card {
+      margin-top: 10px;
+      padding: 9px 10px 9px;
+      border-radius: 14px;
+      background: #f7f1eb;
+      border: 1px solid #e1d6ca;
+      font-size: 0.78rem;
+      line-height: 1.5;
+    }
+
+    body.theme-dark .live-status-card {
+      background: #26272e;
+      border-color: #3a3c45;
+    }
+
+    .live-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .live-title-left {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #4caf50;
+      box-shadow: 0 0 0 4px rgba(76,175,80,0.18);
+      animation: livePulse 1.4s ease-in-out infinite;
+    }
+
+    @keyframes livePulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 0 4px rgba(76,175,80,0.18); }
+      50%       { transform: scale(1.2); box-shadow: 0 0 0 7px rgba(76,175,80,0); }
+    }
+
+    .live-title-text {
+      font-weight: 600;
+    }
+
+    .live-date {
+      color: var(--text-sub);
+      font-size: 0.74rem;
+      white-space: nowrap;
+    }
+
+    .live-summary-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-bottom: 5px;
+    }
+
+    .live-pill {
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid #e3d8cc;
+      background: #ffffff;
+      white-space: nowrap;
+    }
+
+    .live-pill-free {
+      background: #e7f4ee;
+      border-color: #c3dfd2;
+    }
+
+    .live-pill-paid {
+      background: #fff4e7;
+      border-color: #f0c2a0;
+    }
+
+    body.theme-dark .live-pill {
+      background: #232429;
+      border-color: #3a3c45;
+    }
+
+    body.theme-dark .live-pill-free {
+      background: #223831;
+      border-color: #3e6d5b;
+    }
+
+    body.theme-dark .live-pill-paid {
+      background: #3b2a21;
+      border-color: #f0c2a0;
+    }
+
+    .live-list {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      margin-top: 2px;
+      max-height: 210px;
+      overflow-y: auto;
+    }
+
+    .live-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .live-email {
+      font-weight: 500;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 200px;
+    }
+
+    .live-meta {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      font-size: 0.74rem;
+      color: var(--text-sub);
+      white-space: nowrap;
+    }
+
+    .live-badge {
+      padding: 2px 6px;
+      border-radius: 999px;
+      border: 1px solid #e3ddd5;
+      font-size: 0.72rem;
+    }
+
+    .live-badge.free {
+      background: #e7f4ee;
+      border-color: #c3dfd2;
+    }
+
+    .live-badge.paid {
+      background: #fff4e7;
+      border-color: #f0c2a0;
+    }
+
+    body.theme-dark .live-badge.free {
+      background: #223831;
+      border-color: #3e6d5b;
+    }
+
+    body.theme-dark .live-badge.paid {
+      background: #3b2a21;
+      border-color: #f0c2a0;
+    }
+
     /* FOOTER */
     .footer {
       margin-top: 4px;
@@ -1220,9 +1251,9 @@
         <span>ฟอร์มแจ้งเคลมสมาชิก</span>
       </div>
 
-      <!-- ข้อความด้านบน: เวลารับเคลม -->
-      <div class="claim-time-note">
-        รับเคลมเฉพาะวันจันทร์–เสาร์ เวลา 07.00–19.00 น.
+      <!-- ข้อความด้านบน: เวลารับเคลม (กระพริบ + ขึ้นบรรทัดใหม่) -->
+      <div class="claim-time-note claim-time-note--blink">
+        รับเคลมเฉพาะวันจันทร์–เสาร์<br>เวลา 07.00–19.00 น.
       </div>
 
       <div class="card-desc">
@@ -1259,15 +1290,12 @@
           <strong>สำคัญ:</strong>
           <span>กรุณาแจ้งข้อมูลตามความเป็นจริง หากตรวจพบไม่ตรงกับข้อมูลจริง ระบบขอตัดสิทธิ์เคลมทันที</span>
         </div>
-        <div class="important-note important-note--sub">
-          หากเลือกปีสมัคร 2568 ต้องแนบสลิปก่อน ระบบจึงจะรับเข้าระบบเคลมได้
-        </div>
       </div>
 
       <div class="form-group" id="paymentSection" style="display:none;">
         <div class="payment-card">
           <div class="payment-title">แพ็กดูแล 19 บาท (สำหรับรอบเคลมนี้)</div>
-          <div>เลือกปีสมัคร 2568 ระบบให้ใช้แพ็กดูแล 19 บาท เพื่อรับเข้าคิวเคลมทันทีหลังแนบสลิป</div>
+          <div>เลือกปีสมัคร 2568 ระบบจะใช้แพ็กดูแล 19 บาท หลังจากแนบสลิป เพื่อรับเข้าคิวเคลมทันที</div>
           <div class="bank-lines">
             <div class="bank-line">
               <span class="bank-label">ชื่อบัญชี</span>
@@ -1282,39 +1310,25 @@
               <span class="bank-value">062-879-4251</span>
             </div>
           </div>
+          <button type="button" class="btn-copy-account" id="btnCopyAccount">
+            คัดลอกเลขบัญชี
+          </button>
           <div class="file-wrap">
             <span>แนบสลิปโอนเงิน 19 บาท</span>
             <input type="file" id="slipInput" accept="image/*" />
             <span style="opacity:0.8;">ระบบจะใช้สลิปนี้ในการยืนยันแพ็กดูแลสำหรับปี 2568</span>
           </div>
           <div class="payment-note-red">
-            หากไม่แนบสลิป ระบบจะยังไม่รับเข้าระบบเคลมสำหรับปี 2568
+            หากเลือกปี 2568 แล้วไม่ได้แนบสลิป ระบบจะแจ้งเตือนเมื่อกดส่งคำขอเคลม
           </div>
         </div>
       </div>
 
       <div class="form-group">
         <div class="field-label">ฝากข้อความถึงแอดมิน (ถ้ามี)</div>
-        <div class="input-field" id="noteField">
+        <div class="input-field input-field--small" id="noteField">
           <textarea id="noteInput" placeholder="เช่น หลุดจากกลุ่มเมื่อวาน รบกวนช่วยดึงกลับให้ด้วย"></textarea>
         </div>
-      </div>
-
-      <!-- LIVE STATUS (ดึงเมลเรียลไทม์ทุกเมลในระบบ) -->
-      <div id="liveStatusCard" class="live-status-card" style="display:none;">
-        <div class="live-header">
-          <div class="live-title-left">
-            <span class="live-dot"></span>
-            <span class="live-title-text">สถานะเมลในระบบ (เรียลไทม์)</span>
-          </div>
-          <span class="live-date" id="liveDate"></span>
-        </div>
-        <div class="live-summary-row">
-          <span id="liveTotal" class="live-pill">เมลทั้งหมด 0 รายการ</span>
-          <span id="liveFree" class="live-pill live-pill-free">เคลมฟรี 0</span>
-          <span id="livePaid" class="live-pill live-pill-paid">แพ็กดูแล 19 บาท 0</span>
-        </div>
-        <div class="live-list" id="liveList"></div>
       </div>
 
       <div class="btn-row">
@@ -1340,6 +1354,27 @@
     <div class="policy-note">
       ร้าน 426 SHOP อยู่ภายใต้กฎและนโยบาย YouTube มาตรฐานสากล
       การเปลี่ยนแปลงจากระบบหลักไม่ถือเป็นความผิดของร้าน
+    </div>
+
+    <!-- สถานะเรียลไทม์ (ย้ายมาอยู่ล่างสุด) -->
+    <div id="liveStatusCard" class="live-status-card">
+      <div class="live-header">
+        <div class="live-title-left">
+          <span class="live-dot"></span>
+          <span class="live-title-text">สถานะเมลในระบบ (เรียลไทม์)</span>
+        </div>
+        <span class="live-date" id="liveDate"></span>
+      </div>
+      <div class="live-summary-row">
+        <span id="liveTotal" class="live-pill">เมลทั้งหมด 0 รายการ</span>
+        <span id="liveFree" class="live-pill live-pill-free">เคลมฟรี 0</span>
+        <span id="livePaid" class="live-pill live-pill-paid">แพ็กดูแล 19 บาท 0</span>
+      </div>
+      <div class="live-list" id="liveList">
+        <div class="live-item">
+          <span class="live-email">กำลังโหลดสถานะล่าสุด...</span>
+        </div>
+      </div>
     </div>
 
     <footer class="footer">
@@ -1372,6 +1407,7 @@
     const yearRow = document.getElementById("yearRow");
     const paymentSection = document.getElementById("paymentSection");
     const slipInput = document.getElementById("slipInput");
+    const btnCopyAccount = document.getElementById("btnCopyAccount");
 
     const emailField = document.getElementById("emailField");
     const expiryField = document.getElementById("expiryField");
@@ -1467,24 +1503,30 @@
 
         if (year === "2568") {
           paymentSection.style.display = "block";
-          if (slipInput) slipInput.required = true;
         } else {
           paymentSection.style.display = "none";
           if (slipInput) {
-            slipInput.required = false;
             slipInput.value = "";
           }
         }
       });
     });
 
+    // COPY ACCOUNT NUMBER
+    if (btnCopyAccount) {
+      btnCopyAccount.addEventListener("click", () => {
+        const text = "062-879-4251";
+        copyToClipboard(btnCopyAccount, text);
+      });
+    }
+
     // TIP BUBBLE
     const tips = [
       "ใช้อีเมลเดียวกับที่สมัครสมาชิกไว้ เพื่อให้ระบบค้นหาเจอง่ายที่สุดค่ะ",
       "อย่าลืมเลือกปีสมัครให้ตรง: 2568 หรือ 2569 ก่อนส่งคำขอเคลมนะคะ",
-      "เลือกปี 2568 ระบบจะแสดงเลขบัญชีและให้แนบสลิป 19฿",
+      "เลือกปี 2568 สามารถแนบสลิป 19฿ เพื่อเข้าคิวเคลมทันที",
       "ระบบจะแสดงสถานะเมลในระบบแบบเรียลไทม์ด้านล่าง โดยไม่ต้องค้นหาเอง",
-      "มีอะไรอยากฝากถึงแอดมิน พิมพ์ในช่องข้อความได้เลยค่ะ"
+      "มีอะไรอยากฝากถึงแอดมิน พิมพ์ในช่องข้อความกรอบเล็กด้านบนได้เลยค่ะ"
     ];
     let tipIndex = 0;
 
@@ -1531,7 +1573,6 @@
       signupYearInput.value = "";
       if (slipInput) {
         slipInput.value = "";
-        slipInput.required = false;
       }
       yearRow.querySelectorAll(".year-btn").forEach((b) => b.classList.remove("active"));
       paymentSection.style.display = "none";
@@ -1585,7 +1626,7 @@
         return;
       }
       if (year === "2568" && slipInput && !slipInput.files.length) {
-        status.textContent = "เลือกปีสมัคร 2568 แล้ว จำเป็นต้องแนบสลิป 19 บาทก่อน ระบบจึงจะรับเข้าระบบเคลมได้ค่ะ";
+        status.textContent = "เลือกปีสมัคร 2568 แล้ว กรุณาแนบสลิปก่อนส่งคำขอเคลมค่ะ";
         status.classList.add("status-error");
         setStepState("idle");
         return;
@@ -1674,27 +1715,16 @@
     }
 
     function renderLiveStatus(summary) {
-      if (!liveStatusCard || !summary) {
-        if (liveStatusCard) liveStatusCard.style.display = "none";
-        return;
-      }
+      if (!liveStatusCard) return;
 
-      const total = Number(summary.total || summary.count || 0) || 0;
-      const freeCount = Number(summary.freeCount || 0) || 0;
-      const paidCount = Number(summary.paidCount || 0) || 0;
-      const items = Array.isArray(summary.items) ? summary.items : [];
-
-      if (total === 0 && items.length === 0) {
-        liveStatusCard.style.display = "none";
-        return;
-      }
-
-      liveStatusCard.style.display = "block";
+      const total = summary ? (Number(summary.total || summary.count || 0) || 0) : 0;
+      const freeCount = summary ? (Number(summary.freeCount || 0) || 0) : 0;
+      const paidCount = summary ? (Number(summary.paidCount || 0) || 0) : 0;
+      const items = summary && Array.isArray(summary.items) ? summary.items : [];
 
       // อัปเดตข้อความด้านขวาเป็น "อัปเดตล่าสุด"
-      const dateStr = summary.updatedAt || summary.date || summary.today || "";
+      const dateStr = summary && (summary.updatedAt || summary.date || summary.today || "");
       if (dateStr) {
-        // ถ้าเป็นรูปแบบ YYYY-MM-DD ให้แปลงเป็นไทย
         if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
           liveDateEl.textContent = "อัปเดตล่าสุด: " + formatThaiDate(dateStr);
         } else {
@@ -1710,7 +1740,15 @@
 
       liveListEl.innerHTML = "";
 
-      // แสดงทุกเมลในระบบ (เลื่อนดูได้)
+      if (total === 0 && items.length === 0) {
+        // ไม่มีแจ้งเคลมวันนี้
+        const row = document.createElement("div");
+        row.className = "live-item";
+        row.innerHTML = `<span class="live-email">วันนี้ยังไม่มีการแจ้งเคลมในระบบ</span>`;
+        liveListEl.appendChild(row);
+        return;
+      }
+
       items.forEach((item) => {
         const email = maskEmail(item.email || item.mail || "-");
         const claimType = (item.claimType || item.type || "").toLowerCase();
@@ -1737,17 +1775,18 @@
 
     function fetchTodayStatus(initial = false) {
       if (!SCRIPT_URL || SCRIPT_URL === "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL") return;
-      // ให้ Apps Script ฝั่งหลังบ้านส่ง "ทุกเมลในระบบ" กลับมาใน action=todayStatus
+
       fetch(SCRIPT_URL + "?action=todayStatus")
         .then((res) => {
           if (!res.ok) throw new Error("HTTP " + res.status);
           return res.json();
         })
         .then((data) => {
-          if (!data) return;
-          if (data.todaySummary || data.summary || data.dailyStatus) {
-            renderLiveStatus(data.todaySummary || data.summary || data.dailyStatus);
+          if (!data) {
+            renderLiveStatus(null);
+            return;
           }
+          renderLiveStatus(data.todaySummary || data.summary || data.dailyStatus || null);
         })
         .catch((err) => {
           if (initial) {
@@ -1948,7 +1987,7 @@
       }, 1800);
 
       if (toast) {
-        toast.textContent = "คัดลอกรายละเอียดแล้ว ✨";
+        toast.textContent = "คัดลอกเรียบร้อยแล้ว ✨";
         toast.classList.add("show");
         setTimeout(() => toast.classList.remove("show"), 2000);
       }
