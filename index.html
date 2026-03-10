@@ -1420,8 +1420,10 @@
   </div>
 
   <script>
-    // ใช้ Web App URL ของคุณโดยตรง
+    // ✅ เปลี่ยนค่านี้ให้เป็น Web App URL ของโปรเจกต์ Apps Script (ตัวที่มี doGet/doPost ด้าน gs)
+    // ตัวอย่าง: "https://script.google.com/macros/s/XXXXXXXXXXXX/exec"
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyDi2uJKoRmroD7T98QSZ6mFuP74hMxkqzBNNrvlxv3hFYZwMpl9hT0H8Ls9OjQgZU/exec";
+
     const STATUS_POLL_INTERVAL = 30000;
 
     // 🔹 config เวลา/ข้อความ เคลม (default กรณีโหลดจากชีตไม่สำเร็จ)
@@ -1566,9 +1568,6 @@
           if (cfg.outOfTimeErrorText) {
             claimConfig.outOfTimeErrorText = cfg.outOfTimeErrorText;
           }
-
-          // log ไว้เช็คใน console ได้
-          console.log("claimConfig after sheet:", claimConfig);
 
           updateClaimWindowState();
         })
