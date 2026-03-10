@@ -1073,6 +1073,37 @@
       white-space: nowrap;
     }
 
+    /* กรอบสถานะเล็ก ๆ น่ารัก */
+    .live-status-text--synced {
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid #c3dfd2;
+      background: #e7f4ee;
+      color: #356655;
+      font-weight: 500;
+    }
+
+    .live-status-text--pending {
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid #f0d48a;
+      background: #fff8e1;
+      color: #a67816;
+      font-weight: 500;
+    }
+
+    body.theme-dark .live-status-text--synced {
+      border-color: #3e6d5b;
+      background: #223831;
+      color: #c1e4d5;
+    }
+
+    body.theme-dark .live-status-text--pending {
+      border-color: #f0d48a;
+      background: #3b321c;
+      color: #ffe4a3;
+    }
+
     .live-empty {
       font-size: 0.8rem;
       color: var(--text-sub);
@@ -1263,7 +1294,7 @@
       </div>
 
       <div class="claim-time-note" id="claimTimeNote">
-        รับเคลมเฉพาะวันจันทร์–เสาร์ เวลา 07.00–19.00 น.
+        กำลังตรวจสอบเวลารับเคลมจากระบบ...
       </div>
 
       <div class="card-desc">
@@ -1393,6 +1424,10 @@
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxK7lv-bK4G-dT7YL6g-t4vuigK9CArv1wh4K1zgi36kIbsDJQEsbgsUHcB5_ELHRYd/exec";
     const STATUS_POLL_INTERVAL = 30000;
 
+    // ค่า default ของช่วงเวลารับเคลม (จะถูก override จาก Google Sheet ผ่าน action=config)
+    let claimStartHour = 7;
+    let claimEndHour = 19;
+
     const btnSubmit = document.getElementById("btnSubmit");
     const btnClear = document.getElementById("btnClear");
     const emailInput = document.getElementById("emailInput");
@@ -1488,15 +1523,27 @@
       localStorage.setItem("theme", newTheme);
     });
 
+    function formatHourToText(h) {
+      const n = parseInt(h, 10);
+      if (isNaN(n)) return "";
+      return String(n).padStart(2, "0") + ".00";
+    }
+
+    function getClaimTimeRangeText() {
+      return formatHourToText(claimStartHour) + "–" + formatHourToText(claimEndHour);
+    }
+
     function isWithinClaimWindow() {
       const now = new Date();
       const hour = now.getHours();
-      return hour >= 7 && hour < 19;
+      return hour >= claimStartHour && hour < claimEndHour;
     }
 
     function updateClaimWindowState() {
       const open = isWithinClaimWindow();
       isClaimOpen = open;
+
+      const timeRangeText = getClaimTimeRangeText();
 
       if (onlineStatus && onlineDot && onlineText) {
         if (open) {
@@ -1514,13 +1561,40 @@
         if (open) {
           claimTimeNote.classList.remove("closed");
           claimTimeNote.textContent =
-            "รับเคลมเฉพาะวันจันทร์–เสาร์ เวลา 07.00–19.00 น.";
+            "รับเคลมเฉพาะวันจันทร์–เสาร์ เวลา " + timeRangeText + " น.";
         } else {
           claimTimeNote.classList.add("closed");
           claimTimeNote.textContent =
-            "ขณะนี้อยู่นอกเวลารับเคลม กรุณากลับมาเคลมในวันถัดไปช่วงเวลา 07.00–19.00 น.";
+            "ขณะนี้อยู่นอกเวลารับเคลม กรุณากลับมาเคลมในวันถัดไปช่วงเวลา " + timeRangeText + " น.";
         }
       }
+    }
+
+    // ดึงค่า claimStartHour / claimEndHour จาก Google Apps Script (อ่านมาจาก Google Sheet)
+    function loadClaimConfig() {
+      if (!SCRIPT_URL) {
+        updateClaimWindowState();
+        return;
+      }
+      fetch(SCRIPT_URL + "?action=config")
+        .then((res) => {
+          if (!res.ok) throw new Error("HTTP " + res.status);
+          return res.json();
+        })
+        .then((data) => {
+          if (data) {
+            const start = parseInt(data.claimStartHour, 10);
+            const end = parseInt(data.claimEndHour, 10);
+            if (!isNaN(start)) claimStartHour = start;
+            if (!isNaN(end)) claimEndHour = end;
+          }
+          updateClaimWindowState();
+        })
+        .catch((err) => {
+          console.warn("Cannot load claim config:", err);
+          // ใช้ค่า default 07–19 แทน
+          updateClaimWindowState();
+        });
     }
 
     yearRow.querySelectorAll(".year-btn").forEach((btn) => {
@@ -1584,7 +1658,9 @@
     window.addEventListener("load", () => {
       setStepState("idle");
       emailInput.focus();
-      updateClaimWindowState();
+
+      // โหลด config เวลารับเคลมจาก Sheet ก่อน แล้วค่อยอัปเดต
+      loadClaimConfig();
       setInterval(updateClaimWindowState, 60000);
 
       fetchTodayStatus(true);
@@ -1626,7 +1702,9 @@
     function handleSubmit() {
       updateClaimWindowState();
       if (!isClaimOpen) {
-        status.textContent = "วันนี้ปิดรับแล้ว กรุณากลับมาเคลมในวันถัดไปช่วงเวลา 07.00–19.00 น.";
+        const timeRangeText = getClaimTimeRangeText();
+        status.textContent =
+          "วันนี้ปิดรับแล้ว กรุณากลับมาเคลมในวันถัดไปช่วงเวลา " + timeRangeText + " น.";
         status.classList.add("status-error");
         setStepState("idle");
         return;
@@ -1798,16 +1876,28 @@
         const row = document.createElement("div");
         row.className = "live-item";
 
+        let statusClass = "live-status-text";
+        const key = (statusText || "").trim();
+
+        // ถ้าสถานะขึ้น "ดึงเมลแล้ว..." ให้แสดงกรอบสีเขียว
+        if (key.indexOf("ดึงเมลแล้ว") === 0) {
+          statusClass += " live-status-text--synced";
+        }
+        // ถ้าสถานะขึ้น "รอดำเนินการ..." ให้แสดงกรอบสีเหลือง
+        else if (key.indexOf("รอดำเนินการ") === 0) {
+          statusClass += " live-status-text--pending";
+        }
+
         row.innerHTML = `
           <span class="live-email">${email}</span>
-          <span class="live-status-text">${statusText}</span>
+          <span class="${statusClass}">${statusText}</span>
         `;
         liveListEl.appendChild(row);
       });
     }
 
     function fetchTodayStatus(initial = false) {
-      if (!SCRIPT_URL || SCRIPT_URL === "https://script.google.com/macros/s/AKfycbxO3RkKD-KmOsxyyCjJEFbcde13HrH7layJZf6zDhefbTKvCcE2IrcDWNGvW8wauo0/exec") return;
+      if (!SCRIPT_URL) return;
       fetch(SCRIPT_URL + "?action=todayStatus")
         .then((res) => {
           if (!res.ok) throw new Error("HTTP " + res.status);
