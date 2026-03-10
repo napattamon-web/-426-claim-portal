@@ -1420,9 +1420,8 @@
   </div>
 
   <script>
-    // ใช้ Web App URL ของคุณโดยตรง (คือตัว /exec เดียวกับฝั่ง Apps Script ที่ต่อกับชีต)
+    // ใช้ Web App URL ของคุณโดยตรง
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyDi2uJKoRmroD7T98QSZ6mFuP74hMxkqzBNNrvlxv3hFYZwMpl9hT0H8Ls9OjQgZU/exec";
-
     const STATUS_POLL_INTERVAL = 30000;
 
     // 🔹 config เวลา/ข้อความ เคลม (default กรณีโหลดจากชีตไม่สำเร็จ)
@@ -1543,12 +1542,21 @@
         .then((cfg) => {
           if (!cfg) return;
 
-          if (typeof cfg.claimStartHour === "number") {
-            claimConfig.claimStartHour = cfg.claimStartHour;
+          // ✅ แปลงค่าที่มาจากชีต (string/number) ให้เป็นตัวเลขก่อน
+          if (cfg.claimStartHour !== undefined && cfg.claimStartHour !== null) {
+            const start = Number(cfg.claimStartHour);
+            if (!Number.isNaN(start)) {
+              claimConfig.claimStartHour = start;
+            }
           }
-          if (typeof cfg.claimEndHour === "number") {
-            claimConfig.claimEndHour = cfg.claimEndHour;
+
+          if (cfg.claimEndHour !== undefined && cfg.claimEndHour !== null) {
+            const end = Number(cfg.claimEndHour);
+            if (!Number.isNaN(end)) {
+              claimConfig.claimEndHour = end;
+            }
           }
+
           if (cfg.claimOpenText) {
             claimConfig.claimOpenText = cfg.claimOpenText;
           }
@@ -1558,6 +1566,9 @@
           if (cfg.outOfTimeErrorText) {
             claimConfig.outOfTimeErrorText = cfg.outOfTimeErrorText;
           }
+
+          // log ไว้เช็คใน console ได้
+          console.log("claimConfig after sheet:", claimConfig);
 
           updateClaimWindowState();
         })
@@ -1703,13 +1714,10 @@
       setTimeout(() => el.classList.remove("shake"), 500);
     }
 
-    // ✅ ฟังก์ชันส่งเคลม: เปลี่ยนจาก FormData → ส่ง JSON + action=submitClaim ให้ Apps Script อ่านง่าย
     function handleSubmit() {
       updateClaimWindowState();
       if (!isClaimOpen) {
-        status.textContent =
-          claimConfig.outOfTimeErrorText ||
-          "วันนี้ปิดรับแล้ว กรุณากลับมาเคลมในวันถัดไปช่วงเวลา 07.00–19.00 น.";
+        status.textContent = claimConfig.outOfTimeErrorText || "วันนี้ปิดรับแล้ว กรุณากลับมาเคลมในวันถัดไปช่วงเวลา 07.00–19.00 น.";
         status.classList.add("status-error");
         setStepState("idle");
         return;
@@ -1764,45 +1772,20 @@
         "ระบบกำลังส่งคำขอเคลมของคุณเข้าสู่ร้าน 426 SHOP...<br>" +
         "<span style='font-size:0.78rem;color:#c27a5a;'>ระหว่างนี้แนะนำอย่าเพิ่งรีเฟรชหรือปิดหน้านี้ค่ะ</span>";
 
-      const startTime = performance.now();
-      const file = slipInput && slipInput.files && slipInput.files[0] ? slipInput.files[0] : null;
-
-      // ถ้ามีสลิป → แปลงเป็น base64 (dataURL) แล้วค่อยยิง JSON
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          const slipDataUrl = e.target.result; // data:image/...;base64,xxxx
-          submitJsonClaim(email, expiry, year, note, slipDataUrl, file.name, startTime);
-        };
-        reader.onerror = function () {
-          console.warn("อ่านไฟล์สลิปไม่ได้ ส่งข้อมูลโดยไม่แนบไฟล์");
-          submitJsonClaim(email, expiry, year, note, null, null, startTime);
-        };
-        reader.readAsDataURL(file);
-      } else {
-        // ไม่มีสลิป → ส่ง JSON ปกติ
-        submitJsonClaim(email, expiry, year, note, null, null, startTime);
+      const formData = new FormData();
+      formData.append("email", email);
+      formData.append("expiry", expiry);
+      formData.append("signupYear", year);
+      formData.append("note", note);
+      if (slipInput && slipInput.files[0]) {
+        formData.append("slip", slipInput.files[0]);
       }
-    }
 
-    // ✅ ฟังก์ชันยิง JSON ไปหา Apps Script
-    function submitJsonClaim(email, expiry, year, note, slipDataUrl, slipName, startTime) {
-      const payload = {
-        action: "submitClaim",
-        email: email,
-        expiry: expiry,
-        signupYear: year,
-        note: note,
-        slipDataUrl: slipDataUrl || "",
-        slipName: slipName || ""
-      };
+      const startTime = performance.now();
 
-      fetch(SCRIPT_URL + "?action=submitClaim", {
+      fetch(SCRIPT_URL, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(payload)
+        body: formData
       })
         .then((res) => res.text())
         .then((text) => {
@@ -1841,20 +1824,7 @@
         const y = parseInt(parts[0], 10) + 543;
         const m = parseInt(parts[1], 10);
         const d = parseInt(parts[2], 10);
-        const months = [
-          "ม.ค.",
-          "ก.พ.",
-          "มี.ค.",
-          "เม.ย.",
-          "พ.ค.",
-          "มิ.ย.",
-          "ก.ค.",
-          "ส.ค.",
-          "ก.ย.",
-          "ต.ค.",
-          "พ.ย.",
-          "ธ.ค."
-        ];
+        const months = ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."];
         const monthName = months[m - 1] || "";
         return d + " " + monthName + " " + y;
       }
@@ -1866,20 +1836,7 @@
       const y = now.getFullYear() + 543;
       const m = now.getMonth() + 1;
       const d = now.getDate();
-      const months = [
-        "ม.ค.",
-        "ก.พ.",
-        "มี.ค.",
-        "เม.ย.",
-        "พ.ค.",
-        "มิ.ย.",
-        "ก.ค.",
-        "ส.ค.",
-        "ก.ย.",
-        "ต.ค.",
-        "พ.ย.",
-        "ธ.ค."
-      ];
+      const months = ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."];
       const monthName = months[m - 1] || "";
       return d + " " + monthName + " " + y;
     }
@@ -1941,7 +1898,10 @@
       items.forEach((item) => {
         const email = maskEmail(item.email || item.mail || "-");
         const statusText =
-          item.statusText || item.status || item.stage || "รอดำเนินการตามคิวเคลม";
+          item.statusText ||
+          item.status ||
+          item.stage ||
+          "รอดำเนินการตามคิวเคลม";
 
         const row = document.createElement("div");
         row.className = "live-item";
@@ -2055,12 +2015,9 @@
       parts.push("<br>💡 " + extraHint);
 
       if (typeof elapsedSec === "number" && isFinite(elapsedSec)) {
-        const prettyTime =
-          elapsedSec < 0.1 ? "< 0.1" : elapsedSec.toFixed(1).replace(/\.0$/, "");
+        const prettyTime = elapsedSec < 0.1 ? "< 0.1" : elapsedSec.toFixed(1).replace(/\.0$/, "");
         parts.push(
-          "<br><span class='status-time'>⏱ ระบบใช้เวลา " +
-            prettyTime +
-            " วินาที</span>"
+          "<br><span class='status-time'>⏱ ระบบใช้เวลา " + prettyTime + " วินาที</span>"
         );
       }
 
@@ -2078,8 +2035,9 @@
         }
       }
 
-      const history =
-        Array.isArray(res.history) && res.history.length ? res.history : [current];
+      const history = Array.isArray(res.history) && res.history.length
+        ? res.history
+        : [current];
 
       history.forEach((item) => {
         const card = document.createElement("div");
@@ -2108,9 +2066,7 @@
               <div class="item-header">LATEST CLAIM</div>
               <div class="item-email">${safeEmail}</div>
             </div>
-            <div class="item-tag ${
-              claimType === "paid" ? "paid" : claimType === "family" ? "family" : ""
-            }">
+            <div class="item-tag ${claimType === "paid" ? "paid" : claimType === "family" ? "family" : ""}">
               ${tagText}
             </div>
           </div>
