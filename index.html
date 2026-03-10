@@ -1,919 +1,843 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="utf-8" />
-  <title>426 SHOP – แจ้งเคลมออนไลน์</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#c49b7c" />
+  <meta charset="UTF-8" />
+  <title>426 Bear Claim Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- ฟ้อนต์ไทยโทนวัยรุ่นน่ารัก -->
-  <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <!-- ฟอนต์น่ารักวัยรุ่น -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Mali:wght@300;400;600&display=swap"
+    rel="stylesheet"
+  />
 
   <style>
     :root {
-      --bg: #f7eee7;
-      --bg-alt: #f2e4d7;
-      --card: #fffaf6;
-      --border-soft: rgba(157, 122, 93, 0.18);
-      --accent: #c18a5c;
-      --accent-soft: rgba(193, 138, 92, 0.15);
-      --accent-strong: #a76636;
-      --danger: #e35d5d;
-      --danger-soft: rgba(227, 93, 93, 0.12);
-      --success: #4caf79;
-      --success-soft: rgba(76, 175, 121, 0.12);
-      --text-main: #4a3931;
-      --text-soft: #7c6456;
-      --shadow-soft: 0 18px 45px rgba(91, 61, 37, 0.16);
-      --radius-lg: 22px;
+      --bg: #fff7f0;
+      --card-bg: #fffdf9;
+      --accent: #c89a6b;
+      --accent-soft: #f3dfc7;
+      --accent-soft-2: #f7ede1;
+      --accent-strong: #8f5e30;
+      --border-soft: #e8d7c6;
+      --text-main: #4a3424;
+      --text-muted: #a48a72;
+      --danger: #ff6b6b;
+      --danger-soft: #ffe2e2;
+      --success: #4caf50;
+      --success-soft: #e2f7e6;
+      --warning: #ffb74d;
+      --warning-soft: #fff1d9;
+      --shadow-soft: 0 18px 40px rgba(120, 80, 40, 0.18);
+      --radius-xl: 26px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
       --radius-pill: 999px;
+      --transition-fast: 150ms ease-out;
+      --transition-med: 220ms ease-out;
     }
 
     * {
       box-sizing: border-box;
     }
-
     body {
       margin: 0;
       min-height: 100vh;
-      background:
-        radial-gradient(circle at top left, #f9e6cf 0, transparent 55%),
-        radial-gradient(circle at bottom right, #f3dac9 0, transparent 55%),
-        var(--bg);
-      font-family: "Mitr", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: "Mali", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #ffeede 0, #fff7f0 40%, #fdf3ea 100%);
       color: var(--text-main);
       display: flex;
+      align-items: stretch;
       justify-content: center;
-      padding: 16px;
+      padding: 20px;
     }
 
-    .page-shell {
+    .page {
+      max-width: 1080px;
       width: 100%;
-      max-width: 900px;
-      margin-inline: auto;
+      background: linear-gradient(145deg, #fffdf9, #fff6ef);
+      border-radius: 32px;
+      box-shadow: var(--shadow-soft);
+      padding: 22px 20px 20px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(200, 154, 107, 0.18);
     }
 
-    header.top-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 16px 6px;
-      margin-bottom: 6px;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      backdrop-filter: blur(12px);
-      background: linear-gradient(
-        120deg,
-        rgba(247, 238, 231, 0.95),
-        rgba(241, 225, 211, 0.9)
-      );
-      border-radius: 18px;
-      border: 1px solid rgba(193, 138, 92, 0.18);
-      box-shadow: 0 10px 30px rgba(112, 80, 57, 0.15);
-    }
-
-    .brand-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .brand-icon-pill {
-      width: 40px;
-      height: 40px;
+    /* ลายวงกลมพาสเทลด้านหลัง */
+    .page::before,
+    .page::after {
+      content: "";
+      position: absolute;
       border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, #ffe9d9 0, #f2c9a4 40%, #d09d74 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 8px 18px rgba(117, 78, 50, 0.35);
-      font-size: 1.4rem;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .page::before {
+      width: 420px;
+      height: 420px;
+      background: radial-gradient(circle, rgba(245, 215, 188, 0.55), transparent 65%);
+      top: -140px;
+      right: -120px;
+    }
+    .page::after {
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle, rgba(213, 187, 160, 0.35), transparent 65%);
+      bottom: -120px;
+      left: -60px;
     }
 
-    .brand-text {
+    .content {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* หัว */
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .bear-logo {
+      width: 52px;
+      height: 52px;
+      border-radius: 18px;
+      background: #fff;
+      border: 2px solid #e4cdb1;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      flex-shrink: 0;
+    }
+    .bear-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .header-text-main {
       display: flex;
       flex-direction: column;
       gap: 2px;
     }
-
-    .brand-text .shop-name {
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      font-size: 0.9rem;
-      text-transform: uppercase;
+    .title-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
       color: var(--accent-strong);
     }
-
-    .brand-text .sub {
-      font-size: 0.78rem;
-      color: var(--text-soft);
-    }
-
-    .badge-inline {
-      font-size: 0.72rem;
+    .title-pill {
       padding: 2px 10px;
-      border-radius: var(--radius-pill);
-      background: rgba(255, 255, 255, 0.85);
+      border-radius: 999px;
+      font-size: 0.75rem;
+      background: rgba(248, 220, 190, 0.85);
       color: var(--accent-strong);
-      border: 1px solid rgba(193, 138, 92, 0.25);
+      border: 1px dashed rgba(185, 132, 82, 0.7);
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 4px;
+    }
+    .title-pill span:nth-child(1) {
+      font-size: 0.9rem;
+    }
+    .subtitle {
+      font-size: 0.8rem;
+      color: var(--text-muted);
     }
 
-    .badge-inline-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #4caf79;
-      box-shadow: 0 0 0 6px rgba(76, 175, 121, 0.25);
-    }
-
-    /* โลโก้ร้านมุมเล็ก ๆ */
-    .corner-logo {
-      position: fixed;
-      right: 12px;
-      bottom: 12px;
-      width: 54px;
-      height: 54px;
-      border-radius: 50%;
-      object-fit: cover;
-      box-shadow: 0 8px 20px rgba(96, 66, 44, 0.55);
-      border: 2px solid rgba(255, 255, 255, 0.9);
-      background: #fff;
-      z-index: 20;
-    }
-
-    main {
-      margin-top: 10px;
-      display: grid;
-      gap: 14px;
-    }
-
-    .card {
-      background: radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.9) 0, rgba(255, 250, 246, 0.95) 55%);
+    /* แถบ “สำคัญ” */
+    .important-banner {
+      margin: 8px 0 18px;
+      padding: 8px 12px;
       border-radius: var(--radius-lg);
-      padding: 18px 18px 16px;
-      box-shadow: var(--shadow-soft);
-      border: 1px solid var(--border-soft);
+      background: linear-gradient(120deg, var(--warning-soft), #ffe9d0);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      border: 1px solid rgba(255, 183, 77, 0.55);
       position: relative;
       overflow: hidden;
     }
+    .important-badge {
+      border-radius: var(--radius-pill);
+      padding: 2px 10px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      background: var(--warning);
+      color: #5f3600;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      animation: pulseBadge 1.2s infinite alternate;
+      box-shadow: 0 0 0 2px rgba(255, 183, 77, 0.4);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .important-text {
+      font-size: 0.78rem;
+      color: #633b08;
+      line-height: 1.4;
+    }
+    @keyframes pulseBadge {
+      0% { transform: translateY(0); opacity: 0.85; }
+      100% { transform: translateY(-1px) scale(1.03); opacity: 1; }
+    }
 
+    /* layout หลัก */
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 880px) {
+      .page {
+        border-radius: 24px;
+        padding: 18px 14px 16px;
+      }
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      body {
+        padding: 10px;
+      }
+    }
+
+    .card {
+      background: rgba(255, 252, 248, 0.93);
+      border-radius: var(--radius-xl);
+      padding: 16px 18px 16px;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 12px 32px rgba(140, 100, 60, 0.08);
+      position: relative;
+      overflow: hidden;
+    }
     .card::before {
       content: "";
       position: absolute;
       inset: 0;
-      background:
-        radial-gradient(circle at top right, rgba(255, 255, 255, 0.6) 0, transparent 60%),
-        radial-gradient(circle at bottom left, rgba(222, 181, 143, 0.18) 0, transparent 60%);
-      opacity: 0.85;
+      background: radial-gradient(circle at top left, rgba(245, 223, 199, 0.7), transparent 55%);
+      opacity: 0.55;
       pointer-events: none;
     }
-
     .card-inner {
       position: relative;
       z-index: 1;
     }
 
-    .card-title-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 6px;
-    }
-
-    .card-title {
-      font-size: 1rem;
-      font-weight: 600;
+    .section-title {
       display: flex;
       align-items: center;
       gap: 6px;
+      font-size: 0.95rem;
+      margin-bottom: 10px;
       color: var(--accent-strong);
-    }
-
-    .card-subtitle {
-      margin-top: 4px;
-      font-size: 0.78rem;
-      color: var(--text-soft);
-    }
-
-    form.claim-form {
-      display: grid;
-      gap: 10px;
-      margin-top: 8px;
-    }
-
-    .field-row {
-      display: grid;
-      gap: 8px;
-    }
-
-    @media (min-width: 680px) {
-      .field-row--2 {
-        grid-template-columns: 1.2fr 1fr;
-      }
-      .field-row--3 {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-    }
-
-    .field {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .field-label {
-      font-size: 0.8rem;
-      color: var(--text-soft);
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .field-label span.req {
-      color: var(--danger);
       font-weight: 600;
     }
-
-    .field-label-badge {
-      font-size: 0.7rem;
-      padding: 1px 7px;
-      border-radius: var(--radius-pill);
-      border: 1px dashed rgba(193, 138, 92, 0.55);
-      background: rgba(255, 255, 255, 0.9);
-      color: var(--accent-strong);
-    }
-
-    input[type="email"],
-    input[type="date"],
-    input[type="text"],
-    textarea {
-      border-radius: 14px;
-      border: 1px solid rgba(157, 122, 93, 0.4);
-      padding: 8px 11px;
-      font-size: 0.86rem;
-      background: linear-gradient(140deg, #fffaf6 0, #fff7f0 60%, #fffdf9 100%);
-      color: var(--text-main);
-      outline: none;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.12s ease;
-    }
-
-    input[type="email"]:focus,
-    input[type="date"]:focus,
-    input[type="text"]:focus,
-    textarea:focus {
-      border-color: var(--accent-strong);
-      box-shadow: 0 0 0 1px rgba(193, 138, 92, 0.65), 0 0 0 6px rgba(193, 138, 92, 0.13);
-      transform: translateY(-1px);
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 62px;
-    }
-
-    .hint {
-      font-size: 0.72rem;
-      color: var(--text-soft);
-      margin-top: 1px;
-    }
-
-    .hint-strong {
-      font-size: 0.75rem;
-      color: var(--accent-strong);
-      margin-top: 2px;
-    }
-
-    .pill-info {
-      margin-top: 6px;
-      padding: 6px 8px;
-      border-radius: var(--radius-pill);
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px dashed rgba(193, 138, 92, 0.45);
-      font-size: 0.75rem;
-      color: var(--text-soft);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .pill-info-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #f4a261;
-    }
-
-    .checkbox-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      margin-top: 4px;
-    }
-
-    .checkbox-row input[type="checkbox"] {
-      margin-top: 3px;
-      accent-color: var(--accent-strong);
-    }
-
-    .checkbox-row label {
-      font-size: 0.78rem;
-      color: var(--text-soft);
-    }
-
-    .actions-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 10px;
-      align-items: center;
-    }
-
-    button.primary,
-    button.secondary {
-      position: relative;
-      border-radius: var(--radius-pill);
-      border: none;
-      padding: 8px 14px 9px;
-      font-size: 0.84rem;
-      font-weight: 500;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.2s ease, opacity 0.15s ease;
-      outline: none;
-      white-space: nowrap;
-    }
-
-    button.primary {
-      background: linear-gradient(135deg, #c99263 0, #b67543 52%, #9e5d2d 100%);
-      color: #fff7f0;
-      box-shadow: 0 10px 22px rgba(132, 89, 57, 0.6);
-    }
-
-    button.primary:hover:not(:disabled) {
-      transform: translateY(-1px);
-      box-shadow: 0 14px 28px rgba(132, 89, 57, 0.73);
-    }
-
-    button.primary:active:not(:disabled) {
-      transform: translateY(0);
-      box-shadow: 0 8px 16px rgba(132, 89, 57, 0.55);
-    }
-
-    button.secondary {
-      background: rgba(255, 255, 255, 0.9);
-      color: var(--accent-strong);
-      border: 1px solid rgba(193, 138, 92, 0.65);
-      box-shadow: 0 8px 18px rgba(122, 86, 59, 0.22);
-    }
-
-    button.secondary:hover:not(:disabled) {
-      transform: translateY(-1px);
-      box-shadow: 0 10px 20px rgba(122, 86, 59, 0.3);
-    }
-
-    button.secondary:active:not(:disabled) {
-      transform: translateY(0);
-      box-shadow: 0 6px 12px rgba(122, 86, 59, 0.22);
-    }
-
-    button:disabled {
-      opacity: 0.6;
-      cursor: default;
-      box-shadow: none;
-    }
-
-    button .dot-pulse {
-      width: 6px;
-      height: 6px;
+    .section-title span.icon {
+      width: 24px;
+      height: 24px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.94);
-      box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.6);
-      animation: pulseDot 1.2s infinite;
-    }
-
-    @keyframes pulseDot {
-      0% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
-      }
-      70% {
-        transform: scale(1.25);
-        box-shadow: 0 0 0 6px rgba(255, 255, 255, 0);
-      }
-      100% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
-      }
-    }
-
-    /* ปุ่มลัดปีสมัคร 2568 / 2569 */
-    .year-shortcuts {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 4px;
-    }
-
-    .year-pill {
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(193, 138, 92, 0.6);
-      background: rgba(255, 255, 255, 0.96);
-      padding: 3px 10px;
-      font-size: 0.75rem;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      box-shadow: 0 4px 10px rgba(132, 89, 57, 0.25);
-      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
-    }
-
-    .year-pill span {
-      font-size: 0.9em;
-    }
-
-    .year-pill:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 13px rgba(132, 89, 57, 0.35);
-      background: #fffaf6;
-    }
-
-    /* บล็อกสรุปสิทธิ์ / สถานะเรียลไทม์ */
-    .preview-block {
-      margin-top: 10px;
-      padding: 10px 10px 9px;
-      border-radius: 18px;
-      background: linear-gradient(145deg, rgba(251, 242, 233, 0.96), rgba(244, 228, 213, 0.94));
-      border: 1px dashed rgba(193, 138, 92, 0.4);
-      font-size: 0.82rem;
-      display: grid;
-      gap: 8px;
-    }
-
-    .preview-header {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-weight: 500;
-      color: var(--accent-strong);
-      flex-wrap: wrap;
-    }
-
-    .badge-free,
-    .badge-paid,
-    .badge-wait {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 2px 9px;
-      border-radius: var(--radius-pill);
-      font-size: 0.75rem;
-    }
-
-    .badge-free {
-      background: var(--success-soft);
-      color: var(--success);
-    }
-
-    .badge-paid {
-      background: var(--danger-soft);
-      color: var(--danger);
-    }
-
-    .badge-wait {
       background: var(--accent-soft);
-      color: var(--accent-strong);
-    }
-
-    .preview-list {
-      margin: 0;
-      padding-left: 16px;
-      color: var(--text-soft);
-    }
-
-    .preview-list li {
-      margin-bottom: 1px;
-    }
-
-    .longdays-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: 2px;
-      padding: 4px 10px;
-      border-radius: var(--radius-pill);
-      background: rgba(255, 255, 255, 0.95);
-      border: 1px dashed rgba(193, 138, 92, 0.6);
-      font-size: 0.75rem;
-      color: var(--accent-strong);
-    }
-
-    .longdays-pill-icon {
-      width: 13px;
-      height: 13px;
-      border-radius: 50%;
-      border: 2px solid rgba(193, 138, 92, 0.9);
-      border-top-color: transparent;
-      border-right-color: transparent;
-      transform: rotate(-45deg);
-      position: relative;
-    }
-
-    .longdays-pill-icon::after {
-      content: "";
-      position: absolute;
-      width: 2px;
-      height: 5px;
-      background: rgba(193, 138, 92, 0.9);
-      top: 3px;
-      left: 5px;
-      border-radius: 4px;
-    }
-
-    /* กล่องชำระเงิน 19฿ (ไม่มี QR แล้ว) */
-    .pay-box {
-      display: grid;
-      gap: 8px;
-      margin-top: 4px;
-      padding-top: 7px;
-      border-top: 1px dashed rgba(157, 122, 93, 0.35);
-    }
-
-    .pay-main-row {
-      display: grid;
-      gap: 8px;
-    }
-
-    .pay-detail {
-      font-size: 0.8rem;
-      color: var(--text-soft);
-      display: grid;
-      gap: 4px;
-    }
-
-    .amount-tag {
-      display: inline-flex;
-      align-items: baseline;
-      gap: 4px;
-      padding: 5px 10px;
-      border-radius: var(--radius-pill);
-      background: radial-gradient(circle at 0 0, #ffeedd 0, #f5c39e 65%, #ebaf81 100%);
-      color: #5a3217;
-      font-weight: 600;
-      font-size: 0.82rem;
-      box-shadow: 0 6px 16px rgba(144, 95, 56, 0.55);
-    }
-
-    .amount-tag small {
-      font-weight: 400;
-      opacity: 0.9;
-    }
-
-    .bank-line {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      align-items: center;
-    }
-
-    .bank-maintext {
-      font-weight: 500;
-    }
-
-    .copy-btn {
-      border-radius: 999px;
-      border: 1px solid rgba(193, 138, 92, 0.6);
-      padding: 3px 8px;
-      font-size: 0.72rem;
-      background: rgba(255, 255, 255, 0.96);
-      color: var(--accent-strong);
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      box-shadow: 0 4px 10px rgba(132, 89, 57, 0.25);
-      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.15s ease;
-    }
-
-    .copy-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 13px rgba(132, 89, 57, 0.35);
-    }
-
-    .copy-btn:active {
-      transform: translateY(0);
-      box-shadow: 0 3px 8px rgba(132, 89, 57, 0.25);
-    }
-
-    .slip-field {
-      margin-top: 6px;
-      display: grid;
-      gap: 4px;
-    }
-
-    .slip-field input[type="file"] {
-      font-size: 0.78rem;
-    }
-
-    .slip-note {
-      font-size: 0.74rem;
-      color: var(--text-soft);
-    }
-
-    .slip-note strong {
-      color: var(--accent-strong);
-      font-weight: 600;
-    }
-
-    /* NOTICE กระพริบสำคัญ */
-    .important-blink {
-      margin: 6px 0 8px;
-      padding: 6px 10px;
-      border-radius: var(--radius-pill);
-      font-size: 0.78rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(255, 255, 255, 0.95);
-      border: 1px solid rgba(227, 93, 93, 0.7);
-      color: #b43737;
-      animation: blinkNotice 1.1s ease-in-out infinite;
-    }
-
-    @keyframes blinkNotice {
-      0%, 100% {
-        opacity: 1;
-        transform: translateY(0);
-        box-shadow: 0 0 0 0 rgba(227, 93, 93, 0.35);
-      }
-      50% {
-        opacity: 0.35;
-        transform: translateY(-1px);
-        box-shadow: 0 0 0 6px rgba(227, 93, 93, 0);
-      }
-    }
-
-    /* สถานะหลังส่งฟอร์ม (แสดงตลอด) */
-    .status-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      padding: 3px 10px;
-      border-radius: var(--radius-pill);
-      font-size: 0.76rem;
-      margin-bottom: 4px;
-    }
-
-    .status-pill.pending {
-      background: var(--accent-soft);
-      color: var(--accent-strong);
-    }
-
-    .status-pill.ok {
-      background: var(--success-soft);
-      color: var(--success);
-    }
-
-    .status-pill.error {
-      background: var(--danger-soft);
-      color: var(--danger);
-    }
-
-    .status-body {
-      font-size: 0.8rem;
-      color: var(--text-soft);
-      margin-top: 4px;
-      display: grid;
-      gap: 2px;
-    }
-
-    /* เงื่อนไข / Terms */
-    .terms-card .card-inner {
-      display: grid;
-      gap: 4px;
-    }
-
-    .terms-title {
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--accent-strong);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .terms-list {
-      font-size: 0.78rem;
-      color: var(--text-soft);
-      padding-left: 16px;
-      margin: 0;
-    }
-
-    .terms-list li {
-      margin-bottom: 3px;
-    }
-
-    .terms-note {
-      margin-top: 2px;
-      font-size: 0.74rem;
-      color: var(--text-soft);
-    }
-
-    /* Toast */
-    .toast {
-      position: fixed;
-      left: 50%;
-      bottom: 18px;
-      transform: translateX(-50%) translateY(120%);
-      min-width: 220px;
-      max-width: 92vw;
-      padding: 8px 11px;
-      border-radius: 18px;
-      background: #5f3a24;
-      color: #fffaf5;
-      font-size: 0.78rem;
-      box-shadow: 0 12px 24px rgba(63, 39, 24, 0.65);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      opacity: 0;
-      pointer-events: none;
-      z-index: 50;
-      transition: transform 0.25s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.25s ease;
-    }
-
-    .toast.visible {
-      transform: translateX(-50%) translateY(0);
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .toast-icon {
-      width: 18px;
-      height: 18px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.12);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 0.9rem;
     }
 
-    .toast-text {
-      flex: 1;
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
 
-    /* เล็กลงบนจอมือถือ */
-    @media (max-width: 480px) {
-      header.top-bar {
-        padding-inline: 12px;
-      }
-      .card {
-        padding-inline: 14px;
-      }
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .field-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .field-label .req {
+      color: var(--danger);
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+
+    .input-shell {
+      position: relative;
+    }
+    input[type="email"],
+    input[type="date"],
+    input[type="text"] {
+      width: 100%;
+      border-radius: var(--radius-lg);
+      padding: 9px 12px 9px 36px;
+      border: 1px solid rgba(211, 185, 154, 0.9);
+      font-family: inherit;
+      font-size: 0.82rem;
+      background: rgba(255, 252, 247, 0.95);
+      color: var(--text-main);
+      outline: none;
+      transition: border var(--transition-med), box-shadow var(--transition-med), transform var(--transition-fast), background 120ms ease-out;
+    }
+    input::placeholder {
+      color: #c3a994;
+    }
+    input:focus {
+      border-color: var(--accent);
+      background: #fffdf9;
+      box-shadow: 0 0 0 1px rgba(200, 154, 107, 0.4),
+                  0 12px 20px rgba(153, 116, 73, 0.12);
+      transform: translateY(-1px);
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 11px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.9rem;
+      color: #c29c72;
+      opacity: 0.86;
+      pointer-events: none;
+    }
+
+    /* ปุ่มปีสมัคร */
+    .year-chooser {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .year-btn {
+      position: relative;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(200, 154, 107, 0.75);
+      padding: 6px 14px;
+      font-size: 0.78rem;
+      cursor: pointer;
+      background: rgba(245, 223, 199, 0.5);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--accent-strong);
+      transition: background var(--transition-med), transform var(--transition-fast), box-shadow var(--transition-fast), border var(--transition-med);
+    }
+    .year-btn span.badge {
+      font-size: 0.72rem;
+      padding: 1px 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px dashed rgba(170, 122, 75, 0.7);
+    }
+    .year-btn.active {
+      background: linear-gradient(135deg, #eac393, #f2d3a8);
+      box-shadow: 0 10px 20px rgba(173, 128, 79, 0.32);
+      transform: translateY(-1px);
+      border-color: #b17b49;
+    }
+    .year-btn.active span.badge {
+      background: rgba(255, 248, 238, 0.95);
+    }
+
+    /* กล่อง slip + การโอน */
+    .pay-box {
+      margin-top: 10px;
+      padding: 10px 12px;
+      background: var(--accent-soft-2);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(185, 139, 94, 0.65);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .pay-main-row {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+    .amount-tag {
+      border-radius: 18px;
+      padding: 6px 10px;
+      background: #fff9f2;
+      color: #8b5523;
+      font-weight: 700;
+      font-size: 0.85rem;
+      box-shadow: 0 6px 14px rgba(137, 96, 55, 0.18);
+      display: inline-flex;
+      align-items: baseline;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+    .amount-tag small {
+      font-weight: 400;
+      font-size: 0.72rem;
+      color: #a16b32;
+    }
+    .pay-detail {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 0.74rem;
+      color: #6a4320;
+    }
+    .bank-line {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+    }
+    .bank-maintext {
+      font-weight: 500;
+    }
+    .hint {
+      font-size: 0.74rem;
+      color: #8a6341;
+    }
+    .slip-field {
+      margin-top: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    input[type="file"] {
+      border-radius: var(--radius-md);
+      border: 1px dashed rgba(179, 143, 104, 0.9);
+      background: rgba(255, 252, 246, 0.9);
+      padding: 6px 8px;
+      font-size: 0.78rem;
+      cursor: pointer;
+      color: var(--text-main);
+    }
+    input[type="file"]:hover {
+      background: #fff5ea;
+    }
+    .slip-note {
+      font-size: 0.7rem;
+      color: #7d5d3c;
+    }
+
+    /* ปุ่ม submit */
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+    .small-text {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .small-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+    }
+
+    .btn-main {
+      border-radius: var(--radius-pill);
+      border: none;
+      padding: 9px 18px;
+      font-family: inherit;
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: #3d2410;
+      background: linear-gradient(135deg, #f4c99a, #d89b68);
+      box-shadow: 0 12px 24px rgba(154, 106, 63, 0.35);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter 120ms ease-out;
+    }
+    .btn-main span.icon {
+      font-size: 1rem;
+    }
+    .btn-main:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 26px rgba(142, 97, 57, 0.4);
+      filter: brightness(1.02);
+    }
+    .btn-main:active {
+      transform: translateY(0);
+      box-shadow: 0 8px 16px rgba(142, 97, 57, 0.4);
+    }
+    .btn-main:disabled {
+      opacity: 0.7;
+      cursor: default;
+      box-shadow: none;
+      transform: none;
+    }
+
+    /* การ์ด preview / สถานะ */
+    .preview-card {
+      background: rgba(255, 252, 247, 0.96);
+      border-radius: var(--radius-xl);
+      padding: 14px 14px 13px;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 14px 32px rgba(125, 90, 55, 0.18);
+      position: relative;
+      overflow: hidden;
+    }
+    .preview-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(242, 210, 178, 0.8), transparent 58%);
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    .preview-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .preview-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .preview-title-box {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .preview-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #5b3210;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .preview-title span.emoji {
+      font-size: 1.15rem;
+    }
+    .badge {
+      border-radius: var(--radius-pill);
+      padding: 3px 10px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .badge span.dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.9);
+      box-shadow: 0 0 0 2px rgba(255,255,255,0.7);
+    }
+    .badge-free {
+      background: var(--success-soft);
+      color: #2f7a33;
+      border: 1px solid rgba(46, 125, 50, 0.5);
+      animation: softGlowFree 1.25s infinite alternate;
+    }
+    .badge-paid {
+      background: var(--danger-soft);
+      color: #b13b3b;
+      border: 1px solid rgba(196, 70, 70, 0.65);
+      animation: softGlowPaid 1.25s infinite alternate;
+    }
+    .badge-wait {
+      background: var(--warning-soft);
+      color: #b4701f;
+      border: 1px solid rgba(224, 160, 66, 0.6);
+      animation: softGlowWait 1.4s infinite alternate;
+    }
+
+    @keyframes softGlowFree {
+      0% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.0); }
+      100% { box-shadow: 0 0 0 6px rgba(76, 175, 80, 0.18); }
+    }
+    @keyframes softGlowPaid {
+      0% { box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.0); }
+      100% { box-shadow: 0 0 0 6px rgba(244, 67, 54, 0.2); }
+    }
+    @keyframes softGlowWait {
+      0% { box-shadow: 0 0 0 0 rgba(255, 183, 77, 0.0); }
+      100% { box-shadow: 0 0 0 6px rgba(255, 183, 77, 0.2); }
+    }
+
+    .preview-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      border-radius: 20px;
+      background: rgba(255, 252, 247, 0.98);
+      border: 1px dashed rgba(200, 154, 107, 0.5);
+      padding: 8px 10px 8px 12px;
+      font-size: 0.8rem;
+      color: #5a3b23;
+    }
+    .preview-list li + li {
+      margin-top: 4px;
+    }
+
+    .longdays-pill {
+      border-radius: var(--radius-pill);
+      padding: 4px 10px;
+      font-size: 0.75rem;
+      background: rgba(255, 249, 230, 0.96);
+      border: 1px solid rgba(239, 201, 113, 0.9);
+      color: #8a5c1a;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .longdays-pill span.star {
+      font-size: 1rem;
+    }
+
+    .status-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 6px;
+      font-size: 0.72rem;
+      color: #8b6a4a;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    /* ปุ่มคัดลอก */
+    .copy-btn {
+      border-radius: var(--radius-pill);
+      border: none;
+      padding: 4px 10px;
+      font-size: 0.72rem;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.9);
+      color: #7a4b1f;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      box-shadow: 0 4px 10px rgba(133, 96, 58, 0.18);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), background 120ms ease-out;
+      font-family: inherit;
+    }
+    .copy-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 14px rgba(133, 96, 58, 0.25);
+      background: #fffaf4;
+    }
+    .copy-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 3px 6px rgba(133, 96, 58, 0.25);
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      max-width: 260px;
+      border-radius: 18px;
+      padding: 8px 12px 9px;
+      font-size: 0.78rem;
+      background: rgba(48, 31, 13, 0.96);
+      color: #fff7ea;
+      box-shadow: 0 16px 30px rgba(0,0,0,0.35);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      opacity: 0;
+      transform: translateY(16px);
+      pointer-events: none;
+      z-index: 50;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+      animation: toastIn 180ms ease-out forwards;
+    }
+    .toast.hide {
+      animation: toastOut 200ms ease-in forwards;
+    }
+    .toast-icon {
+      font-size: 1.05rem;
+      margin-top: 0;
+    }
+    .toast-text {
+      flex: 1;
+      line-height: 1.4;
+    }
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateY(16px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes toastOut {
+      from { opacity: 1; transform: translateY(0) scale(1); }
+      to { opacity: 0; transform: translateY(8px) scale(0.98); }
+    }
+
+    /* helper */
+    .pill-soft {
+      border-radius: var(--radius-pill);
+      padding: 2px 8px;
+      font-size: 0.7rem;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(187, 149, 104, 0.6);
     }
   </style>
 </head>
 <body>
-  <div class="page-shell">
-    <header class="top-bar">
-      <div class="brand-left">
-        <div class="brand-icon-pill">🐻</div>
-        <div class="brand-text">
-          <span class="shop-name">426 SHOP</span>
-          <span class="sub">หน้าแจ้งเคลมออนไลน์ (เชื่อม Google Sheet)</span>
+  <div class="page">
+    <div class="content">
+      <header class="header">
+        <div class="bear-logo">
+          <!-- โลโก้หมีมุมเล็ก ๆ -->
+          <img src="https://img2.imgbiz.com/imgbiz/IMG_1140.jpeg" alt="426 Bear Logo" />
         </div>
-      </div>
-      <div class="badge-inline">
-        <span class="badge-inline-dot"></span>
-        <span>บันทึกเข้าระบบเรียลไทม์</span>
-      </div>
-    </header>
-
-    <!-- โลโก้ร้านมุมเล็ก ๆ -->
-    <img src="https://img2.imgbiz.com/imgbiz/IMG_1140.jpeg" alt="โลโก้ 426 SHOP" class="corner-logo" />
-
-    <main>
-      <!-- ฟอร์มแจ้งเคลม -->
-      <section class="card" id="claim-card">
-        <div class="card-inner">
-          <div class="card-title-row">
-            <div>
-              <div class="card-title">🐻 แบบฟอร์มแจ้งเคลม</div>
-              <div class="card-subtitle">
-                กรอกข้อมูลตามจริง ระบบช่วยคำนวณสิทธิ์แบบเรียลไทม์ และบันทึกลง Google Sheet อัตโนมัติ
-              </div>
+        <div class="header-text-main">
+          <div class="title-line">
+            <div class="title">426 Bear Claim Portal</div>
+            <div class="title-pill">
+              <span>🐻</span><span>ฟอร์มแจ้งเคลม &amp; ย้ายกลุ่ม</span>
             </div>
           </div>
+          <div class="subtitle">
+            กรอกตามความจริง ระบบจะช่วยจัดสิทธิ์เคลมฟรี / เคลม 19฿ ให้แบบอัตโนมัติ ✨
+          </div>
+        </div>
+      </header>
 
-          <form class="claim-form" id="claim-form">
-            <div class="field">
-              <label for="email" class="field-label">
-                อีเมลที่สมัคร <span class="req">*</span>
-              </label>
-              <input type="email" id="email" name="email" required placeholder="เช่น your@email.com" />
-              <div class="hint">ใช้เฉพาะอีเมลที่เคยสมัคร/ต่ออายุกับร้านเท่านั้น</div>
+      <!-- IMPORTANT -->
+      <div class="important-banner">
+        <div class="important-badge">
+          <span>⚡</span>
+          <span>สำคัญ</span>
+        </div>
+        <div class="important-text">
+          ต้องกรอกข้อมูลตามความเป็นจริงนะคะ หากตรวจพบว่าไม่ตรงกับข้อมูลจริง
+          <strong>ระบบขอตัดสิทธิ์เคลมทันที</strong> เพื่อความยุติธรรมกับทุกคน 🧸
+        </div>
+      </div>
+
+      <div class="grid">
+        <!-- FORM -->
+        <div class="card">
+          <div class="card-inner">
+            <div class="section-title">
+              <span class="icon">📮</span>
+              <span>ข้อมูลที่ใช้เช็กสิทธิ์เคลม</span>
             </div>
 
-            <div class="field-row field-row--2">
-              <div class="field">
+            <form id="claim-form">
+              <!-- Email -->
+              <div class="field-group">
+                <label for="email" class="field-label">
+                  <span>อีเมลที่สมัคร</span> <span class="req">*</span>
+                </label>
+                <div class="input-shell">
+                  <span class="input-icon">📧</span>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="เช่น your@email.com"
+                    required
+                  />
+                </div>
+              </div>
+
+              <!-- Expiry date -->
+              <div class="field-group">
                 <label for="expiry" class="field-label">
-                  วันหมดอายุปัจจุบัน <span class="req">*</span>
-                  <span class="field-label-badge">เลือกจากปฏิทิน</span>
+                  <span>วันหมดอายุที่เห็นในระบบ</span> <span class="req">*</span>
                 </label>
-                <input type="date" id="expiry" name="expiry" required />
-                <div class="hint">ดูจากหน้าบัญชี หรือหน้าจอที่แสดงวันหมดอายุ</div>
-              </div>
-
-              <div class="field">
-                <label for="purchase" class="field-label">
-                  วันที่ซื้อ / ต่ออายุล่าสุด <span class="req">*</span>
-                </label>
-                <input type="date" id="purchase" name="purchase" required />
-                <!-- ปุ่มลัดปีสมัคร -->
-                <div class="year-shortcuts">
-                  <button type="button" class="year-pill" data-year="2025">
-                    สมัครเมื่อ <span>2568</span>
-                  </button>
-                  <button type="button" class="year-pill" data-year="2026">
-                    สมัครเมื่อ <span>2569</span>
-                  </button>
-                </div>
-                <div class="hint">
-                  • ถ้าสมัคร/ต่ออายุปี 2568 ระบบถือว่าใช้แพ็กดูแล 19฿<br />
-                  • ถ้าสมัคร/ต่ออายุปี 2569 ขึ้นไป ระบบเข้าเงื่อนไขเคลมฟรี (ตามระบบเดิม)
+                <div class="input-shell">
+                  <span class="input-icon">📅</span>
+                  <input type="date" id="expiry" name="expiry" required />
                 </div>
               </div>
-            </div>
 
-            <div class="field">
-              <label for="note" class="field-label">
-                รายละเอียดเพิ่มเติม (ถ้ามี)
-              </label>
-              <textarea id="note" name="note" placeholder="เช่น ออกจากกลุ่มแล้ว / เข้ากลุ่มเดิมไม่ได้ ฯลฯ (ไม่บังคับ)"></textarea>
-            </div>
-
-            <div class="checkbox-row">
-              <input type="checkbox" id="confirm-truth" required />
-              <label for="confirm-truth">
-                ยืนยันว่าข้อมูลข้างต้นเป็นความจริง และยินยอมให้ร้านตรวจสอบข้อมูลได้
-              </label>
-            </div>
-
-            <div class="pill-info">
-              <span class="pill-info-dot"></span>
-              <span>กรอกอีเมล + วันที่ ระบบจะดูปีสมัคร (2568/2569) + วันคงเหลือ แล้วสรุปสิทธิ์ให้อัตโนมัติ</span>
-            </div>
-
-            <!-- สรุปสิทธิ์ + สถานะเรียลไทม์ -->
-            <div class="preview-block" id="preview-block">
-              <div class="preview-header">
-                <span id="preview-title">สรุปสิทธิ์เคลม (กรอกข้อมูลเพื่อเริ่มคำนวณ)</span>
-                <span id="preview-badge" class="badge-wait">รอสรุปจากข้อมูลของคุณ</span>
+              <!-- Purchase year buttons -->
+              <div class="field-group">
+                <label class="field-label">
+                  <span>สมัคร / ต่ออายุล่าสุดเมื่อปี</span><span class="req">*</span>
+                </label>
+                <div class="year-chooser" id="year-chooser">
+                  <button
+                    type="button"
+                    class="year-btn"
+                    data-year="2568"
+                  >
+                    <span>สมัครเมื่อ 2568</span>
+                    <span class="badge">ระบบใช้แพ็กดูแล 19฿</span>
+                  </button>
+                  <button
+                    type="button"
+                    class="year-btn"
+                    data-year="2569"
+                  >
+                    <span>สมัครเมื่อ 2569</span>
+                    <span class="badge">เข้าเงื่อนไขเคลมฟรี</span>
+                  </button>
+                </div>
               </div>
 
-              <ul class="preview-list" id="preview-list">
-                <li>กรอกอีเมล + วันหมดอายุ + วันที่ซื้อ/ต่ออายุ ระบบจะสรุปสิทธิ์ให้อัตโนมัติ</li>
-              </ul>
-
-              <!-- โปรลดวันอัตโนมัติสำหรับคนเหลือวันเยอะ -->
-              <div id="longdays-pill" class="longdays-pill" hidden>
-                <span class="longdays-pill-icon"></span>
-                <span>เข้าเงื่อนไขโปร “ลดวัน (ฟรี)” ระบบจัดให้ตอนแอดมินเคลม ไม่ต้องแจ้งเพิ่ม</span>
-              </div>
-
-              <!-- กล่องชำระเงิน 19฿ (เฉพาะเคส 2568) -->
+              <!-- ช่องชำระเงิน 19฿ (เฉพาะสมัคร 2568 หรือเคสที่ต้องใช้แพ็กดูแล) -->
               <div class="pay-box" id="pay-box" hidden>
                 <div class="pay-main-row">
+                  <div class="amount-tag">
+                    19฿ <small>/ รอบเคลม (แพ็กดูแล)</small>
+                  </div>
                   <div class="pay-detail">
-                    <div class="amount-tag">
-                      19฿ <small>/ รอบเคลม (แพ็กดูแล)</small>
-                    </div>
                     <div>
                       <span class="bank-maintext">
-                        ใช้เฉพาะเคสที่ระบบระบุว่า “ใช้แพ็กดูแล 19฿” เท่านั้น
-                      </span><br />
+                        เคสสมัครปี 2568 ระบบจะให้ใช้แพ็กดูแล 19฿ รอบนี้
+                      </span>
+                      <br />
                       <span class="hint">
-                        กรณีสมัครปี 2568 ระบบจะให้ใช้แพ็กดูแล 19฿ + แนบสลิป แล้วรับเข้าคิวทันที
+                        โอนแล้วแนบสลิป ระบบจะรับคำขอเข้าคิวเคลมทันที
                       </span>
                     </div>
                     <div class="bank-line">
                       <span class="bank-maintext">
-                        ช่องทางโอน: โอนผ่าน Mobile Banking เข้าบัญชีด้านล่างแล้วแนบสลิป
+                        ช่องทางโอน: โอนผ่าน Mobile Banking / แอปธนาคาร เข้าบัญชีด้านล่าง
                       </span>
                     </div>
                     <div class="bank-line">
                       <span class="bank-maintext">
                         ธ.กสิกรไทย • เลขบัญชี 062-879-4251 • ชื่อบัญชี นภัทรธมณฑ์ ฤทธิ์ชัยศักดิ์
                       </span>
-                      <button type="button" class="copy-btn" data-copy="ธ.กสิกรไทย 062-879-4251 นภัทรธมณฑ์ ฤทธิ์ชัยศักดิ์">
+                      <button
+                        type="button"
+                        class="copy-btn"
+                        data-copy="ธ.กสิกรไทย 062-879-4251 นภัทรธมณฑ์ ฤทธิ์ชัยศักดิ์"
+                      >
                         📋 คัดลอกเลขบัญชี
                       </button>
                     </div>
@@ -922,181 +846,194 @@
 
                 <div class="slip-field">
                   <label for="slip" class="field-label">
-                    แนบสลิปชำระเงิน 19฿ (ตามที่ระบบแจ้ง) <span class="req">*</span>
+                    <span>แนบสลิปชำระเงิน 19฿</span>
+                    <span class="req">*</span>
                   </label>
-                  <input type="file" id="slip" name="slip" accept="image/*,.jpg,.jpeg,.png,.webp" />
+                  <input
+                    type="file"
+                    id="slip"
+                    name="slip"
+                    accept="image/*,.jpg,.jpeg,.png,.webp"
+                  />
                   <div class="slip-note">
-                    <strong>หมายเหตุ:</strong> แนบเฉพาะเมื่อระบบสรุปว่าใช้แพ็กดูแล 19฿ ถ้าเข้าเงื่อนไขเคลมฟรี ระบบจะไม่บังคับแนบสลิป
+                    <strong>หมายเหตุ:</strong>
+                    ใช้เฉพาะเคสที่ระบบระบุว่า “เคลม 19฿” เท่านั้น
+                    ถ้าเข้าเงื่อนไขเคลมฟรี ระบบจะไม่ให้แนบสลิป และรับเข้าคิวเคลมให้เลยค่ะ
                   </div>
                 </div>
               </div>
-            </div>
 
-            <div class="actions-row">
-              <button type="submit" class="primary" id="submit-btn">
-                <span>🐻 ส่งคำขอเคลม</span>
-                <span class="dot-pulse" aria-hidden="true"></span>
-              </button>
-              <button type="button" class="secondary" id="reset-btn">
-                ล้างฟอร์ม
-              </button>
-            </div>
-
-            <div class="hint-strong">
-              หลังส่งแล้ว ระบบจะบันทึกเข้าชีต + อัปเดตสถานะล่าสุดด้านล่างแบบเรียลไทม์ (ไม่ต้องกดเช็คซ้ำ)
-            </div>
-          </form>
-        </div>
-      </section>
-
-      <!-- สถานะล่าสุด (ดูแบบเรียลไทม์) -->
-      <section class="card" id="status-card">
-        <div class="card-inner">
-          <div class="card-title">📡 สถานะคำขอเคลมล่าสุด</div>
-          <div id="status-pill" class="status-pill pending">
-            ยังไม่ได้ส่งคำขอเคลม
-          </div>
-          <div class="status-body" id="status-body">
-            <div>• เมื่อกด “ส่งคำขอเคลม” ระบบจะอัปเดตสถานะตรงนี้ให้ทันที</div>
-            <div>• ข้อมูลถูกบันทึกเข้าชีตอัตโนมัติ รอแอดมินตรวจตามคิว</div>
+              <div class="actions">
+                <div class="small-text">
+                  <span class="small-dot"></span>
+                  <span>ข้อมูลทุกอย่างถูกส่งเข้าระบบ 426 SHOP เพื่อจัดคิวเคลมให้อัตโนมัติ</span>
+                </div>
+                <button type="submit" class="btn-main" id="submit-btn">
+                  <span class="icon">✨</span>
+                  <span>ส่งคำขอเข้าคิวเคลม</span>
+                </button>
+              </div>
+            </form>
           </div>
         </div>
-      </section>
 
-      <!-- เงื่อนไขเคลมสรุปสั้น ๆ -->
-      <section class="card terms-card">
-        <div class="card-inner">
-          <div class="terms-title">
-            📌 สรุปเงื่อนไขเคลม (สั้น ๆ)
-          </div>
+        <!-- PREVIEW / STATUS -->
+        <div class="preview-card">
+          <div class="preview-inner">
+            <div class="preview-header">
+              <div class="preview-title-box">
+                <div class="preview-title">
+                  <span class="emoji">🧸</span>
+                  <span id="preview-title">สรุปสิทธิ์เคลมของคุณ</span>
+                </div>
+                <div class="pill-soft">
+                  ระบบอัปเดตสถานะให้แบบเรียลไทม์ตามข้อมูลที่กรอก
+                </div>
+              </div>
+              <div id="preview-badge" class="badge badge-wait">
+                <span class="dot"></span>
+                <span id="preview-badge-text">รอสรุปจากข้อมูลของคุณ</span>
+              </div>
+            </div>
 
-          <div class="important-blink">
-            ⚠️ สำคัญ: กรุณาแจ้งข้อมูลตามจริง หากตรวจพบไม่ตรง ตัดสิทธิ์เคลมทันที
-          </div>
+            <ul class="preview-list" id="preview-list">
+              <li>กรอกอีเมล + วันหมดอายุ + ปีที่สมัคร ระบบจะสรุปสิทธิ์เคลมให้อัตโนมัติค่ะ</li>
+            </ul>
 
-          <ul class="terms-list">
-            <li>ระบบใช้ “วันที่ซื้อ/ต่ออายุล่าสุด” + “วันหมดอายุปัจจุบัน” และปีสมัคร (2568/2569) เพื่อตรวจสอบสิทธิ์เคลม</li>
-            <li>สมัครปี <strong>2568</strong> ⇒ รอบนี้ใช้แพ็กดูแล 19฿ (โอน + แนบสลิป แล้วรับเข้าคิวเคลม)</li>
-            <li>สมัครปี <strong>2569 ขึ้นไป</strong> ⇒ เข้าเงื่อนไขเคลมฟรีตามระบบเดิมของร้าน</li>
-            <li>ถ้าเข้าเงื่อนไขโปร “ลดวัน (ฟรี)” ระบบจะจัดโปรให้ตอนแอดมินเคลม ไม่ต้องแจ้งเพิ่ม</li>
-            <li>หลังส่งฟอร์ม ระบบบันทึกเข้าชีต แล้วแอดมินจะตรวจ–อัปเดตผลตามคิว ผ่านช่องทางที่ร้านกำหนด</li>
-          </ul>
+            <div class="longdays-pill" id="longdays-pill" hidden>
+              <span class="star">🎁</span>
+              <span>
+                เหลือวันค่อนข้างเยอะ — ถ้าเข้าเงื่อนไข ระบบจะช่วยจัดโปรลดวัน (ฟรี) แล้วเคลมให้ในคิวเดียวกัน
+              </span>
+            </div>
 
-          <div class="terms-note">
-            ✨ หน้าเว็บนี้ทำงานร่วมกับ Google Apps Script / Google Sheet เพื่อให้หน้าฟอร์มกับหลังบ้านตรงกัน
+            <div class="status-footer">
+              <div>
+                <span>⌛</span>
+                <span id="footer-text">รอกดส่งฟอร์มเพื่อรับเข้าคิวเคลม</span>
+              </div>
+              <div>
+                <span style="opacity:0.7">อัปเดตอัตโนมัติ · ไม่ต้องรีเฟรช</span>
+              </div>
+            </div>
           </div>
         </div>
-      </section>
-    </main>
-  </div>
+      </div>
+    </div>
 
-  <!-- Toast สำหรับแจ้งเตือน -->
-  <div class="toast" id="toast" role="status" aria-live="polite">
-    <div class="toast-icon">🐻</div>
-    <div class="toast-text" id="toast-text">ข้อความแจ้งเตือน</div>
+    <!-- Toast -->
+    <div class="toast" id="toast">
+      <div class="toast-icon" id="toast-icon">✨</div>
+      <div class="toast-text" id="toast-text"></div>
+    </div>
   </div>
 
   <script>
-    // TODO: ใส่ URL Web App ของ Google Apps Script ที่รับข้อมูลแล้วเขียนลง Google Sheet
-    const API_ENDPOINT = "https://script.google.com/macros/s/XXXXXXXXXXXXXXXXXXXX/exec";
+    // TODO: แก้เป็น URL ของ Google Apps Script Web App ที่บันทึกลง Google Sheet
+    const SCRIPT_URL = "https://script.google.com/macros/s/xxxxxxxxxxxxxxxx/exec";
 
-    const form = document.getElementById("claim-form");
     const emailInput = document.getElementById("email");
     const expiryInput = document.getElementById("expiry");
-    const purchaseInput = document.getElementById("purchase");
-    const noteInput = document.getElementById("note");
+    const yearChooser = document.getElementById("year-chooser");
+    const payBox = document.getElementById("pay-box");
     const slipInput = document.getElementById("slip");
+
     const previewTitle = document.getElementById("preview-title");
     const previewBadge = document.getElementById("preview-badge");
+    const previewBadgeText = document.getElementById("preview-badge-text");
     const previewList = document.getElementById("preview-list");
-    const payBox = document.getElementById("pay-box");
     const longdaysPill = document.getElementById("longdays-pill");
-
+    const footerText = document.getElementById("footer-text");
     const submitBtn = document.getElementById("submit-btn");
-    const resetBtn = document.getElementById("reset-btn");
 
-    const statusPill = document.getElementById("status-pill");
-    const statusBody = document.getElementById("status-body");
-
-    const toast = document.getElementById("toast");
+    const toastEl = document.getElementById("toast");
+    const toastIcon = document.getElementById("toast-icon");
     const toastText = document.getElementById("toast-text");
 
-    function showToast(message) {
+    let selectedYear = null;
+
+    function showToast(message, type = "info") {
+      // type: info, success, error
+      if (type === "success") {
+        toastIcon.textContent = "✅";
+      } else if (type === "error") {
+        toastIcon.textContent = "⚠️";
+      } else {
+        toastIcon.textContent = "✨";
+      }
       toastText.textContent = message;
-      toast.classList.add("visible");
+      toastEl.classList.remove("hide");
+      toastEl.classList.add("show");
       setTimeout(() => {
-        toast.classList.remove("visible");
-      }, 2800);
+        toastEl.classList.add("hide");
+        toastEl.classList.remove("show");
+      }, 2200);
     }
 
     function parseDate(value) {
       if (!value) return null;
-      const parts = value.split("-");
-      if (parts.length !== 3) return null;
-      const [y, m, d] = parts.map(Number);
-      if (!y || !m || !d) return null;
-      return new Date(y, m - 1, d);
+      const d = new Date(value);
+      return isNaN(d.getTime()) ? null : d;
     }
 
     function formatDateTH(d) {
-      if (!d || Object.prototype.toString.call(d) !== "[object Date]") return "-";
+      if (!(d instanceof Date) || isNaN(d.getTime())) return "-";
       const dd = d.getDate().toString().padStart(2, "0");
       const mm = (d.getMonth() + 1).toString().padStart(2, "0");
-      const yyyy = d.getFullYear();
+      const yyyy = d.getFullYear() + 543;
       return `${dd}/${mm}/${yyyy}`;
     }
 
-    function daysBetween(today, target) {
-      const one = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-      const two = new Date(target.getFullYear(), target.getMonth(), target.getDate());
-      return Math.ceil((two - one) / 86400000);
+    function daysBetween(from, to) {
+      const ONE_DAY = 24 * 60 * 60 * 1000;
+      const d1 = new Date(from.getFullYear(), from.getMonth(), from.getDate());
+      const d2 = new Date(to.getFullYear(), to.getMonth(), to.getDate());
+      return Math.round((d2 - d1) / ONE_DAY);
     }
 
-    function isEligibleFree(buyDate) {
-      // ซื้อ/ต่ออายุตั้งแต่ปี ค.ศ. 2026 (พ.ศ. 2569) ขึ้นไป => เคลมฟรี
-      if (!buyDate) return false;
-      const threshold = new Date(2026, 0, 1);
-      return buyDate.getTime() >= threshold.getTime();
+    function isEligibleFreeByYear(year) {
+      // 2569 ขึ้นไป = สมัครปี 2026+ => เคลมฟรีตามระบบหลังบ้าน
+      if (!year) return false;
+      const y = parseInt(year, 10);
+      return y >= 2569;
     }
 
     function updatePreview() {
       const email = (emailInput.value || "").trim();
       const expiry = parseDate(expiryInput.value);
-      const purchase = parseDate(purchaseInput.value);
 
-      if (!email || !expiry || !purchase) {
-        previewTitle.textContent = "สรุปสิทธิ์เคลม (กรอกข้อมูลเพื่อเริ่มคำนวณ)";
-        previewBadge.textContent = "รอสรุปจากข้อมูลของคุณ";
-        previewBadge.className = "badge-wait";
+      if (!email || !expiry || !selectedYear) {
+        previewTitle.textContent = "สรุปสิทธิ์เคลมของคุณ";
+        previewBadgeText.textContent = "รอสรุปจากข้อมูลของคุณ";
+        previewBadge.className = "badge badge-wait";
         payBox.hidden = true;
         longdaysPill.hidden = true;
-
+        footerText.textContent = "รอกดส่งฟอร์มเพื่อรับเข้าคิวเคลม";
         previewList.innerHTML = "";
-        const li1 = document.createElement("li");
-        li1.textContent = "กรอกอีเมลที่สมัคร + วันหมดอายุ + วันที่ซื้อ/ต่ออายุ ระบบจะสรุปสิทธิ์ให้อัตโนมัติ";
-        previewList.appendChild(li1);
+        const li = document.createElement("li");
+        li.textContent = "กรอกอีเมล + วันหมดอายุ + ปีที่สมัคร ระบบจะสรุปสิทธิ์เคลมให้อัตโนมัติค่ะ";
+        previewList.appendChild(li);
         return;
       }
 
       const today = new Date();
       const daysLeft = daysBetween(today, expiry);
-      const baseFree = isEligibleFree(purchase); // true = สมัครปี 2569 ขึ้นไป
-      const mode = baseFree ? "free" : "paid19";
+      const baseFree = isEligibleFreeByYear(selectedYear);
+      const mode = baseFree ? "free" : "paid19"; // free = เคลมฟรี, paid19 = ใช้แพ็กดูแล 19฿
 
       const lines = [];
       lines.push(`• อีเมล: ${email}`);
       lines.push(`• วันหมดอายุปัจจุบัน: ${formatDateTH(expiry)} (${daysLeft} วันจากวันนี้)`);
-      lines.push(`• วันที่ซื้อ/ต่ออายุล่าสุด: ${formatDateTH(purchase)}`);
+      lines.push(`• สมัคร / ต่ออายุล่าสุด: ปี ${selectedYear}`);
 
-      // หมดอายุแล้ว
       if (daysLeft < 0) {
         previewTitle.textContent = "อีเมลนี้หมดอายุแล้ว";
-        previewBadge.textContent = "กรุณาต่ออายุก่อนใช้สิทธิ์เคลม";
-        previewBadge.className = "badge-paid";
+        previewBadgeText.textContent = "กรุณาต่ออายุก่อนใช้สิทธิ์เคลม";
+        previewBadge.className = "badge badge-paid";
         payBox.hidden = true;
         longdaysPill.hidden = true;
-        lines.push("• สถานะ: หมดอายุแล้ว — กรุณาต่ออายุก่อน แล้วค่อยกลับมาแจ้งเคลมอีกครั้งค่ะ");
-
+        footerText.textContent = "ขั้นตอนถัดไป: ต่ออายุให้เรียบร้อยก่อน แล้วค่อยกลับมาแจ้งเคลมค่ะ";
+        lines.push("• สถานะ: หมดอายุแล้ว — แนะนำต่ออายุก่อน แล้วจึงกลับมาใช้สิทธิ์เคลมในรอบถัดไป");
         previewList.innerHTML = "";
         lines.forEach((t) => {
           const li = document.createElement("li");
@@ -1109,27 +1046,33 @@
       const isLongDaysFree = baseFree && daysLeft > 90;
       longdaysPill.hidden = !isLongDaysFree;
 
-      // กล่องชำระเงิน 19฿ เฉพาะเคส 2568 (mode = paid19)
-      payBox.hidden = mode !== "paid19";
-
       if (mode === "free") {
+        previewTitle.textContent = isLongDaysFree
+          ? "เข้าเงื่อนไขเคลมฟรี + โปรลดวัน (จัดให้ในคิวเดียวกัน)"
+          : "เข้าเงื่อนไขเคลมฟรีจากประวัติการสมัคร";
+        previewBadgeText.textContent = "เคลมฟรี / ไม่ต้องแนบสลิป";
+        previewBadge.className = "badge badge-free";
+        payBox.hidden = true;
+        footerText.textContent = "เมื่อกดส่งฟอร์ม ระบบจะรับคำขอเข้าคิวเคลมฟรีให้อัตโนมัติ";
+
+        lines.push(
+          "• สถานะ: สมัคร / ต่ออายุปี 2569 ขึ้นไป — ระบบรับเข้าคิวเคลมฟรีให้ตามลำดับคิว"
+        );
         if (isLongDaysFree) {
-          previewTitle.textContent = "เข้าเงื่อนไขเคลมฟรี + โปรลดวัน (จัดให้อัตโนมัติ)";
-          previewBadge.textContent = "เคลมฟรี (เข้าเงื่อนไขโปร)";
-        } else {
-          previewTitle.textContent = "เข้าเงื่อนไขเคลมฟรีจากประวัติการซื้อ";
-          previewBadge.textContent = "เคลมฟรี";
-        }
-        previewBadge.className = "badge-free";
-        lines.push("• สถานะ: สมัคร/ต่ออายุปี 2569 ขึ้นไป — ระบบส่งคำขอเคลมฟรีให้แอดมินตรวจตามคิว");
-        if (isLongDaysFree) {
-          lines.push("• โปร: เข้าเงื่อนไขโปร “ลดวัน (ฟรี)” ระบบจะจัดโปรให้ตอนแอดมินเคลม ไม่ต้องแจ้งเพิ่ม");
+          lines.push(
+            "• โปร: เหลือวันใช้งานค่อนข้างเยอะ — ระบบอาจช่วยลดวันให้เหมาะสม แล้วเคลมฟรีในคิวเดียวกัน (ไม่ต้องแจ้งเพิ่ม)"
+          );
         }
       } else {
         previewTitle.textContent = "สมัครเมื่อ 2568 – รอบนี้ใช้แพ็กดูแล 19฿";
-        previewBadge.textContent = "แพ็กดูแล 19฿ / รอบเคลม";
-        previewBadge.className = "badge-paid";
-        lines.push("• สถานะ: สมัคร/ต่ออายุปี 2568 — รอบนี้ใช้แพ็กดูแล 19฿ (โอน + แนบสลิป แล้วเข้าคิวเคลมทันที)");
+        previewBadgeText.textContent = "ต้องโอน + แนบสลิป เพื่อเข้าคิวเคลม";
+        previewBadge.className = "badge badge-paid";
+        payBox.hidden = false;
+        footerText.textContent = "เมื่อกดส่งฟอร์มและแนบสลิป ระบบจะรับเข้าคิวเคลมทันที";
+
+        lines.push(
+          "• สถานะ: สมัคร / ต่ออายุปี 2568 — รอบนี้ใช้แพ็กดูแล 19฿ แล้วเข้าคิวเคลมตามลำดับคิว"
+        );
       }
 
       previewList.innerHTML = "";
@@ -1140,21 +1083,22 @@
       });
     }
 
-    function resetStatusCard() {
-      statusPill.textContent = "ยังไม่ได้ส่งคำขอเคลม";
-      statusPill.className = "status-pill pending";
-      statusBody.innerHTML = "";
-      const l1 = document.createElement("div");
-      l1.textContent = "• เมื่อกด “ส่งคำขอเคลม” ระบบจะอัปเดตสถานะตรงนี้ให้ทันที";
-      const l2 = document.createElement("div");
-      l2.textContent = "• ข้อมูลถูกบันทึกเข้าชีตอัตโนมัติ รอแอดมินตรวจตามคิว";
-      statusBody.appendChild(l1);
-      statusBody.appendChild(l2);
-    }
+    // เลือกปีสมัคร
+    yearChooser.addEventListener("click", (e) => {
+      const btn = e.target.closest(".year-btn");
+      if (!btn) return;
+      const year = btn.getAttribute("data-year");
+      selectedYear = year;
+
+      document
+        .querySelectorAll(".year-btn")
+        .forEach((b) => b.classList.toggle("active", b === btn));
+
+      updatePreview();
+    });
 
     emailInput.addEventListener("input", updatePreview);
     expiryInput.addEventListener("change", updatePreview);
-    purchaseInput.addEventListener("change", updatePreview);
 
     // ปุ่มคัดลอกเลขบัญชี
     document.addEventListener("click", (e) => {
@@ -1162,180 +1106,75 @@
       if (!btn) return;
       const text = btn.getAttribute("data-copy") || "";
       if (!text) return;
-      navigator.clipboard.writeText(text).then(
-        () => showToast("คัดลอกเลขบัญชีเรียบร้อยแล้ว 🐻"),
-        () => showToast("คัดลอกไม่สำเร็จ ลองใหม่อีกครั้งนะคะ")
-      );
+
+      navigator.clipboard
+        .writeText(text)
+        .then(() => {
+          showToast("คัดลอกเลขบัญชีเรียบร้อยแล้ว 💛", "success");
+        })
+        .catch(() => {
+          showToast("คัดลอกไม่สำเร็จ ลองอีกครั้งนะคะ", "error");
+        });
     });
 
-    // ปุ่มลัดปีสมัคร 2568 / 2569
-    document.querySelectorAll(".year-pill").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const year = parseInt(btn.getAttribute("data-year"), 10);
-        if (!year) return;
-        const current = purchaseInput.value ? parseDate(purchaseInput.value) : new Date();
-        const m = current ? current.getMonth() : 0;
-        const d = current ? current.getDate() : 1;
-        const date = new Date(year, m, d);
-        const yyyy = date.getFullYear();
-        const mm = (date.getMonth() + 1).toString().padStart(2, "0");
-        const dd = date.getDate().toString().padStart(2, "0");
-        purchaseInput.value = `${yyyy}-${mm}-${dd}`;
-        updatePreview();
-
-        if (year === 2025) {
-          showToast("ตั้งปีสมัครเป็น 2568 (ระบบจะถือเป็นเคสใช้แพ็กดูแล 19฿)");
-        } else if (year === 2026) {
-          showToast("ตั้งปีสมัครเป็น 2569 (เข้าเงื่อนไขเคลมฟรี)");
-        }
-      });
-    });
-
-    resetBtn.addEventListener("click", () => {
-      form.reset();
-      payBox.hidden = true;
-      longdaysPill.hidden = true;
-      resetStatusCard();
-      updatePreview();
-    });
-
-    form.addEventListener("submit", async (e) => {
+    // ส่งฟอร์ม
+    document.getElementById("claim-form").addEventListener("submit", async (e) => {
       e.preventDefault();
 
       const email = (emailInput.value || "").trim();
-      const expiry = parseDate(expiryInput.value);
-      const purchase = parseDate(purchaseInput.value);
+      const expiry = expiryInput.value;
+      const slipFile = slipInput.files[0] || null;
 
-      if (!email || !expiry || !purchase) {
-        showToast("กรุณากรอกอีเมล + วันที่ให้ครบก่อนนะคะ");
+      if (!email || !expiry || !selectedYear) {
+        showToast("กรุณากรอกอีเมล วันหมดอายุ และเลือกปีที่สมัครให้ครบก่อนนะคะ", "error");
         return;
       }
 
-      const daysLeft = daysBetween(new Date(), expiry);
-      const baseFree = isEligibleFree(purchase);
-      const mode = baseFree ? "free" : "paid19";
-      const isLongDaysFree = baseFree && daysLeft > 90;
-      const needs19 = mode === "paid19";
+      const mode = isEligibleFreeByYear(selectedYear) ? "free" : "paid19";
 
-      if (daysLeft < 0) {
-        showToast("อีเมลนี้หมดอายุแล้ว กรุณาต่ออายุก่อนใช้สิทธิ์เคลมค่ะ");
+      if (mode === "paid19" && !slipFile) {
+        showToast("เคสสมัครปี 2568 กรุณาแนบสลิปชำระเงิน 19฿ ก่อนส่งฟอร์มค่ะ", "error");
         return;
-      }
-
-      if (needs19) {
-        if (!slipInput.files || !slipInput.files.length) {
-          showToast("เคสนี้ต้องใช้แพ็กดูแล 19฿ กรุณาโอนและแนบสลิปก่อนกดส่งคำขอเคลมค่ะ");
-          return;
-        }
       }
 
       submitBtn.disabled = true;
-
-      // อัปเดตสถานะบนหน้า (เรียลไทม์)
-      statusPill.textContent = "กำลังส่งคำขอเคลมเข้าระบบ…";
-      statusPill.className = "status-pill pending";
-      statusBody.innerHTML = "";
-      const baseStatusLines = [];
-
-      baseStatusLines.push(`• อีเมล: ${email}`);
-      baseStatusLines.push(`• วันหมดอายุ: ${formatDateTH(expiry)} (เหลือ ~${daysLeft} วัน)`);
-      baseStatusLines.push(`• วันที่ซื้อ/ต่ออายุล่าสุด: ${formatDateTH(purchase)}`);
-
-      let claimLabel = "";
-      if (mode === "free") {
-        claimLabel = isLongDaysFree
-          ? "เคลมฟรี + เข้าเงื่อนไขโปรลดวัน (จัดให้อัตโนมัติ)"
-          : "เคลมฟรี";
-      } else {
-        claimLabel = "แพ็กดูแล 19฿ รอบนี้";
-      }
-      baseStatusLines.push(`• ประเภทสิทธิ์: ${claimLabel}`);
-
-      if (isLongDaysFree) {
-        baseStatusLines.push("• โปร: ระบบจะจัดโปรลดวัน (ฟรี) ให้ตอนแอดมินเคลม ไม่ต้องแจ้งเพิ่ม");
-      }
-
-      baseStatusLines.forEach((t) => {
-        const p = document.createElement("div");
-        p.textContent = t;
-        statusBody.appendChild(p);
-      });
-
-      // เตรียมข้อมูลส่งไป Apps Script (Google Sheet)
-      const fd = new FormData();
-      fd.append("mode", "claim");
-      fd.append("email", email);
-      fd.append("expiry_iso", expiryInput.value);
-      fd.append("purchase_iso", purchaseInput.value);
-      fd.append("note", noteInput.value || "");
-      fd.append("days_left", daysLeft.toString());
-      fd.append("claim_type", mode);
-      fd.append("long_days", isLongDaysFree ? "1" : "0");
-
-      if (needs19 && slipInput.files && slipInput.files[0]) {
-        fd.append("slip", slipInput.files[0]);
-      }
+      submitBtn.innerHTML = '<span class="icon">⏳</span><span>กำลังส่งคำขอ...</span>';
 
       try {
-        const res = await fetch(API_ENDPOINT, {
+        const formData = new FormData();
+        formData.append("email", email);
+        formData.append("expiry", expiry);
+        formData.append("signupYear", selectedYear);
+        formData.append("mode", mode); // free / paid19
+        if (slipFile && mode === "paid19") {
+          formData.append("slip", slipFile);
+        }
+
+        // ส่งไปยัง Google Apps Script
+        await fetch(SCRIPT_URL, {
           method: "POST",
-          body: fd
+          body: formData,
         });
 
-        let ok = res.ok;
-        let json = null;
-        try {
-          json = await res.json();
-        } catch (err) {
-          // ถ้า parse JSON ไม่ได้ ใช้สถานะ HTTP เป็นหลัก
-        }
-
-        if (json && typeof json.success === "boolean") {
-          ok = json.success;
-        }
-
-        if (!ok) {
-          throw new Error("API error");
-        }
-
-        if (needs19) {
-          statusPill.textContent = "บันทึกคำขอเคลม + สลิปแล้ว รับเข้าคิวตรวจเคลมทันที";
-          statusPill.className = "status-pill ok";
-        } else if (isLongDaysFree) {
-          statusPill.textContent = "บันทึกคำขอเคลมฟรี + โปรลดวันแล้ว";
-          statusPill.className = "status-pill ok";
+        // ล้างฟอร์มบางส่วน (ไม่ล้าง email เผื่อใช้ซ้ำ)
+        slipInput.value = "";
+        if (mode === "paid19") {
+          showToast("รับคำขอและสลิปเรียบร้อยแล้ว เข้าคิวเคลมทันที 🧸✨", "success");
         } else {
-          statusPill.textContent = "บันทึกคำขอเคลมฟรีแล้ว";
-          statusPill.className = "status-pill ok";
+          showToast("รับคำขอเคลมฟรีแล้ว ระบบจะเคลมให้ตามคิวค่ะ 💌", "success");
         }
-
-        const doneLine = document.createElement("div");
-        if (needs19) {
-          doneLine.textContent = "ระบบได้รับข้อมูล + สลิปเรียบร้อยแล้ว แอดมินจะตรวจและเคลมให้ตามคิว จากนั้นจะแจ้งผลกลับค่ะ";
-        } else if (isLongDaysFree) {
-          doneLine.textContent = "ระบบจัดโปรลดวัน (ฟรี) และเข้าคิวเคลมเรียบร้อยแล้ว แอดมินจะตรวจและอัปเดตผลให้ตามคิวค่ะ";
-        } else {
-          doneLine.textContent = "ระบบได้รับคำขอเคลมฟรีเรียบร้อยแล้ว แอดมินจะตรวจและย้ายกลุ่มให้ตามคิว แล้วแจ้งผลให้ทราบค่ะ";
-        }
-        doneLine.style.marginTop = "4px";
-        statusBody.appendChild(doneLine);
-
-        showToast("ส่งคำขอเคลมเรียบร้อยแล้ว เข้าคิวตรวจเคลมทันที 🐻✨");
+        footerText.textContent = "ส่งคำขอเรียบร้อยแล้ว รอแอดมินจัดการให้ตามคิวได้เลยค่ะ";
       } catch (err) {
         console.error(err);
-        statusPill.textContent = "ส่งคำขอไม่สำเร็จ";
-        statusPill.className = "status-pill error";
-        const errLine = document.createElement("div");
-        errLine.textContent = "ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ได้ในตอนนี้ กรุณาลองใหม่อีกครั้ง หรือส่งข้อมูลให้แอดมินตรวจได้โดยตรงค่ะ";
-        statusBody.appendChild(errLine);
-        showToast("ส่งข้อมูลไม่สำเร็จ ลองใหม่อีกครั้งนะคะ");
+        showToast("ส่งคำขอไม่สำเร็จ ลองใหม่อีกครั้งนะคะ", "error");
       } finally {
         submitBtn.disabled = false;
+        submitBtn.innerHTML =
+          '<span class="icon">✨</span><span>ส่งคำขอเข้าคิวเคลม</span>';
       }
     });
 
-    // ตั้งค่าเริ่มต้น
-    resetStatusCard();
+    // initial
     updatePreview();
   </script>
 </body>
