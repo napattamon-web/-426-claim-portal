@@ -5,7 +5,8 @@
   <title>426 SHOP – ฟอร์มแจ้งเคลม</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#f5f3f0" />
-  <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- ฟอนต์ Noto Sans Thai -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bg: #f5f3f0;
@@ -48,7 +49,7 @@
         radial-gradient(circle at 0 0, #f8e8dd 0, transparent 55%),
         radial-gradient(circle at 100% 0, #e7f4ee 0, transparent 55%),
         var(--bg);
-      font-family: "Anuphan", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: "Noto Sans Thai", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
       color: var(--text-main);
       -webkit-font-smoothing: antialiased;
       transition: background 0.25s ease;
@@ -216,6 +217,7 @@
       gap: 6px;
       white-space: nowrap;
       backdrop-filter: blur(6px);
+      transition: background 0.2s ease, border-color 0.2s ease;
     }
 
     body.theme-dark .badge {
@@ -229,6 +231,22 @@
       border-radius: 999px;
       background: #4caf50;
       box-shadow: 0 0 0 4px rgba(76,175,80,0.18);
+      transition: background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .badge-dot.offline {
+      background: #e57373;
+      box-shadow: 0 0 0 4px rgba(229,115,115,0.25);
+    }
+
+    .badge.closed {
+      background: rgba(255,240,240,0.96);
+      border-color: #f1c0c0;
+    }
+
+    body.theme-dark .badge.closed {
+      background: rgba(40,20,20,0.96);
+      border-color: #f1c0c0;
     }
 
     .theme-toggle {
@@ -340,7 +358,7 @@
       font-size: 0.9rem;
     }
 
-    /* เวลารับเคลม – กระพริบเด้งน่ารัก */
+    /* เวลารับเคลม – กระพริบ เด้งน่ารัก */
     .claim-time-note {
       font-size: 0.78rem;
       padding: 6px 10px;
@@ -352,11 +370,24 @@
       justify-content: center;
       max-width: 100%;
       animation: claimBlink 1.8s ease-in-out infinite;
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
     }
 
     body.theme-dark .claim-time-note {
       background: #25262c;
       border-color: #3a3c45;
+    }
+
+    .claim-time-note.closed {
+      background: #ffe5e5;
+      border-color: #f19a9a;
+      color: #c34040;
+    }
+
+    body.theme-dark .claim-time-note.closed {
+      background: #3b2626;
+      border-color: #f19a9a;
+      color: #f3d0a8;
     }
 
     @keyframes claimBlink {
@@ -910,7 +941,7 @@
       background: #283036;
     }
 
-    /* LIVE STATUS – ล่างสุดของการ์ด (ขยายกรอบให้ใหญ่ น่ารักขึ้น) */
+    /* LIVE STATUS – ล่างสุดของการ์ด (กรอบใหญ่ น่ารัก) */
     .live-status-card {
       margin-top: 12px;
       padding: 12px 12px 12px;
@@ -1181,9 +1212,10 @@
           </div>
         </div>
         <div class="header-right">
-          <div class="badge">
-            <span class="badge-dot"></span>
-            <span>ระบบร้านออนไลน์ · เรียลไทม์</span>
+          <!-- ปุ่มสถานะออนไลน์ / ปิดรับเคลม -->
+          <div class="badge" id="onlineStatus">
+            <span class="badge-dot" id="onlineDot"></span>
+            <span id="onlineText">สถานะ: เปิดรับเคลม</span>
           </div>
           <button class="theme-toggle" id="themeToggle" type="button" aria-label="สลับโหมดกลางคืน">🌙</button>
         </div>
@@ -1202,8 +1234,8 @@
         <span>ฟอร์มแจ้งเคลมสมาชิก</span>
       </div>
 
-      <!-- ข้อความด้านบน: เวลารับเคลม (กระพริบเด้งน่ารัก) -->
-      <div class="claim-time-note">
+      <!-- ข้อความด้านบน: เวลารับเคลม (กระพริบเด้งน่ารัก + เปลี่ยนโทนเมื่อปิดรับ) -->
+      <div class="claim-time-note" id="claimTimeNote">
         รับเคลมเฉพาะวันจันทร์–เสาร์ เวลา 07.00–19.00 น.
       </div>
 
@@ -1365,14 +1397,21 @@
     const themeToggle = document.getElementById("themeToggle");
     const tipBubble = document.getElementById("tipBubble");
     const tipText = document.getElementById("tipText");
+    const claimTimeNote = document.getElementById("claimTimeNote");
 
     // live status elements
     const liveStatusCard = document.getElementById("liveStatusCard");
     const liveDateEl = document.getElementById("liveDate");
     const liveListEl = document.getElementById("liveList");
 
+    // online status elements
+    const onlineStatus = document.getElementById("onlineStatus");
+    const onlineDot = document.getElementById("onlineDot");
+    const onlineText = document.getElementById("onlineText");
+
     let isLoading = false;
     let liveTimerId = null;
+    let isClaimOpen = true;
 
     // STEP STATE
     function setStepState(state) {
@@ -1433,6 +1472,44 @@
       applyTheme(newTheme);
       localStorage.setItem("theme", newTheme);
     });
+
+    // ตรวจสอบว่าขณะนี้อยู่ในช่วงเวลา 07.00–19.00 หรือไม่
+    function isWithinClaimWindow() {
+      const now = new Date();
+      const hour = now.getHours();
+      // เปิดรับเคลมตั้งแต่ 07:00 ถึงก่อน 19:00
+      return hour >= 7 && hour < 19;
+    }
+
+    // อัปเดตปุ่มสถานะ + ข้อความเวลารับเคลม ตามช่วงเวลาเปิด/ปิด
+    function updateClaimWindowState() {
+      const open = isWithinClaimWindow();
+      isClaimOpen = open;
+
+      if (onlineStatus && onlineDot && onlineText) {
+        if (open) {
+          onlineStatus.classList.remove("closed");
+          onlineDot.classList.remove("offline");
+          onlineText.textContent = "สถานะ: เปิดรับเคลม";
+        } else {
+          onlineStatus.classList.add("closed");
+          onlineDot.classList.add("offline");
+          onlineText.textContent = "สถานะ: ปิดรับเคลม";
+        }
+      }
+
+      if (claimTimeNote) {
+        if (open) {
+          claimTimeNote.classList.remove("closed");
+          claimTimeNote.textContent =
+            "รับเคลมเฉพาะวันจันทร์–เสาร์ เวลา 07.00–19.00 น.";
+        } else {
+          claimTimeNote.classList.add("closed");
+          claimTimeNote.textContent =
+            "ขณะนี้อยู่นอกเวลารับเคลม กรุณากลับมาเคลมในวันถัดไปช่วงเวลา 07.00–19.00 น.";
+        }
+      }
+    }
 
     // YEAR SELECT
     yearRow.querySelectorAll(".year-btn").forEach((btn) => {
@@ -1500,6 +1577,10 @@
     window.addEventListener("load", () => {
       setStepState("idle");
       emailInput.focus();
+      updateClaimWindowState();
+      // ตรวจทุก 1 นาทีให้สถานะออนไลน์/ปิดอัปเดตอัตโนมัติ
+      setInterval(updateClaimWindowState, 60000);
+
       // ดึงสถานะเมลในระบบรอบแรก
       fetchTodayStatus(true);
       // อัปเดตสถานะเป็นระยะ
@@ -1539,6 +1620,15 @@
     }
 
     function handleSubmit() {
+      // เช็กช่วงเวลาเปิดรับเคลมก่อน
+      updateClaimWindowState();
+      if (!isClaimOpen) {
+        status.textContent = "วันนี้ปิดรับแล้ว กรุณากลับมาเคลมในวันถัดไปช่วงเวลา 07.00–19.00 น.";
+        status.classList.add("status-error");
+        setStepState("idle");
+        return;
+      }
+
       const email = (emailInput.value || "").trim();
       const expiry = (expiryInput.value || "").trim();
       const year = (signupYearInput.value || "").trim();
@@ -1775,7 +1865,7 @@
       }
 
       const claimLabel =
-        current.claimType === "paid" ? "ใช้แพ็กดูแล 19 บาท" : "เคลมฟรีตามเงื่อนไข";
+        current.claimType === "paid" ? "แพ็กดูแล 19 บาท" : "เคลมฟรีตามเงื่อนไข";
       summaryDiv.innerHTML = `
         <div class="summary-row">
           <div class="summary-pill summary-pill--ok">
