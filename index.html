@@ -654,6 +654,158 @@
       }
     }
 
+    /* LIVE STATUS CARD */
+    .live-status-card {
+      margin-top: 8px;
+      padding: 9px 10px 9px;
+      border-radius: 14px;
+      background: #f7f1eb;
+      border: 1px solid #e1d6ca;
+      font-size: 0.78rem;
+      line-height: 1.5;
+    }
+
+    body.theme-dark .live-status-card {
+      background: #26272e;
+      border-color: #3a3c45;
+    }
+
+    .live-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .live-title-left {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #4caf50;
+      box-shadow: 0 0 0 4px rgba(76,175,80,0.18);
+      animation: livePulse 1.4s ease-in-out infinite;
+    }
+
+    @keyframes livePulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 0 4px rgba(76,175,80,0.18); }
+      50%       { transform: scale(1.2); box-shadow: 0 0 0 7px rgba(76,175,80,0); }
+    }
+
+    .live-title-text {
+      font-weight: 600;
+    }
+
+    .live-date {
+      color: var(--text-sub);
+      font-size: 0.74rem;
+      white-space: nowrap;
+    }
+
+    .live-summary-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-bottom: 5px;
+    }
+
+    .live-pill {
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid #e3d8cc;
+      background: #ffffff;
+      white-space: nowrap;
+    }
+
+    .live-pill-free {
+      background: #e7f4ee;
+      border-color: #c3dfd2;
+    }
+
+    .live-pill-paid {
+      background: #fff4e7;
+      border-color: #f0c2a0;
+    }
+
+    body.theme-dark .live-pill {
+      background: #232429;
+      border-color: #3a3c45;
+    }
+
+    body.theme-dark .live-pill-free {
+      background: #223831;
+      border-color: #3e6d5b;
+    }
+
+    body.theme-dark .live-pill-paid {
+      background: #3b2a21;
+      border-color: #f0c2a0;
+    }
+
+    .live-list {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      margin-top: 2px;
+    }
+
+    .live-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .live-email {
+      font-weight: 500;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 200px;
+    }
+
+    .live-meta {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      font-size: 0.74rem;
+      color: var(--text-sub);
+      white-space: nowrap;
+    }
+
+    .live-badge {
+      padding: 2px 6px;
+      border-radius: 999px;
+      border: 1px solid #e3ddd5;
+      font-size: 0.72rem;
+    }
+
+    .live-badge.free {
+      background: #e7f4ee;
+      border-color: #c3dfd2;
+    }
+
+    .live-badge.paid {
+      background: #fff4e7;
+      border-color: #f0c2a0;
+    }
+
+    body.theme-dark .live-badge.free {
+      background: #223831;
+      border-color: #3e6d5b;
+    }
+
+    body.theme-dark .live-badge.paid {
+      background: #3b2a21;
+      border-color: #f0c2a0;
+    }
+
     /* STATUS */
     #status {
       font-size: 0.8rem;
@@ -1088,6 +1240,23 @@
         </div>
       </div>
 
+      <!-- LIVE DAILY STATUS (เรียลไทม์ทุกเมลที่แจ้งวันนี้) -->
+      <div id="liveStatusCard" class="live-status-card" style="display:none;">
+        <div class="live-header">
+          <div class="live-title-left">
+            <span class="live-dot"></span>
+            <span class="live-title-text">สถานะวันนี้ของร้าน</span>
+          </div>
+          <span class="live-date" id="liveDate"></span>
+        </div>
+        <div class="live-summary-row">
+          <span id="liveTotal" class="live-pill">วันนี้ 0 รายการ</span>
+          <span id="liveFree" class="live-pill live-pill-free">เคลมฟรี 0</span>
+          <span id="livePaid" class="live-pill live-pill-paid">แพ็กดูแล 19 บาท 0</span>
+        </div>
+        <div class="live-list" id="liveList"></div>
+      </div>
+
       <!-- คำเตือนสำคัญกระพริบ -->
       <div class="warn-text warn-text--important">
         <span class="warn-text-icon">⚠️</span>
@@ -1138,6 +1307,7 @@
   <script>
     // 🔗 URL Web App ของ Google Apps Script (ของคุณเอง)
     const SCRIPT_URL = "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL";
+    const STATUS_POLL_INTERVAL = 30000; // ms เช่น 30 วินาที
 
     const btnSubmit = document.getElementById("btnSubmit");
     const btnClear = document.getElementById("btnClear");
@@ -1162,7 +1332,16 @@
     const tipBubble = document.getElementById("tipBubble");
     const tipText = document.getElementById("tipText");
 
+    // live status elements
+    const liveStatusCard = document.getElementById("liveStatusCard");
+    const liveDateEl = document.getElementById("liveDate");
+    const liveTotalEl = document.getElementById("liveTotal");
+    const liveFreeEl = document.getElementById("liveFree");
+    const livePaidEl = document.getElementById("livePaid");
+    const liveListEl = document.getElementById("liveList");
+
     let isLoading = false;
+    let liveTimerId = null;
 
     // STEP STATE
     function setStepState(state) {
@@ -1283,6 +1462,12 @@
     window.addEventListener("load", () => {
       setStepState("idle");
       emailInput.focus();
+      // ดึงสถานะวันนี้รอบแรก
+      fetchTodayStatus(true);
+      // อัปเดตสถานะวันนี้เป็นระยะ
+      if (STATUS_POLL_INTERVAL && STATUS_POLL_INTERVAL > 0) {
+        liveTimerId = setInterval(fetchTodayStatus, STATUS_POLL_INTERVAL);
+      }
     });
 
     function clearForm() {
@@ -1394,6 +1579,11 @@
           btnSubmit.disabled = false;
           btnSubmit.innerHTML = "<span>ส่งคำขอเคลม</span><span>↗</span>";
           renderResult(data, elapsedSec, { email, expiry, year, note });
+
+          // ถ้า response ส่งสถานะวันนี้มาด้วย ก็อัปเดต live status
+          if (data && (data.todaySummary || data.dailyStatus)) {
+            renderLiveStatus(data.todaySummary || data.dailyStatus);
+          }
         })
         .catch((err) => {
           console.error(err);
@@ -1405,6 +1595,103 @@
           setStepState("error");
         });
     }
+
+    // ========== LIVE STATUS (เรียลไทม์ทุกเมลในแต่ละวัน) ==========
+    function formatThaiDate(dateStr) {
+      if (!dateStr) return "";
+      const parts = dateStr.split("-");
+      if (parts.length !== 3) return dateStr;
+      const y = parseInt(parts[0], 10) + 543;
+      const m = parseInt(parts[1], 10);
+      const d = parseInt(parts[2], 10);
+      const months = ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."];
+      const monthName = months[m - 1] || "";
+      return d + " " + monthName + " " + y;
+    }
+
+    function maskEmail(email) {
+      if (!email) return "-";
+      const parts = email.split("@");
+      if (parts.length !== 2) return email;
+      const name = parts[0];
+      const domain = parts[1];
+      const shortName = name.length <= 3 ? name : name.slice(0, 3) + "***";
+      return shortName + "@" + domain;
+    }
+
+    function renderLiveStatus(summary) {
+      if (!liveStatusCard || !summary) {
+        if (liveStatusCard) liveStatusCard.style.display = "none";
+        return;
+      }
+
+      const total = Number(summary.total || summary.count || 0) || 0;
+      const freeCount = Number(summary.freeCount || 0) || 0;
+      const paidCount = Number(summary.paidCount || 0) || 0;
+      const items = Array.isArray(summary.items) ? summary.items : [];
+
+      if (total === 0 && items.length === 0) {
+        liveStatusCard.style.display = "none";
+        return;
+      }
+
+      liveStatusCard.style.display = "block";
+
+      // วันที่วันนี้
+      const dateStr = summary.date || summary.today || "";
+      liveDateEl.textContent = dateStr ? formatThaiDate(dateStr) : "วันนี้";
+
+      liveTotalEl.textContent = "วันนี้ " + total + " รายการ";
+      liveFreeEl.textContent = "เคลมฟรี " + freeCount;
+      livePaidEl.textContent = "แพ็กดูแล 19 บาท " + paidCount;
+
+      liveListEl.innerHTML = "";
+
+      const showItems = items.slice(0, 5); // แสดงล่าสุดไม่เกิน 5 รายการ
+      showItems.forEach((item) => {
+        const email = maskEmail(item.email || item.mail || "-");
+        const claimType = (item.claimType || item.type || "").toLowerCase();
+        const isPaid = claimType === "paid" || claimType === "19" || claimType === "19฿";
+        const timeText = item.time || item.at || "";
+
+        const row = document.createElement("div");
+        row.className = "live-item";
+
+        row.innerHTML = `
+          <span class="live-email">${email}</span>
+          <div class="live-meta">
+            <span class="live-badge ${isPaid ? "paid" : "free"}">
+              ${isPaid ? "แพ็กดูแล 19 บาท" : "เคลมฟรี"}
+            </span>
+            <span>${timeText}</span>
+          </div>
+        `;
+        liveListEl.appendChild(row);
+      });
+    }
+
+    function fetchTodayStatus(initial = false) {
+      if (!SCRIPT_URL || SCRIPT_URL === "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL") return;
+      fetch(SCRIPT_URL + "?action=todayStatus")
+        .then((res) => {
+          if (!res.ok) throw new Error("HTTP " + res.status);
+          return res.json();
+        })
+        .then((data) => {
+          if (!data) return;
+          if (data.todaySummary || data.summary || data.dailyStatus) {
+            renderLiveStatus(data.todaySummary || data.summary || data.dailyStatus);
+          }
+        })
+        .catch((err) => {
+          if (initial) {
+            // เงียบๆ ถ้าโหลดครั้งแรกไม่สำเร็จ
+            console.warn("Cannot load todayStatus:", err);
+          }
+        });
+    }
+
+    // ========== RESULT / HISTORY ==========
 
     function renderResult(res, elapsedSec, localEntry) {
       resultsDiv.innerHTML = "";
@@ -1418,7 +1705,6 @@
         return;
       }
 
-      // เตรียมข้อมูล current
       const current = res.current || {
         email: res.email || localEntry.email,
         expiry: res.expiry || localEntry.expiry,
@@ -1431,7 +1717,6 @@
           "ระบบรับคำขอแล้วและกำลังนำเข้าคิวเคลมตามลำดับ"
       };
 
-      // Step + header animation
       if (res.ok !== false) {
         setStepState("done");
         triggerSuccessAnimation();
@@ -1439,7 +1724,6 @@
         setStepState("error");
       }
 
-      // SUMMARY
       const claimLabel =
         current.claimType === "paid" ? "ใช้แพ็กดูแล 19 บาท" : "เคลมฟรีตามเงื่อนไข";
       summaryDiv.innerHTML = `
@@ -1450,7 +1734,6 @@
         </div>
       `;
 
-      // STATUS TEXT
       const parts = [];
       if (res.message) {
         parts.push("<span class='status-strong'>" + res.message + "</span>");
@@ -1485,7 +1768,6 @@
         status.classList.add("status-ok");
       }
 
-      // ถ้า success ให้เคลียร์ข้อมูลบางส่วน (ไม่เคลียร์ปีสมัคร เผื่อใช้เคลมต่อ)
       if (res.ok !== false) {
         noteInput.value = "";
         if (current.claimType === "free") {
@@ -1493,7 +1775,6 @@
         }
       }
 
-      // HISTORY
       const history = Array.isArray(res.history) && res.history.length
         ? res.history
         : [current];
@@ -1551,7 +1832,6 @@
         resultsDiv.appendChild(card);
       });
 
-      // เลื่อนให้เห็นผลลัพธ์
       if (history.length) {
         window.scrollTo({ top: resultsDiv.offsetTop - 18, behavior: "smooth" });
       }
