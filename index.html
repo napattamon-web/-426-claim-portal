@@ -12,18 +12,18 @@
     :root {
       --bg-main: #fdf7f3;
       --bg-card: #ffffff;
-      --accent: #d6a47a;
+      --accent: #d7a47b;
       --accent-soft: #f7e4d5;
-      --accent-strong: #b47b4f;
-      --border-soft: #e8d7c8;
-      --text-main: #3c3027;
+      --accent-strong: #b2774c;
+      --border-soft: #e6d5c6;
+      --text-main: #3b3027;
       --text-soft: #8a7464;
-      --error: #c85e5e;
+      --error: #c95d5d;
       --success: #5f9963;
-      --online: #4caf50;
-      --shadow-soft: 0 18px 40px rgba(110, 82, 60, 0.16);
+      --online: #41b059;
+      --shadow-soft: 0 18px 40px rgba(107, 79, 57, 0.18);
       --radius-lg: 22px;
-      --radius-md: 14px;
+      --radius-md: 16px;
       --radius-pill: 999px;
       --transition-fast: 0.18s ease-out;
     }
@@ -35,19 +35,52 @@
     }
 
     body {
-      font-family: "Kanit", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        sans-serif;
-      background: radial-gradient(circle at top, #fbeee2 0, #f7e4d6 24%, #fdf7f3 55%, #fdf7f3 100%);
-      color: var(--text-main);
+      font-family: "Kanit", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #faeee2 0, #f4e0cf 26%, #fdf7f3 55%, #fdf7f3 100%);
       min-height: 100vh;
       display: flex;
       justify-content: center;
       padding: 28px 16px;
+      color: var(--text-main);
     }
 
     .page {
       width: 100%;
-      max-width: 1080px;
+      max-width: 1120px;
+      position: relative;
+    }
+
+    /* รูปทรงตกแต่งพื้นหลัง */
+    .bg-bubble {
+      position: fixed;
+      z-index: -1;
+      border-radius: 50%;
+      filter: blur(24px);
+      opacity: 0.7;
+    }
+
+    .bg-bubble.b1 {
+      width: 210px;
+      height: 210px;
+      background: #f6d9bf;
+      top: -60px;
+      left: -40px;
+    }
+
+    .bg-bubble.b2 {
+      width: 180px;
+      height: 180px;
+      background: #f4e7da;
+      bottom: -30px;
+      right: -40px;
+    }
+
+    .bg-bubble.b3 {
+      width: 120px;
+      height: 120px;
+      background: #fbeee1;
+      top: 40%;
+      right: 12%;
     }
 
     /* HEADER */
@@ -55,33 +88,43 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 14px;
       gap: 12px;
+      margin-bottom: 14px;
     }
 
     .brand-block {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
 
     .brand-logo-wrap {
-      width: 46px;
-      height: 46px;
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.95);
-      box-shadow: 0 10px 28px rgba(110, 82, 60, 0.18);
+      width: 52px;
+      height: 52px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 12px 28px rgba(110, 82, 60, 0.25);
       padding: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
+      position: relative;
+    }
+
+    .brand-logo-wrap::after {
+      content: "";
+      position: absolute;
+      inset: 8px;
+      border-radius: 18px;
+      border: 1px dashed rgba(208, 163, 124, 0.7);
+      pointer-events: none;
     }
 
     .brand-logo-wrap img {
       width: 100%;
       height: 100%;
       object-fit: contain;
-      border-radius: 12px;
+      border-radius: 14px;
     }
 
     .brand-text {
@@ -92,78 +135,111 @@
 
     .brand-name {
       font-weight: 600;
-      font-size: 1.3rem;
-      letter-spacing: 0.06em;
+      font-size: 1.35rem;
+      letter-spacing: 0.08em;
     }
 
     .brand-sub {
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       color: var(--text-soft);
+    }
+
+    .header-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+    }
+
+    .header-badge-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
     }
 
     .header-badge {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 4px 10px;
+      padding: 4px 11px;
       border-radius: 999px;
       background: rgba(255, 255, 255, 0.9);
-      border: 1px solid rgba(211, 179, 150, 0.4);
+      border: 1px solid rgba(211, 179, 150, 0.5);
       backdrop-filter: blur(10px);
       font-size: 0.78rem;
       color: var(--text-soft);
     }
 
     .badge-dot {
-      width: 8px;
-      height: 8px;
+      width: 9px;
+      height: 9px;
       border-radius: 50%;
       background: var(--online);
-      animation: dotPulse 1.2s ease-in-out infinite;
+      box-shadow: 0 0 0 0 rgba(65, 176, 89, 0.5);
+      animation: dotPulse 1.4s ease-out infinite;
+    }
+
+    .header-tagline {
+      font-size: 0.78rem;
+      color: var(--text-soft);
     }
 
     @keyframes dotPulse {
       0% {
         transform: scale(1);
-        opacity: 0.9;
+        box-shadow: 0 0 0 0 rgba(65, 176, 89, 0.45);
       }
-      50% {
-        transform: scale(1.2);
-        opacity: 1;
+      70% {
+        transform: scale(1.12);
+        box-shadow: 0 0 0 8px rgba(65, 176, 89, 0);
       }
       100% {
         transform: scale(1);
-        opacity: 0.9;
+        box-shadow: 0 0 0 0 rgba(65, 176, 89, 0);
       }
     }
 
     /* IMPORTANT STRIP */
     .important-strip {
       display: flex;
-      gap: 10px;
-      padding: 10px 14px;
-      border-radius: 16px;
+      gap: 12px;
+      align-items: stretch;
+      padding: 11px 15px;
+      border-radius: 18px;
       background: rgba(255, 255, 255, 0.98);
-      border: 1px solid rgba(200, 120, 90, 0.35);
-      box-shadow: 0 10px 30px rgba(110, 82, 60, 0.16);
+      border: 1px solid rgba(201, 139, 102, 0.5);
+      box-shadow: 0 12px 32px rgba(110, 82, 60, 0.18);
       margin-bottom: 18px;
-      animation: stripBlink 1.4s ease-in-out infinite alternate;
+      position: relative;
+      overflow: hidden;
+      animation: stripBlink 1.5s ease-in-out infinite alternate;
     }
 
-    .important-dot {
-      width: 9px;
-      height: 32px;
+    .important-strip::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(244, 204, 180, 0.28), transparent);
+      pointer-events: none;
+    }
+
+    .important-bar {
+      width: 7px;
       border-radius: 999px;
-      background: linear-gradient(180deg, #d46a6a, #f3b08a);
+      background: linear-gradient(180deg, #d66a6a, #f0a96e);
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.8);
     }
 
     .important-text {
       font-size: 0.8rem;
-      line-height: 1.6;
+      line-height: 1.7;
       color: var(--text-main);
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      gap: 3px;
+      position: relative;
+      z-index: 1;
     }
 
     .important-text span.highlight {
@@ -173,70 +249,111 @@
 
     @keyframes stripBlink {
       0% {
-        box-shadow: 0 10px 24px rgba(110, 82, 60, 0.12);
-        background: rgba(255, 255, 255, 0.96);
+        box-shadow: 0 10px 26px rgba(110, 82, 60, 0.16);
+        transform: translateY(0);
       }
       100% {
-        box-shadow: 0 10px 26px rgba(200, 120, 90, 0.25);
-        background: rgba(255, 255, 255, 1);
+        box-shadow: 0 12px 32px rgba(201, 93, 93, 0.24);
+        transform: translateY(-1px);
       }
     }
 
-    /* LAYOUT */
+    /* MAIN LAYOUT */
     .app-main {
       display: grid;
-      grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
-      gap: 18px;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 20px;
     }
 
     .card {
       background: rgba(255, 255, 255, 0.98);
       border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-soft);
-      padding: 20px 18px;
       border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
     }
 
-    .card h1 {
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top left, rgba(241, 211, 186, 0.6), transparent 65%);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .card-inner {
+      position: relative;
+      z-index: 1;
+      padding: 18px 18px 20px;
+    }
+
+    .card-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .card-title-block h1,
+    .card-title-block h2 {
+      margin: 0;
+    }
+
+    .card-title-block h1 {
       font-size: 1.2rem;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
-    .card h2 {
+    .card-title-block h2 {
       font-size: 1rem;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
     }
 
     .card-subtitle {
       font-size: 0.82rem;
       color: var(--text-soft);
-      margin-bottom: 14px;
     }
 
-    /* FORM */
-    .claim-card {
-      position: relative;
-      overflow: hidden;
+    /* STEP CHIPS */
+    .steps-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(211, 179, 150, 0.6);
+      font-size: 0.76rem;
+      color: var(--text-soft);
     }
 
-    .claim-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top left, rgba(241, 211, 186, 0.7), transparent 60%);
-      opacity: 0.45;
-      pointer-events: none;
+    .steps-dot-row {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
     }
 
-    .claim-card-inner {
-      position: relative;
-      z-index: 1;
+    .step-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #e3c2a4;
     }
 
+    .step-dot.active {
+      background: #c58b5b;
+      transform: scale(1.1);
+    }
+
+    /* FORM GRID */
     .form-grid {
       display: flex;
       flex-direction: column;
       gap: 12px;
+      margin-top: 4px;
     }
 
     .field-group {
@@ -267,7 +384,11 @@
       font-size: 0.88rem;
       color: var(--text-main);
       background: rgba(255, 255, 255, 0.96);
-      transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast), transform 0.08s ease-out;
+      transition:
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast),
+        background var(--transition-fast),
+        transform 0.08s ease-out;
     }
 
     input[type="email"]:focus,
@@ -282,59 +403,76 @@
 
     textarea {
       resize: vertical;
-      min-height: 74px;
+      min-height: 76px;
     }
 
-    /* YEAR TOGGLE – แสดงเฉพาะปุ่มปี */
+    /* YEAR TOGGLE – มีแค่ปุ่มปี */
+    .year-toggle-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
     .year-toggle {
       display: inline-flex;
       gap: 6px;
       background: #f8ede3;
       border-radius: 999px;
       padding: 3px;
-      border: 1px solid rgba(212, 177, 143, 0.55);
-      margin-top: 2px;
+      border: 1px solid rgba(212, 177, 143, 0.7);
     }
 
     .year-toggle button {
       border: none;
       background: transparent;
       border-radius: 999px;
-      padding: 5px 14px;
+      padding: 5px 15px;
       font-family: inherit;
-      font-size: 0.85rem;
+      font-size: 0.86rem;
       cursor: pointer;
       color: var(--text-soft);
-      transition: background var(--transition-fast), color var(--transition-fast),
-        box-shadow var(--transition-fast), transform 0.08s ease-out;
-      min-width: 68px;
+      transition:
+        background var(--transition-fast),
+        color var(--transition-fast),
+        box-shadow var(--transition-fast),
+        transform 0.08s ease-out;
+      min-width: 64px;
     }
 
     .year-toggle button.active {
       background: #fffdf9;
       color: var(--accent-strong);
-      box-shadow: 0 8px 18px rgba(180, 123, 79, 0.25);
+      box-shadow: 0 9px 19px rgba(180, 123, 79, 0.3);
       transform: translateY(-1px);
     }
 
-    .year-toggle button:hover:not(.active) {
-      background: rgba(255, 255, 255, 0.7);
+    .year-toggle button:hover:not(.active)) {
+      background: rgba(255, 255, 255, 0.8);
     }
 
-    /* PAYMENT SECTION */
+    /* PAYMENT SECTION – แสดงเฉพาะปี 2568 */
     .payment-section {
-      margin-top: 6px;
+      margin-top: 4px;
       padding: 12px 12px 10px;
-      border-radius: 16px;
-      background: rgba(247, 231, 215, 0.7);
-      border: 1px dashed rgba(182, 130, 90, 0.7);
+      border-radius: 18px;
+      background: rgba(247, 231, 215, 0.8);
+      border: 1px dashed rgba(182, 130, 90, 0.9);
+      position: relative;
+    }
+
+    .payment-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(255, 255, 255, 0.6), transparent 60%);
+      pointer-events: none;
     }
 
     .payment-title {
       font-size: 0.84rem;
       font-weight: 500;
       color: var(--accent-strong);
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
     .payment-note {
@@ -344,18 +482,24 @@
     }
 
     .bank-box {
-      border-radius: 12px;
+      border-radius: 14px;
       background: rgba(255, 255, 255, 0.98);
-      border: 1px solid rgba(212, 177, 143, 0.6);
-      padding: 8px 10px;
+      border: 1px solid rgba(212, 177, 143, 0.7);
+      padding: 8px 11px;
       margin-bottom: 8px;
       font-size: 0.82rem;
       line-height: 1.6;
     }
 
+    .bank-line {
+      display: flex;
+      gap: 6px;
+    }
+
     .bank-line-label {
       font-weight: 500;
       color: var(--text-main);
+      min-width: 72px;
     }
 
     .bank-line-value {
@@ -384,7 +528,7 @@
     .primary-btn {
       border: none;
       border-radius: var(--radius-pill);
-      background: linear-gradient(135deg, #d6a47a, #c38555);
+      background: linear-gradient(135deg, #d7a47b, #c38355);
       color: #ffffff;
       padding: 9px 18px;
       font-family: inherit;
@@ -395,20 +539,23 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      box-shadow: 0 14px 26px rgba(154, 110, 68, 0.35);
-      transition: transform 0.1s ease-out, box-shadow 0.1s ease-out,
-        filter 0.1s ease-out, background 0.1s ease-out;
+      box-shadow: 0 15px 28px rgba(149, 104, 64, 0.35);
+      transition:
+        transform 0.1s ease-out,
+        box-shadow 0.1s ease-out,
+        filter 0.1s ease-out,
+        background 0.1s ease-out;
     }
 
     .primary-btn:hover {
       transform: translateY(-1px);
-      box-shadow: 0 16px 32px rgba(154, 110, 68, 0.4);
+      box-shadow: 0 17px 34px rgba(149, 104, 64, 0.42);
       filter: brightness(1.02);
     }
 
     .primary-btn:active {
       transform: translateY(1px);
-      box-shadow: 0 8px 18px rgba(154, 110, 68, 0.3);
+      box-shadow: 0 9px 18px rgba(149, 104, 64, 0.3);
     }
 
     .form-hint {
@@ -424,18 +571,18 @@
       color: var(--success);
     }
 
-    /* STATUS */
-    .status-card {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .status-header {
+    /* STATUS CARD */
+    .status-card-title-row {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
-      gap: 10px;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .status-title-block h2 {
+      font-size: 1.02rem;
+      margin-bottom: 2px;
     }
 
     .status-sub {
@@ -443,16 +590,26 @@
       color: var(--text-soft);
     }
 
+    .status-tag {
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(211, 179, 150, 0.6);
+      font-size: 0.76rem;
+      color: var(--text-soft);
+    }
+
     .status-current {
-      border-radius: 16px;
-      border: 1px dashed rgba(203, 180, 155, 0.7);
+      border-radius: 18px;
+      border: 1px dashed rgba(203, 180, 155, 0.95);
       background: #fdf8f3;
       padding: 10px 12px;
-      min-height: 70px;
+      min-height: 72px;
       font-size: 0.82rem;
       display: flex;
       flex-direction: column;
       gap: 4px;
+      margin-bottom: 8px;
       position: relative;
       overflow: hidden;
     }
@@ -461,8 +618,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 0 0, rgba(244, 214, 191, 0.5), transparent 52%);
-      opacity: 0.5;
+      background: radial-gradient(circle at 0 0, rgba(244, 214, 191, 0.5), transparent 55%);
       pointer-events: none;
     }
 
@@ -488,10 +644,10 @@
       align-items: center;
       gap: 6px;
       border-radius: 999px;
-      padding: 3px 9px;
+      padding: 4px 10px;
       font-size: 0.78rem;
       border: 1px solid rgba(180, 123, 79, 0.7);
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.98);
     }
 
     .status-chip-dot {
@@ -499,6 +655,29 @@
       height: 8px;
       border-radius: 50%;
       background: var(--success);
+    }
+
+    .copy-btn {
+      border-radius: 999px;
+      border: 1px solid rgba(156, 128, 102, 0.85);
+      padding: 4px 12px;
+      background: rgba(255, 255, 255, 0.98);
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition:
+        background var(--transition-fast),
+        transform 0.08s ease-out,
+        box-shadow var(--transition-fast);
+    }
+
+    .copy-btn:hover {
+      background: #fffdf9;
+      box-shadow: 0 7px 16px rgba(156, 128, 102, 0.28);
+      transform: translateY(-1px);
+    }
+
+    .status-line-strong {
+      font-weight: 500;
     }
 
     .status-meta {
@@ -509,29 +688,20 @@
       gap: 8px;
     }
 
-    .status-line-strong {
-      font-weight: 500;
-    }
-
-    .copy-btn {
-      border-radius: 999px;
-      border: 1px solid rgba(156, 128, 102, 0.8);
-      padding: 3px 10px;
-      background: rgba(255, 255, 255, 0.9);
+    .status-note {
       font-size: 0.78rem;
-      cursor: pointer;
-      transition: background var(--transition-fast), transform 0.08s ease-out,
-        box-shadow var(--transition-fast);
+      color: var(--text-soft);
     }
 
-    .copy-btn:hover {
-      background: #fffdf9;
-      box-shadow: 0 6px 14px rgba(156, 128, 102, 0.25);
-      transform: translateY(-1px);
+    .status-current.empty {
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--text-soft);
     }
 
     .status-history {
-      border-top: 1px solid rgba(233, 213, 193, 0.9);
+      border-top: 1px solid rgba(233, 213, 193, 0.95);
       padding-top: 8px;
       margin-top: 4px;
     }
@@ -542,16 +712,37 @@
       margin-bottom: 6px;
     }
 
+    .status-list {
+      max-height: 230px;
+      overflow-y: auto;
+      padding-right: 2px;
+      scrollbar-width: thin;
+      scrollbar-color: #d7b79d transparent;
+    }
+
+    .status-list::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .status-list::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .status-list::-webkit-scrollbar-thumb {
+      background: #d7b79d;
+      border-radius: 999px;
+    }
+
     .status-item {
-      border-radius: 13px;
-      border: 1px solid rgba(226, 204, 186, 0.9);
+      border-radius: 14px;
+      border: 1px solid rgba(226, 204, 186, 0.95);
       background: rgba(255, 255, 255, 0.98);
       padding: 7px 9px;
       font-size: 0.8rem;
       margin-bottom: 6px;
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      gap: 3px;
       animation: slideInUp 0.3s ease-out;
     }
 
@@ -560,7 +751,6 @@
       justify-content: space-between;
       align-items: center;
       gap: 6px;
-      margin-bottom: 1px;
     }
 
     .status-item-email {
@@ -572,7 +762,7 @@
       padding: 1px 8px;
       border-radius: 999px;
       font-size: 0.75rem;
-      border: 1px solid rgba(180, 123, 79, 0.6);
+      border: 1px solid rgba(180, 123, 79, 0.7);
       color: var(--accent-strong);
       background: #fff9f5;
     }
@@ -587,7 +777,6 @@
 
     .status-item-note {
       font-size: 0.78rem;
-      margin-top: 2px;
     }
 
     .status-item-note span {
@@ -617,40 +806,41 @@
       }
     }
 
-    .status-current.empty {
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: var(--text-soft);
-      font-size: 0.8rem;
-    }
-
     /* RESPONSIVE */
     @media (max-width: 880px) {
       .app-main {
         grid-template-columns: minmax(0, 1fr);
       }
+
+      .status-list {
+        max-height: 200px;
+      }
     }
 
-    @media (max-width: 540px) {
+    @media (max-width: 620px) {
       body {
-        padding: 20px 10px;
+        padding: 18px 10px;
       }
 
       .app-header {
         flex-direction: column;
         align-items: flex-start;
-        gap: 6px;
       }
 
-      .important-strip {
-        flex-direction: row;
+      .header-right {
+        align-items: flex-start;
       }
     }
   </style>
 </head>
 <body>
+  <!-- ฟองนุ่มๆ ตกแต่งพื้นหลัง -->
+  <div class="bg-bubble b1"></div>
+  <div class="bg-bubble b2"></div>
+  <div class="bg-bubble b3"></div>
+
   <div class="page">
+    <!-- HEADER -->
     <header class="app-header">
       <div class="brand-block">
         <div class="brand-logo-wrap">
@@ -658,18 +848,26 @@
         </div>
         <div class="brand-text">
           <div class="brand-name">426 SHOP</div>
-          <div class="brand-sub">ฟอร์มแจ้งเคลมออนไลน์</div>
+          <div class="brand-sub">ฟอร์มแจ้งเคลมสมาชิกออนไลน์</div>
         </div>
       </div>
-      <div class="header-badge">
-        <span class="badge-dot"></span>
-        <span>ระบบร้านออนไลน์เรียลไทม์</span>
+
+      <div class="header-right">
+        <div class="header-badge-row">
+          <div class="header-badge">
+            <span class="badge-dot"></span>
+            <span>ระบบร้านออนไลน์อยู่ • ดึงข้อมูลแบบเรียลไทม์</span>
+          </div>
+        </div>
+        <div class="header-tagline">
+          ส่งข้อมูลจากหน้านี้ ระบบบันทึกเข้าร้านทันที และอัปเดตสถานะให้อัตโนมัติ
+        </div>
       </div>
     </header>
 
-    <!-- แถบข้อความสำคัญกระพริบ -->
+    <!-- แถบข้อความสำคัญ -->
     <section class="important-strip">
-      <div class="important-dot"></div>
+      <div class="important-bar"></div>
       <div class="important-text">
         <div>
           <span class="highlight">สำคัญ:</span>
@@ -677,20 +875,34 @@
           ระบบขอตัดสิทธิ์เคลมทันที
         </div>
         <div>
-          ร้าน 426 SHOP อยู่ภายใต้กฎและนโยบาย YouTube มาตรฐานสากล
+          ร้าน 426 SHOP อยู่ภายใต้กฎและนโยบายของ YouTube มาตรฐานสากล
           การเปลี่ยนแปลงจากระบบหลักไม่ถือเป็นความผิดของร้าน
           และรับเคลมเฉพาะวันจันทร์–เสาร์ เวลา 07.00–19.00 น.
         </div>
       </div>
     </section>
 
+    <!-- MAIN -->
     <main class="app-main">
-      <!-- ด้านซ้าย: ฟอร์มแจ้งเคลม -->
-      <section class="card claim-card">
-        <div class="claim-card-inner">
-          <h1>ฟอร์มแจ้งเคลม</h1>
-          <div class="card-subtitle">
-            กรอกข้อมูลให้ครบ เลือกปีสมัคร ระบบจะบันทึกเข้าคิวและอัปเดตสถานะให้ทันที
+      <!-- ฟอร์มแจ้งเคลม -->
+      <section class="card">
+        <div class="card-inner">
+          <div class="card-header-row">
+            <div class="card-title-block">
+              <h1>ฟอร์มแจ้งเคลม</h1>
+              <div class="card-subtitle">
+                กรอกข้อมูลให้ครบ เลือกปีที่สมัคร แล้วส่ง ระบบจะบันทึกเข้าคิวเคลมให้ทันที
+              </div>
+            </div>
+            <div class="steps-chip">
+              <span>ขั้นตอน</span>
+              <div class="steps-dot-row">
+                <span class="step-dot active"></span>
+                <span class="step-dot active"></span>
+                <span class="step-dot active"></span>
+              </div>
+              <span>ข้อมูล • ปี • ส่งคำขอ</span>
+            </div>
           </div>
 
           <form id="claimForm" novalidate>
@@ -712,8 +924,10 @@
                   <label for="expiryInput">วันหมดอายุ</label>
                   <input id="expiryInput" type="date" name="expiry" required />
                 </div>
-                <div class="field-group">
-                  <!-- ไม่มีข้อความ “สมัครเมื่อ” ตามที่ขอ เหลือเฉพาะปุ่มปี -->
+
+                <div class="year-toggle-wrap">
+                  <label>ปีที่สมัคร</label>
+                  <!-- ปุ่มมีแค่ปี 2568 / 2569 ตามที่ขอ -->
                   <div class="year-toggle" id="yearToggle">
                     <button type="button" data-year="2568">2568</button>
                     <button type="button" data-year="2569">2569</button>
@@ -722,22 +936,22 @@
                 </div>
               </div>
 
-              <!-- ส่วนชำระเงิน 19฿ แสดงเมื่อเลือกปี 2568 -->
+              <!-- ส่วนชำระแพ็กดูแล 19฿ แสดงเฉพาะเมื่อเลือกปี 2568 -->
               <div id="paymentSection" class="payment-section" hidden>
-                <div class="payment-title">ชำระแพ็กดูแล 19 บาท รอบเคลมนี้</div>
+                <div class="payment-title">แพ็กดูแล 19 บาท (ใช้เฉพาะรอบเคลมนี้)</div>
                 <div class="payment-note">
-                  ใช้ในกรณีที่เข้าระบบแพ็กดูแล 19 บาทเท่านั้น
+                  กรณีระบบเข้าหมวดแพ็กดูแล 19 บาท ให้โอนและแนบสลิป ระบบจะรับเข้าคิวทันทีหลังส่งฟอร์ม
                 </div>
                 <div class="bank-box">
-                  <div>
+                  <div class="bank-line">
                     <span class="bank-line-label">ชื่อบัญชี</span>
                     <span class="bank-line-value">นภัทรธมณฑ์ ฤทธิ์ชัยศักดิ์</span>
                   </div>
-                  <div>
+                  <div class="bank-line">
                     <span class="bank-line-label">ธนาคาร</span>
                     <span class="bank-line-value">กสิกรไทย</span>
                   </div>
-                  <div>
+                  <div class="bank-line">
                     <span class="bank-line-label">เลขบัญชี</span>
                     <span class="bank-line-value">062-879-4251</span>
                   </div>
@@ -772,31 +986,38 @@
                 ส่งคำขอเคลม
               </button>
               <div id="formHint" class="form-hint">
-                ระบบจะส่งข้อมูลเข้าร้านและอัปเดตสถานะให้ทันทีหลังส่งฟอร์ม
+                หลังส่ง ระบบจะบันทึกเข้าร้านทันที และอัปเดตสถานะในช่องด้านขวาแบบเรียลไทม์
               </div>
             </div>
           </form>
         </div>
       </section>
 
-      <!-- ด้านขวา: สถานะคำขอแบบเรียลไทม์ -->
-      <section class="card status-card">
-        <div class="status-header">
-          <div>
-            <h2>สถานะคำขอแบบเรียลไทม์</h2>
-            <p class="status-sub">
-              แสดงสถานะรวมทุกเมลที่ส่งจากหน้านี้ ไม่ต้องพิมพ์เช็กเอง
-            </p>
+      <!-- สถานะคำขอแบบเรียลไทม์ -->
+      <section class="card">
+        <div class="card-inner">
+          <div class="status-card-title-row">
+            <div class="status-title-block">
+              <h2>สถานะคำขอ (เรียลไทม์)</h2>
+              <p class="status-sub">
+                แสดงสถานะรวมทุกคำขอที่ส่งจากหน้านี้ ไม่ต้องพิมพ์เช็กเอง
+              </p>
+            </div>
+            <div class="status-tag">
+              อัปเดตตามข้อมูลจริงจากฟอร์มนี้
+            </div>
           </div>
-        </div>
 
-        <div id="statusCurrent" class="status-current empty">
-          <span>ยังไม่มีคำขอในรอบนี้</span>
-        </div>
+          <div id="statusCurrent" class="status-current empty">
+            <span>ยังไม่มีคำขอในรอบนี้</span>
+          </div>
 
-        <div class="status-history">
-          <div class="status-history-header">รายการก่อนหน้าในหน้านี้</div>
-          <div id="statusList"></div>
+          <div class="status-history">
+            <div class="status-history-header">
+              ประวัติคำขอจากหน้านี้ (เรียงจากล่าสุด)
+            </div>
+            <div id="statusList" class="status-list"></div>
+          </div>
         </div>
       </section>
     </main>
@@ -857,7 +1078,7 @@
         "วันหมดอายุ: " + entry.expiry,
         "สมัครเมื่อ: " + entry.year,
         "คิวเคลม: " + (entry.queueNo || "-"),
-        "ประเภทเคลม: " + (entry.claimType === "paid" ? "เคลม 19 บาท" : "เคลมฟรี"),
+        "ประเภทเคลม: " + (entry.claimType === "paid" ? "เคลม 19 บาท" : "เคลมฟรี")
       ].join("\n");
     }
 
@@ -877,7 +1098,9 @@
       dot.className = "status-chip-dot";
       const label = document.createElement("span");
       label.textContent =
-        entry.claimType === "paid" ? "รับคำขอเคลม (แพ็กดูแล 19 บาท)" : "รับคำขอเคลมฟรีแล้ว";
+        entry.claimType === "paid"
+          ? "รับคำขอเคลม (แพ็กดูแล 19 บาท)"
+          : "รับคำขอเคลมฟรีแล้ว";
 
       chip.appendChild(dot);
       chip.appendChild(label);
@@ -913,13 +1136,10 @@
         "</span><span>สมัครเมื่อ: " +
         entry.year +
         "</span>" +
-        (entry.queueNo
-          ? '<span>คิวเคลม: ' + entry.queueNo + "</span>"
-          : "");
+        (entry.queueNo ? '<span>คิวเคลม: ' + entry.queueNo + "</span>" : "");
 
       const note = document.createElement("div");
-      note.style.fontSize = "0.78rem";
-      note.style.color = "var(--text-soft)";
+      note.className = "status-note";
       note.textContent =
         entry.statusText ||
         "ระบบบันทึกเข้าคิวเรียบร้อยแล้ว และจะดำเนินการตามลำดับคิว";
@@ -960,9 +1180,7 @@
         "</span><span>สมัครเมื่อ: " +
         entry.year +
         "</span>" +
-        (entry.queueNo
-          ? '<span>คิวเคลม: ' + entry.queueNo + "</span>"
-          : "");
+        (entry.queueNo ? '<span>คิวเคลม: ' + entry.queueNo + "</span>" : "");
 
       const note = document.createElement("div");
       note.className = "status-item-note";
@@ -994,7 +1212,7 @@
       }
 
       if (year === "2568" && !slipInput.files.length) {
-        setHint("เคลม 19 บาท กรุณาแนบสลิปโอนเงินก่อนส่งคำขอ", "error");
+        setHint("กรุณาแนบสลิปโอนเงิน 19 บาทก่อนส่งคำขอ", "error");
         submitBtn.disabled = false;
         return;
       }
@@ -1008,24 +1226,24 @@
         formData.append("slip", slipInput.files[0]);
       }
 
-      let entry = {
+      const entry = {
         email,
         expiry,
         year,
         queueNo: "",
         claimType: year === "2568" ? "paid" : "free",
         statusText: "",
-        copyText: "",
+        copyText: ""
       };
 
       try {
         const res = await fetch(SCRIPT_URL, {
           method: "POST",
-          body: formData,
+          body: formData
         });
 
-        let data = null;
         const text = await res.text();
+        let data;
         try {
           data = JSON.parse(text);
         } catch (err) {
