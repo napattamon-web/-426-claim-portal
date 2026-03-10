@@ -2,7 +2,7 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8" />
-  <title>426 Bear Claim Portal</title>
+  <title>426 SHOP | Claim Portal</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- ฟอนต์น่ารักวัยรุ่น -->
@@ -66,7 +66,6 @@
       border: 1px solid rgba(200, 154, 107, 0.18);
     }
 
-    /* ลายวงกลมพาสเทลด้านหลัง */
     .page::before,
     .page::after {
       content: "";
@@ -95,7 +94,7 @@
       z-index: 1;
     }
 
-    /* หัว */
+    /* header */
     .header {
       display: flex;
       align-items: center;
@@ -132,9 +131,9 @@
       flex-wrap: wrap;
     }
     .title {
-      font-size: 1.3rem;
+      font-size: 1.35rem;
       font-weight: 700;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.03em;
       color: var(--accent-strong);
     }
     .title-pill {
@@ -156,7 +155,7 @@
       color: var(--text-muted);
     }
 
-    /* แถบ “สำคัญ” */
+    /* important banner */
     .important-banner {
       margin: 8px 0 18px;
       padding: 8px 12px;
@@ -194,7 +193,7 @@
       100% { transform: translateY(-1px) scale(1.03); opacity: 1; }
     }
 
-    /* layout หลัก */
+    /* layout */
     .grid {
       display: grid;
       grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
@@ -338,6 +337,7 @@
       gap: 6px;
       color: var(--accent-strong);
       transition: background var(--transition-med), transform var(--transition-fast), box-shadow var(--transition-fast), border var(--transition-med);
+      font-family: inherit;
     }
     .year-btn span.badge {
       font-size: 0.72rem;
@@ -356,7 +356,7 @@
       background: rgba(255, 248, 238, 0.95);
     }
 
-    /* กล่อง slip + การโอน */
+    /* กล่องชำระเงิน (มินิมอล) */
     .pay-box {
       margin-top: 10px;
       padding: 10px 12px;
@@ -398,18 +398,21 @@
       font-size: 0.74rem;
       color: #6a4320;
     }
-    .bank-line {
+    .pay-line-main {
+      font-size: 0.74rem;
+    }
+    .account-line {
       display: flex;
       flex-wrap: wrap;
+      gap: 4px 6px;
       align-items: center;
-      gap: 6px;
+      margin-top: 2px;
     }
-    .bank-maintext {
+    .account-label {
+      font-weight: 600;
+    }
+    .account-text {
       font-weight: 500;
-    }
-    .hint {
-      font-size: 0.74rem;
-      color: #8a6341;
     }
     .slip-field {
       margin-top: 4px;
@@ -425,6 +428,7 @@
       font-size: 0.78rem;
       cursor: pointer;
       color: var(--text-main);
+      font-family: inherit;
     }
     input[type="file"]:hover {
       background: #fff5ea;
@@ -702,7 +706,6 @@
       to { opacity: 0; transform: translateY(8px) scale(0.98); }
     }
 
-    /* helper */
     .pill-soft {
       border-radius: var(--radius-pill);
       padding: 2px 8px;
@@ -718,11 +721,11 @@
       <header class="header">
         <div class="bear-logo">
           <!-- โลโก้หมีมุมเล็ก ๆ -->
-          <img src="https://img2.imgbiz.com/imgbiz/IMG_1140.jpeg" alt="426 Bear Logo" />
+          <img src="https://img2.imgbiz.com/imgbiz/IMG_1140.jpeg" alt="426 SHOP Logo" />
         </div>
         <div class="header-text-main">
           <div class="title-line">
-            <div class="title">426 Bear Claim Portal</div>
+            <div class="title">426 SHOP</div>
             <div class="title-pill">
               <span>🐻</span><span>ฟอร์มแจ้งเคลม &amp; ย้ายกลุ่ม</span>
             </div>
@@ -795,7 +798,7 @@
                     data-year="2568"
                   >
                     <span>สมัครเมื่อ 2568</span>
-                    <span class="badge">ระบบใช้แพ็กดูแล 19฿</span>
+                    <span class="badge">ใช้แพ็กดูแล 19฿</span>
                   </button>
                   <button
                     type="button"
@@ -808,37 +811,28 @@
                 </div>
               </div>
 
-              <!-- ช่องชำระเงิน 19฿ (เฉพาะสมัคร 2568 หรือเคสที่ต้องใช้แพ็กดูแล) -->
+              <!-- ช่องชำระเงิน 19฿ (แสดงเมื่อเลือก 2568) -->
               <div class="pay-box" id="pay-box" hidden>
                 <div class="pay-main-row">
                   <div class="amount-tag">
-                    19฿ <small>/ รอบเคลม (แพ็กดูแล)</small>
+                    19฿ <small>/ รอบเคลม</small>
                   </div>
                   <div class="pay-detail">
-                    <div>
-                      <span class="bank-maintext">
-                        เคสสมัครปี 2568 ระบบจะให้ใช้แพ็กดูแล 19฿ รอบนี้
-                      </span>
-                      <br />
-                      <span class="hint">
-                        โอนแล้วแนบสลิป ระบบจะรับคำขอเข้าคิวเคลมทันที
-                      </span>
+                    <div class="pay-line-main">
+                      สำหรับเคสที่สมัคร / ต่ออายุปี <strong>2568</strong> ระบบใช้แพ็กดูแล 19฿ รอบนี้
+                      แล้วรับเข้าคิวเคลมตามลำดับทันที
                     </div>
-                    <div class="bank-line">
-                      <span class="bank-maintext">
-                        ช่องทางโอน: โอนผ่าน Mobile Banking / แอปธนาคาร เข้าบัญชีด้านล่าง
-                      </span>
-                    </div>
-                    <div class="bank-line">
-                      <span class="bank-maintext">
-                        ธ.กสิกรไทย • เลขบัญชี 062-879-4251 • ชื่อบัญชี นภัทรธมณฑ์ ฤทธิ์ชัยศักดิ์
+                    <div class="account-line">
+                      <span class="account-label">เลขบัญชีโอน 19฿:</span>
+                      <span class="account-text">
+                        กสิกรไทย 062-879-4251 · นภัทรธมณฑ์ ฤทธิ์ชัยศักดิ์
                       </span>
                       <button
                         type="button"
                         class="copy-btn"
                         data-copy="ธ.กสิกรไทย 062-879-4251 นภัทรธมณฑ์ ฤทธิ์ชัยศักดิ์"
                       >
-                        📋 คัดลอกเลขบัญชี
+                        📋 คัดลอก
                       </button>
                     </div>
                   </div>
@@ -856,9 +850,8 @@
                     accept="image/*,.jpg,.jpeg,.png,.webp"
                   />
                   <div class="slip-note">
-                    <strong>หมายเหตุ:</strong>
-                    ใช้เฉพาะเคสที่ระบบระบุว่า “เคลม 19฿” เท่านั้น
-                    ถ้าเข้าเงื่อนไขเคลมฟรี ระบบจะไม่ให้แนบสลิป และรับเข้าคิวเคลมให้เลยค่ะ
+                    ใช้เฉพาะเคสสมัครปี 2568 ที่ระบบระบุให้ “เคลม 19฿” เท่านั้น
+                    ถ้าเข้าเงื่อนไขเคลมฟรี ระบบจะไม่ให้แนบสลิปค่ะ
                   </div>
                 </div>
               </div>
@@ -953,7 +946,6 @@
     let selectedYear = null;
 
     function showToast(message, type = "info") {
-      // type: info, success, error
       if (type === "success") {
         toastIcon.textContent = "✅";
       } else if (type === "error") {
@@ -992,9 +984,9 @@
     }
 
     function isEligibleFreeByYear(year) {
-      // 2569 ขึ้นไป = สมัครปี 2026+ => เคลมฟรีตามระบบหลังบ้าน
       if (!year) return false;
       const y = parseInt(year, 10);
+      // 2569 ขึ้นไป = เคลมฟรี
       return y >= 2569;
     }
 
@@ -1019,7 +1011,7 @@
       const today = new Date();
       const daysLeft = daysBetween(today, expiry);
       const baseFree = isEligibleFreeByYear(selectedYear);
-      const mode = baseFree ? "free" : "paid19"; // free = เคลมฟรี, paid19 = ใช้แพ็กดูแล 19฿
+      const mode = baseFree ? "free" : "paid19";
 
       const lines = [];
       lines.push(`• อีเมล: ${email}`);
@@ -1048,9 +1040,9 @@
 
       if (mode === "free") {
         previewTitle.textContent = isLongDaysFree
-          ? "เข้าเงื่อนไขเคลมฟรี + โปรลดวัน (จัดให้ในคิวเดียวกัน)"
+          ? "เข้าเงื่อนไขเคลมฟรี + จัดโปรลดวันให้ในคิวเดียวกัน"
           : "เข้าเงื่อนไขเคลมฟรีจากประวัติการสมัคร";
-        previewBadgeText.textContent = "เคลมฟรี / ไม่ต้องแนบสลิป";
+        previewBadgeText.textContent = "เคลมฟรี / ไม่ต้องโอน ไม่ต้องแนบสลิป";
         previewBadge.className = "badge badge-free";
         payBox.hidden = true;
         footerText.textContent = "เมื่อกดส่งฟอร์ม ระบบจะรับคำขอเข้าคิวเคลมฟรีให้อัตโนมัติ";
@@ -1083,7 +1075,7 @@
       });
     }
 
-    // เลือกปีสมัคร
+    // เลือกปีสมัคร (กดปุ่มก่อน แล้วระบบค่อยตัดสินใจฟรีหรือ 19฿)
     yearChooser.addEventListener("click", (e) => {
       const btn = e.target.closest(".year-btn");
       if (!btn) return;
@@ -1150,20 +1142,18 @@
           formData.append("slip", slipFile);
         }
 
-        // ส่งไปยัง Google Apps Script
         await fetch(SCRIPT_URL, {
           method: "POST",
           body: formData,
         });
 
-        // ล้างฟอร์มบางส่วน (ไม่ล้าง email เผื่อใช้ซ้ำ)
         slipInput.value = "";
         if (mode === "paid19") {
           showToast("รับคำขอและสลิปเรียบร้อยแล้ว เข้าคิวเคลมทันที 🧸✨", "success");
         } else {
           showToast("รับคำขอเคลมฟรีแล้ว ระบบจะเคลมให้ตามคิวค่ะ 💌", "success");
         }
-        footerText.textContent = "ส่งคำขอเรียบร้อยแล้ว รอแอดมินจัดการให้ตามคิวได้เลยค่ะ";
+        footerText.textContent = "ส่งคำขอเรียบร้อยแล้ว รอทีมงาน 426 SHOP จัดการให้ตามคิวได้เลยค่ะ";
       } catch (err) {
         console.error(err);
         showToast("ส่งคำขอไม่สำเร็จ ลองใหม่อีกครั้งนะคะ", "error");
