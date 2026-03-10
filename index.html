@@ -337,7 +337,7 @@
       flex-direction: column;
       gap: 12px;
       transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-      text-align: center;            /* จัดข้อความในการ์ดให้อยู่กลาง */
+      text-align: center;
     }
 
     .card-title {
@@ -447,7 +447,7 @@
       border: 1.5px solid #e6e0da;
       padding: 8px 11px;
       transition: all 0.25s ease;
-      text-align: left;  /* ให้ข้อความในช่องกรอกอ่านง่ายยังเป็นซ้าย */
+      text-align: left;
     }
 
     body.theme-dark .input-field {
@@ -629,7 +629,6 @@
       text-align: center;
     }
 
-    /* ปรับปุ่มเลือกไฟล์ให้ใหญ่ขึ้น + ใช้ Noto Sans Thai */
     .file-wrap input[type="file"] {
       font-family: "Noto Sans Thai", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
       font-size: 0.9rem;
@@ -950,7 +949,7 @@
       background: #ffffff;
       font-size: 0.78rem;
       font-weight: 600;
-      color: var(--text-main);
+      color: #var(--text-main);
       cursor: pointer;
       display: inline-flex;
       align-items: center;
@@ -1380,8 +1379,8 @@
     </main>
 
     <div class="policy-note">
-      ร้าน 426 SHOP อยู่ภายใต้กฎและนโยบาย YouTube มาตรฐานสากล
-      การเปลี่ยนแปลงจากระบบหลักไม่ถือเป็นความผิดของร้าน
+      ร้าน 426 SHOP ดำเนินการภายใต้นโยบายและข้อกำหนดมาตรฐานของ YouTube ทุกประการ
+      การเปลี่ยนแปลงจากระบบหลักของ YouTube ไม่ถือเป็นความผิดหรือความรับผิดชอบของร้าน
     </div>
 
     <footer class="footer">
@@ -1499,10 +1498,16 @@
       localStorage.setItem("theme", newTheme);
     });
 
+    // ✅ ปิดรับเคลมเฉพาะวันอาทิตย์ และรับเคลม จันทร์–เสาร์ เวลา 07.00–19.00 น.
     function isWithinClaimWindow() {
       const now = new Date();
+      const day = now.getDay(); // 0 = อาทิตย์, 1 = จันทร์, ... 6 = เสาร์
       const hour = now.getHours();
-      return hour >= 7 && hour < 19;
+
+      const isMonToSat = day >= 1 && day <= 6; // จันทร์–เสาร์
+      const inTime = hour >= 7 && hour < 19;   // 07:00–18:59
+
+      return isMonToSat && inTime;
     }
 
     function updateClaimWindowState() {
@@ -1794,7 +1799,7 @@
 
       if (!items.length) {
         liveListEl.innerHTML =
-          '<div class="live-empty">วันนี้ไม่มีการแจ้งเคลมในระบบ ระบบพร้อมรับคำขอใหม่ตลอดเวลาค่ะ</div>';
+          '<div class="live-empty">วันนี้ไม่มีการแจ้งเคลมในระบบ</div>';
         return;
       }
 
