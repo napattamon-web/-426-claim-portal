@@ -5,11 +5,11 @@
   <title>426 SHOP | ฟอร์มแจ้งเคลม</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- ฟอนต์น่ารักแต่ดูมาตรฐาน -->
+  <!-- ฟอนต์น่ารัก แต่ยังดูมาตรฐาน -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500;600&display=swap"
     rel="stylesheet"
   />
 
@@ -46,7 +46,7 @@
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: "Noto Sans Thai", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: "Mitr", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background: radial-gradient(circle at top, #fdf7f0 0, #f6f1eb 45%, #f2e9df 100%);
       color: var(--text-main);
       display: flex;
@@ -60,9 +60,35 @@
       width: 100%;
       background: var(--card-bg);
       border-radius: 28px;
-      box-shadow: var(--shadow-soft);
       padding: 20px 22px 20px;
       border: 1px solid rgba(207, 181, 154, 0.4);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page::before {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle at 30% 0%, rgba(255, 210, 170, 0.48), transparent 60%);
+      top: -120px;
+      right: -80px;
+      pointer-events: none;
+      opacity: 0.9;
+    }
+
+    .page::after {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle at 0% 100%, rgba(215, 188, 153, 0.3), transparent 65%);
+      bottom: -120px;
+      left: -80px;
+      pointer-events: none;
+      opacity: 0.8;
     }
 
     @media (max-width: 880px) {
@@ -117,7 +143,7 @@
     }
 
     .title {
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       font-weight: 600;
       letter-spacing: 0.03em;
       color: var(--accent-strong);
@@ -126,7 +152,7 @@
     .title-tag {
       padding: 4px 10px;
       border-radius: var(--radius-pill);
-      font-size: 0.78rem;
+      font-size: 0.8rem;
       background: var(--accent-soft);
       color: var(--accent-strong);
       display: inline-flex;
@@ -262,7 +288,11 @@
       background: #fffcf8;
       color: var(--text-main);
       outline: none;
-      transition: border var(--transition-med), box-shadow var(--transition-med), background 120ms ease-out;
+      transition: border var(--transition-med), box-shadow var(--transition-med), background 120ms ease-out, transform var(--transition-fast);
+    }
+
+    .input-shell--no-icon input[type="date"] {
+      padding-left: 12px;
     }
 
     .input-shell input::placeholder {
@@ -273,6 +303,7 @@
       border-color: var(--accent);
       background: #ffffff;
       box-shadow: 0 0 0 1px rgba(195, 146, 99, 0.45);
+      transform: translateY(-0.5px);
     }
 
     .input-icon {
@@ -318,11 +349,26 @@
       background: #ffe8e8;
       color: #a83f3f;
     }
+    .email-status--checking {
+      background: #fff7e4;
+      color: #8b5c1c;
+    }
+
     .email-status--ok .email-status-dot {
       background: var(--success);
+      animation: dotPulse 1.2s infinite alternate;
     }
     .email-status--error .email-status-dot {
       background: var(--danger);
+    }
+    .email-status--checking .email-status-dot {
+      background: #f2a64a;
+      animation: dotPulse 1.2s infinite alternate;
+    }
+
+    @keyframes dotPulse {
+      0% { transform: scale(1); opacity: 0.7; }
+      100% { transform: scale(1.25); opacity: 1; }
     }
 
     /* year buttons */
@@ -346,6 +392,23 @@
       color: var(--accent-strong);
       transition: background var(--transition-med), box-shadow var(--transition-fast), transform var(--transition-fast), border var(--transition-med);
       min-width: 120px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .year-btn::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 0% 0%, rgba(255, 223, 191, 0.9), transparent 55%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition-med);
+    }
+
+    .year-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(154, 111, 70, 0.18);
     }
 
     .year-btn.active {
@@ -353,6 +416,10 @@
       border-color: #bb8a5a;
       box-shadow: 0 8px 18px rgba(154, 111, 70, 0.28);
       transform: translateY(-1px);
+    }
+
+    .year-btn.active::after {
+      opacity: 1;
     }
 
     /* pay box (ซ่อนเริ่มต้น) */
@@ -394,20 +461,34 @@
     }
 
     .account-line {
-      margin-top: 4px;
-      font-size: 0.76rem;
+      margin-top: 6px;
       display: flex;
+      gap: 8px;
+      align-items: flex-start;
       flex-wrap: wrap;
-      gap: 4px 6px;
-      align-items: center;
+      justify-content: space-between;
+    }
+
+    .account-detail {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      font-size: 0.76rem;
+    }
+
+    .account-detail-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
     }
 
     .account-label {
       font-weight: 500;
-      color: #6d4a2b;
+      color: #7a5532;
+      min-width: 68px;
     }
 
-    .account-text {
+    .account-value {
       font-weight: 500;
       color: #4a3322;
     }
@@ -415,7 +496,7 @@
     .copy-btn {
       border-radius: var(--radius-pill);
       border: none;
-      padding: 3px 10px;
+      padding: 4px 11px;
       font-size: 0.72rem;
       background: #fdf6ee;
       color: #7f532e;
@@ -426,12 +507,18 @@
       font-family: inherit;
       transition: background var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
       box-shadow: 0 4px 10px rgba(125, 92, 60, 0.16);
+      white-space: nowrap;
     }
 
     .copy-btn:hover {
       background: #f8efe4;
       transform: translateY(-1px);
       box-shadow: 0 6px 14px rgba(125, 92, 60, 0.25);
+    }
+
+    .copy-btn--status {
+      box-shadow: 0 4px 10px rgba(123, 94, 65, 0.22);
+      font-size: 0.74rem;
     }
 
     .slip-group {
@@ -528,6 +615,19 @@
       flex-direction: column;
       gap: 10px;
       height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .status-card::before {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle at 100% 0%, rgba(255, 222, 193, 0.75), transparent 65%);
+      top: -90px;
+      right: -90px;
+      pointer-events: none;
     }
 
     .status-header {
@@ -547,10 +647,23 @@
     .status-title {
       font-size: 0.95rem;
       font-weight: 600;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 6px;
       color: var(--accent-strong);
+      position: relative;
+      padding-bottom: 2px;
+    }
+
+    .status-title::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 38%;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #e5b98a, transparent);
     }
 
     .status-subtitle {
@@ -566,6 +679,7 @@
       display: inline-flex;
       align-items: center;
       gap: 5px;
+      backdrop-filter: blur(8px);
     }
 
     .badge-dot {
@@ -618,8 +732,14 @@
       color: var(--text-muted);
     }
 
-    .status-footer span:first-child {
-      color: #7a6147;
+    .status-footer-left {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .status-auto-text {
+      font-size: 0.7rem;
     }
 
     /* toast */
@@ -737,8 +857,7 @@
               <label for="expiry" class="field-label">
                 <span>วันหมดอายุที่แสดงในระบบ</span><span class="req">*</span>
               </label>
-              <div class="input-shell">
-                <span class="input-icon">📅</span>
+              <div class="input-shell input-shell--no-icon">
                 <input type="date" id="expiry" name="expiry" required />
               </div>
             </div>
@@ -770,14 +889,24 @@
               </div>
 
               <div class="account-line">
-                <span class="account-label">โอนเข้าเลขบัญชี:</span>
-                <span class="account-text">
-                  กสิกรไทย 062-879-4251 ชื่อบัญชี นภัทรธมณฑ์ ฤทธิ์ชัยศักดิ์
-                </span>
+                <div class="account-detail">
+                  <div class="account-detail-row">
+                    <span class="account-label">ธนาคาร</span>
+                    <span class="account-value">กสิกรไทย</span>
+                  </div>
+                  <div class="account-detail-row">
+                    <span class="account-label">เลขบัญชี</span>
+                    <span class="account-value">062-879-4251</span>
+                  </div>
+                  <div class="account-detail-row">
+                    <span class="account-label">ชื่อบัญชี</span>
+                    <span class="account-value">นภัทรธมณฑ์ ฤทธิ์ชัยศักดิ์</span>
+                  </div>
+                </div>
                 <button
                   type="button"
                   class="copy-btn"
-                  data-copy="ธ.กสิกรไทย 062-879-4251 นภัทรธมณฑ์ ฤทธิ์ชัยศักดิ์"
+                  data-copy="062-879-4251"
                 >
                   คัดลอกเลขบัญชี
                 </button>
@@ -820,7 +949,7 @@
                 <span>สรุปสิทธิ์จากข้อมูลที่กรอก</span>
               </div>
               <div class="status-subtitle">
-                ระบบอัปเดตแบบเรียลไทม์ทุกครั้งที่เปลี่ยนข้อมูล
+                ระบบดึงสถานะจากฐานข้อมูลและอัปเดตแบบเรียลไทม์
               </div>
             </div>
             <div id="preview-badge" class="badge badge--wait">
@@ -834,8 +963,18 @@
           </ul>
 
           <div class="status-footer">
-            <span id="footer-text">ยังไม่ได้ส่งฟอร์ม</span>
-            <span>สถานะอัปเดตอัตโนมัติ</span>
+            <div class="status-footer-left">
+              <span id="footer-text">ยังไม่ได้ส่งฟอร์ม</span>
+              <span class="status-auto-text">สถานะอัปเดตจากระบบอัตโนมัติ</span>
+            </div>
+            <button
+              type="button"
+              class="copy-btn copy-btn--status"
+              id="copy-status-btn"
+              style="display:none;"
+            >
+              คัดลอกรายละเอียด
+            </button>
           </div>
         </div>
       </div>
@@ -849,8 +988,12 @@
   </div>
 
   <script>
-    // ใส่ URL ของ Google Apps Script ที่บันทึกลง Google Sheet
+    // URL Google Apps Script สำหรับบันทึกลง Google Sheet
     const SCRIPT_URL = "https://script.google.com/macros/s/xxxxxxxxxxxxxxxx/exec";
+
+    // URL สำหรับดึง "สถานะอีเมลแบบเรียลไทม์" จาก Google Sheet
+    // แนะนำให้ทำเป็น web app แยก หรือใช้พารามิเตอร์ action=checkStatus แล้วให้คืนค่า JSON
+    const STATUS_URL = "https://script.google.com/macros/s/xxxxxxxxxxxxxxxx/status";
 
     const emailInput = document.getElementById("email");
     const expiryInput = document.getElementById("expiry");
@@ -866,12 +1009,14 @@
     const previewList = document.getElementById("preview-list");
     const footerText = document.getElementById("footer-text");
     const submitBtn = document.getElementById("submit-btn");
+    const copyStatusBtn = document.getElementById("copy-status-btn");
 
     const toastEl = document.getElementById("toast");
     const toastIcon = document.getElementById("toast-icon");
     const toastText = document.getElementById("toast-text");
 
     let selectedYear = null;
+    let lastStatusCopyText = "";
 
     function showToast(message, type = "info") {
       if (type === "success") {
@@ -890,17 +1035,25 @@
       }, 2200);
     }
 
-    function setEmailStatus(state) {
-      emailStatus.classList.remove("email-status--idle", "email-status--ok", "email-status--error");
+    function setEmailStatus(state, customText) {
+      emailStatus.classList.remove(
+        "email-status--idle",
+        "email-status--ok",
+        "email-status--error",
+        "email-status--checking"
+      );
       if (state === "idle") {
         emailStatus.classList.add("email-status--idle");
-        emailStatusText.textContent = "ยังไม่ได้กรอกอีเมล";
+        emailStatusText.textContent = customText || "ยังไม่ได้กรอกอีเมล";
       } else if (state === "error") {
         emailStatus.classList.add("email-status--error");
-        emailStatusText.textContent = "รูปแบบอีเมลไม่ถูกต้อง";
+        emailStatusText.textContent = customText || "รูปแบบอีเมลไม่ถูกต้อง";
       } else if (state === "ok") {
         emailStatus.classList.add("email-status--ok");
-        emailStatusText.textContent = "อีเมลพร้อมใช้ตรวจสอบสิทธิ์";
+        emailStatusText.textContent = customText || "อีเมลพร้อมใช้ตรวจสอบสิทธิ์";
+      } else if (state === "checking") {
+        emailStatus.classList.add("email-status--checking");
+        emailStatusText.textContent = customText || "กำลังดึงสถานะจากระบบ...";
       }
     }
 
@@ -936,13 +1089,16 @@
       const email = (emailInput.value || "").trim();
       const expiryDate = parseDate(expiryInput.value);
 
-      // ซ่อนเลขบัญชีตั้งต้น
+      // ซ่อนเลขบัญชีเริ่มต้น
       payBox.classList.remove("show");
+      copyStatusBtn.style.display = lastStatusCopyText ? "inline-flex" : "none";
 
       if (!email || !expiryDate || !selectedYear) {
         previewBadgeText.textContent = "รอข้อมูลจากคุณ";
         previewBadge.className = "badge badge--wait";
         footerText.textContent = "ยังไม่ได้ส่งฟอร์ม";
+        lastStatusCopyText = "";
+        copyStatusBtn.style.display = "none";
 
         previewList.innerHTML = "";
         const li = document.createElement("li");
@@ -964,6 +1120,8 @@
         previewBadgeText.textContent = "หมดอายุแล้ว";
         previewBadge.className = "badge badge--paid";
         footerText.textContent = "แนะนำให้ต่ออายุก่อนใช้สิทธิ์เคลม";
+        lastStatusCopyText = "";
+        copyStatusBtn.style.display = "none";
 
         lines.push("สถานะ: หมดอายุแล้ว กรุณาต่ออายุก่อน");
         previewList.innerHTML = "";
@@ -996,6 +1154,75 @@
       });
     }
 
+    // debounce helper สำหรับดึงสถานะเมลแบบเรียลไทม์
+    function debounce(fn, delay) {
+      let timer = null;
+      return function (...args) {
+        clearTimeout(timer);
+        timer = setTimeout(() => fn.apply(this, args), delay);
+      };
+    }
+
+    async function fetchEmailLiveStatus(email) {
+      if (!STATUS_URL || STATUS_URL.indexOf("xxxxxxxx") !== -1) {
+        // ถ้ายังไม่ได้ตั้ง STATUS_URL ให้ใช้แค่เช็กฟอร์มปกติ
+        return;
+      }
+
+      try {
+        setEmailStatus("checking");
+        // ตัวอย่าง: ให้ Apps Script คืนค่า JSON ประมาณนี้
+        // { found: true, status: "queued" | "processing" | "done", queueNo: "A-15", note: "..." }
+        const res = await fetch(STATUS_URL + "?email=" + encodeURIComponent(email), {
+          method: "GET",
+        });
+        const data = await res.json();
+
+        if (!data || data.found === false) {
+          setEmailStatus("error", "ไม่พบอีเมลนี้ในระบบ");
+          return;
+        }
+
+        if (data.status === "queued") {
+          setEmailStatus("ok", "อยู่ในคิวเคลมแล้ว (คิว " + (data.queueNo || "-") + ")");
+          // เตรียมข้อความสำหรับปุ่มคัดลอก
+          lastStatusCopyText =
+            `426 SHOP - รายละเอียดคิวเคลม\n` +
+            `อีเมล: ${email}\n` +
+            `สถานะ: อยู่ในคิวเคลม\n` +
+            (data.queueNo ? `หมายเลขคิว: ${data.queueNo}\n` : "") +
+            (data.note ? `หมายเหตุ: ${data.note}\n` : "");
+          copyStatusBtn.style.display = "inline-flex";
+        } else if (data.status === "processing") {
+          setEmailStatus("ok", "กำลังตรวจเคลมจากทีมงาน");
+          lastStatusCopyText =
+            `426 SHOP - รายละเอียดเคส\n` +
+            `อีเมล: ${email}\n` +
+            `สถานะ: กำลังตรวจเคลมจากทีมงาน\n` +
+            (data.note ? `หมายเหตุ: ${data.note}\n` : "");
+          copyStatusBtn.style.display = "inline-flex";
+        } else if (data.status === "done") {
+          setEmailStatus("ok", "ดำเนินการเสร็จสิ้นแล้ว");
+          lastStatusCopyText =
+            `426 SHOP - รายละเอียดเคส\n` +
+            `อีเมล: ${email}\n` +
+            `สถานะ: ดำเนินการเสร็จสิ้นแล้ว\n` +
+            (data.note ? `หมายเหตุ: ${data.note}\n` : "");
+          copyStatusBtn.style.display = "inline-flex";
+        } else {
+          setEmailStatus("ok", "อีเมลอยู่ในระบบ");
+        }
+      } catch (e) {
+        console.error(e);
+        setEmailStatus("ok", "อีเมลพร้อมใช้ตรวจสอบสิทธิ์");
+      }
+    }
+
+    const debouncedEmailStatus = debounce((email) => {
+      if (!email) return;
+      fetchEmailLiveStatus(email);
+    }, 500);
+
     // เลือกปีสมัคร
     yearChooser.addEventListener("click", (e) => {
       const btn = e.target.closest(".year-btn");
@@ -1009,15 +1236,24 @@
       updatePreview();
     });
 
-    // ตรวจอีเมลเรียลไทม์
+    // ตรวจอีเมล + ดึงสถานะเรียลไทม์จากระบบ
     emailInput.addEventListener("input", () => {
       const value = (emailInput.value || "").trim();
       if (!value) {
         setEmailStatus("idle");
+        lastStatusCopyText = "";
+        copyStatusBtn.style.display = "none";
       } else {
-        // เช็คคร่าว ๆ ว่ามี @ และ .
         const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-        setEmailStatus(isValid ? "ok" : "error");
+        if (!isValid) {
+          setEmailStatus("error");
+          lastStatusCopyText = "";
+          copyStatusBtn.style.display = "none";
+        } else {
+          setEmailStatus("ok", "อีเมลพร้อมใช้ตรวจสอบสิทธิ์");
+          // ดึงสถานะจาก Google Sheet แบบเรียลไทม์ รวมทุกเคสของอีเมลนี้
+          debouncedEmailStatus(value);
+        }
       }
       updatePreview();
     });
@@ -1025,10 +1261,24 @@
     // update preview เมื่อเปลี่ยนวันหมดอายุ
     expiryInput.addEventListener("change", updatePreview);
 
-    // copy account
+    // copy account และ copy status
     document.addEventListener("click", (e) => {
       const btn = e.target.closest(".copy-btn");
       if (!btn) return;
+
+      const isStatusBtn = btn.id === "copy-status-btn";
+      if (isStatusBtn) {
+        if (!lastStatusCopyText) {
+          showToast("ยังไม่มีข้อมูลให้คัดลอก", "error");
+          return;
+        }
+        navigator.clipboard
+          .writeText(lastStatusCopyText)
+          .then(() => showToast("คัดลอกรายละเอียดคิวเคลมแล้ว", "success"))
+          .catch(() => showToast("คัดลอกไม่สำเร็จ ลองอีกครั้ง", "error"));
+        return;
+      }
+
       const text = btn.getAttribute("data-copy") || "";
       if (!text) return;
       navigator.clipboard
@@ -1037,7 +1287,7 @@
         .catch(() => showToast("คัดลอกไม่สำเร็จ ลองอีกครั้ง", "error"));
     });
 
-    // submit
+    // submit ฟอร์ม
     document.getElementById("claim-form").addEventListener("submit", async (e) => {
       e.preventDefault();
 
@@ -1083,10 +1333,20 @@
 
         if (mode === "free") {
           showToast("รับคำขอเรียบร้อย เข้าคิวเคลมฟรีแล้ว", "success");
+          footerText.textContent = "ส่งฟอร์มแล้ว ระบบจัดคิวเคลมฟรีให้";
+          lastStatusCopyText =
+            `426 SHOP - รายละเอียดคิวเคลมฟรี\n` +
+            `อีเมล: ${email}\n` +
+            `สถานะ: เข้าคิวเคลมฟรีแล้ว\n`;
         } else {
           showToast("รับคำขอและสลิปเรียบร้อย เข้าคิวเคลมแล้ว", "success");
+          footerText.textContent = "ส่งฟอร์มแล้ว ระบบจัดคิวเคลมตามลำดับ";
+          lastStatusCopyText =
+            `426 SHOP - รายละเอียดคิวเคลม\n` +
+            `อีเมล: ${email}\n` +
+            `สถานะ: เข้าคิวเคลม (ใช้แพ็กดูแล 19 บาท)\n`;
         }
-        footerText.textContent = "ส่งฟอร์มแล้ว รอทีมงานจัดการตามคิว";
+        copyStatusBtn.style.display = "inline-flex";
       } catch (err) {
         console.error(err);
         showToast("ส่งคำขอไม่สำเร็จ ลองใหม่อีกครั้ง", "error");
