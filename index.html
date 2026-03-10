@@ -346,6 +346,31 @@
       line-height: 1.5;
     }
 
+    /* TOP SMALL INFO (เวลาเคลม) */
+    .info-banner {
+      margin-top: 2px;
+      padding: 8px 10px;
+      border-radius: 12px;
+      background: #f7f1eb;
+      border: 1px solid #e3d8cc;
+      font-size: 0.78rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    body.theme-dark .info-banner {
+      background: #26272e;
+      border-color: #3a3c45;
+    }
+
+    .info-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #ffb74d;
+    }
+
     .form-group {
       display: flex;
       flex-direction: column;
@@ -409,6 +434,41 @@
       line-height: 1.5;
       padding-top: 2px;
       min-height: 80px;
+    }
+
+    /* INLINE RED WARNING (แจ้งตามความจริง) */
+    .truth-alert {
+      margin-top: 4px;
+      padding: 6px 9px;
+      border-radius: 12px;
+      background: #fff2f2;
+      border: 1px solid #f19999;
+      font-size: 0.78rem;
+      color: #c93535;
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      animation: truthPulse 1.4s ease-in-out infinite;
+    }
+
+    body.theme-dark .truth-alert {
+      background: #3b2525;
+      border-color: #f19999;
+      color: #ffd4d4;
+    }
+
+    .truth-icon {
+      font-size: 0.85rem;
+      margin-top: 1px;
+    }
+
+    @keyframes truthPulse {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(219, 82, 82, 0.35);
+      }
+      50% {
+        box-shadow: 0 0 0 6px rgba(219, 82, 82, 0);
+      }
     }
 
     /* YEAR BUTTONS */
@@ -603,7 +663,6 @@
       to { transform: rotate(360deg); }
     }
 
-    /* WARN TEXT */
     .warn-text {
       margin-top: 4px;
       font-size: 0.76rem;
@@ -618,43 +677,7 @@
       margin-top: 1px;
     }
 
-    .warn-text--important {
-      margin-top: 6px;
-      padding: 8px 10px;
-      border-radius: 12px;
-      background: #fff4e7;
-      border: 1px solid #f0c2a0;
-      animation: warnPulse 1.4s ease-in-out infinite;
-    }
-
-    body.theme-dark .warn-text--important {
-      background: #3b2a21;
-      border-color: #f0c2a0;
-    }
-
-    .warn-text--important .warn-text-icon {
-      animation: warnIconPulse 1.4s ease-in-out infinite;
-    }
-
-    @keyframes warnPulse {
-      0%, 100% {
-        box-shadow: 0 0 0 0 rgba(212, 125, 76, 0.35);
-      }
-      50% {
-        box-shadow: 0 0 0 6px rgba(212, 125, 76, 0);
-      }
-    }
-
-    @keyframes warnIconPulse {
-      0%, 100% {
-        transform: translateY(0) scale(1);
-      }
-      50% {
-        transform: translateY(-1px) scale(1.12);
-      }
-    }
-
-    /* LIVE STATUS CARD */
+    /* LIVE STATUS CARD (ดึงเมลเรียลไทม์) */
     .live-status-card {
       margin-top: 8px;
       padding: 9px 10px 9px;
@@ -712,7 +735,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 4px;
-      margin-bottom: 5px;
+      margin-bottom: 4px;
     }
 
     .live-pill {
@@ -746,6 +769,12 @@
     body.theme-dark .live-pill-paid {
       background: #3b2a21;
       border-color: #f0c2a0;
+    }
+
+    .live-note {
+      font-size: 0.74rem;
+      color: var(--text-sub);
+      margin-bottom: 4px;
     }
 
     .live-list {
@@ -1005,6 +1034,14 @@
       color: var(--text-sub);
     }
 
+    .policy-text {
+      max-width: 420px;
+      text-align: center;
+      font-size: 0.72rem;
+      line-height: 1.5;
+      color: var(--text-sub);
+    }
+
     .support-pill {
       display: inline-flex;
       align-items: center;
@@ -1181,6 +1218,12 @@
         กรอกอีเมลเดียวกับที่ใช้สมัคร เลือกปีที่สมัคร แล้วส่งคำขอ ระบบจะบันทึกเข้าคิวเคลม และอัปเดตสถานะให้อัตโนมัติ
       </div>
 
+      <!-- ข้อความบนสุด: เวลาให้บริการเคลม -->
+      <div class="info-banner">
+        <span class="info-dot"></span>
+        <span>รับเคลมเฉพาะวันจันทร์–เสาร์ เวลา 07.00–19.00 น.</span>
+      </div>
+
       <div class="form-group">
         <div class="field-label">อีเมลที่ใช้สมัคร</div>
         <div class="input-field" id="emailField">
@@ -1205,12 +1248,18 @@
             <input type="hidden" id="signupYear" />
           </div>
         </div>
+
+        <!-- ข้อความสำคัญ: แจ้งตามความจริง (กระพริบแดง) -->
+        <div class="truth-alert">
+          <span class="truth-icon">!</span>
+          <span>กรุณาแจ้งข้อมูลตามความเป็นจริง หากตรวจพบไม่ตรงกับข้อมูลจริง ระบบขอตัดสิทธิ์เคลมทันที</span>
+        </div>
       </div>
 
       <div class="form-group" id="paymentSection" style="display:none;">
         <div class="payment-card">
           <div class="payment-title">แพ็กดูแล 19 บาท (สำหรับรอบเคลมนี้)</div>
-          <div>เลือกปีสมัคร 2568 ระบบให้ใช้แพ็กดูแล 19 บาท เพื่อรับเข้าคิวเคลมทันทีหลังแนบสลิป</div>
+          <div>เลือกปีสมัคร 2569 ระบบจะให้ใช้แพ็กดูแล 19 บาท และต้องแนบสลิปก่อนจึงจะรับเข้าระบบเคลมได้</div>
           <div class="bank-lines">
             <div class="bank-line">
               <span class="bank-label">ชื่อบัญชี</span>
@@ -1240,33 +1289,24 @@
         </div>
       </div>
 
-      <!-- LIVE DAILY STATUS (เรียลไทม์ทุกเมลที่แจ้งวันนี้) -->
+      <!-- LIVE DAILY STATUS (เรียลไทม์ทุกเมลในระบบ) -->
       <div id="liveStatusCard" class="live-status-card" style="display:none;">
         <div class="live-header">
           <div class="live-title-left">
             <span class="live-dot"></span>
-            <span class="live-title-text">สถานะวันนี้ของร้าน</span>
+            <span class="live-title-text">สถานะเรียลไทม์จากระบบร้าน</span>
           </div>
           <span class="live-date" id="liveDate"></span>
         </div>
         <div class="live-summary-row">
-          <span id="liveTotal" class="live-pill">วันนี้ 0 รายการ</span>
+          <span id="liveTotal" class="live-pill">ทั้งหมด 0 อีเมลในระบบ</span>
           <span id="liveFree" class="live-pill live-pill-free">เคลมฟรี 0</span>
           <span id="livePaid" class="live-pill live-pill-paid">แพ็กดูแล 19 บาท 0</span>
         </div>
+        <div class="live-note">
+          ระบบดึงอีเมลในระบบเคลมให้แบบอัตโนมัติ ไม่ต้องพิมพ์ค้นหาเอง · แสดงตัวอย่างล่าสุด
+        </div>
         <div class="live-list" id="liveList"></div>
-      </div>
-
-      <!-- คำเตือนสำคัญกระพริบ -->
-      <div class="warn-text warn-text--important">
-        <span class="warn-text-icon">⚠️</span>
-        <span>
-          กรุณาแจ้งข้อมูลตามความเป็นจริง หากตรวจพบไม่ตรงกับข้อมูลจริง
-          ระบบขอตัดสิทธิ์เคลมทันที<br />
-          ร้าน 426 SHOP อยู่ภายใต้กฎและนโยบาย YouTube มาตรฐานสากล
-          การเปลี่ยนแปลงจากระบบหลักไม่ถือเป็นความผิดของร้าน
-          และรับเคลมเฉพาะวันจันทร์–เสาร์ เวลา 07.00–19.00 น.
-        </span>
       </div>
 
       <div class="btn-row">
@@ -1292,6 +1332,10 @@
       <div class="support-pill">
         <span>Support</span>
         <span>@467dlpti</span>
+      </div>
+      <!-- ข้อความล่างสุด: นโยบาย YouTube -->
+      <div class="policy-text">
+        ร้าน 426 SHOP อยู่ภายใต้กฎและนโยบาย YouTube มาตรฐานสากล การเปลี่ยนแปลงจากระบบหลักไม่ถือเป็นความผิดของร้าน
       </div>
       <div class="copyright">426 SHOP · EST 2024</div>
     </footer>
@@ -1411,7 +1455,8 @@
         const year = btn.dataset.year;
         signupYearInput.value = year;
 
-        if (year === "2568") {
+        // เงื่อนไขใหม่: ปี 2569 ต้องแนบสลิป / ใช้แพ็กดูแล 19฿
+        if (year === "2569") {
           paymentSection.style.display = "block";
           if (slipInput) slipInput.required = true;
         } else {
@@ -1428,7 +1473,7 @@
     const tips = [
       "ใช้อีเมลเดียวกับที่สมัครสมาชิกไว้ เพื่อให้ระบบค้นหาเจอง่ายที่สุดค่ะ",
       "อย่าลืมเลือกปีสมัครให้ตรง: 2568 หรือ 2569 ก่อนส่งคำขอเคลมนะคะ",
-      "เลือกปี 2568 ระบบจะแสดงเลขบัญชีสำหรับแพ็กดูแล 19฿ ให้แนบสลิป",
+      "เลือกปีสมัคร 2569 ระบบจะแสดงเลขบัญชีสำหรับแพ็กดูแล 19฿ ให้แนบสลิป",
       "ทุกคำขอที่ส่งจากหน้านี้ ระบบจะบันทึกและแสดงสถานะรวมให้ด้านล่าง",
       "มีอะไรอยากฝากถึงแอดมิน พิมพ์ในช่องข้อความได้เลยค่ะ"
     ];
@@ -1462,9 +1507,9 @@
     window.addEventListener("load", () => {
       setStepState("idle");
       emailInput.focus();
-      // ดึงสถานะวันนี้รอบแรก
+      // ดึงสถานะเรียลไทม์รอบแรก
       fetchTodayStatus(true);
-      // อัปเดตสถานะวันนี้เป็นระยะ
+      // อัปเดตสถานะเรียลไทม์เป็นระยะ
       if (STATUS_POLL_INTERVAL && STATUS_POLL_INTERVAL > 0) {
         liveTimerId = setInterval(fetchTodayStatus, STATUS_POLL_INTERVAL);
       }
@@ -1530,8 +1575,9 @@
         setStepState("idle");
         return;
       }
-      if (year === "2568" && slipInput && !slipInput.files.length) {
-        status.textContent = "เลือกปีสมัคร 2568 แล้ว กรุณาแนบสลิปโอนเงิน 19 บาทด้วยนะคะ";
+      // เงื่อนไขใหม่: ปี 2569 ต้องแนบสลิปก่อน
+      if (year === "2569" && slipInput && !slipInput.files.length) {
+        status.textContent = "เลือกปีสมัคร 2569 แล้ว กรุณาแนบสลิปโอนเงิน 19 บาทก่อนเข้าระบบเคลมค่ะ";
         status.classList.add("status-error");
         setStepState("idle");
         return;
@@ -1580,9 +1626,9 @@
           btnSubmit.innerHTML = "<span>ส่งคำขอเคลม</span><span>↗</span>";
           renderResult(data, elapsedSec, { email, expiry, year, note });
 
-          // ถ้า response ส่งสถานะวันนี้มาด้วย ก็อัปเดต live status
-          if (data && (data.todaySummary || data.dailyStatus)) {
-            renderLiveStatus(data.todaySummary || data.dailyStatus);
+          // ถ้า response ส่งสถานะเรียลไทม์มาด้วย ก็อัปเดต live status
+          if (data && (data.todaySummary || data.dailyStatus || data.summary)) {
+            renderLiveStatus(data.todaySummary || data.dailyStatus || data.summary);
           }
         })
         .catch((err) => {
@@ -1596,7 +1642,7 @@
         });
     }
 
-    // ========== LIVE STATUS (เรียลไทม์ทุกเมลในแต่ละวัน) ==========
+    // ========== LIVE STATUS (ดึงเมลเรียลไทม์) ==========
     function formatThaiDate(dateStr) {
       if (!dateStr) return "";
       const parts = dateStr.split("-");
@@ -1637,11 +1683,11 @@
 
       liveStatusCard.style.display = "block";
 
-      // วันที่วันนี้
+      // วันที่จากระบบ (หรือวันนี้)
       const dateStr = summary.date || summary.today || "";
-      liveDateEl.textContent = dateStr ? formatThaiDate(dateStr) : "วันนี้";
+      liveDateEl.textContent = dateStr ? formatThaiDate(dateStr) : "อัปเดตล่าสุด";
 
-      liveTotalEl.textContent = "วันนี้ " + total + " รายการ";
+      liveTotalEl.textContent = "ทั้งหมด " + total + " อีเมลในระบบ";
       liveFreeEl.textContent = "เคลมฟรี " + freeCount;
       livePaidEl.textContent = "แพ็กดูแล 19 บาท " + paidCount;
 
@@ -1685,7 +1731,6 @@
         })
         .catch((err) => {
           if (initial) {
-            // เงียบๆ ถ้าโหลดครั้งแรกไม่สำเร็จ
             console.warn("Cannot load todayStatus:", err);
           }
         });
@@ -1710,7 +1755,7 @@
         expiry: res.expiry || localEntry.expiry,
         year: res.signupYear || localEntry.year,
         queueNo: res.queueNo || "",
-        claimType: res.claimType || (localEntry.year === "2568" ? "paid" : "free"),
+        claimType: res.claimType || (localEntry.year === "2569" ? "paid" : "free"),
         statusText:
           res.statusText ||
           res.message ||
@@ -1749,7 +1794,7 @@
 
       const extraHint =
         current.claimType === "paid"
-          ? "กรณีนี้ระบบใช้แพ็กดูแล 19 บาทจากสลิปที่แนบ หากมีข้อสงสัยสามารถแคปหน้าจอนี้ส่งให้แอดมินได้เลยค่ะ"
+          ? "คำขอนี้ใช้แพ็กดูแล 19 บาทจากสลิปที่แนบ หากมีข้อสงสัยสามารถแคปหน้าจอนี้ส่งให้แอดมินได้เลยค่ะ"
           : "คำขอนี้เข้าเงื่อนไขเคลมฟรี ระบบจะดำเนินการให้ตามลำดับคิวโดยไม่ต้องแนบสลิปเพิ่มเติม";
 
       parts.push("<br>💡 " + extraHint);
