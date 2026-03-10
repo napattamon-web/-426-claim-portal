@@ -949,7 +949,7 @@
       background: #ffffff;
       font-size: 0.78rem;
       font-weight: 600;
-      color: #var(--text-main);
+      color: var(--text-main);
       cursor: pointer;
       display: inline-flex;
       align-items: center;
@@ -1246,7 +1246,6 @@
           </div>
         </div>
         <div class="header-right">
-          <!-- ปุ่มสถานะออนไลน์ / ปิดรับเคลม -->
           <div class="badge" id="onlineStatus">
             <span class="badge-dot" id="onlineDot"></span>
             <span id="onlineText">สถานะ: เปิดรับเคลม</span>
@@ -1379,8 +1378,9 @@
     </main>
 
     <div class="policy-note">
-      ร้าน 426 SHOP ดำเนินการภายใต้นโยบายและข้อกำหนดมาตรฐานของ YouTube ทุกประการ
-      การเปลี่ยนแปลงจากระบบหลักของ YouTube ไม่ถือเป็นความผิดหรือความรับผิดชอบของร้าน
+      ร้าน 426 SHOP ดำเนินการภายใต้นโยบายและกฎของ YouTube ตามมาตรฐานสากล  
+      การเปลี่ยนแปลงใด ๆ จากระบบหลักของ YouTube (เช่น ระบบสมาชิก / ระบบกลุ่ม / ระบบแจ้งเตือน)  
+      จะยึดตามเงื่อนไขของ YouTube เป็นหลัก และไม่ถือเป็นความผิดหรือความบกพร่องของร้าน
     </div>
 
     <footer class="footer">
@@ -1400,6 +1400,7 @@
   </div>
 
   <script>
+    // ใช้ Web App URL ของคุณโดยตรง
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwylLW5K3yMU45OQS7ESlJyw0qMqA0Wcx6fG-m0tIoOnNbPjnbJmo2cfqLflQkMnFnr/exec";
     const STATUS_POLL_INTERVAL = 30000;
 
@@ -1498,16 +1499,11 @@
       localStorage.setItem("theme", newTheme);
     });
 
-    // ✅ ปิดรับเคลมเฉพาะวันอาทิตย์ และรับเคลม จันทร์–เสาร์ เวลา 07.00–19.00 น.
+    // เดิมเช็กเวลา 7–19 น. (ถ้าต้องการให้ลิงก์กับชีต ให้ย้ายเงื่อนไขไปทำใน Apps Script)
     function isWithinClaimWindow() {
       const now = new Date();
-      const day = now.getDay(); // 0 = อาทิตย์, 1 = จันทร์, ... 6 = เสาร์
       const hour = now.getHours();
-
-      const isMonToSat = day >= 1 && day <= 6; // จันทร์–เสาร์
-      const inTime = hour >= 7 && hour < 19;   // 07:00–18:59
-
-      return isMonToSat && inTime;
+      return hour >= 7 && hour < 19;
     }
 
     function updateClaimWindowState() {
