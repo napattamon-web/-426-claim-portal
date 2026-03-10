@@ -124,14 +124,14 @@
     }
 
     .title-tag {
-      padding: 3px 10px;
+      padding: 4px 10px;
       border-radius: var(--radius-pill);
       font-size: 0.78rem;
       background: var(--accent-soft);
       color: var(--accent-strong);
       display: inline-flex;
       align-items: center;
-      gap: 4px;
+      gap: 6px;
     }
 
     .subtitle {
@@ -143,7 +143,7 @@
     .important-banner {
       display: flex;
       gap: 10px;
-      align-items: flex-start;
+      align-items: center;
       margin-bottom: 18px;
       padding: 10px 12px;
       background: var(--warning-soft);
@@ -153,21 +153,19 @@
 
     .important-badge {
       border-radius: var(--radius-pill);
-      padding: 3px 10px;
+      padding: 4px 10px;
       font-size: 0.75rem;
       font-weight: 600;
       background: var(--warning);
       color: #5c3711;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      animation: badgePulse 1.3s infinite alternate;
+      flex-shrink: 0;
+      animation: badgePulse 1.2s infinite alternate;
     }
 
     .important-text {
       font-size: 0.78rem;
       color: #5e3b17;
-      line-height: 1.5;
+      line-height: 1.4;
     }
 
     @keyframes badgePulse {
@@ -217,7 +215,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.9rem;
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--accent-strong);
     }
 
     form {
@@ -286,6 +286,45 @@
       pointer-events: none;
     }
 
+    /* email status */
+    .email-status {
+      margin-top: 4px;
+      font-size: 0.72rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 9px;
+      border-radius: var(--radius-pill);
+      background: #f9f3ec;
+      color: #7b6756;
+    }
+
+    .email-status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #c5b2a0;
+    }
+
+    .email-status--idle {
+      background: #f9f3ec;
+      color: #7b6756;
+    }
+    .email-status--ok {
+      background: #e6f4ea;
+      color: #286741;
+    }
+    .email-status--error {
+      background: #ffe8e8;
+      color: #a83f3f;
+    }
+    .email-status--ok .email-status-dot {
+      background: var(--success);
+    }
+    .email-status--error .email-status-dot {
+      background: var(--danger);
+    }
+
     /* year buttons */
     .year-chooser {
       display: flex;
@@ -295,29 +334,18 @@
 
     .year-btn {
       border-radius: var(--radius-pill);
-      border: 1px solid rgba(197, 159, 118, 0.7);
-      background: #fff;
-      padding: 6px 14px;
-      font-size: 0.8rem;
+      border: 1px solid rgba(197, 159, 118, 0.75);
+      background: #ffffff;
+      padding: 7px 18px;
+      font-size: 0.82rem;
       font-family: inherit;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      justify-content: center;
       color: var(--accent-strong);
       transition: background var(--transition-med), box-shadow var(--transition-fast), transform var(--transition-fast), border var(--transition-med);
-    }
-
-    .year-btn-label {
-      font-weight: 500;
-    }
-
-    .year-btn-badge {
-      font-size: 0.72rem;
-      padding: 2px 8px;
-      border-radius: var(--radius-pill);
-      background: var(--accent-soft);
-      color: var(--accent-strong);
+      min-width: 120px;
     }
 
     .year-btn.active {
@@ -334,7 +362,7 @@
       background: #fff;
       border-radius: var(--radius-lg);
       border: 1px solid rgba(196, 168, 137, 0.7);
-      display: none; /* สำคัญ: ซ่อนตอนยังไม่เลือกปี */
+      display: none;
     }
 
     .pay-box.show {
@@ -343,14 +371,15 @@
 
     .pay-header {
       display: flex;
-      align-items: flex-start;
-      gap: 8px;
+      align-items: center;
+      gap: 10px;
       flex-wrap: wrap;
+      margin-bottom: 6px;
     }
 
     .amount-tag {
       border-radius: 16px;
-      padding: 6px 10px;
+      padding: 6px 12px;
       font-size: 0.82rem;
       font-weight: 600;
       background: #fff6eb;
@@ -358,19 +387,14 @@
       flex-shrink: 0;
     }
 
-    .amount-tag small {
-      font-size: 0.72rem;
-      font-weight: 400;
-    }
-
     .pay-text {
       font-size: 0.75rem;
       color: #6d4a2b;
-      line-height: 1.5;
+      line-height: 1.4;
     }
 
     .account-line {
-      margin-top: 6px;
+      margin-top: 4px;
       font-size: 0.76rem;
       display: flex;
       flex-wrap: wrap;
@@ -439,7 +463,7 @@
       justify-content: space-between;
       align-items: center;
       gap: 8px;
-      margin-top: 10px;
+      margin-top: 12px;
       flex-wrap: wrap;
     }
 
@@ -461,7 +485,7 @@
     .btn-main {
       border-radius: var(--radius-pill);
       border: none;
-      padding: 9px 18px;
+      padding: 9px 20px;
       font-size: 0.86rem;
       font-weight: 600;
       font-family: inherit;
@@ -470,9 +494,11 @@
       cursor: pointer;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 6px;
       box-shadow: 0 12px 24px rgba(142, 97, 58, 0.32);
       transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter 120ms ease-out;
+      min-width: 170px;
     }
 
     .btn-main:hover {
@@ -492,7 +518,7 @@
       cursor: default;
     }
 
-    /* preview / status */
+    /* status / preview */
     .status-card {
       border-radius: 22px;
       border: 1px solid var(--border-soft);
@@ -627,12 +653,13 @@
     }
 
     .toast-icon {
-      font-size: 1rem;
+      font-size: 0.9rem;
       margin-top: 1px;
+      font-weight: 600;
     }
 
     .toast-text {
-      line-height: 1.5;
+      line-height: 1.4;
     }
 
     @keyframes toastIn {
@@ -657,24 +684,21 @@
           <div class="title-row">
             <div class="title">426 SHOP</div>
             <div class="title-tag">
-              <span>🧸</span>
-              <span>ฟอร์มแจ้งเคลม &amp; ย้ายกลุ่ม</span>
+              <span>ฟอร์มแจ้งเคลม / ย้ายกลุ่ม</span>
             </div>
           </div>
           <div class="subtitle">
-            กรอกข้อมูลจริงให้ครบ ระบบจะช่วยเช็กสิทธิ์และจัดคิวเคลมให้แบบอัตโนมัติ
+            กรอกข้อมูลตามจริง ระบบจะช่วยเช็กสิทธิ์และจัดคิวให้
           </div>
         </div>
       </header>
 
       <!-- important -->
       <div class="important-banner">
-        <div class="important-badge">
-          <span>⚡</span> <span>สำคัญ</span>
-        </div>
+        <div class="important-badge">สำคัญ</div>
         <div class="important-text">
-          กรุณากรอกข้อมูลตามความเป็นจริงเท่านั้น หากตรวจพบว่าไม่ตรงกับข้อมูลจริง
-          <strong>ระบบขอตัดสิทธิ์เคลมทันที</strong> เพื่อความยุติธรรมกับทุกคน
+          กรุณากรอกข้อมูลตามความเป็นจริง หากตรวจพบว่าข้อมูลไม่ตรง
+          ระบบจะตัดสิทธิ์เคลมทันที
         </div>
       </div>
 
@@ -682,8 +706,8 @@
         <!-- form -->
         <div class="card">
           <div class="section-title">
-            <div class="section-title-icon">📮</div>
-            <span>ข้อมูลสำหรับตรวจสอบสิทธิ์</span>
+            <div class="section-title-icon">ข้อมูล</div>
+            <span>สำหรับตรวจสอบสิทธิ์</span>
           </div>
 
           <form id="claim-form">
@@ -693,7 +717,7 @@
                 <span>อีเมลที่ใช้สมัคร</span><span class="req">*</span>
               </label>
               <div class="input-shell">
-                <span class="input-icon">📧</span>
+                <span class="input-icon">@</span>
                 <input
                   type="email"
                   id="email"
@@ -701,6 +725,10 @@
                   placeholder="กรอกอีเมลที่ใช้กับ 426 SHOP"
                   required
                 />
+              </div>
+              <div class="email-status email-status--idle" id="email-status">
+                <span class="email-status-dot"></span>
+                <span id="email-status-text">ยังไม่ได้กรอกอีเมล</span>
               </div>
             </div>
 
@@ -718,16 +746,14 @@
             <!-- year buttons -->
             <div class="field-group">
               <label class="field-label">
-                <span>ปีที่ “สมัคร / ต่ออายุ” ล่าสุด</span><span class="req">*</span>
+                <span>ปีที่สมัคร / ต่ออายุ ล่าสุด</span><span class="req">*</span>
               </label>
               <div class="year-chooser" id="year-chooser">
                 <button type="button" class="year-btn" data-year="2568">
-                  <span class="year-btn-label">สมัครเมื่อ 2568</span>
-                  <span class="year-btn-badge">ใช้แพ็กดูแล 19฿</span>
+                  สมัครปี 2568
                 </button>
                 <button type="button" class="year-btn" data-year="2569">
-                  <span class="year-btn-label">สมัครเมื่อ 2569</span>
-                  <span class="year-btn-badge">เข้าเงื่อนไขเคลมฟรี</span>
+                  สมัครปี 2569
                 </button>
               </div>
             </div>
@@ -736,31 +762,30 @@
             <div class="pay-box" id="pay-box">
               <div class="pay-header">
                 <div class="amount-tag">
-                  19฿ <small>/ รอบเคลม</small>
+                  19 บาท / รอบเคลม
                 </div>
                 <div class="pay-text">
-                  สำหรับเคสสมัคร / ต่ออายุปี <strong>2568</strong> ระบบใช้แพ็กดูแล 19฿ รอบนี้
-                  แล้วรับคำขอเข้าคิวเคลมตามลำดับ
+                  สำหรับผู้ที่สมัครหรือต่ออายุปี 2568 รอบนี้ใช้แพ็กดูแล 19 บาท แล้วเข้าคิวเคลมตามลำดับ
                 </div>
               </div>
 
               <div class="account-line">
                 <span class="account-label">โอนเข้าเลขบัญชี:</span>
                 <span class="account-text">
-                  กสิกรไทย 062-879-4251 · นภัทรธมณฑ์ ฤทธิ์ชัยศักดิ์
+                  กสิกรไทย 062-879-4251 ชื่อบัญชี นภัทรธมณฑ์ ฤทธิ์ชัยศักดิ์
                 </span>
                 <button
                   type="button"
                   class="copy-btn"
                   data-copy="ธ.กสิกรไทย 062-879-4251 นภัทรธมณฑ์ ฤทธิ์ชัยศักดิ์"
                 >
-                  📋 คัดลอกเลขบัญชี
+                  คัดลอกเลขบัญชี
                 </button>
               </div>
 
               <div class="slip-group">
                 <label for="slip" class="field-label">
-                  <span>แนบสลิปโอน 19฿</span><span class="req">*</span>
+                  <span>แนบสลิปโอน 19 บาท</span><span class="req">*</span>
                 </label>
                 <input
                   type="file"
@@ -770,8 +795,7 @@
                   accept="image/*,.jpg,.jpeg,.png,.webp"
                 />
                 <div class="slip-note">
-                  ใช้เฉพาะเคสที่ระบบให้ใช้แพ็กดูแล 19฿ เท่านั้น<br />
-                  หากคุณเข้าเงื่อนไขเคลมฟรี ระบบจะไม่ขอให้แนบสลิปค่ะ
+                  ใช้เฉพาะกรณีสมัครปี 2568 เท่านั้น
                 </div>
               </div>
             </div>
@@ -779,10 +803,9 @@
             <div class="actions">
               <div class="hint-text">
                 <span class="hint-dot"></span>
-                <span>ข้อมูลจะถูกส่งให้ระบบ 426 SHOP จัดคิวเคลมให้อัตโนมัติ</span>
+                <span>เมื่อส่งฟอร์ม ระบบจะจัดคิวให้ตามลำดับ</span>
               </div>
               <button type="submit" class="btn-main" id="submit-btn">
-                <span>✨</span>
                 <span>ส่งคำขอเข้าคิวเคลม</span>
               </button>
             </div>
@@ -794,10 +817,10 @@
           <div class="status-header">
             <div class="status-title-group">
               <div class="status-title">
-                <span>สรุปสิทธิ์เคลมของคุณ</span>
+                <span>สรุปสิทธิ์จากข้อมูลที่กรอก</span>
               </div>
               <div class="status-subtitle">
-                ระบบอัปเดตสถานะแบบเรียลไทม์ตามข้อมูลที่กรอก
+                ระบบอัปเดตแบบเรียลไทม์ทุกครั้งที่เปลี่ยนข้อมูล
               </div>
             </div>
             <div id="preview-badge" class="badge badge--wait">
@@ -807,12 +830,12 @@
           </div>
 
           <ul class="status-list" id="preview-list">
-            <li>กรอกอีเมล + วันหมดอายุ + ปีที่สมัคร ระบบจะช่วยสรุปสิทธิ์ให้อัตโนมัติ</li>
+            <li>กรอกอีเมล วันหมดอายุ และปีที่สมัคร เพื่อดูสรุปสิทธิ์ที่นี่</li>
           </ul>
 
           <div class="status-footer">
-            <span id="footer-text">ยังไม่ได้ส่งฟอร์ม · กรุณากรอกข้อมูลให้ครบก่อน</span>
-            <span>อัปเดตอัตโนมัติ · ไม่ต้องรีเฟรช</span>
+            <span id="footer-text">ยังไม่ได้ส่งฟอร์ม</span>
+            <span>สถานะอัปเดตอัตโนมัติ</span>
           </div>
         </div>
       </div>
@@ -820,13 +843,13 @@
 
     <!-- toast -->
     <div class="toast" id="toast">
-      <div class="toast-icon" id="toast-icon">✨</div>
+      <div class="toast-icon" id="toast-icon">แจ้งเตือน</div>
       <div class="toast-text" id="toast-text"></div>
     </div>
   </div>
 
   <script>
-    // TODO: ใส่ URL ของ Google Apps Script ที่บันทึกลง Google Sheet
+    // ใส่ URL ของ Google Apps Script ที่บันทึกลง Google Sheet
     const SCRIPT_URL = "https://script.google.com/macros/s/xxxxxxxxxxxxxxxx/exec";
 
     const emailInput = document.getElementById("email");
@@ -834,6 +857,9 @@
     const yearChooser = document.getElementById("year-chooser");
     const payBox = document.getElementById("pay-box");
     const slipInput = document.getElementById("slip");
+
+    const emailStatus = document.getElementById("email-status");
+    const emailStatusText = document.getElementById("email-status-text");
 
     const previewBadge = document.getElementById("preview-badge");
     const previewBadgeText = document.getElementById("preview-badge-text");
@@ -849,11 +875,11 @@
 
     function showToast(message, type = "info") {
       if (type === "success") {
-        toastIcon.textContent = "✅";
+        toastIcon.textContent = "สำเร็จ";
       } else if (type === "error") {
-        toastIcon.textContent = "⚠️";
+        toastIcon.textContent = "ข้อผิดพลาด";
       } else {
-        toastIcon.textContent = "✨";
+        toastIcon.textContent = "แจ้งเตือน";
       }
       toastText.textContent = message;
       toastEl.classList.remove("hide");
@@ -862,6 +888,20 @@
         toastEl.classList.add("hide");
         toastEl.classList.remove("show");
       }, 2200);
+    }
+
+    function setEmailStatus(state) {
+      emailStatus.classList.remove("email-status--idle", "email-status--ok", "email-status--error");
+      if (state === "idle") {
+        emailStatus.classList.add("email-status--idle");
+        emailStatusText.textContent = "ยังไม่ได้กรอกอีเมล";
+      } else if (state === "error") {
+        emailStatus.classList.add("email-status--error");
+        emailStatusText.textContent = "รูปแบบอีเมลไม่ถูกต้อง";
+      } else if (state === "ok") {
+        emailStatus.classList.add("email-status--ok");
+        emailStatusText.textContent = "อีเมลพร้อมใช้ตรวจสอบสิทธิ์";
+      }
     }
 
     function parseDate(value) {
@@ -902,11 +942,11 @@
       if (!email || !expiryDate || !selectedYear) {
         previewBadgeText.textContent = "รอข้อมูลจากคุณ";
         previewBadge.className = "badge badge--wait";
-        footerText.textContent = "ยังไม่ได้ส่งฟอร์ม · กรุณากรอกข้อมูลให้ครบก่อน";
+        footerText.textContent = "ยังไม่ได้ส่งฟอร์ม";
 
         previewList.innerHTML = "";
         const li = document.createElement("li");
-        li.textContent = "กรอกอีเมล + วันหมดอายุ + ปีที่สมัคร ระบบจะช่วยสรุปสิทธิ์ให้อัตโนมัติ";
+        li.textContent = "กรอกอีเมล วันหมดอายุ และปีที่สมัคร เพื่อดูสรุปสิทธิ์ที่นี่";
         previewList.appendChild(li);
         return;
       }
@@ -917,16 +957,15 @@
       const mode = baseFree ? "free" : "paid19";
 
       const lines = [];
-      lines.push(`• อีเมล: ${email}`);
-      lines.push(`• วันหมดอายุในระบบ: ${formatDateTH(expiryDate)} (เหลือ ${daysLeft} วันจากวันนี้)`);
-      lines.push(`• สมัคร / ต่ออายุล่าสุด: ปี ${selectedYear}`);
+      lines.push(`อีเมล: ${email}`);
+      lines.push(`วันหมดอายุในระบบ: ${formatDateTH(expiryDate)} (เหลือ ${daysLeft} วัน)`);
 
       if (daysLeft < 0) {
-        previewBadgeText.textContent = "หมดอายุแล้ว · กรุณาต่ออายุก่อนใช้สิทธิ์";
+        previewBadgeText.textContent = "หมดอายุแล้ว";
         previewBadge.className = "badge badge--paid";
-        footerText.textContent = "ขั้นถัดไป: ต่ออายุให้เรียบร้อยก่อน แล้วค่อยกลับมาใช้ฟอร์มนี้อีกครั้ง";
+        footerText.textContent = "แนะนำให้ต่ออายุก่อนใช้สิทธิ์เคลม";
 
-        lines.push("• สถานะ: หมดอายุแล้ว — แนะนำต่ออายุก่อน แล้วจึงกลับมาใช้สิทธิ์เคลมในรอบถัดไป");
+        lines.push("สถานะ: หมดอายุแล้ว กรุณาต่ออายุก่อน");
         previewList.innerHTML = "";
         lines.forEach((t) => {
           const li = document.createElement("li");
@@ -939,16 +978,13 @@
       if (mode === "free") {
         previewBadgeText.textContent = "เข้าเงื่อนไขเคลมฟรี";
         previewBadge.className = "badge badge--free";
-        footerText.textContent = "เมื่อกดส่งฟอร์ม ระบบจะรับเข้าคิวเคลมฟรีให้อัตโนมัติ";
-
-        lines.push("• สถานะ: สมัคร / ต่ออายุปี 2569 ขึ้นไป — ระบบรับเข้าคิวเคลมฟรีให้ตามลำดับ");
+        footerText.textContent = "เมื่อส่งฟอร์ม ระบบจะรับเข้าคิวเคลมฟรีให้";
+        lines.push("สถานะ: สมัครปี 2569 ระบบรับเข้าคิวเคลมฟรี");
       } else {
-        previewBadgeText.textContent = "ใช้แพ็กดูแล 19฿ รอบนี้";
+        previewBadgeText.textContent = "ใช้แพ็กดูแล 19 บาท";
         previewBadge.className = "badge badge--paid";
-        footerText.textContent = "เมื่อกดส่งฟอร์มและแนบสลิป ระบบจะรับคำขอเข้าคิวเคลมทันที";
-
-        lines.push("• สถานะ: สมัคร / ต่ออายุปี 2568 — รอบนี้ใช้แพ็กดูแล 19฿ แล้วเข้าคิวเคลมตามลำดับ");
-        // แสดงเลขบัญชีเฉพาะตอนนี้
+        footerText.textContent = "เมื่อส่งฟอร์มและแนบสลิป ระบบจะรับเข้าคิวเคลม";
+        lines.push("สถานะ: สมัครปี 2568 รอบนี้ใช้แพ็กดูแล 19 บาท");
         payBox.classList.add("show");
       }
 
@@ -973,8 +1009,20 @@
       updatePreview();
     });
 
-    // input change
-    emailInput.addEventListener("input", updatePreview);
+    // ตรวจอีเมลเรียลไทม์
+    emailInput.addEventListener("input", () => {
+      const value = (emailInput.value || "").trim();
+      if (!value) {
+        setEmailStatus("idle");
+      } else {
+        // เช็คคร่าว ๆ ว่ามี @ และ .
+        const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+        setEmailStatus(isValid ? "ok" : "error");
+      }
+      updatePreview();
+    });
+
+    // update preview เมื่อเปลี่ยนวันหมดอายุ
     expiryInput.addEventListener("change", updatePreview);
 
     // copy account
@@ -986,7 +1034,7 @@
       navigator.clipboard
         .writeText(text)
         .then(() => showToast("คัดลอกเลขบัญชีเรียบร้อยแล้ว", "success"))
-        .catch(() => showToast("คัดลอกไม่สำเร็จ ลองอีกครั้งนะคะ", "error"));
+        .catch(() => showToast("คัดลอกไม่สำเร็จ ลองอีกครั้ง", "error"));
     });
 
     // submit
@@ -998,19 +1046,25 @@
       const slipFile = slipInput.files[0] || null;
 
       if (!email || !expiry || !selectedYear) {
-        showToast("กรุณากรอกอีเมล วันหมดอายุ และเลือกปีให้ครบก่อนค่ะ", "error");
+        showToast("กรุณากรอกอีเมล วันหมดอายุ และเลือกปีให้ครบ", "error");
+        return;
+      }
+
+      const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      if (!isEmailValid) {
+        showToast("รูปแบบอีเมลไม่ถูกต้อง", "error");
         return;
       }
 
       const mode = isEligibleFreeByYear(selectedYear) ? "free" : "paid19";
 
       if (mode === "paid19" && !slipFile) {
-        showToast("เคสสมัครปี 2568 กรุณาแนบสลิปชำระเงิน 19฿ ก่อนส่งฟอร์มค่ะ", "error");
+        showToast("กรณีสมัครปี 2568 กรุณาแนบสลิปโอน 19 บาทก่อนส่งฟอร์ม", "error");
         return;
       }
 
       submitBtn.disabled = true;
-      submitBtn.innerHTML = "<span>⏳</span><span>กำลังส่งคำขอ...</span>";
+      submitBtn.textContent = "กำลังส่งคำขอ...";
 
       try {
         const formData = new FormData();
@@ -1028,17 +1082,17 @@
         });
 
         if (mode === "free") {
-          showToast("รับคำขอเรียบร้อย · เข้าคิวเคลมฟรีตามลำดับแล้วค่ะ", "success");
+          showToast("รับคำขอเรียบร้อย เข้าคิวเคลมฟรีแล้ว", "success");
         } else {
-          showToast("รับคำขอและสลิปเรียบร้อย · เข้าคิวเคลมแล้วค่ะ", "success");
+          showToast("รับคำขอและสลิปเรียบร้อย เข้าคิวเคลมแล้ว", "success");
         }
-        footerText.textContent = "ส่งคำขอเรียบร้อยแล้ว รอทีมงาน 426 SHOP จัดการให้ตามคิวได้เลยค่ะ";
+        footerText.textContent = "ส่งฟอร์มแล้ว รอทีมงานจัดการตามคิว";
       } catch (err) {
         console.error(err);
-        showToast("ส่งคำขอไม่สำเร็จ ลองใหม่อีกครั้งนะคะ", "error");
+        showToast("ส่งคำขอไม่สำเร็จ ลองใหม่อีกครั้ง", "error");
       } finally {
         submitBtn.disabled = false;
-        submitBtn.innerHTML = "<span>✨</span><span>ส่งคำขอเข้าคิวเคลม</span>";
+        submitBtn.textContent = "ส่งคำขอเข้าคิวเคลม";
       }
     });
 
