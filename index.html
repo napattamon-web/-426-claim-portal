@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#c49b7c" />
 
-  <!-- แนะนำ: ถ้าอยากใช้ฟอนต์ไทยสวย ๆ เปิดคอมเมนต์บรรทัดด้านล่าง และมีเน็ตตอนโหลด -->
-  <!-- <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet" /> -->
+  <!-- ฟ้อนต์ไทยโทนวัยรุ่นน่ารัก -->
+  <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <style>
     :root {
@@ -40,7 +40,7 @@
         radial-gradient(circle at top left, #f9e6cf 0, transparent 55%),
         radial-gradient(circle at bottom right, #f3dac9 0, transparent 55%),
         var(--bg);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Kanit", "Segoe UI", sans-serif;
+      font-family: "Mitr", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--text-main);
       display: flex;
       justify-content: center;
@@ -79,91 +79,16 @@
       gap: 12px;
     }
 
-    /* โลโก้หมีน่ารัก */
-    .bear-logo {
-      width: 44px;
-      height: 44px;
+    .brand-icon-pill {
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       background: radial-gradient(circle at 30% 30%, #ffe9d9 0, #f2c9a4 40%, #d09d74 100%);
-      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       box-shadow: 0 8px 18px rgba(117, 78, 50, 0.35);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transform-origin: bottom center;
-      animation: bearFloat 3.4s ease-in-out infinite;
-    }
-
-    .bear-logo::before,
-    .bear-logo::after {
-      content: "";
-      position: absolute;
-      top: -11px;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, #ffe6d2 0, #e0a676 65%, #b87c4a 100%);
-      box-shadow: 0 4px 8px rgba(117, 78, 50, 0.4);
-    }
-
-    .bear-logo::before {
-      left: 2px;
-    }
-    .bear-logo::after {
-      right: 2px;
-    }
-
-    .bear-face {
-      width: 28px;
-      height: 22px;
-      border-radius: 40px;
-      background: #fbe5d3;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .bear-eye {
-      width: 4px;
-      height: 4px;
-      background: #5b3b2c;
-      border-radius: 50%;
-      position: absolute;
-      top: 7px;
-      box-shadow: 10px 0 0 #5b3b2c;
-      animation: blink 5s infinite;
-    }
-
-    .bear-nose {
-      width: 10px;
-      height: 7px;
-      background: #5b3b2c;
-      border-radius: 40px;
-      position: absolute;
-      top: 11px;
-    }
-
-    .bear-nose::before {
-      content: "";
-      position: absolute;
-      left: 50%;
-      top: 5px;
-      transform: translateX(-50%);
-      width: 1px;
-      height: 5px;
-      background: #5b3b2c;
-      box-shadow: -3px 1px 0 #5b3b2c, 3px 1px 0 #5b3b2c;
-    }
-
-    @keyframes bearFloat {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-4px); }
-    }
-
-    @keyframes blink {
-      0%, 3%, 100% { transform: scaleY(1); }
-      1%, 2% { transform: scaleY(0.2); }
+      font-size: 1.4rem;
     }
 
     .brand-text {
@@ -203,6 +128,21 @@
       border-radius: 50%;
       background: #4caf79;
       box-shadow: 0 0 0 6px rgba(76, 175, 121, 0.25);
+    }
+
+    /* โลโก้ร้านมุมเล็ก ๆ */
+    .corner-logo {
+      position: fixed;
+      right: 12px;
+      bottom: 12px;
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 8px 20px rgba(96, 66, 44, 0.55);
+      border: 2px solid rgba(255, 255, 255, 0.9);
+      background: #fff;
+      z-index: 20;
     }
 
     main {
@@ -473,7 +413,39 @@
       }
     }
 
-    /* พรีวิว & สถานะ */
+    /* ปุ่มลัดปีสมัคร 2568 / 2569 */
+    .year-shortcuts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .year-pill {
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(193, 138, 92, 0.6);
+      background: rgba(255, 255, 255, 0.96);
+      padding: 3px 10px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      box-shadow: 0 4px 10px rgba(132, 89, 57, 0.25);
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+    }
+
+    .year-pill span {
+      font-size: 0.9em;
+    }
+
+    .year-pill:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 13px rgba(132, 89, 57, 0.35);
+      background: #fffaf6;
+    }
+
+    /* บล็อกสรุปสิทธิ์ / สถานะเรียลไทม์ */
     .preview-block {
       margin-top: 10px;
       padding: 10px 10px 9px;
@@ -491,10 +463,12 @@
       gap: 6px;
       font-weight: 500;
       color: var(--accent-strong);
+      flex-wrap: wrap;
     }
 
     .badge-free,
-    .badge-paid {
+    .badge-paid,
+    .badge-wait {
       display: inline-flex;
       align-items: center;
       gap: 6px;
@@ -511,6 +485,11 @@
     .badge-paid {
       background: var(--danger-soft);
       color: var(--danger);
+    }
+
+    .badge-wait {
+      background: var(--accent-soft);
+      color: var(--accent-strong);
     }
 
     .preview-list {
@@ -558,7 +537,63 @@
       border-radius: 4px;
     }
 
-    /* กล่อง QR 19฿ */
+    /* ตัวเลือกโปรลดวัน (สำหรับเคสสมัคร 2569 และเหลือวัน > 90) */
+    .promo-choice {
+      margin-top: 6px;
+      padding: 8px 9px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px dashed rgba(193, 138, 92, 0.6);
+      display: grid;
+      gap: 6px;
+    }
+
+    .promo-title {
+      font-size: 0.78rem;
+      color: var(--accent-strong);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .promo-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      padding: 5px 6px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+    }
+
+    .promo-option input {
+      margin-top: 4px;
+      accent-color: var(--accent-strong);
+    }
+
+    .promo-option-body {
+      display: grid;
+      gap: 0;
+    }
+
+    .promo-option-title {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-main);
+    }
+
+    .promo-option-text {
+      font-size: 0.72rem;
+      color: var(--text-soft);
+    }
+
+    .promo-option:hover {
+      background: rgba(245, 226, 210, 0.6);
+      box-shadow: 0 4px 10px rgba(135, 92, 63, 0.25);
+      transform: translateY(-1px);
+    }
+
+    /* กล่องชำระเงิน 19฿ (ไม่มี QR แล้ว) */
     .pay-box {
       display: grid;
       gap: 8px;
@@ -570,31 +605,6 @@
     .pay-main-row {
       display: grid;
       gap: 8px;
-    }
-
-    @media (min-width: 720px) {
-      .pay-main-row {
-        grid-template-columns: auto minmax(0, 1fr);
-        align-items: center;
-      }
-    }
-
-    .qr-wrap {
-      align-self: center;
-      justify-self: center;
-      padding: 6px;
-      border-radius: 18px;
-      background: rgba(255, 255, 255, 0.98);
-      box-shadow: 0 8px 20px rgba(136, 94, 60, 0.35);
-      border: 1px solid rgba(193, 138, 92, 0.4);
-    }
-
-    .qr-wrap img {
-      display: block;
-      width: 132px;
-      height: 132px;
-      border-radius: 14px;
-      object-fit: cover;
     }
 
     .pay-detail {
@@ -678,7 +688,7 @@
       font-weight: 600;
     }
 
-    /* IMPORTANT BLINK */
+    /* NOTICE กระพริบสำคัญ */
     .important-blink {
       margin: 6px 0 8px;
       padding: 6px 10px;
@@ -706,15 +716,7 @@
       }
     }
 
-    /* สถานะหลังส่งฟอร์ม */
-    .status-card {
-      display: none;
-    }
-
-    .status-card.visible {
-      display: block;
-    }
-
+    /* สถานะหลังส่งฟอร์ม (แสดงตลอด) */
     .status-pill {
       display: inline-flex;
       align-items: center;
@@ -832,10 +834,6 @@
       .card {
         padding-inline: 14px;
       }
-      .qr-wrap img {
-        width: 120px;
-        height: 120px;
-      }
     }
   </style>
 </head>
@@ -843,12 +841,7 @@
   <div class="page-shell">
     <header class="top-bar">
       <div class="brand-left">
-        <div class="bear-logo" aria-hidden="true">
-          <div class="bear-face">
-            <div class="bear-eye"></div>
-            <div class="bear-nose"></div>
-          </div>
-        </div>
+        <div class="brand-icon-pill">🐻</div>
         <div class="brand-text">
           <span class="shop-name">426 SHOP</span>
           <span class="sub">หน้าแจ้งเคลมออนไลน์ (เชื่อม Google Sheet)</span>
@@ -860,6 +853,9 @@
       </div>
     </header>
 
+    <!-- โลโก้ร้านมุมเล็ก ๆ -->
+    <img src="https://img2.imgbiz.com/imgbiz/IMG_1140.jpeg" alt="โลโก้ 426 SHOP" class="corner-logo" />
+
     <main>
       <!-- ฟอร์มแจ้งเคลม -->
       <section class="card" id="claim-card">
@@ -867,7 +863,9 @@
           <div class="card-title-row">
             <div>
               <div class="card-title">🐻 แบบฟอร์มแจ้งเคลม</div>
-              <div class="card-subtitle">กรอกข้อมูลตามจริง ระบบจะช่วยคำนวณสิทธิ์ให้ทันที และบันทึกลง Google Sheet</div>
+              <div class="card-subtitle">
+                กรอกข้อมูลตามจริง ระบบช่วยคำนวณสิทธิ์แบบเรียลไทม์ และบันทึกลง Google Sheet อัตโนมัติ
+              </div>
             </div>
           </div>
 
@@ -877,7 +875,7 @@
                 อีเมลที่สมัคร <span class="req">*</span>
               </label>
               <input type="email" id="email" name="email" required placeholder="เช่น your@email.com" />
-              <div class="hint">กรุณาใช้อีเมลเดียวกับที่ใช้สมัครกับร้าน</div>
+              <div class="hint">กรุณาใช้อีเมลเดียวกับที่ใช้สมัครกับร้านเท่านั้น</div>
             </div>
 
             <div class="field-row field-row--2">
@@ -895,7 +893,19 @@
                   วันที่ซื้อ / ต่ออายุล่าสุด <span class="req">*</span>
                 </label>
                 <input type="date" id="purchase" name="purchase" required />
-                <div class="hint">ใช้วันที่ซื้อรอบล่าสุด เพื่อนำไปเช็คเงื่อนไขเคลม</div>
+                <!-- ปุ่มลัดปีสมัคร -->
+                <div class="year-shortcuts">
+                  <button type="button" class="year-pill" data-year="2025">
+                    สมัครเมื่อ <span>2568</span>
+                  </button>
+                  <button type="button" class="year-pill" data-year="2026">
+                    สมัครเมื่อ <span>2569</span>
+                  </button>
+                </div>
+                <div class="hint">
+                  ถ้าเคยสมัคร / ต่ออายุปี 2568 ระบบจะถือว่าใช้แพ็กดูแล 19฿<br />
+                  ถ้าสมัคร / ต่ออายุปี 2569 ขึ้นไป ระบบจะเข้าเงื่อนไขเคลมฟรี (ตามระบบเดิมของร้าน)
+                </div>
               </div>
             </div>
 
@@ -903,7 +913,7 @@
               <label for="note" class="field-label">
                 รายละเอียดเพิ่มเติม (ถ้ามี)
               </label>
-              <textarea id="note" name="note" placeholder="เล่าเพิ่มสั้น ๆ เช่น กดออกกลุ่มแล้ว / เข้ากลุ่มเดิมไม่ได้ ฯลฯ"></textarea>
+              <textarea id="note" name="note" placeholder="เล่าเพิ่มสั้น ๆ เช่น ออกจากกลุ่มแล้ว / เข้ากลุ่มเดิมไม่ได้ ฯลฯ"></textarea>
             </div>
 
             <div class="checkbox-row">
@@ -915,44 +925,73 @@
 
             <div class="pill-info">
               <span class="pill-info-dot"></span>
-              <span>ระบบจะคำนวณสิทธิ์ (ฟรี / แพ็กดูแล 19฿ / แนะนำโปรลดวัน) ให้ทันทีหลังใส่วันที่ครบ</span>
+              <span>กรอกอีเมล + วันที่ ระบบจะดูปีสมัคร (2568/2569) + วันคงเหลือ แล้วสรุปสิทธิ์ให้อัตโนมัติ</span>
             </div>
 
-            <!-- สรุปสิทธิ์แบบเรียลไทม์ -->
-            <div class="preview-block" id="preview-block" hidden>
+            <!-- สรุปสิทธิ์ + สถานะเรียลไทม์ -->
+            <div class="preview-block" id="preview-block">
               <div class="preview-header">
-                <span id="preview-title">สรุปสิทธิ์เคลมของคุณ</span>
-                <span id="preview-badge" class="badge-free">เข้าเงื่อนไขเคลมฟรี</span>
+                <span id="preview-title">สรุปสิทธิ์เคลม (กรอกข้อมูลเพื่อเริ่มคำนวณ)</span>
+                <span id="preview-badge" class="badge-wait">รอสรุปจากข้อมูลของคุณ</span>
               </div>
 
               <ul class="preview-list" id="preview-list">
-                <!-- เติมด้วย JS -->
+                <li>กรอกอีเมล + วันหมดอายุ + วันที่ซื้อ/ต่ออายุ ระบบจะจัดสิทธิ์ให้ว่าเคลมฟรี หรือใช้แพ็กดูแล 19฿</li>
               </ul>
 
+              <!-- โปรแนะนำสำหรับคนเหลือวันเยอะ และสมัครปี 2569 -->
               <div id="longdays-pill" class="longdays-pill" hidden>
                 <span class="longdays-pill-icon"></span>
-                <span>เหลือวันใช้งานมากกว่า 90 วัน — แนะนำโปร “ลดวันครึ่งหนึ่ง แล้วย้ายเข้าบัญชีไทย” เพื่อความคุ้มค่าระยะยาว (ให้แอดมินช่วยจัดการต่อ)</span>
+                <span>สมัคร/ต่ออายุปี 2569 และเหลือวันใช้งานมากกว่า 90 วัน — แนะนำโปร “ลดวัน (ฟรี) แล้วย้ายเข้าบัญชีไทย” ก่อนเคลม</span>
               </div>
 
-              <!-- กล่องชำระเงิน 19฿ -->
+              <div class="promo-choice" id="promo-choice" hidden>
+                <div class="promo-title">โปรสำหรับคนเหลือวันเยอะ 🎁</div>
+                <label class="promo-option">
+                  <input type="radio" name="promoOption" value="free_reduce" checked />
+                  <div class="promo-option-body">
+                    <div class="promo-option-title">รับโปรลดวันฟรี + เคลมฟรี</div>
+                    <div class="promo-option-text">
+                      ลดวันให้เหมาะสม แล้วย้ายเข้าคิวเคลมฟรีทันที ไม่ต้องจ่าย 19฿
+                    </div>
+                  </div>
+                </label>
+                <label class="promo-option">
+                  <input type="radio" name="promoOption" value="paid_keep" />
+                  <div class="promo-option-body">
+                    <div class="promo-option-title">ไม่รับโปรลดวัน ขอใช้แพ็กดูแล 19฿ แทน</div>
+                    <div class="promo-option-text">
+                      วันไม่ลด ระบบใช้แพ็กดูแล 19฿ รอบนี้ และรับเข้าคิวตรวจเคลมทันทีหลังส่งฟอร์ม
+                    </div>
+                  </div>
+                </label>
+              </div>
+
+              <!-- กล่องชำระเงิน 19฿ (ไม่มี QR มีเฉพาะเลขบัญชี + แนบสลิป) -->
               <div class="pay-box" id="pay-box" hidden>
                 <div class="pay-main-row">
-                  <div class="qr-wrap">
-                    <img src="https://img2.imgbiz.com/imgbiz/IMG_2680.jpeg" alt="QR ชำระแพ็กดูแล 19฿" />
-                  </div>
                   <div class="pay-detail">
                     <div class="amount-tag">
-                      19฿ <small>/ รอบเคลม ที่ต้องใช้แพ็กดูแล</small>
+                      19฿ <small>/ รอบเคลม (แพ็กดูแล)</small>
                     </div>
                     <div>
-                      <span class="bank-maintext">โอน 19฿ ตาม QR ด้านซ้าย</span><br />
+                      <span class="bank-maintext">
+                        ใช้เฉพาะเคสที่ระบบระบุให้ “เคลม 19฿” เท่านั้น
+                      </span><br />
                       <span class="hint">
-                        ระบบจะนำสลิปไปบันทึกใน Google Sheet เพื่อให้แอดมินตรวจและรับเคลมให้
+                        กรณี “สมัครเมื่อ 2568” หรือเลือกไม่รับโปรลดวัน ระบบจะให้ใช้แพ็กดูแล 19฿ + แนบสลิป แล้วรับเข้าคิวทันที
                       </span>
                     </div>
                     <div class="bank-line">
-                      <span class="bank-maintext">ธนาคารกสิกร • 062-879-4251 • นภัทรธมณฑ์ ฤทธิ์ชัยศักดิ์</span>
-                      <button type="button" class="copy-btn" data-copy="ธ.กสิกร 0628794251 นภัทรธมณฑ์ ฤทธิ์ชัยศักดิ์">
+                      <span class="bank-maintext">
+                        ช่องทางโอน: โอนผ่าน Mobile Banking เข้าบัญชีด้านล่างแล้วแนบสลิป
+                      </span>
+                    </div>
+                    <div class="bank-line">
+                      <span class="bank-maintext">
+                        ธ.กสิกรไทย • เลขบัญชี 062-879-4251 • ชื่อบัญชี นภัทรธมณฑ์ ฤทธิ์ชัยศักดิ์
+                      </span>
+                      <button type="button" class="copy-btn" data-copy="ธ.กสิกรไทย 062-879-4251 นภัทรธมณฑ์ ฤทธิ์ชัยศักดิ์">
                         📋 คัดลอกเลขบัญชี
                       </button>
                     </div>
@@ -961,11 +1000,12 @@
 
                 <div class="slip-field">
                   <label for="slip" class="field-label">
-                    แนบสลิปชำระเงิน 19฿ (ถ้าต้องใช้แพ็กดูแล) <span class="req">*</span>
+                    แนบสลิปชำระเงิน 19฿ (สำหรับเคสที่ระบบแจ้งว่าใช้แพ็กดูแล) <span class="req">*</span>
                   </label>
                   <input type="file" id="slip" name="slip" accept="image/*,.jpg,.jpeg,.png,.webp" />
                   <div class="slip-note">
-                    <strong>สำคัญ:</strong> ถ้าเคสนี้ต้องใช้แพ็กดูแล 19฿ กรุณาโอน–แนบสลิปก่อนกด “ส่งคำขอเคลม”
+                    <strong>หมายเหตุ:</strong> รองรับโอนผ่าน Mobile Banking / ตู้ ATM / แอปธนาคาร ตามสะดวก<br />
+                    ถ้าเข้าเงื่อนไขเคลมฟรี ระบบจะไม่ให้แนบสลิป และรับเข้าคิวเคลมให้เลย
                   </div>
                 </div>
               </div>
@@ -982,21 +1022,22 @@
             </div>
 
             <div class="hint-strong">
-              หลังส่งแล้ว ระบบจะบันทึกเข้าชีต + แสดงสถานะล่าสุดให้ทันทีด้านล่าง (ไม่ต้องกดเช็คซ้ำ)
+              หลังส่งแล้ว ระบบจะบันทึกเข้าชีต + อัปเดตสถานะล่าสุดด้านล่างแบบเรียลไทม์ (ไม่ต้องกดเช็คซ้ำ)
             </div>
           </form>
         </div>
       </section>
 
-      <!-- สถานะล่าสุด -->
-      <section class="card status-card" id="status-card">
+      <!-- สถานะล่าสุด (ใช้ดูภาพรวมแบบเรียลไทม์) -->
+      <section class="card" id="status-card">
         <div class="card-inner">
           <div class="card-title">📡 สถานะคำขอเคลมล่าสุด</div>
           <div id="status-pill" class="status-pill pending">
-            กำลังเตรียมส่งเข้า Google Sheet…
+            ยังไม่ได้ส่งคำขอเคลม
           </div>
           <div class="status-body" id="status-body">
-            <!-- เติมด้วย JS -->
+            <div>• เมื่อกรอกข้อมูลครบและกด “ส่งคำขอเคลม” ที่นี่จะแสดงผลล่าสุดของอีเมลที่คุณแจ้ง</div>
+            <div>• ระบบบันทึกเข้าชีตอัตโนมัติ แล้วให้แอดมินตรวจตามคิว</div>
           </div>
         </div>
       </section>
@@ -1013,14 +1054,15 @@
           </div>
 
           <ul class="terms-list">
-            <li>ระบบจะดู “วันที่ซื้อ/ต่ออายุล่าสุด” และ “วันหมดอายุปัจจุบัน” เพื่อใช้คำนวณสิทธิ์</li>
-            <li>บางเคสต้องใช้แพ็กดูแล 19฿ ต่อรอบเคลม (ขึ้นอยู่กับประวัติ – ระบบจะแจ้งให้ทราบในหน้าสรุป)</li>
-            <li>ถ้าเหลือวันมากกว่า ~90 วัน ระบบจะแนะนำโปร “ลดวันครึ่งหนึ่ง แล้วย้ายเข้าบัญชีไทย” ให้เป็นพิเศษ</li>
-            <li>หลังส่งฟอร์ม ระบบจะบันทึกเข้าชีต และแอดมินตรวจตามคิว จากนั้นแจ้งผลกลับตามช่องทางร้านกำหนด</li>
+            <li>ระบบใช้ “วันที่ซื้อ/ต่ออายุล่าสุด” + “วันหมดอายุปัจจุบัน” และปีสมัคร (2568/2569) เพื่อตรวจสอบสิทธิ์เคลม</li>
+            <li>กรณีสมัครปี <strong>2568</strong> ระบบถือเป็นรอบที่ใช้แพ็กดูแล 19฿ (ต้องโอน + แนบสลิป แล้วรับเข้าคิวทันที)</li>
+            <li>กรณีสมัครปี <strong>2569 ขึ้นไป</strong> ระบบเข้าเงื่อนไขเคลมฟรี และถ้าเหลือวันมากกว่า ~90 วัน จะเสนอโปร “ลดวัน (ฟรี)” ให้เลือก</li>
+            <li>หากไม่รับโปรลดวัน สามารถเลือกใช้แพ็กดูแล 19฿ แทนได้ วันไม่ลด และรับเข้าคิวเคลมทันทีเช่นกัน</li>
+            <li>หลังส่งฟอร์ม ระบบบันทึกเข้าชีต แล้วแอดมินจะตรวจ–อัปเดตผลตามคิว ผ่านช่องทางที่ร้านกำหนด</li>
           </ul>
 
           <div class="terms-note">
-            ✨ หน้าเว็บนี้ทำงานร่วมกับสคริปต์ Google Apps Script / Google Sheet ของร้าน เพื่อให้ข้อมูลในบอทและหน้าแจ้งเคลมตรงกัน
+            ✨ หน้าเว็บนี้ทำงานร่วมกับ Google Apps Script / Google Sheet ของร้าน เพื่อให้ข้อมูลหน้าแจ้งเคลมและหลังบ้านตรงกัน
           </div>
         </div>
       </section>
@@ -1049,11 +1091,11 @@
     const previewList = document.getElementById("preview-list");
     const payBox = document.getElementById("pay-box");
     const longdaysPill = document.getElementById("longdays-pill");
+    const promoChoiceBox = document.getElementById("promo-choice");
 
     const submitBtn = document.getElementById("submit-btn");
     const resetBtn = document.getElementById("reset-btn");
 
-    const statusCard = document.getElementById("status-card");
     const statusPill = document.getElementById("status-pill");
     const statusBody = document.getElementById("status-body");
 
@@ -1092,10 +1134,20 @@
     }
 
     function isEligibleFree(buyDate) {
-      // อิงระบบเดิม: ซื้อใหม่ตั้งแต่ปี 2026 ขึ้นไป เคลมฟรี
+      // ระบบเดิม: ซื้อ/ต่ออายุตั้งแต่ปี ค.ศ. 2026 (พ.ศ. 2569) ขึ้นไป => เคลมฟรี
       if (!buyDate) return false;
       const threshold = new Date(2026, 0, 1); // 1 ม.ค. 2026
       return buyDate.getTime() >= threshold.getTime();
+    }
+
+    function getPromoMode(free, daysLeft) {
+      // free = เข้าเงื่อนไขเคลมฟรีตามปีสมัคร
+      if (!free) return "paid19"; // สมัครปี 2568 หรือต่ำกว่า
+      if (daysLeft > 90) {
+        const selected = document.querySelector('input[name="promoOption"]:checked');
+        return selected ? selected.value : "free_reduce"; // free_reduce หรือ paid_keep
+      }
+      return "free"; // ฟรีปกติ ไม่เหลือวันเยอะ
     }
 
     function updatePreview() {
@@ -1104,50 +1156,78 @@
       const purchase = parseDate(purchaseInput.value);
 
       if (!email || !expiry || !purchase) {
-        previewBlock.hidden = true;
+        previewTitle.textContent = "สรุปสิทธิ์เคลม (กรอกข้อมูลเพื่อเริ่มคำนวณ)";
+        previewBadge.textContent = "รอสรุปจากข้อมูลของคุณ";
+        previewBadge.className = "badge-wait";
         payBox.hidden = true;
         longdaysPill.hidden = true;
+        promoChoiceBox.hidden = true;
+
+        previewList.innerHTML = "";
+        const li1 = document.createElement("li");
+        li1.textContent = "กรอกอีเมลที่สมัคร + วันหมดอายุ + วันที่ซื้อ/ต่ออายุ ระบบจะสรุปสิทธิ์ให้อัตโนมัติ";
+        previewList.appendChild(li1);
         return;
       }
 
-      previewBlock.hidden = false;
-
       const today = new Date();
       const daysLeft = daysBetween(today, expiry);
-
-      const free = isEligibleFree(purchase);
-      const needs19 = !free;
+      const baseFree = isEligibleFree(purchase); // true = สมัครปี 2569 ขึ้นไป
+      const mode = getPromoMode(baseFree, daysLeft);
 
       const lines = [];
       lines.push(`• อีเมล: ${email}`);
       lines.push(`• วันหมดอายุปัจจุบัน: ${formatDateTH(expiry)} (${daysLeft} วันจากวันนี้)`);
       lines.push(`• วันที่ซื้อ/ต่ออายุล่าสุด: ${formatDateTH(purchase)}`);
 
+      // หมดอายุแล้ว
       if (daysLeft < 0) {
         previewTitle.textContent = "อีเมลนี้หมดอายุแล้ว";
         previewBadge.textContent = "กรุณาต่ออายุก่อนใช้สิทธิ์เคลม";
         previewBadge.className = "badge-paid";
         payBox.hidden = true;
         longdaysPill.hidden = true;
+        promoChoiceBox.hidden = true;
         lines.push("• สถานะ: หมดอายุแล้ว — กรุณาต่ออายุก่อน แล้วค่อยกลับมาแจ้งเคลมอีกครั้งค่ะ");
-      } else if (free) {
+
+        previewList.innerHTML = "";
+        lines.forEach((t) => {
+          const li = document.createElement("li");
+          li.textContent = t;
+          previewList.appendChild(li);
+        });
+        return;
+      }
+
+      // แสดงโปร/กล่องต่าง ๆ ตาม mode
+      const isLongDaysFree = baseFree && daysLeft > 90;
+      longdaysPill.hidden = !isLongDaysFree;
+      promoChoiceBox.hidden = !isLongDaysFree;
+
+      const needs19 = mode === "paid19" || mode === "paid_keep";
+      payBox.hidden = !needs19;
+
+      if (mode === "free") {
         previewTitle.textContent = "เข้าเงื่อนไขเคลมฟรีจากประวัติการซื้อ";
         previewBadge.textContent = "เคลมฟรี (ตามเงื่อนไขร้าน)";
         previewBadge.className = "badge-free";
-        payBox.hidden = true;
-        lines.push("• สถานะ: ระบบจะส่งคำขอเคลมฟรีให้แอดมินตรวจตามคิว");
+        lines.push("• สถานะ: สมัคร/ต่ออายุปี 2569 ขึ้นไป และเหลือวันไม่มาก — ระบบจะส่งคำขอเคลมฟรีให้แอดมินตรวจตามคิว");
+      } else if (mode === "free_reduce") {
+        previewTitle.textContent = "เคลมฟรี + โปรลดวัน (ฟรี) สำหรับคนเหลือวันเยอะ";
+        previewBadge.textContent = "เคลมฟรี + โปรลดวัน";
+        previewBadge.className = "badge-free";
+        lines.push("• สถานะ: สมัคร/ต่ออายุปี 2569 และเหลือวันมากกว่า 90 วัน — เลือกใช้โปรลดวันฟรี แล้วเคลมฟรีเข้าคิวทันที");
+      } else if (mode === "paid_keep") {
+        previewTitle.textContent = "ไม่รับโปรลดวัน ใช้แพ็กดูแล 19฿ รอบนี้";
+        previewBadge.textContent = "แพ็กดูแล 19฿ (วันไม่ลด)";
+        previewBadge.className = "badge-paid";
+        lines.push("• สถานะ: สมัคร/ต่ออายุปี 2569 แต่เลือกไม่รับโปรลดวัน ขอใช้แพ็กดูแล 19฿ วันไม่ลด และเข้าคิวเคลมทันที");
       } else {
-        previewTitle.textContent = "ต้องใช้แพ็กดูแล 19฿ รอบนี้";
+        // paid19
+        previewTitle.textContent = "สมัครเมื่อ 2568 – รอบนี้ใช้แพ็กดูแล 19฿";
         previewBadge.textContent = "แพ็กดูแล 19฿ / รอบเคลม";
         previewBadge.className = "badge-paid";
-        payBox.hidden = false;
-        lines.push("• สถานะ: รอบนี้ต้องใช้แพ็กดูแล 19฿ (โอน–แนบสลิป แล้วค่อยกดส่งคำขอเคลม)");
-      }
-
-      if (daysLeft > 90) {
-        longdaysPill.hidden = false;
-      } else {
-        longdaysPill.hidden = true;
+        lines.push("• สถานะ: สมัคร/ต่ออายุปี 2568 — รอบนี้ต้องใช้แพ็กดูแล 19฿ (โอน + แนบสลิป แล้วเข้าคิวตรวจเคลมทันที)");
       }
 
       previewList.innerHTML = "";
@@ -1158,31 +1238,69 @@
       });
     }
 
+    function resetStatusCard() {
+      statusPill.textContent = "ยังไม่ได้ส่งคำขอเคลม";
+      statusPill.className = "status-pill pending";
+      statusBody.innerHTML = "";
+      const l1 = document.createElement("div");
+      l1.textContent = "• เมื่อกรอกข้อมูลครบและกด “ส่งคำขอเคลม” ที่นี่จะแสดงผลล่าสุดของอีเมลที่คุณแจ้ง";
+      const l2 = document.createElement("div");
+      l2.textContent = "• ระบบบันทึกเข้าชีตอัตโนมัติ แล้วให้แอดมินตรวจตามคิว";
+      statusBody.appendChild(l1);
+      statusBody.appendChild(l2);
+    }
+
     emailInput.addEventListener("input", updatePreview);
     expiryInput.addEventListener("change", updatePreview);
     purchaseInput.addEventListener("change", updatePreview);
 
-    // ปุ่มคัดลอก
+    // ปุ่มเลือกโปรลดวัน
+    document.querySelectorAll('input[name="promoOption"]').forEach((r) => {
+      r.addEventListener("change", updatePreview);
+    });
+
+    // ปุ่มคัดลอกเลขบัญชี
     document.addEventListener("click", (e) => {
       const btn = e.target.closest(".copy-btn");
       if (!btn) return;
       const text = btn.getAttribute("data-copy") || "";
       if (!text) return;
       navigator.clipboard.writeText(text).then(
-        () => showToast("คัดลอกข้อมูลเรียบร้อยแล้ว 🐻"),
+        () => showToast("คัดลอกเลขบัญชีเรียบร้อยแล้ว 🐻"),
         () => showToast("คัดลอกไม่สำเร็จ ลองใหม่อีกครั้งนะคะ")
       );
     });
 
+    // ปุ่มลัดปีสมัคร 2568 / 2569
+    document.querySelectorAll(".year-pill").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const year = parseInt(btn.getAttribute("data-year"), 10);
+        if (!year) return;
+        const current = purchaseInput.value ? parseDate(purchaseInput.value) : new Date();
+        const m = current ? current.getMonth() : 0;
+        const d = current ? current.getDate() : 1;
+        const date = new Date(year, m, d);
+        const yyyy = date.getFullYear();
+        const mm = (date.getMonth() + 1).toString().padStart(2, "0");
+        const dd = date.getDate().toString().padStart(2, "0");
+        purchaseInput.value = `${yyyy}-${mm}-${dd}`;
+        updatePreview();
+
+        if (year === 2025) {
+          showToast("ตั้งปีสมัครเป็น 2568 (ระบบจะถือเป็นเคสใช้แพ็กดูแล 19฿)");
+        } else if (year === 2026) {
+          showToast("ตั้งปีสมัครเป็น 2569 (เข้าเงื่อนไขเคลมฟรีตามระบบ)");
+        }
+      });
+    });
+
     resetBtn.addEventListener("click", () => {
       form.reset();
-      previewBlock.hidden = true;
       payBox.hidden = true;
       longdaysPill.hidden = true;
-      statusCard.classList.remove("visible");
-      statusBody.innerHTML = "";
-      statusPill.textContent = "กำลังเตรียมส่งเข้า Google Sheet…";
-      statusPill.className = "status-pill pending";
+      promoChoiceBox.hidden = true;
+      resetStatusCard();
+      updatePreview();
     });
 
     form.addEventListener("submit", async (e) => {
@@ -1198,8 +1316,9 @@
       }
 
       const daysLeft = daysBetween(new Date(), expiry);
-      const free = isEligibleFree(purchase);
-      const needs19 = !free;
+      const baseFree = isEligibleFree(purchase);
+      const mode = getPromoMode(baseFree, daysLeft);
+      const needs19 = mode === "paid19" || mode === "paid_keep";
 
       if (daysLeft < 0) {
         showToast("อีเมลนี้หมดอายุแล้ว กรุณาต่ออายุก่อนใช้สิทธิ์เคลมค่ะ");
@@ -1208,7 +1327,7 @@
 
       if (needs19) {
         if (!slipInput.files || !slipInput.files.length) {
-          showToast("รอบนี้ต้องใช้แพ็กดูแล 19฿ กรุณาแนบสลิปก่อนกดส่งคำขอเคลมค่ะ");
+          showToast("เคสนี้ต้องใช้แพ็กดูแล 19฿ กรุณาโอนและแนบสลิปก่อนกดส่งคำขอเคลมค่ะ");
           return;
         }
       }
@@ -1216,8 +1335,7 @@
       submitBtn.disabled = true;
       submitBtn.classList.add("loading");
 
-      // อัปเดตสถานะบนหน้า
-      statusCard.classList.add("visible");
+      // อัปเดตสถานะบนหน้า (เรียลไทม์)
       statusPill.textContent = "กำลังส่งคำขอเคลมเข้าระบบ…";
       statusPill.className = "status-pill pending";
       statusBody.innerHTML = "";
@@ -1226,10 +1344,21 @@
       baseStatusLines.push(`• อีเมล: ${email}`);
       baseStatusLines.push(`• วันหมดอายุ: ${formatDateTH(expiry)} (เหลือ ~${daysLeft} วัน)`);
       baseStatusLines.push(`• วันที่ซื้อ/ต่ออายุล่าสุด: ${formatDateTH(purchase)}`);
-      baseStatusLines.push(`• ประเภทสิทธิ์: ${free ? "เคลมฟรี (ตามเงื่อนไขร้าน)" : "แพ็กดูแล 19฿ รอบนี้"}`);
 
-      if (daysLeft > 90) {
-        baseStatusLines.push("• หมายเหตุ: เหลือวันใช้งานมากกว่า 90 วัน — แนะนำปรึกษาโปรลดวันย้ายเข้าบัญชีไทยกับแอดมิน");
+      let claimLabel = "";
+      if (mode === "free") {
+        claimLabel = "เคลมฟรี (ตามเงื่อนไขร้าน)";
+      } else if (mode === "free_reduce") {
+        claimLabel = "เคลมฟรี + โปรลดวัน";
+      } else if (mode === "paid_keep") {
+        claimLabel = "แพ็กดูแล 19฿ (วันไม่ลด)";
+      } else {
+        claimLabel = "แพ็กดูแล 19฿ รอบนี้";
+      }
+      baseStatusLines.push(`• ประเภทสิทธิ์: ${claimLabel}`);
+
+      if (baseFree && daysLeft > 90) {
+        baseStatusLines.push("• หมายเหตุ: สมัคร/ต่ออายุปี 2569 และเหลือวันมากกว่า 90 วัน — มีสิทธิ์รับโปรลดวันฟรีหรือเลือกจ่าย 19฿ วันไม่ลด");
       }
 
       baseStatusLines.forEach((t) => {
@@ -1246,8 +1375,8 @@
       fd.append("purchase_iso", purchaseInput.value);
       fd.append("note", noteInput.value || "");
       fd.append("days_left", daysLeft.toString());
-      fd.append("claim_type", free ? "free" : "paid19");
-      fd.append("long_days", daysLeft > 90 ? "1" : "0");
+      fd.append("claim_type", mode);
+      fd.append("long_days", baseFree && daysLeft > 90 ? "1" : "0");
 
       if (needs19 && slipInput.files && slipInput.files[0]) {
         fd.append("slip", slipInput.files[0]);
@@ -1275,19 +1404,29 @@
           throw new Error("API error");
         }
 
-        statusPill.textContent = needs19
-          ? "บันทึกคำขอเคลม + สลิปแล้ว รอแอดมินตรวจตามคิว"
-          : "บันทึกคำขอเคลมฟรีแล้ว รอแอดมินตรวจตามคิว";
-        statusPill.className = "status-pill ok";
+        if (needs19) {
+          statusPill.textContent = "บันทึกคำขอเคลม + สลิปแล้ว รับเข้าคิวตรวจเคลมทันที";
+          statusPill.className = "status-pill ok";
+        } else if (mode === "free_reduce") {
+          statusPill.textContent = "บันทึกโปรลดวันฟรี + เข้าคิวเคลมแล้ว";
+          statusPill.className = "status-pill ok";
+        } else {
+          statusPill.textContent = "บันทึกคำขอเคลมฟรีแล้ว รับเข้าคิวเคลมทันที";
+          statusPill.className = "status-pill ok";
+        }
 
         const doneLine = document.createElement("div");
-        doneLine.textContent = needs19
-          ? "ระบบได้รับข้อมูล + สลิปเรียบร้อยแล้ว แอดมินจะตรวจและเคลมให้ตามคิว จากนั้นจะแจ้งผลกลับอีกครั้งค่ะ"
-          : "ระบบได้รับคำขอเคลมฟรีเรียบร้อยแล้ว แอดมินจะตรวจและย้ายกลุ่มให้ตามคิว แล้วแจ้งผลให้ทราบค่ะ";
+        if (needs19) {
+          doneLine.textContent = "ระบบได้รับข้อมูล + สลิปเรียบร้อยแล้ว แอดมินจะตรวจและเคลมให้ตามคิว จากนั้นจะแจ้งผลกลับอีกครั้งค่ะ";
+        } else if (mode === "free_reduce") {
+          doneLine.textContent = "ระบบจัดโปรลดวันฟรี และรับคำขอเคลมเข้าคิวเรียบร้อยแล้ว แอดมินจะตรวจและอัปเดตผลให้ตามคิวค่ะ";
+        } else {
+          doneLine.textContent = "ระบบได้รับคำขอเคลมฟรีเรียบร้อยแล้ว แอดมินจะตรวจและย้ายกลุ่มให้ตามคิว แล้วแจ้งผลให้ทราบค่ะ";
+        }
         doneLine.style.marginTop = "4px";
         statusBody.appendChild(doneLine);
 
-        showToast("ส่งคำขอเคลมเรียบร้อยแล้ว 🐻✨");
+        showToast("ส่งคำขอเคลมเรียบร้อยแล้ว เข้าคิวตรวจเคลมทันที 🐻✨");
       } catch (err) {
         console.error(err);
         statusPill.textContent = "ส่งคำขอไม่สำเร็จ";
@@ -1301,6 +1440,10 @@
         submitBtn.classList.remove("loading");
       }
     });
+
+    // ตั้งค่าเริ่มต้น
+    resetStatusCard();
+    updatePreview();
   </script>
 </body>
 </html>
