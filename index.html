@@ -911,6 +911,12 @@
       color: #c26f3f;
     }
 
+    .item-tag.family {
+      background: #fdf5ff;
+      border-color: #eadcf5;
+      color: #b38acb;
+    }
+
     body.theme-dark .item-tag {
       background: #223831;
       border-color: #3e6d5b;
@@ -921,6 +927,12 @@
       background: #3b2a21;
       border-color: #f0c2a0;
       color: #f3d0a8;
+    }
+
+    body.theme-dark .item-tag.family {
+      background: #2b2333;
+      border-color: #7e5aa5;
+      color: #e4d5ff;
     }
 
     .item-body {
@@ -1072,16 +1084,17 @@
       font-size: 0.75rem;
       padding: 8px 10px;
       border-radius: 12px;
-      background: #f5f3f0;
-      border: 1px dashed #d5ccc2;
-      color: var(--text-sub);
+      background: linear-gradient(135deg, #fdf5ff, #f2fbff);
+      border: 1px solid #eadcf5;
+      color: #b28bcc;
       line-height: 1.6;
       text-align: center;
     }
 
     body.theme-dark .policy-note {
-      background: #1f2024;
-      border-color: #3a3c45;
+      background: linear-gradient(135deg, #24212b, #1f242b);
+      border-color: #6f5ea0;
+      color: #ddccff;
     }
 
     .footer {
@@ -1378,9 +1391,9 @@
     </main>
 
     <div class="policy-note">
-      ร้าน 426 SHOP ดำเนินการภายใต้นโยบายและกฎของ YouTube ตามมาตรฐานสากล  
-      การเปลี่ยนแปลงใด ๆ จากระบบหลักของ YouTube (เช่น ระบบสมาชิก / ระบบกลุ่ม / ระบบแจ้งเตือน)  
-      จะยึดตามเงื่อนไขของ YouTube เป็นหลัก และไม่ถือเป็นความผิดหรือความบกพร่องของร้าน
+      🌈 ร้าน 426 SHOP ดำเนินการภายใต้นโยบายและกฎของ YouTube ตามมาตรฐานสากล<br>
+      การเปลี่ยนแปลงจากระบบหลักของ YouTube (เช่น ระบบสมาชิก / ระบบกลุ่ม / ระบบแจ้งเตือน)<br>
+      จะยึดตามเงื่อนไขของ YouTube เป็นหลัก และไม่ถือเป็นความผิดหรือความบกพร่องของร้านค่ะ 💛
     </div>
 
     <footer class="footer">
@@ -1499,7 +1512,6 @@
       localStorage.setItem("theme", newTheme);
     });
 
-    // เดิมเช็กเวลา 7–19 น. (ถ้าต้องการให้ลิงก์กับชีต ให้ย้ายเงื่อนไขไปทำใน Apps Script)
     function isWithinClaimWindow() {
       const now = new Date();
       const hour = now.getHours();
@@ -1819,7 +1831,7 @@
     }
 
     function fetchTodayStatus(initial = false) {
-      if (!SCRIPT_URL || SCRIPT_URL === "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL") return;
+      if (!SCRIPT_URL || SCRIPT_URL === "https://script.google.com/macros/s/AKfycbxO3RkKD-KmOsxyyCjJEFbcde13HrH7layJZf6zDhefbTKvCcE2IrcDWNGvW8wauo0/exec") return;
       fetch(SCRIPT_URL + "?action=todayStatus")
         .then((res) => {
           if (!res.ok) throw new Error("HTTP " + res.status);
@@ -1860,6 +1872,7 @@
         email: res.email || localEntry.email,
         expiry: res.expiry || localEntry.expiry,
         year: res.signupYear || localEntry.year,
+        signupYear: res.signupYear || localEntry.year,
         queueNo: res.queueNo || "",
         claimType: res.claimType || (localEntry.year === "2568" ? "paid" : "free"),
         statusText:
@@ -1875,8 +1888,13 @@
         setStepState("error");
       }
 
-      const claimLabel =
-        current.claimType === "paid" ? "แพ็กดูแล 19 บาท" : "เคลมฟรีตามเงื่อนไข";
+      let claimLabel = "เคลมฟรีตามเงื่อนไข";
+      if (current.claimType === "paid") {
+        claimLabel = "แพ็กดูแล 19 บาท";
+      } else if (current.claimType === "family") {
+        claimLabel = "อยู่ในกลุ่มครอบครัวของร้านปกติ";
+      }
+
       summaryDiv.innerHTML = `
         <div class="summary-row">
           <div class="summary-pill summary-pill--ok">
@@ -1898,10 +1916,17 @@
         parts.push("คิวเคลมของคุณ: " + current.queueNo);
       }
 
-      const extraHint =
-        current.claimType === "paid"
-          ? "กรณีนี้ระบบใช้แพ็กดูแล 19 บาทจากสลิปที่แนบ หากมีข้อสงสัยสามารถแคปหน้าจอนี้ส่งให้แอดมินได้เลยค่ะ"
-          : "คำขอนี้เข้าเงื่อนไขเคลมฟรี ระบบจะดำเนินการให้ตามลำดับคิวโดยไม่ต้องแนบสลิปเพิ่มเติม";
+      let extraHint = "";
+      if (current.claimType === "paid") {
+        extraHint =
+          "กรณีนี้ระบบใช้แพ็กดูแล 19 บาทจากสลิปที่แนบ หากมีข้อสงสัยสามารถแคปหน้าจอนี้ส่งให้แอดมินได้เลยค่ะ";
+      } else if (current.claimType === "family") {
+        extraHint =
+          "อีเมลนี้อยู่ในกลุ่มครอบครัวของร้านปกติอยู่แล้ว ระบบจะดูแลสิทธิ์ให้ในกลุ่มเดิมอย่างต่อเนื่องค่ะ";
+      } else {
+        extraHint =
+          "คำขอนี้เข้าเงื่อนไขเคลมฟรี ระบบจะดำเนินการให้ตามลำดับคิวโดยไม่ต้องแนบสลิปเพิ่มเติม";
+      }
 
       parts.push("<br>💡 " + extraHint);
 
@@ -1921,7 +1946,7 @@
 
       if (res.ok !== false) {
         noteInput.value = "";
-        if (current.claimType === "free" && slipInput) {
+        if ((current.claimType === "free" || current.claimType === "family") && slipInput) {
           slipInput.value = "";
         }
       }
@@ -1934,10 +1959,15 @@
         const card = document.createElement("div");
         card.className = "result-item";
 
-        const claimType =
-          (item.claimType || "").toLowerCase() === "paid" ? "paid" : "free";
+        const rawType = (item.claimType || "").toLowerCase();
+        let claimType = "free";
+        if (rawType === "paid") claimType = "paid";
+        else if (rawType === "family") claimType = "family";
 
-        const tagText = claimType === "paid" ? "แพ็กดูแล 19 บาท" : "เคลมฟรี";
+        let tagText = "เคลมฟรี";
+        if (claimType === "paid") tagText = "แพ็กดูแล 19 บาท";
+        else if (claimType === "family") tagText = "กลุ่มครอบครัวร้านปกติ";
+
         const safeEmail = item.email || "-";
         const safeExpiry = item.expiry || "-";
         const safeYear = item.year || item.signupYear || "-";
@@ -1952,7 +1982,7 @@
               <div class="item-header">LATEST CLAIM</div>
               <div class="item-email">${safeEmail}</div>
             </div>
-            <div class="item-tag ${claimType === "paid" ? "paid" : ""}">
+            <div class="item-tag ${claimType === "paid" ? "paid" : claimType === "family" ? "family" : ""}">
               ${tagText}
             </div>
           </div>
@@ -1989,7 +2019,10 @@
     }
 
     function buildCopyText(entry) {
-      const claimLabel = entry.claimType === "paid" ? "แพ็กดูแล 19 บาท" : "เคลมฟรี";
+      let claimLabel = "เคลมฟรี";
+      if (entry.claimType === "paid") claimLabel = "แพ็กดูแล 19 บาท";
+      else if (entry.claimType === "family") claimLabel = "กลุ่มครอบครัวร้านปกติ";
+
       return [
         "426 SHOP – รายละเอียดคำขอเคลม",
         "อีเมล: " + (entry.email || "-"),
