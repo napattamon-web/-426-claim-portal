@@ -3,145 +3,197 @@
 <head>
   <meta charset="UTF-8" />
   <title>426 SHOP – ฟอร์มแจ้งเคลม</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <!-- ฟอนต์น่ารักมาตรฐาน -->
-  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet" />
-
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f5f3f0" />
+  <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg-main: #fdf7f3;
-      --bg-card: #ffffff;
-      --accent: #d7a47b;
-      --accent-soft: #f7e4d5;
-      --accent-strong: #b2774c;
-      --border-soft: #e6d5c6;
-      --text-main: #3b3027;
-      --text-soft: #8a7464;
-      --error: #c95d5d;
-      --success: #5f9963;
-      --online: #41b059;
-      --shadow-soft: 0 18px 40px rgba(107, 79, 57, 0.18);
-      --radius-lg: 22px;
-      --radius-md: 16px;
-      --radius-pill: 999px;
-      --transition-fast: 0.18s ease-out;
+      --bg: #f5f3f0;
+      --card: #ffffff;
+      --accent: #85b8a6;
+      --accent-soft: #e3f0eb;
+      --text-main: #393532;
+      --text-sub: #8b8680;
+      --border-soft: #e2ddd7;
+      --danger: #e57373;
+      --shadow-soft: 0 18px 40px rgba(0,0,0,0.06);
+      --radius-xl: 24px;
+    }
+
+    body.theme-dark {
+      --bg: #15161a;
+      --card: #1f2024;
+      --accent: #9dd4c1;
+      --accent-soft: #223a33;
+      --text-main: #f4f5f7;
+      --text-sub: #a5a9b3;
+      --border-soft: #2d3036;
+      --shadow-soft: 0 18px 40px rgba(0,0,0,0.7);
     }
 
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      outline: none;
     }
 
     body {
-      font-family: "Kanit", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #faeee2 0, #f4e0cf 26%, #fdf7f3 55%, #fdf7f3 100%);
+      margin: 0;
+      padding: 0;
       min-height: 100vh;
       display: flex;
       justify-content: center;
-      padding: 28px 16px;
+      align-items: stretch;
+      background:
+        radial-gradient(circle at 0 0, #f8e8dd 0, transparent 55%),
+        radial-gradient(circle at 100% 0, #e7f4ee 0, transparent 55%),
+        var(--bg);
+      font-family: "Anuphan", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
       color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+      transition: background 0.25s ease;
     }
 
-    .page {
+    body.theme-dark {
+      background:
+        radial-gradient(circle at 0 0, #222433 0, transparent 55%),
+        radial-gradient(circle at 100% 0, #243234 0, transparent 55%),
+        var(--bg);
+    }
+
+    .app {
       width: 100%;
-      max-width: 1120px;
-      position: relative;
-    }
-
-    /* รูปทรงตกแต่งพื้นหลัง */
-    .bg-bubble {
-      position: fixed;
-      z-index: -1;
-      border-radius: 50%;
-      filter: blur(24px);
-      opacity: 0.7;
-    }
-
-    .bg-bubble.b1 {
-      width: 210px;
-      height: 210px;
-      background: #f6d9bf;
-      top: -60px;
-      left: -40px;
-    }
-
-    .bg-bubble.b2 {
-      width: 180px;
-      height: 180px;
-      background: #f4e7da;
-      bottom: -30px;
-      right: -40px;
-    }
-
-    .bg-bubble.b3 {
-      width: 120px;
-      height: 120px;
-      background: #fbeee1;
-      top: 40%;
-      right: 12%;
+      max-width: 480px;
+      padding: 14px 16px 18px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow-y: auto;
     }
 
     /* HEADER */
-    .app-header {
+    .header {
       display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .brand-row {
+      display: flex;
+      align-items: center;
       justify-content: space-between;
-      align-items: center;
       gap: 12px;
-      margin-bottom: 14px;
     }
 
-    .brand-block {
+    .brand-left {
       display: flex;
       align-items: center;
       gap: 12px;
+      min-width: 0;
     }
 
-    .brand-logo-wrap {
-      width: 52px;
-      height: 52px;
-      border-radius: 20px;
-      background: rgba(255, 255, 255, 0.98);
-      box-shadow: 0 12px 28px rgba(110, 82, 60, 0.25);
-      padding: 6px;
+    .logo-circle {
+      width: 54px;
+      height: 54px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #f8efe7, #e7f4ee);
       display: flex;
       align-items: center;
       justify-content: center;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    body.theme-dark .logo-circle {
+      background: linear-gradient(135deg, #2a2b38, #223234);
+      box-shadow: 0 10px 26px rgba(0,0,0,0.8);
+    }
+
+    .logo-circle.success-bounce {
+      animation: successPop 0.55s ease-out;
+    }
+
+    @keyframes successPop {
+      0% { transform: scale(1) translateY(0); }
+      40% { transform: scale(1.08) translateY(-3px); }
+      100% { transform: scale(1) translateY(0); }
+    }
+
+    .bear-min {
+      width: 34px;
+      height: 30px;
+      background: #c9a48b;
+      border-radius: 20px;
       position: relative;
     }
-
-    .brand-logo-wrap::after {
+    .bear-min::before,
+    .bear-min::after {
       content: "";
       position: absolute;
-      inset: 8px;
-      border-radius: 18px;
-      border: 1px dashed rgba(208, 163, 124, 0.7);
-      pointer-events: none;
+      top: -8px;
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: #c9a48b;
+    }
+    .bear-min::before { left: 3px; }
+    .bear-min::after { right: 3px; }
+
+    .bear-eye {
+      position: absolute;
+      top: 11px;
+      width: 4px;
+      height: 4px;
+      border-radius: 999px;
+      background: #3b2a1e;
+      animation: blink 4s infinite;
+      transform-origin: center center;
+    }
+    .bear-eye.left { left: 9px; }
+    .bear-eye.right { right: 9px; }
+
+    .bear-nose {
+      position: absolute;
+      top: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 9px;
+      height: 6px;
+      border-radius: 999px;
+      background: #3b2a1e;
     }
 
-    .brand-logo-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      border-radius: 14px;
+    @keyframes blink {
+      0%, 92%, 100% { transform: scaleY(1); }
+      95% { transform: scaleY(0.15); }
+      97% { transform: scaleY(1); }
     }
 
     .brand-text {
       display: flex;
       flex-direction: column;
       gap: 2px;
+      min-width: 0;
     }
 
-    .brand-name {
-      font-weight: 600;
-      font-size: 1.35rem;
-      letter-spacing: 0.08em;
+    .brand-title {
+      font-weight: 700;
+      font-size: 1.4rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      white-space: nowrap;
     }
 
     .brand-sub {
       font-size: 0.82rem;
-      color: var(--text-soft);
+      color: var(--text-sub);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      white-space: nowrap;
     }
 
     .header-right {
@@ -149,346 +201,285 @@
       flex-direction: column;
       align-items: flex-end;
       gap: 6px;
+      flex-shrink: 0;
     }
 
-    .header-badge-row {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .header-badge {
+    .badge {
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.9);
+      border: 1px solid rgba(0,0,0,0.03);
+      font-size: 0.72rem;
+      color: var(--text-sub);
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 4px 11px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px solid rgba(211, 179, 150, 0.5);
-      backdrop-filter: blur(10px);
-      font-size: 0.78rem;
-      color: var(--text-soft);
+      white-space: nowrap;
+      backdrop-filter: blur(6px);
+    }
+
+    body.theme-dark .badge {
+      background: rgba(31,32,36,0.95);
+      border-color: rgba(255,255,255,0.06);
     }
 
     .badge-dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: var(--online);
-      box-shadow: 0 0 0 0 rgba(65, 176, 89, 0.5);
-      animation: dotPulse 1.4s ease-out infinite;
-    }
-
-    .header-tagline {
-      font-size: 0.78rem;
-      color: var(--text-soft);
-    }
-
-    @keyframes dotPulse {
-      0% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(65, 176, 89, 0.45);
-      }
-      70% {
-        transform: scale(1.12);
-        box-shadow: 0 0 0 8px rgba(65, 176, 89, 0);
-      }
-      100% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(65, 176, 89, 0);
-      }
-    }
-
-    /* IMPORTANT STRIP */
-    .important-strip {
-      display: flex;
-      gap: 12px;
-      align-items: stretch;
-      padding: 11px 15px;
-      border-radius: 18px;
-      background: rgba(255, 255, 255, 0.98);
-      border: 1px solid rgba(201, 139, 102, 0.5);
-      box-shadow: 0 12px 32px rgba(110, 82, 60, 0.18);
-      margin-bottom: 18px;
-      position: relative;
-      overflow: hidden;
-      animation: stripBlink 1.5s ease-in-out infinite alternate;
-    }
-
-    .important-strip::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(120deg, rgba(244, 204, 180, 0.28), transparent);
-      pointer-events: none;
-    }
-
-    .important-bar {
       width: 7px;
+      height: 7px;
       border-radius: 999px;
-      background: linear-gradient(180deg, #d66a6a, #f0a96e);
-      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.8);
+      background: #4caf50;
+      box-shadow: 0 0 0 4px rgba(76,175,80,0.18);
     }
 
-    .important-text {
-      font-size: 0.8rem;
-      line-height: 1.7;
-      color: var(--text-main);
+    .theme-toggle {
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.06);
+      background: rgba(255,255,255,0.95);
+      width: 30px;
+      height: 30px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.95rem;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+      transition: all 0.18s ease;
+      backdrop-filter: blur(6px);
+    }
+
+    .theme-toggle:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+    }
+
+    body.theme-dark .theme-toggle {
+      background: rgba(25,26,30,0.96);
+      border-color: rgba(255,255,255,0.08);
+    }
+
+    /* STEP ROW */
+    .step-row {
       display: flex;
-      flex-direction: column;
-      gap: 3px;
-      position: relative;
-      z-index: 1;
+      gap: 6px;
+      font-size: 0.72rem;
+      color: var(--text-sub);
+      flex-wrap: wrap;
     }
 
-    .important-text span.highlight {
-      font-weight: 600;
-      color: var(--error);
-    }
-
-    @keyframes stripBlink {
-      0% {
-        box-shadow: 0 10px 26px rgba(110, 82, 60, 0.16);
-        transform: translateY(0);
-      }
-      100% {
-        box-shadow: 0 12px 32px rgba(201, 93, 93, 0.24);
-        transform: translateY(-1px);
-      }
-    }
-
-    /* MAIN LAYOUT */
-    .app-main {
-      display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-      gap: 20px;
-    }
-
-    .card {
-      background: rgba(255, 255, 255, 0.98);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border-soft);
-      box-shadow: var(--shadow-soft);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top left, rgba(241, 211, 186, 0.6), transparent 65%);
-      opacity: 0.4;
-      pointer-events: none;
-    }
-
-    .card-inner {
-      position: relative;
-      z-index: 1;
-      padding: 18px 18px 20px;
-    }
-
-    .card-header-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-
-    .card-title-block h1,
-    .card-title-block h2 {
-      margin: 0;
-    }
-
-    .card-title-block h1 {
-      font-size: 1.2rem;
-      margin-bottom: 4px;
-    }
-
-    .card-title-block h2 {
-      font-size: 1rem;
-      margin-bottom: 2px;
-    }
-
-    .card-subtitle {
-      font-size: 0.82rem;
-      color: var(--text-soft);
-    }
-
-    /* STEP CHIPS */
-    .steps-chip {
+    .step-pill {
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.9);
+      border: 1px solid #ded5cb;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 4px 9px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.92);
-      border: 1px solid rgba(211, 179, 150, 0.6);
-      font-size: 0.76rem;
-      color: var(--text-soft);
+      transition: all 0.2s ease;
     }
 
-    .steps-dot-row {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
+    body.theme-dark .step-pill {
+      background: rgba(36,37,43,0.95);
+      border-color: #32343b;
     }
 
-    .step-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #e3c2a4;
+    .step-pill--muted {
+      opacity: 0.65;
     }
 
-    .step-dot.active {
-      background: #c58b5b;
-      transform: scale(1.1);
+    .step-pill--active {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      color: var(--text-main);
+      box-shadow: 0 0 0 3px rgba(133,184,166,0.18);
+      opacity: 1;
     }
 
-    /* FORM GRID */
-    .form-grid {
+    .step-pill--done {
+      background: #e8f6f0;
+      border-color: #b8dccc;
+      color: #356655;
+      opacity: 1;
+    }
+
+    body.theme-dark .step-pill--done {
+      background: #233a31;
+      border-color: #3e6d5b;
+      color: #c1e4d5;
+    }
+
+    /* CARD MAIN */
+    .card {
+      flex: 1;
+      background: var(--card);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--border-soft);
+      padding: 18px 16px 16px;
       display: flex;
       flex-direction: column;
       gap: 12px;
-      margin-top: 4px;
+      transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
     }
 
-    .field-group {
+    .card-title {
+      font-size: 1.02rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-title span.icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+    }
+
+    .card-desc {
+      font-size: 0.86rem;
+      color: var(--text-sub);
+      line-height: 1.5;
+    }
+
+    .form-group {
       display: flex;
       flex-direction: column;
       gap: 4px;
+      margin-top: 6px;
     }
 
-    .field-row {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-      gap: 10px;
+    .two-col {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
     }
 
-    label {
-      font-size: 0.82rem;
-      color: var(--text-soft);
+    .two-col .col {
+      flex: 1 1 150px;
+    }
+
+    .field-label {
+      font-size: 0.78rem;
+      color: var(--text-sub);
+      margin-bottom: 4px;
+    }
+
+    .input-field {
+      background: #faf8f6;
+      border-radius: 16px;
+      border: 1.5px solid #e6e0da;
+      padding: 8px 11px;
+      transition: all 0.25s ease;
+    }
+
+    body.theme-dark .input-field {
+      background: #232429;
+      border-color: #32343b;
+    }
+
+    .input-field:focus-within {
+      border-color: var(--accent);
+      background: #ffffff;
+      box-shadow: 0 0 0 3px rgba(133,184,166,0.16);
+    }
+
+    body.theme-dark .input-field:focus-within {
+      background: #25272d;
     }
 
     input[type="email"],
     input[type="date"],
+    input[type="text"],
     textarea {
       width: 100%;
-      border-radius: 14px;
-      border: 1px solid var(--border-soft);
-      padding: 8px 11px;
+      border: none;
+      background: transparent;
       font-family: inherit;
-      font-size: 0.88rem;
+      font-size: 0.94rem;
       color: var(--text-main);
-      background: rgba(255, 255, 255, 0.96);
-      transition:
-        border-color var(--transition-fast),
-        box-shadow var(--transition-fast),
-        background var(--transition-fast),
-        transform 0.08s ease-out;
-    }
-
-    input[type="email"]:focus,
-    input[type="date"]:focus,
-    textarea:focus {
-      outline: none;
-      border-color: var(--accent-strong);
-      box-shadow: 0 0 0 1px rgba(180, 123, 79, 0.3);
-      background: #fffdf9;
-      transform: translateY(-1px);
     }
 
     textarea {
-      resize: vertical;
-      min-height: 76px;
+      resize: none;
+      line-height: 1.5;
+      padding-top: 2px;
+      min-height: 80px;
     }
 
-    /* YEAR TOGGLE – มีแค่ปุ่มปี */
-    .year-toggle-wrap {
+    /* YEAR BUTTONS */
+    .year-pill-row {
       display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .year-toggle {
-      display: inline-flex;
       gap: 6px;
-      background: #f8ede3;
-      border-radius: 999px;
-      padding: 3px;
-      border: 1px solid rgba(212, 177, 143, 0.7);
     }
 
-    .year-toggle button {
-      border: none;
-      background: transparent;
+    .year-btn {
+      flex: 1;
       border-radius: 999px;
-      padding: 5px 15px;
-      font-family: inherit;
+      border: 1px solid #dad3cc;
+      background: #f8f4f1;
+      padding: 8px 0;
       font-size: 0.86rem;
+      font-weight: 500;
+      color: var(--text-sub);
       cursor: pointer;
-      color: var(--text-soft);
-      transition:
-        background var(--transition-fast),
-        color var(--transition-fast),
-        box-shadow var(--transition-fast),
-        transform 0.08s ease-out;
-      min-width: 64px;
+      text-align: center;
+      transition: all 0.18s ease;
     }
 
-    .year-toggle button.active {
-      background: #fffdf9;
-      color: var(--accent-strong);
-      box-shadow: 0 9px 19px rgba(180, 123, 79, 0.3);
-      transform: translateY(-1px);
+    body.theme-dark .year-btn {
+      background: #25262b;
+      border-color: #383a40;
     }
 
-    .year-toggle button:hover:not(.active)) {
-      background: rgba(255, 255, 255, 0.8);
+    .year-btn:hover {
+      background: #f2ece6;
+      border-color: #cfc5ba;
     }
 
-    /* PAYMENT SECTION – แสดงเฉพาะปี 2568 */
-    .payment-section {
-      margin-top: 4px;
-      padding: 12px 12px 10px;
-      border-radius: 18px;
-      background: rgba(247, 231, 215, 0.8);
-      border: 1px dashed rgba(182, 130, 90, 0.9);
-      position: relative;
+    body.theme-dark .year-btn:hover {
+      background: #2b2c32;
+      border-color: #444751;
     }
 
-    .payment-section::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top right, rgba(255, 255, 255, 0.6), transparent 60%);
-      pointer-events: none;
+    .year-btn.active {
+      background: radial-gradient(circle at 0 0, #a2d5c2 0, #7fae9b 65%);
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+    }
+
+    body.theme-dark .year-btn.active {
+      background: radial-gradient(circle at 0 0, #8fcbb7 0, #5a8a79 65%);
+    }
+
+    /* PAYMENT SECTION */
+    .payment-card {
+      margin-top: 8px;
+      padding: 9px 10px 9px;
+      border-radius: 14px;
+      background: #f5efea;
+      border: 1px solid #e1d6ca;
+      font-size: 0.8rem;
+      line-height: 1.6;
+    }
+
+    body.theme-dark .payment-card {
+      background: #26272e;
+      border-color: #3a3c45;
     }
 
     .payment-title {
-      font-size: 0.84rem;
-      font-weight: 500;
-      color: var(--accent-strong);
+      font-weight: 600;
       margin-bottom: 4px;
     }
 
-    .payment-note {
-      font-size: 0.78rem;
-      color: var(--text-soft);
-      margin-bottom: 8px;
-    }
-
-    .bank-box {
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.98);
-      border: 1px solid rgba(212, 177, 143, 0.7);
-      padding: 8px 11px;
-      margin-bottom: 8px;
-      font-size: 0.82rem;
-      line-height: 1.6;
+    .bank-lines {
+      margin: 4px 0 6px;
     }
 
     .bank-line {
@@ -496,776 +487,1127 @@
       gap: 6px;
     }
 
-    .bank-line-label {
-      font-weight: 500;
-      color: var(--text-main);
+    .bank-label {
       min-width: 72px;
+      color: var(--text-main);
+      font-weight: 500;
     }
 
-    .bank-line-value {
-      color: var(--text-soft);
+    .bank-value {
+      color: var(--text-sub);
     }
 
-    .file-input-wrap {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.8rem;
-    }
-
-    .file-input-wrap input[type="file"] {
+    .file-wrap {
+      margin-top: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
       font-size: 0.78rem;
     }
 
-    /* FOOTER BUTTON */
-    .form-footer {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      margin-top: 10px;
+    .file-wrap input[type="file"] {
+      font-size: 0.78rem;
     }
 
-    .primary-btn {
+    /* BUTTON ROW */
+    .btn-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+      align-items: stretch;
+    }
+
+    .btn-primary {
+      flex: 1;
+      border-radius: 999px;
       border: none;
-      border-radius: var(--radius-pill);
-      background: linear-gradient(135deg, #d7a47b, #c38355);
+      padding: 14px;
+      background: radial-gradient(circle at 0 0, #a2d5c2 0, #7fae9b 55%);
       color: #ffffff;
-      padding: 9px 18px;
-      font-family: inherit;
-      font-size: 0.92rem;
-      font-weight: 500;
+      font-weight: 700;
+      font-size: 1rem;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      box-shadow: 0 15px 28px rgba(149, 104, 64, 0.35);
-      transition:
-        transform 0.1s ease-out,
-        box-shadow 0.1s ease-out,
-        filter 0.1s ease-out,
-        background 0.1s ease-out;
+      box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+      transition: all 0.2s ease;
+      white-space: nowrap;
     }
 
-    .primary-btn:hover {
+    body.theme-dark .btn-primary {
+      background: radial-gradient(circle at 0 0, #8fcbb7 0, #5a8a79 55%);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+    }
+
+    .btn-primary:hover {
       transform: translateY(-1px);
-      box-shadow: 0 17px 34px rgba(149, 104, 64, 0.42);
-      filter: brightness(1.02);
+      box-shadow: 0 14px 32px rgba(0,0,0,0.18);
     }
 
-    .primary-btn:active {
-      transform: translateY(1px);
-      box-shadow: 0 9px 18px rgba(149, 104, 64, 0.3);
+    .btn-primary:active {
+      transform: translateY(0);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.14);
     }
 
-    .form-hint {
+    .btn-primary:disabled {
+      opacity: 0.6;
+      cursor: default;
+      transform: none;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+    }
+
+    .btn-secondary {
+      border-radius: 999px;
+      border: 1px solid #dad3cc;
+      background: #f8f4f1;
+      padding: 12px 14px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-sub);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      transition: all 0.18s ease;
+      white-space: nowrap;
+    }
+
+    body.theme-dark .btn-secondary {
+      background: #25262b;
+      border-color: #383a40;
+    }
+
+    .btn-secondary:hover {
+      background: #f2ece6;
+      border-color: #cfc5ba;
+    }
+
+    body.theme-dark .btn-secondary:hover {
+      background: #2b2c32;
+      border-color: #444751;
+    }
+
+    .btn-primary .spinner {
+      width: 14px;
+      height: 14px;
+      border-radius: 999px;
+      border: 2px solid rgba(255,255,255,0.6);
+      border-top-color: rgba(255,255,255,1);
+      animation: spin 0.7s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* WARN TEXT */
+    .warn-text {
+      margin-top: 4px;
+      font-size: 0.76rem;
+      color: #d47955;
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      line-height: 1.5;
+    }
+    .warn-text-icon {
+      font-size: 0.9rem;
+      margin-top: 1px;
+    }
+
+    .warn-text--important {
+      margin-top: 6px;
+      padding: 8px 10px;
+      border-radius: 12px;
+      background: #fff4e7;
+      border: 1px solid #f0c2a0;
+      animation: warnPulse 1.4s ease-in-out infinite;
+    }
+
+    body.theme-dark .warn-text--important {
+      background: #3b2a21;
+      border-color: #f0c2a0;
+    }
+
+    .warn-text--important .warn-text-icon {
+      animation: warnIconPulse 1.4s ease-in-out infinite;
+    }
+
+    @keyframes warnPulse {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(212, 125, 76, 0.35);
+      }
+      50% {
+        box-shadow: 0 0 0 6px rgba(212, 125, 76, 0);
+      }
+    }
+
+    @keyframes warnIconPulse {
+      0%, 100% {
+        transform: translateY(0) scale(1);
+      }
+      50% {
+        transform: translateY(-1px) scale(1.12);
+      }
+    }
+
+    /* STATUS */
+    #status {
+      font-size: 0.8rem;
+      margin-top: 8px;
+      color: var(--text-sub);
+      line-height: 1.6;
+      min-height: 20px;
+    }
+
+    .status-strong {
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .status-error {
+      color: #e57373 !important;
+    }
+
+    .status-ok {
+      color: #2e7d32 !important;
+    }
+
+    .status-time {
+      font-size: 0.76rem;
+      color: var(--text-sub);
+    }
+
+    #summary {
+      margin-top: 6px;
       font-size: 0.78rem;
-      color: var(--text-soft);
     }
 
-    .form-hint.error {
-      color: var(--error);
+    .summary-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
     }
 
-    .form-hint.success {
-      color: var(--success);
+    .summary-pill {
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #f5efea;
+      border: 1px solid #e1d6ca;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
     }
 
-    /* STATUS CARD */
-    .status-card-title-row {
+    .summary-pill--ok {
+      background: #e7f4ee;
+      border-color: #c3dfd2;
+    }
+
+    body.theme-dark .summary-pill {
+      background: #26272e;
+      border-color: #3a3c45;
+    }
+    body.theme-dark .summary-pill--ok {
+      background: #223831;
+      border-color: #3e6d5b;
+    }
+
+    /* RESULT LIST */
+    #results {
+      margin-top: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .result-item {
+      border-radius: 14px;
+      border: 1px solid #ebe4dc;
+      background: #fdfbf9;
+      padding: 8px 10px 10px;
+      animation: fadeIn 0.35s ease-out;
+    }
+
+    body.theme-dark .result-item {
+      background: #24252b;
+      border-color: #34363f;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .item-top-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 8px;
-      margin-bottom: 8px;
+      margin-bottom: 4px;
+      flex-wrap: wrap;
     }
 
-    .status-title-block h2 {
-      font-size: 1.02rem;
-      margin-bottom: 2px;
+    .item-header {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-sub);
     }
 
-    .status-sub {
-      font-size: 0.78rem;
-      color: var(--text-soft);
+    .item-email {
+      font-size: 0.88rem;
+      font-weight: 500;
+      margin-top: 1px;
     }
 
-    .status-tag {
-      padding: 3px 9px;
+    .item-tag {
+      font-size: 0.72rem;
+      padding: 3px 8px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.92);
-      border: 1px solid rgba(211, 179, 150, 0.6);
-      font-size: 0.76rem;
-      color: var(--text-soft);
+      background: #e7f4ee;
+      border: 1px solid #c3dfd2;
+      color: #356655;
+      white-space: nowrap;
     }
 
-    .status-current {
-      border-radius: 18px;
-      border: 1px dashed rgba(203, 180, 155, 0.95);
-      background: #fdf8f3;
-      padding: 10px 12px;
-      min-height: 72px;
-      font-size: 0.82rem;
+    .item-tag.paid {
+      background: #fff4e7;
+      border-color: #f0c2a0;
+      color: #c26f3f;
+    }
+
+    body.theme-dark .item-tag {
+      background: #223831;
+      border-color: #3e6d5b;
+      color: #c1e4d5;
+    }
+
+    body.theme-dark .item-tag.paid {
+      background: #3b2a21;
+      border-color: #f0c2a0;
+      color: #f3d0a8;
+    }
+
+    .item-body {
+      font-size: 0.84rem;
+      line-height: 1.6;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .item-meta {
+      font-size: 0.76rem;
+      color: var(--text-sub);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .btn-copy {
+      width: 100%;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid #e3ddd5;
+      background: #ffffff;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-main);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+
+    body.theme-dark .btn-copy {
+      background: #26272d;
+      border-color: #3b3d45;
+      color: #f2f3f6;
+    }
+
+    .btn-copy:hover {
+      border-color: var(--accent);
+      background: #f4faf7;
+    }
+
+    body.theme-dark .btn-copy:hover {
+      border-color: #9dd4c1;
+      background: #283036;
+    }
+
+    /* FOOTER */
+    .footer {
+      margin-top: 4px;
       display: flex;
       flex-direction: column;
-      gap: 4px;
-      margin-bottom: 8px;
-      position: relative;
-      overflow: hidden;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.74rem;
+      color: var(--text-sub);
     }
 
-    .status-current::before {
+    .support-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.9);
+      border: 1px solid #e5dfd8;
+      backdrop-filter: blur(6px);
+    }
+
+    body.theme-dark .support-pill {
+      background: rgba(22,23,27,0.95);
+      border-color: #34363f;
+    }
+
+    .support-pill span:first-child {
+      font-weight: 600;
+      color: #7d7a76;
+    }
+
+    body.theme-dark .support-pill span:first-child {
+      color: #d0d3da;
+    }
+
+    .copyright {
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    /* ERROR SHAKE */
+    .shake {
+      animation: shake 0.4s;
+      border-color: var(--danger) !important;
+    }
+
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+
+    /* TOAST */
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%) translateY(40px);
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: rgba(57,53,50,0.96);
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 500;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
+      z-index: 9999;
+    }
+
+    body.theme-dark .toast {
+      background: rgba(10,10,11,0.96);
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* TIP BUBBLE */
+    .tip-bubble {
+      position: fixed;
+      left: 14px;
+      bottom: 68px;
+      max-width: 260px;
+      padding: 9px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.96);
+      border: 1px solid rgba(0,0,0,0.06);
+      font-size: 0.78rem;
+      color: var(--text-sub);
+      box-shadow: 0 10px 26px rgba(0,0,0,0.14);
+      opacity: 0;
+      transform: translateY(8px);
+      pointer-events: none;
+      transition: all 0.25s ease;
+      backdrop-filter: blur(6px);
+      z-index: 9000;
+    }
+
+    body.theme-dark .tip-bubble {
+      background: rgba(18,19,23,0.98);
+      border-color: rgba(255,255,255,0.06);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.8);
+    }
+
+    .tip-bubble::after {
       content: "";
       position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 0 0, rgba(244, 214, 191, 0.5), transparent 55%);
-      pointer-events: none;
+      left: 18px;
+      bottom: -6px;
+      border-width: 6px 6px 0 6px;
+      border-style: solid;
+      border-color: rgba(255,255,255,0.96) transparent transparent transparent;
     }
 
-    .status-current-inner {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
+    body.theme-dark .tip-bubble::after {
+      border-color: rgba(18,19,23,0.98) transparent transparent transparent;
     }
 
-    .status-chip-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 2px;
+    .tip-bubble.show {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    .status-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      border-radius: 999px;
-      padding: 4px 10px;
-      font-size: 0.78rem;
-      border: 1px solid rgba(180, 123, 79, 0.7);
-      background: rgba(255, 255, 255, 0.98);
+    .tip-bubble-emoji {
+      margin-right: 4px;
     }
 
-    .status-chip-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--success);
-    }
-
-    .copy-btn {
-      border-radius: 999px;
-      border: 1px solid rgba(156, 128, 102, 0.85);
-      padding: 4px 12px;
-      background: rgba(255, 255, 255, 0.98);
-      font-size: 0.78rem;
-      cursor: pointer;
-      transition:
-        background var(--transition-fast),
-        transform 0.08s ease-out,
-        box-shadow var(--transition-fast);
-    }
-
-    .copy-btn:hover {
-      background: #fffdf9;
-      box-shadow: 0 7px 16px rgba(156, 128, 102, 0.28);
-      transform: translateY(-1px);
-    }
-
-    .status-line-strong {
-      font-weight: 500;
-    }
-
-    .status-meta {
-      font-size: 0.78rem;
-      color: var(--text-soft);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .status-note {
-      font-size: 0.78rem;
-      color: var(--text-soft);
-    }
-
-    .status-current.empty {
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: var(--text-soft);
-    }
-
-    .status-history {
-      border-top: 1px solid rgba(233, 213, 193, 0.95);
-      padding-top: 8px;
-      margin-top: 4px;
-    }
-
-    .status-history-header {
-      font-size: 0.78rem;
-      color: var(--text-soft);
-      margin-bottom: 6px;
-    }
-
-    .status-list {
-      max-height: 230px;
-      overflow-y: auto;
-      padding-right: 2px;
-      scrollbar-width: thin;
-      scrollbar-color: #d7b79d transparent;
-    }
-
-    .status-list::-webkit-scrollbar {
-      width: 5px;
-    }
-
-    .status-list::-webkit-scrollbar-track {
-      background: transparent;
-    }
-
-    .status-list::-webkit-scrollbar-thumb {
-      background: #d7b79d;
-      border-radius: 999px;
-    }
-
-    .status-item {
-      border-radius: 14px;
-      border: 1px solid rgba(226, 204, 186, 0.95);
-      background: rgba(255, 255, 255, 0.98);
-      padding: 7px 9px;
-      font-size: 0.8rem;
-      margin-bottom: 6px;
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-      animation: slideInUp 0.3s ease-out;
-    }
-
-    .status-item-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .status-item-email {
-      font-weight: 500;
-      color: var(--text-main);
-    }
-
-    .status-item-tag {
-      padding: 1px 8px;
-      border-radius: 999px;
-      font-size: 0.75rem;
-      border: 1px solid rgba(180, 123, 79, 0.7);
-      color: var(--accent-strong);
-      background: #fff9f5;
-    }
-
-    .status-item-meta {
-      font-size: 0.75rem;
-      color: var(--text-soft);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .status-item-note {
-      font-size: 0.78rem;
-    }
-
-    .status-item-note span {
-      font-weight: 500;
-    }
-
-    .status-item.free .status-item-tag {
-      border-color: var(--success);
-      color: var(--success);
-      background: #f1faf1;
-    }
-
-    .status-item.paid .status-item-tag {
-      border-color: var(--accent-strong);
-      color: var(--accent-strong);
-      background: #fff7f0;
-    }
-
-    @keyframes slideInUp {
-      from {
-        opacity: 0;
-        transform: translateY(6px);
+    @media (max-width: 480px) {
+      .app {
+        padding: 10px 12px 14px;
       }
-      to {
-        opacity: 1;
-        transform: translateY(0);
+      .card {
+        padding: 16px 14px 14px;
       }
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 880px) {
-      .app-main {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .status-list {
-        max-height: 200px;
-      }
-    }
-
-    @media (max-width: 620px) {
-      body {
-        padding: 18px 10px;
-      }
-
-      .app-header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .header-right {
-        align-items: flex-start;
+      .tip-bubble {
+        left: 10px;
+        right: 10px;
+        max-width: none;
       }
     }
   </style>
 </head>
 <body>
-  <!-- ฟองนุ่มๆ ตกแต่งพื้นหลัง -->
-  <div class="bg-bubble b1"></div>
-  <div class="bg-bubble b2"></div>
-  <div class="bg-bubble b3"></div>
-
-  <div class="page">
-    <!-- HEADER -->
-    <header class="app-header">
-      <div class="brand-block">
-        <div class="brand-logo-wrap">
-          <img src="https://img2.imgbiz.com/imgbiz/IMG_1140.jpeg" alt="426 SHOP Logo" />
+  <div class="app">
+    <header class="header">
+      <div class="brand-row">
+        <div class="brand-left">
+          <div class="logo-circle">
+            <div class="bear-min">
+              <div class="bear-eye left"></div>
+              <div class="bear-eye right"></div>
+              <div class="bear-nose"></div>
+            </div>
+          </div>
+          <div class="brand-text">
+            <div class="brand-title">426 SHOP</div>
+            <div class="brand-sub">CLAIM CENTER</div>
+          </div>
         </div>
-        <div class="brand-text">
-          <div class="brand-name">426 SHOP</div>
-          <div class="brand-sub">ฟอร์มแจ้งเคลมสมาชิกออนไลน์</div>
+        <div class="header-right">
+          <div class="badge">
+            <span class="badge-dot"></span>
+            <span>ระบบร้านออนไลน์ · เรียลไทม์</span>
+          </div>
+          <button class="theme-toggle" id="themeToggle" type="button" aria-label="สลับโหมดกลางคืน">🌙</button>
         </div>
       </div>
 
-      <div class="header-right">
-        <div class="header-badge-row">
-          <div class="header-badge">
-            <span class="badge-dot"></span>
-            <span>ระบบร้านออนไลน์อยู่ • ดึงข้อมูลแบบเรียลไทม์</span>
-          </div>
-        </div>
-        <div class="header-tagline">
-          ส่งข้อมูลจากหน้านี้ ระบบบันทึกเข้าร้านทันที และอัปเดตสถานะให้อัตโนมัติ
-        </div>
+      <div class="step-row">
+        <div class="step-pill" data-step="1">① กรอกข้อมูล</div>
+        <div class="step-pill" data-step="2">② เลือกปีสมัคร</div>
+        <div class="step-pill" data-step="3">③ ส่งคำขอ & ดูสถานะ</div>
       </div>
     </header>
 
-    <!-- แถบข้อความสำคัญ -->
-    <section class="important-strip">
-      <div class="important-bar"></div>
-      <div class="important-text">
-        <div>
-          <span class="highlight">สำคัญ:</span>
-          กรุณาแจ้งข้อมูลตามความเป็นจริง หากตรวจพบไม่ตรงกับข้อมูลจริง
-          ระบบขอตัดสิทธิ์เคลมทันที
-        </div>
-        <div>
-          ร้าน 426 SHOP อยู่ภายใต้กฎและนโยบายของ YouTube มาตรฐานสากล
-          การเปลี่ยนแปลงจากระบบหลักไม่ถือเป็นความผิดของร้าน
-          และรับเคลมเฉพาะวันจันทร์–เสาร์ เวลา 07.00–19.00 น.
+    <main class="card">
+      <div class="card-title">
+        <span class="icon">📋</span>
+        <span>ฟอร์มแจ้งเคลมสมาชิก</span>
+      </div>
+      <div class="card-desc">
+        กรอกอีเมลเดียวกับที่ใช้สมัคร เลือกปีที่สมัคร แล้วส่งคำขอ ระบบจะบันทึกเข้าคิวเคลม และอัปเดตสถานะให้อัตโนมัติ
+      </div>
+
+      <div class="form-group">
+        <div class="field-label">อีเมลที่ใช้สมัคร</div>
+        <div class="input-field" id="emailField">
+          <input id="emailInput" type="email" placeholder="เช่น yourname@example.com" autocomplete="email" />
         </div>
       </div>
-    </section>
 
-    <!-- MAIN -->
-    <main class="app-main">
-      <!-- ฟอร์มแจ้งเคลม -->
-      <section class="card">
-        <div class="card-inner">
-          <div class="card-header-row">
-            <div class="card-title-block">
-              <h1>ฟอร์มแจ้งเคลม</h1>
-              <div class="card-subtitle">
-                กรอกข้อมูลให้ครบ เลือกปีที่สมัคร แล้วส่ง ระบบจะบันทึกเข้าคิวเคลมให้ทันที
-              </div>
-            </div>
-            <div class="steps-chip">
-              <span>ขั้นตอน</span>
-              <div class="steps-dot-row">
-                <span class="step-dot active"></span>
-                <span class="step-dot active"></span>
-                <span class="step-dot active"></span>
-              </div>
-              <span>ข้อมูล • ปี • ส่งคำขอ</span>
+      <div class="form-group">
+        <div class="two-col">
+          <div class="col">
+            <div class="field-label">วันหมดอายุ</div>
+            <div class="input-field" id="expiryField">
+              <input id="expiryInput" type="date" />
             </div>
           </div>
-
-          <form id="claimForm" novalidate>
-            <div class="form-grid">
-              <div class="field-group">
-                <label for="emailInput">อีเมลที่ใช้สมัคร</label>
-                <input
-                  id="emailInput"
-                  type="email"
-                  name="email"
-                  placeholder="เช่น yourname@example.com"
-                  autocomplete="email"
-                  required
-                />
-              </div>
-
-              <div class="field-row">
-                <div class="field-group">
-                  <label for="expiryInput">วันหมดอายุ</label>
-                  <input id="expiryInput" type="date" name="expiry" required />
-                </div>
-
-                <div class="year-toggle-wrap">
-                  <label>ปีที่สมัคร</label>
-                  <!-- ปุ่มมีแค่ปี 2568 / 2569 ตามที่ขอ -->
-                  <div class="year-toggle" id="yearToggle">
-                    <button type="button" data-year="2568">2568</button>
-                    <button type="button" data-year="2569">2569</button>
-                  </div>
-                  <input type="hidden" id="signupYear" name="signupYear" />
-                </div>
-              </div>
-
-              <!-- ส่วนชำระแพ็กดูแล 19฿ แสดงเฉพาะเมื่อเลือกปี 2568 -->
-              <div id="paymentSection" class="payment-section" hidden>
-                <div class="payment-title">แพ็กดูแล 19 บาท (ใช้เฉพาะรอบเคลมนี้)</div>
-                <div class="payment-note">
-                  กรณีระบบเข้าหมวดแพ็กดูแล 19 บาท ให้โอนและแนบสลิป ระบบจะรับเข้าคิวทันทีหลังส่งฟอร์ม
-                </div>
-                <div class="bank-box">
-                  <div class="bank-line">
-                    <span class="bank-line-label">ชื่อบัญชี</span>
-                    <span class="bank-line-value">นภัทรธมณฑ์ ฤทธิ์ชัยศักดิ์</span>
-                  </div>
-                  <div class="bank-line">
-                    <span class="bank-line-label">ธนาคาร</span>
-                    <span class="bank-line-value">กสิกรไทย</span>
-                  </div>
-                  <div class="bank-line">
-                    <span class="bank-line-label">เลขบัญชี</span>
-                    <span class="bank-line-value">062-879-4251</span>
-                  </div>
-                </div>
-
-                <div class="field-group">
-                  <label for="slipInput">แนบสลิปโอนเงิน 19 บาท</label>
-                  <div class="file-input-wrap">
-                    <input
-                      id="slipInput"
-                      type="file"
-                      name="slip"
-                      accept="image/*"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div class="field-group">
-                <label for="noteInput">ฝากข้อความถึงแอดมิน (ถ้ามี)</label>
-                <textarea
-                  id="noteInput"
-                  name="note"
-                  rows="3"
-                  placeholder="เช่น หลุดจากกลุ่มเมื่อวาน รบกวนช่วยดึงกลับให้ด้วย"
-                ></textarea>
-              </div>
+          <div class="col">
+            <div class="field-label">ปีที่สมัคร</div>
+            <div class="year-pill-row" id="yearRow">
+              <button type="button" class="year-btn" data-year="2568">2568</button>
+              <button type="button" class="year-btn" data-year="2569">2569</button>
             </div>
-
-            <div class="form-footer">
-              <button type="submit" class="primary-btn" id="submitBtn">
-                ส่งคำขอเคลม
-              </button>
-              <div id="formHint" class="form-hint">
-                หลังส่ง ระบบจะบันทึกเข้าร้านทันที และอัปเดตสถานะในช่องด้านขวาแบบเรียลไทม์
-              </div>
-            </div>
-          </form>
-        </div>
-      </section>
-
-      <!-- สถานะคำขอแบบเรียลไทม์ -->
-      <section class="card">
-        <div class="card-inner">
-          <div class="status-card-title-row">
-            <div class="status-title-block">
-              <h2>สถานะคำขอ (เรียลไทม์)</h2>
-              <p class="status-sub">
-                แสดงสถานะรวมทุกคำขอที่ส่งจากหน้านี้ ไม่ต้องพิมพ์เช็กเอง
-              </p>
-            </div>
-            <div class="status-tag">
-              อัปเดตตามข้อมูลจริงจากฟอร์มนี้
-            </div>
-          </div>
-
-          <div id="statusCurrent" class="status-current empty">
-            <span>ยังไม่มีคำขอในรอบนี้</span>
-          </div>
-
-          <div class="status-history">
-            <div class="status-history-header">
-              ประวัติคำขอจากหน้านี้ (เรียงจากล่าสุด)
-            </div>
-            <div id="statusList" class="status-list"></div>
+            <input type="hidden" id="signupYear" />
           </div>
         </div>
-      </section>
+      </div>
+
+      <div class="form-group" id="paymentSection" style="display:none;">
+        <div class="payment-card">
+          <div class="payment-title">แพ็กดูแล 19 บาท (สำหรับรอบเคลมนี้)</div>
+          <div>เลือกปีสมัคร 2568 ระบบให้ใช้แพ็กดูแล 19 บาท เพื่อรับเข้าคิวเคลมทันทีหลังแนบสลิป</div>
+          <div class="bank-lines">
+            <div class="bank-line">
+              <span class="bank-label">ชื่อบัญชี</span>
+              <span class="bank-value">นภัทรธมณฑ์ ฤทธิ์ชัยศักดิ์</span>
+            </div>
+            <div class="bank-line">
+              <span class="bank-label">ธนาคาร</span>
+              <span class="bank-value">กสิกรไทย</span>
+            </div>
+            <div class="bank-line">
+              <span class="bank-label">เลขบัญชี</span>
+              <span class="bank-value">062-879-4251</span>
+            </div>
+          </div>
+          <div class="file-wrap">
+            <span>แนบสลิปโอนเงิน 19 บาท</span>
+            <input type="file" id="slipInput" accept="image/*" />
+            <span style="opacity:0.8;">(ถ้าเข้าเงื่อนไขเคลมฟรี ระบบจะไม่ขอสลิปจากหน้านี้)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="field-label">ฝากข้อความถึงแอดมิน (ถ้ามี)</div>
+        <div class="input-field" id="noteField">
+          <textarea id="noteInput" placeholder="เช่น หลุดจากกลุ่มเมื่อวาน รบกวนช่วยดึงกลับให้ด้วย"></textarea>
+        </div>
+      </div>
+
+      <!-- คำเตือนสำคัญกระพริบ -->
+      <div class="warn-text warn-text--important">
+        <span class="warn-text-icon">⚠️</span>
+        <span>
+          กรุณาแจ้งข้อมูลตามความเป็นจริง หากตรวจพบไม่ตรงกับข้อมูลจริง
+          ระบบขอตัดสิทธิ์เคลมทันที<br />
+          ร้าน 426 SHOP อยู่ภายใต้กฎและนโยบาย YouTube มาตรฐานสากล
+          การเปลี่ยนแปลงจากระบบหลักไม่ถือเป็นความผิดของร้าน
+          และรับเคลมเฉพาะวันจันทร์–เสาร์ เวลา 07.00–19.00 น.
+        </span>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-primary" id="btnSubmit">
+          <span>ส่งคำขอเคลม</span><span>↗</span>
+        </button>
+        <button class="btn-secondary" id="btnClear">
+          <span>ล้างฟอร์ม</span>
+        </button>
+      </div>
+
+      <div class="warn-text">
+        <span class="warn-text-icon">💡</span>
+        <span>หลังจากกด “ส่งคำขอเคลม” แล้ว แนะนำอย่าเพิ่งรีเฟรชหรือปิดหน้านี้จนกว่าสถานะจะขึ้นครบ</span>
+      </div>
+
+      <div id="summary"></div>
+      <div id="status"></div>
+      <div id="results"></div>
     </main>
+
+    <footer class="footer">
+      <div class="support-pill">
+        <span>Support</span>
+        <span>@467dlpti</span>
+      </div>
+      <div class="copyright">426 SHOP · EST 2024</div>
+    </footer>
+  </div>
+
+  <div id="toast" class="toast">คัดลอกข้อความแล้ว</div>
+
+  <div id="tipBubble" class="tip-bubble">
+    <span class="tip-bubble-emoji">💡</span>
+    <span id="tipText">ใช้อีเมลเดียวกับที่สมัครสมาชิกไว้ เพื่อให้ระบบค้นหาเจอง่ายที่สุดค่ะ</span>
   </div>
 
   <script>
-    // ใส่ URL Web App ของ Google Apps Script ที่รับฟอร์มตรงนี้
+    // 🔗 URL Web App ของ Google Apps Script (ของคุณเอง)
     const SCRIPT_URL = "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL";
 
-    const form = document.getElementById("claimForm");
+    const btnSubmit = document.getElementById("btnSubmit");
+    const btnClear = document.getElementById("btnClear");
     const emailInput = document.getElementById("emailInput");
     const expiryInput = document.getElementById("expiryInput");
+    const noteInput = document.getElementById("noteInput");
     const signupYearInput = document.getElementById("signupYear");
-    const yearToggle = document.getElementById("yearToggle");
+    const yearRow = document.getElementById("yearRow");
     const paymentSection = document.getElementById("paymentSection");
     const slipInput = document.getElementById("slipInput");
-    const noteInput = document.getElementById("noteInput");
-    const formHint = document.getElementById("formHint");
-    const submitBtn = document.getElementById("submitBtn");
 
-    const statusCurrent = document.getElementById("statusCurrent");
-    const statusList = document.getElementById("statusList");
+    const emailField = document.getElementById("emailField");
+    const expiryField = document.getElementById("expiryField");
+    const noteField = document.getElementById("noteField");
 
-    // เลือกปีสมัคร
-    yearToggle.querySelectorAll("button").forEach((btn) => {
+    const status = document.getElementById("status");
+    const resultsDiv = document.getElementById("results");
+    const summaryDiv = document.getElementById("summary");
+    const toast = document.getElementById("toast");
+    const logoCircle = document.querySelector(".logo-circle");
+    const themeToggle = document.getElementById("themeToggle");
+    const tipBubble = document.getElementById("tipBubble");
+    const tipText = document.getElementById("tipText");
+
+    let isLoading = false;
+
+    // STEP STATE
+    function setStepState(state) {
+      const steps = document.querySelectorAll(".step-pill");
+      steps.forEach((el) => {
+        el.classList.remove("step-pill--active", "step-pill--done", "step-pill--muted");
+        el.classList.add("step-pill--muted");
+      });
+
+      const s1 = document.querySelector('.step-pill[data-step="1"]');
+      const s2 = document.querySelector('.step-pill[data-step="2"]');
+      const s3 = document.querySelector('.step-pill[data-step="3"]');
+
+      if (!s1 || !s2 || !s3) return;
+
+      if (state === "idle") {
+        s1.classList.remove("step-pill--muted");
+        s1.classList.add("step-pill--active");
+      } else if (state === "loading") {
+        s1.classList.remove("step-pill--muted");
+        s1.classList.add("step-pill--done");
+        s2.classList.remove("step-pill--muted");
+        s2.classList.add("step-pill--active");
+      } else if (state === "done") {
+        s1.classList.remove("step-pill--muted");
+        s2.classList.remove("step-pill--muted");
+        s1.classList.add("step-pill--done");
+        s2.classList.add("step-pill--done");
+        s3.classList.remove("step-pill--muted");
+        s3.classList.add("step-pill--active");
+      } else if (state === "error") {
+        s1.classList.remove("step-pill--muted");
+        s1.classList.add("step-pill--done");
+        s2.classList.remove("step-pill--muted");
+        s2.classList.add("step-pill--active");
+      }
+    }
+
+    // THEME
+    function applyTheme(theme) {
+      if (theme === "dark") {
+        document.body.classList.add("theme-dark");
+        themeToggle.textContent = "☀️";
+        themeToggle.setAttribute("aria-label", "สลับเป็นโหมดสว่าง");
+      } else {
+        document.body.classList.remove("theme-dark");
+        themeToggle.textContent = "🌙";
+        themeToggle.setAttribute("aria-label", "สลับเป็นโหมดมืด");
+      }
+    }
+
+    const savedTheme = localStorage.getItem("theme") || "light";
+    applyTheme(savedTheme);
+
+    themeToggle.addEventListener("click", () => {
+      const nowDark = !document.body.classList.contains("theme-dark");
+      const newTheme = nowDark ? "dark" : "light";
+      applyTheme(newTheme);
+      localStorage.setItem("theme", newTheme);
+    });
+
+    // YEAR SELECT
+    yearRow.querySelectorAll(".year-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
-        yearToggle.querySelectorAll("button").forEach((b) =>
-          b.classList.remove("active")
-        );
+        yearRow.querySelectorAll(".year-btn").forEach((b) => b.classList.remove("active"));
         btn.classList.add("active");
-
         const year = btn.dataset.year;
         signupYearInput.value = year;
 
-        // ถ้าเลือก 2568 ให้แสดงโซนชำระ 19฿
         if (year === "2568") {
-          paymentSection.hidden = false;
-          slipInput.required = true;
+          paymentSection.style.display = "block";
+          if (slipInput) slipInput.required = true;
         } else {
-          paymentSection.hidden = true;
-          slipInput.required = false;
-          slipInput.value = "";
+          paymentSection.style.display = "none";
+          if (slipInput) {
+            slipInput.required = false;
+            slipInput.value = "";
+          }
         }
       });
     });
 
-    function setHint(message, type) {
-      formHint.textContent = message;
-      formHint.classList.remove("error", "success");
-      if (type === "error") formHint.classList.add("error");
-      if (type === "success") formHint.classList.add("success");
+    // TIP BUBBLE
+    const tips = [
+      "ใช้อีเมลเดียวกับที่สมัครสมาชิกไว้ เพื่อให้ระบบค้นหาเจอง่ายที่สุดค่ะ",
+      "อย่าลืมเลือกปีสมัครให้ตรง: 2568 หรือ 2569 ก่อนส่งคำขอเคลมนะคะ",
+      "เลือกปี 2568 ระบบจะแสดงเลขบัญชีสำหรับแพ็กดูแล 19฿ ให้แนบสลิป",
+      "ทุกคำขอที่ส่งจากหน้านี้ ระบบจะบันทึกและแสดงสถานะรวมให้ด้านล่าง",
+      "มีอะไรอยากฝากถึงแอดมิน พิมพ์ในช่องข้อความได้เลยค่ะ"
+    ];
+    let tipIndex = 0;
+
+    function rotateTip() {
+      if (!tipBubble || !tipText) return;
+      tipBubble.classList.remove("show");
+      setTimeout(() => {
+        const text = tips[tipIndex] || tips[0];
+        tipText.textContent = text;
+        tipBubble.classList.add("show");
+        tipIndex = (tipIndex + 1) % tips.length;
+      }, 200);
     }
 
-    function buildCopyText(entry) {
-      return [
-        "426 SHOP – รายละเอียดคำขอเคลม",
-        "อีเมล: " + entry.email,
-        "วันหมดอายุ: " + entry.expiry,
-        "สมัครเมื่อ: " + entry.year,
-        "คิวเคลม: " + (entry.queueNo || "-"),
-        "ประเภทเคลม: " + (entry.claimType === "paid" ? "เคลม 19 บาท" : "เคลมฟรี")
-      ].join("\n");
-    }
+    setTimeout(rotateTip, 800);
+    setInterval(rotateTip, 13000);
 
-    function renderCurrent(entry) {
-      statusCurrent.classList.remove("empty");
-      statusCurrent.innerHTML = "";
+    // SUBMIT / CLEAR
+    btnSubmit.addEventListener("click", handleSubmit);
+    btnClear.addEventListener("click", clearForm);
 
-      const wrap = document.createElement("div");
-      wrap.className = "status-current-inner";
-
-      const chipRow = document.createElement("div");
-      chipRow.className = "status-chip-row";
-
-      const chip = document.createElement("div");
-      chip.className = "status-chip";
-      const dot = document.createElement("span");
-      dot.className = "status-chip-dot";
-      const label = document.createElement("span");
-      label.textContent =
-        entry.claimType === "paid"
-          ? "รับคำขอเคลม (แพ็กดูแล 19 บาท)"
-          : "รับคำขอเคลมฟรีแล้ว";
-
-      chip.appendChild(dot);
-      chip.appendChild(label);
-
-      const copyBtn = document.createElement("button");
-      copyBtn.type = "button";
-      copyBtn.className = "copy-btn";
-      copyBtn.textContent = "คัดลอกรายละเอียด";
-      copyBtn.addEventListener("click", () => {
-        const text = entry.copyText || buildCopyText(entry);
-        navigator.clipboard.writeText(text).then(
-          () => {
-            setHint("คัดลอกข้อมูลเรียบร้อยแล้ว", "success");
-          },
-          () => {
-            setHint("คัดลอกไม่สำเร็จ กรุณาลองอีกครั้ง", "error");
-          }
-        );
-      });
-
-      chipRow.appendChild(chip);
-      chipRow.appendChild(copyBtn);
-
-      const strongLine = document.createElement("div");
-      strongLine.className = "status-line-strong";
-      strongLine.textContent = "อีเมล: " + entry.email;
-
-      const meta = document.createElement("div");
-      meta.className = "status-meta";
-      meta.innerHTML =
-        "<span>วันหมดอายุ: " +
-        entry.expiry +
-        "</span><span>สมัครเมื่อ: " +
-        entry.year +
-        "</span>" +
-        (entry.queueNo ? '<span>คิวเคลม: ' + entry.queueNo + "</span>" : "");
-
-      const note = document.createElement("div");
-      note.className = "status-note";
-      note.textContent =
-        entry.statusText ||
-        "ระบบบันทึกเข้าคิวเรียบร้อยแล้ว และจะดำเนินการตามลำดับคิว";
-
-      wrap.appendChild(chipRow);
-      wrap.appendChild(strongLine);
-      wrap.appendChild(meta);
-      wrap.appendChild(note);
-
-      statusCurrent.appendChild(wrap);
-    }
-
-    function appendHistory(entry) {
-      const item = document.createElement("div");
-      item.className =
-        "status-item " + (entry.claimType === "paid" ? "paid" : "free");
-
-      const header = document.createElement("div");
-      header.className = "status-item-header";
-
-      const emailEl = document.createElement("div");
-      emailEl.className = "status-item-email";
-      emailEl.textContent = entry.email;
-
-      const tag = document.createElement("div");
-      tag.className = "status-item-tag";
-      tag.textContent =
-        entry.claimType === "paid" ? "แพ็กดูแล 19 บาท" : "เคลมฟรี";
-
-      header.appendChild(emailEl);
-      header.appendChild(tag);
-
-      const meta = document.createElement("div");
-      meta.className = "status-item-meta";
-      meta.innerHTML =
-        "<span>วันหมดอายุ: " +
-        entry.expiry +
-        "</span><span>สมัครเมื่อ: " +
-        entry.year +
-        "</span>" +
-        (entry.queueNo ? '<span>คิวเคลม: ' + entry.queueNo + "</span>" : "");
-
-      const note = document.createElement("div");
-      note.className = "status-item-note";
-      note.innerHTML =
-        "<span>สรุป:</span> " +
-        (entry.statusText ||
-          "รับคำขอแล้วและเข้าสู่คิวตรวจเคลมเรียบร้อย");
-
-      item.appendChild(header);
-      item.appendChild(meta);
-      item.appendChild(note);
-
-      statusList.prepend(item);
-    }
-
-    form.addEventListener("submit", async (e) => {
+    // ป้องกันปิด/รีเฟรชตอนกำลังส่ง
+    window.addEventListener("beforeunload", (e) => {
+      if (!isLoading) return;
       e.preventDefault();
-      setHint("กำลังส่งคำขอ โปรดรอสักครู่", null);
-      submitBtn.disabled = true;
+      e.returnValue = "ระบบกำลังส่งคำขอเคลมของคุณอยู่ หากออกจากหน้านี้อาจทำให้สถานะไม่ถูกบันทึกนะคะ";
+    });
 
-      const email = emailInput.value.trim();
-      const expiry = expiryInput.value;
-      const year = signupYearInput.value;
+    window.addEventListener("load", () => {
+      setStepState("idle");
+      emailInput.focus();
+    });
 
-      if (!email || !expiry || !year) {
-        setHint("กรุณากรอกอีเมล วันหมดอายุ และเลือกปีที่สมัครให้ครบ", "error");
-        submitBtn.disabled = false;
+    function clearForm() {
+      emailInput.value = "";
+      expiryInput.value = "";
+      noteInput.value = "";
+      signupYearInput.value = "";
+      if (slipInput) {
+        slipInput.value = "";
+        slipInput.required = false;
+      }
+      yearRow.querySelectorAll(".year-btn").forEach((b) => b.classList.remove("active"));
+      paymentSection.style.display = "none";
+
+      status.innerHTML = "";
+      status.classList.remove("status-error", "status-ok");
+      resultsDiv.innerHTML = "";
+      summaryDiv.innerHTML = "";
+
+      emailField.classList.remove("shake");
+      expiryField.classList.remove("shake");
+      noteField.classList.remove("shake");
+
+      setStepState("idle");
+      emailInput.focus();
+    }
+
+    function shake(el) {
+      el.classList.add("shake");
+      setTimeout(() => el.classList.remove("shake"), 500);
+    }
+
+    function handleSubmit() {
+      const email = (emailInput.value || "").trim();
+      const expiry = (expiryInput.value || "").trim();
+      const year = (signupYearInput.value || "").trim();
+      const note = (noteInput.value || "").trim();
+
+      status.classList.remove("status-error", "status-ok");
+      emailField.classList.remove("shake");
+      expiryField.classList.remove("shake");
+
+      if (!email) {
+        status.textContent = "กรุณากรอกอีเมลที่ใช้สมัครก่อนนะคะ";
+        status.classList.add("status-error");
+        shake(emailField);
+        setStepState("idle");
+        return;
+      }
+      if (!expiry) {
+        status.textContent = "กรุณาเลือกวันหมดอายุสมาชิกก่อนค่ะ";
+        status.classList.add("status-error");
+        shake(expiryField);
+        setStepState("idle");
+        return;
+      }
+      if (!year) {
+        status.textContent = "กรุณาเลือกปีที่สมัคร (2568 หรือ 2569) ให้เรียบร้อยก่อนส่งคำขอ";
+        status.classList.add("status-error");
+        setStepState("idle");
+        return;
+      }
+      if (year === "2568" && slipInput && !slipInput.files.length) {
+        status.textContent = "เลือกปีสมัคร 2568 แล้ว กรุณาแนบสลิปโอนเงิน 19 บาทด้วยนะคะ";
+        status.classList.add("status-error");
+        setStepState("idle");
         return;
       }
 
-      if (year === "2568" && !slipInput.files.length) {
-        setHint("กรุณาแนบสลิปโอนเงิน 19 บาทก่อนส่งคำขอ", "error");
-        submitBtn.disabled = false;
-        return;
-      }
+      isLoading = true;
+      setStepState("loading");
+      btnSubmit.disabled = true;
+      btnSubmit.innerHTML = `
+        <span class="spinner"></span>
+        <span>กำลังส่งคำขอ…</span>
+      `;
+
+      status.style.color = "#8b8680";
+      status.innerHTML =
+        "ระบบกำลังส่งคำขอเคลมของคุณเข้าสู่ร้าน 426 SHOP...<br>" +
+        "<span style='font-size:0.78rem;color:#c27a5a;'>ระหว่างนี้แนะนำอย่าเพิ่งรีเฟรชหรือปิดหน้านี้ค่ะ</span>";
 
       const formData = new FormData();
       formData.append("email", email);
       formData.append("expiry", expiry);
       formData.append("signupYear", year);
-      formData.append("note", noteInput.value || "");
-      if (slipInput.files[0]) {
+      formData.append("note", note);
+      if (slipInput && slipInput.files[0]) {
         formData.append("slip", slipInput.files[0]);
       }
 
-      const entry = {
-        email,
-        expiry,
-        year,
-        queueNo: "",
-        claimType: year === "2568" ? "paid" : "free",
-        statusText: "",
-        copyText: ""
+      const startTime = performance.now();
+
+      fetch(SCRIPT_URL, {
+        method: "POST",
+        body: formData
+      })
+        .then((res) => res.text())
+        .then((text) => {
+          let data;
+          try {
+            data = JSON.parse(text);
+          } catch (e) {
+            data = { ok: false, message: text || "ไม่สามารถอ่านข้อมูลจากเซิร์ฟเวอร์ได้" };
+          }
+
+          const elapsedSec = (performance.now() - startTime) / 1000;
+          isLoading = false;
+          btnSubmit.disabled = false;
+          btnSubmit.innerHTML = "<span>ส่งคำขอเคลม</span><span>↗</span>";
+          renderResult(data, elapsedSec, { email, expiry, year, note });
+        })
+        .catch((err) => {
+          console.error(err);
+          isLoading = false;
+          btnSubmit.disabled = false;
+          btnSubmit.innerHTML = "<span>ส่งคำขอเคลม</span><span>↗</span>";
+          status.innerHTML = "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ";
+          status.classList.add("status-error");
+          setStepState("error");
+        });
+    }
+
+    function renderResult(res, elapsedSec, localEntry) {
+      resultsDiv.innerHTML = "";
+      summaryDiv.innerHTML = "";
+      status.classList.remove("status-error", "status-ok");
+
+      if (!res) {
+        status.innerHTML = "เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้งค่ะ";
+        status.classList.add("status-error");
+        setStepState("error");
+        return;
+      }
+
+      // เตรียมข้อมูล current
+      const current = res.current || {
+        email: res.email || localEntry.email,
+        expiry: res.expiry || localEntry.expiry,
+        year: res.signupYear || localEntry.year,
+        queueNo: res.queueNo || "",
+        claimType: res.claimType || (localEntry.year === "2568" ? "paid" : "free"),
+        statusText:
+          res.statusText ||
+          res.message ||
+          "ระบบรับคำขอแล้วและกำลังนำเข้าคิวเคลมตามลำดับ"
       };
 
-      try {
-        const res = await fetch(SCRIPT_URL, {
-          method: "POST",
-          body: formData
+      // Step + header animation
+      if (res.ok !== false) {
+        setStepState("done");
+        triggerSuccessAnimation();
+      } else {
+        setStepState("error");
+      }
+
+      // SUMMARY
+      const claimLabel =
+        current.claimType === "paid" ? "ใช้แพ็กดูแล 19 บาท" : "เคลมฟรีตามเงื่อนไข";
+      summaryDiv.innerHTML = `
+        <div class="summary-row">
+          <div class="summary-pill summary-pill--ok">
+            ✅ คำขอล่าสุด: ${claimLabel}
+          </div>
+        </div>
+      `;
+
+      // STATUS TEXT
+      const parts = [];
+      if (res.message) {
+        parts.push("<span class='status-strong'>" + res.message + "</span>");
+      } else {
+        parts.push(
+          "<span class='status-strong'>ระบบรับคำขอเคลมของคุณแล้ว และจะดำเนินการตามคิวค่ะ</span>"
+        );
+      }
+
+      if (current.queueNo) {
+        parts.push("คิวเคลมของคุณ: " + current.queueNo);
+      }
+
+      const extraHint =
+        current.claimType === "paid"
+          ? "กรณีนี้ระบบใช้แพ็กดูแล 19 บาทจากสลิปที่แนบ หากมีข้อสงสัยสามารถแคปหน้าจอนี้ส่งให้แอดมินได้เลยค่ะ"
+          : "คำขอนี้เข้าเงื่อนไขเคลมฟรี ระบบจะดำเนินการให้ตามลำดับคิวโดยไม่ต้องแนบสลิปเพิ่มเติม";
+
+      parts.push("<br>💡 " + extraHint);
+
+      if (typeof elapsedSec === "number" && isFinite(elapsedSec)) {
+        const prettyTime = elapsedSec < 0.1 ? "< 0.1" : elapsedSec.toFixed(1).replace(/\.0$/, "");
+        parts.push(
+          "<br><span class='status-time'>⏱ ระบบใช้เวลา " + prettyTime + " วินาที</span>"
+        );
+      }
+
+      status.innerHTML = parts.join("<br>");
+      if (res.ok === false) {
+        status.classList.add("status-error");
+      } else {
+        status.classList.add("status-ok");
+      }
+
+      // ถ้า success ให้เคลียร์ข้อมูลบางส่วน (ไม่เคลียร์ปีสมัคร เผื่อใช้เคลมต่อ)
+      if (res.ok !== false) {
+        noteInput.value = "";
+        if (current.claimType === "free") {
+          if (slipInput) slipInput.value = "";
+        }
+      }
+
+      // HISTORY
+      const history = Array.isArray(res.history) && res.history.length
+        ? res.history
+        : [current];
+
+      history.forEach((item) => {
+        const card = document.createElement("div");
+        card.className = "result-item";
+
+        const claimType =
+          (item.claimType || "").toLowerCase() === "paid" ? "paid" : "free";
+
+        const tagText = claimType === "paid" ? "แพ็กดูแล 19 บาท" : "เคลมฟรี";
+        const safeEmail = item.email || "-";
+        const safeExpiry = item.expiry || "-";
+        const safeYear = item.year || item.signupYear || "-";
+        const safeQueue = item.queueNo || "-";
+        const safeStatus =
+          item.statusText ||
+          "ระบบรับคำขอแล้วและเข้าสู่คิวตรวจเคลมเรียบร้อย";
+
+        card.innerHTML = `
+          <div class="item-top-row">
+            <div>
+              <div class="item-header">LATEST CLAIM</div>
+              <div class="item-email">${safeEmail}</div>
+            </div>
+            <div class="item-tag ${claimType === "paid" ? "paid" : ""}">
+              ${tagText}
+            </div>
+          </div>
+          <div class="item-meta">
+            <span>วันหมดอายุ: ${safeExpiry}</span>
+            <span>สมัครเมื่อ: ${safeYear}</span>
+            <span>คิวเคลม: ${safeQueue}</span>
+          </div>
+          <div class="item-body">${safeStatus}</div>
+          <button class="btn-copy">
+            <span>คัดลอกรายละเอียดคำขอ</span>
+          </button>
+        `;
+
+        const btnCopy = card.querySelector(".btn-copy");
+        btnCopy.addEventListener("click", () => {
+          const copyText = buildCopyText({
+            email: safeEmail,
+            expiry: safeExpiry,
+            year: safeYear,
+            queueNo: safeQueue,
+            claimType: claimType,
+            statusText: safeStatus
+          });
+          copyToClipboard(btnCopy, copyText);
         });
 
-        const text = await res.text();
-        let data;
-        try {
-          data = JSON.parse(text);
-        } catch (err) {
-          data = { success: res.ok, message: text };
-        }
+        resultsDiv.appendChild(card);
+      });
 
-        if (data.queueNo) entry.queueNo = data.queueNo;
-        if (data.claimType) entry.claimType = data.claimType;
-        if (data.statusText) entry.statusText = data.statusText;
-        if (data.copyText) entry.copyText = data.copyText;
-
-        renderCurrent(entry);
-        appendHistory(entry);
-
-        setHint("ส่งคำขอเรียบร้อยแล้ว ระบบบันทึกเข้าคิวและอัปเดตสถานะแล้ว", "success");
-      } catch (err) {
-        console.error(err);
-        setHint("ไม่สามารถส่งคำขอได้ กรุณาลองใหม่อีกครั้ง", "error");
-      } finally {
-        submitBtn.disabled = false;
+      // เลื่อนให้เห็นผลลัพธ์
+      if (history.length) {
+        window.scrollTo({ top: resultsDiv.offsetTop - 18, behavior: "smooth" });
       }
-    });
+    }
+
+    function buildCopyText(entry) {
+      const claimLabel = entry.claimType === "paid" ? "แพ็กดูแล 19 บาท" : "เคลมฟรี";
+      return [
+        "426 SHOP – รายละเอียดคำขอเคลม",
+        "อีเมล: " + (entry.email || "-"),
+        "วันหมดอายุ: " + (entry.expiry || "-"),
+        "สมัครเมื่อ: " + (entry.year || "-"),
+        "ประเภทเคลม: " + claimLabel,
+        "คิวเคลม: " + (entry.queueNo || "-"),
+        "",
+        "สรุปสถานะ:",
+        entry.statusText || "-"
+      ].join("\n");
+    }
+
+    function triggerSuccessAnimation() {
+      if (!logoCircle) return;
+      logoCircle.classList.remove("success-bounce");
+      void logoCircle.offsetWidth;
+      logoCircle.classList.add("success-bounce");
+    }
+
+    function copyToClipboard(btn, text) {
+      if (!navigator.clipboard) {
+        const temp = document.createElement("textarea");
+        temp.value = text;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand("copy");
+        document.body.removeChild(temp);
+      } else {
+        navigator.clipboard.writeText(text);
+      }
+
+      const originalText = btn.innerHTML;
+      btn.innerHTML = "คัดลอกแล้ว ✓";
+      btn.style.background = "#f4faf7";
+      btn.style.borderColor = "#85b8a6";
+
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.style.background = "";
+        btn.style.borderColor = "";
+      }, 1800);
+
+      if (toast) {
+        toast.textContent = "คัดลอกรายละเอียดแล้ว ✨";
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 2000);
+      }
+    }
   </script>
 </body>
 </html>
