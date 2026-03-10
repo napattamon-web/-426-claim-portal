@@ -910,20 +910,22 @@
       background: #283036;
     }
 
-    /* LIVE STATUS – ล่างสุดของการ์ด */
+    /* LIVE STATUS – ล่างสุดของการ์ด (ขยายกรอบให้ใหญ่ น่ารักขึ้น) */
     .live-status-card {
-      margin-top: 10px;
-      padding: 9px 10px 9px;
-      border-radius: 14px;
-      background: #f7f1eb;
+      margin-top: 12px;
+      padding: 12px 12px 12px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #fdf7f2, #f5efea);
       border: 1px solid #e1d6ca;
-      font-size: 0.78rem;
-      line-height: 1.5;
+      font-size: 0.8rem;
+      line-height: 1.6;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.04);
     }
 
     body.theme-dark .live-status-card {
-      background: #26272e;
+      background: linear-gradient(135deg, #26272e, #23242a);
       border-color: #3a3c45;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.5);
     }
 
     .live-header {
@@ -931,7 +933,7 @@
       justify-content: space-between;
       align-items: center;
       gap: 8px;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     .live-title-left {
@@ -941,8 +943,8 @@
     }
 
     .live-dot {
-      width: 8px;
-      height: 8px;
+      width: 9px;
+      height: 9px;
       border-radius: 999px;
       background: #4caf50;
       box-shadow: 0 0 0 4px rgba(76,175,80,0.18);
@@ -967,9 +969,9 @@
     .live-list {
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 6px;
       margin-top: 2px;
-      max-height: 210px;
+      max-height: 260px;
       overflow-y: auto;
     }
 
@@ -989,13 +991,13 @@
     }
 
     .live-status-text {
-      font-size: 0.76rem;
+      font-size: 0.78rem;
       color: var(--text-sub);
       white-space: nowrap;
     }
 
     .live-empty {
-      font-size: 0.78rem;
+      font-size: 0.8rem;
       color: var(--text-sub);
     }
 
@@ -1690,7 +1692,7 @@
 
       if (!items.length) {
         liveListEl.innerHTML =
-          '<div class="live-empty">วันนี้ยังไม่มีแจ้งเคลม ระบบพร้อมดึงเมลใหม่อัตโนมัติค่ะ</div>';
+          '<div class="live-empty">วันนี้ไม่มีการแจ้งเคลมในระบบ ระบบพร้อมรับคำขอใหม่ตลอดเวลาค่ะ</div>';
         return;
       }
 
@@ -1735,7 +1737,6 @@
           if (initial) {
             console.warn("Cannot load live email status:", err);
           }
-          // กรณี error ครั้งหลังๆ ก็ยังแสดงข้อความ default ไว้
           renderLiveStatus(null);
         });
     }
