@@ -1461,6 +1461,15 @@
     let liveTimerId = null;
     let isClaimOpen = true;
 
+    // ค่า default ถ้าดึงจากชีตไม่สำเร็จ
+    const claimConfig = {
+      startHour: 7,
+      endHour: 19,
+      openText: "รับเคลมเฉพาะวันจันทร์–เสาร์ เวลา 07.00–19.00 น.",
+      closedText: "ขณะนี้อยู่นอกเวลารับเคลม กรุณากลับมาเคลมในวันถัดไปช่วงเวลา 07.00–19.00 น.",
+      outOfTimeErrorText: "วันนี้ปิดรับแล้ว กรุณากลับมาเคลมในวันถัดไปช่วงเวลา 07.00–19.00 น."
+    };
+
     function setStepState(state) {
       const steps = document.querySelectorAll(".step-pill");
       steps.forEach((el) => {
@@ -1522,7 +1531,7 @@
     function isWithinClaimWindow() {
       const now = new Date();
       const hour = now.getHours();
-      return hour >= 7 && hour < 19;
+      return hour >= claimConfig.startHour && hour < claimConfig.endHour;
     }
 
     function updateClaimWindowState() {
@@ -1544,14 +1553,49 @@
       if (claimTimeNote) {
         if (open) {
           claimTimeNote.classList.remove("closed");
-          claimTimeNote.textContent =
-            "รับเคลมเฉพาะวันจันทร์–เสาร์ เวลา 07.00–19.00 น.";
+          claimTimeNote.textContent = claimConfig.openText;
         } else {
           claimTimeNote.classList.add("closed");
-          claimTimeNote.textContent =
-            "ขณะนี้อยู่นอกเวลารับเคลม กรุณากลับมาเคลมในวันถัดไปช่วงเวลา 07.00–19.00 น.";
+          claimTimeNote.textContent = claimConfig.closedText;
         }
       }
+    }
+
+    // ดึง config เวลาเปิด–ปิดจาก Apps Script / ชีต
+    function initClaimWindowConfig() {
+      if (!SCRIPT_URL) {
+        updateClaimWindowState();
+        setInterval(updateClaimWindowState, 60000);
+        return;
+      }
+
+      fetch(SCRIPT_URL + "?action=config")
+        .then((res) => {
+          if (!res.ok) throw new Error("HTTP " + res.status);
+          return res.json();
+        })
+        .then((cfg) => {
+          if (!cfg) return;
+
+          if (cfg.claimStartHour !== undefined && cfg.claimStartHour !== null) {
+            const v = Number(cfg.claimStartHour);
+            if (!Number.isNaN(v)) claimConfig.startHour = v;
+          }
+          if (cfg.claimEndHour !== undefined && cfg.claimEndHour !== null) {
+            const v = Number(cfg.claimEndHour);
+            if (!Number.isNaN(v)) claimConfig.endHour = v;
+          }
+          if (cfg.claimOpenText) claimConfig.openText = cfg.claimOpenText;
+          if (cfg.claimClosedText) claimConfig.closedText = cfg.claimClosedText;
+          if (cfg.outOfTimeErrorText) claimConfig.outOfTimeErrorText = cfg.outOfTimeErrorText;
+        })
+        .catch((err) => {
+          console.warn("Cannot load claim config:", err);
+        })
+        .finally(() => {
+          updateClaimWindowState();
+          setInterval(updateClaimWindowState, 60000);
+        });
     }
 
     yearRow.querySelectorAll(".year-btn").forEach((btn) => {
@@ -1615,8 +1659,9 @@
     window.addEventListener("load", () => {
       setStepState("idle");
       emailInput.focus();
-      updateClaimWindowState();
-      setInterval(updateClaimWindowState, 60000);
+
+      // ใช้ config จากชีต
+      initClaimWindowConfig();
 
       fetchTodayStatus(true);
       if (STATUS_POLL_INTERVAL && STATUS_POLL_INTERVAL > 0) {
@@ -1657,7 +1702,7 @@
     function handleSubmit() {
       updateClaimWindowState();
       if (!isClaimOpen) {
-        status.textContent = "วันนี้ปิดรับแล้ว กรุณากลับมาเคลมในวันถัดไปช่วงเวลา 07.00–19.00 น.";
+        status.textContent = claimConfig.outOfTimeErrorText || "วันนี้ปิดรับแล้ว กรุณากลับมาเคลมในวันถัดไปช่วงเวลา 07.00–19.00 น.";
         status.classList.add("status-error");
         setStepState("idle");
         return;
