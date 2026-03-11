@@ -2,56 +2,39 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8" />
-  <title>426 SHOP – ฟอร์มแจ้งเคลมสมาชิก YouTube</title>
+  <title>426 SHOP – ฟอร์มแจ้งเคลม</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#f5f3f0" />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #f7f5f2;
-      --card: rgba(255,255,255,0.88);
-      --card-solid: #ffffff;
-      --accent: #ff4e45;
-      --accent-2: #ff8a65;
-      --mint: #7bc7ae;
-      --mint-soft: #e6f7f1;
-      --accent-soft: #fff1ef;
-      --text-main: #342f2c;
-      --text-sub: #8a837c;
-      --border-soft: rgba(223,215,206,0.85);
+      --bg: #f5f3f0;
+      --card: #ffffff;
+      --accent: #85b8a6;
+      --accent-soft: #e3f0eb;
+      --text-main: #393532;
+      --text-sub: #8b8680;
+      --border-soft: #e2ddd7;
       --danger: #e57373;
-      --warning: #d47955;
-      --success: #2e7d32;
-      --shadow-soft: 0 20px 40px rgba(0,0,0,0.08);
-      --shadow-card: 0 20px 50px rgba(0,0,0,0.08);
-      --radius-xl: 26px;
-      --radius-lg: 18px;
+      --shadow-soft: 0 18px 40px rgba(0,0,0,0.06);
+      --radius-xl: 24px;
     }
 
     body.theme-dark {
-      --bg: #13151a;
-      --card: rgba(29,31,38,0.84);
-      --card-solid: #1d1f26;
-      --accent: #ff6259;
-      --accent-2: #ff9671;
-      --mint: #8fd8bf;
-      --mint-soft: rgba(40,72,62,0.85);
-      --accent-soft: rgba(74,33,33,0.78);
+      --bg: #15161a;
+      --card: #1f2024;
+      --accent: #9dd4c1;
+      --accent-soft: #223a33;
       --text-main: #f4f5f7;
-      --text-sub: #a4a9b1;
-      --border-soft: rgba(58,61,70,0.9);
-      --shadow-soft: 0 18px 40px rgba(0,0,0,0.6);
-      --shadow-card: 0 20px 55px rgba(0,0,0,0.55);
+      --text-sub: #a5a9b3;
+      --border-soft: #2d3036;
+      --shadow-soft: 0 18px 40px rgba(0,0,0,0.7);
     }
 
     * {
       box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
       outline: none;
-    }
-
-    html {
-      scroll-behavior: smooth;
     }
 
     body {
@@ -61,78 +44,38 @@
       display: flex;
       justify-content: center;
       align-items: stretch;
-      overflow-x: hidden;
       background:
-        radial-gradient(circle at 0% 0%, rgba(255, 168, 145, 0.22) 0, transparent 30%),
-        radial-gradient(circle at 100% 0%, rgba(125, 199, 174, 0.22) 0, transparent 32%),
-        radial-gradient(circle at 50% 100%, rgba(255, 221, 180, 0.18) 0, transparent 28%),
+        radial-gradient(circle at 0 0, #f8e8dd 0, transparent 55%),
+        radial-gradient(circle at 100% 0, #e7f4ee 0, transparent 55%),
         var(--bg);
       font-family: "Noto Sans Thai", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
       color: var(--text-main);
       -webkit-font-smoothing: antialiased;
-      transition: background 0.3s ease;
-      position: relative;
+      transition: background 0.25s ease;
     }
 
     body.theme-dark {
       background:
-        radial-gradient(circle at 0% 0%, rgba(85, 61, 89, 0.45) 0, transparent 30%),
-        radial-gradient(circle at 100% 0%, rgba(31, 84, 74, 0.40) 0, transparent 32%),
-        radial-gradient(circle at 50% 100%, rgba(84, 58, 40, 0.3) 0, transparent 28%),
+        radial-gradient(circle at 0 0, #222433 0, transparent 55%),
+        radial-gradient(circle at 100% 0, #243234 0, transparent 55%),
         var(--bg);
     }
 
-    body::before,
-    body::after {
-      content: "";
-      position: fixed;
-      border-radius: 999px;
-      filter: blur(12px);
-      z-index: 0;
-      opacity: 0.45;
-      pointer-events: none;
-      animation: floatBlob 10s ease-in-out infinite;
-    }
-
-    body::before {
-      width: 130px;
-      height: 130px;
-      left: -30px;
-      top: 90px;
-      background: rgba(255, 116, 103, 0.14);
-    }
-
-    body::after {
-      width: 160px;
-      height: 160px;
-      right: -40px;
-      bottom: 120px;
-      background: rgba(123, 199, 174, 0.15);
-      animation-delay: -4s;
-    }
-
-    @keyframes floatBlob {
-      0%,100% { transform: translateY(0) translateX(0) scale(1); }
-      50% { transform: translateY(-10px) translateX(6px) scale(1.05); }
-    }
-
     .app {
-      position: relative;
-      z-index: 1;
       width: 100%;
-      max-width: 500px;
+      max-width: 480px;
       padding: 14px 16px 18px;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
       overflow-y: auto;
     }
 
     .header {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
     }
 
     .brand-row {
@@ -150,142 +93,82 @@
     }
 
     .logo-circle {
-      width: 58px;
-      height: 58px;
-      border-radius: 18px;
-      background:
-        linear-gradient(145deg, rgba(255,255,255,0.95), rgba(255,244,240,0.88));
+      width: 54px;
+      height: 54px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #f8efe7, #e7f4ee);
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow:
-        0 12px 26px rgba(0,0,0,0.10),
-        inset 0 1px 0 rgba(255,255,255,0.8);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.08);
       position: relative;
       overflow: hidden;
       flex-shrink: 0;
       transition: transform 0.25s ease, box-shadow 0.25s ease;
-      border: 1px solid rgba(255,255,255,0.9);
     }
 
     body.theme-dark .logo-circle {
-      background: linear-gradient(145deg, rgba(37,39,46,0.96), rgba(28,30,36,0.92));
-      box-shadow:
-        0 12px 26px rgba(0,0,0,0.45),
-        inset 0 1px 0 rgba(255,255,255,0.04);
-      border-color: rgba(255,255,255,0.05);
-    }
-
-    .logo-circle::before {
-      content: "";
-      position: absolute;
-      inset: -25%;
-      background: conic-gradient(from 180deg, rgba(255,78,69,.0), rgba(255,78,69,.20), rgba(123,199,174,.16), rgba(255,78,69,0));
-      animation: rotateGlow 6s linear infinite;
-    }
-
-    .logo-circle::after {
-      content: "";
-      position: absolute;
-      inset: 2px;
-      border-radius: 16px;
-      background: inherit;
-      z-index: 0;
-    }
-
-    @keyframes rotateGlow {
-      to { transform: rotate(360deg); }
+      background: linear-gradient(135deg, #2a2b38, #223234);
+      box-shadow: 0 10px 26px rgba(0,0,0,0.8);
     }
 
     .logo-circle.success-bounce {
-      animation: successPop 0.65s ease-out;
+      animation: successPop 0.55s ease-out;
     }
 
     @keyframes successPop {
       0% { transform: scale(1) translateY(0); }
-      35% { transform: scale(1.09) translateY(-4px) rotate(-2deg); }
-      65% { transform: scale(0.98) rotate(1deg); }
+      40% { transform: scale(1.08) translateY(-3px); }
       100% { transform: scale(1) translateY(0); }
     }
 
-    /* Cute YouTube logo */
-    .yt-cute-logo {
-      position: relative;
-      width: 38px;
-      height: 38px;
-      z-index: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .yt-bear-face {
+    .bear-min {
       width: 34px;
-      height: 26px;
-      background: linear-gradient(145deg, #ff554b, #ff6c57);
-      border-radius: 12px;
+      height: 30px;
+      background: #c9a48b;
+      border-radius: 20px;
       position: relative;
-      box-shadow:
-        0 8px 16px rgba(255, 85, 75, 0.28),
-        inset 0 -2px 0 rgba(0,0,0,0.08);
     }
-
-    .yt-bear-face::before,
-    .yt-bear-face::after {
+    .bear-min::before,
+    .bear-min::after {
       content: "";
       position: absolute;
-      top: -5px;
-      width: 10px;
-      height: 10px;
+      top: -8px;
+      width: 12px;
+      height: 12px;
       border-radius: 999px;
-      background: linear-gradient(145deg, #ff6d63, #ff4f46);
-      box-shadow: inset 0 -1px 0 rgba(0,0,0,0.08);
+      background: #c9a48b;
     }
+    .bear-min::before { left: 3px; }
+    .bear-min::after { right: 3px; }
 
-    .yt-bear-face::before { left: 4px; }
-    .yt-bear-face::after { right: 4px; }
-
-    .yt-play {
+    .bear-eye {
       position: absolute;
-      left: 13px;
-      top: 8px;
-      width: 0;
-      height: 0;
-      border-top: 6px solid transparent;
-      border-bottom: 6px solid transparent;
-      border-left: 10px solid #fff;
-      filter: drop-shadow(0 1px 0 rgba(0,0,0,0.12));
-    }
-
-    .yt-eye {
-      position: absolute;
-      top: 9px;
-      width: 3px;
-      height: 3px;
+      top: 11px;
+      width: 4px;
+      height: 4px;
       border-radius: 999px;
-      background: #fff;
-      opacity: 0.95;
+      background: #3b2a1e;
       animation: blink 4s infinite;
+      transform-origin: center center;
     }
+    .bear-eye.left { left: 9px; }
+    .bear-eye.right { right: 9px; }
 
-    .yt-eye.left { left: 6px; }
-    .yt-eye.right { right: 6px; }
-
-    .yt-mouth {
+    .bear-nose {
       position: absolute;
-      bottom: 4px;
+      top: 15px;
       left: 50%;
       transform: translateX(-50%);
-      width: 8px;
-      height: 4px;
-      border-radius: 0 0 8px 8px;
-      border: 2px solid rgba(255,255,255,.9);
-      border-top: 0;
+      width: 9px;
+      height: 6px;
+      border-radius: 999px;
+      background: #3b2a1e;
     }
 
     @keyframes blink {
       0%, 92%, 100% { transform: scaleY(1); }
-      95% { transform: scaleY(0.12); }
+      95% { transform: scaleY(0.15); }
       97% { transform: scaleY(1); }
     }
 
@@ -297,31 +180,17 @@
     }
 
     .brand-title {
-      font-weight: 800;
-      font-size: 1.35rem;
-      letter-spacing: 0.08em;
+      font-weight: 700;
+      font-size: 1.4rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       white-space: nowrap;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .brand-title .mini-chip {
-      font-size: 0.62rem;
-      padding: 4px 7px;
-      border-radius: 999px;
-      background: var(--accent-soft);
-      color: var(--accent);
-      letter-spacing: 0.04em;
-      border: 1px solid rgba(255, 78, 69, 0.16);
-      font-weight: 700;
     }
 
     .brand-sub {
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       color: var(--text-sub);
-      letter-spacing: 0.16em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       white-space: nowrap;
     }
@@ -337,21 +206,20 @@
     .badge {
       padding: 6px 12px;
       border-radius: 999px;
-      background: rgba(255,255,255,0.82);
-      border: 1px solid rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.9);
+      border: 1px solid rgba(0,0,0,0.03);
       font-size: 0.72rem;
       color: var(--text-sub);
       display: inline-flex;
       align-items: center;
       gap: 6px;
       white-space: nowrap;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 10px 18px rgba(0,0,0,0.06);
+      backdrop-filter: blur(6px);
       transition: background 0.2s ease, border-color 0.2s ease;
     }
 
     body.theme-dark .badge {
-      background: rgba(29,31,38,0.8);
+      background: rgba(31,32,36,0.95);
       border-color: rgba(255,255,255,0.06);
     }
 
@@ -362,13 +230,11 @@
       background: #4caf50;
       box-shadow: 0 0 0 4px rgba(76,175,80,0.18);
       transition: background 0.2s ease, box-shadow 0.2s ease;
-      animation: livePulse 1.5s ease-in-out infinite;
     }
 
     .badge-dot.offline {
       background: #e57373;
       box-shadow: 0 0 0 4px rgba(229,115,115,0.25);
-      animation: none;
     }
 
     .badge.closed {
@@ -377,29 +243,29 @@
     }
 
     body.theme-dark .badge.closed {
-      background: rgba(54,23,23,0.92);
+      background: rgba(40,20,20,0.96);
       border-color: #f1c0c0;
     }
 
     .theme-toggle {
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.75);
-      background: rgba(255,255,255,0.84);
-      width: 32px;
-      height: 32px;
+      border: 1px solid rgba(0,0,0,0.06);
+      background: rgba(255,255,255,0.95);
+      width: 30px;
+      height: 30px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       font-size: 0.95rem;
-      box-shadow: 0 8px 18px rgba(0,0,0,0.08);
-      transition: all 0.2s ease;
-      backdrop-filter: blur(8px);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+      transition: all 0.18s ease;
+      backdrop-filter: blur(6px);
     }
 
     .theme-toggle:hover {
-      transform: translateY(-1px) rotate(8deg);
-      box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.12);
     }
 
     body.theme-dark .theme-toggle {
@@ -416,32 +282,31 @@
     }
 
     .step-pill {
-      padding: 5px 10px;
+      padding: 4px 10px;
       border-radius: 999px;
-      background: rgba(255,255,255,0.8);
-      border: 1px solid rgba(222,213,203,0.8);
+      background: rgba(255,255,255,0.9);
+      border: 1px solid #ded5cb;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      transition: all 0.22s ease;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.04);
-      backdrop-filter: blur(6px);
+      transition: all 0.2s ease;
     }
 
     body.theme-dark .step-pill {
-      background: rgba(36,37,43,0.88);
+      background: rgba(36,37,43,0.95);
       border-color: #32343b;
     }
 
-    .step-pill--muted { opacity: 0.62; }
+    .step-pill--muted {
+      opacity: 0.65;
+    }
 
     .step-pill--active {
-      border-color: transparent;
-      background: linear-gradient(135deg, rgba(255,93,83,0.18), rgba(123,199,174,0.18));
+      border-color: var(--accent);
+      background: var(--accent-soft);
       color: var(--text-main);
-      box-shadow: 0 0 0 3px rgba(255, 93, 83, 0.08), 0 10px 18px rgba(0,0,0,0.06);
+      box-shadow: 0 0 0 3px rgba(133,184,166,0.18);
       opacity: 1;
-      transform: translateY(-1px);
     }
 
     .step-pill--done {
@@ -458,70 +323,22 @@
     }
 
     .card {
-      position: relative;
       flex: 1;
       background: var(--card);
       border-radius: var(--radius-xl);
-      box-shadow: var(--shadow-card);
+      box-shadow: var(--shadow-soft);
       border: 1px solid var(--border-soft);
       padding: 18px 16px 16px;
       display: flex;
       flex-direction: column;
       gap: 12px;
+      transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
       text-align: center;
-      backdrop-filter: blur(14px);
-      overflow: hidden;
-      isolation: isolate;
-    }
-
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      padding: 1px;
-      background: linear-gradient(135deg, rgba(255, 97, 86, 0.18), rgba(123, 199, 174, 0.18), rgba(255,255,255,0.15));
-      -webkit-mask:
-        linear-gradient(#000 0 0) content-box,
-        linear-gradient(#000 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      pointer-events: none;
-    }
-
-    .card::after {
-      content: "";
-      position: absolute;
-      width: 160px;
-      height: 160px;
-      top: -60px;
-      right: -50px;
-      border-radius: 999px;
-      background: radial-gradient(circle, rgba(255, 95, 86, 0.10), transparent 68%);
-      pointer-events: none;
-    }
-
-    .progress-line {
-      width: 100%;
-      height: 6px;
-      background: rgba(0,0,0,0.05);
-      border-radius: 999px;
-      overflow: hidden;
-      margin-top: -4px;
-    }
-
-    .progress-fill {
-      height: 100%;
-      width: 18%;
-      border-radius: 999px;
-      background: linear-gradient(90deg, var(--accent), var(--mint));
-      transition: width 0.35s ease;
-      box-shadow: 0 0 16px rgba(255,78,69,.22);
     }
 
     .card-title {
-      font-size: 1.04rem;
-      font-weight: 700;
+      font-size: 1.02rem;
+      font-weight: 600;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -529,34 +346,33 @@
     }
 
     .card-title span.icon {
-      width: 24px;
-      height: 24px;
+      width: 22px;
+      height: 22px;
       border-radius: 999px;
-      background: linear-gradient(135deg, var(--accent-soft), var(--mint-soft));
+      background: var(--accent-soft);
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.92rem;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.65);
+      font-size: 0.9rem;
     }
 
     .claim-time-note {
       font-size: 0.78rem;
-      padding: 7px 10px;
+      padding: 6px 10px;
       border-radius: 999px;
-      background: rgba(255,255,255,.72);
-      border: 1px solid rgba(227,216,204,0.85);
+      background: #f7f1eb;
+      border: 1px solid #e3d8cc;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       max-width: 100%;
       margin: 0 auto;
       animation: claimBlink 1.8s ease-in-out infinite;
-      backdrop-filter: blur(8px);
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
     }
 
     body.theme-dark .claim-time-note {
-      background: rgba(37,38,44,0.88);
+      background: #25262c;
       border-color: #3a3c45;
     }
 
@@ -578,8 +394,8 @@
         box-shadow: 0 0 0 0 rgba(212, 125, 76, 0);
       }
       40% {
-        transform: translateY(-1px) scale(1.015);
-        box-shadow: 0 8px 18px rgba(212, 125, 76, 0.16);
+        transform: translateY(-1px) scale(1.02);
+        box-shadow: 0 6px 16px rgba(212, 125, 76, 0.25);
       }
       60% {
         transform: translateY(0) scale(1);
@@ -589,7 +405,7 @@
     .card-desc {
       font-size: 0.86rem;
       color: var(--text-sub);
-      line-height: 1.55;
+      line-height: 1.5;
       text-align: center;
     }
 
@@ -619,34 +435,26 @@
       color: var(--text-sub);
       margin-bottom: 4px;
       text-align: center;
-      font-weight: 500;
     }
 
     .input-field {
-      background: rgba(250,248,246,0.85);
+      background: #faf8f6;
       border-radius: 16px;
       border: 1.5px solid #e6e0da;
       padding: 8px 11px;
       transition: all 0.25s ease;
       text-align: left;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.85);
     }
 
     body.theme-dark .input-field {
-      background: rgba(35,36,41,0.9);
+      background: #232429;
       border-color: #32343b;
-      box-shadow: none;
-    }
-
-    .input-field:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 10px 18px rgba(0,0,0,0.03);
     }
 
     .input-field:focus-within {
       border-color: var(--accent);
       background: #ffffff;
-      box-shadow: 0 0 0 4px rgba(255,78,69,0.10);
+      box-shadow: 0 0 0 3px rgba(133,184,166,0.16);
     }
 
     body.theme-dark .input-field:focus-within {
@@ -667,6 +475,7 @@
 
     input[type="email"],
     input[type="date"],
+    input[type="text"],
     textarea {
       width: 100%;
       border: none;
@@ -674,11 +483,6 @@
       font-family: "Noto Sans Thai", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
       font-size: 0.94rem;
       color: var(--text-main);
-    }
-
-    input::placeholder,
-    textarea::placeholder {
-      color: #b1aaa3;
     }
 
     textarea {
@@ -697,21 +501,24 @@
     .important-note {
       margin-top: 6px;
       font-size: 0.78rem;
-      border-radius: 13px;
-      padding: 8px 10px;
-      border: 1px solid #f3b3aa;
-      background: linear-gradient(135deg, #fff5f3, #fff2ef);
+      border-radius: 12px;
+      padding: 7px 10px;
+      border: 1px solid #f19a9a;
+      background: #fff3f3;
       color: #c34040;
       display: inline-flex;
       align-items: center;
       gap: 6px;
       animation: importantBlink 1.3s ease-in-out infinite;
       text-align: left;
-      box-shadow: 0 8px 16px rgba(255, 111, 97, 0.08);
+    }
+
+    .important-note strong {
+      font-weight: 600;
     }
 
     @keyframes importantBlink {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(241,154,154,0.35); }
+      0%, 100% { box-shadow: 0 0 0 0 rgba(241,154,154,0.45); }
       50%      { box-shadow: 0 0 0 6px rgba(241,154,154,0); }
     }
 
@@ -726,14 +533,13 @@
       border-radius: 999px;
       border: 1px solid #dad3cc;
       background: #f8f4f1;
-      padding: 9px 0;
+      padding: 8px 0;
       font-size: 0.86rem;
-      font-weight: 700;
+      font-weight: 500;
       color: var(--text-sub);
       cursor: pointer;
       text-align: center;
       transition: all 0.18s ease;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.03);
     }
 
     body.theme-dark .year-btn {
@@ -741,38 +547,36 @@
       border-color: #383a40;
     }
 
-    .year-btn:hover {
-      transform: translateY(-1px);
-    }
-
     .year-btn.active {
-      background: linear-gradient(135deg, #ff645a 0, #ff8c65 60%, #7fc6af 100%);
+      background: radial-gradient(circle at 0 0, #a2d5c2 0, #7fae9b 65%);
       color: #ffffff;
       border-color: transparent;
-      box-shadow: 0 10px 22px rgba(0,0,0,0.16);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+    }
+
+    body.theme-dark .year-btn.active {
+      background: radial-gradient(circle at 0 0, #8fcbb7 0, #5a8a79 65%);
     }
 
     .payment-card {
       margin-top: 8px;
-      padding: 10px 10px 10px;
-      border-radius: 16px;
-      background: linear-gradient(135deg, #fff8f5, #fff2eb);
-      border: 1px solid #f0d5c6;
+      padding: 9px 10px 9px;
+      border-radius: 14px;
+      background: #f5efea;
+      border: 1px solid #e1d6ca;
       font-size: 0.8rem;
       line-height: 1.6;
       text-align: center;
-      box-shadow: 0 14px 24px rgba(255,120,90,0.06);
     }
 
     body.theme-dark .payment-card {
-      background: linear-gradient(135deg, #2a2525, #26272e);
-      border-color: #4b3a36;
+      background: #26272e;
+      border-color: #3a3c45;
     }
 
     .payment-title {
-      font-weight: 700;
+      font-weight: 600;
       margin-bottom: 4px;
-      color: var(--accent);
     }
 
     .bank-lines {
@@ -788,7 +592,7 @@
 
     .bank-label {
       color: var(--text-main);
-      font-weight: 600;
+      font-weight: 500;
     }
 
     .bank-value {
@@ -819,8 +623,6 @@
       border: 1px solid #dad3cc;
       background: #ffffff;
       cursor: pointer;
-      max-width: 100%;
-      box-shadow: 0 8px 14px rgba(0,0,0,0.04);
     }
 
     body.theme-dark .file-wrap input[type="file"] {
@@ -840,12 +642,6 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      transition: all 0.18s ease;
-    }
-
-    .small-copy-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 10px 18px rgba(0,0,0,0.05);
     }
 
     body.theme-dark .small-copy-btn {
@@ -867,48 +663,22 @@
       border-radius: 999px;
       border: none;
       padding: 14px;
-      background: linear-gradient(135deg, #ff6259 0, #ff8d64 65%, #7bc7ae 100%);
+      background: radial-gradient(circle at 0 0, #a2d5c2 0, #7fae9b 55%);
       color: #ffffff;
-      font-weight: 800;
+      font-weight: 700;
       font-size: 1rem;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      box-shadow: 0 14px 28px rgba(255,98,89,0.24);
-      transition: all 0.22s ease;
+      box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+      transition: all 0.2s ease;
       white-space: nowrap;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .btn-primary::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: -120%;
-      width: 70%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.32), transparent);
-      transform: skewX(-20deg);
-    }
-
-    .btn-primary:hover::before {
-      animation: shine 1s ease;
-    }
-
-    @keyframes shine {
-      to { left: 130%; }
-    }
-
-    .btn-primary:hover:not(:disabled) {
-      transform: translateY(-1px);
-      box-shadow: 0 18px 34px rgba(255,98,89,0.28);
     }
 
     .btn-primary:disabled {
-      opacity: 0.65;
+      opacity: 0.6;
       cursor: default;
       transform: none;
       box-shadow: 0 6px 14px rgba(0,0,0,0.1);
@@ -917,10 +687,10 @@
     .btn-secondary {
       border-radius: 999px;
       border: 1px solid #dad3cc;
-      background: rgba(248,244,241,0.85);
+      background: #f8f4f1;
       padding: 12px 14px;
       font-size: 0.8rem;
-      font-weight: 700;
+      font-weight: 600;
       color: var(--text-sub);
       cursor: pointer;
       display: inline-flex;
@@ -929,12 +699,6 @@
       gap: 4px;
       transition: all 0.18s ease;
       white-space: nowrap;
-      backdrop-filter: blur(8px);
-    }
-
-    .btn-secondary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 10px 18px rgba(0,0,0,0.05);
     }
 
     body.theme-dark .btn-secondary {
@@ -958,7 +722,7 @@
     .warn-text {
       margin-top: 4px;
       font-size: 0.76rem;
-      color: var(--warning);
+      color: #d47955;
       display: inline-flex;
       align-items: flex-start;
       gap: 6px;
@@ -966,7 +730,6 @@
       justify-content: center;
       text-align: left;
     }
-
     .warn-text-icon {
       font-size: 0.9rem;
       margin-top: 1px;
@@ -982,12 +745,17 @@
     }
 
     .status-strong {
-      font-weight: 700;
+      font-weight: 600;
       color: var(--text-main);
     }
 
-    .status-error { color: #e57373 !important; }
-    .status-ok { color: #2e7d32 !important; }
+    .status-error {
+      color: #e57373 !important;
+    }
+
+    .status-ok {
+      color: #2e7d32 !important;
+    }
 
     .status-time {
       font-size: 0.76rem;
@@ -1008,7 +776,7 @@
     }
 
     .summary-pill {
-      padding: 5px 10px;
+      padding: 4px 10px;
       border-radius: 999px;
       background: #f5efea;
       border: 1px solid #e1d6ca;
@@ -1016,7 +784,6 @@
       align-items: center;
       gap: 6px;
       white-space: nowrap;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.03);
     }
 
     .summary-pill--ok {
@@ -1033,17 +800,15 @@
     }
 
     .result-item {
-      border-radius: 16px;
-      border: 1px solid rgba(235,228,220,0.9);
-      background: rgba(253,251,249,0.82);
-      backdrop-filter: blur(10px);
-      padding: 9px 10px 10px;
+      border-radius: 14px;
+      border: 1px solid #ebe4dc;
+      background: #fdfbf9;
+      padding: 8px 10px 10px;
       animation: fadeIn 0.35s ease-out;
-      box-shadow: 0 12px 22px rgba(0,0,0,0.04);
     }
 
     body.theme-dark .result-item {
-      background: rgba(36,37,43,0.88);
+      background: #24252b;
       border-color: #34363f;
     }
 
@@ -1071,20 +836,19 @@
 
     .item-email {
       font-size: 0.88rem;
-      font-weight: 600;
+      font-weight: 500;
       margin-top: 1px;
       text-align: left;
     }
 
     .item-tag {
       font-size: 0.72rem;
-      padding: 4px 9px;
+      padding: 3px 8px;
       border-radius: 999px;
       background: #e7f4ee;
       border: 1px solid #c3dfd2;
       color: #356655;
       white-space: nowrap;
-      font-weight: 700;
     }
 
     .item-tag.paid {
@@ -1119,42 +883,30 @@
 
     .btn-copy {
       width: 100%;
-      padding: 8px 10px;
+      padding: 7px 10px;
       border-radius: 999px;
       border: 1px solid #e3ddd5;
       background: #ffffff;
       font-size: 0.78rem;
-      font-weight: 700;
+      font-weight: 600;
       color: var(--text-main);
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
-      transition: all .18s ease;
-    }
-
-    .btn-copy:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 10px 18px rgba(0,0,0,0.05);
     }
 
     .live-status-card {
       margin-top: 12px;
-      padding: 12px;
-      border-radius: 20px;
-      background: linear-gradient(135deg, rgba(255,248,244,0.88), rgba(245,239,234,0.84));
-      border: 1px solid rgba(225,214,202,0.85);
+      padding: 12px 12px 12px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #fdf7f2, #f5efea);
+      border: 1px solid #e1d6ca;
       font-size: 0.8rem;
       line-height: 1.6;
-      box-shadow: 0 14px 28px rgba(0,0,0,0.05);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.04);
       text-align: center;
-      backdrop-filter: blur(12px);
-    }
-
-    body.theme-dark .live-status-card {
-      background: linear-gradient(135deg, rgba(38,39,46,0.88), rgba(31,33,39,0.9));
-      border-color: #353842;
     }
 
     .live-header {
@@ -1186,7 +938,7 @@
     }
 
     .live-title-text {
-      font-weight: 700;
+      font-weight: 600;
     }
 
     .live-date {
@@ -1210,19 +962,10 @@
       justify-content: space-between;
       align-items: center;
       gap: 8px;
-      background: rgba(255,255,255,0.55);
-      border: 1px solid rgba(230,223,214,0.72);
-      padding: 8px 10px;
-      border-radius: 14px;
-    }
-
-    body.theme-dark .live-item {
-      background: rgba(255,255,255,0.03);
-      border-color: rgba(255,255,255,0.06);
     }
 
     .live-email {
-      font-weight: 600;
+      font-weight: 500;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -1239,7 +982,6 @@
       font-size: 0.8rem;
       color: var(--text-sub);
       text-align: center;
-      padding: 10px 0;
     }
 
     .footer {
@@ -1259,15 +1001,9 @@
       gap: 6px;
       padding: 6px 12px;
       border-radius: 999px;
-      background: rgba(255,255,255,0.78);
-      border: 1px solid rgba(229,223,216,0.85);
-      backdrop-filter: blur(8px);
-      box-shadow: 0 10px 18px rgba(0,0,0,0.04);
-    }
-
-    body.theme-dark .support-pill {
-      background: rgba(30,31,37,0.82);
-      border-color: rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.9);
+      border: 1px solid #e5dfd8;
+      backdrop-filter: blur(6px);
     }
 
     .copyright {
@@ -1296,13 +1032,12 @@
       background: rgba(57,53,50,0.96);
       color: #fff;
       font-size: 0.8rem;
-      font-weight: 600;
+      font-weight: 500;
       opacity: 0;
       pointer-events: none;
       transition: all 0.3s ease;
       z-index: 9999;
       font-family: "Noto Sans Thai", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      box-shadow: 0 18px 28px rgba(0,0,0,0.18);
     }
 
     .toast.show {
@@ -1314,9 +1049,9 @@
       position: fixed;
       left: 14px;
       bottom: 68px;
-      max-width: 270px;
+      max-width: 260px;
       padding: 9px 12px;
-      border-radius: 16px;
+      border-radius: 14px;
       background: rgba(255,255,255,0.96);
       border: 1px solid rgba(0,0,0,0.06);
       font-size: 0.78rem;
@@ -1326,7 +1061,7 @@
       transform: translateY(8px);
       pointer-events: none;
       transition: all 0.25s ease;
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(6px);
       z-index: 9000;
       font-family: "Noto Sans Thai", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     }
@@ -1346,13 +1081,8 @@
       transform: translateY(0);
     }
 
-    body.theme-dark .tip-bubble {
-      background: rgba(32,34,41,0.96);
-      border-color: rgba(255,255,255,0.05);
-    }
-
-    body.theme-dark .tip-bubble::after {
-      border-color: rgba(32,34,41,0.96) transparent transparent transparent;
+    .tip-bubble-emoji {
+      margin-right: 4px;
     }
 
     .status-pill {
@@ -1363,42 +1093,16 @@
       font-size: 0.74rem;
       border: 1px solid transparent;
       line-height: 1.3;
-      font-weight: 700;
     }
-
     .status-pill--green {
       background: #e7f4ee;
       border-color: #c3dfd2;
       color: #356655;
     }
-
     .status-pill--yellow {
       background: #fff8e1;
       border-color: #ffecb3;
       color: #8a6d1e;
-    }
-
-    .confetti-wrap {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-      z-index: 9998;
-    }
-
-    .confetti {
-      position: absolute;
-      top: -12px;
-      width: 10px;
-      height: 14px;
-      border-radius: 4px;
-      opacity: 0.9;
-      animation: confettiFall 1.8s linear forwards;
-    }
-
-    @keyframes confettiFall {
-      0% { transform: translateY(0) rotate(0deg); opacity: 0.95; }
-      100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
     }
 
     @media (max-width: 480px) {
@@ -1413,12 +1117,6 @@
         right: 10px;
         max-width: none;
       }
-      .brand-title {
-        font-size: 1.18rem;
-      }
-      .brand-sub {
-        font-size: 0.74rem;
-      }
     }
   </style>
 </head>
@@ -1427,30 +1125,22 @@
     <header class="header">
       <div class="brand-row">
         <div class="brand-left">
-          <div class="logo-circle" id="logoCircle">
-            <div class="yt-cute-logo">
-              <div class="yt-bear-face">
-                <div class="yt-eye left"></div>
-                <div class="yt-eye right"></div>
-                <div class="yt-play"></div>
-                <div class="yt-mouth"></div>
-              </div>
+          <div class="logo-circle">
+            <div class="bear-min">
+              <div class="bear-eye left"></div>
+              <div class="bear-eye right"></div>
+              <div class="bear-nose"></div>
             </div>
           </div>
-
           <div class="brand-text">
-            <div class="brand-title">
-              426 SHOP
-              <span class="mini-chip">YT CLAIM</span>
-            </div>
-            <div class="brand-sub">YOUTUBE MEMBERSHIP CLAIM CENTER</div>
+            <div class="brand-title">426 SHOP</div>
+            <div class="brand-sub">CLAIM CENTER</div>
           </div>
         </div>
-
         <div class="header-right">
           <div class="badge" id="onlineStatus">
             <span class="badge-dot" id="onlineDot"></span>
-            <span id="onlineText">สถานะ: เปิดรับเคลม</span>
+            <span id="onlineText">สถานะ: กำลังตรวจสอบระบบ...</span>
           </div>
           <button class="theme-toggle" id="themeToggle" type="button" aria-label="สลับโหมดกลางคืน">🌙</button>
         </div>
@@ -1464,21 +1154,17 @@
     </header>
 
     <main class="card">
-      <div class="progress-line">
-        <div class="progress-fill" id="progressFill"></div>
-      </div>
-
       <div class="card-title">
         <span class="icon">📋</span>
-        <span>ฟอร์มแจ้งเคลมสมาชิก YouTube</span>
+        <span>ฟอร์มแจ้งเคลมสมาชิก</span>
       </div>
 
       <div class="claim-time-note" id="claimTimeNote">
-        รับเคลมเฉพาะวันจันทร์–เสาร์ เวลา 07.00–19.00 น.
+        กำลังโหลดเวลารับเคลม...
       </div>
 
       <div class="card-desc">
-        กรอกอีเมลเดียวกับที่ใช้สมัคร เลือกปีที่สมัคร แล้วส่งคำขอ ระบบจะบันทึกเข้าคิวเคลม และอัปเดตสถานะให้อัตโนมัติแบบเรียลไทม์
+        กรอกอีเมลเดียวกับที่ใช้สมัคร เลือกปีที่สมัคร แล้วส่งคำขอ ระบบจะบันทึกเข้าคิวเคลม และอัปเดตสถานะให้อัตโนมัติ
       </div>
 
       <div class="form-group">
@@ -1530,7 +1216,9 @@
               <span class="bank-value" id="bankAccountNo">-</span>
             </div>
           </div>
-          <button type="button" class="small-copy-btn" id="btnCopyAccount">คัดลอกเลขบัญชี</button>
+          <button type="button" class="small-copy-btn" id="btnCopyAccount">
+            คัดลอกเลขบัญชี
+          </button>
           <div class="file-wrap">
             <span>แนบสลิปโอนเงิน 19 บาท</span>
             <input type="file" id="slipInput" accept="image/*" />
@@ -1593,15 +1281,15 @@
   <div id="toast" class="toast">คัดลอกข้อความแล้ว</div>
 
   <div id="tipBubble" class="tip-bubble">
-    <span>💡</span>
+    <span class="tip-bubble-emoji">💡</span>
     <span id="tipText">ใช้อีเมลเดียวกับที่สมัครสมาชิกไว้ เพื่อให้ระบบค้นหาเจอง่ายที่สุดค่ะ</span>
   </div>
-
-  <div class="confetti-wrap" id="confettiWrap"></div>
 
   <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxSocc7ObQIwfOCsTgOLUZU6H5oippq4CFlzVikMeYjMWBHhytv3sCpfrlT413EzOs/exec";
     const STATUS_POLL_INTERVAL = 30000;
+    const HEALTH_POLL_INTERVAL = 60000;
+    const APP_TIMEZONE = "Asia/Bangkok";
 
     let claimConfig = {
       claimStartHour: 7,
@@ -1622,6 +1310,12 @@
       supportLine: "@467dlpti"
     };
 
+    let backendOnline = false;
+    let isLoading = false;
+    let liveTimerId = null;
+    let healthTimerId = null;
+    let isClaimOpen = false;
+
     const btnSubmit = document.getElementById("btnSubmit");
     const btnClear = document.getElementById("btnClear");
     const emailInput = document.getElementById("emailInput");
@@ -1641,13 +1335,11 @@
     const resultsDiv = document.getElementById("results");
     const summaryDiv = document.getElementById("summary");
     const toast = document.getElementById("toast");
-    const logoCircle = document.getElementById("logoCircle");
+    const logoCircle = document.querySelector(".logo-circle");
     const themeToggle = document.getElementById("themeToggle");
     const tipBubble = document.getElementById("tipBubble");
     const tipText = document.getElementById("tipText");
     const claimTimeNote = document.getElementById("claimTimeNote");
-    const progressFill = document.getElementById("progressFill");
-    const confettiWrap = document.getElementById("confettiWrap");
 
     const liveDateEl = document.getElementById("liveDate");
     const liveListEl = document.getElementById("liveList");
@@ -1664,13 +1356,9 @@
     const bankAccountNameEl = document.getElementById("bankAccountName");
     const supportLineEl = document.getElementById("supportLine");
 
-    let isLoading = false;
-    let liveTimerId = null;
-    let isClaimOpen = true;
-
-    function setProgress(percent) {
-      if (!progressFill) return;
-      progressFill.style.width = percent + "%";
+    function cacheBust(url) {
+      const sep = url.includes("?") ? "&" : "?";
+      return url + sep + "_=" + Date.now();
     }
 
     function setStepState(state) {
@@ -1689,13 +1377,11 @@
       if (state === "idle") {
         s1.classList.remove("step-pill--muted");
         s1.classList.add("step-pill--active");
-        setProgress(18);
       } else if (state === "loading") {
         s1.classList.remove("step-pill--muted");
         s1.classList.add("step-pill--done");
         s2.classList.remove("step-pill--muted");
         s2.classList.add("step-pill--active");
-        setProgress(58);
       } else if (state === "done") {
         s1.classList.remove("step-pill--muted");
         s2.classList.remove("step-pill--muted");
@@ -1703,13 +1389,11 @@
         s2.classList.add("step-pill--done");
         s3.classList.remove("step-pill--muted");
         s3.classList.add("step-pill--active");
-        setProgress(100);
       } else if (state === "error") {
         s1.classList.remove("step-pill--muted");
         s1.classList.add("step-pill--done");
         s2.classList.remove("step-pill--muted");
         s2.classList.add("step-pill--active");
-        setProgress(42);
       }
     }
 
@@ -1745,75 +1429,171 @@
       }
     }
 
+    function getBangkokNowParts() {
+      const formatter = new Intl.DateTimeFormat("en-GB", {
+        timeZone: APP_TIMEZONE,
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false,
+        weekday: "short"
+      });
+
+      const parts = formatter.formatToParts(new Date());
+      const map = {};
+      parts.forEach((p) => {
+        if (p.type !== "literal") map[p.type] = p.value;
+      });
+
+      const weekdayMap = {
+        Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6
+      };
+
+      return {
+        year: Number(map.year),
+        month: Number(map.month),
+        day: Number(map.day),
+        hour: Number(map.hour),
+        minute: Number(map.minute),
+        second: Number(map.second),
+        weekday: weekdayMap[map.weekday] ?? 0
+      };
+    }
+
     function isWithinClaimWindow() {
-      const now = new Date();
-      const hour = now.getHours();
-      const day = now.getDay();
+      const now = getBangkokNowParts();
+      const hour = now.hour;
+      const day = now.weekday;
       const openDays = Array.isArray(claimConfig.claimOpenDays) && claimConfig.claimOpenDays.length
         ? claimConfig.claimOpenDays
         : [1, 2, 3, 4, 5, 6];
-      return openDays.includes(day) && hour >= claimConfig.claimStartHour && hour < claimConfig.claimEndHour;
+
+      const dayOk = openDays.includes(day);
+      const hourOk = hour >= Number(claimConfig.claimStartHour) && hour < Number(claimConfig.claimEndHour);
+
+      return dayOk && hourOk;
     }
 
     function updateClaimWindowState() {
-      const open = isWithinClaimWindow();
-      isClaimOpen = open;
+      const inWindow = isWithinClaimWindow();
 
-      if (open) {
+      if (!backendOnline) {
+        isClaimOpen = false;
+        onlineStatus.classList.add("closed");
+        onlineDot.classList.add("offline");
+        onlineText.textContent = "สถานะ: ระบบออฟไลน์";
+        claimTimeNote.classList.add("closed");
+        claimTimeNote.textContent = "ไม่สามารถเชื่อมต่อระบบเคลมได้ชั่วคราว";
+        return;
+      }
+
+      isClaimOpen = inWindow;
+
+      if (inWindow) {
         onlineStatus.classList.remove("closed");
         onlineDot.classList.remove("offline");
-        onlineText.textContent = "สถานะ: เปิดรับเคลม";
+        onlineText.textContent = "สถานะ: ออนไลน์ / เปิดรับเคลม";
         claimTimeNote.classList.remove("closed");
         claimTimeNote.textContent = claimConfig.claimOpenText;
       } else {
         onlineStatus.classList.add("closed");
         onlineDot.classList.add("offline");
-        onlineText.textContent = "สถานะ: ปิดรับเคลม";
+        onlineText.textContent = "สถานะ: ออนไลน์ / นอกเวลา";
         claimTimeNote.classList.add("closed");
         claimTimeNote.textContent = claimConfig.claimClosedText;
       }
     }
 
+    async function pingBackend() {
+      if (!SCRIPT_URL) {
+        backendOnline = false;
+        updateClaimWindowState();
+        return false;
+      }
+
+      try {
+        const healthRes = await fetch(cacheBust(SCRIPT_URL + "?action=health"), {
+          method: "GET",
+          cache: "no-store"
+        });
+
+        if (!healthRes.ok) throw new Error("health HTTP " + healthRes.status);
+
+        const healthData = await healthRes.json().catch(() => ({ ok: true }));
+        backendOnline = !(healthData && healthData.ok === false);
+      } catch (err) {
+        backendOnline = false;
+        console.warn("health check failed:", err);
+      }
+
+      updateClaimWindowState();
+      return backendOnline;
+    }
+
     async function initClaimWindowConfig() {
       if (!SCRIPT_URL) {
+        backendOnline = false;
         updateClaimWindowState();
         return;
       }
 
       try {
-        const res = await fetch(SCRIPT_URL + "?action=config", { method: "GET" });
-        if (!res.ok) throw new Error("HTTP " + res.status);
+        const res = await fetch(cacheBust(SCRIPT_URL + "?action=config"), {
+          method: "GET",
+          cache: "no-store"
+        });
+        if (!res.ok) throw new Error("config HTTP " + res.status);
+
         const cfg = await res.json();
-        if (!cfg) return;
+        if (!cfg || cfg.ok === false) throw new Error("invalid config response");
 
         if (cfg.claimStartHour !== undefined) claimConfig.claimStartHour = Number(cfg.claimStartHour) || 7;
         if (cfg.claimEndHour !== undefined) claimConfig.claimEndHour = Number(cfg.claimEndHour) || 19;
+
         if (Array.isArray(cfg.claimOpenDays)) {
           claimConfig.claimOpenDays = cfg.claimOpenDays.map(n => Number(n)).filter(n => !isNaN(n));
         }
+
         if (cfg.claimOpenText) claimConfig.claimOpenText = cfg.claimOpenText;
         if (cfg.claimClosedText) claimConfig.claimClosedText = cfg.claimClosedText;
         if (cfg.outOfTimeErrorText) claimConfig.outOfTimeErrorText = cfg.outOfTimeErrorText;
+
         if (cfg.paidYear) claimConfig.paidYear = String(cfg.paidYear);
         if (cfg.freeYear) claimConfig.freeYear = String(cfg.freeYear);
         if (cfg.packagePrice !== undefined) claimConfig.packagePrice = Number(cfg.packagePrice) || 19;
+
         if (cfg.bankName) claimConfig.bankName = cfg.bankName;
         if (cfg.bankAccountNo) claimConfig.bankAccountNo = cfg.bankAccountNo;
         if (cfg.bankAccountName) claimConfig.bankAccountName = cfg.bankAccountName;
+
         if (cfg.paymentTitle) claimConfig.paymentTitle = cfg.paymentTitle;
         if (cfg.paymentNote) claimConfig.paymentNote = cfg.paymentNote;
         if (cfg.paymentRequireSlip) claimConfig.paymentRequireSlip = cfg.paymentRequireSlip;
         if (cfg.supportLine) claimConfig.supportLine = cfg.supportLine;
 
-        renderConfigToUI();
-        renderYearButtons();
-        updateClaimWindowState();
+        backendOnline = true;
       } catch (err) {
         console.warn("โหลด config claim ไม่สำเร็จ:", err);
-        renderConfigToUI();
-        renderYearButtons();
-        updateClaimWindowState();
       }
+
+      renderConfigToUI();
+      renderYearButtons();
+      updateClaimWindowState();
+    }
+
+    function showToast(text) {
+      toast.textContent = text;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2000);
+    }
+
+    function showOfflineMessage() {
+      status.innerHTML = "ตอนนี้ระบบหลังบ้านไม่ตอบสนองค่ะ กรุณาลองใหม่อีกครั้งภายหลัง";
+      status.classList.remove("status-ok");
+      status.classList.add("status-error");
     }
 
     function clearForm() {
@@ -1830,6 +1610,10 @@
       status.classList.remove("status-error", "status-ok");
       resultsDiv.innerHTML = "";
       summaryDiv.innerHTML = "";
+
+      emailField.classList.remove("shake");
+      expiryField.classList.remove("shake");
+      noteField.classList.remove("shake");
 
       setStepState("idle");
       emailInput.focus();
@@ -1863,12 +1647,9 @@
     }
 
     function formatThaiToday() {
-      const now = new Date();
-      const y = now.getFullYear() + 543;
-      const m = now.getMonth() + 1;
-      const d = now.getDate();
+      const now = getBangkokNowParts();
       const months = ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."];
-      return d + " " + months[m - 1] + " " + y;
+      return now.day + " " + months[now.month - 1] + " " + (now.year + 543);
     }
 
     function maskEmail(email) {
@@ -1894,80 +1675,6 @@
 
       if (!cls) return t;
       return `<span class="${cls}">${t}</span>`;
-    }
-
-    function triggerSuccessAnimation() {
-      if (!logoCircle) return;
-      logoCircle.classList.remove("success-bounce");
-      void logoCircle.offsetWidth;
-      logoCircle.classList.add("success-bounce");
-    }
-
-    function triggerConfetti() {
-      if (!confettiWrap) return;
-      const colors = ["#ff6259", "#ff9671", "#7bc7ae", "#ffd166", "#f38ba8", "#ffffff"];
-      for (let i = 0; i < 26; i++) {
-        const piece = document.createElement("span");
-        piece.className = "confetti";
-        piece.style.left = Math.random() * 100 + "vw";
-        piece.style.background = colors[Math.floor(Math.random() * colors.length)];
-        piece.style.animationDuration = (1.2 + Math.random() * 1.4) + "s";
-        piece.style.transform = `rotate(${Math.random() * 360}deg)`;
-        piece.style.width = (8 + Math.random() * 6) + "px";
-        piece.style.height = (10 + Math.random() * 10) + "px";
-        confettiWrap.appendChild(piece);
-        setTimeout(() => piece.remove(), 2200);
-      }
-    }
-
-    function buildCopyText(entry) {
-      let claimLabel = "เคลมฟรี";
-      if (entry.claimType === "paid") claimLabel = "แพ็กดูแล 19 บาท";
-      else if (entry.claimType === "family") claimLabel = "กลุ่มครอบครัวร้านปกติ";
-
-      return [
-        "426 SHOP – รายละเอียดคำขอเคลม YouTube",
-        "อีเมล: " + (entry.email || "-"),
-        "วันหมดอายุ: " + (entry.expiry || "-"),
-        "สมัครเมื่อ: " + (entry.year || "-"),
-        "ประเภทเคลม: " + claimLabel,
-        "คิวเคลม: " + (entry.queueNo || "-"),
-        "",
-        "สรุปสถานะ:",
-        entry.statusText || "-"
-      ].join("\n");
-    }
-
-    async function copyToClipboard(btn, text) {
-      try {
-        if (navigator.clipboard && window.isSecureContext) {
-          await navigator.clipboard.writeText(text);
-        } else {
-          const temp = document.createElement("textarea");
-          temp.value = text;
-          document.body.appendChild(temp);
-          temp.select();
-          document.execCommand("copy");
-          document.body.removeChild(temp);
-        }
-
-        const originalText = btn.innerHTML;
-        btn.innerHTML = "คัดลอกแล้ว ✓";
-        btn.style.background = "#f4faf7";
-        btn.style.borderColor = "#85b8a6";
-
-        setTimeout(() => {
-          btn.innerHTML = originalText;
-          btn.style.background = "";
-          btn.style.borderColor = "";
-        }, 1800);
-
-        toast.textContent = "คัดลอกรายละเอียดแล้ว ✨";
-        toast.classList.add("show");
-        setTimeout(() => toast.classList.remove("show"), 2000);
-      } catch (err) {
-        console.warn("copy failed", err);
-      }
     }
 
     function renderLiveStatus(summary) {
@@ -2001,9 +1708,16 @@
     }
 
     async function fetchTodayStatus(initial = false) {
-      if (!SCRIPT_URL) return;
+      if (!SCRIPT_URL || !backendOnline) {
+        renderLiveStatus(null);
+        return;
+      }
+
       try {
-        const res = await fetch(SCRIPT_URL + "?action=todayStatus", { method: "GET" });
+        const res = await fetch(cacheBust(SCRIPT_URL + "?action=todayStatus"), {
+          method: "GET",
+          cache: "no-store"
+        });
         if (!res.ok) throw new Error("HTTP " + res.status);
         const data = await res.json();
         renderLiveStatus(data.todaySummary || data.summary || data.dailyStatus || null);
@@ -2011,6 +1725,58 @@
         if (initial) console.warn("Cannot load live email status:", err);
         renderLiveStatus(null);
       }
+    }
+
+    function buildCopyText(entry) {
+      let claimLabel = "เคลมฟรี";
+      if (entry.claimType === "paid") claimLabel = "แพ็กดูแล 19 บาท";
+      else if (entry.claimType === "family") claimLabel = "กลุ่มครอบครัวร้านปกติ";
+
+      return [
+        "426 SHOP – รายละเอียดคำขอเคลม",
+        "อีเมล: " + (entry.email || "-"),
+        "วันหมดอายุ: " + (entry.expiry || "-"),
+        "สมัครเมื่อ: " + (entry.year || "-"),
+        "ประเภทเคลม: " + claimLabel,
+        "คิวเคลม: " + (entry.queueNo || "-"),
+        "",
+        "สรุปสถานะ:",
+        entry.statusText || "-"
+      ].join("\n");
+    }
+
+    function triggerSuccessAnimation() {
+      if (!logoCircle) return;
+      logoCircle.classList.remove("success-bounce");
+      void logoCircle.offsetWidth;
+      logoCircle.classList.add("success-bounce");
+    }
+
+    function copyToClipboard(btn, text) {
+      if (!text) return;
+      if (!navigator.clipboard) {
+        const temp = document.createElement("textarea");
+        temp.value = text;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand("copy");
+        document.body.removeChild(temp);
+      } else {
+        navigator.clipboard.writeText(text);
+      }
+
+      const originalText = btn.innerHTML;
+      btn.innerHTML = "คัดลอกแล้ว ✓";
+      btn.style.background = "#f4faf7";
+      btn.style.borderColor = "#85b8a6";
+
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.style.background = "";
+        btn.style.borderColor = "";
+      }, 1800);
+
+      showToast("คัดลอกรายละเอียดแล้ว ✨");
     }
 
     function renderResult(res, elapsedSec, localEntry) {
@@ -2037,7 +1803,6 @@
       if (res.ok !== false) {
         setStepState("done");
         triggerSuccessAnimation();
-        triggerConfetti();
       } else {
         setStepState("error");
       }
@@ -2064,6 +1829,13 @@
 
       status.innerHTML = parts.join("<br>");
       status.classList.add(res.ok === false ? "status-error" : "status-ok");
+
+      if (res.ok !== false) {
+        noteInput.value = "";
+        if ((current.claimType === "free" || current.claimType === "family") && slipInput) {
+          slipInput.value = "";
+        }
+      }
 
       const history = Array.isArray(res.history) && res.history.length ? res.history : [current];
 
@@ -2127,7 +1899,16 @@
     }
 
     async function handleSubmit() {
+      await pingBackend();
+
+      if (!backendOnline) {
+        showOfflineMessage();
+        setStepState("idle");
+        return;
+      }
+
       updateClaimWindowState();
+
       if (!isClaimOpen) {
         status.textContent = claimConfig.outOfTimeErrorText;
         status.classList.add("status-error");
@@ -2174,7 +1955,10 @@
       isLoading = true;
       setStepState("loading");
       btnSubmit.disabled = true;
-      btnSubmit.innerHTML = `<span class="spinner"></span><span>กำลังส่งคำขอ…</span>`;
+      btnSubmit.innerHTML = `
+        <span class="spinner"></span>
+        <span>กำลังส่งคำขอ…</span>
+      `;
 
       status.style.color = "#8b8680";
       status.innerHTML =
@@ -2201,12 +1985,13 @@
 
         const startTime = performance.now();
 
-        const res = await fetch(SCRIPT_URL, {
+        const res = await fetch(cacheBust(SCRIPT_URL), {
           method: "POST",
           headers: {
             "Content-Type": "text/plain;charset=utf-8"
           },
-          body: JSON.stringify(payload)
+          body: JSON.stringify(payload),
+          cache: "no-store"
         });
 
         const text = await res.text();
@@ -2239,25 +2024,8 @@
         status.innerHTML = "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ";
         status.classList.add("status-error");
         setStepState("error");
+        await pingBackend();
       }
-    }
-
-    const tips = [
-      "ใช้อีเมลเดียวกับที่สมัครสมาชิกไว้ เพื่อให้ระบบค้นหาเจอง่ายที่สุดค่ะ",
-      "อย่าลืมเลือกปีสมัครให้ตรงก่อนส่งคำขอเคลมนะคะ",
-      "ถ้าเป็นปีที่ต้องชำระ ระบบจะบังคับแนบสลิปก่อนส่งคำขอ",
-      "สถานะเมลวันนี้จะแสดงด้านล่างสุดแบบเรียลไทม์",
-      "มีอะไรอยากฝากถึงแอดมิน พิมพ์ในกรอบข้อความได้เลยค่ะ"
-    ];
-    let tipIndex = 0;
-
-    function rotateTip() {
-      tipBubble.classList.remove("show");
-      setTimeout(() => {
-        tipText.textContent = tips[tipIndex] || tips[0];
-        tipBubble.classList.add("show");
-        tipIndex = (tipIndex + 1) % tips.length;
-      }, 200);
     }
 
     yearRow.querySelectorAll(".year-btn").forEach((btn) => {
@@ -2282,36 +2050,23 @@
       copyToClipboard(btnCopyAccount, claimConfig.bankAccountNo || "");
     });
 
-    btnSubmit.addEventListener("click", handleSubmit);
-    btnClear.addEventListener("click", clearForm);
+    const tips = [
+      "ใช้อีเมลเดียวกับที่สมัครสมาชิกไว้ เพื่อให้ระบบค้นหาเจอง่ายที่สุดค่ะ",
+      "อย่าลืมเลือกปีสมัครให้ตรงก่อนส่งคำขอเคลมนะคะ",
+      "ถ้าเป็นปีที่ต้องชำระ ระบบจะบังคับแนบสลิปก่อนส่งคำขอ",
+      "สถานะเมลวันนี้จะแสดงด้านล่างสุดแบบเรียลไทม์",
+      "มีอะไรอยากฝากถึงแอดมิน พิมพ์ในกรอบข้อความได้เลยค่ะ"
+    ];
+    let tipIndex = 0;
 
-    window.addEventListener("beforeunload", (e) => {
-      if (!isLoading) return;
-      e.preventDefault();
-      e.returnValue = "ระบบกำลังส่งคำขอเคลมของคุณอยู่ หากออกจากหน้านี้อาจทำให้สถานะไม่ถูกบันทึกนะคะ";
-    });
-
-    window.addEventListener("load", async () => {
-      setStepState("idle");
-      emailInput.focus();
-
-      const savedTheme = localStorage.getItem("theme") || "light";
-      applyTheme(savedTheme);
-
-      renderConfigToUI();
-      renderYearButtons();
-      updateClaimWindowState();
-      await initClaimWindowConfig();
-      setInterval(updateClaimWindowState, 60000);
-
-      fetchTodayStatus(true);
-      if (STATUS_POLL_INTERVAL > 0) {
-        liveTimerId = setInterval(fetchTodayStatus, STATUS_POLL_INTERVAL);
-      }
-
-      setTimeout(rotateTip, 800);
-      setInterval(rotateTip, 13000);
-    });
+    function rotateTip() {
+      tipBubble.classList.remove("show");
+      setTimeout(() => {
+        tipText.textContent = tips[tipIndex] || tips[0];
+        tipBubble.classList.add("show");
+        tipIndex = (tipIndex + 1) % tips.length;
+      }, 200);
+    }
 
     themeToggle.addEventListener("click", () => {
       const nowDark = !document.body.classList.contains("theme-dark");
@@ -2319,6 +2074,60 @@
       applyTheme(newTheme);
       localStorage.setItem("theme", newTheme);
     });
+
+    btnSubmit.addEventListener("click", handleSubmit);
+    btnClear.addEventListener("click", clearForm);
+
+    window.addEventListener("online", async () => {
+      await pingBackend();
+      await initClaimWindowConfig();
+      await fetchTodayStatus();
+      showToast("เชื่อมต่ออินเทอร์เน็ตแล้ว");
+    });
+
+    window.addEventListener("offline", () => {
+      backendOnline = false;
+      updateClaimWindowState();
+      showToast("อุปกรณ์ออฟไลน์อยู่");
+    });
+
+    window.addEventListener("beforeunload", (e) => {
+      if (!isLoading) return;
+      e.preventDefault();
+      e.returnValue = "ระบบกำลังส่งคำขอเคลมของคุณอยู่ หากออกจากหน้านี้อาจทำให้สถานะไม่ถูกบันทึกนะคะ";
+    });
+
+    (async function initApp() {
+      const savedTheme = localStorage.getItem("theme") || "light";
+      applyTheme(savedTheme);
+
+      setStepState("idle");
+      emailInput.focus();
+
+      renderConfigToUI();
+      renderYearButtons();
+      updateClaimWindowState();
+
+      setTimeout(rotateTip, 800);
+      setInterval(rotateTip, 13000);
+
+      await pingBackend();
+      await initClaimWindowConfig();
+      await fetchTodayStatus(true);
+
+      setInterval(updateClaimWindowState, 60000);
+
+      if (healthTimerId) clearInterval(healthTimerId);
+      healthTimerId = setInterval(async () => {
+        await pingBackend();
+        await initClaimWindowConfig();
+      }, HEALTH_POLL_INTERVAL);
+
+      if (liveTimerId) clearInterval(liveTimerId);
+      if (STATUS_POLL_INTERVAL > 0) {
+        liveTimerId = setInterval(fetchTodayStatus, STATUS_POLL_INTERVAL);
+      }
+    })();
   </script>
 </body>
 </html>
