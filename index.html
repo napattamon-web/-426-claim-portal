@@ -475,7 +475,6 @@
 
     input[type="email"],
     input[type="date"],
-    input[type="text"],
     textarea {
       width: 100%;
       border: none;
@@ -511,10 +510,6 @@
       gap: 6px;
       animation: importantBlink 1.3s ease-in-out infinite;
       text-align: left;
-    }
-
-    .important-note strong {
-      font-weight: 600;
     }
 
     @keyframes importantBlink {
@@ -623,6 +618,7 @@
       border: 1px solid #dad3cc;
       background: #ffffff;
       cursor: pointer;
+      max-width: 100%;
     }
 
     body.theme-dark .file-wrap input[type="file"] {
@@ -730,6 +726,7 @@
       justify-content: center;
       text-align: left;
     }
+
     .warn-text-icon {
       font-size: 0.9rem;
       margin-top: 1px;
@@ -899,7 +896,7 @@
 
     .live-status-card {
       margin-top: 12px;
-      padding: 12px 12px 12px;
+      padding: 12px;
       border-radius: 18px;
       background: linear-gradient(135deg, #fdf7f2, #f5efea);
       border: 1px solid #e1d6ca;
@@ -1081,10 +1078,6 @@
       transform: translateY(0);
     }
 
-    .tip-bubble-emoji {
-      margin-right: 4px;
-    }
-
     .status-pill {
       display: inline-flex;
       align-items: center;
@@ -1094,11 +1087,13 @@
       border: 1px solid transparent;
       line-height: 1.3;
     }
+
     .status-pill--green {
       background: #e7f4ee;
       border-color: #c3dfd2;
       color: #356655;
     }
+
     .status-pill--yellow {
       background: #fff8e1;
       border-color: #ffecb3;
@@ -1125,7 +1120,7 @@
     <header class="header">
       <div class="brand-row">
         <div class="brand-left">
-          <div class="logo-circle">
+          <div class="logo-circle" id="logoCircle">
             <div class="bear-min">
               <div class="bear-eye left"></div>
               <div class="bear-eye right"></div>
@@ -1140,7 +1135,7 @@
         <div class="header-right">
           <div class="badge" id="onlineStatus">
             <span class="badge-dot" id="onlineDot"></span>
-            <span id="onlineText">สถานะ: กำลังตรวจสอบระบบ...</span>
+            <span id="onlineText">สถานะ: เปิดรับเคลม</span>
           </div>
           <button class="theme-toggle" id="themeToggle" type="button" aria-label="สลับโหมดกลางคืน">🌙</button>
         </div>
@@ -1160,7 +1155,7 @@
       </div>
 
       <div class="claim-time-note" id="claimTimeNote">
-        กำลังโหลดเวลารับเคลม...
+        รับเคลมเฉพาะวันจันทร์–เสาร์ เวลา 07.00–19.00 น.
       </div>
 
       <div class="card-desc">
@@ -1216,9 +1211,7 @@
               <span class="bank-value" id="bankAccountNo">-</span>
             </div>
           </div>
-          <button type="button" class="small-copy-btn" id="btnCopyAccount">
-            คัดลอกเลขบัญชี
-          </button>
+          <button type="button" class="small-copy-btn" id="btnCopyAccount">คัดลอกเลขบัญชี</button>
           <div class="file-wrap">
             <span>แนบสลิปโอนเงิน 19 บาท</span>
             <input type="file" id="slipInput" accept="image/*" />
@@ -1281,15 +1274,13 @@
   <div id="toast" class="toast">คัดลอกข้อความแล้ว</div>
 
   <div id="tipBubble" class="tip-bubble">
-    <span class="tip-bubble-emoji">💡</span>
+    <span>💡</span>
     <span id="tipText">ใช้อีเมลเดียวกับที่สมัครสมาชิกไว้ เพื่อให้ระบบค้นหาเจอง่ายที่สุดค่ะ</span>
   </div>
 
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxSocc7ObQIwfOCsTgOLUZU6H5oippq4CFlzVikMeYjMWBHhytv3sCpfrlT413EzOs/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyPiOkVVjodNRfri1oqXDA_PtCacHIviWtSRfHjfVnmETIbxQ4VSIGP65fEmyBZ0qgf/exec";
     const STATUS_POLL_INTERVAL = 30000;
-    const HEALTH_POLL_INTERVAL = 60000;
-    const APP_TIMEZONE = "Asia/Bangkok";
 
     let claimConfig = {
       claimStartHour: 7,
@@ -1310,12 +1301,6 @@
       supportLine: "@467dlpti"
     };
 
-    let backendOnline = false;
-    let isLoading = false;
-    let liveTimerId = null;
-    let healthTimerId = null;
-    let isClaimOpen = false;
-
     const btnSubmit = document.getElementById("btnSubmit");
     const btnClear = document.getElementById("btnClear");
     const emailInput = document.getElementById("emailInput");
@@ -1335,7 +1320,7 @@
     const resultsDiv = document.getElementById("results");
     const summaryDiv = document.getElementById("summary");
     const toast = document.getElementById("toast");
-    const logoCircle = document.querySelector(".logo-circle");
+    const logoCircle = document.getElementById("logoCircle");
     const themeToggle = document.getElementById("themeToggle");
     const tipBubble = document.getElementById("tipBubble");
     const tipText = document.getElementById("tipText");
@@ -1356,10 +1341,9 @@
     const bankAccountNameEl = document.getElementById("bankAccountName");
     const supportLineEl = document.getElementById("supportLine");
 
-    function cacheBust(url) {
-      const sep = url.includes("?") ? "&" : "?";
-      return url + sep + "_=" + Date.now();
-    }
+    let isLoading = false;
+    let liveTimerId = null;
+    let isClaimOpen = true;
 
     function setStepState(state) {
       const steps = document.querySelectorAll(".step-pill");
@@ -1429,171 +1413,75 @@
       }
     }
 
-    function getBangkokNowParts() {
-      const formatter = new Intl.DateTimeFormat("en-GB", {
-        timeZone: APP_TIMEZONE,
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: false,
-        weekday: "short"
-      });
-
-      const parts = formatter.formatToParts(new Date());
-      const map = {};
-      parts.forEach((p) => {
-        if (p.type !== "literal") map[p.type] = p.value;
-      });
-
-      const weekdayMap = {
-        Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6
-      };
-
-      return {
-        year: Number(map.year),
-        month: Number(map.month),
-        day: Number(map.day),
-        hour: Number(map.hour),
-        minute: Number(map.minute),
-        second: Number(map.second),
-        weekday: weekdayMap[map.weekday] ?? 0
-      };
-    }
-
     function isWithinClaimWindow() {
-      const now = getBangkokNowParts();
-      const hour = now.hour;
-      const day = now.weekday;
+      const now = new Date();
+      const hour = now.getHours();
+      const day = now.getDay();
       const openDays = Array.isArray(claimConfig.claimOpenDays) && claimConfig.claimOpenDays.length
         ? claimConfig.claimOpenDays
         : [1, 2, 3, 4, 5, 6];
-
-      const dayOk = openDays.includes(day);
-      const hourOk = hour >= Number(claimConfig.claimStartHour) && hour < Number(claimConfig.claimEndHour);
-
-      return dayOk && hourOk;
+      return openDays.includes(day) && hour >= claimConfig.claimStartHour && hour < claimConfig.claimEndHour;
     }
 
     function updateClaimWindowState() {
-      const inWindow = isWithinClaimWindow();
+      const open = isWithinClaimWindow();
+      isClaimOpen = open;
 
-      if (!backendOnline) {
-        isClaimOpen = false;
-        onlineStatus.classList.add("closed");
-        onlineDot.classList.add("offline");
-        onlineText.textContent = "สถานะ: ระบบออฟไลน์";
-        claimTimeNote.classList.add("closed");
-        claimTimeNote.textContent = "ไม่สามารถเชื่อมต่อระบบเคลมได้ชั่วคราว";
-        return;
-      }
-
-      isClaimOpen = inWindow;
-
-      if (inWindow) {
+      if (open) {
         onlineStatus.classList.remove("closed");
         onlineDot.classList.remove("offline");
-        onlineText.textContent = "สถานะ: ออนไลน์ / เปิดรับเคลม";
+        onlineText.textContent = "สถานะ: เปิดรับเคลม";
         claimTimeNote.classList.remove("closed");
         claimTimeNote.textContent = claimConfig.claimOpenText;
       } else {
         onlineStatus.classList.add("closed");
         onlineDot.classList.add("offline");
-        onlineText.textContent = "สถานะ: ออนไลน์ / นอกเวลา";
+        onlineText.textContent = "สถานะ: ปิดรับเคลม";
         claimTimeNote.classList.add("closed");
         claimTimeNote.textContent = claimConfig.claimClosedText;
       }
     }
 
-    async function pingBackend() {
-      if (!SCRIPT_URL) {
-        backendOnline = false;
-        updateClaimWindowState();
-        return false;
-      }
-
-      try {
-        const healthRes = await fetch(cacheBust(SCRIPT_URL + "?action=health"), {
-          method: "GET",
-          cache: "no-store"
-        });
-
-        if (!healthRes.ok) throw new Error("health HTTP " + healthRes.status);
-
-        const healthData = await healthRes.json().catch(() => ({ ok: true }));
-        backendOnline = !(healthData && healthData.ok === false);
-      } catch (err) {
-        backendOnline = false;
-        console.warn("health check failed:", err);
-      }
-
-      updateClaimWindowState();
-      return backendOnline;
-    }
-
     async function initClaimWindowConfig() {
       if (!SCRIPT_URL) {
-        backendOnline = false;
         updateClaimWindowState();
         return;
       }
 
       try {
-        const res = await fetch(cacheBust(SCRIPT_URL + "?action=config"), {
-          method: "GET",
-          cache: "no-store"
-        });
-        if (!res.ok) throw new Error("config HTTP " + res.status);
-
+        const res = await fetch(SCRIPT_URL + "?action=config", { method: "GET" });
+        if (!res.ok) throw new Error("HTTP " + res.status);
         const cfg = await res.json();
-        if (!cfg || cfg.ok === false) throw new Error("invalid config response");
+        if (!cfg) return;
 
         if (cfg.claimStartHour !== undefined) claimConfig.claimStartHour = Number(cfg.claimStartHour) || 7;
         if (cfg.claimEndHour !== undefined) claimConfig.claimEndHour = Number(cfg.claimEndHour) || 19;
-
         if (Array.isArray(cfg.claimOpenDays)) {
           claimConfig.claimOpenDays = cfg.claimOpenDays.map(n => Number(n)).filter(n => !isNaN(n));
         }
-
         if (cfg.claimOpenText) claimConfig.claimOpenText = cfg.claimOpenText;
         if (cfg.claimClosedText) claimConfig.claimClosedText = cfg.claimClosedText;
         if (cfg.outOfTimeErrorText) claimConfig.outOfTimeErrorText = cfg.outOfTimeErrorText;
-
         if (cfg.paidYear) claimConfig.paidYear = String(cfg.paidYear);
         if (cfg.freeYear) claimConfig.freeYear = String(cfg.freeYear);
         if (cfg.packagePrice !== undefined) claimConfig.packagePrice = Number(cfg.packagePrice) || 19;
-
         if (cfg.bankName) claimConfig.bankName = cfg.bankName;
         if (cfg.bankAccountNo) claimConfig.bankAccountNo = cfg.bankAccountNo;
         if (cfg.bankAccountName) claimConfig.bankAccountName = cfg.bankAccountName;
-
         if (cfg.paymentTitle) claimConfig.paymentTitle = cfg.paymentTitle;
         if (cfg.paymentNote) claimConfig.paymentNote = cfg.paymentNote;
         if (cfg.paymentRequireSlip) claimConfig.paymentRequireSlip = cfg.paymentRequireSlip;
         if (cfg.supportLine) claimConfig.supportLine = cfg.supportLine;
 
-        backendOnline = true;
+        renderConfigToUI();
+        renderYearButtons();
+        updateClaimWindowState();
       } catch (err) {
         console.warn("โหลด config claim ไม่สำเร็จ:", err);
+        renderConfigToUI();
+        renderYearButtons();
+        updateClaimWindowState();
       }
-
-      renderConfigToUI();
-      renderYearButtons();
-      updateClaimWindowState();
-    }
-
-    function showToast(text) {
-      toast.textContent = text;
-      toast.classList.add("show");
-      setTimeout(() => toast.classList.remove("show"), 2000);
-    }
-
-    function showOfflineMessage() {
-      status.innerHTML = "ตอนนี้ระบบหลังบ้านไม่ตอบสนองค่ะ กรุณาลองใหม่อีกครั้งภายหลัง";
-      status.classList.remove("status-ok");
-      status.classList.add("status-error");
     }
 
     function clearForm() {
@@ -1610,10 +1498,6 @@
       status.classList.remove("status-error", "status-ok");
       resultsDiv.innerHTML = "";
       summaryDiv.innerHTML = "";
-
-      emailField.classList.remove("shake");
-      expiryField.classList.remove("shake");
-      noteField.classList.remove("shake");
 
       setStepState("idle");
       emailInput.focus();
@@ -1647,9 +1531,12 @@
     }
 
     function formatThaiToday() {
-      const now = getBangkokNowParts();
+      const now = new Date();
+      const y = now.getFullYear() + 543;
+      const m = now.getMonth() + 1;
+      const d = now.getDate();
       const months = ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."];
-      return now.day + " " + months[now.month - 1] + " " + (now.year + 543);
+      return d + " " + months[m - 1] + " " + y;
     }
 
     function maskEmail(email) {
@@ -1675,6 +1562,63 @@
 
       if (!cls) return t;
       return `<span class="${cls}">${t}</span>`;
+    }
+
+    function triggerSuccessAnimation() {
+      if (!logoCircle) return;
+      logoCircle.classList.remove("success-bounce");
+      void logoCircle.offsetWidth;
+      logoCircle.classList.add("success-bounce");
+    }
+
+    function buildCopyText(entry) {
+      let claimLabel = "เคลมฟรี";
+      if (entry.claimType === "paid") claimLabel = "แพ็กดูแล 19 บาท";
+      else if (entry.claimType === "family") claimLabel = "กลุ่มครอบครัวร้านปกติ";
+
+      return [
+        "426 SHOP – รายละเอียดคำขอเคลม",
+        "อีเมล: " + (entry.email || "-"),
+        "วันหมดอายุ: " + (entry.expiry || "-"),
+        "สมัครเมื่อ: " + (entry.year || "-"),
+        "ประเภทเคลม: " + claimLabel,
+        "คิวเคลม: " + (entry.queueNo || "-"),
+        "",
+        "สรุปสถานะ:",
+        entry.statusText || "-"
+      ].join("\n");
+    }
+
+    async function copyToClipboard(btn, text) {
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+        } else {
+          const temp = document.createElement("textarea");
+          temp.value = text;
+          document.body.appendChild(temp);
+          temp.select();
+          document.execCommand("copy");
+          document.body.removeChild(temp);
+        }
+
+        const originalText = btn.innerHTML;
+        btn.innerHTML = "คัดลอกแล้ว ✓";
+        btn.style.background = "#f4faf7";
+        btn.style.borderColor = "#85b8a6";
+
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+          btn.style.background = "";
+          btn.style.borderColor = "";
+        }, 1800);
+
+        toast.textContent = "คัดลอกรายละเอียดแล้ว ✨";
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 2000);
+      } catch (err) {
+        console.warn("copy failed", err);
+      }
     }
 
     function renderLiveStatus(summary) {
@@ -1708,16 +1652,9 @@
     }
 
     async function fetchTodayStatus(initial = false) {
-      if (!SCRIPT_URL || !backendOnline) {
-        renderLiveStatus(null);
-        return;
-      }
-
+      if (!SCRIPT_URL) return;
       try {
-        const res = await fetch(cacheBust(SCRIPT_URL + "?action=todayStatus"), {
-          method: "GET",
-          cache: "no-store"
-        });
+        const res = await fetch(SCRIPT_URL + "?action=todayStatus", { method: "GET" });
         if (!res.ok) throw new Error("HTTP " + res.status);
         const data = await res.json();
         renderLiveStatus(data.todaySummary || data.summary || data.dailyStatus || null);
@@ -1725,58 +1662,6 @@
         if (initial) console.warn("Cannot load live email status:", err);
         renderLiveStatus(null);
       }
-    }
-
-    function buildCopyText(entry) {
-      let claimLabel = "เคลมฟรี";
-      if (entry.claimType === "paid") claimLabel = "แพ็กดูแล 19 บาท";
-      else if (entry.claimType === "family") claimLabel = "กลุ่มครอบครัวร้านปกติ";
-
-      return [
-        "426 SHOP – รายละเอียดคำขอเคลม",
-        "อีเมล: " + (entry.email || "-"),
-        "วันหมดอายุ: " + (entry.expiry || "-"),
-        "สมัครเมื่อ: " + (entry.year || "-"),
-        "ประเภทเคลม: " + claimLabel,
-        "คิวเคลม: " + (entry.queueNo || "-"),
-        "",
-        "สรุปสถานะ:",
-        entry.statusText || "-"
-      ].join("\n");
-    }
-
-    function triggerSuccessAnimation() {
-      if (!logoCircle) return;
-      logoCircle.classList.remove("success-bounce");
-      void logoCircle.offsetWidth;
-      logoCircle.classList.add("success-bounce");
-    }
-
-    function copyToClipboard(btn, text) {
-      if (!text) return;
-      if (!navigator.clipboard) {
-        const temp = document.createElement("textarea");
-        temp.value = text;
-        document.body.appendChild(temp);
-        temp.select();
-        document.execCommand("copy");
-        document.body.removeChild(temp);
-      } else {
-        navigator.clipboard.writeText(text);
-      }
-
-      const originalText = btn.innerHTML;
-      btn.innerHTML = "คัดลอกแล้ว ✓";
-      btn.style.background = "#f4faf7";
-      btn.style.borderColor = "#85b8a6";
-
-      setTimeout(() => {
-        btn.innerHTML = originalText;
-        btn.style.background = "";
-        btn.style.borderColor = "";
-      }, 1800);
-
-      showToast("คัดลอกรายละเอียดแล้ว ✨");
     }
 
     function renderResult(res, elapsedSec, localEntry) {
@@ -1829,13 +1714,6 @@
 
       status.innerHTML = parts.join("<br>");
       status.classList.add(res.ok === false ? "status-error" : "status-ok");
-
-      if (res.ok !== false) {
-        noteInput.value = "";
-        if ((current.claimType === "free" || current.claimType === "family") && slipInput) {
-          slipInput.value = "";
-        }
-      }
 
       const history = Array.isArray(res.history) && res.history.length ? res.history : [current];
 
@@ -1899,16 +1777,7 @@
     }
 
     async function handleSubmit() {
-      await pingBackend();
-
-      if (!backendOnline) {
-        showOfflineMessage();
-        setStepState("idle");
-        return;
-      }
-
       updateClaimWindowState();
-
       if (!isClaimOpen) {
         status.textContent = claimConfig.outOfTimeErrorText;
         status.classList.add("status-error");
@@ -1955,10 +1824,7 @@
       isLoading = true;
       setStepState("loading");
       btnSubmit.disabled = true;
-      btnSubmit.innerHTML = `
-        <span class="spinner"></span>
-        <span>กำลังส่งคำขอ…</span>
-      `;
+      btnSubmit.innerHTML = `<span class="spinner"></span><span>กำลังส่งคำขอ…</span>`;
 
       status.style.color = "#8b8680";
       status.innerHTML =
@@ -1985,13 +1851,12 @@
 
         const startTime = performance.now();
 
-        const res = await fetch(cacheBust(SCRIPT_URL), {
+        const res = await fetch(SCRIPT_URL, {
           method: "POST",
           headers: {
             "Content-Type": "text/plain;charset=utf-8"
           },
-          body: JSON.stringify(payload),
-          cache: "no-store"
+          body: JSON.stringify(payload)
         });
 
         const text = await res.text();
@@ -2024,8 +1889,25 @@
         status.innerHTML = "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ";
         status.classList.add("status-error");
         setStepState("error");
-        await pingBackend();
       }
+    }
+
+    const tips = [
+      "ใช้อีเมลเดียวกับที่สมัครสมาชิกไว้ เพื่อให้ระบบค้นหาเจอง่ายที่สุดค่ะ",
+      "อย่าลืมเลือกปีสมัครให้ตรงก่อนส่งคำขอเคลมนะคะ",
+      "ถ้าเป็นปีที่ต้องชำระ ระบบจะบังคับแนบสลิปก่อนส่งคำขอ",
+      "สถานะเมลวันนี้จะแสดงด้านล่างสุดแบบเรียลไทม์",
+      "มีอะไรอยากฝากถึงแอดมิน พิมพ์ในกรอบข้อความได้เลยค่ะ"
+    ];
+    let tipIndex = 0;
+
+    function rotateTip() {
+      tipBubble.classList.remove("show");
+      setTimeout(() => {
+        tipText.textContent = tips[tipIndex] || tips[0];
+        tipBubble.classList.add("show");
+        tipIndex = (tipIndex + 1) % tips.length;
+      }, 200);
     }
 
     yearRow.querySelectorAll(".year-btn").forEach((btn) => {
@@ -2050,46 +1932,8 @@
       copyToClipboard(btnCopyAccount, claimConfig.bankAccountNo || "");
     });
 
-    const tips = [
-      "ใช้อีเมลเดียวกับที่สมัครสมาชิกไว้ เพื่อให้ระบบค้นหาเจอง่ายที่สุดค่ะ",
-      "อย่าลืมเลือกปีสมัครให้ตรงก่อนส่งคำขอเคลมนะคะ",
-      "ถ้าเป็นปีที่ต้องชำระ ระบบจะบังคับแนบสลิปก่อนส่งคำขอ",
-      "สถานะเมลวันนี้จะแสดงด้านล่างสุดแบบเรียลไทม์",
-      "มีอะไรอยากฝากถึงแอดมิน พิมพ์ในกรอบข้อความได้เลยค่ะ"
-    ];
-    let tipIndex = 0;
-
-    function rotateTip() {
-      tipBubble.classList.remove("show");
-      setTimeout(() => {
-        tipText.textContent = tips[tipIndex] || tips[0];
-        tipBubble.classList.add("show");
-        tipIndex = (tipIndex + 1) % tips.length;
-      }, 200);
-    }
-
-    themeToggle.addEventListener("click", () => {
-      const nowDark = !document.body.classList.contains("theme-dark");
-      const newTheme = nowDark ? "dark" : "light";
-      applyTheme(newTheme);
-      localStorage.setItem("theme", newTheme);
-    });
-
     btnSubmit.addEventListener("click", handleSubmit);
     btnClear.addEventListener("click", clearForm);
-
-    window.addEventListener("online", async () => {
-      await pingBackend();
-      await initClaimWindowConfig();
-      await fetchTodayStatus();
-      showToast("เชื่อมต่ออินเทอร์เน็ตแล้ว");
-    });
-
-    window.addEventListener("offline", () => {
-      backendOnline = false;
-      updateClaimWindowState();
-      showToast("อุปกรณ์ออฟไลน์อยู่");
-    });
 
     window.addEventListener("beforeunload", (e) => {
       if (!isLoading) return;
@@ -2097,37 +1941,34 @@
       e.returnValue = "ระบบกำลังส่งคำขอเคลมของคุณอยู่ หากออกจากหน้านี้อาจทำให้สถานะไม่ถูกบันทึกนะคะ";
     });
 
-    (async function initApp() {
-      const savedTheme = localStorage.getItem("theme") || "light";
-      applyTheme(savedTheme);
-
+    window.addEventListener("load", async () => {
       setStepState("idle");
       emailInput.focus();
+
+      const savedTheme = localStorage.getItem("theme") || "light";
+      applyTheme(savedTheme);
 
       renderConfigToUI();
       renderYearButtons();
       updateClaimWindowState();
-
-      setTimeout(rotateTip, 800);
-      setInterval(rotateTip, 13000);
-
-      await pingBackend();
       await initClaimWindowConfig();
-      await fetchTodayStatus(true);
-
       setInterval(updateClaimWindowState, 60000);
 
-      if (healthTimerId) clearInterval(healthTimerId);
-      healthTimerId = setInterval(async () => {
-        await pingBackend();
-        await initClaimWindowConfig();
-      }, HEALTH_POLL_INTERVAL);
-
-      if (liveTimerId) clearInterval(liveTimerId);
+      fetchTodayStatus(true);
       if (STATUS_POLL_INTERVAL > 0) {
         liveTimerId = setInterval(fetchTodayStatus, STATUS_POLL_INTERVAL);
       }
-    })();
+
+      setTimeout(rotateTip, 800);
+      setInterval(rotateTip, 13000);
+    });
+
+    themeToggle.addEventListener("click", () => {
+      const nowDark = !document.body.classList.contains("theme-dark");
+      const newTheme = nowDark ? "dark" : "light";
+      applyTheme(newTheme);
+      localStorage.setItem("theme", newTheme);
+    });
   </script>
 </body>
 </html>
