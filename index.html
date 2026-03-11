@@ -129,6 +129,7 @@
       border-radius: 20px;
       position: relative;
     }
+
     .bear-min::before,
     .bear-min::after {
       content: "";
@@ -139,6 +140,7 @@
       border-radius: 999px;
       background: #c9a48b;
     }
+
     .bear-min::before { left: 3px; }
     .bear-min::after { right: 3px; }
 
@@ -152,6 +154,7 @@
       animation: blink 4s infinite;
       transform-origin: center center;
     }
+
     .bear-eye.left { left: 9px; }
     .bear-eye.right { right: 9px; }
 
@@ -475,6 +478,7 @@
 
     input[type="email"],
     input[type="date"],
+    input[type="text"],
     textarea {
       width: 100%;
       border: none;
@@ -510,6 +514,10 @@
       gap: 6px;
       animation: importantBlink 1.3s ease-in-out infinite;
       text-align: left;
+    }
+
+    .important-note strong {
+      font-weight: 600;
     }
 
     @keyframes importantBlink {
@@ -618,7 +626,6 @@
       border: 1px solid #dad3cc;
       background: #ffffff;
       cursor: pointer;
-      max-width: 100%;
     }
 
     body.theme-dark .file-wrap input[type="file"] {
@@ -896,7 +903,7 @@
 
     .live-status-card {
       margin-top: 12px;
-      padding: 12px;
+      padding: 12px 12px 12px;
       border-radius: 18px;
       background: linear-gradient(135deg, #fdf7f2, #f5efea);
       border: 1px solid #e1d6ca;
@@ -1078,6 +1085,10 @@
       transform: translateY(0);
     }
 
+    .tip-bubble-emoji {
+      margin-right: 4px;
+    }
+
     .status-pill {
       display: inline-flex;
       align-items: center;
@@ -1120,7 +1131,7 @@
     <header class="header">
       <div class="brand-row">
         <div class="brand-left">
-          <div class="logo-circle" id="logoCircle">
+          <div class="logo-circle">
             <div class="bear-min">
               <div class="bear-eye left"></div>
               <div class="bear-eye right"></div>
@@ -1211,7 +1222,9 @@
               <span class="bank-value" id="bankAccountNo">-</span>
             </div>
           </div>
-          <button type="button" class="small-copy-btn" id="btnCopyAccount">คัดลอกเลขบัญชี</button>
+          <button type="button" class="small-copy-btn" id="btnCopyAccount">
+            คัดลอกเลขบัญชี
+          </button>
           <div class="file-wrap">
             <span>แนบสลิปโอนเงิน 19 บาท</span>
             <input type="file" id="slipInput" accept="image/*" />
@@ -1274,13 +1287,14 @@
   <div id="toast" class="toast">คัดลอกข้อความแล้ว</div>
 
   <div id="tipBubble" class="tip-bubble">
-    <span>💡</span>
+    <span class="tip-bubble-emoji">💡</span>
     <span id="tipText">ใช้อีเมลเดียวกับที่สมัครสมาชิกไว้ เพื่อให้ระบบค้นหาเจอง่ายที่สุดค่ะ</span>
   </div>
 
   <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyPiOkVVjodNRfri1oqXDA_PtCacHIviWtSRfHjfVnmETIbxQ4VSIGP65fEmyBZ0qgf/exec";
     const STATUS_POLL_INTERVAL = 30000;
+    const CONFIG_POLL_INTERVAL = 30000;
 
     let claimConfig = {
       claimStartHour: 7,
@@ -1298,7 +1312,8 @@
       paymentTitle: "แพ็กดูแล 19 บาท (สำหรับรอบเคลมนี้)",
       paymentNote: "เลือกปีสมัคร 2568 ระบบให้ใช้แพ็กดูแล 19 บาท เพื่อรับเข้าคิวเคลมทันทีหลังแนบสลิป",
       paymentRequireSlip: "หากไม่แนบสลิป ระบบจะยังไม่รับเข้าระบบเคลมสำหรับปี 2568",
-      supportLine: "@467dlpti"
+      supportLine: "@467dlpti",
+      isOpenNow: null
     };
 
     const btnSubmit = document.getElementById("btnSubmit");
@@ -1320,7 +1335,7 @@
     const resultsDiv = document.getElementById("results");
     const summaryDiv = document.getElementById("summary");
     const toast = document.getElementById("toast");
-    const logoCircle = document.getElementById("logoCircle");
+    const logoCircle = document.querySelector(".logo-circle");
     const themeToggle = document.getElementById("themeToggle");
     const tipBubble = document.getElementById("tipBubble");
     const tipText = document.getElementById("tipText");
@@ -1343,6 +1358,7 @@
 
     let isLoading = false;
     let liveTimerId = null;
+    let configTimerId = null;
     let isClaimOpen = true;
 
     function setStepState(state) {
@@ -1391,6 +1407,69 @@
       }
     }
 
+    const savedTheme = localStorage.getItem("theme") || "light";
+    applyTheme(savedTheme);
+
+    themeToggle.addEventListener("click", () => {
+      const nowDark = !document.body.classList.contains("theme-dark");
+      const newTheme = nowDark ? "dark" : "light";
+      applyTheme(newTheme);
+      localStorage.setItem("theme", newTheme);
+    });
+
+    async function initClaimWindowConfig() {
+      if (!SCRIPT_URL) {
+        updateClaimWindowState();
+        return;
+      }
+
+      try {
+        const res = await fetch(SCRIPT_URL + "?action=config&_t=" + Date.now(), { cache: "no-store" });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        const cfg = await res.json();
+        if (!cfg) return;
+
+        if (cfg.claimStartHour !== undefined) claimConfig.claimStartHour = Number(cfg.claimStartHour) || 7;
+        if (cfg.claimEndHour !== undefined) claimConfig.claimEndHour = Number(cfg.claimEndHour) || 19;
+        if (Array.isArray(cfg.claimOpenDays)) {
+          claimConfig.claimOpenDays = cfg.claimOpenDays.map(n => Number(n)).filter(n => !isNaN(n));
+        }
+
+        if (cfg.claimOpenText) claimConfig.claimOpenText = cfg.claimOpenText;
+        if (cfg.claimClosedText) claimConfig.claimClosedText = cfg.claimClosedText;
+        if (cfg.outOfTimeErrorText) claimConfig.outOfTimeErrorText = cfg.outOfTimeErrorText;
+
+        if (cfg.paidYear) claimConfig.paidYear = String(cfg.paidYear);
+        if (cfg.freeYear) claimConfig.freeYear = String(cfg.freeYear);
+        if (cfg.packagePrice !== undefined) claimConfig.packagePrice = Number(cfg.packagePrice) || 19;
+
+        if (cfg.bankName) claimConfig.bankName = cfg.bankName;
+        if (cfg.bankAccountNo) claimConfig.bankAccountNo = cfg.bankAccountNo;
+        if (cfg.bankAccountName) claimConfig.bankAccountName = cfg.bankAccountName;
+
+        if (cfg.paymentTitle) claimConfig.paymentTitle = cfg.paymentTitle;
+        if (cfg.paymentNote) claimConfig.paymentNote = cfg.paymentNote;
+        if (cfg.paymentRequireSlip) claimConfig.paymentRequireSlip = cfg.paymentRequireSlip;
+
+        if (cfg.supportLine) claimConfig.supportLine = cfg.supportLine;
+
+        if (cfg.isOpenNow !== undefined && cfg.isOpenNow !== null) {
+          claimConfig.isOpenNow = !!cfg.isOpenNow;
+        } else {
+          claimConfig.isOpenNow = null;
+        }
+
+        renderConfigToUI();
+        renderYearButtons();
+        updateClaimWindowState();
+      } catch (err) {
+        console.warn("โหลด config claim ไม่สำเร็จ:", err);
+        renderConfigToUI();
+        renderYearButtons();
+        updateClaimWindowState();
+      }
+    }
+
     function renderConfigToUI() {
       paymentTitleEl.textContent = claimConfig.paymentTitle || "แพ็กดูแล 19 บาท";
       paymentNoteEl.textContent = claimConfig.paymentNote || "";
@@ -1403,28 +1482,32 @@
 
     function renderYearButtons() {
       const buttons = yearRow.querySelectorAll(".year-btn");
-      if (buttons[0]) {
-        buttons[0].dataset.year = claimConfig.paidYear || "2568";
-        buttons[0].textContent = claimConfig.paidYear || "2568";
-      }
-      if (buttons[1]) {
-        buttons[1].dataset.year = claimConfig.freeYear || "2569";
-        buttons[1].textContent = claimConfig.freeYear || "2569";
-      }
+      if (buttons[0]) buttons[0].dataset.year = claimConfig.paidYear || "2568";
+      if (buttons[0]) buttons[0].textContent = claimConfig.paidYear || "2568";
+      if (buttons[1]) buttons[1].dataset.year = claimConfig.freeYear || "2569";
+      if (buttons[1]) buttons[1].textContent = claimConfig.freeYear || "2569";
     }
 
-    function isWithinClaimWindow() {
+    function isWithinClaimWindowByBrowser() {
       const now = new Date();
       const hour = now.getHours();
       const day = now.getDay();
       const openDays = Array.isArray(claimConfig.claimOpenDays) && claimConfig.claimOpenDays.length
         ? claimConfig.claimOpenDays
         : [1, 2, 3, 4, 5, 6];
-      return openDays.includes(day) && hour >= claimConfig.claimStartHour && hour < claimConfig.claimEndHour;
+
+      const dayOk = openDays.includes(day);
+      const hourOk = hour >= claimConfig.claimStartHour && hour < claimConfig.claimEndHour;
+      return dayOk && hourOk;
+    }
+
+    function getEffectiveClaimOpenState() {
+      if (typeof claimConfig.isOpenNow === "boolean") return claimConfig.isOpenNow;
+      return isWithinClaimWindowByBrowser();
     }
 
     function updateClaimWindowState() {
-      const open = isWithinClaimWindow();
+      const open = getEffectiveClaimOpenState();
       isClaimOpen = open;
 
       if (open) {
@@ -1442,46 +1525,44 @@
       }
     }
 
-    async function initClaimWindowConfig() {
-      if (!SCRIPT_URL) {
-        updateClaimWindowState();
-        return;
-      }
+    yearRow.querySelectorAll(".year-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        yearRow.querySelectorAll(".year-btn").forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        const year = btn.dataset.year;
+        signupYearInput.value = year;
 
-      try {
-        const res = await fetch(SCRIPT_URL + "?action=config", { method: "GET" });
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        const cfg = await res.json();
-        if (!cfg) return;
-
-        if (cfg.claimStartHour !== undefined) claimConfig.claimStartHour = Number(cfg.claimStartHour) || 7;
-        if (cfg.claimEndHour !== undefined) claimConfig.claimEndHour = Number(cfg.claimEndHour) || 19;
-        if (Array.isArray(cfg.claimOpenDays)) {
-          claimConfig.claimOpenDays = cfg.claimOpenDays.map(n => Number(n)).filter(n => !isNaN(n));
+        if (year === String(claimConfig.paidYear)) {
+          paymentSection.style.display = "block";
+          slipInput.required = true;
+        } else {
+          paymentSection.style.display = "none";
+          slipInput.required = false;
+          slipInput.value = "";
         }
-        if (cfg.claimOpenText) claimConfig.claimOpenText = cfg.claimOpenText;
-        if (cfg.claimClosedText) claimConfig.claimClosedText = cfg.claimClosedText;
-        if (cfg.outOfTimeErrorText) claimConfig.outOfTimeErrorText = cfg.outOfTimeErrorText;
-        if (cfg.paidYear) claimConfig.paidYear = String(cfg.paidYear);
-        if (cfg.freeYear) claimConfig.freeYear = String(cfg.freeYear);
-        if (cfg.packagePrice !== undefined) claimConfig.packagePrice = Number(cfg.packagePrice) || 19;
-        if (cfg.bankName) claimConfig.bankName = cfg.bankName;
-        if (cfg.bankAccountNo) claimConfig.bankAccountNo = cfg.bankAccountNo;
-        if (cfg.bankAccountName) claimConfig.bankAccountName = cfg.bankAccountName;
-        if (cfg.paymentTitle) claimConfig.paymentTitle = cfg.paymentTitle;
-        if (cfg.paymentNote) claimConfig.paymentNote = cfg.paymentNote;
-        if (cfg.paymentRequireSlip) claimConfig.paymentRequireSlip = cfg.paymentRequireSlip;
-        if (cfg.supportLine) claimConfig.supportLine = cfg.supportLine;
+      });
+    });
 
-        renderConfigToUI();
-        renderYearButtons();
-        updateClaimWindowState();
-      } catch (err) {
-        console.warn("โหลด config claim ไม่สำเร็จ:", err);
-        renderConfigToUI();
-        renderYearButtons();
-        updateClaimWindowState();
-      }
+    btnCopyAccount.addEventListener("click", () => {
+      copyToClipboard(btnCopyAccount, claimConfig.bankAccountNo || "");
+    });
+
+    const tips = [
+      "ใช้อีเมลเดียวกับที่สมัครสมาชิกไว้ เพื่อให้ระบบค้นหาเจอง่ายที่สุดค่ะ",
+      "อย่าลืมเลือกปีสมัครให้ตรงก่อนส่งคำขอเคลมนะคะ",
+      "ถ้าเป็นปีที่ต้องชำระ ระบบจะบังคับแนบสลิปก่อนส่งคำขอ",
+      "สถานะเมลวันนี้จะแสดงด้านล่างสุดแบบเรียลไทม์",
+      "มีอะไรอยากฝากถึงแอดมิน พิมพ์ในกรอบข้อความได้เลยค่ะ"
+    ];
+    let tipIndex = 0;
+
+    function rotateTip() {
+      tipBubble.classList.remove("show");
+      setTimeout(() => {
+        tipText.textContent = tips[tipIndex] || tips[0];
+        tipBubble.classList.add("show");
+        tipIndex = (tipIndex + 1) % tips.length;
+      }, 200);
     }
 
     function clearForm() {
@@ -1499,6 +1580,10 @@
       resultsDiv.innerHTML = "";
       summaryDiv.innerHTML = "";
 
+      emailField.classList.remove("shake");
+      expiryField.classList.remove("shake");
+      noteField.classList.remove("shake");
+
       setStepState("idle");
       emailInput.focus();
     }
@@ -1515,6 +1600,128 @@
         reader.onerror = reject;
         reader.readAsDataURL(file);
       });
+    }
+
+    async function handleSubmit() {
+      updateClaimWindowState();
+
+      if (!isClaimOpen) {
+        status.textContent = claimConfig.outOfTimeErrorText;
+        status.classList.add("status-error");
+        setStepState("idle");
+        return;
+      }
+
+      const email = (emailInput.value || "").trim().toLowerCase();
+      const expiry = (expiryInput.value || "").trim();
+      const year = (signupYearInput.value || "").trim();
+      const note = (noteInput.value || "").trim();
+
+      status.classList.remove("status-error", "status-ok");
+      emailField.classList.remove("shake");
+      expiryField.classList.remove("shake");
+
+      if (!email) {
+        status.textContent = "กรุณากรอกอีเมลที่ใช้สมัครก่อนนะคะ";
+        status.classList.add("status-error");
+        shake(emailField);
+        setStepState("idle");
+        return;
+      }
+      if (!expiry) {
+        status.textContent = "กรุณาเลือกวันหมดอายุสมาชิกก่อนค่ะ";
+        status.classList.add("status-error");
+        shake(expiryField);
+        setStepState("idle");
+        return;
+      }
+      if (!year) {
+        status.textContent = "กรุณาเลือกปีที่สมัครให้เรียบร้อยก่อนส่งคำขอ";
+        status.classList.add("status-error");
+        setStepState("idle");
+        return;
+      }
+      if (year === String(claimConfig.paidYear) && !slipInput.files.length) {
+        status.textContent = claimConfig.paymentRequireSlip || "กรุณาแนบสลิปก่อนส่งคำขอ";
+        status.classList.add("status-error");
+        setStepState("idle");
+        return;
+      }
+
+      isLoading = true;
+      setStepState("loading");
+      btnSubmit.disabled = true;
+      btnSubmit.innerHTML = `
+        <span class="spinner"></span>
+        <span>กำลังส่งคำขอ…</span>
+      `;
+
+      status.style.color = "#8b8680";
+      status.innerHTML =
+        "ระบบกำลังส่งคำขอเคลมของคุณเข้าสู่ร้าน 426 SHOP...<br>" +
+        "<span style='font-size:0.78rem;color:#c27a5a;'>ระหว่างนี้แนะนำอย่าเพิ่งรีเฟรชหรือปิดหน้านี้ค่ะ</span>";
+
+      try {
+        let slipData = "";
+        let slipName = "";
+
+        if (slipInput.files[0]) {
+          slipName = slipInput.files[0].name || "slip.jpg";
+          slipData = await fileToDataUrl(slipInput.files[0]);
+        }
+
+        const payload = {
+          email,
+          expiry,
+          signupYear: year,
+          note,
+          slipData,
+          slipName
+        };
+
+        const startTime = performance.now();
+
+        const res = await fetch(SCRIPT_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "text/plain;charset=utf-8"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const text = await res.text();
+
+        let data;
+        try {
+          data = JSON.parse(text);
+        } catch (e) {
+          data = { ok: false, message: text || "ไม่สามารถอ่านข้อมูลจากเซิร์ฟเวอร์ได้" };
+        }
+
+        const elapsedSec = (performance.now() - startTime) / 1000;
+
+        isLoading = false;
+        btnSubmit.disabled = false;
+        btnSubmit.innerHTML = "<span>ส่งคำขอเคลม</span><span>↗</span>";
+
+        renderResult(data, elapsedSec, { email, expiry, year, note });
+
+        if (data && (data.todaySummary || data.dailyStatus || data.summary)) {
+          renderLiveStatus(data.todaySummary || data.dailyStatus || data.summary);
+        } else {
+          fetchTodayStatus();
+        }
+
+        await initClaimWindowConfig();
+      } catch (err) {
+        console.error(err);
+        isLoading = false;
+        btnSubmit.disabled = false;
+        btnSubmit.innerHTML = "<span>ส่งคำขอเคลม</span><span>↗</span>";
+        status.innerHTML = "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ";
+        status.classList.add("status-error");
+        setStepState("error");
+      }
     }
 
     function formatThaiDate(dateStr) {
@@ -1564,63 +1771,6 @@
       return `<span class="${cls}">${t}</span>`;
     }
 
-    function triggerSuccessAnimation() {
-      if (!logoCircle) return;
-      logoCircle.classList.remove("success-bounce");
-      void logoCircle.offsetWidth;
-      logoCircle.classList.add("success-bounce");
-    }
-
-    function buildCopyText(entry) {
-      let claimLabel = "เคลมฟรี";
-      if (entry.claimType === "paid") claimLabel = "แพ็กดูแล 19 บาท";
-      else if (entry.claimType === "family") claimLabel = "กลุ่มครอบครัวร้านปกติ";
-
-      return [
-        "426 SHOP – รายละเอียดคำขอเคลม",
-        "อีเมล: " + (entry.email || "-"),
-        "วันหมดอายุ: " + (entry.expiry || "-"),
-        "สมัครเมื่อ: " + (entry.year || "-"),
-        "ประเภทเคลม: " + claimLabel,
-        "คิวเคลม: " + (entry.queueNo || "-"),
-        "",
-        "สรุปสถานะ:",
-        entry.statusText || "-"
-      ].join("\n");
-    }
-
-    async function copyToClipboard(btn, text) {
-      try {
-        if (navigator.clipboard && window.isSecureContext) {
-          await navigator.clipboard.writeText(text);
-        } else {
-          const temp = document.createElement("textarea");
-          temp.value = text;
-          document.body.appendChild(temp);
-          temp.select();
-          document.execCommand("copy");
-          document.body.removeChild(temp);
-        }
-
-        const originalText = btn.innerHTML;
-        btn.innerHTML = "คัดลอกแล้ว ✓";
-        btn.style.background = "#f4faf7";
-        btn.style.borderColor = "#85b8a6";
-
-        setTimeout(() => {
-          btn.innerHTML = originalText;
-          btn.style.background = "";
-          btn.style.borderColor = "";
-        }, 1800);
-
-        toast.textContent = "คัดลอกรายละเอียดแล้ว ✨";
-        toast.classList.add("show");
-        setTimeout(() => toast.classList.remove("show"), 2000);
-      } catch (err) {
-        console.warn("copy failed", err);
-      }
-    }
-
     function renderLiveStatus(summary) {
       let items = [];
       let dateStr = "";
@@ -1654,7 +1804,7 @@
     async function fetchTodayStatus(initial = false) {
       if (!SCRIPT_URL) return;
       try {
-        const res = await fetch(SCRIPT_URL + "?action=todayStatus", { method: "GET" });
+        const res = await fetch(SCRIPT_URL + "?action=todayStatus&_t=" + Date.now(), { cache: "no-store" });
         if (!res.ok) throw new Error("HTTP " + res.status);
         const data = await res.json();
         renderLiveStatus(data.todaySummary || data.summary || data.dailyStatus || null);
@@ -1714,6 +1864,13 @@
 
       status.innerHTML = parts.join("<br>");
       status.classList.add(res.ok === false ? "status-error" : "status-ok");
+
+      if (res.ok !== false) {
+        noteInput.value = "";
+        if ((current.claimType === "free" || current.claimType === "family") && slipInput) {
+          slipInput.value = "";
+        }
+      }
 
       const history = Array.isArray(res.history) && res.history.length ? res.history : [current];
 
@@ -1776,161 +1933,58 @@
       }
     }
 
-    async function handleSubmit() {
-      updateClaimWindowState();
-      if (!isClaimOpen) {
-        status.textContent = claimConfig.outOfTimeErrorText;
-        status.classList.add("status-error");
-        setStepState("idle");
-        return;
-      }
+    function buildCopyText(entry) {
+      let claimLabel = "เคลมฟรี";
+      if (entry.claimType === "paid") claimLabel = "แพ็กดูแล 19 บาท";
+      else if (entry.claimType === "family") claimLabel = "กลุ่มครอบครัวร้านปกติ";
 
-      const email = (emailInput.value || "").trim().toLowerCase();
-      const expiry = (expiryInput.value || "").trim();
-      const year = (signupYearInput.value || "").trim();
-      const note = (noteInput.value || "").trim();
-
-      status.classList.remove("status-error", "status-ok");
-      emailField.classList.remove("shake");
-      expiryField.classList.remove("shake");
-
-      if (!email) {
-        status.textContent = "กรุณากรอกอีเมลที่ใช้สมัครก่อนนะคะ";
-        status.classList.add("status-error");
-        shake(emailField);
-        setStepState("idle");
-        return;
-      }
-      if (!expiry) {
-        status.textContent = "กรุณาเลือกวันหมดอายุสมาชิกก่อนค่ะ";
-        status.classList.add("status-error");
-        shake(expiryField);
-        setStepState("idle");
-        return;
-      }
-      if (!year) {
-        status.textContent = "กรุณาเลือกปีที่สมัครให้เรียบร้อยก่อนส่งคำขอ";
-        status.classList.add("status-error");
-        setStepState("idle");
-        return;
-      }
-      if (year === String(claimConfig.paidYear) && !slipInput.files.length) {
-        status.textContent = claimConfig.paymentRequireSlip || "กรุณาแนบสลิปก่อนส่งคำขอ";
-        status.classList.add("status-error");
-        setStepState("idle");
-        return;
-      }
-
-      isLoading = true;
-      setStepState("loading");
-      btnSubmit.disabled = true;
-      btnSubmit.innerHTML = `<span class="spinner"></span><span>กำลังส่งคำขอ…</span>`;
-
-      status.style.color = "#8b8680";
-      status.innerHTML =
-        "ระบบกำลังส่งคำขอเคลมของคุณเข้าสู่ร้าน 426 SHOP...<br>" +
-        "<span style='font-size:0.78rem;color:#c27a5a;'>ระหว่างนี้แนะนำอย่าเพิ่งรีเฟรชหรือปิดหน้านี้ค่ะ</span>";
-
-      try {
-        let slipData = "";
-        let slipName = "";
-
-        if (slipInput.files[0]) {
-          slipName = slipInput.files[0].name || "slip.jpg";
-          slipData = await fileToDataUrl(slipInput.files[0]);
-        }
-
-        const payload = {
-          email,
-          expiry,
-          signupYear: year,
-          note,
-          slipData,
-          slipName
-        };
-
-        const startTime = performance.now();
-
-        const res = await fetch(SCRIPT_URL, {
-          method: "POST",
-          headers: {
-            "Content-Type": "text/plain;charset=utf-8"
-          },
-          body: JSON.stringify(payload)
-        });
-
-        const text = await res.text();
-
-        let data;
-        try {
-          data = JSON.parse(text);
-        } catch (e) {
-          data = { ok: false, message: text || "ไม่สามารถอ่านข้อมูลจากเซิร์ฟเวอร์ได้" };
-        }
-
-        const elapsedSec = (performance.now() - startTime) / 1000;
-
-        isLoading = false;
-        btnSubmit.disabled = false;
-        btnSubmit.innerHTML = "<span>ส่งคำขอเคลม</span><span>↗</span>";
-
-        renderResult(data, elapsedSec, { email, expiry, year, note });
-
-        if (data && (data.todaySummary || data.dailyStatus || data.summary)) {
-          renderLiveStatus(data.todaySummary || data.dailyStatus || data.summary);
-        } else {
-          fetchTodayStatus();
-        }
-      } catch (err) {
-        console.error(err);
-        isLoading = false;
-        btnSubmit.disabled = false;
-        btnSubmit.innerHTML = "<span>ส่งคำขอเคลม</span><span>↗</span>";
-        status.innerHTML = "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ";
-        status.classList.add("status-error");
-        setStepState("error");
-      }
+      return [
+        "426 SHOP – รายละเอียดคำขอเคลม",
+        "อีเมล: " + (entry.email || "-"),
+        "วันหมดอายุ: " + (entry.expiry || "-"),
+        "สมัครเมื่อ: " + (entry.year || "-"),
+        "ประเภทเคลม: " + claimLabel,
+        "คิวเคลม: " + (entry.queueNo || "-"),
+        "",
+        "สรุปสถานะ:",
+        entry.statusText || "-"
+      ].join("\n");
     }
 
-    const tips = [
-      "ใช้อีเมลเดียวกับที่สมัครสมาชิกไว้ เพื่อให้ระบบค้นหาเจอง่ายที่สุดค่ะ",
-      "อย่าลืมเลือกปีสมัครให้ตรงก่อนส่งคำขอเคลมนะคะ",
-      "ถ้าเป็นปีที่ต้องชำระ ระบบจะบังคับแนบสลิปก่อนส่งคำขอ",
-      "สถานะเมลวันนี้จะแสดงด้านล่างสุดแบบเรียลไทม์",
-      "มีอะไรอยากฝากถึงแอดมิน พิมพ์ในกรอบข้อความได้เลยค่ะ"
-    ];
-    let tipIndex = 0;
+    function triggerSuccessAnimation() {
+      if (!logoCircle) return;
+      logoCircle.classList.remove("success-bounce");
+      void logoCircle.offsetWidth;
+      logoCircle.classList.add("success-bounce");
+    }
 
-    function rotateTip() {
-      tipBubble.classList.remove("show");
+    function copyToClipboard(btn, text) {
+      if (!navigator.clipboard) {
+        const temp = document.createElement("textarea");
+        temp.value = text;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand("copy");
+        document.body.removeChild(temp);
+      } else {
+        navigator.clipboard.writeText(text);
+      }
+
+      const originalText = btn.innerHTML;
+      btn.innerHTML = "คัดลอกแล้ว ✓";
+      btn.style.background = "#f4faf7";
+      btn.style.borderColor = "#85b8a6";
+
       setTimeout(() => {
-        tipText.textContent = tips[tipIndex] || tips[0];
-        tipBubble.classList.add("show");
-        tipIndex = (tipIndex + 1) % tips.length;
-      }, 200);
+        btn.innerHTML = originalText;
+        btn.style.background = "";
+        btn.style.borderColor = "";
+      }, 1800);
+
+      toast.textContent = "คัดลอกรายละเอียดแล้ว ✨";
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2000);
     }
-
-    yearRow.querySelectorAll(".year-btn").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        yearRow.querySelectorAll(".year-btn").forEach((b) => b.classList.remove("active"));
-        btn.classList.add("active");
-        const year = btn.dataset.year;
-        signupYearInput.value = year;
-
-        if (year === String(claimConfig.paidYear)) {
-          paymentSection.style.display = "block";
-          slipInput.required = true;
-        } else {
-          paymentSection.style.display = "none";
-          slipInput.required = false;
-          slipInput.value = "";
-        }
-      });
-    });
-
-    btnCopyAccount.addEventListener("click", () => {
-      copyToClipboard(btnCopyAccount, claimConfig.bankAccountNo || "");
-    });
 
     btnSubmit.addEventListener("click", handleSubmit);
     btnClear.addEventListener("click", clearForm);
@@ -1945,29 +1999,23 @@
       setStepState("idle");
       emailInput.focus();
 
-      const savedTheme = localStorage.getItem("theme") || "light";
-      applyTheme(savedTheme);
-
       renderConfigToUI();
       renderYearButtons();
-      updateClaimWindowState();
       await initClaimWindowConfig();
-      setInterval(updateClaimWindowState, 60000);
+      updateClaimWindowState();
 
-      fetchTodayStatus(true);
-      if (STATUS_POLL_INTERVAL > 0) {
-        liveTimerId = setInterval(fetchTodayStatus, STATUS_POLL_INTERVAL);
-      }
+      await fetchTodayStatus(true);
 
       setTimeout(rotateTip, 800);
       setInterval(rotateTip, 13000);
-    });
 
-    themeToggle.addEventListener("click", () => {
-      const nowDark = !document.body.classList.contains("theme-dark");
-      const newTheme = nowDark ? "dark" : "light";
-      applyTheme(newTheme);
-      localStorage.setItem("theme", newTheme);
+      configTimerId = setInterval(async () => {
+        await initClaimWindowConfig();
+      }, CONFIG_POLL_INTERVAL);
+
+      if (STATUS_POLL_INTERVAL > 0) {
+        liveTimerId = setInterval(fetchTodayStatus, STATUS_POLL_INTERVAL);
+      }
     });
   </script>
 </body>
