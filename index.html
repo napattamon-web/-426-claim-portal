@@ -1286,12 +1286,13 @@
   </div>
 
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyXsMkzcwONKVtgUC-oYocNrlDWQajjbuB3GKaDw1P0Vbdu9s-PCQXl7IAajgLSWtf9/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzkI4RWDXQhO3P5C_g_zJ9qQQI2tZ-RjWoOtin2qOXlrkyHmfF0nZJ5d03O8LSn0xGu/exec";
     const STATUS_POLL_INTERVAL = 30000;
 
     let claimConfig = {
       claimStartHour: 7,
       claimEndHour: 19,
+      claimOpenDays: [1, 2, 3, 4, 5, 6],
       claimOpenText: "รับเคลมเฉพาะวันจันทร์–เสาร์ เวลา 07.00–19.00 น.",
       claimClosedText: "ขณะนี้อยู่นอกเวลารับเคลม กรุณากลับมาเคลมในวันถัดไปช่วงเวลา 07.00–19.00 น.",
       outOfTimeErrorText: "วันนี้ปิดรับแล้ว กรุณากลับมาเคลมในวันถัดไปช่วงเวลา 07.00–19.00 น.",
@@ -1421,6 +1422,9 @@
 
         if (cfg.claimStartHour !== undefined) claimConfig.claimStartHour = Number(cfg.claimStartHour) || 7;
         if (cfg.claimEndHour !== undefined) claimConfig.claimEndHour = Number(cfg.claimEndHour) || 19;
+        if (Array.isArray(cfg.claimOpenDays)) {
+          claimConfig.claimOpenDays = cfg.claimOpenDays.map(n => Number(n)).filter(n => !isNaN(n));
+        }
 
         if (cfg.claimOpenText) claimConfig.claimOpenText = cfg.claimOpenText;
         if (cfg.claimClosedText) claimConfig.claimClosedText = cfg.claimClosedText;
@@ -1471,7 +1475,16 @@
     function isWithinClaimWindow() {
       const now = new Date();
       const hour = now.getHours();
-      return hour >= claimConfig.claimStartHour && hour < claimConfig.claimEndHour;
+      const day = now.getDay(); // 0=อาทิตย์, 1=จันทร์, ... 6=เสาร์
+
+      const openDays = Array.isArray(claimConfig.claimOpenDays) && claimConfig.claimOpenDays.length
+        ? claimConfig.claimOpenDays
+        : [1, 2, 3, 4, 5, 6];
+
+      const dayOk = openDays.includes(day);
+      const hourOk = hour >= claimConfig.claimStartHour && hour < claimConfig.claimEndHour;
+
+      return dayOk && hourOk;
     }
 
     function updateClaimWindowState() {
