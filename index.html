@@ -25,7 +25,6 @@
       --purple:#a48cc9;
       --shadow:0 20px 44px rgba(118,84,63,.10);
       --shadow-soft:0 12px 26px rgba(118,84,63,.08);
-      --glow:0 0 0 6px rgba(217,183,157,.10);
       --r-xl:30px;
       --r-lg:24px;
       --r-md:18px;
@@ -450,12 +449,6 @@
       background:linear-gradient(180deg,#fffdfb,#faf2eb);
       border:1px solid #eaded3;
       box-shadow:0 8px 16px rgba(118,84,63,.05);
-      transition:.2s ease;
-    }
-
-    .mini-stat:hover{
-      transform:translateY(-2px);
-      box-shadow:var(--shadow-soft), var(--glow);
     }
 
     .mini-stat-value{
@@ -986,18 +979,6 @@
       padding:10px 12px 12px;
       box-shadow:0 10px 20px rgba(118,84,63,.05);
       text-align:center;
-      transition:.2s ease;
-    }
-
-    .result-item:hover{
-      transform:translateY(-1px);
-      box-shadow:var(--shadow-soft), var(--glow);
-    }
-
-    .result-item.latest-highlight{
-      border-color:#d6b39b;
-      box-shadow:var(--shadow-soft), 0 0 0 5px rgba(217,183,157,.10);
-      background:linear-gradient(180deg,#fffdfb,#fdf5ef);
     }
 
     .item-header{
@@ -1090,12 +1071,6 @@
       color:#fff;
       border-color:transparent;
       box-shadow:0 8px 16px rgba(118,84,63,.12);
-      animation:stepPop .25s ease;
-    }
-
-    @keyframes stepPop{
-      from{transform:scale(.96);opacity:.8}
-      to{transform:scale(1);opacity:1}
     }
 
     .history-card,.live-card{
@@ -1181,12 +1156,6 @@
       background:rgba(255,255,255,.84);
       border:1px solid #ede2d7;
       font-size:.8rem;
-      transition:.2s ease;
-    }
-
-    .live-item:hover{
-      transform:translateY(-1px);
-      box-shadow:0 8px 16px rgba(118,84,63,.06);
     }
 
     .live-email{
@@ -1219,7 +1188,6 @@
       font-weight:800;
       border:1px solid transparent;
       line-height:1.2;
-      box-shadow:0 4px 10px rgba(0,0,0,.04);
     }
 
     .status-pill--green{
@@ -1805,7 +1773,7 @@
               </div>
             </div>
             <div id="historyResults">
-              <div class="live-empty">ยังไม่มีข้อมูลสถานะคำขอ</div>
+              <div class="live-empty">ยังไม่มีสถานะคำขอ</div>
             </div>
           </div>
 
@@ -1868,7 +1836,7 @@
     const TOKEN_KEY = "shop426_member_token";
     const REMEMBER_KEY = "shop426_saved_login";
     const SUPPORT_LINK = "https://line.me/R/ti/p/@467dlpti";
-    const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$/;
+    const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
     const LAST_SLIP_KEY = "shop426_last_slip_preview";
 
     let claimConfig = {
@@ -1897,7 +1865,8 @@
       member: null,
       token: localStorage.getItem(TOKEN_KEY) || "",
       lastClaimAt: "",
-      submitLock: false
+      submitLock: false,
+      authLock: false
     };
 
     const heroSection = document.getElementById("heroSection");
@@ -2005,6 +1974,31 @@
 
     let activeSlipFile = null;
 
+    function normalizeEmail(value) {
+      return String(value || "").trim().toLowerCase();
+    }
+
+    function normalizeText(value) {
+      return String(value || "").trim();
+    }
+
+    function parseResponseLoose(data) {
+      if (!data || typeof data !== "object") {
+        return { ok: false, message: "ไม่สามารถอ่านข้อมูลจากเซิร์ฟเวอร์ได้" };
+      }
+      const ok =
+        data.ok === true ||
+        data.success === true ||
+        data.status === "ok" ||
+        !!data.token ||
+        !!data.member;
+
+      return {
+        ...data,
+        ok
+      };
+    }
+
     function updateHeroVisibility() {
       const loginActive = document.getElementById("loginView").classList.contains("active");
       const registerActive = document.getElementById("registerView").classList.contains("active");
@@ -2086,7 +2080,7 @@
 
     function formatThaiDate(dateStr) {
       if (!dateStr) return "-";
-      if (/^\\d{4}-\\d{2}-\\d{2}$/.test(dateStr)) {
+      if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
         const [y, m, d] = dateStr.split("-").map(Number);
         const months = ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."];
         return `${d} ${months[m - 1]} ${y + 543}`;
@@ -2131,7 +2125,7 @@
     }
 
     function thaiYearFromYmd(dateStr) {
-      if (!dateStr || !/^\\d{4}-\\d{2}-\\d{2}$/.test(dateStr)) return "";
+      if (!dateStr || !/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return "";
       return String(Number(dateStr.slice(0, 4)) + 543);
     }
 
@@ -2153,7 +2147,7 @@
       if (password.length >= 8) score++;
       if (/[a-z]/.test(password)) score++;
       if (/[A-Z]/.test(password)) score++;
-      if (/\\d/.test(password)) score++;
+      if (/\d/.test(password)) score++;
       if (/[^A-Za-z0-9]/.test(password)) score++;
 
       if (!isStrongPassword(password)) return { text: "ระดับรหัสผ่าน: อ่อน", cls: "strength-weak" };
@@ -2199,8 +2193,8 @@
     function saveRememberedLogin() {
       if (rememberPassword.checked) {
         localStorage.setItem(REMEMBER_KEY, JSON.stringify({
-          email: (loginEmailInput.value || "").trim().toLowerCase(),
-          password: (loginPasswordInput.value || "").trim()
+          email: normalizeEmail(loginEmailInput.value),
+          password: normalizeText(loginPasswordInput.value)
         }));
       } else {
         localStorage.removeItem(REMEMBER_KEY);
@@ -2254,6 +2248,7 @@
       const safe = escapeHtml(raw || "-");
 
       if (!raw) return `<span class="status-pill status-pill--yellow">รอดำเนินการ</span>`;
+
       if (raw.includes("ดึงเมลแล้ว") || raw.includes("เสร็จ") || raw.includes("ใช้งานได้ปกติ") || raw.includes("สำเร็จ")) {
         return `<span class="status-pill status-pill--green">${safe}</span>`;
       }
@@ -2453,11 +2448,11 @@
     function renderHistory(items) {
       historyResults.innerHTML = "";
       if (!Array.isArray(items) || !items.length) {
-        historyResults.innerHTML = '<div class="live-empty">ยังไม่มีข้อมูลสถานะคำขอ</div>';
+        historyResults.innerHTML = '<div class="live-empty">ยังไม่มีสถานะคำขอ</div>';
         return;
       }
 
-      items.forEach((item, index) => {
+      items.forEach((item) => {
         const claimType = (item.claimType || "").toLowerCase() === "paid" ? "paid" : "free";
         const tagText = claimType === "paid" ? "แพ็กดูแล 19 บาท" : "เคลมฟรี";
         const safeEmail = escapeHtml(item.email || "-");
@@ -2468,9 +2463,9 @@
         const lastAt = item.createdAt || item.updatedAt || "";
 
         const card = document.createElement("div");
-        card.className = "result-item" + (index === 0 ? " latest-highlight" : "");
+        card.className = "result-item";
         card.innerHTML = `
-          <div class="item-header">${index === 0 ? "Latest Request" : "Request Status"}</div>
+          <div class="item-header">Request Status</div>
           <div class="item-email">${safeEmail}</div>
           <div class="item-tag ${claimType === "paid" ? "paid" : ""}">${escapeHtml(tagText)}</div>
           <div class="item-meta">
@@ -2531,7 +2526,7 @@
         "",
         "สรุปสถานะ:",
         entry.statusText || "-"
-      ].join("\\n");
+      ].join("\n");
     }
 
     async function copyToClipboard(btn, text) {
@@ -2563,7 +2558,7 @@
 
     function buildAdminMessage(entry) {
       return encodeURIComponent(
-        `สวัสดีค่ะ แอดมิน\\nต้องการสอบถามสถานะเคลม\\nอีเมล: ${entry.email || "-"}\\nวันหมดอายุ: ${entry.expiry || "-"}\\nปีสมัคร: ${entry.year || "-"}\\nคิวเคลม: ${entry.queueNo || "-"}\\nสถานะ: ${entry.statusText || "-"}`
+        `สวัสดีค่ะ แอดมิน\nต้องการสอบถามสถานะเคลม\nอีเมล: ${entry.email || "-"}\nวันหมดอายุ: ${entry.expiry || "-"}\nปีสมัคร: ${entry.year || "-"}\nคิวเคลม: ${entry.queueNo || "-"}\nสถานะ: ${entry.statusText || "-"}`
       );
     }
 
@@ -2607,7 +2602,7 @@
       renderClaimSteps(current.statusText || "");
 
       const history = Array.isArray(res.history) && res.history.length ? res.history : [current];
-      history.forEach((item, index) => {
+      history.forEach((item) => {
         const claimType = (item.claimType || "").toLowerCase() === "paid" ? "paid" : "free";
         const tagText = getClaimTypeLabel(claimType);
         const safeEmail = escapeHtml(item.email || "-");
@@ -2628,9 +2623,9 @@
         };
 
         const card = document.createElement("div");
-        card.className = "result-item" + (index === 0 ? " latest-highlight" : "");
+        card.className = "result-item";
         card.innerHTML = `
-          <div class="item-header">${index === 0 ? "Latest Claim" : "Request Status"}</div>
+          <div class="item-header">Latest Claim</div>
           <div class="item-email">${safeEmail}</div>
           <div class="item-tag ${claimType === "paid" ? "paid" : ""}">${escapeHtml(tagText)}</div>
           <div class="item-meta">
@@ -2719,8 +2714,8 @@
       loginEmailField.classList.remove("shake");
       loginPasswordField.classList.remove("shake");
 
-      const email = (loginEmailInput.value || "").trim().toLowerCase();
-      const password = (loginPasswordInput.value || "").trim();
+      const email = normalizeEmail(loginEmailInput.value);
+      const password = normalizeText(loginPasswordInput.value);
 
       if (!email || !loginEmailInput.checkValidity()) {
         showAuthStatus("กรุณากรอกอีเมลให้ถูกต้อง", "error");
@@ -2728,9 +2723,15 @@
         shake(loginEmailField);
         return false;
       }
-      if (!isStrongPassword(password)) {
-        showAuthStatus("รหัสผ่านต้องมีตัวพิมพ์ใหญ่ ตัวพิมพ์เล็ก ตัวเลข และอย่างน้อย 8 ตัว", "error");
-        showAlert(topAlert, "รหัสผ่านต้องมีตัวพิมพ์ใหญ่ ตัวพิมพ์เล็ก ตัวเลข และอย่างน้อย 8 ตัว", "error");
+      if (!password) {
+        showAuthStatus("กรุณากรอกรหัสผ่าน", "error");
+        showAlert(topAlert, "กรุณากรอกรหัสผ่าน", "error");
+        shake(loginPasswordField);
+        return false;
+      }
+      if (password.length < 8) {
+        showAuthStatus("รหัสผ่านต้องมีอย่างน้อย 8 ตัว", "error");
+        showAlert(topAlert, "รหัสผ่านต้องมีอย่างน้อย 8 ตัว", "error");
         shake(loginPasswordField);
         return false;
       }
@@ -2743,10 +2744,10 @@
       registerConfirmPasswordField.classList.remove("shake");
       registerMemberDateField.classList.remove("shake");
 
-      const email = (registerEmail.value || "").trim().toLowerCase();
-      const password = (registerPassword.value || "").trim();
-      const confirmPassword = (registerConfirmPassword.value || "").trim();
-      const memberDate = (registerMemberDate.value || "").trim();
+      const email = normalizeEmail(registerEmail.value);
+      const password = normalizeText(registerPassword.value);
+      const confirmPassword = normalizeText(registerConfirmPassword.value);
+      const memberDate = normalizeText(registerMemberDate.value);
 
       if (!email || !registerEmail.checkValidity()) {
         showAlert(registerAlert, "กรุณากรอกอีเมลให้ถูกต้อง", "error");
@@ -2772,9 +2773,9 @@
     }
 
     function validateClaimForm() {
-      const expiry = (expiryInput.value || "").trim();
-      const year = (signupYearInput.value || "").trim();
-      const note = (noteInput.value || "").trim();
+      const expiry = normalizeText(expiryInput.value);
+      const year = normalizeText(signupYearInput.value);
+      const note = normalizeText(noteInput.value);
 
       clearStatus();
       expiryField.classList.remove("shake");
@@ -2829,32 +2830,47 @@
     }
 
     async function handleLogin() {
+      if (state.authLock) return;
       if (!validateLogin()) return;
 
       showLoadingOverlay();
       btnLogin.disabled = true;
+      state.authLock = true;
 
       try {
         const payload = {
           action: "login",
-          email: (loginEmailInput.value || "").trim().toLowerCase(),
-          password: (loginPasswordInput.value || "").trim()
+          email: normalizeEmail(loginEmailInput.value),
+          password: normalizeText(loginPasswordInput.value)
         };
 
-        const data = await postJson(payload);
+        let data = await postJson(payload);
+        data = parseResponseLoose(data);
 
-        if (!data || data.ok === false) {
+        if (!data.ok) {
           showAuthStatus(data.message || "เข้าสู่ระบบไม่สำเร็จ", "error");
-          showAlert(topAlert, data.message || "เข้าสู่ระบบไม่สำเร็จ", "error");
+          showAlert(topAlert, data.message || "เข้าสู่ระบบไม่สำเร็จ กรุณาตรวจสอบอีเมลและรหัสผ่านอีกครั้ง", "error");
           return;
         }
 
         saveRememberedLogin();
-        state.token = data.token || "";
-        state.member = data.member || null;
+        state.token = data.token || state.token || "";
+        state.member = data.member || data.user || null;
+
         if (state.token) localStorage.setItem(TOKEN_KEY, state.token);
 
-        updateMemberProfileUI();
+        if (!state.member && state.token) {
+          await fetchMemberMe();
+        } else {
+          updateMemberProfileUI();
+        }
+
+        if (!state.member && !state.token) {
+          showAuthStatus("เข้าสู่ระบบไม่สำเร็จ", "error");
+          showAlert(topAlert, "ไม่สามารถเข้าสู่ระบบได้ในขณะนี้ กรุณาลองใหม่อีกครั้ง", "error");
+          return;
+        }
+
         setActiveView("claimView");
         showAuthStatus("เข้าสู่ระบบสำเร็จค่ะ", "ok");
         showToast("เข้าสู่ระบบสำเร็จ");
@@ -2866,43 +2882,48 @@
       } finally {
         hideLoadingOverlay();
         btnLogin.disabled = false;
+        state.authLock = false;
       }
     }
 
     async function handleRegister() {
+      if (state.authLock) return;
       if (!validateRegister()) return;
 
       showLoadingOverlay();
       btnRegister.disabled = true;
+      state.authLock = true;
 
       try {
-        const memberDate = (registerMemberDate.value || "").trim();
-
+        const memberDate = normalizeText(registerMemberDate.value);
         const payload = {
           action: "register",
-          displayName: (registerDisplayName.value || "").trim(),
-          email: (registerEmail.value || "").trim().toLowerCase(),
-          password: (registerPassword.value || "").trim(),
+          displayName: normalizeText(registerDisplayName.value),
+          email: normalizeEmail(registerEmail.value),
+          password: normalizeText(registerPassword.value),
           memberDate,
           signupDate: memberDate,
           lastRenewDate: memberDate
         };
 
-        const data = await postJson(payload);
+        let data = await postJson(payload);
+        data = parseResponseLoose(data);
 
-        if (!data || data.ok === false) {
+        if (!data.ok) {
           showAlert(registerAlert, data.message || "สมัครสมาชิกไม่สำเร็จ", "error");
           return;
         }
 
         registerSuccessCard.classList.add("show");
-        state.token = data.token || "";
-        state.member = data.member || {
+
+        state.token = data.token || state.token || "";
+        state.member = data.member || data.user || {
           email: payload.email,
           memberDate,
           signupDate: memberDate,
           lastRenewDate: memberDate
         };
+
         if (state.token) localStorage.setItem(TOKEN_KEY, state.token);
 
         loginEmailInput.value = payload.email;
@@ -2919,11 +2940,12 @@
       } finally {
         hideLoadingOverlay();
         btnRegister.disabled = false;
+        state.authLock = false;
       }
     }
 
     async function handleForgotPassword() {
-      const email = (loginEmailInput.value || "").trim().toLowerCase();
+      const email = normalizeEmail(loginEmailInput.value);
       if (!email || !loginEmailInput.checkValidity()) {
         showAlert(topAlert, "กรุณากรอกอีเมลก่อนกดลืมรหัสผ่าน", "warning");
         shake(loginEmailField);
@@ -2945,6 +2967,25 @@
         showAlert(topAlert, "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ", "error");
       } finally {
         hideLoadingOverlay();
+      }
+    }
+
+    async function fetchMemberMe() {
+      if (!state.token) return false;
+      try {
+        const data = await fetchJsonWithRetry(
+          SCRIPT_URL + "?action=me&token=" + encodeURIComponent(state.token) + "&_t=" + Date.now(),
+          {},
+          1
+        );
+        if (data && (data.member || data.user)) {
+          state.member = data.member || data.user;
+          updateMemberProfileUI();
+          return true;
+        }
+        return false;
+      } catch (err) {
+        return false;
       }
     }
 
@@ -2986,9 +3027,9 @@
     }
 
     function openConfirmModal() {
-      const expiry = (expiryInput.value || "").trim();
-      const year = (signupYearInput.value || "").trim();
-      const note = (noteInput.value || "").trim();
+      const expiry = normalizeText(expiryInput.value);
+      const year = normalizeText(signupYearInput.value);
+      const note = normalizeText(noteInput.value);
       const claimType = year === String(claimConfig.paidYear) ? "แพ็กดูแล 19 บาท" : "เคลมฟรี";
       const hasSlip = activeSlipFile ? "แนบแล้ว" : "ไม่มี";
 
@@ -3018,9 +3059,9 @@
     }
 
     async function doSubmitClaim() {
-      const expiry = (expiryInput.value || "").trim();
-      const year = (signupYearInput.value || "").trim();
-      const note = (noteInput.value || "").trim();
+      const expiry = normalizeText(expiryInput.value);
+      const year = normalizeText(signupYearInput.value);
+      const note = normalizeText(noteInput.value);
 
       state.isLoading = true;
       state.submitLock = true;
@@ -3039,11 +3080,7 @@
         if (activeSlipFile) {
           slipName = activeSlipFile.name || "slip.jpg";
           slipData = await fileToDataUrl(activeSlipFile);
-          localStorage.setItem(LAST_SLIP_KEY, JSON.stringify({
-            dataUrl: slipData,
-            name: slipName,
-            updatedAt: new Date().toISOString()
-          }));
+          saveLastSlip(slipData, slipName);
         }
 
         const payload = {
@@ -3068,7 +3105,7 @@
         status.innerHTML =
           "<span class='status-strong'>" + escapeHtml(data.message || "ระบบรับคำขอเคลมของคุณแล้ว") + "</span><br>" +
           "<span class='status-time'>เวลาแจ้งล่าสุด: " + escapeHtml(formatThaiDateTime(state.lastClaimAt)) + "</span><br>" +
-          "<span class='status-time'>ระบบใช้เวลา " + escapeHtml((elapsedSec < 0.1 ? "< 0.1" : elapsedSec.toFixed(1).replace(/\\.0$/, ""))) + " วินาที</span>";
+          "<span class='status-time'>ระบบใช้เวลา " + escapeHtml((elapsedSec < 0.1 ? "< 0.1" : elapsedSec.toFixed(1).replace(/\.0$/, ""))) + " วินาที</span>";
         status.className = "status-ok";
 
         renderLatestStatusPage(data, {
@@ -3270,17 +3307,17 @@
       updateClaimWindowState();
       await fetchTodayStatus(true);
 
-      if (!state.isClaimOpen) {
-        showAlert(topAlert, "ล็อกอินและสมัครสมาชิกได้ตามปกติ แต่การส่งเคลมจะได้เฉพาะช่วงเวลาที่ระบบเปิดรับ", "warning", 5500);
-      }
-
       setActiveView("loginView");
+
+      if (state.token) {
+        const ok = await fetchMemberMe();
+        if (ok) {
+          await fetchClaimHistory();
+        }
+      }
 
       setInterval(async () => {
         await initClaimWindowConfig();
-        if (!state.isClaimOpen && document.getElementById("loginView").classList.contains("active")) {
-          showAlert(topAlert, "ขณะนี้นอกเวลารับเคลม แต่ยังเข้าสู่ระบบและสมัครสมาชิกได้ค่ะ", "warning", 3500);
-        }
       }, CONFIG_POLL_INTERVAL);
 
       if (STATUS_POLL_INTERVAL > 0) {
