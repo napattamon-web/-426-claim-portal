@@ -256,7 +256,7 @@
       text-align:center;
     }
 
-    .login-card,.register-card,.claim-card,.success-card{
+    .login-card,.register-card,.claim-card,.status-card,.success-card{
       border-radius:28px;
       background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(253,247,242,.99));
       border:1px solid #efe0d4;
@@ -276,7 +276,8 @@
 
     .login-card::before,
     .register-card::before,
-    .claim-card::before{
+    .claim-card::before,
+    .status-card::before{
       content:"";
       position:absolute;
       inset:0;
@@ -301,6 +302,37 @@
         radial-gradient(circle at 92% 10%, rgba(243,222,208,.95), rgba(243,222,208,0) 35%);
     }
 
+    .claim-card{
+      background:
+        radial-gradient(circle at 10% 12%, rgba(255,255,255,.65), transparent 18%),
+        radial-gradient(circle at 88% 18%, rgba(255,255,255,.45), transparent 16%),
+        linear-gradient(180deg,#fffbf8,#f8efe8);
+    }
+
+    .claim-card::before{
+      opacity:.24;
+      background-image:
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path fill='%23dcb8a2' d='M32 54C24 47 10 37 10 23c0-6 4-10 10-10 5 0 8 3 12 7 4-4 7-7 12-7 6 0 10 4 10 10 0 14-14 24-22 31z'/></svg>"),
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path fill='%23efd5c5' d='M32 54C24 47 10 37 10 23c0-6 4-10 10-10 5 0 8 3 12 7 4-4 7-7 12-7 6 0 10 4 10 10 0 14-14 24-22 31z'/></svg>");
+      background-size:34px 34px,20px 20px;
+      background-position:6% 8%,94% 9%;
+    }
+
+    .status-card{
+      background:
+        radial-gradient(circle at 12% 10%, rgba(255,255,255,.78), transparent 18%),
+        radial-gradient(circle at 90% 12%, rgba(243,222,208,.7), transparent 18%),
+        linear-gradient(180deg,#fffdfb,#f8f0ea);
+    }
+
+    .status-card::before{
+      opacity:.18;
+      background-image:
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path fill='%23d9b79d' d='M32 54C24 47 10 37 10 23c0-6 4-10 10-10 5 0 8 3 12 7 4-4 7-7 12-7 6 0 10 4 10 10 0 14-14 24-22 31z'/></svg>");
+      background-size:24px 24px;
+      background-position:95% 95%;
+    }
+
     .success-card{
       margin-top:12px;
       display:none;
@@ -323,24 +355,32 @@
       color:var(--sub);
     }
 
-    .claim-card{
-      background:
-        radial-gradient(circle at 10% 12%, rgba(255,255,255,.65), transparent 18%),
-        radial-gradient(circle at 88% 18%, rgba(255,255,255,.45), transparent 16%),
-        linear-gradient(180deg,#fffbf8,#f8efe8);
+    .page-nav{
+      display:flex;
+      gap:10px;
+      margin-bottom:12px;
     }
 
-    .claim-card::before{
-      opacity:.24;
-      background-image:
-        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path fill='%23dcb8a2' d='M32 54C24 47 10 37 10 23c0-6 4-10 10-10 5 0 8 3 12 7 4-4 7-7 12-7 6 0 10 4 10 10 0 14-14 24-22 31z'/></svg>"),
-        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path fill='%23efd5c5' d='M32 54C24 47 10 37 10 23c0-6 4-10 10-10 5 0 8 3 12 7 4-4 7-7 12-7 6 0 10 4 10 10 0 14-14 24-22 31z'/></svg>"),
-        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path fill='%23e6c2ae' d='M32 54C24 47 10 37 10 23c0-6 4-10 10-10 5 0 8 3 12 7 4-4 7-7 12-7 6 0 10 4 10 10 0 14-14 24-22 31z'/></svg>");
-      background-size:34px 34px,20px 20px,26px 26px;
-      background-position:6% 8%,94% 9%,88% 92%;
+    .page-pill{
+      flex:1;
+      min-height:46px;
+      border-radius:999px;
+      border:1px solid #e8d9ce;
+      background:linear-gradient(180deg,#fffdfb,#f7efe8);
+      color:#8c7464;
+      font-size:.8rem;
+      font-weight:800;
+      cursor:pointer;
     }
 
-    .claim-top-frame{
+    .page-pill.active{
+      border-color:transparent;
+      background:linear-gradient(135deg,#d9b79d,#be8d70);
+      color:#fff;
+      box-shadow:0 10px 18px rgba(118,84,63,.12);
+    }
+
+    .claim-top-frame,.status-top-frame{
       position:relative;
       margin-bottom:14px;
       padding:16px 14px 14px;
@@ -351,7 +391,8 @@
       overflow:hidden;
     }
 
-    .claim-top-frame::before,.claim-top-frame::after{
+    .claim-top-frame::before,.claim-top-frame::after,
+    .status-top-frame::before,.status-top-frame::after{
       content:"";
       position:absolute;
       width:72px;
@@ -361,10 +402,10 @@
       pointer-events:none;
     }
 
-    .claim-top-frame::before{top:-18px;left:-18px}
-    .claim-top-frame::after{right:-18px;bottom:-18px}
+    .claim-top-frame::before,.status-top-frame::before{top:-18px;left:-18px}
+    .claim-top-frame::after,.status-top-frame::after{right:-18px;bottom:-18px}
 
-    .claim-only-title{
+    .claim-only-title,.status-only-title{
       position:relative;
       font-size:1rem;
       font-weight:800;
@@ -374,7 +415,7 @@
       letter-spacing:.01em;
     }
 
-    .claim-only-sub{
+    .claim-only-sub,.status-only-sub{
       position:relative;
       margin-top:6px;
       font-size:.78rem;
@@ -442,7 +483,6 @@
       box-shadow:inset 0 1px 0 rgba(255,255,255,.65);
       width:100%;
       text-align:center;
-      position:relative;
     }
 
     .input-shell:focus-within{
@@ -874,7 +914,11 @@
       color:var(--warning);
     }
 
-    #summary{margin-top:8px;text-align:center;font-size:.78rem}
+    #summary,#statusSummary{
+      margin-top:8px;
+      text-align:center;
+      font-size:.78rem;
+    }
 
     .summary-pill{
       display:inline-flex;
@@ -888,7 +932,7 @@
       font-weight:800;
     }
 
-    #status,#authStatus{
+    #status,#authStatus,#statusPageText{
       min-height:20px;
       margin-top:8px;
       text-align:center;
@@ -903,7 +947,11 @@
     .status-strong{font-weight:800;color:var(--text)}
     .status-time{font-size:.76rem;color:var(--sub)}
 
-    #results,#historyResults{margin-top:8px;display:grid;gap:8px}
+    #results,#historyResults{
+      margin-top:8px;
+      display:grid;
+      gap:8px;
+    }
 
     .result-item{
       border-radius:20px;
@@ -1006,7 +1054,7 @@
       box-shadow:0 8px 16px rgba(118,84,63,.12);
     }
 
-    .live-card,.history-card{
+    .history-card{
       margin-top:12px;
       padding:14px;
       border-radius:24px;
@@ -1017,7 +1065,7 @@
       overflow:hidden;
     }
 
-    .live-card::after,.history-card::after{
+    .history-card::after{
       content:"";
       position:absolute;
       right:10px;
@@ -1028,7 +1076,7 @@
       background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path fill='%23cda58e' d='M32 54C24 47 10 37 10 23c0-6 4-10 10-10 5 0 8 3 12 7 4-4 7-7 12-7 6 0 10 4 10 10 0 14-14 24-22 31z'/></svg>") center/contain no-repeat;
     }
 
-    .live-header,.history-header{
+    .history-header{
       display:flex;
       justify-content:center;
       align-items:center;
@@ -1037,7 +1085,7 @@
       flex-wrap:wrap;
     }
 
-    .live-title-left,.history-title-left{
+    .history-title-left{
       display:flex;
       align-items:center;
       gap:7px;
@@ -1059,7 +1107,51 @@
       100%{transform:scale(1);opacity:1}
     }
 
-    .live-title-text,.history-title-text{
+    .history-title-text{
+      font-size:.88rem;
+      font-weight:800;
+      color:#7a5d4b;
+    }
+
+    .live-card{
+      margin-top:12px;
+      padding:14px;
+      border-radius:24px;
+      background:linear-gradient(180deg, rgba(255,255,255,.97), rgba(252,246,240,.97));
+      border:1px solid #eadbcf;
+      box-shadow:var(--shadow-soft);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .live-card::after{
+      content:"";
+      position:absolute;
+      right:10px;
+      top:10px;
+      width:22px;
+      height:22px;
+      opacity:.18;
+      background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path fill='%23cda58e' d='M32 54C24 47 10 37 10 23c0-6 4-10 10-10 5 0 8 3 12 7 4-4 7-7 12-7 6 0 10 4 10 10 0 14-14 24-22 31z'/></svg>") center/contain no-repeat;
+    }
+
+    .live-header{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:10px;
+      margin-bottom:10px;
+      flex-wrap:wrap;
+    }
+
+    .live-title-left{
+      display:flex;
+      align-items:center;
+      gap:7px;
+      justify-content:center;
+    }
+
+    .live-title-text{
       font-size:.88rem;
       font-weight:800;
       color:#7a5d4b;
@@ -1315,6 +1407,7 @@
     @media (max-width:480px){
       .app{padding:12px 12px 16px}
       .action-row,.modal-actions{flex-direction:column}
+      .page-nav{flex-direction:column}
       .float-admin{width:58px;height:58px;right:12px;bottom:14px}
       .live-item{gap:8px}
       .live-email{max-width:150px}
@@ -1490,6 +1583,11 @@
       </section>
 
       <section class="view" id="claimView">
+        <div class="page-nav">
+          <button type="button" class="page-pill active" id="goClaimViewBtn">แจ้งเคลม</button>
+          <button type="button" class="page-pill" id="goStatusViewBtn">สถานะการเคลม</button>
+        </div>
+
         <div class="claim-card">
           <div class="claim-top-frame">
             <div class="claim-only-title">รับแจ้งเคลมสำหรับสมาชิก</div>
@@ -1600,19 +1698,35 @@
               <span>↗</span>
             </button>
             <button class="btn-secondary" id="btnClear">ล้างฟอร์ม</button>
-            <button class="btn-danger" id="btnLogout">ออกจากระบบ</button>
           </div>
 
           <div class="helper">
             <span>ℹ️</span>
-            <span>กรุณาตรวจสอบข้อมูลให้ถูกต้องก่อนส่งคำขอ ระบบจะบันทึกสถานะล่าสุดให้โดยอัตโนมัติ</span>
+            <span>หลังส่งคำขอแล้ว สามารถกดเข้าไปดูหน้า “สถานะการเคลม” เพื่อติดตามผลได้ทันที</span>
           </div>
 
           <div id="summary"></div>
           <div id="status"></div>
+        </div>
+      </section>
+
+      <section class="view" id="statusView">
+        <div class="page-nav">
+          <button type="button" class="page-pill" id="goClaimViewBtn2">แจ้งเคลม</button>
+          <button type="button" class="page-pill active" id="goStatusViewBtn2">สถานะการเคลม</button>
+        </div>
+
+        <div class="status-card">
+          <div class="status-top-frame">
+            <div class="status-only-title">สถานะการเคลม</div>
+            <div class="status-only-sub">ตรวจสอบคำขอล่าสุด ประวัติการเคลม และติดต่อแอดมินได้จากหน้านี้</div>
+          </div>
+
+          <div id="statusPageText"></div>
+          <div id="statusSummary"></div>
 
           <div class="step-card" id="claimStepCard" style="display:none;">
-            <div class="step-title">สถานะการเคลม</div>
+            <div class="step-title">สถานะการเคลมล่าสุด</div>
             <div class="step-list" id="claimStepList"></div>
           </div>
 
@@ -1628,6 +1742,11 @@
             <div id="historyResults">
               <div class="live-empty">ยังไม่มีข้อมูลประวัติการเคลม</div>
             </div>
+          </div>
+
+          <div class="action-row">
+            <button class="btn-secondary" id="btnRefreshStatus">รีเฟรชสถานะ</button>
+            <button class="btn-danger" id="btnLogout">ออกจากระบบ</button>
           </div>
         </div>
       </section>
@@ -1720,6 +1839,7 @@
     const btnSubmit = document.getElementById("btnSubmit");
     const btnClear = document.getElementById("btnClear");
     const btnLogout = document.getElementById("btnLogout");
+    const btnRefreshStatus = document.getElementById("btnRefreshStatus");
     const btnPickSlip = document.getElementById("btnPickSlip");
     const btnCameraSlip = document.getElementById("btnCameraSlip");
     const btnCopyAccount = document.getElementById("btnCopyAccount");
@@ -1731,6 +1851,11 @@
     const floatAdminBtn = document.getElementById("floatAdminBtn");
     const showRegisterBtn = document.getElementById("showRegisterBtn");
     const backToLoginBtn = document.getElementById("backToLoginBtn");
+
+    const goClaimViewBtn = document.getElementById("goClaimViewBtn");
+    const goStatusViewBtn = document.getElementById("goStatusViewBtn");
+    const goClaimViewBtn2 = document.getElementById("goClaimViewBtn2");
+    const goStatusViewBtn2 = document.getElementById("goStatusViewBtn2");
 
     const loginEmailInput = document.getElementById("loginEmail");
     const loginPasswordInput = document.getElementById("loginPassword");
@@ -1768,9 +1893,11 @@
 
     const noteCounter = document.getElementById("noteCounter");
     const status = document.getElementById("status");
+    const statusPageText = document.getElementById("statusPageText");
     const authStatus = document.getElementById("authStatus");
     const resultsDiv = document.getElementById("results");
     const summaryDiv = document.getElementById("summary");
+    const statusSummary = document.getElementById("statusSummary");
     const historyResults = document.getElementById("historyResults");
     const claimTimeNote = document.getElementById("claimTimeNote");
     const paymentTitleEl = document.getElementById("paymentTitle");
@@ -1813,6 +1940,14 @@
       const loginActive = document.getElementById("loginView").classList.contains("active");
       const registerActive = document.getElementById("registerView").classList.contains("active");
       heroSection.style.display = (loginActive || registerActive) ? "" : "none";
+    }
+
+    function setMemberPagePills(active) {
+      const isClaim = active === "claim";
+      goClaimViewBtn.classList.toggle("active", isClaim);
+      goStatusViewBtn.classList.toggle("active", !isClaim);
+      goClaimViewBtn2.classList.toggle("active", isClaim);
+      goStatusViewBtn2.classList.toggle("active", !isClaim);
     }
 
     function showLoadingOverlay() {
@@ -1945,12 +2080,8 @@
       if (/\d/.test(password)) score++;
       if (/[^A-Za-z0-9]/.test(password)) score++;
 
-      if (!isStrongPassword(password)) {
-        return { text: "ระดับรหัสผ่าน: อ่อน", cls: "strength-weak" };
-      }
-      if (score <= 4) {
-        return { text: "ระดับรหัสผ่าน: ปานกลาง", cls: "strength-medium" };
-      }
+      if (!isStrongPassword(password)) return { text: "ระดับรหัสผ่าน: อ่อน", cls: "strength-weak" };
+      if (score <= 4) return { text: "ระดับรหัสผ่าน: ปานกลาง", cls: "strength-medium" };
       return { text: "ระดับรหัสผ่าน: แข็งแรง", cls: "strength-strong" };
     }
 
@@ -2365,56 +2496,38 @@
       );
     }
 
-    function renderResult(res, elapsedSec, localEntry) {
+    function renderLatestStatusPage(res, localEntry = {}) {
       resultsDiv.innerHTML = "";
-      summaryDiv.innerHTML = "";
-      clearStatus();
+      statusSummary.innerHTML = "";
+      statusPageText.innerHTML = "";
 
       if (!res) {
-        showStatusError("เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้งค่ะ");
+        statusPageText.innerHTML = "<span class='status-error'>ยังไม่พบข้อมูลสถานะล่าสุด</span>";
         return;
       }
 
       const current = res.current || {
-        email: localEntry.email,
-        expiry: localEntry.expiry,
-        signupYear: localEntry.year,
+        email: localEntry.email || state.member?.email || "-",
+        expiry: localEntry.expiry || "-",
+        signupYear: localEntry.year || signupYearInput.value || "-",
         queueNo: "",
         claimType: localEntry.year === String(claimConfig.paidYear) ? "paid" : "free",
         statusText: res.message || "ระบบรับคำขอแล้ว",
         createdAt: new Date().toISOString()
       };
 
-      state.lastClaimAt = current.createdAt || current.updatedAt || new Date().toISOString();
+      state.lastClaimAt = current.createdAt || current.updatedAt || state.lastClaimAt || new Date().toISOString();
 
       const claimLabel = current.claimType === "paid" ? "แพ็กดูแล 19 บาท" : "เคลมฟรีตามเงื่อนไข";
-      summaryDiv.innerHTML = `<div class="summary-pill">คำขอล่าสุด: ${escapeHtml(claimLabel)}</div>`;
+      statusSummary.innerHTML = `<div class="summary-pill">คำขอล่าสุด: ${escapeHtml(claimLabel)}</div>`;
 
-      const parts = [];
-      parts.push("<span class='status-strong'>" + escapeHtml(res.message || "ระบบรับคำขอเคลมของคุณแล้ว") + "</span>");
-      if (current.queueNo && current.queueNo !== "-") {
-        parts.push("<br>คิวเคลมของคุณ: " + escapeHtml(current.queueNo));
-      }
-      parts.push("<br><span class='status-time'>เวลาแจ้งล่าสุด: " + escapeHtml(formatThaiDateTime(state.lastClaimAt)) + "</span>");
-      if (typeof elapsedSec === "number" && isFinite(elapsedSec)) {
-        const pretty = elapsedSec < 0.1 ? "< 0.1" : elapsedSec.toFixed(1).replace(/\.0$/, "");
-        parts.push("<br><span class='status-time'>ระบบใช้เวลา " + escapeHtml(pretty) + " วินาที</span>");
-      }
+      statusPageText.innerHTML =
+        "<span class='status-strong'>" + escapeHtml(current.statusText || "ระบบรับคำขอแล้ว") + "</span><br>" +
+        "<span class='status-time'>เวลาแจ้งล่าสุด: " + escapeHtml(formatThaiDateTime(state.lastClaimAt)) + "</span>";
 
-      status.innerHTML = parts.join("");
-      status.classList.add(res.ok === false ? "status-error" : "status-ok");
-
-      renderClaimSteps(current.statusText || res.message || "");
-
-      if (res.ok !== false) {
-        noteInput.value = "";
-        updateNoteCounter();
-        if (current.claimType !== "paid") resetSlipPreview();
-        showAlert(claimAlert, res.message || "ส่งคำขอสำเร็จแล้วค่ะ", "success", 5000);
-      }
+      renderClaimSteps(current.statusText || "");
 
       const history = Array.isArray(res.history) && res.history.length ? res.history : [current];
-
       history.forEach((item) => {
         const claimType = (item.claimType || "").toLowerCase() === "paid" ? "paid" : "free";
         const tagText = getClaimTypeLabel(claimType);
@@ -2469,12 +2582,6 @@
 
         resultsDiv.appendChild(card);
       });
-
-      fetchClaimHistory();
-
-      if (history.length) {
-        window.scrollTo({ top: resultsDiv.offsetTop - 16, behavior: "smooth" });
-      }
     }
 
     function setActiveView(viewId) {
@@ -2482,6 +2589,18 @@
         view.classList.toggle("active", view.id === viewId);
       });
       updateHeroVisibility();
+
+      if (viewId === "claimView") setMemberPagePills("claim");
+      if (viewId === "statusView") setMemberPagePills("status");
+    }
+
+    function safeSetMemberView(viewId) {
+      if (!state.token || !state.member) {
+        showAlert(topAlert, "กรุณาเข้าสู่ระบบก่อนใช้งาน", "warning");
+        setActiveView("loginView");
+        return;
+      }
+      setActiveView(viewId);
     }
 
     function updateMemberProfileUI() {
@@ -2500,8 +2619,8 @@
       profileEmail.textContent = state.member.email || "-";
       profileMemberDate.textContent = formatThaiDate(memberDate || "");
       profileSignupYear.textContent = signupYear || "-";
-      profileBox.style.display = "grid";
 
+      profileBox.style.display = "grid";
       signupYearInput.value = signupYear;
       signupYearDisplay.value = signupYear || "";
       syncPaymentSection();
@@ -2774,6 +2893,9 @@
       showToast("ออกจากระบบแล้ว");
       renderHistory([]);
       claimStepCard.style.display = "none";
+      resultsDiv.innerHTML = "";
+      statusSummary.innerHTML = "";
+      statusPageText.innerHTML = "";
     }
 
     function clearForm() {
@@ -2781,7 +2903,6 @@
       noteInput.value = "";
       resetSlipPreview();
       clearStatus();
-      resultsDiv.innerHTML = "";
       summaryDiv.innerHTML = "";
       updateNoteCounter();
       syncPaymentSection();
@@ -2851,12 +2972,28 @@
         const data = await postJson(payload);
         const elapsedSec = (performance.now() - startTime) / 1000;
 
-        renderResult(data, elapsedSec, {
+        state.lastClaimAt = (data.current && (data.current.createdAt || data.current.updatedAt)) || new Date().toISOString();
+
+        const claimType = (data.current && data.current.claimType) || (year === String(claimConfig.paidYear) ? "paid" : "free");
+        const claimLabel = claimType === "paid" ? "แพ็กดูแล 19 บาท" : "เคลมฟรีตามเงื่อนไข";
+
+        summaryDiv.innerHTML = `<div class="summary-pill">คำขอล่าสุด: ${escapeHtml(claimLabel)}</div>`;
+        status.innerHTML =
+          "<span class='status-strong'>" + escapeHtml(data.message || "ระบบรับคำขอเคลมของคุณแล้ว") + "</span><br>" +
+          "<span class='status-time'>เวลาแจ้งล่าสุด: " + escapeHtml(formatThaiDateTime(state.lastClaimAt)) + "</span><br>" +
+          "<span class='status-time'>ระบบใช้เวลา " + escapeHtml((elapsedSec < 0.1 ? "< 0.1" : elapsedSec.toFixed(1).replace(/\.0$/, ""))) + " วินาที</span>";
+        status.className = "status-ok";
+
+        renderLatestStatusPage(data, {
           email: state.member?.email || "-",
           expiry,
-          year,
-          note
+          year
         });
+
+        if (data && data.member) {
+          state.member = data.member;
+          updateMemberProfileUI();
+        }
 
         if (data && (data.todaySummary || data.dailyStatus || data.summary)) {
           renderLiveStatus(data.todaySummary || data.dailyStatus || data.summary);
@@ -2864,12 +3001,18 @@
           fetchTodayStatus();
         }
 
-        if (data && data.member) {
-          state.member = data.member;
-          updateMemberProfileUI();
-        }
-
+        await fetchClaimHistory();
         await initClaimWindowConfig();
+
+        noteInput.value = "";
+        updateNoteCounter();
+        if (claimType !== "paid") resetSlipPreview();
+
+        showAlert(claimAlert, data.message || "ส่งคำขอสำเร็จแล้วค่ะ", "success", 4500);
+        showToast("ส่งคำขอสำเร็จแล้ว");
+        setTimeout(() => {
+          safeSetMemberView("statusView");
+        }, 500);
       } catch (err) {
         showStatusError("เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ");
         state.submitLock = false;
@@ -2887,6 +3030,38 @@
       updateClaimWindowState();
       if (!validateClaimForm()) return;
       openConfirmModal();
+    }
+
+    async function refreshStatusPage() {
+      if (!state.token) {
+        safeSetMemberView("loginView");
+        return;
+      }
+
+      showLoadingOverlay();
+      try {
+        const data = await fetchJsonWithRetry(
+          SCRIPT_URL + "?action=history&token=" + encodeURIComponent(state.token) + "&_t=" + Date.now(),
+          {},
+          1
+        );
+
+        const history = data.history || data.items || [];
+        const current = history.length ? history[0] : null;
+
+        renderLatestStatusPage({
+          current,
+          history,
+          message: current?.statusText || "ยังไม่มีข้อมูลสถานะล่าสุด"
+        });
+
+        await fetchClaimHistory();
+        showToast("รีเฟรชสถานะแล้ว");
+      } catch (err) {
+        statusPageText.innerHTML = "<span class='status-error'>รีเฟรชสถานะไม่สำเร็จ</span>";
+      } finally {
+        hideLoadingOverlay();
+      }
     }
 
     function goSupport() {
@@ -2915,10 +3090,16 @@
       showAuthStatus("");
     });
 
+    goClaimViewBtn.addEventListener("click", () => safeSetMemberView("claimView"));
+    goStatusViewBtn.addEventListener("click", () => safeSetMemberView("statusView"));
+    goClaimViewBtn2.addEventListener("click", () => safeSetMemberView("claimView"));
+    goStatusViewBtn2.addEventListener("click", () => safeSetMemberView("statusView"));
+
     btnLogin.addEventListener("click", handleLogin);
     btnRegister.addEventListener("click", handleRegister);
     btnForgotPassword.addEventListener("click", handleForgotPassword);
     btnLogout.addEventListener("click", handleLogout);
+    btnRefreshStatus.addEventListener("click", refreshStatusPage);
     floatAdminBtn.addEventListener("click", goSupport);
 
     btnPickSlip.addEventListener("click", () => slipInput.click());
