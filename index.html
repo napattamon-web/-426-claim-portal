@@ -16,8 +16,6 @@
       --accent:#bf8f72;
       --accent-2:#e7c6b2;
       --accent-3:#f3ded0;
-      --pink:#f4d7d7;
-      --cream:#fff8f3;
       --success:#6f8e63;
       --danger:#d77d7d;
       --warning:#c58e5e;
@@ -26,8 +24,6 @@
       --shadow:0 20px 44px rgba(118,84,63,.10);
       --shadow-soft:0 12px 26px rgba(118,84,63,.08);
       --r-xl:30px;
-      --r-lg:24px;
-      --r-md:18px;
     }
 
     *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -1993,10 +1989,7 @@
         !!data.token ||
         !!data.member;
 
-      return {
-        ...data,
-        ok
-      };
+      return { ...data, ok };
     }
 
     function updateHeroVisibility() {
@@ -2248,7 +2241,6 @@
       const safe = escapeHtml(raw || "-");
 
       if (!raw) return `<span class="status-pill status-pill--yellow">รอดำเนินการ</span>`;
-
       if (raw.includes("ดึงเมลแล้ว") || raw.includes("เสร็จ") || raw.includes("ใช้งานได้ปกติ") || raw.includes("สำเร็จ")) {
         return `<span class="status-pill status-pill--green">${safe}</span>`;
       }
@@ -2260,9 +2252,6 @@
       }
       if (raw.includes("ไม่ผ่าน") || raw.includes("ชื่อไม่ตรง") || raw.includes("ไม่เข้าเงื่อนไข") || raw.includes("สลิปปลอม")) {
         return `<span class="status-pill status-pill--red">${safe}</span>`;
-      }
-      if (raw.includes("รับคำขอ")) {
-        return `<span class="status-pill status-pill--purple">${safe}</span>`;
       }
       return `<span class="status-pill status-pill--purple">${safe}</span>`;
     }
@@ -2400,6 +2389,12 @@
       let activeIndex = 0;
       const raw = String(statusText || "");
 
+      if (!raw) {
+        claimStepCard.style.display = "none";
+        claimStepList.innerHTML = "";
+        return;
+      }
+
       if (raw.includes("รอตรวจสอบ") || raw.includes("กำลัง")) activeIndex = 1;
       if (raw.includes("ตรวจสอบสลิป") || raw.includes("ดึงเมล")) activeIndex = 2;
       if (raw.includes("เสร็จ") || raw.includes("สำเร็จ") || raw.includes("ใช้งานได้ปกติ")) activeIndex = 3;
@@ -2495,7 +2490,7 @@
     async function fetchClaimHistory() {
       if (!state.token) {
         renderHistory([]);
-        return;
+        return [];
       }
 
       try {
@@ -2504,9 +2499,12 @@
           {},
           1
         );
-        renderHistory(data.history || data.items || []);
+        const items = data.history || data.items || [];
+        renderHistory(items);
+        return items;
       } catch (err) {
         renderHistory([]);
+        return [];
       }
     }
 
@@ -2565,43 +2563,42 @@
     function fillMiniStats(current) {
       miniQueueNo.textContent = current?.queueNo || "-";
       miniClaimType.textContent = current?.claimType === "paid" ? "19฿" : (current?.claimType === "free" ? "ฟรี" : "-");
-      miniLastTime.textContent = formatShortThaiTime(current?.createdAt || current?.updatedAt || state.lastClaimAt);
+      miniLastTime.textContent = formatShortThaiTime(current?.createdAt || current?.updatedAt || "");
     }
 
-    function renderLatestStatusPage(res, localEntry = {}) {
+    function renderEmptyStatusPage() {
+      resultsDiv.innerHTML = '<div class="live-empty">คุณยังไม่มีรายการเคลมในระบบ</div>';
+      statusSummary.innerHTML = "";
+      statusPageText.innerHTML = "<span class='status-info'>คุณยังไม่มีรายการเคลมในระบบ</span>";
+      claimStepCard.style.display = "none";
+      claimStepList.innerHTML = "";
+      fillMiniStats(null);
+    }
+
+    function renderLatestStatusPage(res) {
       resultsDiv.innerHTML = "";
       statusSummary.innerHTML = "";
       statusPageText.innerHTML = "";
 
-      if (!res) {
-        statusPageText.innerHTML = "<span class='status-error'>ยังไม่พบข้อมูลสถานะล่าสุด</span>";
-        fillMiniStats(null);
+      const history = Array.isArray(res?.history) ? res.history : [];
+      const current = res?.current || (history.length ? history[0] : null);
+
+      if (!current) {
+        renderEmptyStatusPage();
         return;
       }
 
-      const current = res.current || {
-        email: localEntry.email || state.member?.email || "-",
-        expiry: localEntry.expiry || "-",
-        signupYear: localEntry.year || signupYearInput.value || "-",
-        queueNo: "",
-        claimType: localEntry.year === String(claimConfig.paidYear) ? "paid" : "free",
-        statusText: res.message || "ระบบรับคำขอแล้ว",
-        createdAt: new Date().toISOString()
-      };
-
-      state.lastClaimAt = current.createdAt || current.updatedAt || state.lastClaimAt || new Date().toISOString();
+      state.lastClaimAt = current.createdAt || current.updatedAt || "";
       fillMiniStats(current);
 
       const claimLabel = current.claimType === "paid" ? "แพ็กดูแล 19 บาท" : "เคลมฟรีตามเงื่อนไข";
       statusSummary.innerHTML = `<div class="summary-pill">คำขอล่าสุด: ${escapeHtml(claimLabel)}</div>`;
-
       statusPageText.innerHTML =
-        "<span class='status-strong'>" + decorateStatusText(current.statusText || "ระบบรับคำขอแล้ว") + "</span><br>" +
+        "<span class='status-strong'>" + decorateStatusText(current.statusText || "รอดำเนินการ") + "</span><br>" +
         "<span class='status-time'>เวลาแจ้งล่าสุด: " + escapeHtml(formatThaiDateTime(state.lastClaimAt)) + "</span>";
 
       renderClaimSteps(current.statusText || "");
 
-      const history = Array.isArray(res.history) && res.history.length ? res.history : [current];
       history.forEach((item) => {
         const claimType = (item.claimType || "").toLowerCase() === "paid" ? "paid" : "free";
         const tagText = getClaimTypeLabel(claimType);
@@ -2610,7 +2607,7 @@
         const safeYear = escapeHtml(item.signupYear || "-");
         const safeQueue = escapeHtml(item.queueNo || "-");
         const safeStatus = item.statusText || "รอดำเนินการ";
-        const lastAt = formatThaiDateTime(item.createdAt || item.updatedAt || state.lastClaimAt);
+        const lastAt = formatThaiDateTime(item.createdAt || item.updatedAt || "");
 
         const entry = {
           email: item.email || "-",
@@ -2667,13 +2664,24 @@
       if (viewId === "statusView") setMemberPagePills("status");
     }
 
-    function safeSetMemberView(viewId) {
+    async function safeSetMemberView(viewId) {
       if (!state.token || !state.member) {
         showAlert(topAlert, "กรุณาเข้าสู่ระบบก่อนใช้งาน", "warning");
         setActiveView("loginView");
         return;
       }
+
       setActiveView(viewId);
+
+      if (viewId === "statusView") {
+        showLoadingOverlay();
+        try {
+          const items = await fetchClaimHistory();
+          renderLatestStatusPage({ history: items, current: items[0] || null });
+        } finally {
+          hideLoadingOverlay();
+        }
+      }
     }
 
     function updateMemberProfileUI() {
@@ -2700,7 +2708,7 @@
     }
 
     function syncPaymentSection() {
-      const year = (signupYearInput.value || "").trim();
+      const year = normalizeText(signupYearInput.value);
       if (year && year === String(claimConfig.paidYear)) {
         paymentSection.style.display = "block";
       } else {
@@ -2915,7 +2923,6 @@
         }
 
         registerSuccessCard.classList.add("show");
-
         state.token = data.token || state.token || "";
         state.member = data.member || data.user || {
           email: payload.email,
@@ -3006,11 +3013,7 @@
       showAlert(topAlert, "ออกจากระบบเรียบร้อยแล้วค่ะ", "info");
       showToast("ออกจากระบบแล้ว");
       renderHistory([]);
-      claimStepCard.style.display = "none";
-      resultsDiv.innerHTML = "";
-      statusSummary.innerHTML = "";
-      statusPageText.innerHTML = "";
-      fillMiniStats(null);
+      renderEmptyStatusPage();
     }
 
     function clearForm() {
@@ -3096,9 +3099,10 @@
         const data = await postJson(payload);
         const elapsedSec = (performance.now() - startTime) / 1000;
 
-        state.lastClaimAt = (data.current && (data.current.createdAt || data.current.updatedAt)) || new Date().toISOString();
+        const current = data.current || null;
+        state.lastClaimAt = current?.createdAt || current?.updatedAt || "";
 
-        const claimType = (data.current && data.current.claimType) || (year === String(claimConfig.paidYear) ? "paid" : "free");
+        const claimType = current?.claimType || (year === String(claimConfig.paidYear) ? "paid" : "free");
         const claimLabel = claimType === "paid" ? "แพ็กดูแล 19 บาท" : "เคลมฟรีตามเงื่อนไข";
 
         summaryDiv.innerHTML = `<div class="summary-pill">คำขอล่าสุด: ${escapeHtml(claimLabel)}</div>`;
@@ -3108,11 +3112,8 @@
           "<span class='status-time'>ระบบใช้เวลา " + escapeHtml((elapsedSec < 0.1 ? "< 0.1" : elapsedSec.toFixed(1).replace(/\.0$/, ""))) + " วินาที</span>";
         status.className = "status-ok";
 
-        renderLatestStatusPage(data, {
-          email: state.member?.email || "-",
-          expiry,
-          year
-        });
+        const items = await fetchClaimHistory();
+        renderLatestStatusPage({ history: items, current: items[0] || current });
 
         if (data && data.member) {
           state.member = data.member;
@@ -3125,7 +3126,6 @@
           fetchTodayStatus();
         }
 
-        await fetchClaimHistory();
         await initClaimWindowConfig();
 
         noteInput.value = "";
@@ -3134,6 +3134,7 @@
 
         showAlert(claimAlert, data.message || "ส่งคำขอสำเร็จแล้วค่ะ", "success", 4500);
         showToast("ส่งคำขอสำเร็จแล้ว");
+        state.submitLock = false;
         setTimeout(() => {
           safeSetMemberView("statusView");
         }, 500);
@@ -3143,10 +3144,8 @@
       } finally {
         state.isLoading = false;
         hideLoadingOverlay();
-        if (!state.submitLock) {
-          btnSubmit.disabled = false;
-          btnSubmit.innerHTML = "<span>ส่งคำขอเคลม</span><span>↗</span>";
-        }
+        btnSubmit.disabled = false;
+        btnSubmit.innerHTML = "<span>ส่งคำขอเคลม</span><span>↗</span>";
       }
     }
 
@@ -3164,22 +3163,8 @@
 
       showLoadingOverlay();
       try {
-        const data = await fetchJsonWithRetry(
-          SCRIPT_URL + "?action=history&token=" + encodeURIComponent(state.token) + "&_t=" + Date.now(),
-          {},
-          1
-        );
-
-        const history = data.history || data.items || [];
-        const current = history.length ? history[0] : null;
-
-        renderLatestStatusPage({
-          current,
-          history,
-          message: current?.statusText || "ยังไม่มีข้อมูลสถานะล่าสุด"
-        });
-
-        await fetchClaimHistory();
+        const items = await fetchClaimHistory();
+        renderLatestStatusPage({ history: items, current: items[0] || null });
         showToast("รีเฟรชสถานะแล้ว");
       } catch (err) {
         statusPageText.innerHTML = "<span class='status-error'>รีเฟรชสถานะไม่สำเร็จ</span>";
@@ -3301,7 +3286,7 @@
       updatePasswordStrengthUI();
       loadRememberedLogin();
       updateHeroVisibility();
-      fillMiniStats(null);
+      renderEmptyStatusPage();
 
       await initClaimWindowConfig();
       updateClaimWindowState();
