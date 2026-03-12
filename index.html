@@ -1500,7 +1500,7 @@
     }
 
     async function initClaimWindowConfig() {
-      if (!SCRIPT_URL || SCRIPT_URL === "https://script.google.com/macros/s/AKfycbyJ7ekPA4WWbLcQlzf6Vk6iiHw2sy9pVEGXL_b3_uKbzgqtEJSRvxDs2m4FGcpfkLyS/exec") {
+      if (!SCRIPT_URL || SCRIPT_URL === "PUT_YOUR_WEB_APP_URL_HERE") {
         updateClaimWindowState();
         return;
       }
@@ -1822,7 +1822,7 @@
     }
 
     async function fetchTodayStatus(initial = false) {
-      if (!SCRIPT_URL || SCRIPT_URL === "PUT_YOUR_WEB_APP_URL_HERE") return;
+      if (!SCRIPT_URL || SCRIPT_URL === "https://script.google.com/macros/s/AKfycbzQcxawo3plttIh1tXpBckAlRqiO5V2nn2dHH_Bh1ujrQnJepa6GJQnOzAfQ_N5hAu2/exec") return;
       try {
         const data = await fetchJsonWithRetry(SCRIPT_URL + "?action=todayStatus&_t=" + Date.now(), { cache: "no-store" }, 1);
         renderLiveStatus(data.todaySummary || data.summary || data.dailyStatus || null);
