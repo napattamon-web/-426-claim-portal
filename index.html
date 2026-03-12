@@ -15,10 +15,14 @@
       --sub:#9a8679;
       --accent:#bf8f72;
       --accent-2:#e7c6b2;
+      --accent-3:#f3ded0;
+      --pink:#f4d7d7;
+      --cream:#fff8f3;
       --success:#6f8e63;
       --danger:#d77d7d;
       --warning:#c58e5e;
       --info:#7588b8;
+      --purple:#a48cc9;
       --shadow:0 20px 44px rgba(118,84,63,.10);
       --shadow-soft:0 12px 26px rgba(118,84,63,.08);
       --r-xl:30px;
@@ -266,11 +270,8 @@
       overflow:hidden;
     }
 
-    .login-card{
-      background:
-        radial-gradient(circle at 8% 10%, rgba(255,255,255,.8), transparent 16%),
-        radial-gradient(circle at 92% 12%, rgba(255,255,255,.55), transparent 14%),
-        linear-gradient(180deg, rgba(255,255,255,.97), rgba(253,247,242,.99));
+    .login-card,.register-card,.claim-card,.status-card{
+      isolation:isolate;
     }
 
     .login-card::before,
@@ -283,15 +284,15 @@
       pointer-events:none;
       opacity:.22;
       background-repeat:no-repeat;
+      z-index:-1;
     }
 
     .login-card::before{
       background-image:
         url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path fill='%23e9c8b8' d='M32 54C24 47 10 37 10 23c0-6 4-10 10-10 5 0 8 3 12 7 4-4 7-7 12-7 6 0 10 4 10 10 0 14-14 24-22 31z'/></svg>"),
-        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path fill='%23f0ddd2' d='M32 54C24 47 10 37 10 23c0-6 4-10 10-10 5 0 8 3 12 7 4-4 7-7 12-7 6 0 10 4 10 10 0 14-14 24-22 31z'/></svg>"),
-        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path fill='%23dec0ae' d='M32 54C24 47 10 37 10 23c0-6 4-10 10-10 5 0 8 3 12 7 4-4 7-7 12-7 6 0 10 4 10 10 0 14-14 24-22 31z'/></svg>");
-      background-size:28px 28px,18px 18px,22px 22px;
-      background-position:8% 10%,92% 9%,86% 90%;
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path fill='%23f0ddd2' d='M32 54C24 47 10 37 10 23c0-6 4-10 10-10 5 0 8 3 12 7 4-4 7-7 12-7 6 0 10 4 10 10 0 14-14 24-22 31z'/></svg>");
+      background-size:28px 28px,18px 18px;
+      background-position:8% 10%,92% 9%;
     }
 
     .register-card::before{
@@ -301,35 +302,13 @@
         radial-gradient(circle at 92% 10%, rgba(243,222,208,.95), rgba(243,222,208,0) 35%);
     }
 
-    .claim-card{
-      background:
-        radial-gradient(circle at 10% 12%, rgba(255,255,255,.65), transparent 18%),
-        radial-gradient(circle at 88% 18%, rgba(255,255,255,.45), transparent 16%),
-        linear-gradient(180deg,#fffbf8,#f8efe8);
-    }
-
-    .claim-card::before{
-      opacity:.24;
-      background-image:
-        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path fill='%23dcb8a2' d='M32 54C24 47 10 37 10 23c0-6 4-10 10-10 5 0 8 3 12 7 4-4 7-7 12-7 6 0 10 4 10 10 0 14-14 24-22 31z'/></svg>"),
-        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path fill='%23efd5c5' d='M32 54C24 47 10 37 10 23c0-6 4-10 10-10 5 0 8 3 12 7 4-4 7-7 12-7 6 0 10 4 10 10 0 14-14 24-22 31z'/></svg>");
-      background-size:34px 34px,20px 20px;
-      background-position:6% 8%,94% 9%;
-    }
-
-    .status-card{
-      background:
-        radial-gradient(circle at 12% 10%, rgba(255,255,255,.78), transparent 18%),
-        radial-gradient(circle at 90% 12%, rgba(243,222,208,.7), transparent 18%),
-        linear-gradient(180deg,#fffdfb,#f8f0ea);
-    }
-
+    .claim-card::before,
     .status-card::before{
-      opacity:.18;
+      opacity:.22;
       background-image:
-        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path fill='%23d9b79d' d='M32 54C24 47 10 37 10 23c0-6 4-10 10-10 5 0 8 3 12 7 4-4 7-7 12-7 6 0 10 4 10 10 0 14-14 24-22 31z'/></svg>");
-      background-size:24px 24px;
-      background-position:95% 95%;
+        radial-gradient(circle at 10% 8%, rgba(255,255,255,.85), rgba(255,255,255,0) 24%),
+        radial-gradient(circle at 90% 10%, rgba(243,222,208,.85), rgba(243,222,208,0) 22%),
+        radial-gradient(circle at 88% 90%, rgba(231,198,178,.45), rgba(231,198,178,0) 18%);
     }
 
     .success-card{
@@ -370,6 +349,19 @@
       font-size:.8rem;
       font-weight:800;
       cursor:pointer;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .page-pill::after{
+      content:"";
+      position:absolute;
+      inset:auto -14px -18px auto;
+      width:44px;
+      height:44px;
+      border-radius:999px;
+      background:radial-gradient(circle, rgba(255,255,255,.45), rgba(255,255,255,0));
+      pointer-events:none;
     }
 
     .page-pill.active{
@@ -443,6 +435,34 @@
 
     .warning-blink .icon{font-size:1.05rem;flex-shrink:0}
     @keyframes warningPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.025);opacity:.9}}
+
+    .status-mini-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin:0 0 12px;
+    }
+
+    .mini-stat{
+      border-radius:20px;
+      padding:12px 10px;
+      background:linear-gradient(180deg,#fffdfb,#faf2eb);
+      border:1px solid #eaded3;
+      box-shadow:0 8px 16px rgba(118,84,63,.05);
+    }
+
+    .mini-stat-value{
+      font-size:.95rem;
+      font-weight:800;
+      color:#7a5d4b;
+    }
+
+    .mini-stat-label{
+      margin-top:4px;
+      font-size:.72rem;
+      color:var(--sub);
+      line-height:1.5;
+    }
 
     .field-group{
       display:flex;
@@ -946,14 +966,13 @@
     .status-strong{font-weight:800;color:var(--text)}
     .status-time{font-size:.76rem;color:var(--sub)}
 
-    #results,#historyResults,#moveHistoryResults{
+    #results,#historyResults{
       margin-top:8px;
       display:grid;
       gap:8px;
     }
 
-    .result-item,
-    .move-item{
+    .result-item{
       border-radius:20px;
       border:1px solid #eadfd5;
       background:rgba(255,255,255,.96);
@@ -962,8 +981,7 @@
       text-align:center;
     }
 
-    .item-header,
-    .move-header{
+    .item-header{
       width:100%;
       font-size:.72rem;
       color:var(--sub);
@@ -973,8 +991,7 @@
       margin-bottom:6px;
     }
 
-    .item-email,
-    .move-title{
+    .item-email{
       width:100%;
       font-size:.9rem;
       font-weight:800;
@@ -982,8 +999,7 @@
       text-align:center;
     }
 
-    .item-tag,
-    .move-tag{
+    .item-tag{
       font-size:.72rem;
       padding:4px 9px;
       border-radius:999px;
@@ -996,10 +1012,8 @@
     }
 
     .item-tag.paid{background:#fff5eb;border-color:#efd9bf;color:#b57a45}
-    .move-tag{background:#f4efe9;border-color:#e5d7cb}
 
-    .item-meta,
-    .move-meta{
+    .item-meta{
       display:flex;
       flex-wrap:wrap;
       gap:8px;
@@ -1010,13 +1024,7 @@
       text-align:center;
     }
 
-    .item-body,
-    .move-body{
-      text-align:center;
-      font-size:.84rem;
-      line-height:1.65;
-      margin-bottom:8px;
-    }
+    .item-body{text-align:center;font-size:.84rem;line-height:1.65;margin-bottom:8px}
 
     .result-actions{
       display:grid;
@@ -1065,8 +1073,7 @@
       box-shadow:0 8px 16px rgba(118,84,63,.12);
     }
 
-    .history-card,
-    .move-history-card{
+    .history-card,.live-card{
       margin-top:12px;
       padding:14px;
       border-radius:24px;
@@ -1077,8 +1084,7 @@
       overflow:hidden;
     }
 
-    .history-card::after,
-    .move-history-card::after{
+    .history-card::after,.live-card::after{
       content:"";
       position:absolute;
       right:10px;
@@ -1089,8 +1095,7 @@
       background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path fill='%23cda58e' d='M32 54C24 47 10 37 10 23c0-6 4-10 10-10 5 0 8 3 12 7 4-4 7-7 12-7 6 0 10 4 10 10 0 14-14 24-22 31z'/></svg>") center/contain no-repeat;
     }
 
-    .history-header,
-    .move-history-header{
+    .history-header,.live-header{
       display:flex;
       justify-content:center;
       align-items:center;
@@ -1099,8 +1104,7 @@
       flex-wrap:wrap;
     }
 
-    .history-title-left,
-    .move-history-title-left{
+    .history-title-left,.live-title-left{
       display:flex;
       align-items:center;
       gap:7px;
@@ -1122,52 +1126,7 @@
       100%{transform:scale(1);opacity:1}
     }
 
-    .history-title-text,
-    .move-history-title-text{
-      font-size:.88rem;
-      font-weight:800;
-      color:#7a5d4b;
-    }
-
-    .live-card{
-      margin-top:12px;
-      padding:14px;
-      border-radius:24px;
-      background:linear-gradient(180deg, rgba(255,255,255,.97), rgba(252,246,240,.97));
-      border:1px solid #eadbcf;
-      box-shadow:var(--shadow-soft);
-      position:relative;
-      overflow:hidden;
-    }
-
-    .live-card::after{
-      content:"";
-      position:absolute;
-      right:10px;
-      top:10px;
-      width:22px;
-      height:22px;
-      opacity:.18;
-      background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path fill='%23cda58e' d='M32 54C24 47 10 37 10 23c0-6 4-10 10-10 5 0 8 3 12 7 4-4 7-7 12-7 6 0 10 4 10 10 0 14-14 24-22 31z'/></svg>") center/contain no-repeat;
-    }
-
-    .live-header{
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      gap:10px;
-      margin-bottom:10px;
-      flex-wrap:wrap;
-    }
-
-    .live-title-left{
-      display:flex;
-      align-items:center;
-      gap:7px;
-      justify-content:center;
-    }
-
-    .live-title-text{
+    .history-title-text,.live-title-text{
       font-size:.88rem;
       font-weight:800;
       color:#7a5d4b;
@@ -1211,52 +1170,55 @@
 
     .live-status-text{
       font-size:.77rem;
+      color:var(--sub);
       white-space:nowrap;
       text-align:right;
       flex-shrink:0;
     }
 
+    .live-empty{text-align:center;font-size:.8rem;color:var(--sub);padding:8px 0}
+
     .status-pill{
       display:inline-flex;
       align-items:center;
-      padding:4px 10px;
+      justify-content:center;
+      padding:5px 10px;
       border-radius:999px;
-      font-size:.73rem;
+      font-size:.72rem;
       font-weight:800;
       border:1px solid transparent;
+      line-height:1.2;
     }
 
     .status-pill--green{
-      background:#eaf6ed;
-      border-color:#cde4d3;
-      color:#467055;
+      background:#edf8ef;
+      color:#47734d;
+      border-color:#cfe4d2;
     }
 
     .status-pill--yellow{
-      background:#fff8e7;
-      border-color:#f0e0ab;
-      color:#8a6d1e;
+      background:#fff7e9;
+      color:#9c7330;
+      border-color:#f1dfb8;
     }
 
     .status-pill--red{
       background:#fff1f1;
-      border-color:#efc4c4;
-      color:#b95656;
+      color:#b85d5d;
+      border-color:#efcccc;
     }
 
     .status-pill--blue{
-      background:#eef5ff;
-      border-color:#cfe0ff;
-      color:#4f72b8;
+      background:#eef4ff;
+      color:#5675af;
+      border-color:#d5e0fb;
     }
 
-    .status-pill--neutral{
-      background:#f4efea;
-      border-color:#e3d7cc;
-      color:#7c6a5e;
+    .status-pill--purple{
+      background:#f4efff;
+      color:#7860a7;
+      border-color:#dfd4f7;
     }
-
-    .live-empty{text-align:center;font-size:.8rem;color:var(--sub);padding:8px 0}
 
     .alert-box{
       display:none;
@@ -1463,6 +1425,7 @@
       .app{padding:12px 12px 16px}
       .action-row,.modal-actions{flex-direction:column}
       .page-nav{flex-direction:column}
+      .status-mini-grid{grid-template-columns:1fr}
       .float-admin{width:58px;height:58px;right:12px;bottom:14px}
       .live-item{gap:8px}
       .live-email{max-width:150px}
@@ -1774,7 +1737,22 @@
         <div class="status-card">
           <div class="status-top-frame">
             <div class="status-only-title">สถานะการเคลม</div>
-            <div class="status-only-sub">ตรวจสอบคำขอล่าสุด ประวัติการเคลม และประวัติย้ายกลุ่มได้จากหน้านี้</div>
+            <div class="status-only-sub">ตรวจสอบคำขอล่าสุด ประวัติการเคลม และติดต่อแอดมินได้จากหน้านี้</div>
+          </div>
+
+          <div class="status-mini-grid">
+            <div class="mini-stat">
+              <div class="mini-stat-value" id="miniQueueNo">-</div>
+              <div class="mini-stat-label">คิวเคลมล่าสุด</div>
+            </div>
+            <div class="mini-stat">
+              <div class="mini-stat-value" id="miniClaimType">-</div>
+              <div class="mini-stat-label">ประเภทเคลม</div>
+            </div>
+            <div class="mini-stat">
+              <div class="mini-stat-value" id="miniLastTime">-</div>
+              <div class="mini-stat-label">แจ้งล่าสุด</div>
+            </div>
           </div>
 
           <div id="statusPageText"></div>
@@ -1796,18 +1774,6 @@
             </div>
             <div id="historyResults">
               <div class="live-empty">ยังไม่มีข้อมูลประวัติการเคลม</div>
-            </div>
-          </div>
-
-          <div class="move-history-card">
-            <div class="move-history-header">
-              <div class="move-history-title-left">
-                <span class="live-dot"></span>
-                <span class="move-history-title-text">ประวัติย้ายกลุ่ม (ละเอียด)</span>
-              </div>
-            </div>
-            <div id="moveHistoryResults">
-              <div class="live-empty">ยังไม่มีข้อมูลประวัติย้ายกลุ่ม</div>
             </div>
           </div>
 
@@ -1899,9 +1865,7 @@
       member: null,
       token: localStorage.getItem(TOKEN_KEY) || "",
       lastClaimAt: "",
-      submitLock: false,
-      cachedClaimHistory: [],
-      cachedMoveHistoryDetailed: []
+      submitLock: false
     };
 
     const heroSection = document.getElementById("heroSection");
@@ -1968,7 +1932,6 @@
     const summaryDiv = document.getElementById("summary");
     const statusSummary = document.getElementById("statusSummary");
     const historyResults = document.getElementById("historyResults");
-    const moveHistoryResults = document.getElementById("moveHistoryResults");
     const claimTimeNote = document.getElementById("claimTimeNote");
     const paymentTitleEl = document.getElementById("paymentTitle");
     const paymentNoteEl = document.getElementById("paymentNote");
@@ -1982,6 +1945,10 @@
     const profileEmail = document.getElementById("profileEmail");
     const profileMemberDate = document.getElementById("profileMemberDate");
     const profileSignupYear = document.getElementById("profileSignupYear");
+
+    const miniQueueNo = document.getElementById("miniQueueNo");
+    const miniClaimType = document.getElementById("miniClaimType");
+    const miniLastTime = document.getElementById("miniLastTime");
 
     const onlineStatus = document.getElementById("onlineStatus");
     const onlineDot = document.getElementById("onlineDot");
@@ -2105,7 +2072,14 @@
       const yy = d.getFullYear() + 543;
       const hh = String(d.getHours()).padStart(2, "0");
       const mi = String(d.getMinutes()).padStart(2, "0");
-      return `${dd} ${mm} ${yy} เวลา ${hh}:${mi} น.`;
+      return `${dd} ${mm} ${yy} เวลา ${hh}:${mi}`;
+    }
+
+    function formatShortThaiTime(value) {
+      if (!value) return "-";
+      const d = new Date(value);
+      if (isNaN(d.getTime())) return "-";
+      return `${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`;
     }
 
     function formatThaiToday() {
@@ -2159,26 +2133,6 @@
       const { text, cls } = getPasswordStrength(registerPassword.value || "");
       registerPasswordStrength.textContent = text;
       registerPasswordStrength.className = "password-strength " + cls;
-    }
-
-    function decorateStatusText(text) {
-      const raw = String(text || "").trim();
-      const t = escapeHtml(raw || "-");
-
-      if (!raw) return `<span class="status-pill status-pill--neutral">-</span>`;
-      if (raw.includes("ดึงเมลแล้ว") || raw.includes("ใช้งานได้ปกติ") || raw.includes("เสร็จ") || raw.includes("สำเร็จ")) {
-        return `<span class="status-pill status-pill--green">${t}</span>`;
-      }
-      if (raw.includes("ไม่เข้าเงื่อนไข") || raw.includes("สลิปปลอม") || raw.includes("ชื่อไม่ตรง") || raw.includes("ไม่ผ่าน")) {
-        return `<span class="status-pill status-pill--red">${t}</span>`;
-      }
-      if (raw.includes("รอตรวจสอบสลิป")) {
-        return `<span class="status-pill status-pill--blue">${t}</span>`;
-      }
-      if (raw.includes("รอดำเนินการ") || raw.includes("กำลัง") || raw.includes("ตรวจสอบ")) {
-        return `<span class="status-pill status-pill--yellow">${t}</span>`;
-      }
-      return `<span class="status-pill status-pill--neutral">${t}</span>`;
     }
 
     async function fetchJsonWithRetry(url, options = {}, retries = 1) {
@@ -2263,28 +2217,28 @@
       slipStatusHint.className = "upload-status";
     }
 
-    function updateHeroVisibility() {
-      const loginActive = document.getElementById("loginView").classList.contains("active");
-      const registerActive = document.getElementById("registerView").classList.contains("active");
-      heroSection.style.display = (loginActive || registerActive) ? "" : "none";
-    }
+    function decorateStatusText(text) {
+      const raw = String(text || "").trim();
+      const safe = escapeHtml(raw || "-");
 
-    function setActiveView(viewId) {
-      document.querySelectorAll(".view").forEach(view => {
-        view.classList.toggle("active", view.id === viewId);
-      });
-      updateHeroVisibility();
-      if (viewId === "claimView") setMemberPagePills("claim");
-      if (viewId === "statusView") setMemberPagePills("status");
-    }
+      if (!raw) return `<span class="status-pill status-pill--yellow">รอดำเนินการ</span>`;
 
-    function safeSetMemberView(viewId) {
-      if (!state.token || !state.member) {
-        showAlert(topAlert, "กรุณาเข้าสู่ระบบก่อนใช้งาน", "warning");
-        setActiveView("loginView");
-        return;
+      if (raw.includes("ดึงเมลแล้ว") || raw.includes("เสร็จ") || raw.includes("ใช้งานได้ปกติ") || raw.includes("สำเร็จ")) {
+        return `<span class="status-pill status-pill--green">${safe}</span>`;
       }
-      setActiveView(viewId);
+      if (raw.includes("รอตรวจสอบสลิป")) {
+        return `<span class="status-pill status-pill--blue">${safe}</span>`;
+      }
+      if (raw.includes("กำลัง") || raw.includes("รอดำเนินการ") || raw.includes("ตรวจสอบ")) {
+        return `<span class="status-pill status-pill--yellow">${safe}</span>`;
+      }
+      if (raw.includes("ไม่ผ่าน") || raw.includes("ชื่อไม่ตรง") || raw.includes("ไม่เข้าเงื่อนไข") || raw.includes("สลิปปลอม")) {
+        return `<span class="status-pill status-pill--red">${safe}</span>`;
+      }
+      if (raw.includes("รับคำขอ")) {
+        return `<span class="status-pill status-pill--purple">${safe}</span>`;
+      }
+      return `<span class="status-pill status-pill--purple">${safe}</span>`;
     }
 
     function renderConfigToUI() {
@@ -2339,7 +2293,7 @@
       const now = new Date();
       const hour = now.getHours();
       const day = now.getDay();
-      const openDays = Array.isArray(claimConfig.claimOpenDays) && claimConfig.claimOpenDays.length ? claimConfig.claimOpenDays : [1, 2, 3, 4, 5, 6];
+      const openDays = Array.isArray(claimConfig.claimOpenDays) && claimConfig.claimOpenDays.length ? claimConfig.claimOpenDays : [1,2,3,4,5,6];
       return openDays.includes(day) && hour >= claimConfig.claimStartHour && hour < claimConfig.claimEndHour;
     }
 
@@ -2364,39 +2318,6 @@
         onlineText.textContent = "สถานะ: ปิดรับเคลม";
         claimTimeNote.classList.add("closed");
         claimTimeNote.textContent = claimConfig.claimOpenText;
-      }
-    }
-
-    function updateMemberProfileUI() {
-      if (!state.member) {
-        profileBox.style.display = "none";
-        signupYearInput.value = "";
-        signupYearDisplay.value = "";
-        paymentSection.style.display = "none";
-        return;
-      }
-
-      const memberDate = state.member.memberDate || state.member.lastRenewDate || state.member.signupDate || "";
-      const signupYear = state.member.signupYearThai || thaiYearFromYmd(memberDate) || "";
-      state.member.signupYearThai = signupYear;
-
-      profileEmail.textContent = state.member.email || "-";
-      profileMemberDate.textContent = formatThaiDate(memberDate || "");
-      profileSignupYear.textContent = signupYear || "-";
-
-      profileBox.style.display = "grid";
-      signupYearInput.value = signupYear;
-      signupYearDisplay.value = signupYear || "";
-      syncPaymentSection();
-    }
-
-    function syncPaymentSection() {
-      const year = (signupYearInput.value || "").trim();
-      if (year && year === String(claimConfig.paidYear)) {
-        paymentSection.style.display = "block";
-      } else {
-        paymentSection.style.display = "none";
-        resetSlipPreview();
       }
     }
 
@@ -2500,14 +2421,12 @@
 
     function renderHistory(items) {
       historyResults.innerHTML = "";
-      state.cachedClaimHistory = Array.isArray(items) ? items : [];
-
-      if (!state.cachedClaimHistory.length) {
+      if (!Array.isArray(items) || !items.length) {
         historyResults.innerHTML = '<div class="live-empty">ยังไม่มีข้อมูลประวัติการเคลม</div>';
         return;
       }
 
-      state.cachedClaimHistory.forEach((item) => {
+      items.forEach((item) => {
         const claimType = (item.claimType || "").toLowerCase() === "paid" ? "paid" : "free";
         const tagText = claimType === "paid" ? "แพ็กดูแล 19 บาท" : "เคลมฟรี";
         const safeEmail = escapeHtml(item.email || "-");
@@ -2537,41 +2456,6 @@
       });
     }
 
-    function renderMoveHistoryDetailed(items) {
-      moveHistoryResults.innerHTML = "";
-      state.cachedMoveHistoryDetailed = Array.isArray(items) ? items : [];
-
-      if (!state.cachedMoveHistoryDetailed.length) {
-        moveHistoryResults.innerHTML = '<div class="live-empty">ยังไม่มีข้อมูลประวัติย้ายกลุ่ม</div>';
-        return;
-      }
-
-      state.cachedMoveHistoryDetailed.forEach((item) => {
-        const title = item.title || item.subject || item.groupName || item.moveType || "รายการย้ายกลุ่ม";
-        const statusText = item.statusText || item.status || item.result || "-";
-        const dateText = item.date || item.createdAt || item.updatedAt || item.moveDate || "";
-        const detailText = item.detail || item.description || item.note || item.remark || "-";
-        const fromGroup = item.fromGroup || item.oldGroup || "";
-        const toGroup = item.toGroup || item.newGroup || "";
-
-        const card = document.createElement("div");
-        card.className = "move-item";
-        card.innerHTML = `
-          <div class="move-header">Move History</div>
-          <div class="move-title">${escapeHtml(title)}</div>
-          <div class="move-tag">${escapeHtml(item.type || "ประวัติย้ายกลุ่ม")}</div>
-          <div class="move-meta">
-            ${dateText ? `<span>วันที่: ${escapeHtml(formatThaiDateTime(dateText))}</span>` : ""}
-            ${fromGroup ? `<span>จาก: ${escapeHtml(fromGroup)}</span>` : ""}
-            ${toGroup ? `<span>ไป: ${escapeHtml(toGroup)}</span>` : ""}
-          </div>
-          <div class="move-body">${decorateStatusText(statusText)}</div>
-          <div class="move-body">${escapeHtml(detailText)}</div>
-        `;
-        moveHistoryResults.appendChild(card);
-      });
-    }
-
     async function fetchTodayStatus(initial = false) {
       try {
         const data = await fetchJsonWithRetry(SCRIPT_URL + "?action=todayStatus&_t=" + Date.now(), {}, 1);
@@ -2582,11 +2466,10 @@
       }
     }
 
-    async function fetchMemberStatusBundle() {
+    async function fetchClaimHistory() {
       if (!state.token) {
         renderHistory([]);
-        renderMoveHistoryDetailed([]);
-        return null;
+        return;
       }
 
       try {
@@ -2595,22 +2478,9 @@
           {},
           1
         );
-
-        const history = data.history || data.items || [];
-        const moveHistoryDetailed =
-          data.moveHistoryDetailed ||
-          data.moveHistory ||
-          data.groupMoveHistoryDetailed ||
-          data.groupMoveHistory ||
-          [];
-
-        renderHistory(history);
-        renderMoveHistoryDetailed(moveHistoryDetailed);
-        return data;
+        renderHistory(data.history || data.items || []);
       } catch (err) {
         renderHistory([]);
-        renderMoveHistoryDetailed([]);
-        return null;
       }
     }
 
@@ -2666,6 +2536,12 @@
       );
     }
 
+    function fillMiniStats(current) {
+      miniQueueNo.textContent = current?.queueNo || "-";
+      miniClaimType.textContent = current?.claimType === "paid" ? "19฿" : (current?.claimType === "free" ? "ฟรี" : "-");
+      miniLastTime.textContent = formatShortThaiTime(current?.createdAt || current?.updatedAt || state.lastClaimAt);
+    }
+
     function renderLatestStatusPage(res, localEntry = {}) {
       resultsDiv.innerHTML = "";
       statusSummary.innerHTML = "";
@@ -2673,11 +2549,11 @@
 
       if (!res) {
         statusPageText.innerHTML = "<span class='status-error'>ยังไม่พบข้อมูลสถานะล่าสุด</span>";
+        fillMiniStats(null);
         return;
       }
 
-      const history = Array.isArray(res.history) && res.history.length ? res.history : (state.cachedClaimHistory || []);
-      const current = res.current || history[0] || {
+      const current = res.current || {
         email: localEntry.email || state.member?.email || "-",
         expiry: localEntry.expiry || "-",
         signupYear: localEntry.year || signupYearInput.value || "-",
@@ -2688,17 +2564,18 @@
       };
 
       state.lastClaimAt = current.createdAt || current.updatedAt || state.lastClaimAt || new Date().toISOString();
+      fillMiniStats(current);
 
       const claimLabel = current.claimType === "paid" ? "แพ็กดูแล 19 บาท" : "เคลมฟรีตามเงื่อนไข";
       statusSummary.innerHTML = `<div class="summary-pill">คำขอล่าสุด: ${escapeHtml(claimLabel)}</div>`;
 
       statusPageText.innerHTML =
-        "<span class='status-strong'>สถานะล่าสุด</span><br>" +
-        decorateStatusText(current.statusText || "ระบบรับคำขอแล้ว") +
-        "<br><span class='status-time'>เวลาแจ้งล่าสุด: " + escapeHtml(formatThaiDateTime(state.lastClaimAt)) + "</span>";
+        "<span class='status-strong'>" + decorateStatusText(current.statusText || "ระบบรับคำขอแล้ว") + "</span><br>" +
+        "<span class='status-time'>เวลาแจ้งล่าสุด: " + escapeHtml(formatThaiDateTime(state.lastClaimAt)) + "</span>";
 
       renderClaimSteps(current.statusText || "");
 
+      const history = Array.isArray(res.history) && res.history.length ? res.history : [current];
       history.forEach((item) => {
         const claimType = (item.claimType || "").toLowerCase() === "paid" ? "paid" : "free";
         const tagText = getClaimTypeLabel(claimType);
@@ -2753,6 +2630,57 @@
 
         resultsDiv.appendChild(card);
       });
+    }
+
+    function setActiveView(viewId) {
+      document.querySelectorAll(".view").forEach(view => {
+        view.classList.toggle("active", view.id === viewId);
+      });
+      updateHeroVisibility();
+      if (viewId === "claimView") setMemberPagePills("claim");
+      if (viewId === "statusView") setMemberPagePills("status");
+    }
+
+    function safeSetMemberView(viewId) {
+      if (!state.token || !state.member) {
+        showAlert(topAlert, "กรุณาเข้าสู่ระบบก่อนใช้งาน", "warning");
+        setActiveView("loginView");
+        return;
+      }
+      setActiveView(viewId);
+    }
+
+    function updateMemberProfileUI() {
+      if (!state.member) {
+        profileBox.style.display = "none";
+        signupYearInput.value = "";
+        signupYearDisplay.value = "";
+        paymentSection.style.display = "none";
+        return;
+      }
+
+      const memberDate = state.member.memberDate || state.member.lastRenewDate || state.member.signupDate || "";
+      const signupYear = state.member.signupYearThai || thaiYearFromYmd(memberDate) || "";
+      state.member.signupYearThai = signupYear;
+
+      profileEmail.textContent = state.member.email || "-";
+      profileMemberDate.textContent = formatThaiDate(memberDate || "");
+      profileSignupYear.textContent = signupYear || "-";
+
+      profileBox.style.display = "grid";
+      signupYearInput.value = signupYear;
+      signupYearDisplay.value = signupYear || "";
+      syncPaymentSection();
+    }
+
+    function syncPaymentSection() {
+      const year = (signupYearInput.value || "").trim();
+      if (year && year === String(claimConfig.paidYear)) {
+        paymentSection.style.display = "block";
+      } else {
+        paymentSection.style.display = "none";
+        resetSlipPreview();
+      }
     }
 
     function validateLogin() {
@@ -2900,9 +2828,7 @@
         showAuthStatus("เข้าสู่ระบบสำเร็จค่ะ", "ok");
         showToast("เข้าสู่ระบบสำเร็จ");
         showAlert(claimAlert, "เข้าสู่ระบบสำเร็จ", "success", 3500);
-
-        const bundle = await fetchMemberStatusBundle();
-        if (bundle) renderLatestStatusPage(bundle);
+        await fetchClaimHistory();
       } catch (err) {
         showAuthStatus("เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ", "error");
         showAlert(topAlert, "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ", "error");
@@ -2956,9 +2882,7 @@
         setActiveView("claimView");
         showToast("สมัครสมาชิกสำเร็จ");
         showAlert(claimAlert, "สมัครสมาชิกสำเร็จ", "success", 3500);
-
-        const bundle = await fetchMemberStatusBundle();
-        if (bundle) renderLatestStatusPage(bundle);
+        await fetchClaimHistory();
       } catch (err) {
         showAlert(registerAlert, "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ", "error");
       } finally {
@@ -2977,10 +2901,7 @@
 
       showLoadingOverlay();
       try {
-        const data = await postJson({
-          action: "forgotPassword",
-          email
-        });
+        const data = await postJson({ action: "forgotPassword", email });
 
         if (!data || data.ok === false) {
           showAlert(topAlert, data.message || "ส่งรหัสรีเซ็ตรหัสผ่านทางอีเมลไม่สำเร็จ", "error");
@@ -3004,8 +2925,6 @@
 
       state.token = "";
       state.member = null;
-      state.cachedClaimHistory = [];
-      state.cachedMoveHistoryDetailed = [];
       localStorage.removeItem(TOKEN_KEY);
 
       clearForm();
@@ -3015,11 +2934,11 @@
       showAlert(topAlert, "ออกจากระบบเรียบร้อยแล้วค่ะ", "info");
       showToast("ออกจากระบบแล้ว");
       renderHistory([]);
-      renderMoveHistoryDetailed([]);
       claimStepCard.style.display = "none";
       resultsDiv.innerHTML = "";
       statusSummary.innerHTML = "";
       statusPageText.innerHTML = "";
+      fillMiniStats(null);
     }
 
     function clearForm() {
@@ -3050,11 +2969,21 @@
         <strong>สลิป:</strong> ${escapeHtml(hasSlip)}<br>
         <strong>ข้อความถึงแอดมิน:</strong> ${escapeHtml(note || "-")}
       `;
+
       confirmModal.classList.add("show");
     }
 
     function closeConfirmModal() {
       confirmModal.classList.remove("show");
+    }
+
+    async function fileToDataUrl(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
     }
 
     async function doSubmitClaim() {
@@ -3107,24 +3036,11 @@
           "<span class='status-time'>ระบบใช้เวลา " + escapeHtml((elapsedSec < 0.1 ? "< 0.1" : elapsedSec.toFixed(1).replace(/\.0$/, ""))) + " วินาที</span>";
         status.className = "status-ok";
 
-        const bundle = await fetchMemberStatusBundle();
-        if (bundle) {
-          renderLatestStatusPage({
-            ...bundle,
-            current: data.current || bundle.current,
-            history: bundle.history || bundle.items || []
-          }, {
-            email: state.member?.email || "-",
-            expiry,
-            year
-          });
-        } else {
-          renderLatestStatusPage(data, {
-            email: state.member?.email || "-",
-            expiry,
-            year
-          });
-        }
+        renderLatestStatusPage(data, {
+          email: state.member?.email || "-",
+          expiry,
+          year
+        });
 
         if (data && data.member) {
           state.member = data.member;
@@ -3137,6 +3053,7 @@
           fetchTodayStatus();
         }
 
+        await fetchClaimHistory();
         await initClaimWindowConfig();
 
         noteInput.value = "";
@@ -3145,8 +3062,6 @@
 
         showAlert(claimAlert, data.message || "ส่งคำขอสำเร็จแล้วค่ะ", "success", 4500);
         showToast("ส่งคำขอสำเร็จแล้ว");
-        state.submitLock = false;
-
         setTimeout(() => {
           safeSetMemberView("statusView");
         }, 500);
@@ -3177,16 +3092,22 @@
 
       showLoadingOverlay();
       try {
-        const bundle = await fetchMemberStatusBundle();
-        if (bundle) {
-          renderLatestStatusPage({
-            current: (bundle.history || bundle.items || [])[0] || bundle.current || null,
-            history: bundle.history || bundle.items || [],
-            message: ((bundle.history || bundle.items || [])[0] || {}).statusText || "ยังไม่มีข้อมูลสถานะล่าสุด"
-          });
-        } else {
-          statusPageText.innerHTML = "<span class='status-error'>รีเฟรชสถานะไม่สำเร็จ</span>";
-        }
+        const data = await fetchJsonWithRetry(
+          SCRIPT_URL + "?action=history&token=" + encodeURIComponent(state.token) + "&_t=" + Date.now(),
+          {},
+          1
+        );
+
+        const history = data.history || data.items || [];
+        const current = history.length ? history[0] : null;
+
+        renderLatestStatusPage({
+          current,
+          history,
+          message: current?.statusText || "ยังไม่มีข้อมูลสถานะล่าสุด"
+        });
+
+        await fetchClaimHistory();
         showToast("รีเฟรชสถานะแล้ว");
       } catch (err) {
         statusPageText.innerHTML = "<span class='status-error'>รีเฟรชสถานะไม่สำเร็จ</span>";
@@ -3270,7 +3191,6 @@
     });
 
     btnSubmit.addEventListener("click", handleSubmit);
-
     btnCopyAccount.addEventListener("click", () => {
       copyToClipboard(btnCopyAccount, claimConfig.bankAccountNo || "0628794251");
     });
@@ -3309,6 +3229,8 @@
       updatePasswordStrengthUI();
       loadRememberedLogin();
       updateHeroVisibility();
+      fillMiniStats(null);
+
       await initClaimWindowConfig();
       updateClaimWindowState();
       await fetchTodayStatus(true);
