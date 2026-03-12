@@ -206,15 +206,6 @@
       box-shadow: 0 0 0 4px rgba(215,125,125,0.14);
     }
 
-    .hero-main-text {
-      max-width: 430px;
-      font-size: .95rem;
-      line-height: 1.75;
-      font-weight: 700;
-      color: var(--text-main);
-      text-align: center;
-    }
-
     .claim-note {
       display: inline-flex;
       align-items: center;
@@ -297,6 +288,41 @@
       color: #755847;
       margin-bottom: 12px;
       text-align: center;
+    }
+
+    .warning-blink {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin: 0 0 12px;
+      padding: 12px 14px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #fff4e8, #ffe9db);
+      border: 1px solid #f0cfb6;
+      color: #b5642d;
+      font-size: .82rem;
+      font-weight: 800;
+      line-height: 1.6;
+      text-align: center;
+      animation: warningPulse 1.35s ease-in-out infinite;
+      box-shadow: 0 10px 20px rgba(197,142,94,0.12);
+    }
+
+    .warning-blink .icon {
+      font-size: 1.05rem;
+      flex-shrink: 0;
+    }
+
+    @keyframes warningPulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.025);
+        opacity: .9;
+      }
     }
 
     .field-group {
@@ -907,7 +933,6 @@
       box-shadow: var(--shadow-soft);
       position: relative;
       overflow: hidden;
-      text-align: center;
     }
 
     .live-card::after,
@@ -977,9 +1002,9 @@
     .live-item {
       display: flex;
       justify-content: space-between;
-      gap: 10px;
+      gap: 12px;
       align-items: center;
-      padding: 9px 10px;
+      padding: 10px 12px;
       border-radius: 16px;
       background: rgba(255,255,255,0.84);
       border: 1px solid #ede2d7;
@@ -992,12 +1017,16 @@
       text-overflow: ellipsis;
       white-space: nowrap;
       max-width: 220px;
+      text-align: left;
+      flex: 1;
     }
 
     .live-status-text {
       font-size: .77rem;
       color: var(--text-sub);
       white-space: nowrap;
+      text-align: right;
+      flex-shrink: 0;
     }
 
     .live-empty {
@@ -1277,15 +1306,16 @@
         bottom: 14px;
       }
       .live-item {
-        flex-direction: column;
-        justify-content: center;
+        gap: 8px;
+      }
+      .live-email {
+        max-width: 150px;
       }
     }
   </style>
 </head>
 <body>
   <div class="app">
-    <!-- HERO ใช้เฉพาะหน้า login/register -->
     <section class="hero shell-card" id="heroSection">
       <div class="hero-top">
         <div class="brand-wrap">
@@ -1310,10 +1340,6 @@
           <span id="onlineText">สถานะ: เปิดรับเคลม</span>
         </div>
 
-        <div class="hero-main-text">
-          ล็อกอินก่อนใช้งาน ระบบจะดึงข้อมูลสมาชิกให้อัตโนมัติ
-        </div>
-
         <div class="claim-note" id="claimTimeNote">
           รับเคลมเฉพาะวันจันทร์–เสาร์ เวลา 07.00–19.00 น.
         </div>
@@ -1321,10 +1347,9 @@
     </section>
 
     <main class="panel shell-card">
-      <!-- หน้า LOGIN -->
       <section class="view active" id="loginView">
         <div class="section-blurb">
-          ล็อกอินก่อนใช้งาน ระบบจะดึงข้อมูลสมาชิกให้อัตโนมัติ
+          เข้าสู่ระบบด้วยอีเมลและรหัสผ่านของคุณ
         </div>
 
         <div class="login-card">
@@ -1383,7 +1408,6 @@
         </div>
       </section>
 
-      <!-- หน้า REGISTER -->
       <section class="view" id="registerView">
         <div class="section-blurb">
           สมัครสมาชิกด้วยอีเมลที่ใช้กับร้าน พร้อมตั้งรหัสผ่าน 6 หลัก
@@ -1439,10 +1463,14 @@
         </div>
       </section>
 
-      <!-- หน้า CLAIM -->
       <section class="view" id="claimView">
         <div class="claim-card">
           <div class="claim-only-title">รับแจ้งเคลมสำหรับสมาชิก</div>
+
+          <div class="warning-blink">
+            <span class="icon">⚠️</span>
+            <span>หากแจ้งข้อมูลไม่ตรงตามความจริง ตัดสิทธิ์อัตโนมัติ</span>
+          </div>
 
           <div id="claimAlert" class="alert-box"></div>
 
@@ -2430,36 +2458,6 @@
       return true;
     }
 
-    async function fetchMemberMe() {
-      if (!state.token) return false;
-
-      try {
-        const data = await fetchJsonWithRetry(
-          SCRIPT_URL + "?action=me&token=" + encodeURIComponent(state.token) + "&_t=" + Date.now(),
-          {},
-          1
-        );
-
-        if (!data || data.ok === false || !data.member) {
-          state.token = "";
-          state.member = null;
-          localStorage.removeItem(TOKEN_KEY);
-          updateMemberProfileUI();
-          return false;
-        }
-
-        state.member = data.member;
-        updateMemberProfileUI();
-        setActiveView("claimView");
-        showAuthStatus("เข้าสู่ระบบแล้ว", "ok");
-        showAlert(claimAlert, "ยินดีต้อนรับกลับค่ะ", "success", 3000);
-        await fetchClaimHistory();
-        return true;
-      } catch (err) {
-        return false;
-      }
-    }
-
     async function handleLogin() {
       if (!validateLogin()) return;
 
@@ -2812,12 +2810,7 @@
         showAlert(topAlert, "ล็อกอินและสมัครสมาชิกได้ตามปกติ แต่การส่งเคลมจะได้เฉพาะช่วงเวลาที่ระบบเปิดรับ", "warning", 5500);
       }
 
-      if (state.token) {
-        const ok = await fetchMemberMe();
-        if (!ok) setActiveView("loginView");
-      } else {
-        setActiveView("loginView");
-      }
+      setActiveView("loginView");
 
       setInterval(async () => {
         await initClaimWindowConfig();
