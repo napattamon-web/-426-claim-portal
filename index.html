@@ -279,15 +279,80 @@
     }
 
     .claim-card {
-      background: linear-gradient(180deg, #fffbf8, #f8efe8);
+      background:
+        radial-gradient(circle at 10% 12%, rgba(255,255,255,0.55), transparent 18%),
+        radial-gradient(circle at 88% 18%, rgba(255,255,255,0.45), transparent 16%),
+        linear-gradient(180deg, #fffbf8, #f8efe8);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .claim-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.24;
+      background-repeat: no-repeat;
+      background-image:
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path fill='%23dcb8a2' d='M32 54C24 47 10 37 10 23c0-6 4-10 10-10 5 0 8 3 12 7 4-4 7-7 12-7 6 0 10 4 10 10 0 14-14 24-22 31z'/></svg>"),
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path fill='%23efd5c5' d='M32 54C24 47 10 37 10 23c0-6 4-10 10-10 5 0 8 3 12 7 4-4 7-7 12-7 6 0 10 4 10 10 0 14-14 24-22 31z'/></svg>"),
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path fill='%23e6c2ae' d='M32 54C24 47 10 37 10 23c0-6 4-10 10-10 5 0 8 3 12 7 4-4 7-7 12-7 6 0 10 4 10 10 0 14-14 24-22 31z'/></svg>");
+      background-size: 34px 34px, 20px 20px, 26px 26px;
+      background-position: 6% 8%, 94% 9%, 88% 92%;
+    }
+
+    .claim-top-frame {
+      position: relative;
+      margin-bottom: 14px;
+      padding: 16px 14px 14px;
+      border-radius: 24px;
+      border: 1px solid #efdccd;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,247,241,0.95));
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.85),
+        0 10px 22px rgba(118,84,63,0.06);
+      overflow: hidden;
+    }
+
+    .claim-top-frame::before,
+    .claim-top-frame::after {
+      content: "";
+      position: absolute;
+      width: 72px;
+      height: 72px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(231,198,178,0.35), rgba(231,198,178,0));
+      pointer-events: none;
+    }
+
+    .claim-top-frame::before {
+      top: -18px;
+      left: -18px;
+    }
+
+    .claim-top-frame::after {
+      right: -18px;
+      bottom: -18px;
     }
 
     .claim-only-title {
+      position: relative;
       font-size: 1rem;
       font-weight: 800;
       color: #755847;
-      margin-bottom: 12px;
+      margin: 0;
       text-align: center;
+      letter-spacing: .01em;
+    }
+
+    .claim-only-sub {
+      position: relative;
+      margin-top: 6px;
+      font-size: .78rem;
+      color: var(--text-sub);
+      line-height: 1.6;
     }
 
     .warning-blink {
@@ -477,7 +542,8 @@
     .btn-danger,
     .btn-link-small,
     .mini-btn,
-    .upload-btn {
+    .upload-btn,
+    .copy-account-btn {
       border-radius: 999px;
       font-family: inherit;
       font-weight: 800;
@@ -567,10 +633,13 @@
     .payment-card {
       margin-top: 10px;
       padding: 14px;
-      border-radius: 22px;
-      background: linear-gradient(135deg, #fffaf7, #f8efe7);
-      border: 1px solid #eaded3;
+      border-radius: 24px;
+      background: linear-gradient(180deg, #fffdfb, #faf3ed);
+      border: 1px solid #eadfd4;
       text-align: center;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.8),
+        0 10px 20px rgba(118,84,63,0.05);
     }
 
     .payment-title {
@@ -584,52 +653,78 @@
       font-size: .79rem;
       color: var(--text-sub);
       line-height: 1.6;
-      margin-bottom: 10px;
-      text-align: center;
-    }
-
-    .bank-box {
-      display: grid;
-      gap: 6px;
-      padding: 10px;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.92);
-      border: 1px solid #eee2d8;
       margin-bottom: 12px;
       text-align: center;
     }
 
-    .bank-line {
+    .bank-minimal {
+      margin-bottom: 14px;
+      padding: 14px;
+      border-radius: 22px;
+      border: 1px solid #efe2d8;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,250,246,0.98));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.85);
+    }
+
+    .bank-minimal-top {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 6px;
-      font-size: .8rem;
-    }
-
-    .bank-label {
-      font-weight: 800;
-      color: var(--text-main);
-    }
-
-    .bank-value {
-      color: var(--text-sub);
-    }
-
-    .mini-actions {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
       margin-bottom: 10px;
     }
 
-    .mini-btn {
-      border: 1px solid #e5d7cb;
-      background: linear-gradient(180deg, #ffffff, #f8f1eb);
-      padding: 8px 12px;
+    .bank-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #f8efe8;
+      border: 1px solid #ebdcd0;
+      font-size: .73rem;
+      font-weight: 800;
+      color: #8b6c5b;
+    }
+
+    .bank-card-name {
       font-size: .76rem;
-      color: var(--text-main);
+      color: var(--text-sub);
+      line-height: 1.5;
+      text-align: left;
+    }
+
+    .bank-number-box {
+      padding: 14px 12px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #fff, #fcf7f2);
+      border: 1px solid #eee1d6;
+      margin-bottom: 10px;
+    }
+
+    .bank-number-label {
+      font-size: .72rem;
+      color: var(--text-sub);
+      margin-bottom: 4px;
+      letter-spacing: .04em;
+    }
+
+    .bank-number {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #6c4f40;
+      letter-spacing: .08em;
+      word-break: break-all;
+    }
+
+    .copy-account-btn {
+      width: 100%;
+      min-height: 42px;
+      border: 1px solid #e4d6ca;
+      background: linear-gradient(180deg, #fff, #f8f1eb);
+      color: #6f5647;
+      font-size: .8rem;
     }
 
     .qr-wrap {
@@ -1311,6 +1406,13 @@
       .live-email {
         max-width: 150px;
       }
+      .bank-minimal-top {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .bank-card-name {
+        text-align: center;
+      }
     }
   </style>
 </head>
@@ -1465,7 +1567,10 @@
 
       <section class="view" id="claimView">
         <div class="claim-card">
-          <div class="claim-only-title">รับแจ้งเคลมสำหรับสมาชิก</div>
+          <div class="claim-top-frame">
+            <div class="claim-only-title">รับแจ้งเคลมสำหรับสมาชิก</div>
+            <div class="claim-only-sub">กรอกข้อมูลให้ครบถ้วนเพื่อให้ระบบตรวจสอบและดำเนินการได้เร็วขึ้น</div>
+          </div>
 
           <div class="warning-blink">
             <span class="icon">⚠️</span>
@@ -1502,23 +1607,18 @@
                 สำหรับปีสมัครที่กำหนด ระบบจะให้ชำระ 19 บาท และแนบหลักฐานเพื่อเข้าคิวเคลม
               </div>
 
-              <div class="bank-box">
-                <div class="bank-line">
-                  <span class="bank-label">ชื่อบัญชี</span>
-                  <span class="bank-value" id="bankAccountName">นภัทรธมณฑ์ ฤทธิ์ชัยศักดิ์</span>
+              <div class="bank-minimal">
+                <div class="bank-minimal-top">
+                  <span class="bank-chip" id="bankName">ธ.กสิกร (KBank)</span>
+                  <div class="bank-card-name" id="bankAccountName">นภัทรธมณฑ์ ฤทธิ์ชัยศักดิ์</div>
                 </div>
-                <div class="bank-line">
-                  <span class="bank-label">ธนาคาร</span>
-                  <span class="bank-value" id="bankName">ธ.กสิกร (KBank)</span>
-                </div>
-                <div class="bank-line">
-                  <span class="bank-label">เลขบัญชี</span>
-                  <span class="bank-value" id="bankAccountNo">0628794251</span>
-                </div>
-              </div>
 
-              <div class="mini-actions">
-                <button type="button" class="mini-btn" id="btnCopyAccount">คัดลอกเลขบัญชี</button>
+                <div class="bank-number-box">
+                  <div class="bank-number-label">เลขบัญชีสำหรับชำระ 19฿</div>
+                  <div class="bank-number" id="bankAccountNo">0628794251</div>
+                </div>
+
+                <button type="button" class="copy-account-btn" id="btnCopyAccount">คัดลอกเลขบัญชี</button>
               </div>
 
               <div class="qr-wrap">
@@ -1842,7 +1942,7 @@
 
     function formatThaiDate(dateStr) {
       if (!dateStr) return "-";
-      if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+      if (/^\\d{4}-\\d{2}-\\d{2}$/.test(dateStr)) {
         const [y, m, d] = dateStr.split("-").map(Number);
         const months = ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."];
         return `${d} ${months[m - 1]} ${y + 543}`;
@@ -1867,7 +1967,7 @@
     }
 
     function thaiYearFromYmd(dateStr) {
-      if (!dateStr || !/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return "";
+      if (!dateStr || !/^\\d{4}-\\d{2}-\\d{2}$/.test(dateStr)) return "";
       return String(Number(dateStr.slice(0, 4)) + 543);
     }
 
@@ -2194,7 +2294,7 @@
         "",
         "สรุปสถานะ:",
         entry.statusText || "-"
-      ].join("\n");
+      ].join("\\n");
     }
 
     async function copyToClipboard(btn, text) {
@@ -2252,7 +2352,7 @@
         parts.push("คิวเคลมของคุณ: " + escapeHtml(current.queueNo));
       }
       if (typeof elapsedSec === "number" && isFinite(elapsedSec)) {
-        const pretty = elapsedSec < 0.1 ? "< 0.1" : elapsedSec.toFixed(1).replace(/\.0$/, "");
+        const pretty = elapsedSec < 0.1 ? "< 0.1" : elapsedSec.toFixed(1).replace(/\\.0$/, "");
         parts.push("<br><span class='status-time'>⏱ ระบบใช้เวลา " + escapeHtml(pretty) + " วินาที</span>");
       }
 
@@ -2371,7 +2471,7 @@
         shake(loginEmailField);
         return false;
       }
-      if (!/^\d{6}$/.test(password)) {
+      if (!/^\\d{6}$/.test(password)) {
         showAuthStatus("รหัสผ่านต้องเป็นตัวเลข 6 หลัก", "error");
         showAlert(topAlert, "รหัสผ่านต้องเป็นตัวเลข 6 หลัก", "error");
         shake(loginPasswordField);
@@ -2394,7 +2494,7 @@
         shake(registerEmailField);
         return false;
       }
-      if (!/^\d{6}$/.test(password)) {
+      if (!/^\\d{6}$/.test(password)) {
         showAlert(registerAlert, "รหัสผ่านต้องเป็นตัวเลข 6 หลัก", "error");
         shake(registerPasswordField);
         return false;
