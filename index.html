@@ -2,7 +2,7 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8" />
-  <title>426 SHOP – ฟอร์มแจ้งเคลม</title>
+  <title>426 SHOP – Member & Claim Center</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#fbf6f3" />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -19,6 +19,7 @@
       --danger: #e57f7f;
       --success: #337a5d;
       --warning: #bf8357;
+      --info: #3562a8;
       --shadow-soft: 0 18px 42px rgba(84, 61, 49, 0.08);
     }
 
@@ -34,6 +35,7 @@
       --danger: #ee8c8c;
       --success: #78c89d;
       --warning: #e9b17a;
+      --info: #7fb0ff;
       --shadow-soft: 0 18px 42px rgba(0, 0, 0, 0.42);
     }
 
@@ -268,49 +270,6 @@
       border-color: #353841;
     }
 
-    .step-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      margin-top: 14px;
-    }
-
-    .step-pill {
-      min-height: 46px;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.82);
-      border: 1px solid #e8e0d8;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 8px 10px;
-      font-size: .74rem;
-      font-weight: 700;
-      color: var(--text-sub);
-      transition: all .22s ease;
-    }
-
-    body.theme-dark .step-pill {
-      background: rgba(38,40,47,0.92);
-      border-color: #343842;
-    }
-
-    .step-pill--muted { opacity: .66; }
-    .step-pill--active {
-      color: var(--text-main);
-      border-color: rgba(143,201,181,0.72);
-      background: linear-gradient(135deg, rgba(232,246,239,1), rgba(255,255,255,0.98));
-      box-shadow: 0 0 0 3px rgba(143,201,181,0.14);
-      opacity: 1;
-    }
-    .step-pill--done {
-      color: #356655;
-      border-color: #bfdccd;
-      background: #ebf7f1;
-      opacity: 1;
-    }
-
     .panel {
       border-radius: 28px;
       padding: 16px;
@@ -343,6 +302,42 @@
       line-height: 1.65;
       color: var(--text-sub);
       margin-bottom: 8px;
+    }
+
+    .tab-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+      margin-bottom: 8px;
+    }
+
+    .tab-btn {
+      min-height: 46px;
+      border-radius: 18px;
+      border: 1px solid #ddd7d0;
+      background: linear-gradient(180deg, #fffaf6, #f6efe9);
+      color: var(--text-sub);
+      font-weight: 800;
+      font-family: inherit;
+      cursor: pointer;
+      font-size: .78rem;
+      padding: 8px;
+    }
+
+    .tab-btn.active {
+      color: #fff;
+      border-color: transparent;
+      background: linear-gradient(135deg, #a6dcc8, #7fb4a0);
+      box-shadow: 0 12px 22px rgba(0,0,0,0.14);
+    }
+
+    .view {
+      display: none;
+    }
+
+    .view.active {
+      display: block;
     }
 
     .field-group {
@@ -391,6 +386,8 @@
     }
 
     input[type="email"],
+    input[type="password"],
+    input[type="text"],
     input[type="date"],
     textarea {
       width: 100%;
@@ -429,28 +426,19 @@
       line-height: 1.55;
     }
 
-    .year-pill-row {
-      display: flex;
-      gap: 8px;
+    .profile-box {
+      margin-top: 10px;
+      border-radius: 20px;
+      border: 1px solid #d8eadf;
+      background: #eef8f2;
+      padding: 12px;
+      display: grid;
+      gap: 6px;
+      font-size: .82rem;
     }
 
-    .year-btn {
-      flex: 1;
-      min-height: 46px;
-      border-radius: 999px;
-      border: 1px solid #ddd4cb;
-      background: linear-gradient(180deg, #fff9f5, #f7efe9);
-      color: var(--text-sub);
-      font-weight: 800;
-      font-size: .88rem;
-      cursor: pointer;
-    }
-
-    .year-btn.active {
-      border-color: transparent;
-      color: #fff;
-      background: linear-gradient(135deg, #a6dcc8, #7fb4a0);
-      box-shadow: 0 12px 22px rgba(0,0,0,0.14);
+    .profile-box .line strong {
+      color: var(--text-main);
     }
 
     .payment-section { display: none; }
@@ -617,7 +605,8 @@
     }
 
     .btn-primary,
-    .btn-secondary {
+    .btn-secondary,
+    .btn-danger {
       min-height: 52px;
       border-radius: 999px;
       font-family: inherit;
@@ -647,6 +636,14 @@
       border: 1px solid #ddd4cb;
       background: linear-gradient(180deg, #fffaf6, #f6efe9);
       color: var(--text-sub);
+      padding: 0 16px;
+      font-size: .82rem;
+    }
+
+    .btn-danger {
+      border: 1px solid #f0c1c1;
+      background: linear-gradient(180deg, #fff5f5, #ffeded);
+      color: #c44a4a;
       padding: 0 16px;
       font-size: .82rem;
     }
@@ -681,7 +678,7 @@
       font-weight: 800;
     }
 
-    #status {
+    #status, #authStatus {
       min-height: 20px;
       margin-top: 8px;
       text-align: center;
@@ -692,6 +689,7 @@
 
     .status-error { color: var(--danger) !important; }
     .status-ok { color: var(--success) !important; }
+    .status-info { color: var(--info) !important; }
     .status-strong { font-weight: 800; color: var(--text-main); }
     .status-time { font-size: .76rem; color: var(--text-sub); }
 
@@ -1102,8 +1100,8 @@
     @media (max-width: 480px) {
       .app { padding: 12px 12px 16px; }
       .grid-2 { grid-template-columns: 1fr; }
-      .step-row { grid-template-columns: 1fr; }
       .action-row { flex-direction: column; }
+      .tab-row { grid-template-columns: 1fr; }
       .tip-bubble { left: 10px; right: 10px; max-width: none; }
     }
   </style>
@@ -1123,7 +1121,7 @@
           </div>
           <div class="brand-copy">
             <div class="brand-title">426 SHOP</div>
-            <div class="brand-sub">Claim Center</div>
+            <div class="brand-sub">Member & Claim Center</div>
           </div>
         </div>
 
@@ -1138,157 +1136,235 @@
 
       <div class="hero-center-text">
         <div class="hero-main-text">
-          แจ้งเคลมสมาชิกได้ง่ายในไม่กี่ขั้นตอน กรอกข้อมูลให้ครบ ระบบจะบันทึกคำขอและอัปเดตสถานะให้อัตโนมัติค่ะ
+          สมัครสมาชิกหรือล็อกอินก่อนใช้งาน จากนั้นแจ้งเคลมได้ทันที ระบบจะดึงข้อมูลสมาชิกมาใช้ให้อัตโนมัติค่ะ
         </div>
 
         <div class="claim-note" id="claimTimeNote">
           รับเคลมเฉพาะวันจันทร์–เสาร์ เวลา 07.00–19.00 น.
         </div>
       </div>
-
-      <div class="step-row">
-        <div class="step-pill" data-step="1">① กรอกข้อมูล</div>
-        <div class="step-pill" data-step="2">② เลือกแพ็ก / แนบสลิป</div>
-        <div class="step-pill" data-step="3">③ ส่งคำขอและดูสถานะ</div>
-      </div>
     </section>
 
     <main class="panel">
       <div class="panel-title">
-        <span class="icon">📋</span>
-        <span>ฟอร์มแจ้งเคลมสมาชิก</span>
+        <span class="icon">🧸</span>
+        <span>ศูนย์สมาชิก 426 SHOP</span>
       </div>
 
-      <div class="section-blurb">
-        กรุณากรอกอีเมลเดียวกับที่ใช้สมัครสมาชิก และเลือกปีสมัครให้ถูกต้องเพื่อให้ระบบค้นหาข้อมูลได้ง่ายที่สุด
+      <div class="tab-row">
+        <button type="button" class="tab-btn active" data-view="loginView">ล็อกอิน</button>
+        <button type="button" class="tab-btn" data-view="registerView">สมัครสมาชิก</button>
+        <button type="button" class="tab-btn" data-view="claimView">แจ้งเคลม</button>
       </div>
 
-      <div class="field-group">
-        <label class="field-label" for="emailInput">อีเมลที่ใช้สมัคร</label>
-        <div class="input-shell" id="emailField">
-          <input id="emailInput" type="email" placeholder="เช่น yourname@example.com" autocomplete="email" />
+      <section class="view active" id="loginView">
+        <div class="section-blurb">
+          เข้าสู่ระบบด้วยอีเมลที่สมัครกับร้าน และรหัสผ่าน 6 หลักที่ตั้งเอง
         </div>
-      </div>
 
-      <div class="field-group">
-        <div class="grid-2">
-          <div>
-            <label class="field-label" for="expiryInput">วันหมดอายุสมาชิก</label>
-            <div class="input-shell" id="expiryField">
-              <input id="expiryInput" type="date" />
-            </div>
+        <div class="field-group">
+          <label class="field-label" for="loginEmail">อีเมล</label>
+          <div class="input-shell" id="loginEmailField">
+            <input id="loginEmail" type="email" placeholder="เช่น yourname@example.com" autocomplete="email" />
           </div>
+        </div>
 
-          <div>
-            <div class="field-label">ปีที่สมัคร</div>
-            <div class="year-pill-row" id="yearRow">
-              <button type="button" class="year-btn" data-year="2568">2568</button>
-              <button type="button" class="year-btn" data-year="2569">2569</button>
+        <div class="field-group">
+          <label class="field-label" for="loginPassword">รหัสผ่าน 6 หลัก</label>
+          <div class="input-shell" id="loginPasswordField">
+            <input id="loginPassword" type="password" inputmode="numeric" maxlength="6" placeholder="เช่น 123456" />
+          </div>
+        </div>
+
+        <div class="action-row">
+          <button class="btn-primary" id="btnLogin">
+            <span>เข้าสู่ระบบ</span>
+            <span>↗</span>
+          </button>
+        </div>
+
+        <div id="authStatus"></div>
+      </section>
+
+      <section class="view" id="registerView">
+        <div class="section-blurb">
+          สมัครสมาชิกด้วยอีเมลที่ใช้กับร้าน พร้อมตั้งรหัสผ่าน 6 หลัก และกรอกวันสมัคร / วันต่ออายุล่าสุด
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="registerDisplayName">ชื่อแสดงผล (ถ้ามี)</label>
+          <div class="input-shell">
+            <input id="registerDisplayName" type="text" placeholder="เช่น คุณเอ" />
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="registerEmail">อีเมล</label>
+          <div class="input-shell" id="registerEmailField">
+            <input id="registerEmail" type="email" placeholder="เช่น yourname@example.com" autocomplete="email" />
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="registerPassword">รหัสผ่าน 6 หลัก</label>
+          <div class="input-shell" id="registerPasswordField">
+            <input id="registerPassword" type="password" inputmode="numeric" maxlength="6" placeholder="เช่น 123456" />
+          </div>
+        </div>
+
+        <div class="field-group">
+          <div class="grid-2">
+            <div>
+              <label class="field-label" for="registerSignupDate">วันที่สมัคร</label>
+              <div class="input-shell" id="registerSignupDateField">
+                <input id="registerSignupDate" type="date" />
+              </div>
             </div>
-            <input type="hidden" id="signupYear" />
+            <div>
+              <label class="field-label" for="registerRenewDate">วันที่ต่ออายุล่าสุด</label>
+              <div class="input-shell" id="registerRenewDateField">
+                <input id="registerRenewDate" type="date" />
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="important-note">
           <strong>สำคัญ:</strong>
-          <span>กรุณาแจ้งข้อมูลตามความเป็นจริง หากตรวจพบว่าไม่ตรงกับข้อมูลจริง ระบบขอตัดสิทธิ์เคลมทันที</span>
+          <span>ข้อมูลวันสมัครและวันต่ออายุล่าสุดจะถูกใช้ในระบบแจ้งเคลมอัตโนมัติ กรุณากรอกให้ตรงกับข้อมูลจริง</span>
         </div>
-      </div>
 
-      <div class="field-group payment-section" id="paymentSection">
-        <div class="payment-card">
-          <div class="payment-title" id="paymentTitle">แพ็กดูแล 19 บาท</div>
-          <div class="payment-desc" id="paymentNote">
-            เลือกปีสมัคร 2568 ระบบให้ใช้แพ็กดูแล 19 บาท เพื่อรับเข้าคิวเคลมทันทีหลังแนบสลิป
+        <div class="action-row">
+          <button class="btn-primary" id="btnRegister">
+            <span>สมัครสมาชิก</span>
+            <span>↗</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="view" id="claimView">
+        <div class="section-blurb">
+          เมื่อเข้าสู่ระบบแล้ว ระบบจะใช้ข้อมูลสมาชิกของคุณแทนการกรอกอีเมลและปีสมัครใหม่
+        </div>
+
+        <div class="profile-box" id="memberProfileBox" style="display:none;">
+          <div class="line"><strong>อีเมล:</strong> <span id="profileEmail">-</span></div>
+          <div class="line"><strong>วันที่สมัคร:</strong> <span id="profileSignupDate">-</span></div>
+          <div class="line"><strong>วันที่ต่ออายุล่าสุด:</strong> <span id="profileRenewDate">-</span></div>
+          <div class="line"><strong>ปีสมัคร:</strong> <span id="profileSignupYear">-</span></div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="expiryInput">วันหมดอายุสมาชิก</label>
+          <div class="input-shell" id="expiryField">
+            <input id="expiryInput" type="date" />
           </div>
+        </div>
 
-          <div class="bank-box">
-            <div class="bank-line">
-              <span class="bank-label">ชื่อบัญชี</span>
-              <span class="bank-value" id="bankAccountName">นภัทรธมณฑ์ ฤทธิ์ชัยศักดิ์</span>
-            </div>
-            <div class="bank-line">
-              <span class="bank-label">ธนาคาร</span>
-              <span class="bank-value" id="bankName">ธ.กสิกร (KBank)</span>
-            </div>
-            <div class="bank-line">
-              <span class="bank-label">เลขบัญชี</span>
-              <span class="bank-value" id="bankAccountNo">0628794251</span>
-            </div>
+        <div class="field-group">
+          <label class="field-label">ปีสมัครจากระบบสมาชิก</label>
+          <div class="input-shell">
+            <input id="signupYearDisplay" type="text" readonly placeholder="ระบบจะดึงให้อัตโนมัติ" />
           </div>
+          <input type="hidden" id="signupYear" />
+        </div>
 
-          <div class="mini-actions">
-            <button type="button" class="mini-btn" id="btnCopyAccount">คัดลอกเลขบัญชี</button>
-          </div>
+        <div class="field-group payment-section" id="paymentSection">
+          <div class="payment-card">
+            <div class="payment-title" id="paymentTitle">แพ็กดูแล 19 บาท</div>
+            <div class="payment-desc" id="paymentNote">
+              เลือกปีสมัคร 2568 ระบบให้ใช้แพ็กดูแล 19 บาท เพื่อรับเข้าคิวเคลมทันทีหลังแนบสลิป
+            </div>
 
-          <div class="uploader">
-            <div class="uploader-top">
-              <div class="upload-title">แนบสลิปโอนเงิน</div>
-              <div class="upload-sub">
-                รองรับเฉพาะไฟล์รูปภาพ เช่น JPG, PNG, WEBP<br />
-                ขนาดไม่เกิน 3 MB
+            <div class="bank-box">
+              <div class="bank-line">
+                <span class="bank-label">ชื่อบัญชี</span>
+                <span class="bank-value" id="bankAccountName">นภัทรธมณฑ์ ฤทธิ์ชัยศักดิ์</span>
+              </div>
+              <div class="bank-line">
+                <span class="bank-label">ธนาคาร</span>
+                <span class="bank-value" id="bankName">ธ.กสิกร (KBank)</span>
+              </div>
+              <div class="bank-line">
+                <span class="bank-label">เลขบัญชี</span>
+                <span class="bank-value" id="bankAccountNo">0628794251</span>
               </div>
             </div>
 
-            <div class="upload-row">
-              <button type="button" class="upload-btn" id="btnPickSlip">เลือกไฟล์สลิป</button>
-              <button type="button" class="upload-btn secondary" id="btnCameraSlip">ถ่ายรูปสลิป</button>
+            <div class="mini-actions">
+              <button type="button" class="mini-btn" id="btnCopyAccount">คัดลอกเลขบัญชี</button>
             </div>
 
-            <input id="slipInput" class="hidden-file-input" type="file" accept="image/*" />
-            <input id="slipInputCamera" class="hidden-file-input" type="file" accept="image/*" capture="environment" />
+            <div class="uploader">
+              <div class="uploader-top">
+                <div class="upload-title">แนบสลิปโอนเงิน</div>
+                <div class="upload-sub">
+                  รองรับเฉพาะไฟล์รูปภาพ เช่น JPG, PNG, WEBP<br />
+                  ขนาดไม่เกิน 3 MB
+                </div>
+              </div>
 
-            <div class="file-name" id="fileName">ยังไม่ได้เลือกไฟล์</div>
+              <div class="upload-row">
+                <button type="button" class="upload-btn" id="btnPickSlip">เลือกไฟล์สลิป</button>
+                <button type="button" class="upload-btn secondary" id="btnCameraSlip">ถ่ายรูปสลิป</button>
+              </div>
 
-            <div class="preview-wrap" id="slipPreviewWrap">
-              <img id="slipPreview" class="preview-img" alt="ตัวอย่างสลิป" />
-              <button type="button" class="mini-btn" id="btnRemoveSlip">ลบรูปที่เลือก</button>
+              <input id="slipInput" class="hidden-file-input" type="file" accept="image/*" />
+              <input id="slipInputCamera" class="hidden-file-input" type="file" accept="image/*" capture="environment" />
+
+              <div class="file-name" id="fileName">ยังไม่ได้เลือกไฟล์</div>
+
+              <div class="preview-wrap" id="slipPreviewWrap">
+                <img id="slipPreview" class="preview-img" alt="ตัวอย่างสลิป" />
+                <button type="button" class="mini-btn" id="btnRemoveSlip">ลบรูปที่เลือก</button>
+              </div>
+            </div>
+
+            <div class="payment-require" id="paymentRequireSlip">
+              หากไม่แนบสลิป ระบบจะยังไม่รับเข้าระบบเคลมสำหรับปี 2568
             </div>
           </div>
+        </div>
 
-          <div class="payment-require" id="paymentRequireSlip">
-            หากไม่แนบสลิป ระบบจะยังไม่รับเข้าระบบเคลมสำหรับปี 2568
+        <div class="field-group">
+          <label class="field-label" for="noteInput">ฝากข้อความถึงแอดมิน (ถ้ามี)</label>
+          <div class="input-shell note" id="noteField">
+            <textarea id="noteInput" placeholder="เช่น หลุดจากกลุ่มเมื่อวาน รบกวนช่วยดึงกลับให้ด้วย"></textarea>
+          </div>
+          <div class="note-counter" id="noteCounter">0 / 500</div>
+        </div>
+
+        <div class="action-row">
+          <button class="btn-primary" id="btnSubmit">
+            <span>ส่งคำขอเคลม</span>
+            <span>↗</span>
+          </button>
+          <button class="btn-secondary" id="btnClear">ล้างฟอร์ม</button>
+          <button class="btn-danger" id="btnLogout">ออกจากระบบ</button>
+        </div>
+
+        <div class="helper">
+          <span>ℹ️</span>
+          <span>หลังจากกดส่งคำขอแล้ว แนะนำอย่าเพิ่งรีเฟรชหรือปิดหน้านี้จนกว่าสถานะจะขึ้นครบ</span>
+        </div>
+
+        <div id="summary"></div>
+        <div id="status"></div>
+        <div id="results"></div>
+
+        <div class="live-card" id="liveStatusCard">
+          <div class="live-header">
+            <div class="live-title-left">
+              <span class="live-dot"></span>
+              <span class="live-title-text">สถานะเมลวันนี้ (เรียลไทม์)</span>
+            </div>
+            <span class="live-date" id="liveDate"></span>
+          </div>
+          <div class="live-list" id="liveList">
+            <div class="live-empty">กำลังดึงสถานะเมลวันนี้...</div>
           </div>
         </div>
-      </div>
-
-      <div class="field-group">
-        <label class="field-label" for="noteInput">ฝากข้อความถึงแอดมิน (ถ้ามี)</label>
-        <div class="input-shell note" id="noteField">
-          <textarea id="noteInput" placeholder="เช่น หลุดจากกลุ่มเมื่อวาน รบกวนช่วยดึงกลับให้ด้วย"></textarea>
-        </div>
-        <div class="note-counter" id="noteCounter">0 / 500</div>
-      </div>
-
-      <div class="action-row">
-        <button class="btn-primary" id="btnSubmit">
-          <span>ส่งคำขอเคลม</span>
-          <span>↗</span>
-        </button>
-        <button class="btn-secondary" id="btnClear">ล้างฟอร์ม</button>
-      </div>
-
-      <div class="helper">
-        <span>ℹ️</span>
-        <span>หลังจากกดส่งคำขอแล้ว แนะนำอย่าเพิ่งรีเฟรชหรือปิดหน้านี้จนกว่าสถานะจะขึ้นครบ</span>
-      </div>
-
-      <div id="summary"></div>
-      <div id="status"></div>
-      <div id="results"></div>
-
-      <div class="live-card" id="liveStatusCard">
-        <div class="live-header">
-          <div class="live-title-left">
-            <span class="live-dot"></span>
-            <span class="live-title-text">สถานะเมลวันนี้ (เรียลไทม์)</span>
-          </div>
-          <span class="live-date" id="liveDate"></span>
-        </div>
-        <div class="live-list" id="liveList">
-          <div class="live-empty">กำลังดึงสถานะเมลวันนี้...</div>
-        </div>
-      </div>
+      </section>
     </main>
 
     <footer class="footer">
@@ -1303,7 +1379,7 @@
   <div id="toast" class="toast">คัดลอกข้อความแล้ว</div>
 
   <div id="tipBubble" class="tip-bubble">
-    <span id="tipText">ใช้อีเมลเดียวกับที่สมัครสมาชิกไว้ เพื่อให้ระบบค้นหาเจอง่ายที่สุดค่ะ</span>
+    <span id="tipText">ล็อกอินก่อนใช้งาน ระบบจะดึงปีสมัครและข้อมูลสมาชิกให้อัตโนมัติค่ะ</span>
   </div>
 
   <div id="loadingOverlay" class="loading-overlay">
@@ -1319,7 +1395,7 @@
 
       <div class="loading-title">รอสักครู่นะคะ ✨</div>
       <div class="loading-sub">
-        ระบบกำลังส่งคำขอรับเคลมของคุณเข้าสู่คิว<br />
+        ระบบกำลังประมวลผลคำขอของคุณ<br />
         กรุณาอย่ารีเฟรชหน้าจอระหว่างกำลังโหลด
       </div>
 
@@ -1336,6 +1412,7 @@
     const CONFIG_POLL_INTERVAL = 30000;
     const MAX_NOTE_LENGTH = 500;
     const MAX_SLIP_SIZE = 3 * 1024 * 1024;
+    const TOKEN_KEY = "shop426_member_token";
 
     let claimConfig = {
       claimStartHour: 7,
@@ -1359,28 +1436,47 @@
 
     const state = {
       isLoading: false,
-      isClaimOpen: true
+      isClaimOpen: true,
+      member: null,
+      token: localStorage.getItem(TOKEN_KEY) || ""
     };
 
     const btnSubmit = document.getElementById("btnSubmit");
     const btnClear = document.getElementById("btnClear");
+    const btnLogout = document.getElementById("btnLogout");
     const btnPickSlip = document.getElementById("btnPickSlip");
     const btnCameraSlip = document.getElementById("btnCameraSlip");
     const btnCopyAccount = document.getElementById("btnCopyAccount");
     const btnRemoveSlip = document.getElementById("btnRemoveSlip");
     const themeToggle = document.getElementById("themeToggle");
+    const btnLogin = document.getElementById("btnLogin");
+    const btnRegister = document.getElementById("btnRegister");
 
-    const emailInput = document.getElementById("emailInput");
+    const loginEmailInput = document.getElementById("loginEmail");
+    const loginPasswordInput = document.getElementById("loginPassword");
+
+    const registerDisplayName = document.getElementById("registerDisplayName");
+    const registerEmail = document.getElementById("registerEmail");
+    const registerPassword = document.getElementById("registerPassword");
+    const registerSignupDate = document.getElementById("registerSignupDate");
+    const registerRenewDate = document.getElementById("registerRenewDate");
+
     const expiryInput = document.getElementById("expiryInput");
     const noteInput = document.getElementById("noteInput");
     const signupYearInput = document.getElementById("signupYear");
+    const signupYearDisplay = document.getElementById("signupYearDisplay");
     const slipInput = document.getElementById("slipInput");
     const slipInputCamera = document.getElementById("slipInputCamera");
 
-    const emailField = document.getElementById("emailField");
+    const loginEmailField = document.getElementById("loginEmailField");
+    const loginPasswordField = document.getElementById("loginPasswordField");
+    const registerEmailField = document.getElementById("registerEmailField");
+    const registerPasswordField = document.getElementById("registerPasswordField");
+    const registerSignupDateField = document.getElementById("registerSignupDateField");
+    const registerRenewDateField = document.getElementById("registerRenewDateField");
+
     const expiryField = document.getElementById("expiryField");
     const noteField = document.getElementById("noteField");
-    const yearRow = document.getElementById("yearRow");
     const paymentSection = document.getElementById("paymentSection");
     const fileName = document.getElementById("fileName");
     const slipPreviewWrap = document.getElementById("slipPreviewWrap");
@@ -1388,6 +1484,7 @@
 
     const noteCounter = document.getElementById("noteCounter");
     const status = document.getElementById("status");
+    const authStatus = document.getElementById("authStatus");
     const resultsDiv = document.getElementById("results");
     const summaryDiv = document.getElementById("summary");
     const claimTimeNote = document.getElementById("claimTimeNote");
@@ -1398,6 +1495,12 @@
     const bankAccountNoEl = document.getElementById("bankAccountNo");
     const bankAccountNameEl = document.getElementById("bankAccountName");
     const supportLineEl = document.getElementById("supportLine");
+
+    const profileBox = document.getElementById("memberProfileBox");
+    const profileEmail = document.getElementById("profileEmail");
+    const profileSignupDate = document.getElementById("profileSignupDate");
+    const profileRenewDate = document.getElementById("profileRenewDate");
+    const profileSignupYear = document.getElementById("profileSignupYear");
 
     const onlineStatus = document.getElementById("onlineStatus");
     const onlineDot = document.getElementById("onlineDot");
@@ -1452,40 +1555,61 @@
         .replace(/'/g, "&#39;");
     }
 
-    function setStepState(stateName) {
-      const steps = document.querySelectorAll(".step-pill");
-      steps.forEach((el) => {
-        el.classList.remove("step-pill--active", "step-pill--done", "step-pill--muted");
-        el.classList.add("step-pill--muted");
-      });
+    function showAuthStatus(message, type = "") {
+      authStatus.className = "";
+      authStatus.id = "authStatus";
+      if (type === "error") authStatus.classList.add("status-error");
+      if (type === "ok") authStatus.classList.add("status-ok");
+      if (type === "info") authStatus.classList.add("status-info");
+      authStatus.textContent = message || "";
+    }
 
-      const s1 = document.querySelector('.step-pill[data-step="1"]');
-      const s2 = document.querySelector('.step-pill[data-step="2"]');
-      const s3 = document.querySelector('.step-pill[data-step="3"]');
+    function showStatusError(message) {
+      status.classList.remove("status-ok", "status-info");
+      status.classList.add("status-error");
+      status.textContent = message;
+    }
 
-      if (!s1 || !s2 || !s3) return;
+    function clearStatus() {
+      status.classList.remove("status-error", "status-ok", "status-info");
+      status.textContent = "";
+    }
 
-      if (stateName === "idle") {
-        s1.classList.remove("step-pill--muted");
-        s1.classList.add("step-pill--active");
-      } else if (stateName === "loading") {
-        s1.classList.remove("step-pill--muted");
-        s1.classList.add("step-pill--done");
-        s2.classList.remove("step-pill--muted");
-        s2.classList.add("step-pill--active");
-      } else if (stateName === "done") {
-        s1.classList.remove("step-pill--muted");
-        s2.classList.remove("step-pill--muted");
-        s1.classList.add("step-pill--done");
-        s2.classList.add("step-pill--done");
-        s3.classList.remove("step-pill--muted");
-        s3.classList.add("step-pill--active");
-      } else if (stateName === "error") {
-        s1.classList.remove("step-pill--muted");
-        s1.classList.add("step-pill--done");
-        s2.classList.remove("step-pill--muted");
-        s2.classList.add("step-pill--active");
+    function shake(el) {
+      if (!el) return;
+      el.classList.add("shake");
+      setTimeout(() => el.classList.remove("shake"), 500);
+    }
+
+    function formatThaiDate(dateStr) {
+      if (!dateStr) return "-";
+      if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+        const [y, m, d] = dateStr.split("-").map(Number);
+        const months = ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."];
+        return `${d} ${months[m - 1]} ${y + 543}`;
       }
+      return dateStr;
+    }
+
+    function formatThaiToday() {
+      const now = new Date();
+      const months = ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."];
+      return `${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear() + 543}`;
+    }
+
+    function maskEmail(email) {
+      if (!email) return "-";
+      const parts = email.split("@");
+      if (parts.length !== 2) return email;
+      const name = parts[0];
+      const domain = parts[1];
+      const shortName = name.length <= 3 ? name : name.slice(0, 3) + "***";
+      return shortName + "@" + domain;
+    }
+
+    function thaiYearFromYmd(dateStr) {
+      if (!dateStr || !/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return "";
+      return String(Number(dateStr.slice(0, 4)) + 543);
     }
 
     async function fetchJsonWithRetry(url, options = {}, retries = 1) {
@@ -1503,12 +1627,31 @@
       }
     }
 
-    async function initClaimWindowConfig() {
-      if (!SCRIPT_URL || SCRIPT_URL === "PUT_YOUR_WEB_APP_URL_HERE") {
-        updateClaimWindowState();
-        return;
+    async function postJson(payload) {
+      const res = await fetch(SCRIPT_URL, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(payload)
+      });
+      const text = await res.text();
+      try {
+        return JSON.parse(text);
+      } catch (e) {
+        return { ok: false, message: text || "ไม่สามารถอ่านข้อมูลจากเซิร์ฟเวอร์ได้" };
       }
+    }
 
+    function renderConfigToUI() {
+      paymentTitleEl.textContent = claimConfig.paymentTitle || "แพ็กดูแล 19 บาท";
+      paymentNoteEl.textContent = claimConfig.paymentNote || "";
+      paymentRequireSlipEl.textContent = claimConfig.paymentRequireSlip || "";
+      bankNameEl.textContent = claimConfig.bankName || "ธ.กสิกร (KBank)";
+      bankAccountNoEl.textContent = claimConfig.bankAccountNo || "0628794251";
+      bankAccountNameEl.textContent = claimConfig.bankAccountName || "นภัทรธมณฑ์ ฤทธิ์ชัยศักดิ์";
+      supportLineEl.textContent = claimConfig.supportLine || "@467dlpti";
+    }
+
+    async function initClaimWindowConfig() {
       try {
         const cfg = await fetchJsonWithRetry(SCRIPT_URL + "?action=config&_t=" + Date.now(), {}, 1);
 
@@ -1537,35 +1680,13 @@
         }
 
         renderConfigToUI();
-        renderYearButtons();
         updateClaimWindowState();
+        syncPaymentSection();
       } catch (err) {
         console.warn("โหลด config claim ไม่สำเร็จ:", err);
         renderConfigToUI();
-        renderYearButtons();
         updateClaimWindowState();
-      }
-    }
-
-    function renderConfigToUI() {
-      paymentTitleEl.textContent = claimConfig.paymentTitle || "แพ็กดูแล 19 บาท";
-      paymentNoteEl.textContent = claimConfig.paymentNote || "";
-      paymentRequireSlipEl.textContent = claimConfig.paymentRequireSlip || "";
-      bankNameEl.textContent = claimConfig.bankName || "ธ.กสิกร (KBank)";
-      bankAccountNoEl.textContent = claimConfig.bankAccountNo || "0628794251";
-      bankAccountNameEl.textContent = claimConfig.bankAccountName || "นภัทรธมณฑ์ ฤทธิ์ชัยศักดิ์";
-      supportLineEl.textContent = claimConfig.supportLine || "@467dlpti";
-    }
-
-    function renderYearButtons() {
-      const buttons = yearRow.querySelectorAll(".year-btn");
-      if (buttons[0]) {
-        buttons[0].dataset.year = claimConfig.paidYear || "2568";
-        buttons[0].textContent = claimConfig.paidYear || "2568";
-      }
-      if (buttons[1]) {
-        buttons[1].dataset.year = claimConfig.freeYear || "2569";
-        buttons[1].textContent = claimConfig.freeYear || "2569";
+        syncPaymentSection();
       }
     }
 
@@ -1608,22 +1729,6 @@
       noteCounter.textContent = `${noteInput.value.length} / ${MAX_NOTE_LENGTH}`;
     }
 
-    function showStatusError(message) {
-      status.classList.remove("status-ok");
-      status.classList.add("status-error");
-      status.textContent = message;
-    }
-
-    function clearStatus() {
-      status.classList.remove("status-error", "status-ok");
-      status.textContent = "";
-    }
-
-    function shake(el) {
-      el.classList.add("shake");
-      setTimeout(() => el.classList.remove("shake"), 500);
-    }
-
     function resetSlipPreview() {
       activeSlipFile = null;
       slipInput.value = "";
@@ -1662,53 +1767,6 @@
       reader.readAsDataURL(file);
     }
 
-    function validateForm() {
-      const email = (emailInput.value || "").trim().toLowerCase();
-      const expiry = (expiryInput.value || "").trim();
-      const year = (signupYearInput.value || "").trim();
-      const note = (noteInput.value || "").trim();
-
-      clearStatus();
-      emailField.classList.remove("shake");
-      expiryField.classList.remove("shake");
-      noteField.classList.remove("shake");
-
-      if (!state.isClaimOpen) {
-        showStatusError(claimConfig.outOfTimeErrorText);
-        return false;
-      }
-
-      if (!email || !emailInput.checkValidity()) {
-        showStatusError("กรุณากรอกอีเมลให้ถูกต้อง");
-        shake(emailField);
-        return false;
-      }
-
-      if (!expiry) {
-        showStatusError("กรุณาเลือกวันหมดอายุสมาชิก");
-        shake(expiryField);
-        return false;
-      }
-
-      if (!year) {
-        showStatusError("กรุณาเลือกปีที่สมัครก่อนส่งคำขอ");
-        return false;
-      }
-
-      if (note.length > MAX_NOTE_LENGTH) {
-        showStatusError(`ฝากข้อความได้ไม่เกิน ${MAX_NOTE_LENGTH} ตัวอักษร`);
-        shake(noteField);
-        return false;
-      }
-
-      if (year === String(claimConfig.paidYear) && !activeSlipFile) {
-        showStatusError(claimConfig.paymentRequireSlip || "กรุณาแนบสลิปก่อนส่งคำขอ");
-        return false;
-      }
-
-      return true;
-    }
-
     function fileToDataUrl(file) {
       return new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -1716,48 +1774,6 @@
         reader.onerror = reject;
         reader.readAsDataURL(file);
       });
-    }
-
-    function clearForm() {
-      emailInput.value = "";
-      expiryInput.value = "";
-      noteInput.value = "";
-      signupYearInput.value = "";
-      yearRow.querySelectorAll(".year-btn").forEach((b) => b.classList.remove("active"));
-      paymentSection.style.display = "none";
-      resetSlipPreview();
-      clearStatus();
-      resultsDiv.innerHTML = "";
-      summaryDiv.innerHTML = "";
-      updateNoteCounter();
-      setStepState("idle");
-      emailInput.focus();
-    }
-
-    function formatThaiDate(dateStr) {
-      if (!dateStr) return "";
-      if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
-        const [y, m, d] = dateStr.split("-").map(Number);
-        const months = ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."];
-        return `${d} ${months[m - 1]} ${y + 543}`;
-      }
-      return dateStr;
-    }
-
-    function formatThaiToday() {
-      const now = new Date();
-      const months = ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."];
-      return `${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear() + 543}`;
-    }
-
-    function maskEmail(email) {
-      if (!email) return "-";
-      const parts = email.split("@");
-      if (parts.length !== 2) return email;
-      const name = parts[0];
-      const domain = parts[1];
-      const shortName = name.length <= 3 ? name : name.slice(0, 3) + "***";
-      return shortName + "@" + domain;
     }
 
     function decorateStatusText(text) {
@@ -1826,7 +1842,6 @@
     }
 
     async function fetchTodayStatus(initial = false) {
-      if (!SCRIPT_URL || SCRIPT_URL === "PUT_YOUR_WEB_APP_URL_HERE") return;
       try {
         const data = await fetchJsonWithRetry(SCRIPT_URL + "?action=todayStatus&_t=" + Date.now(), {}, 1);
         renderLiveStatus(data.todaySummary || data.summary || data.dailyStatus || null);
@@ -1867,11 +1882,13 @@
           await navigator.clipboard.writeText(text);
         }
 
-        const original = btn.innerHTML;
-        btn.innerHTML = "คัดลอกแล้ว ✓";
-        setTimeout(() => {
-          btn.innerHTML = original;
-        }, 1600);
+        if (btn) {
+          const original = btn.innerHTML;
+          btn.innerHTML = "คัดลอกแล้ว ✓";
+          setTimeout(() => {
+            btn.innerHTML = original;
+          }, 1600);
+        }
 
         toast.textContent = "คัดลอกแล้ว ✨";
         toast.classList.add("show");
@@ -1890,21 +1907,17 @@
 
       if (!res) {
         showStatusError("เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้งค่ะ");
-        setStepState("error");
         return;
       }
 
       const current = res.current || {
-        email: res.email || localEntry.email,
-        expiry: res.expiry || localEntry.expiry,
-        signupYear: res.signupYear || localEntry.year,
-        queueNo: res.queueNo || "",
-        claimType: res.claimType || (localEntry.year === String(claimConfig.paidYear) ? "paid" : "free"),
-        statusText: res.statusText || res.message || "ระบบรับคำขอแล้ว"
+        email: localEntry.email,
+        expiry: localEntry.expiry,
+        signupYear: localEntry.year,
+        queueNo: "",
+        claimType: localEntry.year === String(claimConfig.paidYear) ? "paid" : "free",
+        statusText: res.message || "ระบบรับคำขอแล้ว"
       };
-
-      if (res.ok !== false) setStepState("done");
-      else setStepState("error");
 
       const claimLabel = current.claimType === "paid" ? "แพ็กดูแล 19 บาท" : "เคลมฟรีตามเงื่อนไข";
       summaryDiv.innerHTML = `<div class="summary-pill">✅ คำขอล่าสุด: ${escapeHtml(claimLabel)}</div>`;
@@ -1981,23 +1994,302 @@
       }
     }
 
-    async function handleSubmit() {
-      updateClaimWindowState();
+    function setActiveView(viewId) {
+      document.querySelectorAll(".tab-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.view === viewId);
+      });
+      document.querySelectorAll(".view").forEach(view => {
+        view.classList.toggle("active", view.id === viewId);
+      });
+    }
 
-      if (!validateForm()) {
-        setStepState("idle");
+    function updateMemberProfileUI() {
+      if (!state.member) {
+        profileBox.style.display = "none";
+        signupYearInput.value = "";
+        signupYearDisplay.value = "";
+        paymentSection.style.display = "none";
         return;
       }
 
-      const email = (emailInput.value || "").trim().toLowerCase();
+      const signupYear = state.member.signupYearThai || thaiYearFromYmd(state.member.signupDate) || "";
+      state.member.signupYearThai = signupYear;
+
+      profileEmail.textContent = state.member.email || "-";
+      profileSignupDate.textContent = formatThaiDate(state.member.signupDate || "");
+      profileRenewDate.textContent = formatThaiDate(state.member.lastRenewDate || "");
+      profileSignupYear.textContent = signupYear || "-";
+      profileBox.style.display = "grid";
+
+      signupYearInput.value = signupYear;
+      signupYearDisplay.value = signupYear || "";
+      syncPaymentSection();
+    }
+
+    function syncPaymentSection() {
+      const year = (signupYearInput.value || "").trim();
+      if (year && year === String(claimConfig.paidYear)) {
+        paymentSection.style.display = "block";
+      } else {
+        paymentSection.style.display = "none";
+        resetSlipPreview();
+      }
+    }
+
+    function validateLogin() {
+      showAuthStatus("");
+      loginEmailField.classList.remove("shake");
+      loginPasswordField.classList.remove("shake");
+
+      const email = (loginEmailInput.value || "").trim().toLowerCase();
+      const password = (loginPasswordInput.value || "").trim();
+
+      if (!email || !loginEmailInput.checkValidity()) {
+        showAuthStatus("กรุณากรอกอีเมลให้ถูกต้อง", "error");
+        shake(loginEmailField);
+        return false;
+      }
+      if (!/^\d{6}$/.test(password)) {
+        showAuthStatus("รหัสผ่านต้องเป็นตัวเลข 6 หลัก", "error");
+        shake(loginPasswordField);
+        return false;
+      }
+      return true;
+    }
+
+    function validateRegister() {
+      showAuthStatus("");
+      registerEmailField.classList.remove("shake");
+      registerPasswordField.classList.remove("shake");
+      registerSignupDateField.classList.remove("shake");
+      registerRenewDateField.classList.remove("shake");
+
+      const email = (registerEmail.value || "").trim().toLowerCase();
+      const password = (registerPassword.value || "").trim();
+      const signupDate = (registerSignupDate.value || "").trim();
+      const renewDate = (registerRenewDate.value || "").trim();
+
+      if (!email || !registerEmail.checkValidity()) {
+        showAuthStatus("กรุณากรอกอีเมลให้ถูกต้อง", "error");
+        shake(registerEmailField);
+        return false;
+      }
+      if (!/^\d{6}$/.test(password)) {
+        showAuthStatus("รหัสผ่านต้องเป็นตัวเลข 6 หลัก", "error");
+        shake(registerPasswordField);
+        return false;
+      }
+      if (!signupDate) {
+        showAuthStatus("กรุณาเลือกวันที่สมัคร", "error");
+        shake(registerSignupDateField);
+        return false;
+      }
+      if (!renewDate) {
+        showAuthStatus("กรุณาเลือกวันที่ต่ออายุล่าสุด", "error");
+        shake(registerRenewDateField);
+        return false;
+      }
+      return true;
+    }
+
+    function validateClaimForm() {
+      const expiry = (expiryInput.value || "").trim();
+      const year = (signupYearInput.value || "").trim();
+      const note = (noteInput.value || "").trim();
+
+      clearStatus();
+      expiryField.classList.remove("shake");
+      noteField.classList.remove("shake");
+
+      if (!state.member || !state.token) {
+        showStatusError("กรุณาเข้าสู่ระบบก่อนแจ้งเคลม");
+        setActiveView("loginView");
+        return false;
+      }
+
+      if (!state.isClaimOpen) {
+        showStatusError(claimConfig.outOfTimeErrorText);
+        return false;
+      }
+
+      if (!expiry) {
+        showStatusError("กรุณาเลือกวันหมดอายุสมาชิก");
+        shake(expiryField);
+        return false;
+      }
+
+      if (!year) {
+        showStatusError("ไม่พบปีสมัครจากระบบสมาชิก กรุณาอัปเดตข้อมูลสมาชิกก่อน");
+        return false;
+      }
+
+      if (note.length > MAX_NOTE_LENGTH) {
+        showStatusError(`ฝากข้อความได้ไม่เกิน ${MAX_NOTE_LENGTH} ตัวอักษร`);
+        shake(noteField);
+        return false;
+      }
+
+      if (year === String(claimConfig.paidYear) && !activeSlipFile) {
+        showStatusError(claimConfig.paymentRequireSlip || "กรุณาแนบสลิปก่อนส่งคำขอ");
+        return false;
+      }
+
+      return true;
+    }
+
+    async function fetchMemberMe() {
+      if (!state.token) return false;
+
+      try {
+        const data = await fetchJsonWithRetry(
+          SCRIPT_URL + "?action=me&token=" + encodeURIComponent(state.token) + "&_t=" + Date.now(),
+          {},
+          1
+        );
+
+        if (!data || data.ok === false || !data.member) {
+          state.token = "";
+          state.member = null;
+          localStorage.removeItem(TOKEN_KEY);
+          updateMemberProfileUI();
+          return false;
+        }
+
+        state.member = data.member;
+        updateMemberProfileUI();
+        setActiveView("claimView");
+        showAuthStatus("เข้าสู่ระบบแล้ว สามารถแจ้งเคลมได้เลยค่ะ", "ok");
+        return true;
+      } catch (err) {
+        console.warn("fetch member me failed", err);
+        return false;
+      }
+    }
+
+    async function handleLogin() {
+      if (!validateLogin()) return;
+
+      showLoadingOverlay();
+      btnLogin.disabled = true;
+
+      try {
+        const payload = {
+          action: "login",
+          email: (loginEmailInput.value || "").trim().toLowerCase(),
+          password: (loginPasswordInput.value || "").trim()
+        };
+
+        const data = await postJson(payload);
+
+        if (!data || data.ok === false) {
+          showAuthStatus(data.message || "เข้าสู่ระบบไม่สำเร็จ", "error");
+          return;
+        }
+
+        state.token = data.token || "";
+        state.member = data.member || null;
+        if (state.token) {
+          localStorage.setItem(TOKEN_KEY, state.token);
+        }
+        updateMemberProfileUI();
+        setActiveView("claimView");
+        showAuthStatus("เข้าสู่ระบบสำเร็จค่ะ", "ok");
+      } catch (err) {
+        console.error(err);
+        showAuthStatus("เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ", "error");
+      } finally {
+        hideLoadingOverlay();
+        btnLogin.disabled = false;
+      }
+    }
+
+    async function handleRegister() {
+      if (!validateRegister()) return;
+
+      showLoadingOverlay();
+      btnRegister.disabled = true;
+
+      try {
+        const payload = {
+          action: "register",
+          displayName: (registerDisplayName.value || "").trim(),
+          email: (registerEmail.value || "").trim().toLowerCase(),
+          password: (registerPassword.value || "").trim(),
+          signupDate: (registerSignupDate.value || "").trim(),
+          lastRenewDate: (registerRenewDate.value || "").trim()
+        };
+
+        const data = await postJson(payload);
+
+        if (!data || data.ok === false) {
+          showAuthStatus(data.message || "สมัครสมาชิกไม่สำเร็จ", "error");
+          return;
+        }
+
+        state.token = data.token || "";
+        state.member = data.member || null;
+        if (state.token) {
+          localStorage.setItem(TOKEN_KEY, state.token);
+        }
+
+        updateMemberProfileUI();
+        setActiveView("claimView");
+        showAuthStatus("สมัครสมาชิกสำเร็จและเข้าสู่ระบบแล้วค่ะ", "ok");
+      } catch (err) {
+        console.error(err);
+        showAuthStatus("เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ", "error");
+      } finally {
+        hideLoadingOverlay();
+        btnRegister.disabled = false;
+      }
+    }
+
+    async function handleLogout() {
+      const token = state.token || "";
+      try {
+        if (token) {
+          await postJson({ action: "logout", token });
+        }
+      } catch (err) {
+        console.warn("logout failed", err);
+      }
+
+      state.token = "";
+      state.member = null;
+      localStorage.removeItem(TOKEN_KEY);
+
+      loginEmailInput.value = "";
+      loginPasswordInput.value = "";
+      clearForm();
+      updateMemberProfileUI();
+      setActiveView("loginView");
+      showAuthStatus("ออกจากระบบเรียบร้อยแล้วค่ะ", "info");
+    }
+
+    function clearForm() {
+      expiryInput.value = "";
+      noteInput.value = "";
+      resetSlipPreview();
+      clearStatus();
+      resultsDiv.innerHTML = "";
+      summaryDiv.innerHTML = "";
+      updateNoteCounter();
+      syncPaymentSection();
+    }
+
+    async function handleSubmit() {
+      updateClaimWindowState();
+
+      if (!validateClaimForm()) {
+        return;
+      }
+
       const expiry = (expiryInput.value || "").trim();
       const year = (signupYearInput.value || "").trim();
       const note = (noteInput.value || "").trim();
 
       state.isLoading = true;
-      setStepState("loading");
       showLoadingOverlay();
-
       btnSubmit.disabled = true;
       btnSubmit.innerHTML = "<span>กำลังส่งคำขอ…</span>";
 
@@ -2015,39 +2307,24 @@
         }
 
         const payload = {
-          email,
+          action: "claim",
+          token: state.token,
           expiry,
-          signupYear: year,
           note,
           slipData,
           slipName
         };
 
         const startTime = performance.now();
-
-        const res = await fetch(SCRIPT_URL, {
-          method: "POST",
-          headers: { "Content-Type": "text/plain;charset=utf-8" },
-          body: JSON.stringify(payload)
-        });
-
-        const text = await res.text();
-
-        let data;
-        try {
-          data = JSON.parse(text);
-        } catch (e) {
-          data = { ok: false, message: text || "ไม่สามารถอ่านข้อมูลจากเซิร์ฟเวอร์ได้" };
-        }
-
+        const data = await postJson(payload);
         const elapsedSec = (performance.now() - startTime) / 1000;
 
-        state.isLoading = false;
-        hideLoadingOverlay();
-        btnSubmit.disabled = false;
-        btnSubmit.innerHTML = "<span>ส่งคำขอเคลม</span><span>↗</span>";
-
-        renderResult(data, elapsedSec, { email, expiry, year, note });
+        renderResult(data, elapsedSec, {
+          email: state.member?.email || "-",
+          expiry,
+          year,
+          note
+        });
 
         if (data && (data.todaySummary || data.dailyStatus || data.summary)) {
           renderLiveStatus(data.todaySummary || data.dailyStatus || data.summary);
@@ -2055,34 +2332,38 @@
           fetchTodayStatus();
         }
 
+        if (data && data.member) {
+          state.member = data.member;
+          updateMemberProfileUI();
+        }
+
         await initClaimWindowConfig();
       } catch (err) {
         console.error(err);
+        showStatusError("เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ");
+      } finally {
         state.isLoading = false;
         hideLoadingOverlay();
         btnSubmit.disabled = false;
         btnSubmit.innerHTML = "<span>ส่งคำขอเคลม</span><span>↗</span>";
-        showStatusError("เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ");
-        setStepState("error");
       }
     }
 
-    yearRow.querySelectorAll(".year-btn").forEach((btn) => {
+    document.querySelectorAll(".tab-btn").forEach(btn => {
       btn.addEventListener("click", () => {
-        yearRow.querySelectorAll(".year-btn").forEach((b) => b.classList.remove("active"));
-        btn.classList.add("active");
-
-        const year = btn.dataset.year;
-        signupYearInput.value = year;
-
-        if (year === String(claimConfig.paidYear)) {
-          paymentSection.style.display = "block";
-        } else {
-          paymentSection.style.display = "none";
-          resetSlipPreview();
+        const target = btn.dataset.view;
+        if (target === "claimView" && !state.token) {
+          showAuthStatus("กรุณาเข้าสู่ระบบก่อนเข้าใช้งานหน้าแจ้งเคลม", "info");
+          setActiveView("loginView");
+          return;
         }
+        setActiveView(target);
       });
     });
+
+    btnLogin.addEventListener("click", handleLogin);
+    btnRegister.addEventListener("click", handleRegister);
+    btnLogout.addEventListener("click", handleLogout);
 
     btnPickSlip.addEventListener("click", () => slipInput.click());
     btnCameraSlip.addEventListener("click", () => slipInputCamera.click());
@@ -2098,19 +2379,19 @@
     });
 
     btnRemoveSlip.addEventListener("click", resetSlipPreview);
+    btnClear.addEventListener("click", clearForm);
+    btnSubmit.addEventListener("click", handleSubmit);
 
     btnCopyAccount.addEventListener("click", () => {
       copyToClipboard(btnCopyAccount, claimConfig.bankAccountNo || "0628794251");
     });
 
-    btnSubmit.addEventListener("click", handleSubmit);
-    btnClear.addEventListener("click", clearForm);
     noteInput.addEventListener("input", updateNoteCounter);
 
     const tips = [
-      "ใช้อีเมลเดียวกับที่สมัครสมาชิกไว้ เพื่อให้ระบบค้นหาเจอง่ายที่สุดค่ะ",
-      "เลือกปีสมัครให้ตรงกับข้อมูลจริงก่อนส่งคำขอนะคะ",
-      "ถ้าเป็นปีที่ต้องชำระ กรุณาแนบสลิปก่อนกดส่งคำขอ",
+      "ล็อกอินก่อนใช้งาน ระบบจะดึงปีสมัครและข้อมูลสมาชิกให้อัตโนมัติค่ะ",
+      "ถ้าสมัครปี 2568 ระบบจะให้แนบสลิปก่อนส่งคำขอ",
+      "ถ้าสมัครปี 2569 ระบบจะส่งเข้าคิวฟรีตามเงื่อนไข",
       "หลังส่งคำขอแล้ว ระบบจะแสดงสถานะล่าสุดให้ด้านล่างทันที"
     ];
     let tipIndex = 0;
@@ -2127,19 +2408,22 @@
     window.addEventListener("beforeunload", (e) => {
       if (!state.isLoading) return;
       e.preventDefault();
-      e.returnValue = "ระบบกำลังส่งคำขอเคลมของคุณอยู่ หากออกจากหน้านี้อาจทำให้สถานะไม่ถูกบันทึก";
+      e.returnValue = "ระบบกำลังส่งคำขอของคุณอยู่ หากออกจากหน้านี้อาจทำให้สถานะไม่ถูกบันทึก";
     });
 
     window.addEventListener("load", async () => {
-      setStepState("idle");
-      updateNoteCounter();
-      emailInput.focus();
-
       renderConfigToUI();
-      renderYearButtons();
+      updateNoteCounter();
       await initClaimWindowConfig();
       updateClaimWindowState();
       await fetchTodayStatus(true);
+
+      if (state.token) {
+        const ok = await fetchMemberMe();
+        if (!ok) setActiveView("loginView");
+      } else {
+        setActiveView("loginView");
+      }
 
       setTimeout(rotateTip, 800);
       setInterval(rotateTip, 13000);
