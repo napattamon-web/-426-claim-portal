@@ -4,26 +4,27 @@
   <meta charset="UTF-8" />
   <title>426 SHOP – Member & Claim Center</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#f7efe8" />
+  <meta name="theme-color" content="#f8f1ea" />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #f7efe8;
-      --card: rgba(255, 250, 246, 0.96);
-      --card-2: #fffaf6;
-      --accent: #c49a7a;
-      --accent-2: #e8c8b2;
-      --accent-3: #d8b49a;
-      --soft: #f1e2d6;
-      --soft-2: #f6ebe3;
-      --line: #eadbcf;
-      --text-main: #5a463b;
-      --text-sub: #9a8678;
+      --bg: #f8f1ea;
+      --bg-soft: #fffaf6;
+      --card: rgba(255, 251, 247, 0.96);
+      --card-strong: #fffdfb;
+      --accent: #bf8f72;
+      --accent-2: #e7c6b2;
+      --accent-3: #d9b49a;
+      --soft: #f3e3d7;
+      --soft-2: #f8ece4;
+      --line: #ecdccf;
+      --text-main: #5b463c;
+      --text-sub: #9a8679;
       --success: #6f8e63;
-      --danger: #d97f7f;
-      --warning: #c79366;
-      --info: #7a8cb8;
-      --shadow: 0 18px 40px rgba(118, 84, 63, 0.10);
+      --danger: #d77d7d;
+      --warning: #c58e5e;
+      --info: #7588b8;
+      --shadow: 0 20px 44px rgba(118, 84, 63, 0.10);
       --shadow-soft: 0 12px 26px rgba(118, 84, 63, 0.08);
       --radius-xl: 30px;
       --radius-lg: 24px;
@@ -47,32 +48,33 @@
       font-family: "Noto Sans Thai", system-ui, sans-serif;
       color: var(--text-main);
       background:
-        radial-gradient(circle at top left, rgba(232, 200, 178, 0.35), transparent 28%),
-        radial-gradient(circle at top right, rgba(196, 154, 122, 0.16), transparent 22%),
-        linear-gradient(180deg, #fffaf6 0%, #f7efe8 100%);
+        radial-gradient(circle at top left, rgba(231,198,178,0.34), transparent 28%),
+        radial-gradient(circle at top right, rgba(191,143,114,0.14), transparent 20%),
+        linear-gradient(180deg, #fffaf6 0%, #f8f1ea 100%);
       display: flex;
       justify-content: center;
       overflow-x: hidden;
       position: relative;
     }
 
+    /* หมีพื้นหลัง */
     body::before {
       content: "";
       position: fixed;
       inset: 0;
       pointer-events: none;
-      opacity: 0.10;
+      opacity: 0.11;
       background-repeat: no-repeat;
       background-position: center 70px;
-      background-size: min(74vw, 330px);
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 420 420'><g fill='none' fill-rule='evenodd'><circle cx='210' cy='230' r='108' fill='%23eecfb8'/><circle cx='125' cy='128' r='46' fill='%23ddb89c'/><circle cx='295' cy='128' r='46' fill='%23ddb89c'/><circle cx='125' cy='128' r='22' fill='%23fff2e8'/><circle cx='295' cy='128' r='22' fill='%23fff2e8'/><ellipse cx='172' cy='220' rx='14' ry='18' fill='%23524239'/><ellipse cx='248' cy='220' rx='14' ry='18' fill='%23524239'/><ellipse cx='210' cy='270' rx='38' ry='28' fill='%23fff7f1'/><ellipse cx='210' cy='258' rx='16' ry='12' fill='%23524239'/><path d='M184 286c10 12 42 12 52 0' stroke='%23c9908d' stroke-width='10' stroke-linecap='round'/><ellipse cx='144' cy='266' rx='24' ry='12' fill='%23f0c8c2' opacity='.55'/><ellipse cx='276' cy='266' rx='24' ry='12' fill='%23f0c8c2' opacity='.55'/></g></svg>");
+      background-size: min(82vw, 380px);
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 420 420'><g fill='none' fill-rule='evenodd'><circle cx='210' cy='220' r='124' fill='%23efcfba'/><circle cx='118' cy='118' r='54' fill='%23ddb89c'/><circle cx='302' cy='118' r='54' fill='%23ddb89c'/><circle cx='118' cy='118' r='25' fill='%23fff3ea'/><circle cx='302' cy='118' r='25' fill='%23fff3ea'/><ellipse cx='170' cy='216' rx='15' ry='19' fill='%23524239'/><ellipse cx='250' cy='216' rx='15' ry='19' fill='%23524239'/><ellipse cx='210' cy='276' rx='42' ry='31' fill='%23fff8f3'/><ellipse cx='210' cy='262' rx='18' ry='13' fill='%23524239'/><path d='M186 294c11 13 37 13 48 0' stroke='%23cc918c' stroke-width='10' stroke-linecap='round'/><ellipse cx='144' cy='264' rx='25' ry='13' fill='%23efc1c8' opacity='.5'/><ellipse cx='276' cy='264' rx='25' ry='13' fill='%23efc1c8' opacity='.5'/></g></svg>");
     }
 
     .app {
       width: 100%;
-      max-width: 520px;
+      max-width: 540px;
       min-height: 100vh;
-      padding: 16px 14px 18px;
+      padding: 16px 14px 20px;
       display: flex;
       flex-direction: column;
       gap: 14px;
@@ -97,19 +99,19 @@
     .hero::after {
       content: "";
       position: absolute;
-      right: -12px;
-      top: -12px;
-      width: 110px;
-      height: 110px;
+      right: -20px;
+      top: -20px;
+      width: 120px;
+      height: 120px;
       border-radius: 999px;
-      background: radial-gradient(circle, rgba(255,255,255,0.75), rgba(255,255,255,0));
+      background: radial-gradient(circle, rgba(255,255,255,0.85), rgba(255,255,255,0));
       pointer-events: none;
     }
 
     .hero-top {
       display: flex;
-      align-items: flex-start;
       justify-content: space-between;
+      align-items: flex-start;
       gap: 10px;
     }
 
@@ -121,11 +123,11 @@
     }
 
     .logo-shell {
-      width: 64px;
-      height: 64px;
+      width: 68px;
+      height: 68px;
       border-radius: 22px;
       padding: 4px;
-      background: linear-gradient(135deg, #fffdfb, #f4e5da);
+      background: linear-gradient(135deg, #fffefc, #f4e7dc);
       box-shadow: var(--shadow-soft);
       flex-shrink: 0;
     }
@@ -133,9 +135,9 @@
     .logo-img {
       width: 100%;
       height: 100%;
+      display: block;
       object-fit: cover;
       border-radius: 18px;
-      display: block;
       background: #fff;
     }
 
@@ -149,50 +151,50 @@
     .brand-title {
       font-size: 1.28rem;
       font-weight: 800;
-      letter-spacing: .04em;
       line-height: 1.1;
+      letter-spacing: .05em;
       text-transform: uppercase;
-      color: #6b4f3f;
+      color: #6f5242;
     }
 
     .brand-sub {
       font-size: .78rem;
-      letter-spacing: .14em;
-      text-transform: uppercase;
       color: var(--text-sub);
+      letter-spacing: .13em;
+      text-transform: uppercase;
       white-space: nowrap;
     }
 
     .badge {
       padding: 8px 12px;
       border-radius: 999px;
-      background: rgba(255,255,255,0.92);
-      border: 1px solid #efdfd1;
+      background: rgba(255,255,255,0.95);
+      border: 1px solid #efe1d6;
       display: inline-flex;
       align-items: center;
       gap: 8px;
       font-size: .74rem;
       color: var(--text-sub);
+      box-shadow: 0 8px 18px rgba(118,84,63,0.06);
       white-space: nowrap;
-      box-shadow: 0 8px 18px rgba(118, 84, 63, 0.06);
     }
 
     .badge-dot {
       width: 8px;
       height: 8px;
       border-radius: 999px;
-      background: #7f9b74;
-      box-shadow: 0 0 0 4px rgba(127, 155, 116, 0.15);
-    }
-
-    .badge-dot.offline {
-      background: #d97f7f;
-      box-shadow: 0 0 0 4px rgba(217, 127, 127, 0.16);
+      background: var(--success);
+      box-shadow: 0 0 0 4px rgba(111,142,99,0.14);
     }
 
     .badge.closed {
       background: #fff5f4;
-      border-color: #f1d3d0;
+      border-color: #efd1d1;
+    }
+
+    .badge-dot.offline {
+      background: var(--danger);
+      box-shadow: 0 0 0 4px rgba(215,125,125,0.14);
     }
 
     .hero-center-text {
@@ -200,35 +202,51 @@
       text-align: center;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
       align-items: center;
     }
 
     .hero-main-text {
-      max-width: 420px;
-      font-size: .92rem;
+      max-width: 430px;
+      font-size: .95rem;
       line-height: 1.75;
+      font-weight: 700;
       color: var(--text-main);
-      font-weight: 600;
     }
 
     .claim-note {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 9px 14px;
+      padding: 11px 18px;
       border-radius: 999px;
-      background: #fcf5ef;
-      border: 1px solid #eadbcf;
-      font-size: .78rem;
-      color: var(--text-sub);
+      background: linear-gradient(135deg, #fff8f1, #ffeede);
+      border: 1px solid #edd7c6;
+      font-size: .82rem;
+      color: #8d6a55;
       text-align: center;
+      font-weight: 800;
+      box-shadow: 0 10px 20px rgba(191,143,114,0.10);
+      animation: cuteBlink 1.6s ease-in-out infinite;
     }
 
     .claim-note.closed {
-      background: #fff2f1;
+      background: linear-gradient(135deg, #fff0f0, #ffe4e4);
       border-color: #edc7c7;
-      color: #c46a6a;
+      color: #c16666;
+    }
+
+    @keyframes cuteBlink {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 10px 20px rgba(191,143,114,0.10);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.04);
+        box-shadow: 0 14px 28px rgba(191,143,114,0.18);
+        opacity: .92;
+      }
     }
 
     .panel {
@@ -243,7 +261,7 @@
       font-weight: 800;
       font-size: 1rem;
       margin-bottom: 8px;
-      color: #6b4f3f;
+      color: #6e5344;
     }
 
     .panel-title .icon {
@@ -282,16 +300,39 @@
     .login-card,
     .register-card,
     .claim-card {
-      border-radius: 24px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(252,246,240,0.96));
-      border: 1px solid #efe0d5;
-      padding: 14px;
+      border-radius: 26px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.94), rgba(253,247,242,0.98));
+      border: 1px solid #efe0d4;
+      padding: 15px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
     }
 
     .claim-card {
       background:
-        radial-gradient(circle at top right, rgba(255,255,255,.7), transparent 30%),
-        linear-gradient(180deg, #fffaf6, #f8efe8);
+        radial-gradient(circle at top right, rgba(255,255,255,.75), transparent 28%),
+        linear-gradient(180deg, #fffbf8, #f8efe8);
+    }
+
+    .cute-banner {
+      margin-bottom: 10px;
+      border-radius: 22px;
+      padding: 13px 14px;
+      background: linear-gradient(135deg, #fff4ec, #f3e4d8);
+      border: 1px solid #ead7ca;
+      text-align: center;
+    }
+
+    .cute-banner-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #755847;
+      margin-bottom: 4px;
+    }
+
+    .cute-banner-sub {
+      font-size: .78rem;
+      color: var(--text-sub);
+      line-height: 1.65;
     }
 
     .field-group {
@@ -315,17 +356,17 @@
     }
 
     .input-shell {
-      background: rgba(255, 252, 249, 0.98);
-      border: 1.5px solid #e9ddd2;
+      background: rgba(255,253,250,0.98);
+      border: 1.5px solid #eadfd4;
       border-radius: 20px;
       padding: 11px 12px;
       transition: .2s ease;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.65);
     }
 
     .input-shell:focus-within {
       border-color: #d6b39b;
-      box-shadow: 0 0 0 4px rgba(212, 180, 154, 0.14);
+      box-shadow: 0 0 0 4px rgba(214,179,155,0.14);
       background: #fff;
     }
 
@@ -348,8 +389,8 @@
 
     .toggle-pass {
       border: 0;
-      background: #f4e7dc;
-      color: #7d6657;
+      background: #f5e7db;
+      color: #7c6557;
       border-radius: 999px;
       padding: 7px 11px;
       font-size: .76rem;
@@ -375,20 +416,13 @@
 
     input::placeholder,
     textarea::placeholder {
-      color: #b4a396;
+      color: #b6a396;
     }
 
     textarea {
       resize: none;
       min-height: 92px;
       line-height: 1.6;
-    }
-
-    .note-counter {
-      margin-top: 4px;
-      font-size: .73rem;
-      color: var(--text-sub);
-      text-align: right;
     }
 
     .remember-row {
@@ -416,86 +450,11 @@
       height: 16px;
     }
 
-    .action-row {
-      display: flex;
-      gap: 10px;
-      margin-top: 14px;
-    }
-
-    .btn-primary,
-    .btn-secondary,
-    .btn-danger,
-    .btn-link-small,
-    .btn-support {
-      min-height: 52px;
-      border-radius: 999px;
-      font-family: inherit;
-      font-weight: 800;
-      cursor: pointer;
-      transition: .2s ease;
-    }
-
-    .btn-primary {
-      flex: 1;
-      border: 0;
-      background: linear-gradient(135deg, #d7b59b, #b78868);
-      color: #fffdfb;
-      box-shadow: 0 14px 24px rgba(126, 89, 66, 0.18);
-      font-size: .96rem;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .btn-primary:hover { transform: translateY(-1px); }
-
-    .btn-primary:disabled {
-      opacity: .65;
-      cursor: default;
-      transform: none;
-    }
-
-    .btn-secondary {
-      border: 1px solid #e6d8cd;
-      background: linear-gradient(180deg, #fffdfb, #f7efe8);
+    .note-counter {
+      margin-top: 4px;
+      font-size: .73rem;
       color: var(--text-sub);
-      padding: 0 16px;
-      font-size: .82rem;
-    }
-
-    .btn-danger {
-      border: 1px solid #f0cdcd;
-      background: linear-gradient(180deg, #fff7f7, #ffefef);
-      color: #c46a6a;
-      padding: 0 16px;
-      font-size: .82rem;
-    }
-
-    .btn-link-small,
-    .btn-support {
-      min-height: 40px;
-      border: 1px solid #eadbcf;
-      background: #fffaf6;
-      color: #8f7868;
-      padding: 0 16px;
-      font-size: .78rem;
-      width: 100%;
-      margin-top: 12px;
-    }
-
-    .btn-link-small:hover,
-    .btn-secondary:hover,
-    .btn-danger:hover,
-    .btn-support:hover {
-      transform: translateY(-1px);
-    }
-
-    .auth-foot {
-      margin-top: 12px;
-      text-align: center;
-      font-size: .78rem;
-      color: var(--text-sub);
+      text-align: right;
     }
 
     .important-note {
@@ -510,6 +469,89 @@
       color: #9a6f52;
       font-size: .78rem;
       line-height: 1.6;
+    }
+
+    .action-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .btn-primary,
+    .btn-secondary,
+    .btn-danger,
+    .btn-link-small,
+    .btn-support,
+    .mini-btn,
+    .upload-btn {
+      border-radius: 999px;
+      font-family: inherit;
+      font-weight: 800;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .btn-primary {
+      flex: 1;
+      min-height: 52px;
+      border: 0;
+      background: linear-gradient(135deg, #d6b297, #b98665);
+      color: #fffdfb;
+      box-shadow: 0 14px 24px rgba(126,89,66,0.18);
+      font-size: .96rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-primary:disabled {
+      opacity: .65;
+      cursor: default;
+    }
+
+    .btn-secondary {
+      min-height: 52px;
+      border: 1px solid #e6d8cd;
+      background: linear-gradient(180deg, #fffdfb, #f7efe8);
+      color: var(--text-sub);
+      padding: 0 16px;
+      font-size: .82rem;
+    }
+
+    .btn-danger {
+      min-height: 52px;
+      border: 1px solid #f0cdcd;
+      background: linear-gradient(180deg, #fff7f7, #ffefef);
+      color: #c46a6a;
+      padding: 0 16px;
+      font-size: .82rem;
+    }
+
+    .btn-link-small,
+    .btn-support {
+      min-height: 42px;
+      border: 1px solid #eadbcf;
+      background: #fffaf6;
+      color: #8f7868;
+      padding: 0 16px;
+      font-size: .78rem;
+      width: 100%;
+      margin-top: 12px;
+    }
+
+    .btn-notify {
+      min-height: 44px;
+      border: 1px solid #eadccf;
+      background: linear-gradient(135deg, #fff8f2, #f5e6da);
+      color: #7d6757;
+      border-radius: 999px;
+      padding: 0 16px;
+      font-size: .8rem;
+      font-weight: 800;
+      width: 100%;
+      margin-top: 12px;
+      cursor: pointer;
     }
 
     .profile-box {
@@ -536,29 +578,6 @@
 
     .profile-box .line strong {
       color: var(--text-main);
-    }
-
-    .cute-banner {
-      margin-bottom: 10px;
-      border-radius: 20px;
-      padding: 12px 14px;
-      background: linear-gradient(135deg, #fff6ee, #f4e6db);
-      border: 1px solid #ead8cb;
-      text-align: center;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
-    }
-
-    .cute-banner-title {
-      font-size: 1rem;
-      font-weight: 800;
-      color: #7a5d4b;
-      margin-bottom: 4px;
-    }
-
-    .cute-banner-sub {
-      font-size: .78rem;
-      color: var(--text-sub);
-      line-height: 1.6;
     }
 
     .mini-info-grid {
@@ -588,7 +607,9 @@
       color: #735847;
     }
 
-    .payment-section { display: none; }
+    .payment-section {
+      display: none;
+    }
 
     .payment-card {
       margin-top: 10px;
@@ -597,11 +618,10 @@
       background: linear-gradient(135deg, #fffaf7, #f8efe7);
       border: 1px solid #eaded3;
       text-align: center;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
     }
 
     .payment-title {
-      font-size: .96rem;
+      font-size: .98rem;
       font-weight: 800;
       margin-bottom: 4px;
       color: #7a5d4b;
@@ -619,9 +639,9 @@
       gap: 6px;
       padding: 10px;
       border-radius: 18px;
-      background: rgba(255,255,255,0.9);
+      background: rgba(255,255,255,0.92);
       border: 1px solid #eee2d8;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
     .bank-line {
@@ -632,8 +652,14 @@
       font-size: .8rem;
     }
 
-    .bank-label { font-weight: 800; color: var(--text-main); }
-    .bank-value { color: var(--text-sub); }
+    .bank-label {
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .bank-value {
+      color: var(--text-sub);
+    }
 
     .mini-actions {
       display: flex;
@@ -644,14 +670,44 @@
     }
 
     .mini-btn {
-      border-radius: 999px;
       border: 1px solid #e5d7cb;
       background: linear-gradient(180deg, #ffffff, #f8f1eb);
       padding: 8px 12px;
       font-size: .76rem;
-      font-weight: 800;
       color: var(--text-main);
-      cursor: pointer;
+    }
+
+    .qr-wrap {
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 22px;
+      border: 1px solid #eaded3;
+      background: rgba(255,255,255,0.88);
+    }
+
+    .qr-title {
+      font-size: .86rem;
+      font-weight: 800;
+      color: #755847;
+      margin-bottom: 8px;
+    }
+
+    .qr-img {
+      width: 100%;
+      max-width: 260px;
+      display: block;
+      margin: 0 auto;
+      border-radius: 18px;
+      border: 1px solid #eadbcf;
+      background: #fff;
+      box-shadow: 0 12px 20px rgba(0,0,0,0.06);
+    }
+
+    .qr-caption {
+      margin-top: 8px;
+      font-size: .76rem;
+      line-height: 1.6;
+      color: var(--text-sub);
     }
 
     .uploader {
@@ -659,6 +715,7 @@
       border-radius: 22px;
       padding: 14px;
       background: rgba(255,255,255,0.84);
+      margin-top: 12px;
     }
 
     .uploader-top {
@@ -691,13 +748,10 @@
 
     .upload-btn {
       border: 0;
-      border-radius: 999px;
       padding: 11px 16px;
       background: linear-gradient(135deg, #e8c8b2, #d9b498);
       color: #6c4a3d;
-      font-weight: 800;
       font-size: .84rem;
-      cursor: pointer;
       box-shadow: 0 10px 18px rgba(118,84,63,0.08);
     }
 
@@ -951,8 +1005,8 @@
       width: 9px;
       height: 9px;
       border-radius: 999px;
-      background: #7f9b74;
-      box-shadow: 0 0 0 4px rgba(127,155,116,0.16);
+      background: var(--success);
+      box-shadow: 0 0 0 4px rgba(111,142,99,0.16);
       animation: pulseDot 1.6s infinite;
     }
 
@@ -1113,43 +1167,6 @@
       margin-top: 14px;
     }
 
-    .footer {
-      margin-top: auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      color: var(--text-sub);
-      font-size: .74rem;
-      text-align: center;
-    }
-
-    .support-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 7px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.9);
-      border: 1px solid #eadfd5;
-    }
-
-    .copyright {
-      letter-spacing: .16em;
-      text-transform: uppercase;
-    }
-
-    .shake {
-      animation: shake .4s;
-      border-color: var(--danger) !important;
-    }
-
-    @keyframes shake {
-      0%,100% { transform: translateX(0); }
-      25% { transform: translateX(-4px); }
-      75% { transform: translateX(4px); }
-    }
-
     .toast {
       position: fixed;
       left: 50%;
@@ -1157,7 +1174,7 @@
       transform: translateX(-50%) translateY(40px);
       padding: 10px 18px;
       border-radius: 999px;
-      background: rgba(90, 70, 59, 0.96);
+      background: rgba(90,70,59,0.96);
       color: #fff;
       font-size: .8rem;
       font-weight: 800;
@@ -1241,10 +1258,82 @@
       font-weight: 800;
     }
 
+    .float-admin {
+      position: fixed;
+      right: 16px;
+      bottom: 20px;
+      z-index: 9997;
+      width: 62px;
+      height: 62px;
+      border: 0;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #fffdfb, #f4e7dc);
+      box-shadow: 0 16px 28px rgba(118,84,63,0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 6px;
+    }
+
+    .float-admin img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 999px;
+    }
+
+    .float-admin:hover {
+      transform: translateY(-2px);
+    }
+
+    .footer {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-sub);
+      font-size: .74rem;
+      text-align: center;
+    }
+
+    .support-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.9);
+      border: 1px solid #eadfd5;
+    }
+
+    .copyright {
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .shake {
+      animation: shake .4s;
+      border-color: var(--danger) !important;
+    }
+
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      25% { transform: translateX(-4px); }
+      75% { transform: translateX(4px); }
+    }
+
     @media (max-width: 480px) {
       .app { padding: 12px 12px 16px; }
       .grid-2, .mini-info-grid { grid-template-columns: 1fr; }
       .action-row, .modal-actions { flex-direction: column; }
+      .float-admin {
+        width: 58px;
+        height: 58px;
+        right: 12px;
+        bottom: 14px;
+      }
     }
   </style>
 </head>
@@ -1275,7 +1364,7 @@
 
       <div class="hero-center-text">
         <div class="hero-main-text">
-          เข้าสู่ระบบหรือสมัครสมาชิกได้ตลอดเวลา ส่วนการส่งเคลมจะทำได้เฉพาะช่วงเวลาที่ระบบเปิดรับค่ะ
+          ล็อกอินก่อนใช้งาน ระบบจะดึงข้อมูลสมาชิกให้อัตโนมัติ
         </div>
 
         <div class="claim-note" id="claimTimeNote">
@@ -1290,6 +1379,7 @@
         <span>ศูนย์สมาชิก 426 SHOP</span>
       </div>
 
+      <!-- หน้า LOGIN -->
       <section class="view active" id="loginView">
         <div class="section-blurb">
           เข้าสู่ระบบด้วยอีเมลที่สมัครกับร้าน และรหัสผ่าน 6 หลัก
@@ -1330,6 +1420,7 @@
           </div>
 
           <button type="button" class="btn-link-small" id="btnForgotPassword">ลืมรหัสผ่าน</button>
+          <button type="button" class="btn-notify" id="btnEnablePushLogin">🔔 เปิดการแจ้งเตือนบราวเซอร์</button>
 
           <div id="authStatus"></div>
         </div>
@@ -1337,7 +1428,7 @@
         <div class="auth-foot">ยังไม่มีสมาชิก?</div>
         <button type="button" class="btn-link-small" id="showRegisterBtn">สมัครสมาชิกใหม่</button>
 
-        <div class="live-card" id="liveStatusCardLogin">
+        <div class="live-card">
           <div class="live-header">
             <div class="live-title-left">
               <span class="live-dot"></span>
@@ -1351,6 +1442,7 @@
         </div>
       </section>
 
+      <!-- หน้า REGISTER -->
       <section class="view" id="registerView">
         <div class="section-blurb">
           สมัครสมาชิกด้วยอีเมลที่ใช้กับร้าน พร้อมตั้งรหัสผ่าน 6 หลัก
@@ -1390,7 +1482,7 @@
 
           <div class="important-note">
             <strong>สำคัญ:</strong>
-            <span>กรอกวันที่สมัครหรือวันที่ต่ออายุล่าสุดตามข้อมูลที่คุณใช้อยู่ในระบบ เพื่อให้ร้านใช้ข้อมูลนี้อ้างอิงการเคลมได้ถูกต้อง</span>
+            <span>กรอกวันที่สมัครหรือวันที่ต่ออายุล่าสุดตามข้อมูลที่ใช้อยู่ในระบบ เพื่อให้ร้านใช้เป็นข้อมูลอ้างอิงการเคลม</span>
           </div>
 
           <div class="action-row">
@@ -1404,6 +1496,7 @@
         </div>
       </section>
 
+      <!-- หน้า CLAIM -->
       <section class="view" id="claimView">
         <div class="claim-card">
           <div id="claimAlert" class="alert-box"></div>
@@ -1411,7 +1504,7 @@
           <div class="cute-banner">
             <div class="cute-banner-title">🐻 แจ้งเคลมสมาชิก</div>
             <div class="cute-banner-sub">
-              ล็อกอินสำเร็จแล้ว ระบบจะใช้ข้อมูลสมาชิกของคุณอัตโนมัติ และแสดงประวัติการเคลมล่าสุดให้ทันที
+              เมื่อเข้าสู่ระบบแล้ว ระบบจะใช้ข้อมูลสมาชิกของคุณอัตโนมัติ และช่วยกรอกส่วนสำคัญให้ค่ะ
             </div>
           </div>
 
@@ -1449,9 +1542,9 @@
 
           <div class="field-group payment-section" id="paymentSection">
             <div class="payment-card">
-              <div class="payment-title" id="paymentTitle">แพ็กดูแล 19 บาท</div>
+              <div class="payment-title" id="paymentTitle">ชำระค่าดูแล 19 บาท</div>
               <div class="payment-desc" id="paymentNote">
-                เลือกปีสมัคร 2568 ระบบให้ใช้แพ็กดูแล 19 บาท เพื่อรับเข้าคิวเคลมทันทีหลังแนบสลิป
+                สำหรับปีสมัครที่กำหนด ระบบจะให้ชำระ 19 บาท และแนบหลักฐานเพื่อเข้าคิวเคลม
               </div>
 
               <div class="bank-box">
@@ -1471,6 +1564,19 @@
 
               <div class="mini-actions">
                 <button type="button" class="mini-btn" id="btnCopyAccount">คัดลอกเลขบัญชี</button>
+              </div>
+
+              <div class="qr-wrap">
+                <div class="qr-title">สแกน QR เพื่อชำระเงิน 19฿</div>
+                <img
+                  class="qr-img"
+                  id="paymentQr"
+                  src="https://img2.imgbiz.com/imgbiz/IMG_2680.jpeg"
+                  alt="QR Payment 19 THB"
+                />
+                <div class="qr-caption">
+                  ชำระเงินแล้วแนบสลิปด้านล่างเพื่อให้ระบบรับเข้าคิวเคลม
+                </div>
               </div>
 
               <div class="uploader">
@@ -1499,7 +1605,7 @@
               </div>
 
               <div class="payment-require" id="paymentRequireSlip">
-                หากไม่แนบสลิป ระบบจะยังไม่รับเข้าระบบเคลมสำหรับปี 2568
+                หากไม่แนบสลิป ระบบจะยังไม่รับเข้าระบบเคลมสำหรับรอบที่ต้องชำระ 19 บาท
               </div>
             </div>
           </div>
@@ -1521,12 +1627,11 @@
             <button class="btn-danger" id="btnLogout">ออกจากระบบ</button>
           </div>
 
-          <button type="button" class="btn-support" id="btnSupport">ติดต่อแอดมินทันที</button>
-          <button type="button" class="btn-support" id="btnEnablePush">เปิดแจ้งเตือนผ่านเบราว์เซอร์</button>
+          <button type="button" class="btn-notify" id="btnEnablePushClaim">🔔 เปิดการแจ้งเตือนบราวเซอร์</button>
 
           <div class="helper">
             <span>ℹ️</span>
-            <span>เข้าสู่ระบบและสมัครสมาชิกได้ตลอดเวลา แต่การส่งคำขอเคลมจะส่งได้เฉพาะช่วงเวลาที่ระบบเปิดรับเท่านั้น</span>
+            <span>เข้าสู่ระบบและสมัครสมาชิกได้ตลอดเวลา แต่การส่งคำขอเคลมจะทำได้เฉพาะช่วงเวลาที่ระบบเปิดรับเท่านั้น</span>
           </div>
 
           <div id="summary"></div>
@@ -1556,6 +1661,10 @@
       <div class="copyright">426 SHOP · EST 2024</div>
     </footer>
   </div>
+
+  <button class="float-admin" id="floatAdminBtn" aria-label="ติดต่อแอดมิน">
+    <img src="https://img2.imgbiz.com/imgbiz/IMG_1141eda396408a914d01.png" alt="Admin" />
+  </button>
 
   <div id="toast" class="toast">คัดลอกข้อความแล้ว</div>
 
@@ -1594,6 +1703,7 @@
     const MAX_SLIP_SIZE = 3 * 1024 * 1024;
     const TOKEN_KEY = "shop426_member_token";
     const REMEMBER_KEY = "shop426_saved_login";
+    const SUPPORT_LINK = "https://line.me/R/ti/p/@467dlpti";
 
     let claimConfig = {
       claimStartHour: 7,
@@ -1608,9 +1718,9 @@
       bankName: "ธ.กสิกร (KBank)",
       bankAccountNo: "0628794251",
       bankAccountName: "นภัทรธมณฑ์ ฤทธิ์ชัยศักดิ์",
-      paymentTitle: "แพ็กดูแล 19 บาท (สำหรับรอบเคลมนี้)",
-      paymentNote: "เลือกปีสมัคร 2568 ระบบให้ใช้แพ็กดูแล 19 บาท เพื่อรับเข้าคิวเคลมทันทีหลังแนบสลิป",
-      paymentRequireSlip: "หากไม่แนบสลิป ระบบจะยังไม่รับเข้าระบบเคลมสำหรับปี 2568",
+      paymentTitle: "ชำระค่าดูแล 19 บาท",
+      paymentNote: "สำหรับปีสมัครที่กำหนด ระบบจะให้ชำระ 19 บาท และแนบหลักฐานเพื่อเข้าคิวเคลม",
+      paymentRequireSlip: "หากไม่แนบสลิป ระบบจะยังไม่รับเข้าระบบเคลมสำหรับรอบที่ต้องชำระ 19 บาท",
       supportLine: "@467dlpti",
       isOpenNow: null
     };
@@ -1619,8 +1729,7 @@
       isLoading: false,
       isClaimOpen: true,
       member: null,
-      token: localStorage.getItem(TOKEN_KEY) || "",
-      pendingSubmit: false
+      token: localStorage.getItem(TOKEN_KEY) || ""
     };
 
     const btnSubmit = document.getElementById("btnSubmit");
@@ -1632,9 +1741,10 @@
     const btnRemoveSlip = document.getElementById("btnRemoveSlip");
     const btnLogin = document.getElementById("btnLogin");
     const btnRegister = document.getElementById("btnRegister");
-    const btnSupport = document.getElementById("btnSupport");
-    const btnEnablePush = document.getElementById("btnEnablePush");
     const btnForgotPassword = document.getElementById("btnForgotPassword");
+    const btnEnablePushLogin = document.getElementById("btnEnablePushLogin");
+    const btnEnablePushClaim = document.getElementById("btnEnablePushClaim");
+    const floatAdminBtn = document.getElementById("floatAdminBtn");
     const showRegisterBtn = document.getElementById("showRegisterBtn");
     const backToLoginBtn = document.getElementById("backToLoginBtn");
 
@@ -1867,7 +1977,7 @@
     }
 
     function renderConfigToUI() {
-      paymentTitleEl.textContent = claimConfig.paymentTitle || "แพ็กดูแล 19 บาท";
+      paymentTitleEl.textContent = claimConfig.paymentTitle || "ชำระค่าดูแล 19 บาท";
       paymentNoteEl.textContent = claimConfig.paymentNote || "";
       paymentRequireSlipEl.textContent = claimConfig.paymentRequireSlip || "";
       bankNameEl.textContent = claimConfig.bankName || "ธ.กสิกร (KBank)";
@@ -1908,7 +2018,6 @@
         updateClaimWindowState();
         syncPaymentSection();
       } catch (err) {
-        console.warn("โหลด config claim ไม่สำเร็จ:", err);
         renderConfigToUI();
         updateClaimWindowState();
         syncPaymentSection();
@@ -1946,7 +2055,7 @@
         onlineDot.classList.add("offline");
         onlineText.textContent = "สถานะ: ปิดรับเคลม";
         claimTimeNote.classList.add("closed");
-        claimTimeNote.textContent = claimConfig.claimClosedText;
+        claimTimeNote.textContent = claimConfig.claimClosedText || claimConfig.claimOpenText;
       }
     }
 
@@ -2008,7 +2117,6 @@
       if (!t) return "-";
 
       let cls = "";
-
       if (raw.includes("ดึงเมลแล้ว") || raw.includes("ใช้งานได้ปกติ") || raw.includes("เสร็จ") || raw.includes("สำเร็จ")) {
         cls = "status-pill status-pill--green";
       } else if (raw.includes("ไม่เข้าเงื่อนไข") || raw.includes("สลิปปลอม") || raw.includes("ชื่อไม่ตรง") || raw.includes("ไม่ผ่าน")) {
@@ -2054,7 +2162,6 @@
 
     function renderHistory(items) {
       historyResults.innerHTML = "";
-
       if (!Array.isArray(items) || !items.length) {
         historyResults.innerHTML = '<div class="live-empty">ยังไม่มีข้อมูลประวัติการเคลม</div>';
         return;
@@ -2444,7 +2551,6 @@
         await fetchQueueSummary();
         return true;
       } catch (err) {
-        console.warn("fetch member me failed", err);
         return false;
       }
     }
@@ -2477,6 +2583,7 @@
         if (state.token) {
           localStorage.setItem(TOKEN_KEY, state.token);
         }
+
         updateMemberProfileUI();
         setActiveView("claimView");
         showAuthStatus("เข้าสู่ระบบสำเร็จค่ะ", "ok");
@@ -2485,7 +2592,6 @@
         await fetchClaimHistory();
         await fetchQueueSummary();
       } catch (err) {
-        console.error(err);
         showAuthStatus("เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ", "error");
         showAlert(topAlert, "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ", "error");
       } finally {
@@ -2543,7 +2649,6 @@
         await fetchClaimHistory();
         await fetchQueueSummary();
       } catch (err) {
-        console.error(err);
         showAuthStatus("เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ", "error");
       } finally {
         hideLoadingOverlay();
@@ -2583,12 +2688,8 @@
     async function handleLogout() {
       const token = state.token || "";
       try {
-        if (token) {
-          await postJson({ action: "logout", token });
-        }
-      } catch (err) {
-        console.warn("logout failed", err);
-      }
+        if (token) await postJson({ action: "logout", token });
+      } catch (err) {}
 
       state.token = "";
       state.member = null;
@@ -2694,7 +2795,6 @@
         await initClaimWindowConfig();
         await fetchQueueSummary();
       } catch (err) {
-        console.error(err);
         showStatusError("เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ");
       } finally {
         state.isLoading = false;
@@ -2706,37 +2806,32 @@
 
     async function handleSubmit() {
       updateClaimWindowState();
-
       if (!validateClaimForm()) return;
       openConfirmModal();
     }
 
-    async function enablePushNotifications() {
+    async function enablePushNotifications(target = "login") {
       if (!("Notification" in window)) {
-        showAlert(claimAlert, "อุปกรณ์นี้ไม่รองรับการแจ้งเตือนผ่านเบราว์เซอร์", "warning");
+        showAlert(target === "claim" ? claimAlert : topAlert, "อุปกรณ์นี้ไม่รองรับการแจ้งเตือนผ่านเบราว์เซอร์", "warning");
         return;
       }
 
       try {
         const permission = await Notification.requestPermission();
         if (permission !== "granted") {
-          showAlert(claimAlert, "คุณยังไม่ได้อนุญาตการแจ้งเตือน", "warning");
+          showAlert(target === "claim" ? claimAlert : topAlert, "คุณยังไม่ได้อนุญาตการแจ้งเตือน", "warning");
           return;
         }
 
-        showAlert(claimAlert, "เปิดแจ้งเตือนผ่านเบราว์เซอร์แล้วค่ะ", "success");
-        showToast("เปิดแจ้งเตือนแล้ว");
-        // ถ้ามี service worker / push backend ภายหลัง ให้ส่ง subscription ไป server ต่อที่นี่
+        showAlert(target === "claim" ? claimAlert : topAlert, "เปิดการแจ้งเตือนผ่านเบราว์เซอร์แล้วค่ะ 🔔", "success");
+        showToast("เปิดการแจ้งเตือนแล้ว");
       } catch (err) {
-        showAlert(claimAlert, "ไม่สามารถเปิดแจ้งเตือนได้", "error");
+        showAlert(target === "claim" ? claimAlert : topAlert, "ไม่สามารถเปิดแจ้งเตือนได้", "error");
       }
     }
 
     function goSupport() {
-      const supportLine = supportLineEl.textContent || "@467dlpti";
-      const lineId = supportLine.replace("@", "");
-      const lineUrl = "https://line.me/R/ti/p/@" + lineId;
-      window.open(lineUrl, "_blank");
+      window.open(SUPPORT_LINK, "_blank");
     }
 
     function togglePassword(targetId, btn) {
@@ -2748,9 +2843,7 @@
     }
 
     document.querySelectorAll(".toggle-pass").forEach(btn => {
-      btn.addEventListener("click", () => {
-        togglePassword(btn.dataset.target, btn);
-      });
+      btn.addEventListener("click", () => togglePassword(btn.dataset.target, btn));
     });
 
     showRegisterBtn.addEventListener("click", () => {
@@ -2765,10 +2858,11 @@
 
     btnLogin.addEventListener("click", handleLogin);
     btnRegister.addEventListener("click", handleRegister);
-    btnLogout.addEventListener("click", handleLogout);
     btnForgotPassword.addEventListener("click", handleForgotPassword);
-    btnSupport.addEventListener("click", goSupport);
-    btnEnablePush.addEventListener("click", enablePushNotifications);
+    btnLogout.addEventListener("click", handleLogout);
+    btnEnablePushLogin.addEventListener("click", () => enablePushNotifications("login"));
+    btnEnablePushClaim.addEventListener("click", () => enablePushNotifications("claim"));
+    floatAdminBtn.addEventListener("click", goSupport);
 
     btnPickSlip.addEventListener("click", () => slipInput.click());
     btnCameraSlip.addEventListener("click", () => slipInputCamera.click());
