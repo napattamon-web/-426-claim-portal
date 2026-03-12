@@ -9,17 +9,12 @@
   <style>
     :root {
       --bg: #f8f1ea;
-      --bg-soft: #fffaf6;
       --card: rgba(255, 251, 247, 0.96);
-      --card-strong: #fffdfb;
-      --accent: #bf8f72;
-      --accent-2: #e7c6b2;
-      --accent-3: #d9b49a;
-      --soft: #f3e3d7;
-      --soft-2: #f8ece4;
       --line: #ecdccf;
       --text-main: #5b463c;
       --text-sub: #9a8679;
+      --accent: #bf8f72;
+      --accent-2: #e7c6b2;
       --success: #6f8e63;
       --danger: #d77d7d;
       --warning: #c58e5e;
@@ -29,7 +24,6 @@
       --radius-xl: 30px;
       --radius-lg: 24px;
       --radius-md: 18px;
-      --radius-sm: 14px;
     }
 
     * {
@@ -55,7 +49,6 @@
       justify-content: center;
       overflow-x: hidden;
       position: relative;
-      text-align: center;
     }
 
     body::before {
@@ -110,7 +103,7 @@
 
     .hero-top {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-start;
       align-items: flex-start;
       gap: 10px;
     }
@@ -119,9 +112,9 @@
       display: flex;
       gap: 12px;
       align-items: center;
-      justify-content: center;
       min-width: 0;
       width: 100%;
+      justify-content: flex-start;
     }
 
     .logo-shell {
@@ -148,8 +141,8 @@
       flex-direction: column;
       gap: 4px;
       min-width: 0;
-      align-items: center;
-      text-align: center;
+      align-items: flex-start;
+      text-align: left;
     }
 
     .brand-title {
@@ -159,6 +152,7 @@
       letter-spacing: .05em;
       text-transform: uppercase;
       color: #6f5242;
+      text-align: left;
     }
 
     .brand-sub {
@@ -167,6 +161,16 @@
       letter-spacing: .13em;
       text-transform: uppercase;
       white-space: nowrap;
+      text-align: left;
+    }
+
+    .hero-center-text {
+      margin-top: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+      text-align: center;
     }
 
     .badge {
@@ -202,21 +206,13 @@
       box-shadow: 0 0 0 4px rgba(215,125,125,0.14);
     }
 
-    .hero-center-text {
-      margin-top: 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      align-items: center;
-      text-align: center;
-    }
-
     .hero-main-text {
       max-width: 430px;
       font-size: .95rem;
       line-height: 1.75;
       font-weight: 700;
       color: var(--text-main);
+      text-align: center;
     }
 
     .claim-note {
@@ -258,10 +254,6 @@
       padding: 16px;
     }
 
-    .panel-title {
-      display: none;
-    }
-
     .view {
       display: none;
       animation: fadeUp .24s ease;
@@ -299,26 +291,11 @@
       background: linear-gradient(180deg, #fffbf8, #f8efe8);
     }
 
-    .cute-banner {
-      margin-bottom: 10px;
-      border-radius: 22px;
-      padding: 13px 14px;
-      background: linear-gradient(135deg, #fff4ec, #f3e4d8);
-      border: 1px solid #ead7ca;
-      text-align: center;
-    }
-
-    .cute-banner-title {
+    .claim-only-title {
       font-size: 1rem;
       font-weight: 800;
       color: #755847;
-      margin-bottom: 4px;
-    }
-
-    .cute-banner-sub {
-      font-size: .78rem;
-      color: var(--text-sub);
-      line-height: 1.65;
+      margin-bottom: 12px;
       text-align: center;
     }
 
@@ -335,13 +312,6 @@
       color: var(--text-sub);
       font-weight: 700;
       text-align: center;
-      width: 100%;
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
       width: 100%;
     }
 
@@ -562,33 +532,6 @@
 
     .profile-box .line strong {
       color: var(--text-main);
-    }
-
-    .mini-info-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .mini-info-card {
-      border-radius: 18px;
-      background: #fffaf7;
-      border: 1px solid #eadccf;
-      padding: 10px;
-      text-align: center;
-    }
-
-    .mini-info-label {
-      font-size: .72rem;
-      color: var(--text-sub);
-      margin-bottom: 4px;
-    }
-
-    .mini-info-value {
-      font-size: .95rem;
-      font-weight: 800;
-      color: #735847;
     }
 
     .payment-section {
@@ -839,7 +782,7 @@
     .status-strong { font-weight: 800; color: var(--text-main); }
     .status-time { font-size: .76rem; color: var(--text-sub); }
 
-    #results, #historyResults, #groupHistoryResults {
+    #results, #historyResults {
       margin-top: 8px;
       display: grid;
       gap: 8px;
@@ -854,15 +797,6 @@
       text-align: center;
     }
 
-    .item-top-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 10px;
-      margin-bottom: 6px;
-      flex-wrap: wrap;
-    }
-
     .item-header {
       width: 100%;
       font-size: .72rem;
@@ -870,6 +804,7 @@
       letter-spacing: .12em;
       text-transform: uppercase;
       text-align: center;
+      margin-bottom: 6px;
     }
 
     .item-email {
@@ -888,7 +823,8 @@
       border: 1px solid #e7d7ca;
       color: #7a5d4b;
       font-weight: 800;
-      margin: 0 auto;
+      margin: 8px auto;
+      display: inline-flex;
     }
 
     .item-tag.paid {
@@ -1333,7 +1269,6 @@
 
     @media (max-width: 480px) {
       .app { padding: 12px 12px 16px; }
-      .grid-2, .mini-info-grid { grid-template-columns: 1fr; }
       .action-row, .modal-actions { flex-direction: column; }
       .float-admin {
         width: 58px;
@@ -1350,7 +1285,8 @@
 </head>
 <body>
   <div class="app">
-    <section class="hero shell-card">
+    <!-- HERO ใช้เฉพาะหน้า login/register -->
+    <section class="hero shell-card" id="heroSection">
       <div class="hero-top">
         <div class="brand-wrap">
           <div class="logo-shell">
@@ -1388,7 +1324,7 @@
       <!-- หน้า LOGIN -->
       <section class="view active" id="loginView">
         <div class="section-blurb">
-          เข้าสู่ระบบด้วยอีเมลที่สมัครกับร้าน และรหัสผ่าน 6 หลัก
+          ล็อกอินก่อนใช้งาน ระบบจะดึงข้อมูลสมาชิกให้อัตโนมัติ
         </div>
 
         <div class="login-card">
@@ -1506,23 +1442,14 @@
       <!-- หน้า CLAIM -->
       <section class="view" id="claimView">
         <div class="claim-card">
+          <div class="claim-only-title">รับแจ้งเคลมสำหรับสมาชิก</div>
+
           <div id="claimAlert" class="alert-box"></div>
 
           <div class="profile-box" id="memberProfileBox" style="display:none;">
             <div class="line"><strong>อีเมล:</strong> <span id="profileEmail">-</span></div>
             <div class="line"><strong>วันที่ในระบบ:</strong> <span id="profileMemberDate">-</span></div>
             <div class="line"><strong>ปีสมัคร:</strong> <span id="profileSignupYear">-</span></div>
-          </div>
-
-          <div class="mini-info-grid">
-            <div class="mini-info-card">
-              <div class="mini-info-label">คิวรอโดยประมาณ</div>
-              <div class="mini-info-value" id="queueEstimateText">-</div>
-            </div>
-            <div class="mini-info-card">
-              <div class="mini-info-label">เวลารอตรวจสอบ</div>
-              <div class="mini-info-value" id="queueEtaText">-</div>
-            </div>
           </div>
 
           <div class="field-group">
@@ -1647,18 +1574,6 @@
               <div class="live-empty">ยังไม่มีข้อมูลประวัติการเคลม</div>
             </div>
           </div>
-
-          <div class="history-card">
-            <div class="history-header">
-              <div class="history-title-left">
-                <span class="live-dot"></span>
-                <span class="history-title-text">ประวัติการย้ายกลุ่ม</span>
-              </div>
-            </div>
-            <div id="groupHistoryResults">
-              <div class="live-empty">ยังไม่มีข้อมูลประวัติการย้ายกลุ่ม</div>
-            </div>
-          </div>
         </div>
       </section>
     </main>
@@ -1742,6 +1657,7 @@
       token: localStorage.getItem(TOKEN_KEY) || ""
     };
 
+    const heroSection = document.getElementById("heroSection");
     const btnSubmit = document.getElementById("btnSubmit");
     const btnClear = document.getElementById("btnClear");
     const btnLogout = document.getElementById("btnLogout");
@@ -1791,7 +1707,6 @@
     const resultsDiv = document.getElementById("results");
     const summaryDiv = document.getElementById("summary");
     const historyResults = document.getElementById("historyResults");
-    const groupHistoryResults = document.getElementById("groupHistoryResults");
     const claimTimeNote = document.getElementById("claimTimeNote");
     const paymentTitleEl = document.getElementById("paymentTitle");
     const paymentNoteEl = document.getElementById("paymentNote");
@@ -1810,9 +1725,6 @@
     const onlineDot = document.getElementById("onlineDot");
     const onlineText = document.getElementById("onlineText");
 
-    const queueEstimateText = document.getElementById("queueEstimateText");
-    const queueEtaText = document.getElementById("queueEtaText");
-
     const liveDateEl = document.getElementById("liveDate");
     const liveListEl = document.getElementById("liveList");
 
@@ -1828,6 +1740,12 @@
     const btnConfirmSubmit = document.getElementById("btnConfirmSubmit");
 
     let activeSlipFile = null;
+
+    function updateHeroVisibility() {
+      const loginActive = document.getElementById("loginView").classList.contains("active");
+      const registerActive = document.getElementById("registerView").classList.contains("active");
+      heroSection.style.display = (loginActive || registerActive) ? "" : "none";
+    }
 
     function showLoadingOverlay() {
       loadingOverlay.classList.add("show");
@@ -2205,36 +2123,6 @@
       });
     }
 
-    function renderGroupHistory(items) {
-      groupHistoryResults.innerHTML = "";
-      if (!Array.isArray(items) || !items.length) {
-        groupHistoryResults.innerHTML = '<div class="live-empty">ยังไม่มีข้อมูลประวัติการย้ายกลุ่ม</div>';
-        return;
-      }
-
-      items.forEach((item) => {
-        const movedAt = escapeHtml(item.date || item.movedAt || "-");
-        const fromGroup = escapeHtml(item.fromGroup || item.from || "-");
-        const toGroup = escapeHtml(item.toGroup || item.to || "-");
-        const note = escapeHtml(item.note || "-");
-
-        const card = document.createElement("div");
-        card.className = "result-item";
-        card.innerHTML = `
-          <div class="item-header">Group History</div>
-          <div class="item-meta">
-            <span>วันที่: ${movedAt}</span>
-          </div>
-          <div class="item-body">
-            ย้ายจาก: <strong>${fromGroup}</strong><br>
-            ไปยัง: <strong>${toGroup}</strong><br>
-            หมายเหตุ: ${note}
-          </div>
-        `;
-        groupHistoryResults.appendChild(card);
-      });
-    }
-
     async function fetchTodayStatus(initial = false) {
       try {
         const data = await fetchJsonWithRetry(SCRIPT_URL + "?action=todayStatus&_t=" + Date.now(), {}, 1);
@@ -2242,19 +2130,6 @@
       } catch (err) {
         if (initial) console.warn("Cannot load live email status:", err);
         renderLiveStatus(null);
-      }
-    }
-
-    async function fetchQueueSummary() {
-      try {
-        const data = await fetchJsonWithRetry(SCRIPT_URL + "?action=queueSummary&_t=" + Date.now(), {}, 1);
-        const queueCount = data.queueCount ?? data.pendingCount ?? "-";
-        const eta = data.etaText || data.estimatedTime || "-";
-        queueEstimateText.textContent = queueCount === "-" ? "-" : `${queueCount} คิว`;
-        queueEtaText.textContent = eta;
-      } catch (err) {
-        queueEstimateText.textContent = "-";
-        queueEtaText.textContent = "-";
       }
     }
 
@@ -2273,24 +2148,6 @@
         renderHistory(data.history || data.items || []);
       } catch (err) {
         renderHistory([]);
-      }
-    }
-
-    async function fetchGroupHistory() {
-      if (!state.token) {
-        renderGroupHistory([]);
-        return;
-      }
-
-      try {
-        const data = await fetchJsonWithRetry(
-          SCRIPT_URL + "?action=groupHistory&token=" + encodeURIComponent(state.token) + "&_t=" + Date.now(),
-          {},
-          1
-        );
-        renderGroupHistory(data.history || data.items || []);
-      } catch (err) {
-        renderGroupHistory([]);
       }
     }
 
@@ -2426,7 +2283,6 @@
       });
 
       fetchClaimHistory();
-      fetchGroupHistory();
 
       if (history.length) {
         window.scrollTo({ top: resultsDiv.offsetTop - 16, behavior: "smooth" });
@@ -2437,6 +2293,7 @@
       document.querySelectorAll(".view").forEach(view => {
         view.classList.toggle("active", view.id === viewId);
       });
+      updateHeroVisibility();
     }
 
     function updateMemberProfileUI() {
@@ -2532,9 +2389,8 @@
       noteField.classList.remove("shake");
 
       if (!state.member || !state.token) {
-        showStatusError("กรุณาเข้าสู่ระบบก่อนแจ้งเคลม");
+        showAlert(topAlert, "กรุณาเข้าสู่ระบบก่อนใช้งาน", "warning");
         setActiveView("loginView");
-        showAlert(topAlert, "กรุณาเข้าสู่ระบบก่อนใช้งานหน้าแจ้งเคลม", "warning");
         return false;
       }
 
@@ -2595,11 +2451,9 @@
         state.member = data.member;
         updateMemberProfileUI();
         setActiveView("claimView");
-        showAuthStatus("เข้าสู่ระบบแล้ว สามารถแจ้งเคลมได้เลยค่ะ", "ok");
-        showAlert(claimAlert, "ยินดีต้อนรับกลับค่ะ พร้อมแจ้งเคลมแล้ว 🤎", "success", 4000);
+        showAuthStatus("เข้าสู่ระบบแล้ว", "ok");
+        showAlert(claimAlert, "ยินดีต้อนรับกลับค่ะ", "success", 3000);
         await fetchClaimHistory();
-        await fetchGroupHistory();
-        await fetchQueueSummary();
         return true;
       } catch (err) {
         return false;
@@ -2639,10 +2493,8 @@
         setActiveView("claimView");
         showAuthStatus("เข้าสู่ระบบสำเร็จค่ะ", "ok");
         showToast("เข้าสู่ระบบสำเร็จ ✨");
-        showAlert(claimAlert, "เข้าสู่ระบบสำเร็จ ระบบพามาหน้าแจ้งเคลมแล้วค่ะ", "success", 4500);
+        showAlert(claimAlert, "เข้าสู่ระบบสำเร็จ", "success", 3500);
         await fetchClaimHistory();
-        await fetchGroupHistory();
-        await fetchQueueSummary();
       } catch (err) {
         showAuthStatus("เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ", "error");
         showAlert(topAlert, "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ", "error");
@@ -2696,10 +2548,8 @@
         updateMemberProfileUI();
         setActiveView("claimView");
         showToast("สมัครสมาชิกสำเร็จ ✨");
-        showAlert(claimAlert, "สมัครสมาชิกสำเร็จและพร้อมแจ้งเคลมแล้วค่ะ", "success", 4500);
+        showAlert(claimAlert, "สมัครสมาชิกสำเร็จ", "success", 3500);
         await fetchClaimHistory();
-        await fetchGroupHistory();
-        await fetchQueueSummary();
       } catch (err) {
         showAlert(registerAlert, "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ", "error");
       } finally {
@@ -2754,7 +2604,6 @@
       showAlert(topAlert, "ออกจากระบบเรียบร้อยแล้วค่ะ", "info");
       showToast("ออกจากระบบแล้ว");
       renderHistory([]);
-      renderGroupHistory([]);
     }
 
     function clearForm() {
@@ -2846,7 +2695,6 @@
         }
 
         await initClaimWindowConfig();
-        await fetchQueueSummary();
       } catch (err) {
         showStatusError("เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ");
       } finally {
@@ -2955,10 +2803,10 @@
       renderConfigToUI();
       updateNoteCounter();
       loadRememberedLogin();
+      updateHeroVisibility();
       await initClaimWindowConfig();
       updateClaimWindowState();
       await fetchTodayStatus(true);
-      await fetchQueueSummary();
 
       if (!state.isClaimOpen) {
         showAlert(topAlert, "ล็อกอินและสมัครสมาชิกได้ตามปกติ แต่การส่งเคลมจะได้เฉพาะช่วงเวลาที่ระบบเปิดรับ", "warning", 5500);
@@ -2973,7 +2821,6 @@
 
       setInterval(async () => {
         await initClaimWindowConfig();
-        await fetchQueueSummary();
         if (!state.isClaimOpen && document.getElementById("loginView").classList.contains("active")) {
           showAlert(topAlert, "ขณะนี้นอกเวลารับเคลม แต่ยังเข้าสู่ระบบและสมัครสมาชิกได้ค่ะ", "warning", 3500);
         }
