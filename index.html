@@ -25,6 +25,7 @@
       --purple:#a48cc9;
       --shadow:0 20px 44px rgba(118,84,63,.10);
       --shadow-soft:0 12px 26px rgba(118,84,63,.08);
+      --glow:0 0 0 6px rgba(217,183,157,.10);
       --r-xl:30px;
       --r-lg:24px;
       --r-md:18px;
@@ -449,6 +450,12 @@
       background:linear-gradient(180deg,#fffdfb,#faf2eb);
       border:1px solid #eaded3;
       box-shadow:0 8px 16px rgba(118,84,63,.05);
+      transition:.2s ease;
+    }
+
+    .mini-stat:hover{
+      transform:translateY(-2px);
+      box-shadow:var(--shadow-soft), var(--glow);
     }
 
     .mini-stat-value{
@@ -979,6 +986,18 @@
       padding:10px 12px 12px;
       box-shadow:0 10px 20px rgba(118,84,63,.05);
       text-align:center;
+      transition:.2s ease;
+    }
+
+    .result-item:hover{
+      transform:translateY(-1px);
+      box-shadow:var(--shadow-soft), var(--glow);
+    }
+
+    .result-item.latest-highlight{
+      border-color:#d6b39b;
+      box-shadow:var(--shadow-soft), 0 0 0 5px rgba(217,183,157,.10);
+      background:linear-gradient(180deg,#fffdfb,#fdf5ef);
     }
 
     .item-header{
@@ -1071,6 +1090,12 @@
       color:#fff;
       border-color:transparent;
       box-shadow:0 8px 16px rgba(118,84,63,.12);
+      animation:stepPop .25s ease;
+    }
+
+    @keyframes stepPop{
+      from{transform:scale(.96);opacity:.8}
+      to{transform:scale(1);opacity:1}
     }
 
     .history-card,.live-card{
@@ -1156,6 +1181,12 @@
       background:rgba(255,255,255,.84);
       border:1px solid #ede2d7;
       font-size:.8rem;
+      transition:.2s ease;
+    }
+
+    .live-item:hover{
+      transform:translateY(-1px);
+      box-shadow:0 8px 16px rgba(118,84,63,.06);
     }
 
     .live-email{
@@ -1188,6 +1219,7 @@
       font-weight:800;
       border:1px solid transparent;
       line-height:1.2;
+      box-shadow:0 4px 10px rgba(0,0,0,.04);
     }
 
     .status-pill--green{
@@ -1737,7 +1769,7 @@
         <div class="status-card">
           <div class="status-top-frame">
             <div class="status-only-title">สถานะการเคลม</div>
-            <div class="status-only-sub">ตรวจสอบคำขอล่าสุด ประวัติการเคลม และติดต่อแอดมินได้จากหน้านี้</div>
+            <div class="status-only-sub">ตรวจสอบคำขอล่าสุด สถานะคำขอของคุณ และติดต่อแอดมินได้จากหน้านี้</div>
           </div>
 
           <div class="status-mini-grid">
@@ -1769,11 +1801,11 @@
             <div class="history-header">
               <div class="history-title-left">
                 <span class="live-dot"></span>
-                <span class="history-title-text">ประวัติการเคลมของคุณ</span>
+                <span class="history-title-text">สถานะคำขอของคุณ</span>
               </div>
             </div>
             <div id="historyResults">
-              <div class="live-empty">ยังไม่มีข้อมูลประวัติการเคลม</div>
+              <div class="live-empty">ยังไม่มีข้อมูลสถานะคำขอ</div>
             </div>
           </div>
 
@@ -1836,7 +1868,7 @@
     const TOKEN_KEY = "shop426_member_token";
     const REMEMBER_KEY = "shop426_saved_login";
     const SUPPORT_LINK = "https://line.me/R/ti/p/@467dlpti";
-    const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+    const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$/;
     const LAST_SLIP_KEY = "shop426_last_slip_preview";
 
     let claimConfig = {
@@ -2054,7 +2086,7 @@
 
     function formatThaiDate(dateStr) {
       if (!dateStr) return "-";
-      if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+      if (/^\\d{4}-\\d{2}-\\d{2}$/.test(dateStr)) {
         const [y, m, d] = dateStr.split("-").map(Number);
         const months = ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."];
         return `${d} ${months[m - 1]} ${y + 543}`;
@@ -2099,7 +2131,7 @@
     }
 
     function thaiYearFromYmd(dateStr) {
-      if (!dateStr || !/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return "";
+      if (!dateStr || !/^\\d{4}-\\d{2}-\\d{2}$/.test(dateStr)) return "";
       return String(Number(dateStr.slice(0, 4)) + 543);
     }
 
@@ -2121,7 +2153,7 @@
       if (password.length >= 8) score++;
       if (/[a-z]/.test(password)) score++;
       if (/[A-Z]/.test(password)) score++;
-      if (/\d/.test(password)) score++;
+      if (/\\d/.test(password)) score++;
       if (/[^A-Za-z0-9]/.test(password)) score++;
 
       if (!isStrongPassword(password)) return { text: "ระดับรหัสผ่าน: อ่อน", cls: "strength-weak" };
@@ -2222,7 +2254,6 @@
       const safe = escapeHtml(raw || "-");
 
       if (!raw) return `<span class="status-pill status-pill--yellow">รอดำเนินการ</span>`;
-
       if (raw.includes("ดึงเมลแล้ว") || raw.includes("เสร็จ") || raw.includes("ใช้งานได้ปกติ") || raw.includes("สำเร็จ")) {
         return `<span class="status-pill status-pill--green">${safe}</span>`;
       }
@@ -2422,11 +2453,11 @@
     function renderHistory(items) {
       historyResults.innerHTML = "";
       if (!Array.isArray(items) || !items.length) {
-        historyResults.innerHTML = '<div class="live-empty">ยังไม่มีข้อมูลประวัติการเคลม</div>';
+        historyResults.innerHTML = '<div class="live-empty">ยังไม่มีข้อมูลสถานะคำขอ</div>';
         return;
       }
 
-      items.forEach((item) => {
+      items.forEach((item, index) => {
         const claimType = (item.claimType || "").toLowerCase() === "paid" ? "paid" : "free";
         const tagText = claimType === "paid" ? "แพ็กดูแล 19 บาท" : "เคลมฟรี";
         const safeEmail = escapeHtml(item.email || "-");
@@ -2437,9 +2468,9 @@
         const lastAt = item.createdAt || item.updatedAt || "";
 
         const card = document.createElement("div");
-        card.className = "result-item";
+        card.className = "result-item" + (index === 0 ? " latest-highlight" : "");
         card.innerHTML = `
-          <div class="item-header">Claim History</div>
+          <div class="item-header">${index === 0 ? "Latest Request" : "Request Status"}</div>
           <div class="item-email">${safeEmail}</div>
           <div class="item-tag ${claimType === "paid" ? "paid" : ""}">${escapeHtml(tagText)}</div>
           <div class="item-meta">
@@ -2500,7 +2531,7 @@
         "",
         "สรุปสถานะ:",
         entry.statusText || "-"
-      ].join("\n");
+      ].join("\\n");
     }
 
     async function copyToClipboard(btn, text) {
@@ -2532,7 +2563,7 @@
 
     function buildAdminMessage(entry) {
       return encodeURIComponent(
-        `สวัสดีค่ะ แอดมิน\nต้องการสอบถามสถานะเคลม\nอีเมล: ${entry.email || "-"}\nวันหมดอายุ: ${entry.expiry || "-"}\nปีสมัคร: ${entry.year || "-"}\nคิวเคลม: ${entry.queueNo || "-"}\nสถานะ: ${entry.statusText || "-"}`
+        `สวัสดีค่ะ แอดมิน\\nต้องการสอบถามสถานะเคลม\\nอีเมล: ${entry.email || "-"}\\nวันหมดอายุ: ${entry.expiry || "-"}\\nปีสมัคร: ${entry.year || "-"}\\nคิวเคลม: ${entry.queueNo || "-"}\\nสถานะ: ${entry.statusText || "-"}`
       );
     }
 
@@ -2576,7 +2607,7 @@
       renderClaimSteps(current.statusText || "");
 
       const history = Array.isArray(res.history) && res.history.length ? res.history : [current];
-      history.forEach((item) => {
+      history.forEach((item, index) => {
         const claimType = (item.claimType || "").toLowerCase() === "paid" ? "paid" : "free";
         const tagText = getClaimTypeLabel(claimType);
         const safeEmail = escapeHtml(item.email || "-");
@@ -2597,9 +2628,9 @@
         };
 
         const card = document.createElement("div");
-        card.className = "result-item";
+        card.className = "result-item" + (index === 0 ? " latest-highlight" : "");
         card.innerHTML = `
-          <div class="item-header">Latest Claim</div>
+          <div class="item-header">${index === 0 ? "Latest Claim" : "Request Status"}</div>
           <div class="item-email">${safeEmail}</div>
           <div class="item-tag ${claimType === "paid" ? "paid" : ""}">${escapeHtml(tagText)}</div>
           <div class="item-meta">
@@ -3008,7 +3039,11 @@
         if (activeSlipFile) {
           slipName = activeSlipFile.name || "slip.jpg";
           slipData = await fileToDataUrl(activeSlipFile);
-          saveLastSlip(slipData, slipName);
+          localStorage.setItem(LAST_SLIP_KEY, JSON.stringify({
+            dataUrl: slipData,
+            name: slipName,
+            updatedAt: new Date().toISOString()
+          }));
         }
 
         const payload = {
@@ -3033,7 +3068,7 @@
         status.innerHTML =
           "<span class='status-strong'>" + escapeHtml(data.message || "ระบบรับคำขอเคลมของคุณแล้ว") + "</span><br>" +
           "<span class='status-time'>เวลาแจ้งล่าสุด: " + escapeHtml(formatThaiDateTime(state.lastClaimAt)) + "</span><br>" +
-          "<span class='status-time'>ระบบใช้เวลา " + escapeHtml((elapsedSec < 0.1 ? "< 0.1" : elapsedSec.toFixed(1).replace(/\.0$/, ""))) + " วินาที</span>";
+          "<span class='status-time'>ระบบใช้เวลา " + escapeHtml((elapsedSec < 0.1 ? "< 0.1" : elapsedSec.toFixed(1).replace(/\\.0$/, ""))) + " วินาที</span>";
         status.className = "status-ok";
 
         renderLatestStatusPage(data, {
