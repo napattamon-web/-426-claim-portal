@@ -4,39 +4,32 @@
   <meta charset="UTF-8" />
   <title>426 SHOP – Member & Claim Center</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#fbf6f3" />
+  <meta name="theme-color" content="#f7efe8" />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #fbf6f3;
-      --card: rgba(255,255,255,0.92);
-      --accent: #8fc9b5;
-      --accent-2: #f3b6b0;
-      --accent-soft: #e8f6ef;
-      --text-main: #3d3532;
-      --text-sub: #8d847e;
-      --border-soft: #eadfd7;
-      --danger: #e57f7f;
-      --success: #337a5d;
-      --warning: #bf8357;
-      --info: #3562a8;
-      --shadow-soft: 0 18px 42px rgba(84, 61, 49, 0.08);
-    }
-
-    body.theme-dark {
-      --bg: #17181d;
-      --card: rgba(33,35,42,0.92);
-      --accent: #9dd5c1;
-      --accent-2: #efb3ad;
-      --accent-soft: #253b35;
-      --text-main: #f5f6f8;
-      --text-sub: #a8adb6;
-      --border-soft: #323640;
-      --danger: #ee8c8c;
-      --success: #78c89d;
-      --warning: #e9b17a;
-      --info: #7fb0ff;
-      --shadow-soft: 0 18px 42px rgba(0, 0, 0, 0.42);
+      --bg: #f7efe8;
+      --bg-2: #fdf8f3;
+      --card: rgba(255, 250, 246, 0.96);
+      --card-2: #fffaf6;
+      --accent: #c49a7a;
+      --accent-2: #e8c8b2;
+      --accent-3: #d8b49a;
+      --soft: #f1e2d6;
+      --soft-2: #f6ebe3;
+      --line: #eadbcf;
+      --text-main: #5a463b;
+      --text-sub: #9a8678;
+      --success: #7f9b74;
+      --danger: #d97f7f;
+      --warning: #c79366;
+      --info: #7a8cb8;
+      --shadow: 0 18px 40px rgba(118, 84, 63, 0.10);
+      --shadow-soft: 0 12px 26px rgba(118, 84, 63, 0.08);
+      --radius-xl: 30px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --radius-sm: 14px;
     }
 
     * {
@@ -52,12 +45,12 @@
 
     body {
       min-height: 100vh;
-      font-family: "Noto Sans Thai", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: "Noto Sans Thai", system-ui, sans-serif;
       color: var(--text-main);
       background:
-        radial-gradient(circle at top left, rgba(243,182,176,0.18), transparent 26%),
-        radial-gradient(circle at top right, rgba(143,201,181,0.18), transparent 26%),
-        var(--bg);
+        radial-gradient(circle at top left, rgba(232, 200, 178, 0.35), transparent 28%),
+        radial-gradient(circle at top right, rgba(196, 154, 122, 0.16), transparent 22%),
+        linear-gradient(180deg, #fffaf6 0%, #f7efe8 100%);
       display: flex;
       justify-content: center;
       overflow-x: hidden;
@@ -69,16 +62,11 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      opacity: 0.12;
+      opacity: 0.10;
       background-repeat: no-repeat;
-      background-position: center 120px;
-      background-size: min(78vw, 420px);
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 420 420'><g fill='none' fill-rule='evenodd'><circle cx='210' cy='230' r='108' fill='%23f4d7c7'/><circle cx='125' cy='128' r='46' fill='%23e9bea8'/><circle cx='295' cy='128' r='46' fill='%23e9bea8'/><circle cx='125' cy='128' r='22' fill='%23f8ece3'/><circle cx='295' cy='128' r='22' fill='%23f8ece3'/><ellipse cx='172' cy='220' rx='14' ry='18' fill='%23524239'/><ellipse cx='248' cy='220' rx='14' ry='18' fill='%23524239'/><ellipse cx='210' cy='270' rx='38' ry='28' fill='%23fff2ea'/><ellipse cx='210' cy='258' rx='16' ry='12' fill='%23524239'/><path d='M184 286c10 12 42 12 52 0' stroke='%23cf8d93' stroke-width='10' stroke-linecap='round'/><ellipse cx='144' cy='266' rx='24' ry='12' fill='%23f3b7be' opacity='.55'/><ellipse cx='276' cy='266' rx='24' ry='12' fill='%23f3b7be' opacity='.55'/></g></svg>");
-    }
-
-    body.theme-dark::before {
-      opacity: 0.07;
-      filter: brightness(0.85);
+      background-position: center 70px;
+      background-size: min(74vw, 330px);
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 420 420'><g fill='none' fill-rule='evenodd'><circle cx='210' cy='230' r='108' fill='%23eecfb8'/><circle cx='125' cy='128' r='46' fill='%23ddb89c'/><circle cx='295' cy='128' r='46' fill='%23ddb89c'/><circle cx='125' cy='128' r='22' fill='%23fff2e8'/><circle cx='295' cy='128' r='22' fill='%23fff2e8'/><ellipse cx='172' cy='220' rx='14' ry='18' fill='%23524239'/><ellipse cx='248' cy='220' rx='14' ry='18' fill='%23524239'/><ellipse cx='210' cy='270' rx='38' ry='28' fill='%23fff7f1'/><ellipse cx='210' cy='258' rx='16' ry='12' fill='%23524239'/><path d='M184 286c10 12 42 12 52 0' stroke='%23c9908d' stroke-width='10' stroke-linecap='round'/><ellipse cx='144' cy='266' rx='24' ry='12' fill='%23f0c8c2' opacity='.55'/><ellipse cx='276' cy='266' rx='24' ry='12' fill='%23f0c8c2' opacity='.55'/></g></svg>");
     }
 
     .app {
@@ -88,36 +76,48 @@
       padding: 16px 14px 18px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 14px;
       position: relative;
       z-index: 1;
     }
 
-    .hero, .panel, .live-card {
+    .shell-card {
       background: var(--card);
-      border: 1px solid var(--border-soft);
-      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
       backdrop-filter: blur(10px);
+      border-radius: var(--radius-xl);
     }
 
     .hero {
-      border-radius: 30px;
-      padding: 16px;
+      padding: 18px 16px;
       position: relative;
       overflow: hidden;
     }
 
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -12px;
+      top: -12px;
+      width: 110px;
+      height: 110px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(255,255,255,0.75), rgba(255,255,255,0));
+      pointer-events: none;
+    }
+
     .hero-top {
       display: flex;
-      justify-content: space-between;
       align-items: flex-start;
-      gap: 12px;
+      justify-content: space-between;
+      gap: 10px;
     }
 
     .brand-wrap {
       display: flex;
-      align-items: center;
       gap: 12px;
+      align-items: center;
       min-width: 0;
     }
 
@@ -126,8 +126,8 @@
       height: 64px;
       border-radius: 22px;
       padding: 4px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(232,246,239,0.95));
-      box-shadow: 0 14px 30px rgba(0,0,0,0.12);
+      background: linear-gradient(135deg, #fffdfb, #f4e5da);
+      box-shadow: var(--shadow-soft);
       flex-shrink: 0;
     }
 
@@ -141,91 +141,59 @@
     }
 
     .brand-copy {
-      min-width: 0;
       display: flex;
       flex-direction: column;
-      gap: 3px;
+      gap: 4px;
+      min-width: 0;
     }
 
     .brand-title {
       font-size: 1.28rem;
       font-weight: 800;
+      letter-spacing: .04em;
       line-height: 1.1;
-      letter-spacing: .05em;
       text-transform: uppercase;
-      white-space: nowrap;
+      color: #6b4f3f;
     }
 
     .brand-sub {
-      font-size: .8rem;
-      color: var(--text-sub);
-      letter-spacing: .18em;
+      font-size: .78rem;
+      letter-spacing: .14em;
       text-transform: uppercase;
+      color: var(--text-sub);
       white-space: nowrap;
     }
 
-    .header-tools {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 8px;
-      flex-shrink: 0;
-    }
-
-    .theme-toggle {
-      width: 36px;
-      height: 36px;
-      border-radius: 999px;
-      border: 1px solid rgba(0,0,0,0.06);
-      background: rgba(255,255,255,0.96);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.08);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 1rem;
-    }
-
-    body.theme-dark .theme-toggle {
-      background: rgba(36,38,45,0.96);
-      border-color: rgba(255,255,255,0.08);
-      color: #fff;
-    }
-
     .badge {
-      padding: 7px 12px;
+      padding: 8px 12px;
       border-radius: 999px;
-      background: rgba(255,255,255,0.95);
-      border: 1px solid rgba(0,0,0,0.03);
+      background: rgba(255,255,255,0.92);
+      border: 1px solid #efdfd1;
       display: inline-flex;
       align-items: center;
       gap: 8px;
       font-size: .74rem;
       color: var(--text-sub);
       white-space: nowrap;
-    }
-
-    body.theme-dark .badge {
-      background: rgba(36,38,45,0.96);
-      border-color: rgba(255,255,255,0.06);
+      box-shadow: 0 8px 18px rgba(118, 84, 63, 0.06);
     }
 
     .badge-dot {
       width: 8px;
       height: 8px;
       border-radius: 999px;
-      background: #4caf50;
-      box-shadow: 0 0 0 4px rgba(76,175,80,0.18);
+      background: #7f9b74;
+      box-shadow: 0 0 0 4px rgba(127, 155, 116, 0.15);
     }
 
     .badge-dot.offline {
-      background: #e57373;
-      box-shadow: 0 0 0 4px rgba(229,115,115,0.24);
+      background: #d97f7f;
+      box-shadow: 0 0 0 4px rgba(217, 127, 127, 0.16);
     }
 
     .badge.closed {
-      background: rgba(255,241,241,0.96);
-      border-color: #f1c2c2;
+      background: #fff5f4;
+      border-color: #f1d3d0;
     }
 
     .hero-center-text {
@@ -239,11 +207,10 @@
 
     .hero-main-text {
       max-width: 420px;
-      font-size: .93rem;
-      line-height: 1.7;
+      font-size: .92rem;
+      line-height: 1.75;
       color: var(--text-main);
       font-weight: 600;
-      text-align: center;
     }
 
     .claim-note {
@@ -252,26 +219,20 @@
       justify-content: center;
       padding: 9px 14px;
       border-radius: 999px;
-      background: #f8f2ec;
-      border: 1px solid #e8ddd0;
-      font-size: .79rem;
+      background: #fcf5ef;
+      border: 1px solid #eadbcf;
+      font-size: .78rem;
       color: var(--text-sub);
       text-align: center;
     }
 
     .claim-note.closed {
-      background: #fff0f0;
-      border-color: #efb2b2;
-      color: #c64b4b;
-    }
-
-    body.theme-dark .claim-note {
-      background: #26282e;
-      border-color: #353841;
+      background: #fff2f1;
+      border-color: #edc7c7;
+      color: #c46a6a;
     }
 
     .panel {
-      border-radius: 28px;
       padding: 16px;
     }
 
@@ -283,17 +244,32 @@
       font-weight: 800;
       font-size: 1rem;
       margin-bottom: 8px;
+      color: #6b4f3f;
     }
 
     .panel-title .icon {
-      width: 26px;
-      height: 26px;
+      width: 28px;
+      height: 28px;
       border-radius: 999px;
-      background: var(--accent-soft);
+      background: #f4e5da;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       font-size: .95rem;
+    }
+
+    .view {
+      display: none;
+      animation: fadeUp .24s ease;
+    }
+
+    .view.active {
+      display: block;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .section-blurb {
@@ -301,50 +277,29 @@
       font-size: .84rem;
       line-height: 1.65;
       color: var(--text-sub);
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
-    .tab-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      margin-top: 10px;
-      margin-bottom: 8px;
+    .login-card,
+    .register-card,
+    .claim-card {
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(252,246,240,0.96));
+      border: 1px solid #efe0d5;
+      padding: 14px;
     }
 
-    .tab-btn {
-      min-height: 46px;
-      border-radius: 18px;
-      border: 1px solid #ddd7d0;
-      background: linear-gradient(180deg, #fffaf6, #f6efe9);
-      color: var(--text-sub);
-      font-weight: 800;
-      font-family: inherit;
-      cursor: pointer;
-      font-size: .78rem;
-      padding: 8px;
-    }
-
-    .tab-btn.active {
-      color: #fff;
-      border-color: transparent;
-      background: linear-gradient(135deg, #a6dcc8, #7fb4a0);
-      box-shadow: 0 12px 22px rgba(0,0,0,0.14);
-    }
-
-    .view {
-      display: none;
-    }
-
-    .view.active {
-      display: block;
+    .claim-card {
+      background:
+        radial-gradient(circle at top right, rgba(255,255,255,.7), transparent 30%),
+        linear-gradient(180deg, #fffaf6, #f8efe8);
     }
 
     .field-group {
       display: flex;
       flex-direction: column;
       gap: 6px;
-      margin-top: 10px;
+      margin-top: 11px;
     }
 
     .field-label {
@@ -361,28 +316,24 @@
     }
 
     .input-shell {
-      background: rgba(250,248,246,0.96);
-      border: 1.5px solid #e7dfd8;
+      background: rgba(255, 252, 249, 0.98);
+      border: 1.5px solid #e9ddd2;
       border-radius: 20px;
       padding: 11px 12px;
-      transition: all .22s ease;
-    }
-
-    body.theme-dark .input-shell {
-      background: #25272d;
-      border-color: #353841;
+      transition: .2s ease;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
     }
 
     .input-shell:focus-within {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(143,201,181,0.16);
+      border-color: #d6b39b;
+      box-shadow: 0 0 0 4px rgba(212, 180, 154, 0.14);
       background: #fff;
     }
 
     .input-shell.note {
-      padding: 8px 10px;
+      padding: 9px 10px;
       border-style: dashed;
-      background: #fdf9f6;
+      background: #fffaf7;
     }
 
     input[type="email"],
@@ -399,46 +350,189 @@
       color: var(--text-main);
     }
 
+    input::placeholder,
+    textarea::placeholder {
+      color: #b4a396;
+    }
+
     textarea {
       resize: none;
-      min-height: 84px;
-      line-height: 1.55;
+      min-height: 92px;
+      line-height: 1.6;
     }
 
     .note-counter {
-      margin-top: 3px;
+      margin-top: 4px;
       font-size: .73rem;
       color: var(--text-sub);
       text-align: right;
     }
 
+    .remember-row {
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      font-size: .78rem;
+      color: var(--text-sub);
+    }
+
+    .remember-check {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .remember-check input {
+      accent-color: #b98e71;
+      width: 16px;
+      height: 16px;
+    }
+
+    .action-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .btn-primary,
+    .btn-secondary,
+    .btn-danger,
+    .btn-link-small {
+      min-height: 52px;
+      border-radius: 999px;
+      font-family: inherit;
+      font-weight: 800;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .btn-primary {
+      flex: 1;
+      border: 0;
+      background: linear-gradient(135deg, #d7b59b, #b78868);
+      color: #fffdfb;
+      box-shadow: 0 14px 24px rgba(126, 89, 66, 0.18);
+      font-size: .96rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-primary:hover { transform: translateY(-1px); }
+
+    .btn-primary:disabled {
+      opacity: .65;
+      cursor: default;
+      transform: none;
+    }
+
+    .btn-secondary {
+      border: 1px solid #e6d8cd;
+      background: linear-gradient(180deg, #fffdfb, #f7efe8);
+      color: var(--text-sub);
+      padding: 0 16px;
+      font-size: .82rem;
+    }
+
+    .btn-danger {
+      border: 1px solid #f0cdcd;
+      background: linear-gradient(180deg, #fff7f7, #ffefef);
+      color: #c46a6a;
+      padding: 0 16px;
+      font-size: .82rem;
+    }
+
+    .btn-link-small {
+      min-height: 40px;
+      border: 1px solid #eadbcf;
+      background: #fffaf6;
+      color: #8f7868;
+      padding: 0 16px;
+      font-size: .78rem;
+      width: 100%;
+      margin-top: 12px;
+    }
+
+    .btn-link-small:hover,
+    .btn-secondary:hover,
+    .btn-danger:hover {
+      transform: translateY(-1px);
+    }
+
+    .auth-foot {
+      margin-top: 12px;
+      text-align: center;
+      font-size: .78rem;
+      color: var(--text-sub);
+    }
+
     .important-note {
-      margin-top: 8px;
+      margin-top: 10px;
       display: flex;
       gap: 8px;
       align-items: flex-start;
       padding: 10px 12px;
       border-radius: 18px;
-      border: 1px solid #f3c0c0;
-      background: #fff4f4;
-      color: #c44a4a;
+      border: 1px solid #efddd0;
+      background: #fff7f1;
+      color: #9a6f52;
       font-size: .78rem;
-      line-height: 1.55;
+      line-height: 1.6;
     }
 
     .profile-box {
       margin-top: 10px;
       border-radius: 20px;
-      border: 1px solid #d8eadf;
-      background: #eef8f2;
+      border: 1px solid #eadacd;
+      background: linear-gradient(180deg, #fffaf6, #f9f0e9);
       padding: 12px;
       display: grid;
-      gap: 6px;
+      gap: 8px;
       font-size: .82rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .profile-box::after {
+      content: "♡";
+      position: absolute;
+      right: 14px;
+      top: 8px;
+      font-size: 1.4rem;
+      color: rgba(196,154,122,0.22);
     }
 
     .profile-box .line strong {
       color: var(--text-main);
+    }
+
+    .cute-banner {
+      margin-bottom: 10px;
+      border-radius: 20px;
+      padding: 12px 14px;
+      background: linear-gradient(135deg, #fff6ee, #f4e6db);
+      border: 1px solid #ead8cb;
+      text-align: center;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+    }
+
+    .cute-banner-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #7a5d4b;
+      margin-bottom: 4px;
+    }
+
+    .cute-banner-sub {
+      font-size: .78rem;
+      color: var(--text-sub);
+      line-height: 1.6;
     }
 
     .payment-section { display: none; }
@@ -447,15 +541,17 @@
       margin-top: 10px;
       padding: 14px;
       border-radius: 22px;
-      background: linear-gradient(135deg, #fffaf7, #f7f0ea);
-      border: 1px solid #eadfd5;
+      background: linear-gradient(135deg, #fffaf7, #f8efe7);
+      border: 1px solid #eaded3;
       text-align: center;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
     }
 
     .payment-title {
       font-size: .96rem;
       font-weight: 800;
       margin-bottom: 4px;
+      color: #7a5d4b;
     }
 
     .payment-desc {
@@ -471,7 +567,7 @@
       padding: 10px;
       border-radius: 18px;
       background: rgba(255,255,255,0.9);
-      border: 1px solid #eee2d6;
+      border: 1px solid #eee2d8;
       margin-bottom: 10px;
     }
 
@@ -496,7 +592,7 @@
 
     .mini-btn {
       border-radius: 999px;
-      border: 1px solid #ded5cc;
+      border: 1px solid #e5d7cb;
       background: linear-gradient(180deg, #ffffff, #f8f1eb);
       padding: 8px 12px;
       font-size: .76rem;
@@ -506,7 +602,7 @@
     }
 
     .uploader {
-      border: 1.5px dashed #d8cfc6;
+      border: 1.5px dashed #daccc0;
       border-radius: 22px;
       padding: 14px;
       background: rgba(255,255,255,0.84);
@@ -523,6 +619,7 @@
     .upload-title {
       font-size: .9rem;
       font-weight: 800;
+      color: #7a5d4b;
     }
 
     .upload-sub {
@@ -543,17 +640,18 @@
       border: 0;
       border-radius: 999px;
       padding: 11px 16px;
-      background: linear-gradient(135deg, #f6c5c0, #f0d0bf);
+      background: linear-gradient(135deg, #e8c8b2, #d9b498);
       color: #6c4a3d;
       font-weight: 800;
       font-size: .84rem;
       cursor: pointer;
-      box-shadow: 0 10px 18px rgba(0,0,0,0.08);
+      box-shadow: 0 10px 18px rgba(118,84,63,0.08);
     }
 
     .upload-btn.secondary {
-      background: linear-gradient(135deg, #d3ecdf, #ecf7f2);
-      color: #335d4e;
+      background: linear-gradient(135deg, #f5e5da, #fff7f2);
+      color: #7a5d4b;
+      border: 1px solid #e8d9ce;
     }
 
     .hidden-file-input {
@@ -586,66 +684,16 @@
       max-height: 260px;
       object-fit: contain;
       border-radius: 18px;
-      border: 1px solid #e5d9cc;
+      border: 1px solid #eadfd4;
       background: #fff;
-      box-shadow: 0 14px 24px rgba(0,0,0,0.08);
+      box-shadow: 0 14px 24px rgba(0,0,0,0.06);
     }
 
     .payment-require {
       margin-top: 8px;
       font-size: .75rem;
-      color: #c44a4a;
+      color: #c46a6a;
       line-height: 1.55;
-    }
-
-    .action-row {
-      display: flex;
-      gap: 10px;
-      margin-top: 12px;
-    }
-
-    .btn-primary,
-    .btn-secondary,
-    .btn-danger {
-      min-height: 52px;
-      border-radius: 999px;
-      font-family: inherit;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    .btn-primary {
-      flex: 1;
-      border: 0;
-      background: linear-gradient(135deg, #a6dcc8, #7fb4a0);
-      color: #fff;
-      box-shadow: 0 14px 24px rgba(0,0,0,0.14);
-      font-size: .98rem;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .btn-primary:disabled {
-      opacity: .65;
-      cursor: default;
-    }
-
-    .btn-secondary {
-      border: 1px solid #ddd4cb;
-      background: linear-gradient(180deg, #fffaf6, #f6efe9);
-      color: var(--text-sub);
-      padding: 0 16px;
-      font-size: .82rem;
-    }
-
-    .btn-danger {
-      border: 1px solid #f0c1c1;
-      background: linear-gradient(180deg, #fff5f5, #ffeded);
-      color: #c44a4a;
-      padding: 0 16px;
-      font-size: .82rem;
     }
 
     .helper {
@@ -672,9 +720,9 @@
       gap: 6px;
       padding: 7px 12px;
       border-radius: 999px;
-      background: #ebf7f1;
-      border: 1px solid #c8e0d4;
-      color: #356655;
+      background: #f5eee8;
+      border: 1px solid #e7d7ca;
+      color: #7a5d4b;
       font-weight: 800;
     }
 
@@ -701,9 +749,10 @@
 
     .result-item {
       border-radius: 20px;
-      border: 1px solid #ebe3da;
+      border: 1px solid #eadfd5;
       background: rgba(255,255,255,0.95);
       padding: 10px 12px 12px;
+      box-shadow: 0 10px 20px rgba(118,84,63,0.05);
     }
 
     .item-top-row {
@@ -732,16 +781,16 @@
       font-size: .72rem;
       padding: 4px 9px;
       border-radius: 999px;
-      background: #e9f6f0;
-      border: 1px solid #cbe2d7;
-      color: #356655;
+      background: #f5eee8;
+      border: 1px solid #e7d7ca;
+      color: #7a5d4b;
       font-weight: 800;
     }
 
     .item-tag.paid {
-      background: #fff3e8;
-      border-color: #efd0b6;
-      color: #b76d3e;
+      background: #fff5eb;
+      border-color: #efd9bf;
+      color: #b57a45;
     }
 
     .item-meta {
@@ -765,7 +814,7 @@
       width: 100%;
       min-height: 42px;
       border-radius: 999px;
-      border: 1px solid #e3ddd5;
+      border: 1px solid #e6dbd2;
       background: linear-gradient(180deg, #fff, #f8f1eb);
       font-size: .78rem;
       font-weight: 800;
@@ -784,33 +833,36 @@
     }
 
     .status-pill--green {
-      background: #e7f4ee;
-      border-color: #c3dfd2;
-      color: #356655;
+      background: #edf5e9;
+      border-color: #d7e6cf;
+      color: #59704f;
     }
 
     .status-pill--yellow {
-      background: #fff8e1;
-      border-color: #ffecb3;
-      color: #8a6d1e;
+      background: #fff8ea;
+      border-color: #f2e0b0;
+      color: #8b6e2e;
     }
 
     .status-pill--red {
-      background: #fdecec;
-      border-color: #f2bbbb;
-      color: #b63f3f;
+      background: #fff0f0;
+      border-color: #efcccc;
+      color: #b95a5a;
     }
 
     .status-pill--blue {
-      background: #edf5ff;
-      border-color: #c9ddff;
-      color: #3562a8;
+      background: #eef4ff;
+      border-color: #d6e1ff;
+      color: #5975af;
     }
 
     .live-card {
       margin-top: 4px;
       padding: 14px;
       border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(252,246,240,0.96));
+      border: 1px solid #eadbcf;
+      box-shadow: var(--shadow-soft);
     }
 
     .live-header {
@@ -831,13 +883,14 @@
       width: 9px;
       height: 9px;
       border-radius: 999px;
-      background: #4caf50;
-      box-shadow: 0 0 0 4px rgba(76,175,80,0.18);
+      background: #7f9b74;
+      box-shadow: 0 0 0 4px rgba(127,155,116,0.16);
     }
 
     .live-title-text {
       font-size: .88rem;
       font-weight: 800;
+      color: #7a5d4b;
     }
 
     .live-date {
@@ -860,8 +913,8 @@
       align-items: center;
       padding: 9px 10px;
       border-radius: 16px;
-      background: rgba(255,255,255,0.76);
-      border: 1px solid #eee3d9;
+      background: rgba(255,255,255,0.84);
+      border: 1px solid #ede2d7;
       font-size: .8rem;
     }
 
@@ -904,7 +957,7 @@
       padding: 7px 12px;
       border-radius: 999px;
       background: rgba(255,255,255,0.9);
-      border: 1px solid #e8e0d8;
+      border: 1px solid #eadfd5;
     }
 
     .copyright {
@@ -930,7 +983,7 @@
       transform: translateX(-50%) translateY(40px);
       padding: 10px 18px;
       border-radius: 999px;
-      background: rgba(57,53,50,0.96);
+      background: rgba(90, 70, 59, 0.96);
       color: #fff;
       font-size: .8rem;
       font-weight: 800;
@@ -945,30 +998,6 @@
       transform: translateX(-50%) translateY(0);
     }
 
-    .tip-bubble {
-      position: fixed;
-      left: 14px;
-      bottom: 68px;
-      max-width: 270px;
-      padding: 10px 12px;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.96);
-      border: 1px solid rgba(0,0,0,0.06);
-      box-shadow: 0 12px 26px rgba(0,0,0,0.12);
-      font-size: .78rem;
-      color: var(--text-sub);
-      opacity: 0;
-      transform: translateY(8px);
-      pointer-events: none;
-      transition: all .25s ease;
-      z-index: 9000;
-    }
-
-    .tip-bubble.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
     .loading-overlay {
       position: fixed;
       inset: 0;
@@ -977,8 +1006,8 @@
       justify-content: center;
       z-index: 99999;
       padding: 20px;
-      background: rgba(255,250,247,0.94);
-      backdrop-filter: blur(10px);
+      background: rgba(255,248,243,0.90);
+      backdrop-filter: blur(8px);
     }
 
     .loading-overlay.show {
@@ -987,95 +1016,38 @@
 
     .loading-card {
       width: 100%;
-      max-width: 360px;
-      border-radius: 30px;
-      background: rgba(255,255,255,0.92);
-      border: 1px solid rgba(255,255,255,0.42);
-      box-shadow: 0 20px 54px rgba(0,0,0,0.14);
+      max-width: 320px;
+      border-radius: 28px;
+      background: rgba(255,255,255,0.96);
+      border: 1px solid #efe0d5;
+      box-shadow: 0 20px 54px rgba(118,84,63,0.14);
       padding: 24px 18px 22px;
       text-align: center;
     }
 
-    .spinner-wrap {
-      position: relative;
-      width: 160px;
-      height: 160px;
+    .spinner {
+      width: 62px;
+      height: 62px;
       margin: 0 auto 14px;
-      display: grid;
-      place-items: center;
-    }
-
-    .spinner-ring {
-      position: absolute;
-      inset: 0;
       border-radius: 999px;
-      border: 10px solid rgba(143,201,181,0.16);
-      border-top-color: #8fc9b5;
-      border-right-color: #f3b6b0;
-      animation: spinFast 1.2s linear infinite;
+      border: 6px solid #edd9ca;
+      border-top-color: #b98e71;
+      animation: spin 0.85s linear infinite;
     }
 
-    .spinner-ring.r2 {
-      inset: 12px;
-      border-width: 8px;
-      border-color: rgba(243,182,176,0.14);
-      border-bottom-color: #f0c9ae;
-      border-left-color: #8fc9b5;
-      animation: spinReverse 1.7s linear infinite;
-    }
-
-    .spinner-center {
-      position: relative;
-      width: 104px;
-      height: 104px;
-      border-radius: 999px;
-      background: #f6ddd0;
-    }
-
-    .spinner-center::before,
-    .spinner-center::after {
-      content: "";
-      position: absolute;
-      top: 38px;
-      width: 8px;
-      height: 10px;
-      background: #524239;
-      border-radius: 999px;
-    }
-
-    .spinner-center::before { left: 30px; }
-    .spinner-center::after { right: 30px; }
-
-    .spinner-nose {
-      position: absolute;
-      left: 50%;
-      top: 50px;
-      transform: translateX(-50%);
-      width: 14px;
-      height: 10px;
-      border-radius: 999px;
-      background: #524239;
-    }
-
-    .spinner-mouth {
-      position: absolute;
-      left: 50%;
-      top: 62px;
-      transform: translateX(-50%);
-      width: 18px;
-      height: 8px;
-      border-bottom: 3px solid #cf8d93;
-      border-radius: 0 0 18px 18px;
+    @keyframes spin {
+      to { transform: rotate(360deg); }
     }
 
     .loading-title {
-      font-size: 1.1rem;
+      font-size: 1.08rem;
       font-weight: 800;
+      color: #7a5d4b;
     }
 
     .loading-sub {
       margin-top: 8px;
-      font-size: .88rem;
+      font-size: .87rem;
       color: var(--text-sub);
       line-height: 1.65;
     }
@@ -1087,28 +1059,27 @@
       gap: 8px;
       padding: 9px 13px;
       border-radius: 999px;
-      background: #fff4ef;
-      border: 1px solid #f2c8ba;
-      color: #c26f54;
+      background: #fff7f1;
+      border: 1px solid #efd9ca;
+      color: #b67b5a;
       font-size: .8rem;
       font-weight: 800;
     }
 
-    @keyframes spinFast { to { transform: rotate(360deg); } }
-    @keyframes spinReverse { to { transform: rotate(-360deg); } }
+    .hidden {
+      display: none !important;
+    }
 
     @media (max-width: 480px) {
       .app { padding: 12px 12px 16px; }
       .grid-2 { grid-template-columns: 1fr; }
       .action-row { flex-direction: column; }
-      .tab-row { grid-template-columns: 1fr; }
-      .tip-bubble { left: 10px; right: 10px; max-width: none; }
     }
   </style>
 </head>
 <body>
   <div class="app">
-    <section class="hero">
+    <section class="hero shell-card">
       <div class="hero-top">
         <div class="brand-wrap">
           <div class="logo-shell">
@@ -1125,18 +1096,15 @@
           </div>
         </div>
 
-        <div class="header-tools">
-          <div class="badge" id="onlineStatus">
-            <span class="badge-dot" id="onlineDot"></span>
-            <span id="onlineText">สถานะ: เปิดรับเคลม</span>
-          </div>
-          <button class="theme-toggle" id="themeToggle" type="button" aria-label="สลับโหมดกลางคืน">🌙</button>
+        <div class="badge" id="onlineStatus">
+          <span class="badge-dot" id="onlineDot"></span>
+          <span id="onlineText">สถานะ: เปิดรับเคลม</span>
         </div>
       </div>
 
       <div class="hero-center-text">
         <div class="hero-main-text">
-          สมัครสมาชิกหรือล็อกอินก่อนใช้งาน จากนั้นแจ้งเคลมได้ทันที ระบบจะดึงข้อมูลสมาชิกมาใช้ให้อัตโนมัติค่ะ
+          ล็อกอินก่อนใช้งาน ระบบจะดึงข้อมูลสมาชิกให้อัตโนมัติ แล้วพาเข้าสู่หน้าแจ้งเคลมทันทีค่ะ
         </div>
 
         <div class="claim-note" id="claimTimeNote">
@@ -1145,223 +1113,241 @@
       </div>
     </section>
 
-    <main class="panel">
+    <main class="panel shell-card">
       <div class="panel-title">
-        <span class="icon">🧸</span>
+        <span class="icon">🤎</span>
         <span>ศูนย์สมาชิก 426 SHOP</span>
       </div>
 
-      <div class="tab-row">
-        <button type="button" class="tab-btn active" data-view="loginView">ล็อกอิน</button>
-        <button type="button" class="tab-btn" data-view="registerView">สมัครสมาชิก</button>
-        <button type="button" class="tab-btn" data-view="claimView">แจ้งเคลม</button>
-      </div>
-
+      <!-- LOGIN VIEW -->
       <section class="view active" id="loginView">
         <div class="section-blurb">
-          เข้าสู่ระบบด้วยอีเมลที่สมัครกับร้าน และรหัสผ่าน 6 หลักที่ตั้งเอง
+          เข้าสู่ระบบด้วยอีเมลที่สมัครกับร้าน และรหัสผ่าน 6 หลัก
         </div>
 
-        <div class="field-group">
-          <label class="field-label" for="loginEmail">อีเมล</label>
-          <div class="input-shell" id="loginEmailField">
-            <input id="loginEmail" type="email" placeholder="เช่น yourname@example.com" autocomplete="email" />
+        <div class="login-card">
+          <div class="field-group">
+            <label class="field-label" for="loginEmail">อีเมล</label>
+            <div class="input-shell" id="loginEmailField">
+              <input id="loginEmail" type="email" placeholder="เช่น yourname@example.com" autocomplete="email" />
+            </div>
           </div>
-        </div>
 
-        <div class="field-group">
-          <label class="field-label" for="loginPassword">รหัสผ่าน 6 หลัก</label>
-          <div class="input-shell" id="loginPasswordField">
-            <input id="loginPassword" type="password" inputmode="numeric" maxlength="6" placeholder="เช่น 123456" />
+          <div class="field-group">
+            <label class="field-label" for="loginPassword">รหัสผ่าน 6 หลัก</label>
+            <div class="input-shell" id="loginPasswordField">
+              <input id="loginPassword" type="password" inputmode="numeric" maxlength="6" placeholder="เช่น 123456" autocomplete="current-password" />
+            </div>
           </div>
+
+          <div class="remember-row">
+            <label class="remember-check">
+              <input type="checkbox" id="rememberPassword" />
+              <span>บันทึกอีเมลและรหัสผ่านไว้ในเครื่องนี้</span>
+            </label>
+          </div>
+
+          <div class="action-row">
+            <button class="btn-primary" id="btnLogin">
+              <span>เข้าสู่ระบบ</span>
+              <span>↗</span>
+            </button>
+          </div>
+
+          <div id="authStatus"></div>
         </div>
 
-        <div class="action-row">
-          <button class="btn-primary" id="btnLogin">
-            <span>เข้าสู่ระบบ</span>
-            <span>↗</span>
-          </button>
-        </div>
-
-        <div id="authStatus"></div>
+        <div class="auth-foot">ยังไม่มีสมาชิก?</div>
+        <button type="button" class="btn-link-small" id="showRegisterBtn">สมัครสมาชิกใหม่</button>
       </section>
 
+      <!-- REGISTER VIEW -->
       <section class="view" id="registerView">
         <div class="section-blurb">
-          สมัครสมาชิกด้วยอีเมลที่ใช้กับร้าน พร้อมตั้งรหัสผ่าน 6 หลัก และกรอกวันสมัคร / วันต่ออายุล่าสุด
+          สมัครสมาชิกด้วยอีเมลที่ใช้กับร้าน พร้อมตั้งรหัสผ่าน 6 หลัก
         </div>
 
-        <div class="field-group">
-          <label class="field-label" for="registerDisplayName">ชื่อแสดงผล (ถ้ามี)</label>
-          <div class="input-shell">
-            <input id="registerDisplayName" type="text" placeholder="เช่น คุณเอ" />
-          </div>
-        </div>
-
-        <div class="field-group">
-          <label class="field-label" for="registerEmail">อีเมล</label>
-          <div class="input-shell" id="registerEmailField">
-            <input id="registerEmail" type="email" placeholder="เช่น yourname@example.com" autocomplete="email" />
-          </div>
-        </div>
-
-        <div class="field-group">
-          <label class="field-label" for="registerPassword">รหัสผ่าน 6 หลัก</label>
-          <div class="input-shell" id="registerPasswordField">
-            <input id="registerPassword" type="password" inputmode="numeric" maxlength="6" placeholder="เช่น 123456" />
-          </div>
-        </div>
-
-        <div class="field-group">
-          <div class="grid-2">
-            <div>
-              <label class="field-label" for="registerSignupDate">วันที่สมัคร</label>
-              <div class="input-shell" id="registerSignupDateField">
-                <input id="registerSignupDate" type="date" />
-              </div>
-            </div>
-            <div>
-              <label class="field-label" for="registerRenewDate">วันที่ต่ออายุล่าสุด</label>
-              <div class="input-shell" id="registerRenewDateField">
-                <input id="registerRenewDate" type="date" />
-              </div>
+        <div class="register-card">
+          <div class="field-group">
+            <label class="field-label" for="registerDisplayName">ชื่อแสดงผล (ถ้ามี)</label>
+            <div class="input-shell">
+              <input id="registerDisplayName" type="text" placeholder="เช่น คุณเอ" />
             </div>
           </div>
-        </div>
 
-        <div class="important-note">
-          <strong>สำคัญ:</strong>
-          <span>ข้อมูลวันสมัครและวันต่ออายุล่าสุดจะถูกใช้ในระบบแจ้งเคลมอัตโนมัติ กรุณากรอกให้ตรงกับข้อมูลจริง</span>
-        </div>
+          <div class="field-group">
+            <label class="field-label" for="registerEmail">อีเมล</label>
+            <div class="input-shell" id="registerEmailField">
+              <input id="registerEmail" type="email" placeholder="เช่น yourname@example.com" autocomplete="email" />
+            </div>
+          </div>
 
-        <div class="action-row">
-          <button class="btn-primary" id="btnRegister">
-            <span>สมัครสมาชิก</span>
-            <span>↗</span>
-          </button>
+          <div class="field-group">
+            <label class="field-label" for="registerPassword">รหัสผ่าน 6 หลัก</label>
+            <div class="input-shell" id="registerPasswordField">
+              <input id="registerPassword" type="password" inputmode="numeric" maxlength="6" placeholder="เช่น 123456" autocomplete="new-password" />
+            </div>
+          </div>
+
+          <div class="field-group">
+            <div class="grid-2">
+              <div>
+                <label class="field-label" for="registerSignupDate">วันที่สมัคร</label>
+                <div class="input-shell" id="registerSignupDateField">
+                  <input id="registerSignupDate" type="date" />
+                </div>
+              </div>
+              <div>
+                <label class="field-label" for="registerRenewDate">วันที่ต่ออายุล่าสุด</label>
+                <div class="input-shell" id="registerRenewDateField">
+                  <input id="registerRenewDate" type="date" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="important-note">
+            <strong>สำคัญ:</strong>
+            <span>ข้อมูลวันสมัครและวันต่ออายุล่าสุดจะถูกใช้ในระบบแจ้งเคลมอัตโนมัติ กรุณากรอกให้ตรงกับข้อมูลจริง</span>
+          </div>
+
+          <div class="action-row">
+            <button class="btn-primary" id="btnRegister">
+              <span>สมัครสมาชิก</span>
+              <span>↗</span>
+            </button>
+          </div>
+
+          <button type="button" class="btn-link-small" id="backToLoginBtn">กลับไปหน้าล็อกอิน</button>
         </div>
       </section>
 
+      <!-- CLAIM VIEW -->
       <section class="view" id="claimView">
-        <div class="section-blurb">
-          เมื่อเข้าสู่ระบบแล้ว ระบบจะใช้ข้อมูลสมาชิกของคุณแทนการกรอกอีเมลและปีสมัครใหม่
-        </div>
-
-        <div class="profile-box" id="memberProfileBox" style="display:none;">
-          <div class="line"><strong>อีเมล:</strong> <span id="profileEmail">-</span></div>
-          <div class="line"><strong>วันที่สมัคร:</strong> <span id="profileSignupDate">-</span></div>
-          <div class="line"><strong>วันที่ต่ออายุล่าสุด:</strong> <span id="profileRenewDate">-</span></div>
-          <div class="line"><strong>ปีสมัคร:</strong> <span id="profileSignupYear">-</span></div>
-        </div>
-
-        <div class="field-group">
-          <label class="field-label" for="expiryInput">วันหมดอายุสมาชิก</label>
-          <div class="input-shell" id="expiryField">
-            <input id="expiryInput" type="date" />
+        <div class="claim-card">
+          <div class="cute-banner">
+            <div class="cute-banner-title">🐻 แจ้งเคลมสมาชิก</div>
+            <div class="cute-banner-sub">
+              เมื่อเข้าสู่ระบบแล้ว ระบบจะใช้ข้อมูลสมาชิกของคุณอัตโนมัติ ไม่ต้องกรอกอีเมลซ้ำ
+            </div>
           </div>
-        </div>
 
-        <div class="field-group">
-          <label class="field-label">ปีสมัครจากระบบสมาชิก</label>
-          <div class="input-shell">
-            <input id="signupYearDisplay" type="text" readonly placeholder="ระบบจะดึงให้อัตโนมัติ" />
+          <div class="profile-box" id="memberProfileBox" style="display:none;">
+            <div class="line"><strong>อีเมล:</strong> <span id="profileEmail">-</span></div>
+            <div class="line"><strong>วันที่สมัคร:</strong> <span id="profileSignupDate">-</span></div>
+            <div class="line"><strong>วันที่ต่ออายุล่าสุด:</strong> <span id="profileRenewDate">-</span></div>
+            <div class="line"><strong>ปีสมัคร:</strong> <span id="profileSignupYear">-</span></div>
           </div>
-          <input type="hidden" id="signupYear" />
-        </div>
 
-        <div class="field-group payment-section" id="paymentSection">
-          <div class="payment-card">
-            <div class="payment-title" id="paymentTitle">แพ็กดูแล 19 บาท</div>
-            <div class="payment-desc" id="paymentNote">
-              เลือกปีสมัคร 2568 ระบบให้ใช้แพ็กดูแล 19 บาท เพื่อรับเข้าคิวเคลมทันทีหลังแนบสลิป
+          <div class="field-group">
+            <label class="field-label" for="expiryInput">วันหมดอายุสมาชิก</label>
+            <div class="input-shell" id="expiryField">
+              <input id="expiryInput" type="date" />
             </div>
+          </div>
 
-            <div class="bank-box">
-              <div class="bank-line">
-                <span class="bank-label">ชื่อบัญชี</span>
-                <span class="bank-value" id="bankAccountName">นภัทรธมณฑ์ ฤทธิ์ชัยศักดิ์</span>
-              </div>
-              <div class="bank-line">
-                <span class="bank-label">ธนาคาร</span>
-                <span class="bank-value" id="bankName">ธ.กสิกร (KBank)</span>
-              </div>
-              <div class="bank-line">
-                <span class="bank-label">เลขบัญชี</span>
-                <span class="bank-value" id="bankAccountNo">0628794251</span>
-              </div>
+          <div class="field-group">
+            <label class="field-label">ปีสมัครจากระบบสมาชิก</label>
+            <div class="input-shell">
+              <input id="signupYearDisplay" type="text" readonly placeholder="ระบบจะดึงให้อัตโนมัติ" />
             </div>
+            <input type="hidden" id="signupYear" />
+          </div>
 
-            <div class="mini-actions">
-              <button type="button" class="mini-btn" id="btnCopyAccount">คัดลอกเลขบัญชี</button>
-            </div>
+          <div class="field-group payment-section" id="paymentSection">
+            <div class="payment-card">
+              <div class="payment-title" id="paymentTitle">แพ็กดูแล 19 บาท</div>
+              <div class="payment-desc" id="paymentNote">
+                เลือกปีสมัคร 2568 ระบบให้ใช้แพ็กดูแล 19 บาท เพื่อรับเข้าคิวเคลมทันทีหลังแนบสลิป
+              </div>
 
-            <div class="uploader">
-              <div class="uploader-top">
-                <div class="upload-title">แนบสลิปโอนเงิน</div>
-                <div class="upload-sub">
-                  รองรับเฉพาะไฟล์รูปภาพ เช่น JPG, PNG, WEBP<br />
-                  ขนาดไม่เกิน 3 MB
+              <div class="bank-box">
+                <div class="bank-line">
+                  <span class="bank-label">ชื่อบัญชี</span>
+                  <span class="bank-value" id="bankAccountName">นภัทรธมณฑ์ ฤทธิ์ชัยศักดิ์</span>
+                </div>
+                <div class="bank-line">
+                  <span class="bank-label">ธนาคาร</span>
+                  <span class="bank-value" id="bankName">ธ.กสิกร (KBank)</span>
+                </div>
+                <div class="bank-line">
+                  <span class="bank-label">เลขบัญชี</span>
+                  <span class="bank-value" id="bankAccountNo">0628794251</span>
                 </div>
               </div>
 
-              <div class="upload-row">
-                <button type="button" class="upload-btn" id="btnPickSlip">เลือกไฟล์สลิป</button>
-                <button type="button" class="upload-btn secondary" id="btnCameraSlip">ถ่ายรูปสลิป</button>
+              <div class="mini-actions">
+                <button type="button" class="mini-btn" id="btnCopyAccount">คัดลอกเลขบัญชี</button>
               </div>
 
-              <input id="slipInput" class="hidden-file-input" type="file" accept="image/*" />
-              <input id="slipInputCamera" class="hidden-file-input" type="file" accept="image/*" capture="environment" />
+              <div class="uploader">
+                <div class="uploader-top">
+                  <div class="upload-title">แนบสลิปโอนเงิน</div>
+                  <div class="upload-sub">
+                    รองรับเฉพาะไฟล์รูปภาพ เช่น JPG, PNG, WEBP<br />
+                    ขนาดไม่เกิน 3 MB
+                  </div>
+                </div>
 
-              <div class="file-name" id="fileName">ยังไม่ได้เลือกไฟล์</div>
+                <div class="upload-row">
+                  <button type="button" class="upload-btn" id="btnPickSlip">เลือกไฟล์สลิป</button>
+                  <button type="button" class="upload-btn secondary" id="btnCameraSlip">ถ่ายรูปสลิป</button>
+                </div>
 
-              <div class="preview-wrap" id="slipPreviewWrap">
-                <img id="slipPreview" class="preview-img" alt="ตัวอย่างสลิป" />
-                <button type="button" class="mini-btn" id="btnRemoveSlip">ลบรูปที่เลือก</button>
+                <input id="slipInput" class="hidden-file-input" type="file" accept="image/*" />
+                <input id="slipInputCamera" class="hidden-file-input" type="file" accept="image/*" capture="environment" />
+
+                <div class="file-name" id="fileName">ยังไม่ได้เลือกไฟล์</div>
+
+                <div class="preview-wrap" id="slipPreviewWrap">
+                  <img id="slipPreview" class="preview-img" alt="ตัวอย่างสลิป" />
+                  <button type="button" class="mini-btn" id="btnRemoveSlip">ลบรูปที่เลือก</button>
+                </div>
+              </div>
+
+              <div class="payment-require" id="paymentRequireSlip">
+                หากไม่แนบสลิป ระบบจะยังไม่รับเข้าระบบเคลมสำหรับปี 2568
               </div>
             </div>
+          </div>
 
-            <div class="payment-require" id="paymentRequireSlip">
-              หากไม่แนบสลิป ระบบจะยังไม่รับเข้าระบบเคลมสำหรับปี 2568
+          <div class="field-group">
+            <label class="field-label" for="noteInput">ฝากข้อความถึงแอดมิน (ถ้ามี)</label>
+            <div class="input-shell note" id="noteField">
+              <textarea id="noteInput" placeholder="เช่น หลุดจากกลุ่มเมื่อวาน รบกวนช่วยดึงกลับให้ด้วย"></textarea>
             </div>
+            <div class="note-counter" id="noteCounter">0 / 500</div>
           </div>
-        </div>
 
-        <div class="field-group">
-          <label class="field-label" for="noteInput">ฝากข้อความถึงแอดมิน (ถ้ามี)</label>
-          <div class="input-shell note" id="noteField">
-            <textarea id="noteInput" placeholder="เช่น หลุดจากกลุ่มเมื่อวาน รบกวนช่วยดึงกลับให้ด้วย"></textarea>
+          <div class="action-row">
+            <button class="btn-primary" id="btnSubmit">
+              <span>ส่งคำขอเคลม</span>
+              <span>↗</span>
+            </button>
+            <button class="btn-secondary" id="btnClear">ล้างฟอร์ม</button>
+            <button class="btn-danger" id="btnLogout">ออกจากระบบ</button>
           </div>
-          <div class="note-counter" id="noteCounter">0 / 500</div>
-        </div>
 
-        <div class="action-row">
-          <button class="btn-primary" id="btnSubmit">
-            <span>ส่งคำขอเคลม</span>
-            <span>↗</span>
-          </button>
-          <button class="btn-secondary" id="btnClear">ล้างฟอร์ม</button>
-          <button class="btn-danger" id="btnLogout">ออกจากระบบ</button>
-        </div>
+          <div class="helper">
+            <span>ℹ️</span>
+            <span>หลังจากกดส่งคำขอแล้ว แนะนำอย่าเพิ่งรีเฟรชหรือปิดหน้านี้จนกว่าสถานะจะขึ้นครบ</span>
+          </div>
 
-        <div class="helper">
-          <span>ℹ️</span>
-          <span>หลังจากกดส่งคำขอแล้ว แนะนำอย่าเพิ่งรีเฟรชหรือปิดหน้านี้จนกว่าสถานะจะขึ้นครบ</span>
-        </div>
+          <div id="summary"></div>
+          <div id="status"></div>
+          <div id="results"></div>
 
-        <div id="summary"></div>
-        <div id="status"></div>
-        <div id="results"></div>
-
-        <div class="live-card" id="liveStatusCard">
-          <div class="live-header">
-            <div class="live-title-left">
-              <span class="live-dot"></span>
-              <span class="live-title-text">สถานะเมลวันนี้ (เรียลไทม์)</span>
+          <div class="live-card" id="liveStatusCard">
+            <div class="live-header">
+              <div class="live-title-left">
+                <span class="live-dot"></span>
+                <span class="live-title-text">สถานะเมลวันนี้ (เรียลไทม์)</span>
+              </div>
+              <span class="live-date" id="liveDate"></span>
             </div>
-            <span class="live-date" id="liveDate"></span>
-          </div>
-          <div class="live-list" id="liveList">
-            <div class="live-empty">กำลังดึงสถานะเมลวันนี้...</div>
+            <div class="live-list" id="liveList">
+              <div class="live-empty">กำลังดึงสถานะเมลวันนี้...</div>
+            </div>
           </div>
         </div>
       </section>
@@ -1378,27 +1364,14 @@
 
   <div id="toast" class="toast">คัดลอกข้อความแล้ว</div>
 
-  <div id="tipBubble" class="tip-bubble">
-    <span id="tipText">ล็อกอินก่อนใช้งาน ระบบจะดึงปีสมัครและข้อมูลสมาชิกให้อัตโนมัติค่ะ</span>
-  </div>
-
   <div id="loadingOverlay" class="loading-overlay">
     <div class="loading-card">
-      <div class="spinner-wrap">
-        <div class="spinner-ring"></div>
-        <div class="spinner-ring r2"></div>
-        <div class="spinner-center">
-          <span class="spinner-nose"></span>
-          <span class="spinner-mouth"></span>
-        </div>
-      </div>
-
+      <div class="spinner"></div>
       <div class="loading-title">รอสักครู่นะคะ ✨</div>
       <div class="loading-sub">
         ระบบกำลังประมวลผลคำขอของคุณ<br />
         กรุณาอย่ารีเฟรชหน้าจอระหว่างกำลังโหลด
       </div>
-
       <div class="loading-warning">
         <span>⛔</span>
         <span>ห้ามรีเฟรชหน้าจอ</span>
@@ -1413,6 +1386,7 @@
     const MAX_NOTE_LENGTH = 500;
     const MAX_SLIP_SIZE = 3 * 1024 * 1024;
     const TOKEN_KEY = "shop426_member_token";
+    const REMEMBER_KEY = "shop426_saved_login";
 
     let claimConfig = {
       claimStartHour: 7,
@@ -1448,12 +1422,14 @@
     const btnCameraSlip = document.getElementById("btnCameraSlip");
     const btnCopyAccount = document.getElementById("btnCopyAccount");
     const btnRemoveSlip = document.getElementById("btnRemoveSlip");
-    const themeToggle = document.getElementById("themeToggle");
     const btnLogin = document.getElementById("btnLogin");
     const btnRegister = document.getElementById("btnRegister");
+    const showRegisterBtn = document.getElementById("showRegisterBtn");
+    const backToLoginBtn = document.getElementById("backToLoginBtn");
 
     const loginEmailInput = document.getElementById("loginEmail");
     const loginPasswordInput = document.getElementById("loginPassword");
+    const rememberPassword = document.getElementById("rememberPassword");
 
     const registerDisplayName = document.getElementById("registerDisplayName");
     const registerEmail = document.getElementById("registerEmail");
@@ -1510,8 +1486,6 @@
     const liveListEl = document.getElementById("liveList");
 
     const toast = document.getElementById("toast");
-    const tipBubble = document.getElementById("tipBubble");
-    const tipText = document.getElementById("tipText");
     const loadingOverlay = document.getElementById("loadingOverlay");
 
     let activeSlipFile = null;
@@ -1525,26 +1499,6 @@
       loadingOverlay.classList.remove("show");
       document.body.style.overflow = "";
     }
-
-    function applyTheme(theme) {
-      if (theme === "dark") {
-        document.body.classList.add("theme-dark");
-        themeToggle.textContent = "☀️";
-      } else {
-        document.body.classList.remove("theme-dark");
-        themeToggle.textContent = "🌙";
-      }
-    }
-
-    const savedTheme = localStorage.getItem("theme") || "light";
-    applyTheme(savedTheme);
-
-    themeToggle.addEventListener("click", () => {
-      const isDark = !document.body.classList.contains("theme-dark");
-      const next = isDark ? "dark" : "light";
-      applyTheme(next);
-      localStorage.setItem("theme", next);
-    });
 
     function escapeHtml(str) {
       return String(str || "")
@@ -1583,7 +1537,7 @@
 
     function formatThaiDate(dateStr) {
       if (!dateStr) return "-";
-      if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+      if (/^\\d{4}-\\d{2}-\\d{2}$/.test(dateStr)) {
         const [y, m, d] = dateStr.split("-").map(Number);
         const months = ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."];
         return `${d} ${months[m - 1]} ${y + 543}`;
@@ -1608,7 +1562,7 @@
     }
 
     function thaiYearFromYmd(dateStr) {
-      if (!dateStr || !/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return "";
+      if (!dateStr || !/^\\d{4}-\\d{2}-\\d{2}$/.test(dateStr)) return "";
       return String(Number(dateStr.slice(0, 4)) + 543);
     }
 
@@ -1638,6 +1592,30 @@
         return JSON.parse(text);
       } catch (e) {
         return { ok: false, message: text || "ไม่สามารถอ่านข้อมูลจากเซิร์ฟเวอร์ได้" };
+      }
+    }
+
+    function saveRememberedLogin() {
+      if (rememberPassword.checked) {
+        localStorage.setItem(REMEMBER_KEY, JSON.stringify({
+          email: (loginEmailInput.value || "").trim().toLowerCase(),
+          password: (loginPasswordInput.value || "").trim()
+        }));
+      } else {
+        localStorage.removeItem(REMEMBER_KEY);
+      }
+    }
+
+    function loadRememberedLogin() {
+      try {
+        const raw = localStorage.getItem(REMEMBER_KEY);
+        if (!raw) return;
+        const saved = JSON.parse(raw);
+        if (saved?.email) loginEmailInput.value = saved.email;
+        if (saved?.password) loginPasswordInput.value = saved.password;
+        if (saved?.email || saved?.password) rememberPassword.checked = true;
+      } catch (err) {
+        localStorage.removeItem(REMEMBER_KEY);
       }
     }
 
@@ -1783,28 +1761,13 @@
 
       let cls = "";
 
-      if (
-        raw.includes("ดึงเมลแล้ว") ||
-        raw.includes("ใช้งานได้ปกติ") ||
-        raw.includes("เสร็จ")
-      ) {
+      if (raw.includes("ดึงเมลแล้ว") || raw.includes("ใช้งานได้ปกติ") || raw.includes("เสร็จ")) {
         cls = "status-pill status-pill--green";
-      } else if (
-        raw.includes("ไม่เข้าเงื่อนไข") ||
-        raw.includes("สลิปปลอม") ||
-        raw.includes("ชื่อไม่ตรง") ||
-        raw.includes("ไม่ผ่าน")
-      ) {
+      } else if (raw.includes("ไม่เข้าเงื่อนไข") || raw.includes("สลิปปลอม") || raw.includes("ชื่อไม่ตรง") || raw.includes("ไม่ผ่าน")) {
         cls = "status-pill status-pill--red";
-      } else if (
-        raw.includes("รอตรวจสอบสลิป")
-      ) {
+      } else if (raw.includes("รอตรวจสอบสลิป")) {
         cls = "status-pill status-pill--blue";
-      } else if (
-        raw.includes("รอดำเนินการ") ||
-        raw.includes("กำลัง") ||
-        raw.includes("ตรวจสอบ")
-      ) {
+      } else if (raw.includes("รอดำเนินการ") || raw.includes("กำลัง") || raw.includes("ตรวจสอบ")) {
         cls = "status-pill status-pill--yellow";
       }
 
@@ -1866,7 +1829,7 @@
         "",
         "สรุปสถานะ:",
         entry.statusText || "-"
-      ].join("\n");
+      ].join("\\n");
     }
 
     async function copyToClipboard(btn, text) {
@@ -1928,7 +1891,7 @@
         parts.push("คิวเคลมของคุณ: " + escapeHtml(current.queueNo));
       }
       if (typeof elapsedSec === "number" && isFinite(elapsedSec)) {
-        const pretty = elapsedSec < 0.1 ? "< 0.1" : elapsedSec.toFixed(1).replace(/\.0$/, "");
+        const pretty = elapsedSec < 0.1 ? "< 0.1" : elapsedSec.toFixed(1).replace(/\\.0$/, "");
         parts.push("<br><span class='status-time'>⏱ ระบบใช้เวลา " + escapeHtml(pretty) + " วินาที</span>");
       }
 
@@ -1995,9 +1958,6 @@
     }
 
     function setActiveView(viewId) {
-      document.querySelectorAll(".tab-btn").forEach(btn => {
-        btn.classList.toggle("active", btn.dataset.view === viewId);
-      });
       document.querySelectorAll(".view").forEach(view => {
         view.classList.toggle("active", view.id === viewId);
       });
@@ -2049,7 +2009,7 @@
         shake(loginEmailField);
         return false;
       }
-      if (!/^\d{6}$/.test(password)) {
+      if (!/^\\d{6}$/.test(password)) {
         showAuthStatus("รหัสผ่านต้องเป็นตัวเลข 6 หลัก", "error");
         shake(loginPasswordField);
         return false;
@@ -2074,7 +2034,7 @@
         shake(registerEmailField);
         return false;
       }
-      if (!/^\d{6}$/.test(password)) {
+      if (!/^\\d{6}$/.test(password)) {
         showAuthStatus("รหัสผ่านต้องเป็นตัวเลข 6 หลัก", "error");
         shake(registerPasswordField);
         return false;
@@ -2186,6 +2146,8 @@
           return;
         }
 
+        saveRememberedLogin();
+
         state.token = data.token || "";
         state.member = data.member || null;
         if (state.token) {
@@ -2232,6 +2194,10 @@
           localStorage.setItem(TOKEN_KEY, state.token);
         }
 
+        loginEmailInput.value = (registerEmail.value || "").trim().toLowerCase();
+        loginPasswordInput.value = (registerPassword.value || "").trim();
+        if (rememberPassword.checked) saveRememberedLogin();
+
         updateMemberProfileUI();
         setActiveView("claimView");
         showAuthStatus("สมัครสมาชิกสำเร็จและเข้าสู่ระบบแล้วค่ะ", "ok");
@@ -2258,8 +2224,6 @@
       state.member = null;
       localStorage.removeItem(TOKEN_KEY);
 
-      loginEmailInput.value = "";
-      loginPasswordInput.value = "";
       clearForm();
       updateMemberProfileUI();
       setActiveView("loginView");
@@ -2280,9 +2244,7 @@
     async function handleSubmit() {
       updateClaimWindowState();
 
-      if (!validateClaimForm()) {
-        return;
-      }
+      if (!validateClaimForm()) return;
 
       const expiry = (expiryInput.value || "").trim();
       const year = (signupYearInput.value || "").trim();
@@ -2349,16 +2311,14 @@
       }
     }
 
-    document.querySelectorAll(".tab-btn").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const target = btn.dataset.view;
-        if (target === "claimView" && !state.token) {
-          showAuthStatus("กรุณาเข้าสู่ระบบก่อนเข้าใช้งานหน้าแจ้งเคลม", "info");
-          setActiveView("loginView");
-          return;
-        }
-        setActiveView(target);
-      });
+    showRegisterBtn.addEventListener("click", () => {
+      setActiveView("registerView");
+      showAuthStatus("");
+    });
+
+    backToLoginBtn.addEventListener("click", () => {
+      setActiveView("loginView");
+      showAuthStatus("");
     });
 
     btnLogin.addEventListener("click", handleLogin);
@@ -2387,23 +2347,9 @@
     });
 
     noteInput.addEventListener("input", updateNoteCounter);
-
-    const tips = [
-      "ล็อกอินก่อนใช้งาน ระบบจะดึงปีสมัครและข้อมูลสมาชิกให้อัตโนมัติค่ะ",
-      "ถ้าสมัครปี 2568 ระบบจะให้แนบสลิปก่อนส่งคำขอ",
-      "ถ้าสมัครปี 2569 ระบบจะส่งเข้าคิวฟรีตามเงื่อนไข",
-      "หลังส่งคำขอแล้ว ระบบจะแสดงสถานะล่าสุดให้ด้านล่างทันที"
-    ];
-    let tipIndex = 0;
-
-    function rotateTip() {
-      tipBubble.classList.remove("show");
-      setTimeout(() => {
-        tipText.textContent = tips[tipIndex] || tips[0];
-        tipBubble.classList.add("show");
-        tipIndex = (tipIndex + 1) % tips.length;
-      }, 180);
-    }
+    rememberPassword.addEventListener("change", saveRememberedLogin);
+    loginEmailInput.addEventListener("input", () => { if (rememberPassword.checked) saveRememberedLogin(); });
+    loginPasswordInput.addEventListener("input", () => { if (rememberPassword.checked) saveRememberedLogin(); });
 
     window.addEventListener("beforeunload", (e) => {
       if (!state.isLoading) return;
@@ -2414,6 +2360,7 @@
     window.addEventListener("load", async () => {
       renderConfigToUI();
       updateNoteCounter();
+      loadRememberedLogin();
       await initClaimWindowConfig();
       updateClaimWindowState();
       await fetchTodayStatus(true);
@@ -2424,9 +2371,6 @@
       } else {
         setActiveView("loginView");
       }
-
-      setTimeout(rotateTip, 800);
-      setInterval(rotateTip, 13000);
 
       setInterval(async () => {
         await initClaimWindowConfig();
