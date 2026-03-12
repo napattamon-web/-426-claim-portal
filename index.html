@@ -278,6 +278,30 @@
       text-align: center;
     }
 
+    .login-card {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 8% 10%, rgba(255,255,255,0.7), transparent 16%),
+        radial-gradient(circle at 92% 12%, rgba(255,255,255,0.55), transparent 14%),
+        linear-gradient(180deg, rgba(255,255,255,0.96), rgba(253,247,242,0.98));
+    }
+
+    .login-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.22;
+      background-repeat: no-repeat;
+      background-image:
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path fill='%23e9c8b8' d='M32 54C24 47 10 37 10 23c0-6 4-10 10-10 5 0 8 3 12 7 4-4 7-7 12-7 6 0 10 4 10 10 0 14-14 24-22 31z'/></svg>"),
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path fill='%23f0ddd2' d='M32 54C24 47 10 37 10 23c0-6 4-10 10-10 5 0 8 3 12 7 4-4 7-7 12-7 6 0 10 4 10 10 0 14-14 24-22 31z'/></svg>"),
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path fill='%23dec0ae' d='M32 54C24 47 10 37 10 23c0-6 4-10 10-10 5 0 8 3 12 7 4-4 7-7 12-7 6 0 10 4 10 10 0 14-14 24-22 31z'/></svg>");
+      background-size: 28px 28px, 18px 18px, 22px 22px;
+      background-position: 8% 10%, 92% 9%, 86% 90%;
+    }
+
     .claim-card {
       background:
         radial-gradient(circle at 10% 12%, rgba(255,255,255,0.55), transparent 18%),
@@ -380,14 +404,8 @@
     }
 
     @keyframes warningPulse {
-      0%, 100% {
-        transform: scale(1);
-        opacity: 1;
-      }
-      50% {
-        transform: scale(1.025);
-        opacity: .9;
-      }
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.025); opacity: .9; }
     }
 
     .field-group {
@@ -404,6 +422,14 @@
       font-weight: 700;
       text-align: center;
       width: 100%;
+    }
+
+    .password-rule {
+      margin-top: 2px;
+      font-size: .72rem;
+      color: #9a8679;
+      line-height: 1.5;
+      text-align: center;
     }
 
     .input-shell {
@@ -1465,13 +1491,14 @@
           </div>
 
           <div class="field-group">
-            <label class="field-label" for="loginPassword">รหัสผ่าน 6 หลัก</label>
+            <label class="field-label" for="loginPassword">รหัสผ่าน</label>
             <div class="input-shell" id="loginPasswordField">
               <div class="password-shell">
-                <input id="loginPassword" type="password" inputmode="numeric" maxlength="6" placeholder="เช่น 123456" autocomplete="current-password" />
+                <input id="loginPassword" type="password" placeholder="อย่างน้อย 8 ตัว" autocomplete="current-password" />
                 <button type="button" class="toggle-pass" data-target="loginPassword">แสดง</button>
               </div>
             </div>
+            <div class="password-rule">ต้องมี A-Z, a-z และ 0-9 อย่างน้อย 8 ตัว</div>
           </div>
 
           <div class="remember-row">
@@ -1488,7 +1515,7 @@
             </button>
           </div>
 
-          <button type="button" class="btn-link-small" id="btnForgotPassword">ลืมรหัสผ่าน</button>
+          <button type="button" class="btn-link-small" id="btnForgotPassword">ลืมรหัสผ่าน ส่งรหัสทางอีเมล</button>
 
           <div id="authStatus"></div>
         </div>
@@ -1512,7 +1539,7 @@
 
       <section class="view" id="registerView">
         <div class="section-blurb">
-          สมัครสมาชิกด้วยอีเมลที่ใช้กับร้าน พร้อมตั้งรหัสผ่าน 6 หลัก
+          สมัครสมาชิกด้วยอีเมลที่ใช้กับร้าน พร้อมตั้งรหัสผ่านใหม่
         </div>
 
         <div class="register-card">
@@ -1533,13 +1560,14 @@
           </div>
 
           <div class="field-group">
-            <label class="field-label" for="registerPassword">รหัสผ่าน 6 หลัก</label>
+            <label class="field-label" for="registerPassword">รหัสผ่าน</label>
             <div class="input-shell" id="registerPasswordField">
               <div class="password-shell">
-                <input id="registerPassword" type="password" inputmode="numeric" maxlength="6" placeholder="เช่น 123456" autocomplete="new-password" />
+                <input id="registerPassword" type="password" placeholder="อย่างน้อย 8 ตัว" autocomplete="new-password" />
                 <button type="button" class="toggle-pass" data-target="registerPassword">แสดง</button>
               </div>
             </div>
+            <div class="password-rule">ต้องมีตัวพิมพ์ใหญ่ ตัวพิมพ์เล็ก และตัวเลข</div>
           </div>
 
           <div class="field-group">
@@ -1757,6 +1785,7 @@
     const TOKEN_KEY = "shop426_member_token";
     const REMEMBER_KEY = "shop426_saved_login";
     const SUPPORT_LINK = "https://line.me/R/ti/p/@467dlpti";
+    const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
 
     let claimConfig = {
       claimStartHour: 7,
@@ -1942,7 +1971,7 @@
 
     function formatThaiDate(dateStr) {
       if (!dateStr) return "-";
-      if (/^\\d{4}-\\d{2}-\\d{2}$/.test(dateStr)) {
+      if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
         const [y, m, d] = dateStr.split("-").map(Number);
         const months = ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."];
         return `${d} ${months[m - 1]} ${y + 543}`;
@@ -1967,7 +1996,7 @@
     }
 
     function thaiYearFromYmd(dateStr) {
-      if (!dateStr || !/^\\d{4}-\\d{2}-\\d{2}$/.test(dateStr)) return "";
+      if (!dateStr || !/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return "";
       return String(Number(dateStr.slice(0, 4)) + 543);
     }
 
@@ -1977,6 +2006,10 @@
       const today = new Date();
       today.setHours(0,0,0,0);
       return selected >= today;
+    }
+
+    function isStrongPassword(password) {
+      return PASSWORD_REGEX.test(password || "");
     }
 
     async function fetchJsonWithRetry(url, options = {}, retries = 1) {
@@ -2294,7 +2327,7 @@
         "",
         "สรุปสถานะ:",
         entry.statusText || "-"
-      ].join("\\n");
+      ].join("\n");
     }
 
     async function copyToClipboard(btn, text) {
@@ -2352,7 +2385,7 @@
         parts.push("คิวเคลมของคุณ: " + escapeHtml(current.queueNo));
       }
       if (typeof elapsedSec === "number" && isFinite(elapsedSec)) {
-        const pretty = elapsedSec < 0.1 ? "< 0.1" : elapsedSec.toFixed(1).replace(/\\.0$/, "");
+        const pretty = elapsedSec < 0.1 ? "< 0.1" : elapsedSec.toFixed(1).replace(/\.0$/, "");
         parts.push("<br><span class='status-time'>⏱ ระบบใช้เวลา " + escapeHtml(pretty) + " วินาที</span>");
       }
 
@@ -2471,9 +2504,9 @@
         shake(loginEmailField);
         return false;
       }
-      if (!/^\\d{6}$/.test(password)) {
-        showAuthStatus("รหัสผ่านต้องเป็นตัวเลข 6 หลัก", "error");
-        showAlert(topAlert, "รหัสผ่านต้องเป็นตัวเลข 6 หลัก", "error");
+      if (!isStrongPassword(password)) {
+        showAuthStatus("รหัสผ่านต้องมีตัวพิมพ์ใหญ่ ตัวพิมพ์เล็ก ตัวเลข และยาวอย่างน้อย 8 ตัว", "error");
+        showAlert(topAlert, "รหัสผ่านต้องมีตัวพิมพ์ใหญ่ ตัวพิมพ์เล็ก ตัวเลข และอย่างน้อย 8 ตัว", "error");
         shake(loginPasswordField);
         return false;
       }
@@ -2494,8 +2527,8 @@
         shake(registerEmailField);
         return false;
       }
-      if (!/^\\d{6}$/.test(password)) {
-        showAlert(registerAlert, "รหัสผ่านต้องเป็นตัวเลข 6 หลัก", "error");
+      if (!isStrongPassword(password)) {
+        showAlert(registerAlert, "รหัสผ่านต้องมีตัวพิมพ์ใหญ่ ตัวพิมพ์เล็ก ตัวเลข และอย่างน้อย 8 ตัว", "error");
         shake(registerPasswordField);
         return false;
       }
@@ -2672,12 +2705,12 @@
         });
 
         if (!data || data.ok === false) {
-          showAlert(topAlert, data.message || "ส่งคำขอรีเซ็ตรหัสผ่านไม่สำเร็จ", "error");
+          showAlert(topAlert, data.message || "ส่งรหัสรีเซ็ตรหัสผ่านทางอีเมลไม่สำเร็จ", "error");
           return;
         }
 
-        showAlert(topAlert, data.message || "ระบบส่งคำแนะนำการรีเซ็ตรหัสผ่านให้แล้ว", "success", 5000);
-        showToast("ส่งคำขอรีเซ็ตรหัสผ่านแล้ว");
+        showAlert(topAlert, data.message || "ระบบส่งรหัสหรือคำแนะนำรีเซ็ตรหัสผ่านไปยังอีเมลของคุณแล้ว", "success", 6000);
+        showToast("ส่งรหัสทางอีเมลแล้ว");
       } catch (err) {
         showAlert(topAlert, "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ", "error");
       } finally {
