@@ -15,6 +15,7 @@
       --sub:#9a8679;
       --accent:#bf8f72;
       --accent-2:#e7c6b2;
+      --accent-3:#f3ded0;
       --success:#6f8e63;
       --danger:#d77d7d;
       --warning:#c58e5e;
@@ -28,13 +29,14 @@
 
     *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
     html,body{margin:0;padding:0;min-height:100%}
+
     body{
       min-height:100vh;
       font-family:"Noto Sans Thai",system-ui,sans-serif;
       color:var(--text);
       background:
-        radial-gradient(circle at top left, rgba(231,198,178,.34), transparent 28%),
-        radial-gradient(circle at top right, rgba(191,143,114,.14), transparent 20%),
+        radial-gradient(circle at top left, rgba(231,198,178,.36), transparent 28%),
+        radial-gradient(circle at top right, rgba(191,143,114,.14), transparent 22%),
         linear-gradient(180deg,#fffaf6 0%,#f8f1ea 100%);
       display:flex;
       justify-content:center;
@@ -49,7 +51,7 @@
       pointer-events:none;
       opacity:.11;
       background-repeat:no-repeat;
-      background-position:center 70px;
+      background-position:center 66px;
       background-size:min(82vw,380px);
       background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 420 420'><g fill='none' fill-rule='evenodd'><circle cx='210' cy='220' r='124' fill='%23efcfba'/><circle cx='118' cy='118' r='54' fill='%23ddb89c'/><circle cx='302' cy='118' r='54' fill='%23ddb89c'/><circle cx='118' cy='118' r='25' fill='%23fff3ea'/><circle cx='302' cy='118' r='25' fill='%23fff3ea'/><ellipse cx='170' cy='216' rx='15' ry='19' fill='%23524239'/><ellipse cx='250' cy='216' rx='15' ry='19' fill='%23524239'/><ellipse cx='210' cy='276' rx='42' ry='31' fill='%23fff8f3'/><ellipse cx='210' cy='262' rx='18' ry='13' fill='%23524239'/><path d='M186 294c11 13 37 13 48 0' stroke='%23cc918c' stroke-width='10' stroke-linecap='round'/><ellipse cx='144' cy='264' rx='25' ry='13' fill='%23efc1c8' opacity='.5'/><ellipse cx='276' cy='264' rx='25' ry='13' fill='%23efc1c8' opacity='.5'/></g></svg>");
     }
@@ -78,6 +80,17 @@
       padding:18px 16px;
       position:relative;
       overflow:hidden;
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:auto auto -18px -18px;
+      width:110px;
+      height:110px;
+      border-radius:999px;
+      background:radial-gradient(circle, rgba(255,255,255,.7), rgba(255,255,255,0));
+      pointer-events:none;
     }
 
     .hero::after{
@@ -109,13 +122,26 @@
     }
 
     .logo-shell{
-      width:68px;
-      height:68px;
-      border-radius:22px;
+      width:70px;
+      height:70px;
+      border-radius:24px;
       padding:4px;
       background:linear-gradient(135deg,#fffefc,#f4e7dc);
       box-shadow:var(--shadow-soft);
       flex-shrink:0;
+      position:relative;
+    }
+
+    .logo-shell::after{
+      content:"";
+      position:absolute;
+      right:-4px;
+      top:-4px;
+      width:16px;
+      height:16px;
+      border-radius:999px;
+      background:linear-gradient(135deg,#f7dcd3,#fff4ee);
+      border:1px solid #edd8ca;
     }
 
     .logo-img{
@@ -123,7 +149,7 @@
       height:100%;
       display:block;
       object-fit:cover;
-      border-radius:18px;
+      border-radius:19px;
       background:#fff;
     }
 
@@ -180,7 +206,10 @@
     }
 
     .badge-dot{
-      width:8px;height:8px;border-radius:999px;background:var(--success);
+      width:8px;
+      height:8px;
+      border-radius:999px;
+      background:var(--success);
       box-shadow:0 0 0 4px rgba(111,142,99,.14);
     }
 
@@ -228,36 +257,48 @@
     }
 
     .login-card,.register-card,.claim-card,.success-card{
-      border-radius:26px;
-      background:linear-gradient(180deg, rgba(255,255,255,.94), rgba(253,247,242,.98));
+      border-radius:28px;
+      background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(253,247,242,.99));
       border:1px solid #efe0d4;
       padding:15px;
       box-shadow:inset 0 1px 0 rgba(255,255,255,.6);
       text-align:center;
+      position:relative;
+      overflow:hidden;
     }
 
     .login-card{
-      position:relative;
-      overflow:hidden;
       background:
-        radial-gradient(circle at 8% 10%, rgba(255,255,255,.7), transparent 16%),
+        radial-gradient(circle at 8% 10%, rgba(255,255,255,.8), transparent 16%),
         radial-gradient(circle at 92% 12%, rgba(255,255,255,.55), transparent 14%),
-        linear-gradient(180deg, rgba(255,255,255,.96), rgba(253,247,242,.98));
+        linear-gradient(180deg, rgba(255,255,255,.97), rgba(253,247,242,.99));
     }
 
-    .login-card::before{
+    .login-card::before,
+    .register-card::before,
+    .claim-card::before{
       content:"";
       position:absolute;
       inset:0;
       pointer-events:none;
       opacity:.22;
       background-repeat:no-repeat;
+    }
+
+    .login-card::before{
       background-image:
         url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path fill='%23e9c8b8' d='M32 54C24 47 10 37 10 23c0-6 4-10 10-10 5 0 8 3 12 7 4-4 7-7 12-7 6 0 10 4 10 10 0 14-14 24-22 31z'/></svg>"),
         url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path fill='%23f0ddd2' d='M32 54C24 47 10 37 10 23c0-6 4-10 10-10 5 0 8 3 12 7 4-4 7-7 12-7 6 0 10 4 10 10 0 14-14 24-22 31z'/></svg>"),
         url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path fill='%23dec0ae' d='M32 54C24 47 10 37 10 23c0-6 4-10 10-10 5 0 8 3 12 7 4-4 7-7 12-7 6 0 10 4 10 10 0 14-14 24-22 31z'/></svg>");
       background-size:28px 28px,18px 18px,22px 22px;
       background-position:8% 10%,92% 9%,86% 90%;
+    }
+
+    .register-card::before{
+      opacity:.18;
+      background-image:
+        radial-gradient(circle at 9% 12%, rgba(231,198,178,.9), rgba(231,198,178,0) 35%),
+        radial-gradient(circle at 92% 10%, rgba(243,222,208,.95), rgba(243,222,208,0) 35%);
     }
 
     .success-card{
@@ -284,20 +325,13 @@
 
     .claim-card{
       background:
-        radial-gradient(circle at 10% 12%, rgba(255,255,255,.55), transparent 18%),
+        radial-gradient(circle at 10% 12%, rgba(255,255,255,.65), transparent 18%),
         radial-gradient(circle at 88% 18%, rgba(255,255,255,.45), transparent 16%),
         linear-gradient(180deg,#fffbf8,#f8efe8);
-      position:relative;
-      overflow:hidden;
     }
 
     .claim-card::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      pointer-events:none;
       opacity:.24;
-      background-repeat:no-repeat;
       background-image:
         url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path fill='%23dcb8a2' d='M32 54C24 47 10 37 10 23c0-6 4-10 10-10 5 0 8 3 12 7 4-4 7-7 12-7 6 0 10 4 10 10 0 14-14 24-22 31z'/></svg>"),
         url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path fill='%23efd5c5' d='M32 54C24 47 10 37 10 23c0-6 4-10 10-10 5 0 8 3 12 7 4-4 7-7 12-7 6 0 10 4 10 10 0 14-14 24-22 31z'/></svg>"),
@@ -312,7 +346,7 @@
       padding:16px 14px 14px;
       border-radius:24px;
       border:1px solid #efdccd;
-      background:linear-gradient(180deg, rgba(255,255,255,.85), rgba(255,247,241,.95));
+      background:linear-gradient(180deg, rgba(255,255,255,.88), rgba(255,247,241,.96));
       box-shadow:inset 0 1px 0 rgba(255,255,255,.85),0 10px 22px rgba(118,84,63,.06);
       overflow:hidden;
     }
@@ -320,7 +354,9 @@
     .claim-top-frame::before,.claim-top-frame::after{
       content:"";
       position:absolute;
-      width:72px;height:72px;border-radius:999px;
+      width:72px;
+      height:72px;
+      border-radius:999px;
       background:radial-gradient(circle, rgba(231,198,178,.35), rgba(231,198,178,0));
       pointer-events:none;
     }
@@ -393,7 +429,6 @@
 
     .password-rule{color:#9a8679}
     .password-strength{font-weight:800}
-
     .strength-weak{color:#c46a6a}
     .strength-medium{color:#b88443}
     .strength-strong{color:#5f8d5d}
@@ -407,6 +442,7 @@
       box-shadow:inset 0 1px 0 rgba(255,255,255,.65);
       width:100%;
       text-align:center;
+      position:relative;
     }
 
     .input-shell:focus-within{
@@ -614,7 +650,7 @@
       padding:14px;
       border-radius:22px;
       border:1px solid #efe2d8;
-      background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,250,246,.98));
+      background:linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,250,246,.98));
       box-shadow:inset 0 1px 0 rgba(255,255,255,.85);
     }
 
@@ -683,7 +719,7 @@
       padding:12px;
       border-radius:22px;
       border:1px solid #eaded3;
-      background:rgba(255,255,255,.88);
+      background:rgba(255,255,255,.90);
       text-align:center;
     }
 
@@ -717,9 +753,10 @@
       border:1.5px dashed #daccc0;
       border-radius:22px;
       padding:14px;
-      background:rgba(255,255,255,.84);
+      background:rgba(255,255,255,.86);
       margin-top:12px;
       text-align:center;
+      position:relative;
     }
 
     .uploader-top{
@@ -759,7 +796,10 @@
     .hidden-file-input{
       position:absolute;
       left:-9999px;
-      width:1px;height:1px;opacity:0;pointer-events:none;
+      width:1px;
+      height:1px;
+      opacity:0;
+      pointer-events:none;
     }
 
     .file-name{
@@ -768,6 +808,26 @@
       color:var(--sub);
       word-break:break-word;
       text-align:center;
+    }
+
+    .upload-status{
+      margin-top:10px;
+      display:none;
+      padding:10px 12px;
+      border-radius:16px;
+      background:linear-gradient(180deg,#f3fbf0,#edf8ea);
+      border:1px solid #d7e7cf;
+      color:#5f7b56;
+      font-size:.78rem;
+      font-weight:800;
+      line-height:1.6;
+    }
+
+    .upload-status.show{display:block}
+    .upload-status.error{
+      background:linear-gradient(180deg,#fff3f3,#fff0f0);
+      border-color:#efcccc;
+      color:#b85d5d;
     }
 
     .preview-wrap{
@@ -848,7 +908,7 @@
     .result-item{
       border-radius:20px;
       border:1px solid #eadfd5;
-      background:rgba(255,255,255,.95);
+      background:rgba(255,255,255,.96);
       padding:10px 12px 12px;
       box-shadow:0 10px 20px rgba(118,84,63,.05);
       text-align:center;
@@ -950,7 +1010,7 @@
       margin-top:12px;
       padding:14px;
       border-radius:24px;
-      background:linear-gradient(180deg, rgba(255,255,255,.96), rgba(252,246,240,.96));
+      background:linear-gradient(180deg, rgba(255,255,255,.97), rgba(252,246,240,.97));
       border:1px solid #eadbcf;
       box-shadow:var(--shadow-soft);
       position:relative;
@@ -958,12 +1018,14 @@
     }
 
     .live-card::after,.history-card::after{
-      content:"🤎";
+      content:"";
       position:absolute;
-      right:12px;
-      top:8px;
-      font-size:1.2rem;
-      opacity:.15;
+      right:10px;
+      top:10px;
+      width:22px;
+      height:22px;
+      opacity:.18;
+      background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path fill='%23cda58e' d='M32 54C24 47 10 37 10 23c0-6 4-10 10-10 5 0 8 3 12 7 4-4 7-7 12-7 6 0 10 4 10 10 0 14-14 24-22 31z'/></svg>") center/contain no-repeat;
     }
 
     .live-header,.history-header{
@@ -983,7 +1045,10 @@
     }
 
     .live-dot{
-      width:9px;height:9px;border-radius:999px;background:var(--success);
+      width:9px;
+      height:9px;
+      border-radius:999px;
+      background:var(--success);
       box-shadow:0 0 0 4px rgba(111,142,99,.16);
       animation:pulseDot 1.6s infinite;
     }
@@ -1066,8 +1131,15 @@
     .alert-box.warning{background:#fff8ed;color:#9b7441;border-color:#f1dec0}
 
     .modal-backdrop{
-      position:fixed;inset:0;background:rgba(64,47,37,.34);display:none;
-      align-items:center;justify-content:center;padding:18px;z-index:99998;backdrop-filter:blur(6px);
+      position:fixed;
+      inset:0;
+      background:rgba(64,47,37,.34);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      z-index:99998;
+      backdrop-filter:blur(6px);
     }
 
     .modal-backdrop.show{display:flex}
@@ -1120,20 +1192,54 @@
     .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
     .loading-overlay{
-      position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:99999;
-      padding:20px;background:rgba(255,248,243,.90);backdrop-filter:blur(8px);
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:99999;
+      padding:20px;
+      background:rgba(255,248,243,.90);
+      backdrop-filter:blur(8px);
     }
 
     .loading-overlay.show{display:flex}
 
     .loading-card{
-      width:100%;max-width:320px;border-radius:28px;background:rgba(255,255,255,.96);
-      border:1px solid #efe0d5;box-shadow:0 20px 54px rgba(118,84,63,.14);padding:24px 18px 22px;text-align:center;
+      width:100%;
+      max-width:320px;
+      border-radius:28px;
+      background:rgba(255,255,255,.97);
+      border:1px solid #efe0d5;
+      box-shadow:0 20px 54px rgba(118,84,63,.14);
+      padding:24px 18px 22px;
+      text-align:center;
+      position:relative;
+      overflow:hidden;
     }
 
+    .loading-card::before,
+    .loading-card::after{
+      content:"";
+      position:absolute;
+      width:80px;
+      height:80px;
+      border-radius:999px;
+      background:radial-gradient(circle, rgba(231,198,178,.28), rgba(231,198,178,0));
+      pointer-events:none;
+    }
+
+    .loading-card::before{left:-18px;top:-18px}
+    .loading-card::after{right:-18px;bottom:-18px}
+
     .spinner{
-      width:62px;height:62px;margin:0 auto 14px;border-radius:999px;border:6px solid #edd9ca;
-      border-top-color:#b98e71;animation:spin .85s linear infinite;
+      width:62px;
+      height:62px;
+      margin:0 auto 14px;
+      border-radius:999px;
+      border:6px solid #edd9ca;
+      border-top-color:#b98e71;
+      animation:spin .85s linear infinite;
     }
 
     @keyframes spin{to{transform:rotate(360deg)}}
@@ -1141,26 +1247,64 @@
     .loading-title{font-size:1.08rem;font-weight:800;color:#7a5d4b;text-align:center}
     .loading-sub{margin-top:8px;font-size:.87rem;color:var(--sub);line-height:1.65;text-align:center}
     .loading-warning{
-      margin-top:12px;display:inline-flex;align-items:center;gap:8px;padding:9px 13px;border-radius:999px;
-      background:#fff7f1;border:1px solid #efd9ca;color:#b67b5a;font-size:.8rem;font-weight:800;text-align:center;
+      margin-top:12px;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:9px 13px;
+      border-radius:999px;
+      background:#fff7f1;
+      border:1px solid #efd9ca;
+      color:#b67b5a;
+      font-size:.8rem;
+      font-weight:800;
+      text-align:center;
     }
 
     .float-admin{
-      position:fixed;right:16px;bottom:20px;z-index:9997;width:62px;height:62px;border:0;border-radius:999px;
-      background:linear-gradient(135deg,#fffdfb,#f4e7dc);box-shadow:0 16px 28px rgba(118,84,63,.18);
-      display:flex;align-items:center;justify-content:center;cursor:pointer;padding:6px;
+      position:fixed;
+      right:16px;
+      bottom:20px;
+      z-index:9997;
+      width:62px;
+      height:62px;
+      border:0;
+      border-radius:999px;
+      background:linear-gradient(135deg,#fffdfb,#f4e7dc);
+      box-shadow:0 16px 28px rgba(118,84,63,.18);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      padding:6px;
     }
 
-    .float-admin img{width:100%;height:100%;object-fit:contain;border-radius:999px}
+    .float-admin img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      border-radius:999px;
+    }
 
     .footer{
-      margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--sub);
-      font-size:.74rem;text-align:center;
+      margin-top:auto;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:6px;
+      color:var(--sub);
+      font-size:.74rem;
+      text-align:center;
     }
 
     .support-pill{
-      display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;
-      background:rgba(255,255,255,.9);border:1px solid #eadfd5;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:7px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.9);
+      border:1px solid #eadfd5;
     }
 
     .copyright{letter-spacing:.16em;text-transform:uppercase;text-align:center}
@@ -1337,7 +1481,7 @@
         </div>
 
         <div class="success-card" id="registerSuccessCard">
-          <div class="success-title">สมัครสมาชิกสำเร็จแล้ว ✨</div>
+          <div class="success-title">สมัครสมาชิกสำเร็จแล้ว</div>
           <div class="success-desc">
             ตอนนี้คุณสามารถใช้อีเมลและรหัสผ่านที่ตั้งไว้เข้าสู่ระบบได้ทันที<br />
             หากลืมรหัสผ่าน สามารถกดส่งรหัสทางอีเมลได้จากหน้าล็อกอิน
@@ -1425,12 +1569,13 @@
                 <input id="slipInputCamera" class="hidden-file-input" type="file" accept="image/*" capture="environment" />
 
                 <div class="file-name" id="fileName">ยังไม่ได้เลือกไฟล์</div>
+                <div class="upload-status" id="slipStatusHint">แนบสลิปเรียบร้อยแล้ว</div>
 
                 <div class="preview-wrap" id="slipPreviewWrap">
                   <img id="slipPreview" class="preview-img" alt="ตัวอย่างสลิป" />
                   <div class="preview-meta">
                     <button type="button" class="btn-copy" id="btnViewLastSlip">ดูสลิปล่าสุด</button>
-                    <button type="button" class="mini-btn" id="btnRemoveSlip">ลบรูปที่เลือก</button>
+                    <button type="button" class="btn-copy" id="btnRemoveSlip">ลบรูปที่เลือก</button>
                   </div>
                 </div>
               </div>
@@ -1506,7 +1651,7 @@
   <div id="loadingOverlay" class="loading-overlay">
     <div class="loading-card">
       <div class="spinner"></div>
-      <div class="loading-title">รอสักครู่นะคะ ✨</div>
+      <div class="loading-title">รอสักครู่นะคะ</div>
       <div class="loading-sub">
         ระบบกำลังประมวลผลคำขอของคุณ<br />
         กรุณาอย่ารีเฟรชหน้าจอระหว่างกำลังโหลด
@@ -1617,6 +1762,7 @@
     const noteField = document.getElementById("noteField");
     const paymentSection = document.getElementById("paymentSection");
     const fileName = document.getElementById("fileName");
+    const slipStatusHint = document.getElementById("slipStatusHint");
     const slipPreviewWrap = document.getElementById("slipPreviewWrap");
     const slipPreview = document.getElementById("slipPreview");
 
@@ -1679,7 +1825,7 @@
       document.body.style.overflow = "";
     }
 
-    function showToast(message = "เรียบร้อยแล้ว ✨") {
+    function showToast(message = "เรียบร้อยแล้ว") {
       toast.textContent = message;
       toast.classList.add("show");
       setTimeout(() => toast.classList.remove("show"), 1800);
@@ -1782,7 +1928,7 @@
       if (!dateStr) return false;
       const selected = new Date(dateStr + "T00:00:00");
       const today = new Date();
-      today.setHours(0,0,0,0);
+      today.setHours(0, 0, 0, 0);
       return selected >= today;
     }
 
@@ -1886,6 +2032,16 @@
       }
     }
 
+    function setSlipStatus(message, type = "ok") {
+      slipStatusHint.textContent = message || "";
+      slipStatusHint.className = "upload-status show" + (type === "error" ? " error" : "");
+    }
+
+    function clearSlipStatus() {
+      slipStatusHint.textContent = "";
+      slipStatusHint.className = "upload-status";
+    }
+
     function renderConfigToUI() {
       paymentTitleEl.textContent = claimConfig.paymentTitle || "ชำระค่าดูแล 19 บาท";
       paymentNoteEl.textContent = claimConfig.paymentNote || "";
@@ -1938,7 +2094,7 @@
       const now = new Date();
       const hour = now.getHours();
       const day = now.getDay();
-      const openDays = Array.isArray(claimConfig.claimOpenDays) && claimConfig.claimOpenDays.length ? claimConfig.claimOpenDays : [1,2,3,4,5,6];
+      const openDays = Array.isArray(claimConfig.claimOpenDays) && claimConfig.claimOpenDays.length ? claimConfig.claimOpenDays : [1, 2, 3, 4, 5, 6];
       return openDays.includes(day) && hour >= claimConfig.claimStartHour && hour < claimConfig.claimEndHour;
     }
 
@@ -1977,6 +2133,7 @@
       slipPreview.src = "";
       slipPreviewWrap.style.display = "none";
       fileName.textContent = "ยังไม่ได้เลือกไฟล์";
+      clearSlipStatus();
     }
 
     function setSlipFile(file, sourceInput) {
@@ -1987,18 +2144,21 @@
 
       if (!file.type.startsWith("image/")) {
         showStatusError("กรุณาแนบไฟล์รูปภาพสลิปเท่านั้น");
+        setSlipStatus("รองรับเฉพาะไฟล์รูปภาพเท่านั้น", "error");
         sourceInput.value = "";
         return;
       }
 
       if (file.size > MAX_SLIP_SIZE) {
         showStatusError("ไฟล์สลิปมีขนาดใหญ่เกิน 3 MB");
+        setSlipStatus("ไฟล์สลิปมีขนาดใหญ่เกิน 3 MB", "error");
         sourceInput.value = "";
         return;
       }
 
       activeSlipFile = file;
       fileName.textContent = file.name || "เลือกไฟล์แล้ว";
+      setSlipStatus("แนบสลิปเรียบร้อยแล้ว กรุณาตรวจสอบรูปก่อนกดส่งคำขอ");
       showToast("แนบสลิปเรียบร้อยแล้ว");
 
       const reader = new FileReader();
@@ -2193,7 +2353,7 @@
           }, 1600);
         }
 
-        showToast("คัดลอกแล้ว ✨");
+        showToast("คัดลอกแล้ว");
       } catch (err) {
         showToast("คัดลอกไม่สำเร็จ");
       }
@@ -2228,17 +2388,17 @@
       state.lastClaimAt = current.createdAt || current.updatedAt || new Date().toISOString();
 
       const claimLabel = current.claimType === "paid" ? "แพ็กดูแล 19 บาท" : "เคลมฟรีตามเงื่อนไข";
-      summaryDiv.innerHTML = `<div class="summary-pill">✅ คำขอล่าสุด: ${escapeHtml(claimLabel)}</div>`;
+      summaryDiv.innerHTML = `<div class="summary-pill">คำขอล่าสุด: ${escapeHtml(claimLabel)}</div>`;
 
       const parts = [];
       parts.push("<span class='status-strong'>" + escapeHtml(res.message || "ระบบรับคำขอเคลมของคุณแล้ว") + "</span>");
       if (current.queueNo && current.queueNo !== "-") {
-        parts.push("คิวเคลมของคุณ: " + escapeHtml(current.queueNo));
+        parts.push("<br>คิวเคลมของคุณ: " + escapeHtml(current.queueNo));
       }
-      parts.push("<br><span class='status-time'>🕒 แจ้งเคลมล่าสุด: " + escapeHtml(formatThaiDateTime(state.lastClaimAt)) + "</span>");
+      parts.push("<br><span class='status-time'>เวลาแจ้งล่าสุด: " + escapeHtml(formatThaiDateTime(state.lastClaimAt)) + "</span>");
       if (typeof elapsedSec === "number" && isFinite(elapsedSec)) {
         const pretty = elapsedSec < 0.1 ? "< 0.1" : elapsedSec.toFixed(1).replace(/\.0$/, "");
-        parts.push("<br><span class='status-time'>⏱ ระบบใช้เวลา " + escapeHtml(pretty) + " วินาที</span>");
+        parts.push("<br><span class='status-time'>ระบบใช้เวลา " + escapeHtml(pretty) + " วินาที</span>");
       }
 
       status.innerHTML = parts.join("");
@@ -2464,6 +2624,7 @@
 
       if (year === String(claimConfig.paidYear) && !activeSlipFile) {
         showStatusError(claimConfig.paymentRequireSlip || "กรุณาแนบสลิปก่อนส่งคำขอ");
+        setSlipStatus("กรุณาแนบสลิปก่อนส่งคำขอ", "error");
         return false;
       }
 
@@ -2500,7 +2661,7 @@
         updateMemberProfileUI();
         setActiveView("claimView");
         showAuthStatus("เข้าสู่ระบบสำเร็จค่ะ", "ok");
-        showToast("เข้าสู่ระบบสำเร็จ ✨");
+        showToast("เข้าสู่ระบบสำเร็จ");
         showAlert(claimAlert, "เข้าสู่ระบบสำเร็จ", "success", 3500);
         await fetchClaimHistory();
       } catch (err) {
@@ -2555,7 +2716,7 @@
 
         updateMemberProfileUI();
         setActiveView("claimView");
-        showToast("สมัครสมาชิกสำเร็จ ✨");
+        showToast("สมัครสมาชิกสำเร็จ");
         showAlert(claimAlert, "สมัครสมาชิกสำเร็จ", "success", 3500);
         await fetchClaimHistory();
       } catch (err) {
@@ -2782,6 +2943,7 @@
       slipPreview.src = last.dataUrl;
       slipPreviewWrap.style.display = "flex";
       fileName.textContent = last.name || "slip";
+      setSlipStatus("แสดงสลิปล่าสุดแล้ว");
       showToast("แสดงสลิปล่าสุดแล้ว");
     });
 
