@@ -1205,15 +1205,15 @@
           <div class="bank-box">
             <div class="bank-line">
               <span class="bank-label">ชื่อบัญชี</span>
-              <span class="bank-value" id="bankAccountName">-</span>
+              <span class="bank-value" id="bankAccountName">นภัทรธมณฑ์ ฤทธิ์ชัยศักดิ์</span>
             </div>
             <div class="bank-line">
               <span class="bank-label">ธนาคาร</span>
-              <span class="bank-value" id="bankName">-</span>
+              <span class="bank-value" id="bankName">ธ.กสิกร (KBank)</span>
             </div>
             <div class="bank-line">
               <span class="bank-label">เลขบัญชี</span>
-              <span class="bank-value" id="bankAccountNo">-</span>
+              <span class="bank-value" id="bankAccountNo">0628794251</span>
             </div>
           </div>
 
@@ -1331,7 +1331,7 @@
   </div>
 
   <script>
-    const SCRIPT_URL = "PUT_YOUR_WEB_APP_URL_HERE";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzQcxawo3plttIh1tXpBckAlRqiO5V2nn2dHH_Bh1ujrQnJepa6GJQnOzAfQ_N5hAu2/exec";
     const STATUS_POLL_INTERVAL = 30000;
     const CONFIG_POLL_INTERVAL = 30000;
     const MAX_NOTE_LENGTH = 500;
@@ -1347,9 +1347,9 @@
       paidYear: "2568",
       freeYear: "2569",
       packagePrice: 19,
-      bankName: "กสิกรไทย",
-      bankAccountNo: "",
-      bankAccountName: "",
+      bankName: "ธ.กสิกร (KBank)",
+      bankAccountNo: "0628794251",
+      bankAccountName: "นภัทรธมณฑ์ ฤทธิ์ชัยศักดิ์",
       paymentTitle: "แพ็กดูแล 19 บาท (สำหรับรอบเคลมนี้)",
       paymentNote: "เลือกปีสมัคร 2568 ระบบให้ใช้แพ็กดูแล 19 บาท เพื่อรับเข้าคิวเคลมทันทีหลังแนบสลิป",
       paymentRequireSlip: "หากไม่แนบสลิป ระบบจะยังไม่รับเข้าระบบเคลมสำหรับปี 2568",
@@ -1490,7 +1490,11 @@
 
     async function fetchJsonWithRetry(url, options = {}, retries = 1) {
       try {
-        const res = await fetch(url, options);
+        const res = await fetch(url, {
+          ...options,
+          method: options.method || "GET",
+          cache: "no-store"
+        });
         if (!res.ok) throw new Error("HTTP " + res.status);
         return await res.json();
       } catch (err) {
@@ -1506,7 +1510,7 @@
       }
 
       try {
-        const cfg = await fetchJsonWithRetry(SCRIPT_URL + "?action=config&_t=" + Date.now(), { cache: "no-store" }, 1);
+        const cfg = await fetchJsonWithRetry(SCRIPT_URL + "?action=config&_t=" + Date.now(), {}, 1);
 
         if (cfg.claimStartHour !== undefined) claimConfig.claimStartHour = Number(cfg.claimStartHour) || 7;
         if (cfg.claimEndHour !== undefined) claimConfig.claimEndHour = Number(cfg.claimEndHour) || 19;
@@ -1547,9 +1551,9 @@
       paymentTitleEl.textContent = claimConfig.paymentTitle || "แพ็กดูแล 19 บาท";
       paymentNoteEl.textContent = claimConfig.paymentNote || "";
       paymentRequireSlipEl.textContent = claimConfig.paymentRequireSlip || "";
-      bankNameEl.textContent = claimConfig.bankName || "-";
-      bankAccountNoEl.textContent = claimConfig.bankAccountNo || "-";
-      bankAccountNameEl.textContent = claimConfig.bankAccountName || "-";
+      bankNameEl.textContent = claimConfig.bankName || "ธ.กสิกร (KBank)";
+      bankAccountNoEl.textContent = claimConfig.bankAccountNo || "0628794251";
+      bankAccountNameEl.textContent = claimConfig.bankAccountName || "นภัทรธมณฑ์ ฤทธิ์ชัยศักดิ์";
       supportLineEl.textContent = claimConfig.supportLine || "@467dlpti";
     }
 
@@ -1822,9 +1826,9 @@
     }
 
     async function fetchTodayStatus(initial = false) {
-      if (!SCRIPT_URL || SCRIPT_URL === "https://script.google.com/macros/s/AKfycbzQcxawo3plttIh1tXpBckAlRqiO5V2nn2dHH_Bh1ujrQnJepa6GJQnOzAfQ_N5hAu2/exec") return;
+      if (!SCRIPT_URL || SCRIPT_URL === "PUT_YOUR_WEB_APP_URL_HERE") return;
       try {
-        const data = await fetchJsonWithRetry(SCRIPT_URL + "?action=todayStatus&_t=" + Date.now(), { cache: "no-store" }, 1);
+        const data = await fetchJsonWithRetry(SCRIPT_URL + "?action=todayStatus&_t=" + Date.now(), {}, 1);
         renderLiveStatus(data.todaySummary || data.summary || data.dailyStatus || null);
       } catch (err) {
         if (initial) console.warn("Cannot load live email status:", err);
@@ -2096,7 +2100,7 @@
     btnRemoveSlip.addEventListener("click", resetSlipPreview);
 
     btnCopyAccount.addEventListener("click", () => {
-      copyToClipboard(btnCopyAccount, claimConfig.bankAccountNo || "");
+      copyToClipboard(btnCopyAccount, claimConfig.bankAccountNo || "0628794251");
     });
 
     btnSubmit.addEventListener("click", handleSubmit);
