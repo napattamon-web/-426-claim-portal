@@ -9,7 +9,6 @@
   <style>
     :root {
       --bg: #f7efe8;
-      --bg-2: #fdf8f3;
       --card: rgba(255, 250, 246, 0.96);
       --card-2: #fffaf6;
       --accent: #c49a7a;
@@ -20,7 +19,7 @@
       --line: #eadbcf;
       --text-main: #5a463b;
       --text-sub: #9a8678;
-      --success: #7f9b74;
+      --success: #6f8e63;
       --danger: #d97f7f;
       --warning: #c79366;
       --info: #7a8cb8;
@@ -336,6 +335,30 @@
       background: #fffaf7;
     }
 
+    .password-shell {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .password-shell input {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .toggle-pass {
+      border: 0;
+      background: #f4e7dc;
+      color: #7d6657;
+      border-radius: 999px;
+      padding: 7px 11px;
+      font-size: .76rem;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
     input[type="email"],
     input[type="password"],
     input[type="text"],
@@ -402,7 +425,8 @@
     .btn-primary,
     .btn-secondary,
     .btn-danger,
-    .btn-link-small {
+    .btn-link-small,
+    .btn-support {
       min-height: 52px;
       border-radius: 999px;
       font-family: inherit;
@@ -448,7 +472,8 @@
       font-size: .82rem;
     }
 
-    .btn-link-small {
+    .btn-link-small,
+    .btn-support {
       min-height: 40px;
       border: 1px solid #eadbcf;
       background: #fffaf6;
@@ -461,7 +486,8 @@
 
     .btn-link-small:hover,
     .btn-secondary:hover,
-    .btn-danger:hover {
+    .btn-danger:hover,
+    .btn-support:hover {
       transform: translateY(-1px);
     }
 
@@ -533,6 +559,33 @@
       font-size: .78rem;
       color: var(--text-sub);
       line-height: 1.6;
+    }
+
+    .mini-info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .mini-info-card {
+      border-radius: 18px;
+      background: #fffaf7;
+      border: 1px solid #eadccf;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .mini-info-label {
+      font-size: .72rem;
+      color: var(--text-sub);
+      margin-bottom: 4px;
+    }
+
+    .mini-info-value {
+      font-size: .95rem;
+      font-weight: 800;
+      color: #735847;
     }
 
     .payment-section { display: none; }
@@ -741,7 +794,7 @@
     .status-strong { font-weight: 800; color: var(--text-main); }
     .status-time { font-size: .76rem; color: var(--text-sub); }
 
-    #results {
+    #results, #historyResults {
       margin-top: 8px;
       display: grid;
       gap: 8px;
@@ -856,7 +909,8 @@
       color: #5975af;
     }
 
-    .live-card {
+    .live-card,
+    .history-card {
       margin-top: 12px;
       padding: 14px;
       border-radius: 24px;
@@ -867,7 +921,8 @@
       overflow: hidden;
     }
 
-    .live-card::after {
+    .live-card::after,
+    .history-card::after {
       content: "🤎";
       position: absolute;
       right: 12px;
@@ -876,7 +931,8 @@
       opacity: 0.15;
     }
 
-    .live-header {
+    .live-header,
+    .history-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -884,7 +940,8 @@
       margin-bottom: 10px;
     }
 
-    .live-title-left {
+    .live-title-left,
+    .history-title-left {
       display: flex;
       align-items: center;
       gap: 7px;
@@ -905,7 +962,8 @@
       100% { transform: scale(1); opacity: 1; }
     }
 
-    .live-title-text {
+    .live-title-text,
+    .history-title-text {
       font-size: .88rem;
       font-weight: 800;
       color: #7a5d4b;
@@ -995,6 +1053,64 @@
       background: #fff8ed;
       color: #9b7441;
       border-color: #f1dec0;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(64, 47, 37, 0.34);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      z-index: 99998;
+      backdrop-filter: blur(6px);
+    }
+
+    .modal-backdrop.show {
+      display: flex;
+    }
+
+    .modal-card {
+      width: 100%;
+      max-width: 360px;
+      background: #fffaf6;
+      border: 1px solid #eadccf;
+      border-radius: 24px;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.16);
+      padding: 18px;
+    }
+
+    .modal-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #735847;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .modal-desc {
+      font-size: .83rem;
+      color: var(--text-sub);
+      line-height: 1.65;
+      text-align: center;
+      margin-bottom: 14px;
+    }
+
+    .modal-summary {
+      border-radius: 18px;
+      border: 1px solid #ebddd1;
+      background: #fff;
+      padding: 12px;
+      font-size: .8rem;
+      line-height: 1.7;
+      color: #6b5648;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 14px;
     }
 
     .footer {
@@ -1127,8 +1243,8 @@
 
     @media (max-width: 480px) {
       .app { padding: 12px 12px 16px; }
-      .grid-2 { grid-template-columns: 1fr; }
-      .action-row { flex-direction: column; }
+      .grid-2, .mini-info-grid { grid-template-columns: 1fr; }
+      .action-row, .modal-actions { flex-direction: column; }
     }
   </style>
 </head>
@@ -1159,7 +1275,7 @@
 
       <div class="hero-center-text">
         <div class="hero-main-text">
-          ล็อกอินก่อนใช้งาน ระบบจะดึงข้อมูลสมาชิกให้อัตโนมัติ แล้วพาเข้าสู่หน้าแจ้งเคลมทันทีค่ะ
+          เข้าสู่ระบบหรือสมัครสมาชิกได้ตลอดเวลา ส่วนการส่งเคลมจะทำได้เฉพาะช่วงเวลาที่ระบบเปิดรับค่ะ
         </div>
 
         <div class="claim-note" id="claimTimeNote">
@@ -1192,7 +1308,10 @@
           <div class="field-group">
             <label class="field-label" for="loginPassword">รหัสผ่าน 6 หลัก</label>
             <div class="input-shell" id="loginPasswordField">
-              <input id="loginPassword" type="password" inputmode="numeric" maxlength="6" placeholder="เช่น 123456" autocomplete="current-password" />
+              <div class="password-shell">
+                <input id="loginPassword" type="password" inputmode="numeric" maxlength="6" placeholder="เช่น 123456" autocomplete="current-password" />
+                <button type="button" class="toggle-pass" data-target="loginPassword">แสดง</button>
+              </div>
             </div>
           </div>
 
@@ -1209,6 +1328,8 @@
               <span>↗</span>
             </button>
           </div>
+
+          <button type="button" class="btn-link-small" id="btnForgotPassword">ลืมรหัสผ่าน</button>
 
           <div id="authStatus"></div>
         </div>
@@ -1253,30 +1374,23 @@
           <div class="field-group">
             <label class="field-label" for="registerPassword">รหัสผ่าน 6 หลัก</label>
             <div class="input-shell" id="registerPasswordField">
-              <input id="registerPassword" type="password" inputmode="numeric" maxlength="6" placeholder="เช่น 123456" autocomplete="new-password" />
+              <div class="password-shell">
+                <input id="registerPassword" type="password" inputmode="numeric" maxlength="6" placeholder="เช่น 123456" autocomplete="new-password" />
+                <button type="button" class="toggle-pass" data-target="registerPassword">แสดง</button>
+              </div>
             </div>
           </div>
 
           <div class="field-group">
-            <div class="grid-2">
-              <div>
-                <label class="field-label" for="registerSignupDate">วันที่สมัคร</label>
-                <div class="input-shell" id="registerSignupDateField">
-                  <input id="registerSignupDate" type="date" />
-                </div>
-              </div>
-              <div>
-                <label class="field-label" for="registerRenewDate">วันที่ต่ออายุล่าสุด</label>
-                <div class="input-shell" id="registerRenewDateField">
-                  <input id="registerRenewDate" type="date" />
-                </div>
-              </div>
+            <label class="field-label" for="registerMemberDate">วันที่สมัคร / วันที่ต่ออายุล่าสุด</label>
+            <div class="input-shell" id="registerMemberDateField">
+              <input id="registerMemberDate" type="date" />
             </div>
           </div>
 
           <div class="important-note">
             <strong>สำคัญ:</strong>
-            <span>ข้อมูลวันสมัครและวันต่ออายุล่าสุดจะถูกใช้ในระบบแจ้งเคลมอัตโนมัติ กรุณากรอกให้ตรงกับข้อมูลจริง</span>
+            <span>กรอกวันที่สมัครหรือวันที่ต่ออายุล่าสุดตามข้อมูลที่คุณใช้อยู่ในระบบ เพื่อให้ร้านใช้ข้อมูลนี้อ้างอิงการเคลมได้ถูกต้อง</span>
           </div>
 
           <div class="action-row">
@@ -1297,15 +1411,25 @@
           <div class="cute-banner">
             <div class="cute-banner-title">🐻 แจ้งเคลมสมาชิก</div>
             <div class="cute-banner-sub">
-              เมื่อเข้าสู่ระบบแล้ว ระบบจะใช้ข้อมูลสมาชิกของคุณอัตโนมัติ ไม่ต้องกรอกอีเมลซ้ำ
+              ล็อกอินสำเร็จแล้ว ระบบจะใช้ข้อมูลสมาชิกของคุณอัตโนมัติ และแสดงประวัติการเคลมล่าสุดให้ทันที
             </div>
           </div>
 
           <div class="profile-box" id="memberProfileBox" style="display:none;">
             <div class="line"><strong>อีเมล:</strong> <span id="profileEmail">-</span></div>
-            <div class="line"><strong>วันที่สมัคร:</strong> <span id="profileSignupDate">-</span></div>
-            <div class="line"><strong>วันที่ต่ออายุล่าสุด:</strong> <span id="profileRenewDate">-</span></div>
+            <div class="line"><strong>วันที่ในระบบ:</strong> <span id="profileMemberDate">-</span></div>
             <div class="line"><strong>ปีสมัคร:</strong> <span id="profileSignupYear">-</span></div>
+          </div>
+
+          <div class="mini-info-grid">
+            <div class="mini-info-card">
+              <div class="mini-info-label">คิวรอโดยประมาณ</div>
+              <div class="mini-info-value" id="queueEstimateText">-</div>
+            </div>
+            <div class="mini-info-card">
+              <div class="mini-info-label">เวลารอตรวจสอบ</div>
+              <div class="mini-info-value" id="queueEtaText">-</div>
+            </div>
           </div>
 
           <div class="field-group">
@@ -1397,14 +1521,29 @@
             <button class="btn-danger" id="btnLogout">ออกจากระบบ</button>
           </div>
 
+          <button type="button" class="btn-support" id="btnSupport">ติดต่อแอดมินทันที</button>
+          <button type="button" class="btn-support" id="btnEnablePush">เปิดแจ้งเตือนผ่านเบราว์เซอร์</button>
+
           <div class="helper">
             <span>ℹ️</span>
-            <span>หลังจากกดส่งคำขอแล้ว แนะนำอย่าเพิ่งรีเฟรชหรือปิดหน้านี้จนกว่าสถานะจะขึ้นครบ</span>
+            <span>เข้าสู่ระบบและสมัครสมาชิกได้ตลอดเวลา แต่การส่งคำขอเคลมจะส่งได้เฉพาะช่วงเวลาที่ระบบเปิดรับเท่านั้น</span>
           </div>
 
           <div id="summary"></div>
           <div id="status"></div>
           <div id="results"></div>
+
+          <div class="history-card">
+            <div class="history-header">
+              <div class="history-title-left">
+                <span class="live-dot"></span>
+                <span class="history-title-text">ประวัติการเคลมของคุณ</span>
+              </div>
+            </div>
+            <div id="historyResults">
+              <div class="live-empty">ยังไม่มีข้อมูลประวัติการเคลม</div>
+            </div>
+          </div>
         </div>
       </section>
     </main>
@@ -1435,8 +1574,20 @@
     </div>
   </div>
 
+  <div id="confirmModal" class="modal-backdrop">
+    <div class="modal-card">
+      <div class="modal-title">ยืนยันก่อนส่งคำขอ</div>
+      <div class="modal-desc">กรุณาตรวจสอบข้อมูลก่อนกดยืนยันส่งเคลม</div>
+      <div class="modal-summary" id="confirmSummary"></div>
+      <div class="modal-actions">
+        <button type="button" class="btn-secondary" id="btnCancelConfirm">แก้ไขก่อน</button>
+        <button type="button" class="btn-primary" id="btnConfirmSubmit">ยืนยันส่งคำขอ</button>
+      </div>
+    </div>
+  </div>
+
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwKawXEyIltO9FsXck-810WcGELPXtr4eW_U-NQtg70xCWIc9snKDsCGGwZvHQjSv0TBA/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxucQbJg68gmoAdMn2SNOR-jngmi55yTGScBerouhx9KFd84OGgu237qfpR-ospbRK7MQ/exec";
     const STATUS_POLL_INTERVAL = 30000;
     const CONFIG_POLL_INTERVAL = 30000;
     const MAX_NOTE_LENGTH = 500;
@@ -1468,7 +1619,8 @@
       isLoading: false,
       isClaimOpen: true,
       member: null,
-      token: localStorage.getItem(TOKEN_KEY) || ""
+      token: localStorage.getItem(TOKEN_KEY) || "",
+      pendingSubmit: false
     };
 
     const btnSubmit = document.getElementById("btnSubmit");
@@ -1480,6 +1632,9 @@
     const btnRemoveSlip = document.getElementById("btnRemoveSlip");
     const btnLogin = document.getElementById("btnLogin");
     const btnRegister = document.getElementById("btnRegister");
+    const btnSupport = document.getElementById("btnSupport");
+    const btnEnablePush = document.getElementById("btnEnablePush");
+    const btnForgotPassword = document.getElementById("btnForgotPassword");
     const showRegisterBtn = document.getElementById("showRegisterBtn");
     const backToLoginBtn = document.getElementById("backToLoginBtn");
 
@@ -1490,8 +1645,7 @@
     const registerDisplayName = document.getElementById("registerDisplayName");
     const registerEmail = document.getElementById("registerEmail");
     const registerPassword = document.getElementById("registerPassword");
-    const registerSignupDate = document.getElementById("registerSignupDate");
-    const registerRenewDate = document.getElementById("registerRenewDate");
+    const registerMemberDate = document.getElementById("registerMemberDate");
 
     const expiryInput = document.getElementById("expiryInput");
     const noteInput = document.getElementById("noteInput");
@@ -1504,8 +1658,7 @@
     const loginPasswordField = document.getElementById("loginPasswordField");
     const registerEmailField = document.getElementById("registerEmailField");
     const registerPasswordField = document.getElementById("registerPasswordField");
-    const registerSignupDateField = document.getElementById("registerSignupDateField");
-    const registerRenewDateField = document.getElementById("registerRenewDateField");
+    const registerMemberDateField = document.getElementById("registerMemberDateField");
 
     const expiryField = document.getElementById("expiryField");
     const noteField = document.getElementById("noteField");
@@ -1519,6 +1672,7 @@
     const authStatus = document.getElementById("authStatus");
     const resultsDiv = document.getElementById("results");
     const summaryDiv = document.getElementById("summary");
+    const historyResults = document.getElementById("historyResults");
     const claimTimeNote = document.getElementById("claimTimeNote");
     const paymentTitleEl = document.getElementById("paymentTitle");
     const paymentNoteEl = document.getElementById("paymentNote");
@@ -1530,13 +1684,15 @@
 
     const profileBox = document.getElementById("memberProfileBox");
     const profileEmail = document.getElementById("profileEmail");
-    const profileSignupDate = document.getElementById("profileSignupDate");
-    const profileRenewDate = document.getElementById("profileRenewDate");
+    const profileMemberDate = document.getElementById("profileMemberDate");
     const profileSignupYear = document.getElementById("profileSignupYear");
 
     const onlineStatus = document.getElementById("onlineStatus");
     const onlineDot = document.getElementById("onlineDot");
     const onlineText = document.getElementById("onlineText");
+
+    const queueEstimateText = document.getElementById("queueEstimateText");
+    const queueEtaText = document.getElementById("queueEtaText");
 
     const liveDateEl = document.getElementById("liveDate");
     const liveListEl = document.getElementById("liveList");
@@ -1545,6 +1701,11 @@
     const loadingOverlay = document.getElementById("loadingOverlay");
     const topAlert = document.getElementById("topAlert");
     const claimAlert = document.getElementById("claimAlert");
+
+    const confirmModal = document.getElementById("confirmModal");
+    const confirmSummary = document.getElementById("confirmSummary");
+    const btnCancelConfirm = document.getElementById("btnCancelConfirm");
+    const btnConfirmSubmit = document.getElementById("btnConfirmSubmit");
 
     let activeSlipFile = null;
 
@@ -1642,6 +1803,14 @@
     function thaiYearFromYmd(dateStr) {
       if (!dateStr || !/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return "";
       return String(Number(dateStr.slice(0, 4)) + 543);
+    }
+
+    function isValidFutureExpiry(dateStr) {
+      if (!dateStr) return false;
+      const selected = new Date(dateStr + "T00:00:00");
+      const today = new Date();
+      today.setHours(0,0,0,0);
+      return selected >= today;
     }
 
     async function fetchJsonWithRetry(url, options = {}, retries = 1) {
@@ -1840,7 +2009,7 @@
 
       let cls = "";
 
-      if (raw.includes("ดึงเมลแล้ว") || raw.includes("ใช้งานได้ปกติ") || raw.includes("เสร็จ")) {
+      if (raw.includes("ดึงเมลแล้ว") || raw.includes("ใช้งานได้ปกติ") || raw.includes("เสร็จ") || raw.includes("สำเร็จ")) {
         cls = "status-pill status-pill--green";
       } else if (raw.includes("ไม่เข้าเงื่อนไข") || raw.includes("สลิปปลอม") || raw.includes("ชื่อไม่ตรง") || raw.includes("ไม่ผ่าน")) {
         cls = "status-pill status-pill--red";
@@ -1883,6 +2052,46 @@
       });
     }
 
+    function renderHistory(items) {
+      historyResults.innerHTML = "";
+
+      if (!Array.isArray(items) || !items.length) {
+        historyResults.innerHTML = '<div class="live-empty">ยังไม่มีข้อมูลประวัติการเคลม</div>';
+        return;
+      }
+
+      items.forEach((item) => {
+        const claimType = (item.claimType || "").toLowerCase() === "paid" ? "paid" : "free";
+        const tagText = claimType === "paid" ? "แพ็กดูแล 19 บาท" : "เคลมฟรี";
+        const safeEmail = escapeHtml(item.email || "-");
+        const safeExpiry = escapeHtml(item.expiry || "-");
+        const safeYear = escapeHtml(item.signupYear || "-");
+        const safeQueue = escapeHtml(item.queueNo || "-");
+        const safeStatus = item.statusText || "รอดำเนินการ";
+
+        const card = document.createElement("div");
+        card.className = "result-item";
+        card.innerHTML = `
+          <div class="item-top-row">
+            <div>
+              <div class="item-header">Claim History</div>
+              <div class="item-email">${safeEmail}</div>
+            </div>
+            <div class="item-tag ${claimType === "paid" ? "paid" : ""}">
+              ${escapeHtml(tagText)}
+            </div>
+          </div>
+          <div class="item-meta">
+            <span>วันหมดอายุ: ${safeExpiry}</span>
+            <span>สมัครเมื่อ: ${safeYear}</span>
+            <span>คิวเคลม: ${safeQueue}</span>
+          </div>
+          <div class="item-body">${decorateStatusText(safeStatus)}</div>
+        `;
+        historyResults.appendChild(card);
+      });
+    }
+
     async function fetchTodayStatus(initial = false) {
       try {
         const data = await fetchJsonWithRetry(SCRIPT_URL + "?action=todayStatus&_t=" + Date.now(), {}, 1);
@@ -1890,6 +2099,37 @@
       } catch (err) {
         if (initial) console.warn("Cannot load live email status:", err);
         renderLiveStatus(null);
+      }
+    }
+
+    async function fetchQueueSummary() {
+      try {
+        const data = await fetchJsonWithRetry(SCRIPT_URL + "?action=queueSummary&_t=" + Date.now(), {}, 1);
+        const queueCount = data.queueCount ?? data.pendingCount ?? "-";
+        const eta = data.etaText || data.estimatedTime || "-";
+        queueEstimateText.textContent = queueCount === "-" ? "-" : `${queueCount} คิว`;
+        queueEtaText.textContent = eta;
+      } catch (err) {
+        queueEstimateText.textContent = "-";
+        queueEtaText.textContent = "-";
+      }
+    }
+
+    async function fetchClaimHistory() {
+      if (!state.token) {
+        renderHistory([]);
+        return;
+      }
+
+      try {
+        const data = await fetchJsonWithRetry(
+          SCRIPT_URL + "?action=history&token=" + encodeURIComponent(state.token) + "&_t=" + Date.now(),
+          {},
+          1
+        );
+        renderHistory(data.history || data.items || []);
+      } catch (err) {
+        renderHistory([]);
       }
     }
 
@@ -1908,7 +2148,7 @@
         "",
         "สรุปสถานะ:",
         entry.statusText || "-"
-      ].join("\\n");
+      ].join("\n");
     }
 
     async function copyToClipboard(btn, text) {
@@ -1966,7 +2206,7 @@
         parts.push("คิวเคลมของคุณ: " + escapeHtml(current.queueNo));
       }
       if (typeof elapsedSec === "number" && isFinite(elapsedSec)) {
-        const pretty = elapsedSec < 0.1 ? "< 0.1" : elapsedSec.toFixed(1).replace(/\\.0$/, "");
+        const pretty = elapsedSec < 0.1 ? "< 0.1" : elapsedSec.toFixed(1).replace(/\.0$/, "");
         parts.push("<br><span class='status-time'>⏱ ระบบใช้เวลา " + escapeHtml(pretty) + " วินาที</span>");
       }
 
@@ -2028,6 +2268,8 @@
         resultsDiv.appendChild(card);
       });
 
+      fetchClaimHistory();
+
       if (history.length) {
         window.scrollTo({ top: resultsDiv.offsetTop - 16, behavior: "smooth" });
       }
@@ -2048,12 +2290,12 @@
         return;
       }
 
-      const signupYear = state.member.signupYearThai || thaiYearFromYmd(state.member.signupDate) || "";
+      const memberDate = state.member.memberDate || state.member.lastRenewDate || state.member.signupDate || "";
+      const signupYear = state.member.signupYearThai || thaiYearFromYmd(memberDate) || "";
       state.member.signupYearThai = signupYear;
 
       profileEmail.textContent = state.member.email || "-";
-      profileSignupDate.textContent = formatThaiDate(state.member.signupDate || "");
-      profileRenewDate.textContent = formatThaiDate(state.member.lastRenewDate || "");
+      profileMemberDate.textContent = formatThaiDate(memberDate || "");
       profileSignupYear.textContent = signupYear || "-";
       profileBox.style.display = "grid";
 
@@ -2086,7 +2328,7 @@
         shake(loginEmailField);
         return false;
       }
-      if (!/^\\d{6}$/.test(password)) {
+      if (!/^\d{6}$/.test(password)) {
         showAuthStatus("รหัสผ่านต้องเป็นตัวเลข 6 หลัก", "error");
         showAlert(topAlert, "รหัสผ่านต้องเป็นตัวเลข 6 หลัก", "error");
         shake(loginPasswordField);
@@ -2099,32 +2341,25 @@
       showAuthStatus("");
       registerEmailField.classList.remove("shake");
       registerPasswordField.classList.remove("shake");
-      registerSignupDateField.classList.remove("shake");
-      registerRenewDateField.classList.remove("shake");
+      registerMemberDateField.classList.remove("shake");
 
       const email = (registerEmail.value || "").trim().toLowerCase();
       const password = (registerPassword.value || "").trim();
-      const signupDate = (registerSignupDate.value || "").trim();
-      const renewDate = (registerRenewDate.value || "").trim();
+      const memberDate = (registerMemberDate.value || "").trim();
 
       if (!email || !registerEmail.checkValidity()) {
         showAuthStatus("กรุณากรอกอีเมลให้ถูกต้อง", "error");
         shake(registerEmailField);
         return false;
       }
-      if (!/^\\d{6}$/.test(password)) {
+      if (!/^\d{6}$/.test(password)) {
         showAuthStatus("รหัสผ่านต้องเป็นตัวเลข 6 หลัก", "error");
         shake(registerPasswordField);
         return false;
       }
-      if (!signupDate) {
-        showAuthStatus("กรุณาเลือกวันที่สมัคร", "error");
-        shake(registerSignupDateField);
-        return false;
-      }
-      if (!renewDate) {
-        showAuthStatus("กรุณาเลือกวันที่ต่ออายุล่าสุด", "error");
-        shake(registerRenewDateField);
+      if (!memberDate) {
+        showAuthStatus("กรุณาเลือกวันที่สมัคร / วันที่ต่ออายุล่าสุด", "error");
+        shake(registerMemberDateField);
         return false;
       }
       return true;
@@ -2153,6 +2388,12 @@
 
       if (!expiry) {
         showStatusError("กรุณาเลือกวันหมดอายุสมาชิก");
+        shake(expiryField);
+        return false;
+      }
+
+      if (!isValidFutureExpiry(expiry)) {
+        showStatusError("วันหมดอายุต้องเป็นวันนี้หรือวันในอนาคต");
         shake(expiryField);
         return false;
       }
@@ -2199,6 +2440,8 @@
         setActiveView("claimView");
         showAuthStatus("เข้าสู่ระบบแล้ว สามารถแจ้งเคลมได้เลยค่ะ", "ok");
         showAlert(claimAlert, "ยินดีต้อนรับกลับค่ะ พร้อมแจ้งเคลมแล้ว 🤎", "success", 4000);
+        await fetchClaimHistory();
+        await fetchQueueSummary();
         return true;
       } catch (err) {
         console.warn("fetch member me failed", err);
@@ -2239,6 +2482,8 @@
         showAuthStatus("เข้าสู่ระบบสำเร็จค่ะ", "ok");
         showToast("เข้าสู่ระบบสำเร็จ ✨");
         showAlert(claimAlert, "เข้าสู่ระบบสำเร็จ ระบบพามาหน้าแจ้งเคลมแล้วค่ะ", "success", 4500);
+        await fetchClaimHistory();
+        await fetchQueueSummary();
       } catch (err) {
         console.error(err);
         showAuthStatus("เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ", "error");
@@ -2256,13 +2501,16 @@
       btnRegister.disabled = true;
 
       try {
+        const memberDate = (registerMemberDate.value || "").trim();
+
         const payload = {
           action: "register",
           displayName: (registerDisplayName.value || "").trim(),
           email: (registerEmail.value || "").trim().toLowerCase(),
           password: (registerPassword.value || "").trim(),
-          signupDate: (registerSignupDate.value || "").trim(),
-          lastRenewDate: (registerRenewDate.value || "").trim()
+          memberDate,
+          signupDate: memberDate,
+          lastRenewDate: memberDate
         };
 
         const data = await postJson(payload);
@@ -2273,13 +2521,18 @@
         }
 
         state.token = data.token || "";
-        state.member = data.member || null;
+        state.member = data.member || {
+          email: payload.email,
+          memberDate,
+          signupDate: memberDate,
+          lastRenewDate: memberDate
+        };
         if (state.token) {
           localStorage.setItem(TOKEN_KEY, state.token);
         }
 
-        loginEmailInput.value = (registerEmail.value || "").trim().toLowerCase();
-        loginPasswordInput.value = (registerPassword.value || "").trim();
+        loginEmailInput.value = payload.email;
+        loginPasswordInput.value = payload.password;
         if (rememberPassword.checked) saveRememberedLogin();
 
         updateMemberProfileUI();
@@ -2287,12 +2540,43 @@
         showAuthStatus("สมัครสมาชิกสำเร็จและเข้าสู่ระบบแล้วค่ะ", "ok");
         showToast("สมัครสมาชิกสำเร็จ ✨");
         showAlert(claimAlert, "สมัครสมาชิกสำเร็จและพร้อมแจ้งเคลมแล้วค่ะ", "success", 4500);
+        await fetchClaimHistory();
+        await fetchQueueSummary();
       } catch (err) {
         console.error(err);
         showAuthStatus("เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ", "error");
       } finally {
         hideLoadingOverlay();
         btnRegister.disabled = false;
+      }
+    }
+
+    async function handleForgotPassword() {
+      const email = (loginEmailInput.value || "").trim().toLowerCase();
+      if (!email || !loginEmailInput.checkValidity()) {
+        showAlert(topAlert, "กรุณากรอกอีเมลก่อนกดลืมรหัสผ่าน", "warning");
+        shake(loginEmailField);
+        return;
+      }
+
+      showLoadingOverlay();
+      try {
+        const data = await postJson({
+          action: "forgotPassword",
+          email
+        });
+
+        if (!data || data.ok === false) {
+          showAlert(topAlert, data.message || "ส่งคำขอรีเซ็ตรหัสผ่านไม่สำเร็จ", "error");
+          return;
+        }
+
+        showAlert(topAlert, data.message || "ระบบส่งคำแนะนำการรีเซ็ตรหัสผ่านให้แล้ว", "success", 5000);
+        showToast("ส่งคำขอรีเซ็ตรหัสผ่านแล้ว");
+      } catch (err) {
+        showAlert(topAlert, "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ", "error");
+      } finally {
+        hideLoadingOverlay();
       }
     }
 
@@ -2316,6 +2600,7 @@
       showAuthStatus("ออกจากระบบเรียบร้อยแล้วค่ะ", "info");
       showAlert(topAlert, "ออกจากระบบเรียบร้อยแล้วค่ะ", "info");
       showToast("ออกจากระบบแล้ว");
+      renderHistory([]);
     }
 
     function clearForm() {
@@ -2329,11 +2614,30 @@
       syncPaymentSection();
     }
 
-    async function handleSubmit() {
-      updateClaimWindowState();
+    function openConfirmModal() {
+      const expiry = (expiryInput.value || "").trim();
+      const year = (signupYearInput.value || "").trim();
+      const note = (noteInput.value || "").trim();
+      const claimType = year === String(claimConfig.paidYear) ? "แพ็กดูแล 19 บาท" : "เคลมฟรี";
+      const hasSlip = activeSlipFile ? "แนบแล้ว" : "ไม่มี";
 
-      if (!validateClaimForm()) return;
+      confirmSummary.innerHTML = `
+        <strong>อีเมล:</strong> ${escapeHtml(state.member?.email || "-")}<br>
+        <strong>วันหมดอายุ:</strong> ${escapeHtml(expiry || "-")}<br>
+        <strong>ปีสมัคร:</strong> ${escapeHtml(year || "-")}<br>
+        <strong>ประเภทเคลม:</strong> ${escapeHtml(claimType)}<br>
+        <strong>สลิป:</strong> ${escapeHtml(hasSlip)}<br>
+        <strong>ข้อความถึงแอดมิน:</strong> ${escapeHtml(note || "-")}
+      `;
 
+      confirmModal.classList.add("show");
+    }
+
+    function closeConfirmModal() {
+      confirmModal.classList.remove("show");
+    }
+
+    async function doSubmitClaim() {
       const expiry = (expiryInput.value || "").trim();
       const year = (signupYearInput.value || "").trim();
       const note = (noteInput.value || "").trim();
@@ -2388,6 +2692,7 @@
         }
 
         await initClaimWindowConfig();
+        await fetchQueueSummary();
       } catch (err) {
         console.error(err);
         showStatusError("เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ");
@@ -2398,6 +2703,55 @@
         btnSubmit.innerHTML = "<span>ส่งคำขอเคลม</span><span>↗</span>";
       }
     }
+
+    async function handleSubmit() {
+      updateClaimWindowState();
+
+      if (!validateClaimForm()) return;
+      openConfirmModal();
+    }
+
+    async function enablePushNotifications() {
+      if (!("Notification" in window)) {
+        showAlert(claimAlert, "อุปกรณ์นี้ไม่รองรับการแจ้งเตือนผ่านเบราว์เซอร์", "warning");
+        return;
+      }
+
+      try {
+        const permission = await Notification.requestPermission();
+        if (permission !== "granted") {
+          showAlert(claimAlert, "คุณยังไม่ได้อนุญาตการแจ้งเตือน", "warning");
+          return;
+        }
+
+        showAlert(claimAlert, "เปิดแจ้งเตือนผ่านเบราว์เซอร์แล้วค่ะ", "success");
+        showToast("เปิดแจ้งเตือนแล้ว");
+        // ถ้ามี service worker / push backend ภายหลัง ให้ส่ง subscription ไป server ต่อที่นี่
+      } catch (err) {
+        showAlert(claimAlert, "ไม่สามารถเปิดแจ้งเตือนได้", "error");
+      }
+    }
+
+    function goSupport() {
+      const supportLine = supportLineEl.textContent || "@467dlpti";
+      const lineId = supportLine.replace("@", "");
+      const lineUrl = "https://line.me/R/ti/p/@" + lineId;
+      window.open(lineUrl, "_blank");
+    }
+
+    function togglePassword(targetId, btn) {
+      const input = document.getElementById(targetId);
+      if (!input) return;
+      const isPassword = input.type === "password";
+      input.type = isPassword ? "text" : "password";
+      btn.textContent = isPassword ? "ซ่อน" : "แสดง";
+    }
+
+    document.querySelectorAll(".toggle-pass").forEach(btn => {
+      btn.addEventListener("click", () => {
+        togglePassword(btn.dataset.target, btn);
+      });
+    });
 
     showRegisterBtn.addEventListener("click", () => {
       setActiveView("registerView");
@@ -2412,6 +2766,9 @@
     btnLogin.addEventListener("click", handleLogin);
     btnRegister.addEventListener("click", handleRegister);
     btnLogout.addEventListener("click", handleLogout);
+    btnForgotPassword.addEventListener("click", handleForgotPassword);
+    btnSupport.addEventListener("click", goSupport);
+    btnEnablePush.addEventListener("click", enablePushNotifications);
 
     btnPickSlip.addEventListener("click", () => slipInput.click());
     btnCameraSlip.addEventListener("click", () => slipInputCamera.click());
@@ -2442,10 +2799,26 @@
       copyToClipboard(btnCopyAccount, claimConfig.bankAccountNo || "0628794251");
     });
 
+    btnCancelConfirm.addEventListener("click", closeConfirmModal);
+    btnConfirmSubmit.addEventListener("click", async () => {
+      closeConfirmModal();
+      await doSubmitClaim();
+    });
+
+    confirmModal.addEventListener("click", (e) => {
+      if (e.target === confirmModal) closeConfirmModal();
+    });
+
     noteInput.addEventListener("input", updateNoteCounter);
     rememberPassword.addEventListener("change", saveRememberedLogin);
     loginEmailInput.addEventListener("input", () => { if (rememberPassword.checked) saveRememberedLogin(); });
     loginPasswordInput.addEventListener("input", () => { if (rememberPassword.checked) saveRememberedLogin(); });
+
+    expiryInput.addEventListener("change", () => {
+      if (expiryInput.value && !isValidFutureExpiry(expiryInput.value)) {
+        showAlert(claimAlert, "วันหมดอายุต้องเป็นวันนี้หรือวันในอนาคต", "warning");
+      }
+    });
 
     window.addEventListener("beforeunload", (e) => {
       if (!state.isLoading) return;
@@ -2460,9 +2833,10 @@
       await initClaimWindowConfig();
       updateClaimWindowState();
       await fetchTodayStatus(true);
+      await fetchQueueSummary();
 
       if (!state.isClaimOpen) {
-        showAlert(topAlert, claimConfig.claimClosedText || "ขณะนี้อยู่นอกเวลารับเคลม", "warning", 5000);
+        showAlert(topAlert, "ล็อกอินและสมัครสมาชิกได้ตามปกติ แต่การส่งเคลมจะได้เฉพาะช่วงเวลาที่ระบบเปิดรับ", "warning", 5500);
       }
 
       if (state.token) {
@@ -2474,8 +2848,9 @@
 
       setInterval(async () => {
         await initClaimWindowConfig();
+        await fetchQueueSummary();
         if (!state.isClaimOpen && document.getElementById("loginView").classList.contains("active")) {
-          showAlert(topAlert, claimConfig.claimClosedText || "ขณะนี้อยู่นอกเวลารับเคลม", "warning", 4000);
+          showAlert(topAlert, "ขณะนี้นอกเวลารับเคลม แต่ยังเข้าสู่ระบบและสมัครสมาชิกได้ค่ะ", "warning", 3500);
         }
       }, CONFIG_POLL_INTERVAL);
 
