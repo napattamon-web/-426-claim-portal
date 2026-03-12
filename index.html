@@ -857,12 +857,23 @@
     }
 
     .live-card {
-      margin-top: 4px;
+      margin-top: 12px;
       padding: 14px;
       border-radius: 24px;
       background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(252,246,240,0.96));
       border: 1px solid #eadbcf;
       box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .live-card::after {
+      content: "🤎";
+      position: absolute;
+      right: 12px;
+      top: 8px;
+      font-size: 1.2rem;
+      opacity: 0.15;
     }
 
     .live-header {
@@ -885,6 +896,13 @@
       border-radius: 999px;
       background: #7f9b74;
       box-shadow: 0 0 0 4px rgba(127,155,116,0.16);
+      animation: pulseDot 1.6s infinite;
+    }
+
+    @keyframes pulseDot {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.12); opacity: .75; }
+      100% { transform: scale(1); opacity: 1; }
     }
 
     .live-title-text {
@@ -939,6 +957,46 @@
       padding: 8px 0;
     }
 
+    .alert-box {
+      display: none;
+      margin-top: 10px;
+      padding: 11px 12px;
+      border-radius: 18px;
+      font-size: .8rem;
+      line-height: 1.6;
+      font-weight: 700;
+      border: 1px solid transparent;
+      animation: fadeUp .2s ease;
+    }
+
+    .alert-box.show {
+      display: block;
+    }
+
+    .alert-box.success {
+      background: #f2f8ef;
+      color: #5d7753;
+      border-color: #d7e7cf;
+    }
+
+    .alert-box.error {
+      background: #fff2f2;
+      color: #b95a5a;
+      border-color: #efcccc;
+    }
+
+    .alert-box.info {
+      background: #f2f6ff;
+      color: #5c74ab;
+      border-color: #d8e2ff;
+    }
+
+    .alert-box.warning {
+      background: #fff8ed;
+      color: #9b7441;
+      border-color: #f1dec0;
+    }
+
     .footer {
       margin-top: auto;
       display: flex;
@@ -991,6 +1049,7 @@
       pointer-events: none;
       transition: all .28s ease;
       z-index: 9999;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.18);
     }
 
     .toast.show {
@@ -1066,10 +1125,6 @@
       font-weight: 800;
     }
 
-    .hidden {
-      display: none !important;
-    }
-
     @media (max-width: 480px) {
       .app { padding: 12px 12px 16px; }
       .grid-2 { grid-template-columns: 1fr; }
@@ -1119,13 +1174,14 @@
         <span>ศูนย์สมาชิก 426 SHOP</span>
       </div>
 
-      <!-- LOGIN VIEW -->
       <section class="view active" id="loginView">
         <div class="section-blurb">
           เข้าสู่ระบบด้วยอีเมลที่สมัครกับร้าน และรหัสผ่าน 6 หลัก
         </div>
 
         <div class="login-card">
+          <div id="topAlert" class="alert-box"></div>
+
           <div class="field-group">
             <label class="field-label" for="loginEmail">อีเมล</label>
             <div class="input-shell" id="loginEmailField">
@@ -1159,9 +1215,21 @@
 
         <div class="auth-foot">ยังไม่มีสมาชิก?</div>
         <button type="button" class="btn-link-small" id="showRegisterBtn">สมัครสมาชิกใหม่</button>
+
+        <div class="live-card" id="liveStatusCardLogin">
+          <div class="live-header">
+            <div class="live-title-left">
+              <span class="live-dot"></span>
+              <span class="live-title-text">สถานะเมลวันนี้แบบเรียลไทม์</span>
+            </div>
+            <span class="live-date" id="liveDate"></span>
+          </div>
+          <div class="live-list" id="liveList">
+            <div class="live-empty">กำลังดึงสถานะเมลวันนี้...</div>
+          </div>
+        </div>
       </section>
 
-      <!-- REGISTER VIEW -->
       <section class="view" id="registerView">
         <div class="section-blurb">
           สมัครสมาชิกด้วยอีเมลที่ใช้กับร้าน พร้อมตั้งรหัสผ่าน 6 หลัก
@@ -1222,9 +1290,10 @@
         </div>
       </section>
 
-      <!-- CLAIM VIEW -->
       <section class="view" id="claimView">
         <div class="claim-card">
+          <div id="claimAlert" class="alert-box"></div>
+
           <div class="cute-banner">
             <div class="cute-banner-title">🐻 แจ้งเคลมสมาชิก</div>
             <div class="cute-banner-sub">
@@ -1336,19 +1405,6 @@
           <div id="summary"></div>
           <div id="status"></div>
           <div id="results"></div>
-
-          <div class="live-card" id="liveStatusCard">
-            <div class="live-header">
-              <div class="live-title-left">
-                <span class="live-dot"></span>
-                <span class="live-title-text">สถานะเมลวันนี้ (เรียลไทม์)</span>
-              </div>
-              <span class="live-date" id="liveDate"></span>
-            </div>
-            <div class="live-list" id="liveList">
-              <div class="live-empty">กำลังดึงสถานะเมลวันนี้...</div>
-            </div>
-          </div>
         </div>
       </section>
     </main>
@@ -1380,7 +1436,7 @@
   </div>
 
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxucQbJg68gmoAdMn2SNOR-jngmi55yTGScBerouhx9KFd84OGgu237qfpR-ospbRK7MQ/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwKawXEyIltO9FsXck-810WcGELPXtr4eW_U-NQtg70xCWIc9snKDsCGGwZvHQjSv0TBA/exec";
     const STATUS_POLL_INTERVAL = 30000;
     const CONFIG_POLL_INTERVAL = 30000;
     const MAX_NOTE_LENGTH = 500;
@@ -1487,6 +1543,8 @@
 
     const toast = document.getElementById("toast");
     const loadingOverlay = document.getElementById("loadingOverlay");
+    const topAlert = document.getElementById("topAlert");
+    const claimAlert = document.getElementById("claimAlert");
 
     let activeSlipFile = null;
 
@@ -1498,6 +1556,25 @@
     function hideLoadingOverlay() {
       loadingOverlay.classList.remove("show");
       document.body.style.overflow = "";
+    }
+
+    function showToast(message = "เรียบร้อยแล้ว ✨") {
+      toast.textContent = message;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 1800);
+    }
+
+    function showAlert(el, message, type = "info", timeout = 4000) {
+      if (!el) return;
+      el.className = "alert-box show " + type;
+      el.textContent = message || "";
+      if (timeout > 0) {
+        clearTimeout(el._timer);
+        el._timer = setTimeout(() => {
+          el.className = "alert-box";
+          el.textContent = "";
+        }, timeout);
+      }
     }
 
     function escapeHtml(str) {
@@ -1522,6 +1599,7 @@
       status.classList.remove("status-ok", "status-info");
       status.classList.add("status-error");
       status.textContent = message;
+      showAlert(claimAlert, message, "error", 4500);
     }
 
     function clearStatus() {
@@ -1537,7 +1615,7 @@
 
     function formatThaiDate(dateStr) {
       if (!dateStr) return "-";
-      if (/^\\d{4}-\\d{2}-\\d{2}$/.test(dateStr)) {
+      if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
         const [y, m, d] = dateStr.split("-").map(Number);
         const months = ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."];
         return `${d} ${months[m - 1]} ${y + 543}`;
@@ -1562,7 +1640,7 @@
     }
 
     function thaiYearFromYmd(dateStr) {
-      if (!dateStr || !/^\\d{4}-\\d{2}-\\d{2}$/.test(dateStr)) return "";
+      if (!dateStr || !/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return "";
       return String(Number(dateStr.slice(0, 4)) + 543);
     }
 
@@ -1736,6 +1814,7 @@
 
       activeSlipFile = file;
       fileName.textContent = file.name || "เลือกไฟล์แล้ว";
+      showToast("แนบสลิปเรียบร้อยแล้ว");
 
       const reader = new FileReader();
       reader.onload = () => {
@@ -1853,13 +1932,9 @@
           }, 1600);
         }
 
-        toast.textContent = "คัดลอกแล้ว ✨";
-        toast.classList.add("show");
-        setTimeout(() => toast.classList.remove("show"), 1800);
+        showToast("คัดลอกแล้ว ✨");
       } catch (err) {
-        toast.textContent = "คัดลอกไม่สำเร็จ";
-        toast.classList.add("show");
-        setTimeout(() => toast.classList.remove("show"), 1800);
+        showToast("คัดลอกไม่สำเร็จ");
       }
     }
 
@@ -1902,6 +1977,7 @@
         noteInput.value = "";
         updateNoteCounter();
         if (current.claimType !== "paid") resetSlipPreview();
+        showAlert(claimAlert, res.message || "ส่งคำขอสำเร็จแล้วค่ะ", "success", 5000);
       }
 
       const history = Array.isArray(res.history) && res.history.length ? res.history : [current];
@@ -2006,11 +2082,13 @@
 
       if (!email || !loginEmailInput.checkValidity()) {
         showAuthStatus("กรุณากรอกอีเมลให้ถูกต้อง", "error");
+        showAlert(topAlert, "กรุณากรอกอีเมลให้ถูกต้อง", "error");
         shake(loginEmailField);
         return false;
       }
       if (!/^\\d{6}$/.test(password)) {
         showAuthStatus("รหัสผ่านต้องเป็นตัวเลข 6 หลัก", "error");
+        showAlert(topAlert, "รหัสผ่านต้องเป็นตัวเลข 6 หลัก", "error");
         shake(loginPasswordField);
         return false;
       }
@@ -2064,6 +2142,7 @@
       if (!state.member || !state.token) {
         showStatusError("กรุณาเข้าสู่ระบบก่อนแจ้งเคลม");
         setActiveView("loginView");
+        showAlert(topAlert, "กรุณาเข้าสู่ระบบก่อนใช้งานหน้าแจ้งเคลม", "warning");
         return false;
       }
 
@@ -2119,6 +2198,7 @@
         updateMemberProfileUI();
         setActiveView("claimView");
         showAuthStatus("เข้าสู่ระบบแล้ว สามารถแจ้งเคลมได้เลยค่ะ", "ok");
+        showAlert(claimAlert, "ยินดีต้อนรับกลับค่ะ พร้อมแจ้งเคลมแล้ว 🤎", "success", 4000);
         return true;
       } catch (err) {
         console.warn("fetch member me failed", err);
@@ -2143,6 +2223,7 @@
 
         if (!data || data.ok === false) {
           showAuthStatus(data.message || "เข้าสู่ระบบไม่สำเร็จ", "error");
+          showAlert(topAlert, data.message || "เข้าสู่ระบบไม่สำเร็จ", "error");
           return;
         }
 
@@ -2156,9 +2237,12 @@
         updateMemberProfileUI();
         setActiveView("claimView");
         showAuthStatus("เข้าสู่ระบบสำเร็จค่ะ", "ok");
+        showToast("เข้าสู่ระบบสำเร็จ ✨");
+        showAlert(claimAlert, "เข้าสู่ระบบสำเร็จ ระบบพามาหน้าแจ้งเคลมแล้วค่ะ", "success", 4500);
       } catch (err) {
         console.error(err);
         showAuthStatus("เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ", "error");
+        showAlert(topAlert, "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ", "error");
       } finally {
         hideLoadingOverlay();
         btnLogin.disabled = false;
@@ -2201,6 +2285,8 @@
         updateMemberProfileUI();
         setActiveView("claimView");
         showAuthStatus("สมัครสมาชิกสำเร็จและเข้าสู่ระบบแล้วค่ะ", "ok");
+        showToast("สมัครสมาชิกสำเร็จ ✨");
+        showAlert(claimAlert, "สมัครสมาชิกสำเร็จและพร้อมแจ้งเคลมแล้วค่ะ", "success", 4500);
       } catch (err) {
         console.error(err);
         showAuthStatus("เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ", "error");
@@ -2228,6 +2314,8 @@
       updateMemberProfileUI();
       setActiveView("loginView");
       showAuthStatus("ออกจากระบบเรียบร้อยแล้วค่ะ", "info");
+      showAlert(topAlert, "ออกจากระบบเรียบร้อยแล้วค่ะ", "info");
+      showToast("ออกจากระบบแล้ว");
     }
 
     function clearForm() {
@@ -2338,8 +2426,16 @@
       setSlipFile(file, slipInputCamera);
     });
 
-    btnRemoveSlip.addEventListener("click", resetSlipPreview);
-    btnClear.addEventListener("click", clearForm);
+    btnRemoveSlip.addEventListener("click", () => {
+      resetSlipPreview();
+      showToast("ลบรูปสลิปแล้ว");
+    });
+
+    btnClear.addEventListener("click", () => {
+      clearForm();
+      showToast("ล้างฟอร์มแล้ว");
+    });
+
     btnSubmit.addEventListener("click", handleSubmit);
 
     btnCopyAccount.addEventListener("click", () => {
@@ -2365,6 +2461,10 @@
       updateClaimWindowState();
       await fetchTodayStatus(true);
 
+      if (!state.isClaimOpen) {
+        showAlert(topAlert, claimConfig.claimClosedText || "ขณะนี้อยู่นอกเวลารับเคลม", "warning", 5000);
+      }
+
       if (state.token) {
         const ok = await fetchMemberMe();
         if (!ok) setActiveView("loginView");
@@ -2374,6 +2474,9 @@
 
       setInterval(async () => {
         await initClaimWindowConfig();
+        if (!state.isClaimOpen && document.getElementById("loginView").classList.contains("active")) {
+          showAlert(topAlert, claimConfig.claimClosedText || "ขณะนี้อยู่นอกเวลารับเคลม", "warning", 4000);
+        }
       }, CONFIG_POLL_INTERVAL);
 
       if (STATUS_POLL_INTERVAL > 0) {
