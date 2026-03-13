@@ -43,18 +43,16 @@
       position:relative;
     }
 
-    body::before{
+    body::after{
       content:"";
       position:fixed;
       inset:0;
       pointer-events:none;
-      opacity:.12;
-      background-image:
-        url("https://img2.imgbiz.com/imgbiz/IMG_1141eda396408a914d01.png");
+      opacity:.08;
       background-repeat:no-repeat;
-      background-size:260px auto;
-      background-position:left bottom 18px;
-      filter:blur(.2px);
+      background-position:center 82px;
+      background-size:min(52vw,240px);
+      background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 420 420'><g fill='none' fill-rule='evenodd'><circle cx='210' cy='220' r='124' fill='%23efcfba'/><circle cx='118' cy='118' r='54' fill='%23ddb89c'/><circle cx='302' cy='118' r='54' fill='%23ddb89c'/><circle cx='118' cy='118' r='25' fill='%23fff3ea'/><circle cx='302' cy='118' r='25' fill='%23fff3ea'/><ellipse cx='170' cy='216' rx='15' ry='19' fill='%23524239'/><ellipse cx='250' cy='216' rx='15' ry='19' fill='%23524239'/><ellipse cx='210' cy='276' rx='42' ry='31' fill='%23fff8f3'/><ellipse cx='210' cy='262' rx='18' ry='13' fill='%23524239'/><path d='M186 294c11 13 37 13 48 0' stroke='%23cc918c' stroke-width='10' stroke-linecap='round'/><ellipse cx='144' cy='264' rx='25' ry='13' fill='%23efc1c8' opacity='.5'/><ellipse cx='276' cy='264' rx='25' ry='13' fill='%23efc1c8' opacity='.5'/></g></svg>");
     }
 
     .app{
@@ -201,12 +199,18 @@
 
     .field-group{display:flex;flex-direction:column;gap:6px;margin-top:11px;align-items:center}
     .field-label{font-size:.78rem;color:var(--sub);font-weight:700;text-align:center;width:100%}
+    .field-label.left{text-align:left}
     .input-shell{
       background:rgba(255,253,250,.98);border:1.5px solid #eadfd4;border-radius:20px;padding:11px 12px;
       transition:.2s ease;box-shadow:inset 0 1px 0 rgba(255,255,255,.65);width:100%;text-align:center
     }
     .input-shell:focus-within{border-color:#d6b39b;box-shadow:0 0 0 4px rgba(214,179,155,.14);background:#fff}
     .input-shell.note{padding:9px 10px;border-style:dashed;background:#fffaf7}
+    .input-shell.left-align{ text-align:left; }
+    .input-shell.left-align input,
+    .input-shell.left-align textarea{
+      text-align:left;
+    }
 
     .password-shell{display:flex;align-items:center;gap:8px}
     .password-shell input{flex:1;min-width:0}
@@ -218,7 +222,6 @@
     input[type="email"],input[type="password"],input[type="text"],input[type="date"],textarea{
       width:100%;border:0;outline:0;background:transparent;font-family:inherit;font-size:.96rem;color:var(--text);text-align:center
     }
-    input[readonly]{color:#7f685a}
     input::placeholder,textarea::placeholder{color:#b6a396;text-align:center}
     textarea{resize:none;min-height:92px;line-height:1.6}
 
@@ -253,34 +256,10 @@
     .btn-link-small{min-height:42px;border:1px solid #eadbcf;background:#fffaf6;color:#8f7868;padding:0 16px;font-size:.78rem;width:100%;margin-top:12px}
 
     .profile-box{
-      margin-top:10px;border-radius:20px;border:1px solid #eadacd;background:linear-gradient(180deg,#fffaf6,#f9f0e9);padding:14px;display:grid;gap:10px;font-size:.82rem;text-align:left
+      margin-top:10px;border-radius:20px;border:1px solid #eadacd;background:linear-gradient(180deg,#fffaf6,#f9f0e9);padding:12px;display:grid;gap:8px;font-size:.82rem;text-align:left
     }
-    .profile-line{
-      display:flex;
-      align-items:flex-start;
-      gap:8px;
-      line-height:1.7;
-      color:#70594c;
+    .profile-box .line{
       text-align:left;
-      word-break:break-word;
-    }
-    .profile-line strong{
-      min-width:92px;
-      color:#8b6d5d;
-      font-weight:800;
-      flex-shrink:0;
-    }
-    .profile-actions{
-      display:flex;
-      gap:10px;
-      margin-top:4px;
-      flex-wrap:wrap;
-    }
-    .profile-actions .btn-link-small{
-      margin-top:0;
-      width:auto;
-      flex:1;
-      min-width:160px;
     }
 
     .payment-section{display:none}
@@ -477,9 +456,7 @@
       .bank-minimal-top{flex-direction:column;align-items:stretch}
       .bank-card-name{text-align:center}
       .route-cute-badges{flex-direction:column;align-items:center}
-      .profile-actions{flex-direction:column}
-      .profile-actions .btn-link-small{width:100%}
-      body::before{background-size:180px auto;background-position:left bottom 10px}
+      body::after{background-size:min(62vw,180px);background-position:center 88px}
     }
   </style>
 </head>
@@ -671,24 +648,21 @@
           <div id="claimAlert" class="alert-box"></div>
 
           <div class="profile-box" id="memberProfileBox" style="display:none;">
-            <div class="profile-line"><strong>อีเมล:</strong> <span id="profileEmail">-</span></div>
-            <div class="profile-line"><strong>วันที่ในระบบ:</strong> <span id="profileMemberDate">-</span></div>
-            <div class="profile-line"><strong>ปีสมัคร:</strong> <span id="profileSignupYear">-</span></div>
-            <div class="profile-actions">
-              <button type="button" class="btn-link-small" id="btnCheckExpiry">เช็ควันหมดอายุ</button>
-            </div>
+            <div class="line"><strong>อีเมล:</strong> <span id="profileEmail">-</span></div>
+            <div class="line"><strong>วันที่ในระบบ:</strong> <span id="profileMemberDate">-</span></div>
+            <div class="line"><strong>ปีสมัคร:</strong> <span id="profileSignupYear">-</span></div>
           </div>
 
           <div class="field-group">
-            <label class="field-label" for="expiryInput">วันหมดอายุสมาชิก</label>
-            <div class="input-shell" id="expiryField">
+            <label class="field-label left" for="expiryInput">วันหมดอายุสมาชิก</label>
+            <div class="input-shell left-align" id="expiryField">
               <input id="expiryInput" type="date" />
             </div>
           </div>
 
           <div class="field-group">
-            <label class="field-label">ปีสมัครจากระบบสมาชิก</label>
-            <div class="input-shell">
+            <label class="field-label left">ปีสมัครจากระบบสมาชิก</label>
+            <div class="input-shell left-align">
               <input id="signupYearDisplay" type="text" readonly placeholder="ระบบจะดึงให้อัตโนมัติ" />
             </div>
             <input type="hidden" id="signupYear" />
@@ -757,8 +731,8 @@
           </div>
 
           <div class="field-group">
-            <label class="field-label" for="noteInput">ฝากข้อความถึงแอดมิน (ถ้ามี)</label>
-            <div class="input-shell note" id="noteField">
+            <label class="field-label left" for="noteInput">ฝากข้อความถึงแอดมิน (ถ้ามี)</label>
+            <div class="input-shell note left-align" id="noteField">
               <textarea id="noteInput" placeholder="เช่น หลุดจากกลุ่มเมื่อวาน รบกวนช่วยดึงกลับให้ด้วย"></textarea>
             </div>
             <div class="note-counter" id="noteCounter">0 / 500</div>
@@ -893,7 +867,7 @@
   </div>
 
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxNwKiTy-vxNd-Xy58tfQ8xGP8kAN7cz7U6CBDYL_CSdt62XOHyJrtcdCKPfZo5nusTyg/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbySDRLkuq2My-TbgBCjsh9IULqbxsbjv9EFyyck6a5dMuuOZEScPrJH0sRCXM3vhFYcOw/exec";
     const STATUS_POLL_INTERVAL = 30000;
     const CONFIG_POLL_INTERVAL = 30000;
     const MAX_NOTE_LENGTH = 500;
@@ -922,6 +896,7 @@
       paymentRequireSlip: "หากไม่แนบสลิป ระบบจะยังไม่รับเข้าระบบเคลมสำหรับรอบที่ต้องชำระ 19 บาท",
       supportLine: "@467dlpti",
       isOpenNow: null,
+
       lineEnabled: true,
       webEnabled: true,
       customerNotice: "แจ้งได้ 2 ช่องทาง\n• ทางไลน์\n• ทางเว็บ",
@@ -944,9 +919,6 @@
     };
 
     let userSelectedView = false;
-    let appBooted = false;
-    let activeSlipFile = null;
-    let silentSessionChecked = false;
 
     const heroSection = document.getElementById("heroSection");
     const globalBanner = document.getElementById("globalBanner");
@@ -962,7 +934,6 @@
     const btnLogin = document.getElementById("btnLogin");
     const btnRegister = document.getElementById("btnRegister");
     const btnForgotPassword = document.getElementById("btnForgotPassword");
-    const btnCheckExpiry = document.getElementById("btnCheckExpiry");
     const floatAdminBtn = document.getElementById("floatAdminBtn");
     const showRegisterBtn = document.getElementById("showRegisterBtn");
     const backToLoginBtn = document.getElementById("backToLoginBtn");
@@ -1055,6 +1026,8 @@
     const claimStepCard = document.getElementById("claimStepCard");
     const claimStepList = document.getElementById("claimStepList");
 
+    let activeSlipFile = null;
+
     function normalizeEmail(value){ return String(value || "").trim().toLowerCase(); }
     function normalizeText(value){ return String(value || "").trim(); }
 
@@ -1070,9 +1043,7 @@
     }
 
     function requireScriptUrl() {
-      if (!SCRIPT_URL || SCRIPT_URL.indexOf("PUT_YOUR_WEB_APP_EXEC_URL_HERE") !== -1) {
-        throw new Error("กรุณาใส่ SCRIPT_URL ก่อนใช้งาน");
-      }
+      if (!SCRIPT_URL) throw new Error("กรุณาใส่ SCRIPT_URL ก่อนใช้งาน");
     }
 
     function updateHeroVisibility() {
@@ -1129,7 +1100,6 @@
     }
 
     function showGlobalBanner(message, type = "info") {
-      if (!message) return hideGlobalBanner();
       globalBanner.className = "global-banner shell-card show" + (type === "error" ? " error" : "");
       globalBanner.innerText = message || "";
     }
@@ -1181,11 +1151,6 @@
         const y = Number(p[0]), m = Number(p[1]), d = Number(p[2]);
         const months = ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."];
         return d + " " + months[m - 1] + " " + (y + 543);
-      }
-      const x = new Date(dateStr);
-      if (!isNaN(x.getTime())) {
-        const months = ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."];
-        return x.getDate() + " " + months[x.getMonth()] + " " + (x.getFullYear() + 543);
       }
       return dateStr;
     }
@@ -1660,8 +1625,7 @@
       clearLocalSession(true);
       if (stayOnLogin) {
         setActiveView("loginView");
-        showAuthStatus("กรุณาเข้าสู่ระบบใหม่อีกครั้ง", "error");
-        showAlert(topAlert, message || "กรุณาเข้าสู่ระบบใหม่อีกครั้ง", "warning", 5000);
+        showAuthStatus(message || "กรุณาเข้าสู่ระบบใหม่อีกครั้ง", "error");
       }
     }
 
@@ -1691,6 +1655,20 @@
         renderHistory([]);
         return [];
       }
+    }
+
+    async function prefillLastClaimInput() {
+      if (!state.token) return;
+      try {
+        const data = await fetchJsonWithRetry(
+          SCRIPT_URL + "?action=lastClaimInfo&token=" + encodeURIComponent(state.token) + "&_t=" + Date.now(),
+          {},
+          1
+        );
+        if (data && data.ok && data.lastExpiry && !expiryInput.value) {
+          expiryInput.value = data.lastExpiry;
+        }
+      } catch (err) {}
     }
 
     function getClaimTypeLabel(claimType) {
@@ -1845,8 +1823,8 @@
 
     async function safeSetMemberView(viewId) {
       if (!state.token || !state.member) {
-        showAlert(topAlert, "กรุณาเข้าสู่ระบบก่อนใช้งาน", "warning");
         setActiveView("loginView");
+        showAuthStatus("กรุณาเข้าสู่ระบบก่อนใช้งาน", "error");
         return;
       }
 
@@ -1898,7 +1876,7 @@
 
     function validateLogin() {
       if (state.webClosed) {
-        showAlert(topAlert, claimConfig.webClosedMessage || "ระบบเว็บปิดชั่วคราว", "warning");
+        showAuthStatus(claimConfig.webClosedMessage || "ระบบเว็บปิดชั่วคราว", "error");
         return false;
       }
 
@@ -1911,19 +1889,16 @@
 
       if (!email || !loginEmailInput.checkValidity()) {
         showAuthStatus("กรุณากรอกอีเมลให้ถูกต้อง", "error");
-        showAlert(topAlert, "กรุณากรอกอีเมลให้ถูกต้อง", "error");
         shake(loginEmailField);
         return false;
       }
       if (!password) {
         showAuthStatus("กรุณากรอกรหัสผ่าน", "error");
-        showAlert(topAlert, "กรุณากรอกรหัสผ่าน", "error");
         shake(loginPasswordField);
         return false;
       }
       if (password.length < 8) {
         showAuthStatus("รหัสผ่านต้องมีอย่างน้อย 8 ตัว", "error");
-        showAlert(topAlert, "รหัสผ่านต้องมีอย่างน้อย 8 ตัว", "error");
         shake(loginPasswordField);
         return false;
       }
@@ -1984,8 +1959,8 @@
       }
 
       if (!state.member || !state.token) {
-        showAlert(topAlert, "กรุณาเข้าสู่ระบบก่อนใช้งาน", "warning");
         setActiveView("loginView");
+        showAuthStatus("กรุณาเข้าสู่ระบบก่อนใช้งาน", "error");
         return false;
       }
 
@@ -2051,20 +2026,18 @@
 
         if (data.closed) {
           setWebClosedState(true, data.message || claimConfig.webClosedMessage);
-          showAlert(topAlert, data.message || "ระบบเว็บปิดชั่วคราว", "warning", 6000);
+          showAuthStatus(data.message || "ระบบเว็บปิดชั่วคราว", "error");
           return;
         }
 
         if (!data.ok) {
           const msg = data.message || "เข้าสู่ระบบไม่สำเร็จ";
           showAuthStatus(msg, "error");
-          showAlert(topAlert, msg, "error");
           return;
         }
 
         if (!data.token) {
           showAuthStatus("เข้าสู่ระบบไม่สำเร็จ ระบบไม่ได้ส่ง token กลับมา", "error");
-          showAlert(topAlert, "เข้าสู่ระบบไม่สำเร็จ ระบบไม่ได้ส่ง token กลับมา", "error");
           return;
         }
 
@@ -2093,7 +2066,6 @@
         await fetchClaimHistory();
       } catch (err) {
         showAuthStatus("เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ", "error");
-        showAlert(topAlert, "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ", "error");
       } finally {
         hideLoadingOverlay();
         btnLogin.disabled = state.webClosed;
@@ -2172,13 +2144,13 @@
 
     async function handleForgotPassword() {
       if (state.webClosed) {
-        showAlert(topAlert, claimConfig.webClosedMessage || "ระบบเว็บปิดชั่วคราว", "warning");
+        showAuthStatus(claimConfig.webClosedMessage || "ระบบเว็บปิดชั่วคราว", "error");
         return;
       }
 
       const email = normalizeEmail(loginEmailInput.value);
       if (!email || !loginEmailInput.checkValidity()) {
-        showAlert(topAlert, "กรุณากรอกอีเมลก่อนกดลืมรหัสผ่าน", "warning");
+        showAuthStatus("กรุณากรอกอีเมลก่อนกดลืมรหัสผ่าน", "error");
         shake(loginEmailField);
         return;
       }
@@ -2189,19 +2161,19 @@
 
         if (data.closed) {
           setWebClosedState(true, data.message || claimConfig.webClosedMessage);
-          showAlert(topAlert, data.message || "ระบบเว็บปิดชั่วคราว", "warning", 6000);
+          showAuthStatus(data.message || "ระบบเว็บปิดชั่วคราว", "error");
           return;
         }
 
         if (!data || data.ok === false) {
-          showAlert(topAlert, data.message || "ส่งรหัสรีเซ็ตรหัสผ่านทางอีเมลไม่สำเร็จ", "error");
+          showAuthStatus(data.message || "ส่งรหัสรีเซ็ตรหัสผ่านทางอีเมลไม่สำเร็จ", "error");
           return;
         }
 
-        showAlert(topAlert, data.message || "ระบบส่งรหัสหรือคำแนะนำรีเซ็ตรหัสผ่านไปยังอีเมลของคุณแล้ว", "success", 6000);
+        showAuthStatus(data.message || "ระบบส่งรหัสหรือคำแนะนำรีเซ็ตรหัสผ่านไปยังอีเมลของคุณแล้ว", "ok");
         showToast("ส่งรหัสทางอีเมลแล้ว");
       } catch (err) {
-        showAlert(topAlert, "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ", "error");
+        showAuthStatus("เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ", "error");
       } finally {
         hideLoadingOverlay();
       }
@@ -2228,28 +2200,11 @@
           updateMemberProfileUI();
           return true;
         }
+
         return !!state.member;
       } catch (err) {
         return !!state.member;
       }
-    }
-
-    async function prefillLastClaimInput() {
-      if (!state.token || !state.member) return;
-
-      try {
-        const data = await fetchJsonWithRetry(
-          SCRIPT_URL + "?action=lastClaimInput&token=" + encodeURIComponent(state.token) + "&_t=" + Date.now(),
-          {},
-          1
-        );
-
-        if (data && data.ok && data.item) {
-          if (data.item.latestExpiry && !expiryInput.value) {
-            expiryInput.value = String(data.item.latestExpiry).slice(0, 10);
-          }
-        }
-      } catch (err) {}
     }
 
     async function handleLogout() {
@@ -2261,7 +2216,6 @@
       clearLocalSession();
       setActiveView("loginView");
       showAuthStatus("ออกจากระบบเรียบร้อยแล้วค่ะ", "info");
-      showAlert(topAlert, "ออกจากระบบเรียบร้อยแล้วค่ะ", "info");
       showToast("ออกจากระบบแล้ว");
     }
 
@@ -2364,6 +2318,13 @@
           return;
         }
 
+        if (data && data.inFamily) {
+          showStatusError("อีเมลนี้อยู่ในกลุ่มของร้านปกติค่ะ ไม่ต้องแจ้งเคลม");
+          if (data.currentExpiry) expiryInput.value = data.currentExpiry;
+          state.submitLock = false;
+          return;
+        }
+
         if (!data || data.ok === false) {
           showStatusError(data && data.message || "ส่งคำขอไม่สำเร็จ");
           state.submitLock = false;
@@ -2445,43 +2406,6 @@
       }
     }
 
-    async function checkExpiryNow() {
-      if (!state.token || !state.member) {
-        showAlert(topAlert, "กรุณาเข้าสู่ระบบก่อนใช้งาน", "warning");
-        return;
-      }
-
-      showLoadingOverlay();
-      try {
-        const data = await postJson({
-          action: "checkExpiry",
-          token: state.token,
-          email: state.member.email
-        });
-
-        if (isUnauthorizedMessage(data && data.message)) {
-          await handleUnauthorizedResponse(data.message);
-          return;
-        }
-
-        if (!data || data.ok === false) {
-          showAlert(claimAlert, data && data.message ? data.message : "ไม่สามารถเช็ควันหมดอายุได้", "warning", 5000);
-          return;
-        }
-
-        if (data.expiry) {
-          expiryInput.value = String(data.expiry).slice(0, 10);
-        }
-
-        showAlert(claimAlert, data.message || ("วันหมดอายุ: " + data.expiry), "info", 6000);
-        showToast("เช็ควันหมดอายุแล้ว");
-      } catch (err) {
-        showAlert(claimAlert, "เชื่อมต่อไม่สำเร็จ กรุณาลองใหม่อีกครั้ง", "error", 5000);
-      } finally {
-        hideLoadingOverlay();
-      }
-    }
-
     function goSupport() {
       window.open(SUPPORT_LINK_BASE + encodeURIComponent(claimConfig.supportLine || "@467dlpti"), "_blank");
     }
@@ -2520,7 +2444,6 @@
     btnForgotPassword.addEventListener("click", handleForgotPassword);
     btnLogout.addEventListener("click", handleLogout);
     btnRefreshStatus.addEventListener("click", refreshStatusPage);
-    btnCheckExpiry.addEventListener("click", checkExpiryNow);
     floatAdminBtn.addEventListener("click", goSupport);
 
     btnPickSlip.addEventListener("click", function() { slipInput.click(); });
@@ -2554,9 +2477,8 @@
       showToast("ลบรูปสลิปแล้ว");
     });
 
-    btnClear.addEventListener("click", async function() {
+    btnClear.addEventListener("click", function() {
       clearForm();
-      await prefillLastClaimInput();
       showToast("ล้างฟอร์มแล้ว");
     });
 
@@ -2602,9 +2524,8 @@
       updateHeroVisibility();
       renderEmptyStatusPage();
 
-      if (!SCRIPT_URL || SCRIPT_URL.indexOf("PUT_YOUR_WEB_APP_EXEC_URL_HERE") !== -1) {
-        showAlert(topAlert, "กรุณาใส่ SCRIPT_URL ของ Web App ก่อนใช้งาน", "warning", 0);
-        appBooted = true;
+      if (!SCRIPT_URL) {
+        showAuthStatus("กรุณาใส่ SCRIPT_URL ของ Web App ก่อนใช้งาน", "error");
         return;
       }
 
@@ -2614,22 +2535,17 @@
 
       if (state.token) {
         const ok = await fetchMemberMe(true);
-        silentSessionChecked = true;
-
         if (ok) {
-          await prefillLastClaimInput();
           await fetchClaimHistory();
-          updateMemberProfileUI();
-          setActiveView("claimView");
+          await prefillLastClaimInput();
         } else {
           clearLocalSession(true);
-          setActiveView("loginView");
         }
-      } else {
-        setActiveView("loginView");
       }
 
-      appBooted = true;
+      if (!userSelectedView && !state.token) {
+        setActiveView("loginView");
+      }
 
       setInterval(async function() {
         await initClaimWindowConfig();
