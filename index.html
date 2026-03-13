@@ -266,47 +266,6 @@
       overflow:hidden;
     }
 
-    .login-card,.register-card,.claim-card,.status-card{
-      isolation:isolate;
-    }
-
-    .login-card::before,
-    .register-card::before,
-    .claim-card::before,
-    .status-card::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      opacity:.22;
-      background-repeat:no-repeat;
-      z-index:-1;
-    }
-
-    .login-card::before{
-      background-image:
-        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path fill='%23e9c8b8' d='M32 54C24 47 10 37 10 23c0-6 4-10 10-10 5 0 8 3 12 7 4-4 7-7 12-7 6 0 10 4 10 10 0 14-14 24-22 31z'/></svg>"),
-        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path fill='%23f0ddd2' d='M32 54C24 47 10 37 10 23c0-6 4-10 10-10 5 0 8 3 12 7 4-4 7-7 12-7 6 0 10 4 10 10 0 14-14 24-22 31z'/></svg>");
-      background-size:28px 28px,18px 18px;
-      background-position:8% 10%,92% 9%;
-    }
-
-    .register-card::before{
-      opacity:.18;
-      background-image:
-        radial-gradient(circle at 9% 12%, rgba(231,198,178,.9), rgba(231,198,178,0) 35%),
-        radial-gradient(circle at 92% 10%, rgba(243,222,208,.95), rgba(243,222,208,0) 35%);
-    }
-
-    .claim-card::before,
-    .status-card::before{
-      opacity:.22;
-      background-image:
-        radial-gradient(circle at 10% 8%, rgba(255,255,255,.85), rgba(255,255,255,0) 24%),
-        radial-gradient(circle at 90% 10%, rgba(243,222,208,.85), rgba(243,222,208,0) 22%),
-        radial-gradient(circle at 88% 90%, rgba(231,198,178,.45), rgba(231,198,178,0) 18%);
-    }
-
     .success-card{
       margin-top:12px;
       display:none;
@@ -315,19 +274,8 @@
     }
 
     .success-card.show{display:block}
-
-    .success-title{
-      font-size:1rem;
-      font-weight:800;
-      color:#755847;
-      margin-bottom:6px;
-    }
-
-    .success-desc{
-      font-size:.8rem;
-      line-height:1.7;
-      color:var(--sub);
-    }
+    .success-title{font-size:1rem;font-weight:800;color:#755847;margin-bottom:6px}
+    .success-desc{font-size:.8rem;line-height:1.7;color:var(--sub)}
 
     .page-nav{
       display:flex;
@@ -349,17 +297,6 @@
       overflow:hidden;
     }
 
-    .page-pill::after{
-      content:"";
-      position:absolute;
-      inset:auto -14px -18px auto;
-      width:44px;
-      height:44px;
-      border-radius:999px;
-      background:radial-gradient(circle, rgba(255,255,255,.45), rgba(255,255,255,0));
-      pointer-events:none;
-    }
-
     .page-pill.active{
       border-color:transparent;
       background:linear-gradient(135deg,#d9b79d,#be8d70);
@@ -377,20 +314,6 @@
       box-shadow:inset 0 1px 0 rgba(255,255,255,.85),0 10px 22px rgba(118,84,63,.06);
       overflow:hidden;
     }
-
-    .claim-top-frame::before,.claim-top-frame::after,
-    .status-top-frame::before,.status-top-frame::after{
-      content:"";
-      position:absolute;
-      width:72px;
-      height:72px;
-      border-radius:999px;
-      background:radial-gradient(circle, rgba(231,198,178,.35), rgba(231,198,178,0));
-      pointer-events:none;
-    }
-
-    .claim-top-frame::before,.status-top-frame::before{top:-18px;left:-18px}
-    .claim-top-frame::after,.status-top-frame::after{right:-18px;bottom:-18px}
 
     .claim-only-title,.status-only-title{
       position:relative;
@@ -429,7 +352,6 @@
       box-shadow:0 10px 20px rgba(197,142,94,.12);
     }
 
-    .warning-blink .icon{font-size:1.05rem;flex-shrink:0}
     @keyframes warningPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.025);opacity:.9}}
 
     .status-mini-grid{
@@ -447,18 +369,8 @@
       box-shadow:0 8px 16px rgba(118,84,63,.05);
     }
 
-    .mini-stat-value{
-      font-size:.95rem;
-      font-weight:800;
-      color:#7a5d4b;
-    }
-
-    .mini-stat-label{
-      margin-top:4px;
-      font-size:.72rem;
-      color:var(--sub);
-      line-height:1.5;
-    }
+    .mini-stat-value{font-size:.95rem;font-weight:800;color:#7a5d4b}
+    .mini-stat-label{margin-top:4px;font-size:.72rem;color:var(--sub);line-height:1.5}
 
     .field-group{
       display:flex;
@@ -658,21 +570,9 @@
       display:grid;
       gap:8px;
       font-size:.82rem;
-      position:relative;
-      overflow:hidden;
       text-align:center;
     }
 
-    .profile-box::after{
-      content:"♡";
-      position:absolute;
-      right:14px;
-      top:8px;
-      font-size:1.4rem;
-      color:rgba(196,154,122,.22);
-    }
-
-    .profile-box .line strong{color:var(--text)}
     .payment-section{display:none}
 
     .payment-card{
@@ -685,20 +585,8 @@
       box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 10px 20px rgba(118,84,63,.05);
     }
 
-    .payment-title{
-      font-size:.98rem;
-      font-weight:800;
-      margin-bottom:4px;
-      color:#7a5d4b;
-    }
-
-    .payment-desc{
-      font-size:.79rem;
-      color:var(--sub);
-      line-height:1.6;
-      margin-bottom:12px;
-      text-align:center;
-    }
+    .payment-title{font-size:.98rem;font-weight:800;margin-bottom:4px;color:#7a5d4b}
+    .payment-desc{font-size:.79rem;color:var(--sub);line-height:1.6;margin-bottom:12px;text-align:center}
 
     .bank-minimal{
       margin-bottom:14px;
@@ -706,7 +594,6 @@
       border-radius:22px;
       border:1px solid #efe2d8;
       background:linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,250,246,.98));
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.85);
     }
 
     .bank-minimal-top{
@@ -730,12 +617,7 @@
       color:#8b6c5b;
     }
 
-    .bank-card-name{
-      font-size:.76rem;
-      color:var(--sub);
-      line-height:1.5;
-      text-align:left;
-    }
+    .bank-card-name{font-size:.76rem;color:var(--sub);line-height:1.5;text-align:left}
 
     .bank-number-box{
       padding:14px 12px;
@@ -745,20 +627,8 @@
       margin-bottom:10px;
     }
 
-    .bank-number-label{
-      font-size:.72rem;
-      color:var(--sub);
-      margin-bottom:4px;
-      letter-spacing:.04em;
-    }
-
-    .bank-number{
-      font-size:1.15rem;
-      font-weight:800;
-      color:#6c4f40;
-      letter-spacing:.08em;
-      word-break:break-all;
-    }
+    .bank-number-label{font-size:.72rem;color:var(--sub);margin-bottom:4px;letter-spacing:.04em}
+    .bank-number{font-size:1.15rem;font-weight:800;color:#6c4f40;letter-spacing:.08em;word-break:break-all}
 
     .copy-account-btn,.btn-copy{
       width:100%;
@@ -778,13 +648,7 @@
       text-align:center;
     }
 
-    .qr-title{
-      font-size:.86rem;
-      font-weight:800;
-      color:#755847;
-      margin-bottom:8px;
-    }
-
+    .qr-title{font-size:.86rem;font-weight:800;color:#755847;margin-bottom:8px}
     .qr-img{
       width:100%;
       max-width:260px;
@@ -796,13 +660,7 @@
       box-shadow:0 12px 20px rgba(0,0,0,.06);
     }
 
-    .qr-caption{
-      margin-top:8px;
-      font-size:.76rem;
-      line-height:1.6;
-      color:var(--sub);
-      text-align:center;
-    }
+    .qr-caption{margin-top:8px;font-size:.76rem;line-height:1.6;color:var(--sub);text-align:center}
 
     .uploader{
       border:1.5px dashed #daccc0;
@@ -857,13 +715,7 @@
       pointer-events:none;
     }
 
-    .file-name{
-      margin-top:10px;
-      font-size:.76rem;
-      color:var(--sub);
-      word-break:break-word;
-      text-align:center;
-    }
+    .file-name{margin-top:10px;font-size:.76rem;color:var(--sub);word-break:break-word;text-align:center}
 
     .upload-status{
       margin-top:10px;
@@ -903,38 +755,10 @@
       box-shadow:0 14px 24px rgba(0,0,0,.06);
     }
 
-    .preview-meta{
-      width:100%;
-      display:grid;
-      gap:8px;
-    }
+    .payment-require{margin-top:8px;font-size:.75rem;color:#c46a6a;line-height:1.55;text-align:center}
+    .helper{margin-top:8px;display:flex;gap:8px;align-items:flex-start;justify-content:center;text-align:center;font-size:.76rem;line-height:1.6;color:var(--warning)}
 
-    .payment-require{
-      margin-top:8px;
-      font-size:.75rem;
-      color:#c46a6a;
-      line-height:1.55;
-      text-align:center;
-    }
-
-    .helper{
-      margin-top:8px;
-      display:flex;
-      gap:8px;
-      align-items:flex-start;
-      justify-content:center;
-      text-align:center;
-      font-size:.76rem;
-      line-height:1.6;
-      color:var(--warning);
-    }
-
-    #summary,#statusSummary{
-      margin-top:8px;
-      text-align:center;
-      font-size:.78rem;
-    }
-
+    #summary,#statusSummary{margin-top:8px;text-align:center;font-size:.78rem}
     .summary-pill{
       display:inline-flex;
       align-items:center;
@@ -1008,25 +832,9 @@
     }
 
     .item-tag.paid{background:#fff5eb;border-color:#efd9bf;color:#b57a45}
-
-    .item-meta{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      justify-content:center;
-      font-size:.76rem;
-      color:var(--sub);
-      margin-bottom:8px;
-      text-align:center;
-    }
-
+    .item-meta{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;font-size:.76rem;color:var(--sub);margin-bottom:8px;text-align:center}
     .item-body{text-align:center;font-size:.84rem;line-height:1.65;margin-bottom:8px}
-
-    .result-actions{
-      display:grid;
-      gap:8px;
-      margin-top:6px;
-    }
+    .result-actions{display:grid;gap:8px;margin-top:6px}
 
     .step-card{
       margin-top:12px;
@@ -1036,19 +844,8 @@
       background:linear-gradient(180deg,#fffdfb,#faf3ed);
     }
 
-    .step-title{
-      font-size:.84rem;
-      font-weight:800;
-      color:#755847;
-      margin-bottom:10px;
-    }
-
-    .step-list{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      justify-content:center;
-    }
+    .step-title{font-size:.84rem;font-weight:800;color:#755847;margin-bottom:10px}
+    .step-list{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
 
     .step-chip{
       min-height:34px;
@@ -1078,17 +875,6 @@
       box-shadow:var(--shadow-soft);
       position:relative;
       overflow:hidden;
-    }
-
-    .history-card::after,.live-card::after{
-      content:"";
-      position:absolute;
-      right:10px;
-      top:10px;
-      width:22px;
-      height:22px;
-      opacity:.18;
-      background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path fill='%23cda58e' d='M32 54C24 47 10 37 10 23c0-6 4-10 10-10 5 0 8 3 12 7 4-4 7-7 12-7 6 0 10 4 10 10 0 14-14 24-22 31z'/></svg>") center/contain no-repeat;
     }
 
     .history-header,.live-header{
@@ -1122,18 +908,8 @@
       100%{transform:scale(1);opacity:1}
     }
 
-    .history-title-text,.live-title-text{
-      font-size:.88rem;
-      font-weight:800;
-      color:#7a5d4b;
-    }
-
-    .live-date{
-      width:100%;
-      font-size:.74rem;
-      color:var(--sub);
-      text-align:center;
-    }
+    .history-title-text,.live-title-text{font-size:.88rem;font-weight:800;color:#7a5d4b}
+    .live-date{width:100%;font-size:.74rem;color:var(--sub);text-align:center}
 
     .live-list{
       display:grid;
@@ -1186,35 +962,11 @@
       line-height:1.2;
     }
 
-    .status-pill--green{
-      background:#edf8ef;
-      color:#47734d;
-      border-color:#cfe4d2;
-    }
-
-    .status-pill--yellow{
-      background:#fff7e9;
-      color:#9c7330;
-      border-color:#f1dfb8;
-    }
-
-    .status-pill--red{
-      background:#fff1f1;
-      color:#b85d5d;
-      border-color:#efcccc;
-    }
-
-    .status-pill--blue{
-      background:#eef4ff;
-      color:#5675af;
-      border-color:#d5e0fb;
-    }
-
-    .status-pill--purple{
-      background:#f4efff;
-      color:#7860a7;
-      border-color:#dfd4f7;
-    }
+    .status-pill--green{background:#edf8ef;color:#47734d;border-color:#cfe4d2}
+    .status-pill--yellow{background:#fff7e9;color:#9c7330;border-color:#f1dfb8}
+    .status-pill--red{background:#fff1f1;color:#b85d5d;border-color:#efcccc}
+    .status-pill--blue{background:#eef4ff;color:#5675af;border-color:#d5e0fb}
+    .status-pill--purple{background:#f4efff;color:#7860a7;border-color:#dfd4f7}
 
     .alert-box{
       display:none;
@@ -1319,23 +1071,7 @@
       box-shadow:0 20px 54px rgba(118,84,63,.14);
       padding:24px 18px 22px;
       text-align:center;
-      position:relative;
-      overflow:hidden;
     }
-
-    .loading-card::before,
-    .loading-card::after{
-      content:"";
-      position:absolute;
-      width:80px;
-      height:80px;
-      border-radius:999px;
-      background:radial-gradient(circle, rgba(231,198,178,.28), rgba(231,198,178,0));
-      pointer-events:none;
-    }
-
-    .loading-card::before{left:-18px;top:-18px}
-    .loading-card::after{right:-18px;bottom:-18px}
 
     .spinner{
       width:62px;
@@ -1413,7 +1149,6 @@
     }
 
     .copyright{letter-spacing:.16em;text-transform:uppercase;text-align:center}
-
     .shake{animation:shake .4s;border-color:var(--danger)!important}
     @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
 
@@ -1824,14 +1559,14 @@
   </div>
 
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxF2xaxoowSFHTL2F8WN8aW53Rm-33ObWcneu-BrtTM7McPZ5gPqqraqUG5MQY-ddpwBw/exec";
+    const SCRIPT_URL = "PASTE_YOUR_WEB_APP_URL_HERE";
     const STATUS_POLL_INTERVAL = 30000;
     const CONFIG_POLL_INTERVAL = 30000;
     const MAX_NOTE_LENGTH = 500;
     const MAX_SLIP_SIZE = 3 * 1024 * 1024;
     const TOKEN_KEY = "shop426_member_token";
     const REMEMBER_KEY = "shop426_saved_login";
-    const SUPPORT_LINK = "https://line.me/R/ti/p/@467dlpti";
+    const SUPPORT_LINK_BASE = "https://line.me/R/ti/p/";
     const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
     const LAST_SLIP_KEY = "shop426_last_slip_preview";
 
@@ -1937,6 +1672,7 @@
     const bankAccountNoEl = document.getElementById("bankAccountNo");
     const bankAccountNameEl = document.getElementById("bankAccountName");
     const supportLineEl = document.getElementById("supportLine");
+    const paymentQr = document.getElementById("paymentQr");
 
     const profileBox = document.getElementById("memberProfileBox");
     const profileEmail = document.getElementById("profileEmail");
@@ -1982,14 +1718,7 @@
       if (!data || typeof data !== "object") {
         return { ok: false, message: "ไม่สามารถอ่านข้อมูลจากเซิร์ฟเวอร์ได้" };
       }
-      const ok =
-        data.ok === true ||
-        data.success === true ||
-        data.status === "ok" ||
-        !!data.token ||
-        !!data.member;
-
-      return { ...data, ok };
+      return { ...data, ok: data.ok === true };
     }
 
     function updateHeroVisibility() {
@@ -2046,7 +1775,6 @@
 
     function showAuthStatus(message, type = "") {
       authStatus.className = "";
-      authStatus.id = "authStatus";
       if (type === "error") authStatus.classList.add("status-error");
       if (type === "ok") authStatus.classList.add("status-ok");
       if (type === "info") authStatus.classList.add("status-info");
@@ -2395,8 +2123,8 @@
         return;
       }
 
-      if (raw.includes("รอตรวจสอบ") || raw.includes("กำลัง")) activeIndex = 1;
-      if (raw.includes("ตรวจสอบสลิป") || raw.includes("ดึงเมล")) activeIndex = 2;
+      if (raw.includes("รอตรวจสอบ") || raw.includes("กำลัง") || raw.includes("รอดำเนินการ")) activeIndex = 1;
+      if (raw.includes("รอตรวจสอบสลิป") || raw.includes("ตรวจสอบสลิป") || raw.includes("ดึงเมล")) activeIndex = 2;
       if (raw.includes("เสร็จ") || raw.includes("สำเร็จ") || raw.includes("ใช้งานได้ปกติ")) activeIndex = 3;
       if (raw.includes("ไม่ผ่าน")) activeIndex = 1;
 
@@ -2480,7 +2208,7 @@
     async function fetchTodayStatus(initial = false) {
       try {
         const data = await fetchJsonWithRetry(SCRIPT_URL + "?action=todayStatus&_t=" + Date.now(), {}, 1);
-        renderLiveStatus(data.todaySummary || data.summary || data.dailyStatus || null);
+        renderLiveStatus(data.todaySummary || null);
       } catch (err) {
         if (initial) console.warn("Cannot load live email status:", err);
         renderLiveStatus(null);
@@ -2499,7 +2227,7 @@
           {},
           1
         );
-        const items = data.history || data.items || [];
+        const items = data.history || [];
         renderHistory(items);
         return items;
       } catch (err) {
@@ -2648,7 +2376,7 @@
         });
 
         btnContact.addEventListener("click", () => {
-          window.open(`https://line.me/R/ti/p/@467dlpti?text=${buildAdminMessage(entry)}`, "_blank");
+          window.open(`${SUPPORT_LINK_BASE}${encodeURIComponent(claimConfig.supportLine || "@467dlpti")}?text=${buildAdminMessage(entry)}`, "_blank");
         });
 
         resultsDiv.appendChild(card);
@@ -2693,7 +2421,7 @@
         return;
       }
 
-      const memberDate = state.member.memberDate || state.member.lastRenewDate || state.member.signupDate || "";
+      const memberDate = state.member.memberDate || "";
       const signupYear = state.member.signupYearThai || thaiYearFromYmd(memberDate) || "";
       state.member.signupYearThai = signupYear;
 
@@ -2862,8 +2590,8 @@
         }
 
         saveRememberedLogin();
-        state.token = data.token || state.token || "";
-        state.member = data.member || data.user || null;
+        state.token = data.token || "";
+        state.member = data.member || null;
 
         if (state.token) localStorage.setItem(TOKEN_KEY, state.token);
 
@@ -2909,9 +2637,7 @@
           displayName: normalizeText(registerDisplayName.value),
           email: normalizeEmail(registerEmail.value),
           password: normalizeText(registerPassword.value),
-          memberDate,
-          signupDate: memberDate,
-          lastRenewDate: memberDate
+          memberDate
         };
 
         let data = await postJson(payload);
@@ -2923,12 +2649,11 @@
         }
 
         registerSuccessCard.classList.add("show");
-        state.token = data.token || state.token || "";
-        state.member = data.member || data.user || {
+        state.token = data.token || "";
+        state.member = data.member || {
           email: payload.email,
           memberDate,
-          signupDate: memberDate,
-          lastRenewDate: memberDate
+          signupYearThai: thaiYearFromYmd(memberDate)
         };
 
         if (state.token) localStorage.setItem(TOKEN_KEY, state.token);
@@ -2962,7 +2687,6 @@
       showLoadingOverlay();
       try {
         const data = await postJson({ action: "forgotPassword", email });
-
         if (!data || data.ok === false) {
           showAlert(topAlert, data.message || "ส่งรหัสรีเซ็ตรหัสผ่านทางอีเมลไม่สำเร็จ", "error");
           return;
@@ -2985,8 +2709,8 @@
           {},
           1
         );
-        if (data && (data.member || data.user)) {
-          state.member = data.member || data.user;
+        if (data && data.member) {
+          state.member = data.member;
           updateMemberProfileUI();
           return true;
         }
@@ -3099,6 +2823,12 @@
         const data = await postJson(payload);
         const elapsedSec = (performance.now() - startTime) / 1000;
 
+        if (!data || data.ok === false) {
+          showStatusError(data?.message || "ส่งคำขอไม่สำเร็จ");
+          state.submitLock = false;
+          return;
+        }
+
         const current = data.current || null;
         state.lastClaimAt = current?.createdAt || current?.updatedAt || "";
 
@@ -3115,13 +2845,13 @@
         const items = await fetchClaimHistory();
         renderLatestStatusPage({ history: items, current: items[0] || current });
 
-        if (data && data.member) {
+        if (data.member) {
           state.member = data.member;
           updateMemberProfileUI();
         }
 
-        if (data && (data.todaySummary || data.dailyStatus || data.summary)) {
-          renderLiveStatus(data.todaySummary || data.dailyStatus || data.summary);
+        if (data.todaySummary) {
+          renderLiveStatus(data.todaySummary);
         } else {
           fetchTodayStatus();
         }
@@ -3135,6 +2865,7 @@
         showAlert(claimAlert, data.message || "ส่งคำขอสำเร็จแล้วค่ะ", "success", 4500);
         showToast("ส่งคำขอสำเร็จแล้ว");
         state.submitLock = false;
+
         setTimeout(() => {
           safeSetMemberView("statusView");
         }, 500);
@@ -3174,7 +2905,7 @@
     }
 
     function goSupport() {
-      window.open(SUPPORT_LINK, "_blank");
+      window.open(`${SUPPORT_LINK_BASE}${encodeURIComponent(claimConfig.supportLine || "@467dlpti")}`, "_blank");
     }
 
     function togglePassword(targetId, btn) {
