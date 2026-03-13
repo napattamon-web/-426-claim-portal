@@ -181,7 +181,7 @@
     .claim-only-sub,.status-only-sub{position:relative;margin-top:6px;font-size:.78rem;color:var(--sub);line-height:1.6}
 
     .warning-blink{
-      display:flex;align-items:center;justify-content:center;gap:8px;margin:12px 0 0;padding:12px 14px;border-radius:18px;
+      display:flex;align-items:center;justify-content:center;gap:8px;margin:12px 0 12px;padding:12px 14px;border-radius:18px;
       background:linear-gradient(135deg,#fff4e8,#ffe9db);border:1px solid #f0cfb6;color:#b5642d;font-size:.82rem;font-weight:800;line-height:1.6;text-align:center
     }
 
@@ -874,9 +874,9 @@
   </div>
 
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyx7pVo2809YstaxHe2e82f21oqaqbQFak_bLEFe-eRyjDSCYSoPqUARfHnEPsgrAFN/exec";
-    const STATUS_POLL_INTERVAL = 60000;
-    const CONFIG_POLL_INTERVAL = 120000;
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz9260Y2N_jq4HD5mi6Od5tPjYIO5HATuWhskat98SE6GxybDSrd8xxsjrfB_lPaN1v/exec";
+    const STATUS_POLL_INTERVAL = 30000;
+    const CONFIG_POLL_INTERVAL = 30000;
     const MAX_NOTE_LENGTH = 500;
     const MAX_SLIP_SIZE = 3 * 1024 * 1024;
     const TOKEN_KEY = "shop426_member_token";
@@ -1267,7 +1267,7 @@
       };
     }
 
-    async function fetchJsonWithRetry(url, options = {}, retries = 0) {
+    async function fetchJsonWithRetry(url, options = {}, retries = 1) {
       requireScriptUrl();
       try {
         const res = await fetch(url, {
@@ -1408,7 +1408,7 @@
 
     async function initClaimWindowConfig() {
       try {
-        const cfg = await fetchJsonWithRetry(SCRIPT_URL + "?action=config&_t=" + Date.now(), {}, 0);
+        const cfg = await fetchJsonWithRetry(SCRIPT_URL + "?action=config&_t=" + Date.now(), {}, 1);
 
         if (cfg.claimStartHour !== undefined) claimConfig.claimStartHour = Number(cfg.claimStartHour) || 7;
         if (cfg.claimEndHour !== undefined) claimConfig.claimEndHour = Number(cfg.claimEndHour) || 19;
@@ -1623,7 +1623,7 @@
 
     async function fetchTodayStatus(initial = false) {
       try {
-        const data = await fetchJsonWithRetry(SCRIPT_URL + "?action=todayStatus&_t=" + Date.now(), {}, 0);
+        const data = await fetchJsonWithRetry(SCRIPT_URL + "?action=todayStatus&_t=" + Date.now(), {}, 1);
         renderLiveStatus(data.todaySummary || null);
       } catch (err) {
         if (initial) console.warn("Cannot load live email status:", err);
@@ -1650,7 +1650,7 @@
         const data = await fetchJsonWithRetry(
           SCRIPT_URL + "?action=history&token=" + encodeURIComponent(state.token) + "&_t=" + Date.now(),
           {},
-          0
+          1
         );
 
         if (isUnauthorizedMessage(data && data.message)) {
@@ -1881,7 +1881,7 @@
 
     function validateLogin() {
       if (state.webClosed) {
-        showAuthStatus(claimConfig.webClosedMessage || "ระบบเว็บปิดชั่วคราว", "error");
+        showAlert(topAlert, claimConfig.webClosedMessage || "ระบบเว็บปิดชั่วคราว", "warning");
         return false;
       }
 
@@ -2031,7 +2031,7 @@
 
         if (data.closed) {
           setWebClosedState(true, data.message || claimConfig.webClosedMessage);
-          showAuthStatus(data.message || "ระบบเว็บปิดชั่วคราว", "error");
+          showAlert(topAlert, data.message || "ระบบเว็บปิดชั่วคราว", "warning", 6000);
           return;
         }
 
@@ -2048,19 +2048,14 @@
 
         state.token = String(data.token || "").trim();
         localStorage.setItem(TOKEN_KEY, state.token);
-
-        if (data.member) {
-          state.member = data.member;
-        } else {
-          state.member = buildLocalMemberFallback(payload.email, "", "", "");
-        }
+        state.member = data.member || buildLocalMemberFallback(payload.email, "", "", "");
 
         saveRememberedLogin();
         updateMemberProfileUI();
         setActiveView("claimView");
         showAuthStatus("เข้าสู่ระบบสำเร็จค่ะ", "ok");
         showToast("เข้าสู่ระบบสำเร็จ");
-        showAlert(claimAlert, "เข้าสู่ระบบสำเร็จ", "success", 2500);
+        showAlert(claimAlert, "เข้าสู่ระบบสำเร็จ", "success", 3000);
       } catch (err) {
         showAuthStatus("เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ", "error");
       } finally {
@@ -2123,7 +2118,7 @@
         updateMemberProfileUI();
         setActiveView("claimView");
         showToast("สมัครสมาชิกสำเร็จ");
-        showAlert(claimAlert, "สมัครสมาชิกสำเร็จ", "success", 2500);
+        showAlert(claimAlert, "สมัครสมาชิกสำเร็จ", "success", 3500);
       } catch (err) {
         showAlert(registerAlert, "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ", "error");
       } finally {
@@ -2135,13 +2130,13 @@
 
     async function handleForgotPassword() {
       if (state.webClosed) {
-        showAuthStatus(claimConfig.webClosedMessage || "ระบบเว็บปิดชั่วคราว", "error");
+        showAlert(topAlert, claimConfig.webClosedMessage || "ระบบเว็บปิดชั่วคราว", "warning");
         return;
       }
 
       const email = normalizeEmail(loginEmailInput.value);
       if (!email || !loginEmailInput.checkValidity()) {
-        showAuthStatus("กรุณากรอกอีเมลก่อนกดลืมรหัสผ่าน", "error");
+        showAlert(topAlert, "กรุณากรอกอีเมลก่อนกดลืมรหัสผ่าน", "warning");
         shake(loginEmailField);
         return;
       }
@@ -2152,19 +2147,19 @@
 
         if (data.closed) {
           setWebClosedState(true, data.message || claimConfig.webClosedMessage);
-          showAuthStatus(data.message || "ระบบเว็บปิดชั่วคราว", "error");
+          showAlert(topAlert, data.message || "ระบบเว็บปิดชั่วคราว", "warning", 6000);
           return;
         }
 
         if (!data || data.ok === false) {
-          showAuthStatus(data.message || "ส่งรหัสรีเซ็ตรหัสผ่านทางอีเมลไม่สำเร็จ", "error");
+          showAlert(topAlert, data.message || "ส่งรหัสรีเซ็ตรหัสผ่านทางอีเมลไม่สำเร็จ", "error");
           return;
         }
 
-        showAuthStatus(data.message || "ระบบส่งรหัสหรือคำแนะนำรีเซ็ตรหัสผ่านไปยังอีเมลของคุณแล้ว", "ok");
+        showAlert(topAlert, data.message || "ระบบส่งรหัสหรือคำแนะนำรีเซ็ตรหัสผ่านไปยังอีเมลของคุณแล้ว", "success", 6000);
         showToast("ส่งรหัสทางอีเมลแล้ว");
       } catch (err) {
-        showAuthStatus("เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ", "error");
+        showAlert(topAlert, "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ", "error");
       } finally {
         hideLoadingOverlay();
       }
@@ -2176,7 +2171,7 @@
         const data = await fetchJsonWithRetry(
           SCRIPT_URL + "?action=me&token=" + encodeURIComponent(state.token) + "&_t=" + Date.now(),
           {},
-          0
+          1
         );
 
         if (isUnauthorizedMessage(data && data.message) || (data && data.ok === false)) {
@@ -2209,7 +2204,7 @@
         const data = await fetchJsonWithRetry(
           SCRIPT_URL + "?action=checkExpiry&token=" + encodeURIComponent(state.token) + "&_t=" + Date.now(),
           {},
-          0
+          1
         );
 
         if (isUnauthorizedMessage(data && data.message)) {
@@ -2223,7 +2218,7 @@
           return;
         }
 
-        if (data.expiry) {
+        if (data.expiry && !expiryInput.value) {
           expiryInput.value = data.expiry;
         }
 
@@ -2253,6 +2248,7 @@
       clearLocalSession();
       setActiveView("loginView");
       showAuthStatus("ออกจากระบบเรียบร้อยแล้วค่ะ", "info");
+      showAlert(topAlert, "ออกจากระบบเรียบร้อยแล้วค่ะ", "info");
       showToast("ออกจากระบบแล้ว");
     }
 
@@ -2392,7 +2388,11 @@
 
         if (data.todaySummary) {
           renderLiveStatus(data.todaySummary);
+        } else {
+          fetchTodayStatus();
         }
+
+        await initClaimWindowConfig();
 
         noteInput.value = "";
         updateNoteCounter();
@@ -2404,7 +2404,7 @@
 
         setTimeout(function() {
           safeSetMemberView("statusView");
-        }, 400);
+        }, 500);
       } catch (err) {
         showStatusError("เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ");
         state.submitLock = false;
@@ -2560,13 +2560,13 @@
       renderEmptyStatusPage();
 
       if (!SCRIPT_URL) {
-        showAuthStatus("กรุณาใส่ SCRIPT_URL ของ Web App ก่อนใช้งาน", "error");
+        showAlert(topAlert, "กรุณาใส่ SCRIPT_URL ของ Web App ก่อนใช้งาน", "warning", 0);
         return;
       }
 
       await initClaimWindowConfig();
       updateClaimWindowState();
-      fetchTodayStatus(true);
+      await fetchTodayStatus(true);
 
       if (state.token) {
         const ok = await fetchMemberMe(true);
