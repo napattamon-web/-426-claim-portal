@@ -43,18 +43,6 @@
       position:relative;
     }
 
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      opacity:.11;
-      background-repeat:no-repeat;
-      background-position:center 66px;
-      background-size:min(82vw,380px);
-      background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 420 420'><g fill='none' fill-rule='evenodd'><circle cx='210' cy='220' r='124' fill='%23efcfba'/><circle cx='118' cy='118' r='54' fill='%23ddb89c'/><circle cx='302' cy='118' r='54' fill='%23ddb89c'/><circle cx='118' cy='118' r='25' fill='%23fff3ea'/><circle cx='302' cy='118' r='25' fill='%23fff3ea'/><ellipse cx='170' cy='216' rx='15' ry='19' fill='%23524239'/><ellipse cx='250' cy='216' rx='15' ry='19' fill='%23524239'/><ellipse cx='210' cy='276' rx='42' ry='31' fill='%23fff8f3'/><ellipse cx='210' cy='262' rx='18' ry='13' fill='%23524239'/><path d='M186 294c11 13 37 13 48 0' stroke='%23cc918c' stroke-width='10' stroke-linecap='round'/><ellipse cx='144' cy='264' rx='25' ry='13' fill='%23efc1c8' opacity='.5'/><ellipse cx='276' cy='264' rx='25' ry='13' fill='%23efc1c8' opacity='.5'/></g></svg>");
-    }
-
     .app{
       width:100%;
       max-width:540px;
@@ -75,119 +63,20 @@
       border-radius:var(--r-xl);
     }
 
-    .hero{
-      padding:18px 16px;
-      position:relative;
-      overflow:hidden;
-    }
+    .hero{padding:18px 16px;position:relative;overflow:hidden}
+    .panel{padding:16px}
+    .view{display:none;animation:fadeUp .24s ease}
+    .view.active{display:block}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
-    .hero::before{
-      content:"";
-      position:absolute;
-      inset:auto auto -18px -18px;
-      width:110px;
-      height:110px;
-      border-radius:999px;
-      background:radial-gradient(circle, rgba(255,255,255,.7), rgba(255,255,255,0));
-      pointer-events:none;
-    }
-
-    .hero::after{
-      content:"";
-      position:absolute;
-      right:-20px;
-      top:-20px;
-      width:120px;
-      height:120px;
-      border-radius:999px;
-      background:radial-gradient(circle, rgba(255,255,255,.85), rgba(255,255,255,0));
-      pointer-events:none;
-    }
-
-    .hero-top{
-      display:flex;
-      justify-content:flex-start;
-      align-items:flex-start;
-      gap:10px;
-    }
-
-    .brand-wrap{
-      display:flex;
-      gap:12px;
-      align-items:center;
-      min-width:0;
-      width:100%;
-      justify-content:flex-start;
-    }
-
-    .logo-shell{
-      width:70px;
-      height:70px;
-      border-radius:24px;
-      padding:4px;
-      background:linear-gradient(135deg,#fffefc,#f4e7dc);
-      box-shadow:var(--shadow-soft);
-      flex-shrink:0;
-      position:relative;
-    }
-
-    .logo-shell::after{
-      content:"";
-      position:absolute;
-      right:-4px;
-      top:-4px;
-      width:16px;
-      height:16px;
-      border-radius:999px;
-      background:linear-gradient(135deg,#f7dcd3,#fff4ee);
-      border:1px solid #edd8ca;
-    }
-
-    .logo-img{
-      width:100%;
-      height:100%;
-      display:block;
-      object-fit:cover;
-      border-radius:19px;
-      background:#fff;
-    }
-
-    .brand-copy{
-      display:flex;
-      flex-direction:column;
-      gap:4px;
-      min-width:0;
-      align-items:flex-start;
-      text-align:left;
-    }
-
-    .brand-title{
-      font-size:1.28rem;
-      font-weight:800;
-      line-height:1.1;
-      letter-spacing:.05em;
-      text-transform:uppercase;
-      color:#6f5242;
-      text-align:left;
-    }
-
-    .brand-sub{
-      font-size:.78rem;
-      color:var(--sub);
-      letter-spacing:.13em;
-      text-transform:uppercase;
-      white-space:nowrap;
-      text-align:left;
-    }
-
-    .hero-center-text{
-      margin-top:14px;
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-      align-items:center;
-      text-align:center;
-    }
+    .hero-top{display:flex;justify-content:flex-start;align-items:flex-start;gap:10px}
+    .brand-wrap{display:flex;gap:12px;align-items:center;min-width:0;width:100%;justify-content:flex-start}
+    .logo-shell{width:70px;height:70px;border-radius:24px;padding:4px;background:linear-gradient(135deg,#fffefc,#f4e7dc);box-shadow:var(--shadow-soft);flex-shrink:0;position:relative}
+    .logo-img{width:100%;height:100%;display:block;object-fit:cover;border-radius:19px;background:#fff}
+    .brand-copy{display:flex;flex-direction:column;gap:4px;min-width:0;align-items:flex-start;text-align:left}
+    .brand-title{font-size:1.28rem;font-weight:800;line-height:1.1;letter-spacing:.05em;text-transform:uppercase;color:#6f5242;text-align:left}
+    .brand-sub{font-size:.78rem;color:var(--sub);letter-spacing:.13em;text-transform:uppercase;white-space:nowrap;text-align:left}
+    .hero-center-text{margin-top:14px;display:flex;flex-direction:column;gap:12px;align-items:center;text-align:center}
 
     .badge{
       margin:0 auto;
@@ -204,14 +93,7 @@
       white-space:nowrap;
     }
 
-    .badge-dot{
-      width:8px;
-      height:8px;
-      border-radius:999px;
-      background:var(--success);
-      box-shadow:0 0 0 4px rgba(111,142,99,.14);
-    }
-
+    .badge-dot{width:8px;height:8px;border-radius:999px;background:var(--success);box-shadow:0 0 0 4px rgba(111,142,99,.14)}
     .badge.closed{background:#fff5f4;border-color:#efd1d1}
     .badge-dot.offline{background:var(--danger);box-shadow:0 0 0 4px rgba(215,125,125,.14)}
 
@@ -226,8 +108,6 @@
       font-size:.82rem;
       color:#8d6a55;
       font-weight:800;
-      box-shadow:0 10px 20px rgba(191,143,114,.10);
-      animation:cuteBlink 1.6s ease-in-out infinite;
       text-align:center;
     }
 
@@ -237,24 +117,26 @@
       color:#c16666;
     }
 
-    @keyframes cuteBlink{
-      0%,100%{transform:scale(1);box-shadow:0 10px 20px rgba(191,143,114,.10);opacity:1}
-      50%{transform:scale(1.04);box-shadow:0 14px 28px rgba(191,143,114,.18);opacity:.92}
-    }
-
-    .panel{padding:16px}
-    .view{display:none;animation:fadeUp .24s ease}
-    .view.active{display:block}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-
-    .section-blurb{
-      font-size:.84rem;
-      line-height:1.65;
-      color:var(--sub);
-      margin-bottom:10px;
+    .global-banner{
+      display:none;
+      padding:12px 14px;
+      border-radius:18px;
+      border:1px solid #efd5c7;
+      background:linear-gradient(135deg,#fff7f1,#fff0e7);
+      color:#8d644b;
+      font-size:.82rem;
+      line-height:1.7;
       text-align:center;
+      font-weight:700;
+    }
+    .global-banner.show{display:block}
+    .global-banner.error{
+      border-color:#efcccc;
+      background:linear-gradient(135deg,#fff3f3,#fff0f0);
+      color:#b95a5a;
     }
 
+    .section-blurb{font-size:.84rem;line-height:1.65;color:var(--sub);margin-bottom:10px;text-align:center}
     .login-card,.register-card,.claim-card,.status-card,.success-card{
       border-radius:28px;
       background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(253,247,242,.99));
@@ -265,703 +147,181 @@
       position:relative;
       overflow:hidden;
     }
-
-    .success-card{
-      margin-top:12px;
-      display:none;
-      background:linear-gradient(180deg,#fffdfb,#f9f2eb);
-      border-style:dashed;
-    }
-
+    .success-card{margin-top:12px;display:none;background:linear-gradient(180deg,#fffdfb,#f9f2eb);border-style:dashed}
     .success-card.show{display:block}
     .success-title{font-size:1rem;font-weight:800;color:#755847;margin-bottom:6px}
     .success-desc{font-size:.8rem;line-height:1.7;color:var(--sub)}
 
-    .page-nav{
-      display:flex;
-      gap:10px;
-      margin-bottom:12px;
-    }
-
+    .page-nav{display:flex;gap:10px;margin-bottom:12px}
     .page-pill{
-      flex:1;
-      min-height:46px;
-      border-radius:999px;
-      border:1px solid #e8d9ce;
-      background:linear-gradient(180deg,#fffdfb,#f7efe8);
-      color:#8c7464;
-      font-size:.8rem;
-      font-weight:800;
-      cursor:pointer;
-      position:relative;
-      overflow:hidden;
+      flex:1;min-height:46px;border-radius:999px;border:1px solid #e8d9ce;
+      background:linear-gradient(180deg,#fffdfb,#f7efe8);color:#8c7464;font-size:.8rem;font-weight:800;cursor:pointer
     }
-
     .page-pill.active{
-      border-color:transparent;
-      background:linear-gradient(135deg,#d9b79d,#be8d70);
-      color:#fff;
-      box-shadow:0 10px 18px rgba(118,84,63,.12);
+      border-color:transparent;background:linear-gradient(135deg,#d9b79d,#be8d70);color:#fff;
+      box-shadow:0 10px 18px rgba(118,84,63,.12)
     }
 
     .claim-top-frame,.status-top-frame{
-      position:relative;
-      margin-bottom:14px;
-      padding:16px 14px 14px;
-      border-radius:24px;
-      border:1px solid #efdccd;
+      position:relative;margin-bottom:14px;padding:16px 14px 14px;border-radius:24px;border:1px solid #efdccd;
       background:linear-gradient(180deg, rgba(255,255,255,.88), rgba(255,247,241,.96));
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.85),0 10px 22px rgba(118,84,63,.06);
-      overflow:hidden;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.85),0 10px 22px rgba(118,84,63,.06);overflow:hidden
     }
-
-    .claim-only-title,.status-only-title{
-      position:relative;
-      font-size:1rem;
-      font-weight:800;
-      color:#755847;
-      margin:0;
-      text-align:center;
-      letter-spacing:.01em;
-    }
-
-    .claim-only-sub,.status-only-sub{
-      position:relative;
-      margin-top:6px;
-      font-size:.78rem;
-      color:var(--sub);
-      line-height:1.6;
-    }
+    .claim-only-title,.status-only-title{position:relative;font-size:1rem;font-weight:800;color:#755847;margin:0;text-align:center}
+    .claim-only-sub,.status-only-sub{position:relative;margin-top:6px;font-size:.78rem;color:var(--sub);line-height:1.6}
 
     .warning-blink{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      margin:0 0 12px;
-      padding:12px 14px;
-      border-radius:18px;
-      background:linear-gradient(135deg,#fff4e8,#ffe9db);
-      border:1px solid #f0cfb6;
-      color:#b5642d;
-      font-size:.82rem;
-      font-weight:800;
-      line-height:1.6;
-      text-align:center;
-      animation:warningPulse 1.35s ease-in-out infinite;
-      box-shadow:0 10px 20px rgba(197,142,94,.12);
+      display:flex;align-items:center;justify-content:center;gap:8px;margin:0 0 12px;padding:12px 14px;border-radius:18px;
+      background:linear-gradient(135deg,#fff4e8,#ffe9db);border:1px solid #f0cfb6;color:#b5642d;font-size:.82rem;font-weight:800;line-height:1.6;text-align:center
     }
 
-    @keyframes warningPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.025);opacity:.9}}
-
-    .status-mini-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:10px;
-      margin:0 0 12px;
+    .field-group{display:flex;flex-direction:column;gap:6px;margin-top:11px;align-items:center}
+    .field-label{font-size:.78rem;color:var(--sub);font-weight:700;text-align:center;width:100%}
+    .input-shell{
+      background:rgba(255,253,250,.98);border:1.5px solid #eadfd4;border-radius:20px;padding:11px 12px;
+      transition:.2s ease;box-shadow:inset 0 1px 0 rgba(255,255,255,.65);width:100%;text-align:center
     }
+    .input-shell:focus-within{border-color:#d6b39b;box-shadow:0 0 0 4px rgba(214,179,155,.14);background:#fff}
+    .input-shell.note{padding:9px 10px;border-style:dashed;background:#fffaf7}
 
-    .mini-stat{
-      border-radius:20px;
-      padding:12px 10px;
-      background:linear-gradient(180deg,#fffdfb,#faf2eb);
-      border:1px solid #eaded3;
-      box-shadow:0 8px 16px rgba(118,84,63,.05);
+    .password-shell{display:flex;align-items:center;gap:8px}
+    .password-shell input{flex:1;min-width:0}
+    .toggle-pass{border:0;background:#f5e7db;color:#7c6557;border-radius:999px;padding:7px 11px;font-size:.76rem;font-weight:800;cursor:pointer;white-space:nowrap;flex-shrink:0}
+
+    input[type="email"],input[type="password"],input[type="text"],input[type="date"],textarea{
+      width:100%;border:0;outline:0;background:transparent;font-family:inherit;font-size:.96rem;color:var(--text);text-align:center
     }
+    input::placeholder,textarea::placeholder{color:#b6a396;text-align:center}
+    textarea{resize:none;min-height:92px;line-height:1.6}
 
-    .mini-stat-value{font-size:.95rem;font-weight:800;color:#7a5d4b}
-    .mini-stat-label{margin-top:4px;font-size:.72rem;color:var(--sub);line-height:1.5}
+    .remember-row{margin-top:12px;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;font-size:.78rem;color:var(--sub);text-align:center}
+    .remember-check{display:inline-flex;align-items:center;gap:8px;cursor:pointer;user-select:none}
+    .remember-check input{accent-color:#b98e71;width:16px;height:16px}
 
-    .field-group{
-      display:flex;
-      flex-direction:column;
-      gap:6px;
-      margin-top:11px;
-      align-items:center;
-    }
-
-    .field-label{
-      font-size:.78rem;
-      color:var(--sub);
-      font-weight:700;
-      text-align:center;
-      width:100%;
-    }
-
-    .password-rule,.password-strength{
-      margin-top:2px;
-      font-size:.72rem;
-      line-height:1.5;
-      text-align:center;
-    }
-
+    .password-rule,.password-strength{margin-top:2px;font-size:.72rem;line-height:1.5;text-align:center}
     .password-rule{color:#9a8679}
     .password-strength{font-weight:800}
     .strength-weak{color:#c46a6a}
     .strength-medium{color:#b88443}
     .strength-strong{color:#5f8d5d}
 
-    .input-shell{
-      background:rgba(255,253,250,.98);
-      border:1.5px solid #eadfd4;
-      border-radius:20px;
-      padding:11px 12px;
-      transition:.2s ease;
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.65);
-      width:100%;
-      text-align:center;
-    }
-
-    .input-shell:focus-within{
-      border-color:#d6b39b;
-      box-shadow:0 0 0 4px rgba(214,179,155,.14);
-      background:#fff;
-    }
-
-    .input-shell.note{padding:9px 10px;border-style:dashed;background:#fffaf7}
-
-    .password-shell{
-      display:flex;
-      align-items:center;
-      gap:8px;
-    }
-
-    .password-shell input{flex:1;min-width:0}
-
-    .toggle-pass{
-      border:0;
-      background:#f5e7db;
-      color:#7c6557;
-      border-radius:999px;
-      padding:7px 11px;
-      font-size:.76rem;
-      font-weight:800;
-      cursor:pointer;
-      white-space:nowrap;
-      flex-shrink:0;
-    }
-
-    input[type="email"],input[type="password"],input[type="text"],input[type="date"],textarea{
-      width:100%;
-      border:0;
-      outline:0;
-      background:transparent;
-      font-family:inherit;
-      font-size:.96rem;
-      color:var(--text);
-      text-align:center;
-    }
-
-    input::placeholder,textarea::placeholder{color:#b6a396;text-align:center}
-    textarea{resize:none;min-height:92px;line-height:1.6}
-
-    .remember-row{
-      margin-top:12px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      flex-wrap:wrap;
-      font-size:.78rem;
-      color:var(--sub);
-      text-align:center;
-    }
-
-    .remember-check{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      cursor:pointer;
-      user-select:none;
-    }
-
-    .remember-check input{accent-color:#b98e71;width:16px;height:16px}
-
-    .note-counter{
-      margin-top:4px;
-      font-size:.73rem;
-      color:var(--sub);
-      text-align:center;
-      width:100%;
-    }
-
+    .note-counter{margin-top:4px;font-size:.73rem;color:var(--sub);text-align:center;width:100%}
     .important-note{
-      margin-top:10px;
-      display:flex;
-      gap:8px;
-      align-items:flex-start;
-      justify-content:center;
-      padding:10px 12px;
-      border-radius:18px;
-      border:1px solid #efddd0;
-      background:#fff7f1;
-      color:#9a6f52;
-      font-size:.78rem;
-      line-height:1.6;
-      text-align:center;
+      margin-top:10px;display:flex;gap:8px;align-items:flex-start;justify-content:center;padding:10px 12px;border-radius:18px;
+      border:1px solid #efddd0;background:#fff7f1;color:#9a6f52;font-size:.78rem;line-height:1.6;text-align:center
     }
 
-    .action-row{
-      display:flex;
-      gap:10px;
-      margin-top:14px;
-      justify-content:center;
-    }
-
+    .action-row{display:flex;gap:10px;margin-top:14px;justify-content:center}
     .btn-primary,.btn-secondary,.btn-danger,.btn-link-small,.upload-btn,.copy-account-btn,.btn-copy,.step-chip{
-      border-radius:999px;
-      font-family:inherit;
-      font-weight:800;
-      cursor:pointer;
-      transition:.2s ease;
+      border-radius:999px;font-family:inherit;font-weight:800;cursor:pointer;transition:.2s ease
     }
-
     .btn-primary{
-      flex:1;
-      min-height:52px;
-      border:0;
-      background:linear-gradient(135deg,#d6b297,#b98665);
-      color:#fffdfb;
-      box-shadow:0 14px 24px rgba(126,89,66,.18);
-      font-size:.96rem;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
+      flex:1;min-height:52px;border:0;background:linear-gradient(135deg,#d6b297,#b98665);
+      color:#fffdfb;box-shadow:0 14px 24px rgba(126,89,66,.18);font-size:.96rem;display:inline-flex;align-items:center;justify-content:center;gap:8px
     }
-
     .btn-primary:disabled{opacity:.65;cursor:default}
-
-    .btn-secondary{
-      min-height:52px;
-      border:1px solid #e6d8cd;
-      background:linear-gradient(180deg,#fffdfb,#f7efe8);
-      color:var(--sub);
-      padding:0 16px;
-      font-size:.82rem;
-    }
-
-    .btn-danger{
-      min-height:52px;
-      border:1px solid #f0cdcd;
-      background:linear-gradient(180deg,#fff7f7,#ffefef);
-      color:#c46a6a;
-      padding:0 16px;
-      font-size:.82rem;
-    }
-
-    .btn-link-small{
-      min-height:42px;
-      border:1px solid #eadbcf;
-      background:#fffaf6;
-      color:#8f7868;
-      padding:0 16px;
-      font-size:.78rem;
-      width:100%;
-      margin-top:12px;
-    }
+    .btn-secondary{min-height:52px;border:1px solid #e6d8cd;background:linear-gradient(180deg,#fffdfb,#f7efe8);color:var(--sub);padding:0 16px;font-size:.82rem}
+    .btn-danger{min-height:52px;border:1px solid #f0cdcd;background:linear-gradient(180deg,#fff7f7,#ffefef);color:#c46a6a;padding:0 16px;font-size:.82rem}
+    .btn-link-small{min-height:42px;border:1px solid #eadbcf;background:#fffaf6;color:#8f7868;padding:0 16px;font-size:.78rem;width:100%;margin-top:12px}
 
     .profile-box{
-      margin-top:10px;
-      border-radius:20px;
-      border:1px solid #eadacd;
-      background:linear-gradient(180deg,#fffaf6,#f9f0e9);
-      padding:12px;
-      display:grid;
-      gap:8px;
-      font-size:.82rem;
-      text-align:center;
+      margin-top:10px;border-radius:20px;border:1px solid #eadacd;background:linear-gradient(180deg,#fffaf6,#f9f0e9);padding:12px;display:grid;gap:8px;font-size:.82rem;text-align:center
     }
 
     .payment-section{display:none}
-
     .payment-card{
-      margin-top:10px;
-      padding:14px;
-      border-radius:24px;
-      background:linear-gradient(180deg,#fffdfb,#faf3ed);
-      border:1px solid #eadfd4;
-      text-align:center;
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 10px 20px rgba(118,84,63,.05);
+      margin-top:10px;padding:14px;border-radius:24px;background:linear-gradient(180deg,#fffdfb,#faf3ed);
+      border:1px solid #eadfd4;text-align:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 10px 20px rgba(118,84,63,.05)
     }
-
     .payment-title{font-size:.98rem;font-weight:800;margin-bottom:4px;color:#7a5d4b}
     .payment-desc{font-size:.79rem;color:var(--sub);line-height:1.6;margin-bottom:12px;text-align:center}
 
-    .bank-minimal{
-      margin-bottom:14px;
-      padding:14px;
-      border-radius:22px;
-      border:1px solid #efe2d8;
-      background:linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,250,246,.98));
-    }
-
-    .bank-minimal-top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      margin-bottom:10px;
-    }
-
-    .bank-chip{
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      padding:6px 10px;
-      border-radius:999px;
-      background:#f8efe8;
-      border:1px solid #ebdcd0;
-      font-size:.73rem;
-      font-weight:800;
-      color:#8b6c5b;
-    }
-
+    .bank-minimal{margin-bottom:14px;padding:14px;border-radius:22px;border:1px solid #efe2d8;background:linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,250,246,.98))}
+    .bank-minimal-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+    .bank-chip{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;background:#f8efe8;border:1px solid #ebdcd0;font-size:.73rem;font-weight:800;color:#8b6c5b}
     .bank-card-name{font-size:.76rem;color:var(--sub);line-height:1.5;text-align:left}
-
-    .bank-number-box{
-      padding:14px 12px;
-      border-radius:18px;
-      background:linear-gradient(180deg,#fff,#fcf7f2);
-      border:1px solid #eee1d6;
-      margin-bottom:10px;
-    }
-
+    .bank-number-box{padding:14px 12px;border-radius:18px;background:linear-gradient(180deg,#fff,#fcf7f2);border:1px solid #eee1d6;margin-bottom:10px}
     .bank-number-label{font-size:.72rem;color:var(--sub);margin-bottom:4px;letter-spacing:.04em}
     .bank-number{font-size:1.15rem;font-weight:800;color:#6c4f40;letter-spacing:.08em;word-break:break-all}
 
-    .copy-account-btn,.btn-copy{
-      width:100%;
-      min-height:42px;
-      border:1px solid #e4d6ca;
-      background:linear-gradient(180deg,#fff,#f8f1eb);
-      color:#6f5647;
-      font-size:.8rem;
-    }
-
-    .qr-wrap{
-      margin-top:10px;
-      padding:12px;
-      border-radius:22px;
-      border:1px solid #eaded3;
-      background:rgba(255,255,255,.90);
-      text-align:center;
-    }
-
+    .copy-account-btn,.btn-copy{width:100%;min-height:42px;border:1px solid #e4d6ca;background:linear-gradient(180deg,#fff,#f8f1eb);color:#6f5647;font-size:.8rem}
+    .qr-wrap{margin-top:10px;padding:12px;border-radius:22px;border:1px solid #eaded3;background:rgba(255,255,255,.90);text-align:center}
     .qr-title{font-size:.86rem;font-weight:800;color:#755847;margin-bottom:8px}
-    .qr-img{
-      width:100%;
-      max-width:260px;
-      display:block;
-      margin:0 auto;
-      border-radius:18px;
-      border:1px solid #eadbcf;
-      background:#fff;
-      box-shadow:0 12px 20px rgba(0,0,0,.06);
-    }
-
+    .qr-img{width:100%;max-width:260px;display:block;margin:0 auto;border-radius:18px;border:1px solid #eadbcf;background:#fff;box-shadow:0 12px 20px rgba(0,0,0,.06)}
     .qr-caption{margin-top:8px;font-size:.76rem;line-height:1.6;color:var(--sub);text-align:center}
 
-    .uploader{
-      border:1.5px dashed #daccc0;
-      border-radius:22px;
-      padding:14px;
-      background:rgba(255,255,255,.86);
-      margin-top:12px;
-      text-align:center;
-      position:relative;
-    }
-
-    .uploader-top{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:8px;
-      text-align:center;
-    }
-
+    .uploader{border:1.5px dashed #daccc0;border-radius:22px;padding:14px;background:rgba(255,255,255,.86);margin-top:12px;text-align:center;position:relative}
+    .uploader-top{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
     .upload-title{font-size:.9rem;font-weight:800;color:#7a5d4b}
     .upload-sub{font-size:.76rem;color:var(--sub);line-height:1.55;text-align:center}
-
-    .upload-row{
-      display:flex;
-      gap:8px;
-      justify-content:center;
-      flex-wrap:wrap;
-      margin-top:12px;
-    }
-
-    .upload-btn{
-      border:0;
-      padding:11px 16px;
-      background:linear-gradient(135deg,#e8c8b2,#d9b498);
-      color:#6c4a3d;
-      font-size:.84rem;
-      box-shadow:0 10px 18px rgba(118,84,63,.08);
-    }
-
-    .upload-btn.secondary{
-      background:linear-gradient(135deg,#f5e5da,#fff7f2);
-      color:#7a5d4b;
-      border:1px solid #e8d9ce;
-    }
-
-    .hidden-file-input{
-      position:absolute;
-      left:-9999px;
-      width:1px;
-      height:1px;
-      opacity:0;
-      pointer-events:none;
-    }
-
+    .upload-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+    .upload-btn{border:0;padding:11px 16px;background:linear-gradient(135deg,#e8c8b2,#d9b498);color:#6c4a3d;font-size:.84rem;box-shadow:0 10px 18px rgba(118,84,63,.08)}
+    .upload-btn.secondary{background:linear-gradient(135deg,#f5e5da,#fff7f2);color:#7a5d4b;border:1px solid #e8d9ce}
+    .hidden-file-input{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none}
     .file-name{margin-top:10px;font-size:.76rem;color:var(--sub);word-break:break-word;text-align:center}
 
     .upload-status{
-      margin-top:10px;
-      display:none;
-      padding:10px 12px;
-      border-radius:16px;
-      background:linear-gradient(180deg,#f3fbf0,#edf8ea);
-      border:1px solid #d7e7cf;
-      color:#5f7b56;
-      font-size:.78rem;
-      font-weight:800;
-      line-height:1.6;
+      margin-top:10px;display:none;padding:10px 12px;border-radius:16px;background:linear-gradient(180deg,#f3fbf0,#edf8ea);
+      border:1px solid #d7e7cf;color:#5f7b56;font-size:.78rem;font-weight:800;line-height:1.6
     }
-
     .upload-status.show{display:block}
-    .upload-status.error{
-      background:linear-gradient(180deg,#fff3f3,#fff0f0);
-      border-color:#efcccc;
-      color:#b85d5d;
-    }
+    .upload-status.error{background:linear-gradient(180deg,#fff3f3,#fff0f0);border-color:#efcccc;color:#b85d5d}
 
-    .preview-wrap{
-      margin-top:12px;
-      display:none;
-      flex-direction:column;
-      align-items:center;
-      gap:10px;
-    }
-
-    .preview-img{
-      width:100%;
-      max-height:260px;
-      object-fit:contain;
-      border-radius:18px;
-      border:1px solid #eadfd4;
-      background:#fff;
-      box-shadow:0 14px 24px rgba(0,0,0,.06);
-    }
+    .preview-wrap{margin-top:12px;display:none;flex-direction:column;align-items:center;gap:10px}
+    .preview-img{width:100%;max-height:260px;object-fit:contain;border-radius:18px;border:1px solid #eadfd4;background:#fff;box-shadow:0 14px 24px rgba(0,0,0,.06)}
 
     .payment-require{margin-top:8px;font-size:.75rem;color:#c46a6a;line-height:1.55;text-align:center}
     .helper{margin-top:8px;display:flex;gap:8px;align-items:flex-start;justify-content:center;text-align:center;font-size:.76rem;line-height:1.6;color:var(--warning)}
 
     #summary,#statusSummary{margin-top:8px;text-align:center;font-size:.78rem}
     .summary-pill{
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      padding:7px 12px;
-      border-radius:999px;
-      background:#f5eee8;
-      border:1px solid #e7d7ca;
-      color:#7a5d4b;
-      font-weight:800;
+      display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;background:#f5eee8;border:1px solid #e7d7ca;color:#7a5d4b;font-weight:800
     }
 
-    #status,#authStatus,#statusPageText{
-      min-height:20px;
-      margin-top:8px;
-      text-align:center;
-      font-size:.82rem;
-      line-height:1.7;
-      color:var(--sub);
-    }
-
+    #status,#authStatus,#statusPageText{min-height:20px;margin-top:8px;text-align:center;font-size:.82rem;line-height:1.7;color:var(--sub)}
     .status-error{color:var(--danger)!important}
     .status-ok{color:var(--success)!important}
     .status-info{color:var(--info)!important}
     .status-strong{font-weight:800;color:var(--text)}
     .status-time{font-size:.76rem;color:var(--sub)}
 
-    #results,#historyResults{
-      margin-top:8px;
-      display:grid;
-      gap:8px;
-    }
-
+    #results,#historyResults{margin-top:8px;display:grid;gap:8px}
     .result-item{
-      border-radius:20px;
-      border:1px solid #eadfd5;
-      background:rgba(255,255,255,.96);
-      padding:10px 12px 12px;
-      box-shadow:0 10px 20px rgba(118,84,63,.05);
-      text-align:center;
+      border-radius:20px;border:1px solid #eadfd5;background:rgba(255,255,255,.96);padding:10px 12px 12px;
+      box-shadow:0 10px 20px rgba(118,84,63,.05);text-align:center
     }
-
-    .item-header{
-      width:100%;
-      font-size:.72rem;
-      color:var(--sub);
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      text-align:center;
-      margin-bottom:6px;
-    }
-
-    .item-email{
-      width:100%;
-      font-size:.9rem;
-      font-weight:800;
-      word-break:break-word;
-      text-align:center;
-    }
-
-    .item-tag{
-      font-size:.72rem;
-      padding:4px 9px;
-      border-radius:999px;
-      background:#f5eee8;
-      border:1px solid #e7d7ca;
-      color:#7a5d4b;
-      font-weight:800;
-      margin:8px auto;
-      display:inline-flex;
-    }
-
+    .item-header{width:100%;font-size:.72rem;color:var(--sub);letter-spacing:.12em;text-transform:uppercase;text-align:center;margin-bottom:6px}
+    .item-email{width:100%;font-size:.9rem;font-weight:800;word-break:break-word;text-align:center}
+    .item-tag{font-size:.72rem;padding:4px 9px;border-radius:999px;background:#f5eee8;border:1px solid #e7d7ca;color:#7a5d4b;font-weight:800;margin:8px auto;display:inline-flex}
     .item-tag.paid{background:#fff5eb;border-color:#efd9bf;color:#b57a45}
     .item-meta{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;font-size:.76rem;color:var(--sub);margin-bottom:8px;text-align:center}
     .item-body{text-align:center;font-size:.84rem;line-height:1.65;margin-bottom:8px}
     .result-actions{display:grid;gap:8px;margin-top:6px}
 
-    .step-card{
-      margin-top:12px;
-      padding:12px;
-      border-radius:20px;
-      border:1px solid #eaded3;
-      background:linear-gradient(180deg,#fffdfb,#faf3ed);
-    }
-
+    .step-card{margin-top:12px;padding:12px;border-radius:20px;border:1px solid #eaded3;background:linear-gradient(180deg,#fffdfb,#faf3ed)}
     .step-title{font-size:.84rem;font-weight:800;color:#755847;margin-bottom:10px}
     .step-list{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
-
-    .step-chip{
-      min-height:34px;
-      padding:7px 12px;
-      border:1px solid #eaded3;
-      background:#fff;
-      color:#8b7466;
-      font-size:.74rem;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-    }
-
-    .step-chip.active{
-      background:linear-gradient(135deg,#d9b79d,#be8d70);
-      color:#fff;
-      border-color:transparent;
-      box-shadow:0 8px 16px rgba(118,84,63,.12);
-    }
+    .step-chip{min-height:34px;padding:7px 12px;border:1px solid #eaded3;background:#fff;color:#8b7466;font-size:.74rem;display:inline-flex;align-items:center;justify-content:center}
+    .step-chip.active{background:linear-gradient(135deg,#d9b79d,#be8d70);color:#fff;border-color:transparent;box-shadow:0 8px 16px rgba(118,84,63,.12)}
 
     .history-card,.live-card{
-      margin-top:12px;
-      padding:14px;
-      border-radius:24px;
-      background:linear-gradient(180deg, rgba(255,255,255,.97), rgba(252,246,240,.97));
-      border:1px solid #eadbcf;
-      box-shadow:var(--shadow-soft);
-      position:relative;
-      overflow:hidden;
+      margin-top:12px;padding:14px;border-radius:24px;background:linear-gradient(180deg, rgba(255,255,255,.97), rgba(252,246,240,.97));
+      border:1px solid #eadbcf;box-shadow:var(--shadow-soft);position:relative;overflow:hidden
     }
-
-    .history-header,.live-header{
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      gap:10px;
-      margin-bottom:10px;
-      flex-wrap:wrap;
-    }
-
-    .history-title-left,.live-title-left{
-      display:flex;
-      align-items:center;
-      gap:7px;
-      justify-content:center;
-    }
-
-    .live-dot{
-      width:9px;
-      height:9px;
-      border-radius:999px;
-      background:var(--success);
-      box-shadow:0 0 0 4px rgba(111,142,99,.16);
-      animation:pulseDot 1.6s infinite;
-    }
-
-    @keyframes pulseDot{
-      0%{transform:scale(1);opacity:1}
-      50%{transform:scale(1.12);opacity:.75}
-      100%{transform:scale(1);opacity:1}
-    }
-
+    .history-header,.live-header{display:flex;justify-content:center;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+    .history-title-left,.live-title-left{display:flex;align-items:center;gap:7px;justify-content:center}
+    .live-dot{width:9px;height:9px;border-radius:999px;background:var(--success);box-shadow:0 0 0 4px rgba(111,142,99,.16)}
     .history-title-text,.live-title-text{font-size:.88rem;font-weight:800;color:#7a5d4b}
     .live-date{width:100%;font-size:.74rem;color:var(--sub);text-align:center}
-
-    .live-list{
-      display:grid;
-      gap:8px;
-      max-height:270px;
-      overflow-y:auto;
-    }
-
-    .live-item{
-      display:flex;
-      justify-content:space-between;
-      gap:12px;
-      align-items:center;
-      padding:10px 12px;
-      border-radius:16px;
-      background:rgba(255,255,255,.84);
-      border:1px solid #ede2d7;
-      font-size:.8rem;
-    }
-
-    .live-email{
-      font-weight:800;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
-      max-width:220px;
-      text-align:left;
-      flex:1;
-    }
-
-    .live-status-text{
-      font-size:.77rem;
-      color:var(--sub);
-      white-space:nowrap;
-      text-align:right;
-      flex-shrink:0;
-    }
-
+    .live-list{display:grid;gap:8px;max-height:270px;overflow-y:auto}
+    .live-item{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:10px 12px;border-radius:16px;background:rgba(255,255,255,.84);border:1px solid #ede2d7;font-size:.8rem}
+    .live-email{font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:220px;text-align:left;flex:1}
+    .live-status-text{font-size:.77rem;color:var(--sub);white-space:nowrap;text-align:right;flex-shrink:0}
     .live-empty{text-align:center;font-size:.8rem;color:var(--sub);padding:8px 0}
 
     .status-pill{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:5px 10px;
-      border-radius:999px;
-      font-size:.72rem;
-      font-weight:800;
-      border:1px solid transparent;
-      line-height:1.2;
+      display:inline-flex;align-items:center;justify-content:center;padding:5px 10px;border-radius:999px;font-size:.72rem;font-weight:800;border:1px solid transparent;line-height:1.2
     }
-
     .status-pill--green{background:#edf8ef;color:#47734d;border-color:#cfe4d2}
     .status-pill--yellow{background:#fff7e9;color:#9c7330;border-color:#f1dfb8}
     .status-pill--red{background:#fff1f1;color:#b85d5d;border-color:#efcccc}
@@ -969,18 +329,8 @@
     .status-pill--purple{background:#f4efff;color:#7860a7;border-color:#dfd4f7}
 
     .alert-box{
-      display:none;
-      margin-top:10px;
-      padding:11px 12px;
-      border-radius:18px;
-      font-size:.8rem;
-      line-height:1.6;
-      font-weight:700;
-      border:1px solid transparent;
-      animation:fadeUp .2s ease;
-      text-align:center;
+      display:none;margin-top:10px;padding:11px 12px;border-radius:18px;font-size:.8rem;line-height:1.6;font-weight:700;border:1px solid transparent;text-align:center
     }
-
     .alert-box.show{display:block}
     .alert-box.success{background:#f2f8ef;color:#5d7753;border-color:#d7e7cf}
     .alert-box.error{background:#fff2f2;color:#b95a5a;border-color:#efcccc}
@@ -988,166 +338,50 @@
     .alert-box.warning{background:#fff8ed;color:#9b7441;border-color:#f1dec0}
 
     .modal-backdrop{
-      position:fixed;
-      inset:0;
-      background:rgba(64,47,37,.34);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding:18px;
-      z-index:99998;
-      backdrop-filter:blur(6px);
+      position:fixed;inset:0;background:rgba(64,47,37,.34);display:none;align-items:center;justify-content:center;
+      padding:18px;z-index:99998;backdrop-filter:blur(6px)
     }
-
     .modal-backdrop.show{display:flex}
-
     .modal-card{
-      width:100%;
-      max-width:360px;
-      background:#fffaf6;
-      border:1px solid #eadccf;
-      border-radius:24px;
-      box-shadow:0 18px 40px rgba(0,0,0,.16);
-      padding:18px;
-      text-align:center;
+      width:100%;max-width:360px;background:#fffaf6;border:1px solid #eadccf;border-radius:24px;
+      box-shadow:0 18px 40px rgba(0,0,0,.16);padding:18px;text-align:center
     }
-
     .modal-title{font-size:1rem;font-weight:800;color:#735847;margin-bottom:8px}
     .modal-desc{font-size:.83rem;color:var(--sub);line-height:1.65;margin-bottom:14px}
-    .modal-summary{
-      border-radius:18px;
-      border:1px solid #ebddd1;
-      background:#fff;
-      padding:12px;
-      font-size:.8rem;
-      line-height:1.7;
-      color:#6b5648;
-      text-align:center;
-    }
-
+    .modal-summary{border-radius:18px;border:1px solid #ebddd1;background:#fff;padding:12px;font-size:.8rem;line-height:1.7;color:#6b5648;text-align:center}
     .modal-actions{display:flex;gap:10px;margin-top:14px;justify-content:center}
 
     .toast{
-      position:fixed;
-      left:50%;
-      bottom:18px;
-      transform:translateX(-50%) translateY(40px);
-      padding:10px 18px;
-      border-radius:999px;
-      background:rgba(90,70,59,.96);
-      color:#fff;
-      font-size:.8rem;
-      font-weight:800;
-      opacity:0;
-      pointer-events:none;
-      transition:all .28s ease;
-      z-index:9999;
-      box-shadow:0 12px 24px rgba(0,0,0,.18);
-      text-align:center;
+      position:fixed;left:50%;bottom:18px;transform:translateX(-50%) translateY(40px);padding:10px 18px;border-radius:999px;
+      background:rgba(90,70,59,.96);color:#fff;font-size:.8rem;font-weight:800;opacity:0;pointer-events:none;transition:all .28s ease;z-index:9999
     }
-
     .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
     .loading-overlay{
-      position:fixed;
-      inset:0;
-      display:none;
-      align-items:center;
-      justify-content:center;
-      z-index:99999;
-      padding:20px;
-      background:rgba(255,248,243,.90);
-      backdrop-filter:blur(8px);
+      position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:99999;padding:20px;
+      background:rgba(255,248,243,.90);backdrop-filter:blur(8px)
     }
-
     .loading-overlay.show{display:flex}
-
     .loading-card{
-      width:100%;
-      max-width:320px;
-      border-radius:28px;
-      background:rgba(255,255,255,.97);
-      border:1px solid #efe0d5;
-      box-shadow:0 20px 54px rgba(118,84,63,.14);
-      padding:24px 18px 22px;
-      text-align:center;
+      width:100%;max-width:320px;border-radius:28px;background:rgba(255,255,255,.97);border:1px solid #efe0d5;
+      box-shadow:0 20px 54px rgba(118,84,63,.14);padding:24px 18px 22px;text-align:center
     }
-
     .spinner{
-      width:62px;
-      height:62px;
-      margin:0 auto 14px;
-      border-radius:999px;
-      border:6px solid #edd9ca;
-      border-top-color:#b98e71;
-      animation:spin .85s linear infinite;
+      width:62px;height:62px;margin:0 auto 14px;border-radius:999px;border:6px solid #edd9ca;border-top-color:#b98e71;animation:spin .85s linear infinite
     }
-
     @keyframes spin{to{transform:rotate(360deg)}}
-
     .loading-title{font-size:1.08rem;font-weight:800;color:#7a5d4b;text-align:center}
     .loading-sub{margin-top:8px;font-size:.87rem;color:var(--sub);line-height:1.65;text-align:center}
-    .loading-warning{
-      margin-top:12px;
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:9px 13px;
-      border-radius:999px;
-      background:#fff7f1;
-      border:1px solid #efd9ca;
-      color:#b67b5a;
-      font-size:.8rem;
-      font-weight:800;
-      text-align:center;
-    }
 
     .float-admin{
-      position:fixed;
-      right:16px;
-      bottom:20px;
-      z-index:9997;
-      width:62px;
-      height:62px;
-      border:0;
-      border-radius:999px;
-      background:linear-gradient(135deg,#fffdfb,#f4e7dc);
-      box-shadow:0 16px 28px rgba(118,84,63,.18);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      cursor:pointer;
-      padding:6px;
+      position:fixed;right:16px;bottom:20px;z-index:9997;width:62px;height:62px;border:0;border-radius:999px;
+      background:linear-gradient(135deg,#fffdfb,#f4e7dc);box-shadow:0 16px 28px rgba(118,84,63,.18);
+      display:flex;align-items:center;justify-content:center;cursor:pointer;padding:6px
     }
+    .float-admin img{width:100%;height:100%;object-fit:contain;border-radius:999px}
 
-    .float-admin img{
-      width:100%;
-      height:100%;
-      object-fit:contain;
-      border-radius:999px;
-    }
-
-    .footer{
-      margin-top:auto;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:6px;
-      color:var(--sub);
-      font-size:.74rem;
-      text-align:center;
-    }
-
-    .support-pill{
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      padding:7px 12px;
-      border-radius:999px;
-      background:rgba(255,255,255,.9);
-      border:1px solid #eadfd5;
-    }
-
+    .footer{margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--sub);font-size:.74rem;text-align:center}
+    .support-pill{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;background:rgba(255,255,255,.9);border:1px solid #eadfd5}
     .copyright{letter-spacing:.16em;text-transform:uppercase;text-align:center}
     .shake{animation:shake .4s;border-color:var(--danger)!important}
     @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
@@ -1156,7 +390,6 @@
       .app{padding:12px 12px 16px}
       .action-row,.modal-actions{flex-direction:column}
       .page-nav{flex-direction:column}
-      .status-mini-grid{grid-template-columns:1fr}
       .float-admin{width:58px;height:58px;right:12px;bottom:14px}
       .live-item{gap:8px}
       .live-email{max-width:150px}
@@ -1196,6 +429,8 @@
         </div>
       </div>
     </section>
+
+    <div class="global-banner shell-card" id="globalBanner"></div>
 
     <main class="panel shell-card">
       <section class="view active" id="loginView">
@@ -1451,7 +686,7 @@
 
           <div class="helper">
             <span>ℹ️</span>
-            <span>หลังส่งคำขอแล้ว สามารถกดเข้าไปดูหน้า “สถานะการเคลม” เพื่อติดตามผลได้ทันที</span>
+            <span id="routeHelperText">แจ้งลูกค้าได้ทั้งทางไลน์ และทางเว็บ</span>
           </div>
 
           <div id="summary"></div>
@@ -1471,18 +706,24 @@
             <div class="status-only-sub">ตรวจสอบคำขอล่าสุด สถานะคำขอของคุณ และติดต่อแอดมินได้จากหน้านี้</div>
           </div>
 
-          <div class="status-mini-grid">
-            <div class="mini-stat">
-              <div class="mini-stat-value" id="miniQueueNo">-</div>
-              <div class="mini-stat-label">คิวเคลมล่าสุด</div>
+          <div class="field-group" id="routeStatusBlock" style="margin-top:0;">
+            <div class="input-shell" style="font-size:.82rem;color:#8d6a55;">
+              <span id="routeStatusText">แจ้งลูกค้าได้ทั้งทางไลน์ และทางเว็บ</span>
             </div>
-            <div class="mini-stat">
-              <div class="mini-stat-value" id="miniClaimType">-</div>
-              <div class="mini-stat-label">ประเภทเคลม</div>
+          </div>
+
+          <div class="status-mini-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0 12px;">
+            <div class="input-shell">
+              <div style="font-size:.95rem;font-weight:800;color:#7a5d4b" id="miniQueueNo">-</div>
+              <div style="margin-top:4px;font-size:.72rem;color:#9a8679;">คิวเคลมล่าสุด</div>
             </div>
-            <div class="mini-stat">
-              <div class="mini-stat-value" id="miniLastTime">-</div>
-              <div class="mini-stat-label">แจ้งล่าสุด</div>
+            <div class="input-shell">
+              <div style="font-size:.95rem;font-weight:800;color:#7a5d4b" id="miniClaimType">-</div>
+              <div style="margin-top:4px;font-size:.72rem;color:#9a8679;">ประเภทเคลม</div>
+            </div>
+            <div class="input-shell">
+              <div style="font-size:.95rem;font-weight:800;color:#7a5d4b" id="miniLastTime">-</div>
+              <div style="margin-top:4px;font-size:.72rem;color:#9a8679;">แจ้งล่าสุด</div>
             </div>
           </div>
 
@@ -1539,10 +780,6 @@
         ระบบกำลังประมวลผลคำขอของคุณ<br />
         กรุณาอย่ารีเฟรชหน้าจอระหว่างกำลังโหลด
       </div>
-      <div class="loading-warning">
-        <span>⛔</span>
-        <span>ห้ามรีเฟรชหน้าจอ</span>
-      </div>
     </div>
   </div>
 
@@ -1559,11 +796,7 @@
   </div>
 
   <script>
-    /* 426 SHOP WEB APP — patched front-end
-       Build: 2026-03-13 web-patch-session-guard-1
-    */
-
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbykbCYxSuLxmw6-fHFe2eYNjTZkg4jhAzyTihLpjUhn5uDzkUZPqMpqJEYfU-XPAQ64Ow/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbykbCYxSuLxmw6-fHFe2eYNjTZkg4jhAzyTihLpjUhn5uDzkUZPqMpqJEYfU-XPAQ64Ow/exec"; // ใส่ /exec ของ deployment ล่าสุด
     const STATUS_POLL_INTERVAL = 30000;
     const CONFIG_POLL_INTERVAL = 30000;
     const MAX_NOTE_LENGTH = 500;
@@ -1577,7 +810,7 @@
     let claimConfig = {
       claimStartHour: 7,
       claimEndHour: 19,
-      claimOpenDays: [1, 2, 3, 4, 5, 6],
+      claimOpenDays: [1,2,3,4,5,6],
       claimOpenText: "รับเคลมเฉพาะวันจันทร์–เสาร์ เวลา 07.00–19.00 น.",
       claimClosedText: "ขณะนี้อยู่นอกเวลารับเคลม กรุณากลับมาเคลมในช่วงเวลาที่กำหนด",
       outOfTimeErrorText: "วันนี้ปิดรับแล้ว กรุณากลับมาเคลมในวันและเวลาที่กำหนด",
@@ -1591,7 +824,16 @@
       paymentNote: "สำหรับปีสมัครที่กำหนด ระบบจะให้ชำระ 19 บาท และแนบหลักฐานเพื่อเข้าคิวเคลม",
       paymentRequireSlip: "หากไม่แนบสลิป ระบบจะยังไม่รับเข้าระบบเคลมสำหรับรอบที่ต้องชำระ 19 บาท",
       supportLine: "@467dlpti",
-      isOpenNow: null
+      isOpenNow: null,
+
+      lineEnabled: true,
+      webEnabled: true,
+      customerNotice: "แจ้งได้ 2 ช่องทาง\n• ทางไลน์\n• ทางเว็บ",
+      routeMessage: "แจ้งได้ 2 ช่องทาง\n• ทางไลน์\n• ทางเว็บ",
+      webClosedMessage: "ขออภัยค่ะ ตอนนี้ระบบหน้าเว็บปิดชั่วคราว\nสามารถแจ้งเรื่องผ่านทางไลน์ได้ค่ะ",
+      lineClosedMessage: "ขออภัยค่ะ ตอนนี้ระบบทางไลน์ปิดชั่วคราว\nสามารถแจ้งเรื่องผ่านทางเว็บได้ค่ะ",
+      bothClosedMessage: "ขออภัยค่ะ ตอนนี้ระบบปิดชั่วคราวทั้งทางไลน์และทางเว็บ",
+      webBannerMessage: "ตอนนี้ระบบเว็บเปิดให้บริการตามปกติค่ะ"
     };
 
     const state = {
@@ -1601,10 +843,12 @@
       token: localStorage.getItem(TOKEN_KEY) || "",
       lastClaimAt: "",
       submitLock: false,
-      authLock: false
+      authLock: false,
+      webClosed: false
     };
 
     const heroSection = document.getElementById("heroSection");
+    const globalBanner = document.getElementById("globalBanner");
     const btnSubmit = document.getElementById("btnSubmit");
     const btnClear = document.getElementById("btnClear");
     const btnLogout = document.getElementById("btnLogout");
@@ -1677,6 +921,8 @@
     const bankAccountNameEl = document.getElementById("bankAccountName");
     const supportLineEl = document.getElementById("supportLine");
     const paymentQr = document.getElementById("paymentQr");
+    const routeHelperText = document.getElementById("routeHelperText");
+    const routeStatusText = document.getElementById("routeStatusText");
 
     const profileBox = document.getElementById("memberProfileBox");
     const profileEmail = document.getElementById("profileEmail");
@@ -1710,13 +956,8 @@
 
     let activeSlipFile = null;
 
-    function normalizeEmail(value) {
-      return String(value || "").trim().toLowerCase();
-    }
-
-    function normalizeText(value) {
-      return String(value || "").trim();
-    }
+    function normalizeEmail(value){ return String(value || "").trim().toLowerCase(); }
+    function normalizeText(value){ return String(value || "").trim(); }
 
     function parseResponseLoose(data) {
       if (!data || typeof data !== "object") {
@@ -1726,8 +967,11 @@
     }
 
     function isUnauthorizedMessage(message) {
-      const msg = String(message || "").toLowerCase();
-      return msg.includes("unauthorized");
+      return String(message || "").toLowerCase().indexOf("unauthorized") !== -1;
+    }
+
+    function requireScriptUrl() {
+      if (!SCRIPT_URL) throw new Error("กรุณาใส่ SCRIPT_URL ก่อนใช้งาน");
     }
 
     function updateHeroVisibility() {
@@ -1773,6 +1017,16 @@
       }
     }
 
+    function showGlobalBanner(message, type = "info") {
+      globalBanner.className = "global-banner shell-card show" + (type === "error" ? " error" : "");
+      globalBanner.innerText = message || "";
+    }
+
+    function hideGlobalBanner() {
+      globalBanner.className = "global-banner shell-card";
+      globalBanner.innerText = "";
+    }
+
     function escapeHtml(str) {
       return String(str || "")
         .replace(/&/g, "&amp;")
@@ -1811,9 +1065,10 @@
     function formatThaiDate(dateStr) {
       if (!dateStr) return "-";
       if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
-        const [y, m, d] = dateStr.split("-").map(Number);
+        const p = dateStr.split("-");
+        const y = Number(p[0]), m = Number(p[1]), d = Number(p[2]);
         const months = ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."];
-        return `${d} ${months[m - 1]} ${y + 543}`;
+        return d + " " + months[m - 1] + " " + (y + 543);
       }
       return dateStr;
     }
@@ -1828,20 +1083,20 @@
       const yy = d.getFullYear() + 543;
       const hh = String(d.getHours()).padStart(2, "0");
       const mi = String(d.getMinutes()).padStart(2, "0");
-      return `${dd} ${mm} ${yy} เวลา ${hh}:${mi}`;
+      return dd + " " + mm + " " + yy + " เวลา " + hh + ":" + mi;
     }
 
     function formatShortThaiTime(value) {
       if (!value) return "-";
       const d = new Date(value);
       if (isNaN(d.getTime())) return "-";
-      return `${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`;
+      return String(d.getHours()).padStart(2,"0") + ":" + String(d.getMinutes()).padStart(2,"0");
     }
 
     function formatThaiToday() {
       const now = new Date();
       const months = ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."];
-      return `${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear() + 543}`;
+      return now.getDate() + " " + months[now.getMonth()] + " " + (now.getFullYear() + 543);
     }
 
     function maskEmail(email) {
@@ -1886,12 +1141,34 @@
     }
 
     function updatePasswordStrengthUI() {
-      const { text, cls } = getPasswordStrength(registerPassword.value || "");
-      registerPasswordStrength.textContent = text;
-      registerPasswordStrength.className = "password-strength " + cls;
+      const x = getPasswordStrength(registerPassword.value || "");
+      registerPasswordStrength.textContent = x.text;
+      registerPasswordStrength.className = "password-strength " + x.cls;
+    }
+
+    function setWebClosedState(flag, message) {
+      state.webClosed = !!flag;
+
+      const controls = [
+        btnLogin, btnRegister, btnForgotPassword, btnSubmit, btnClear,
+        showRegisterBtn, backToLoginBtn, btnPickSlip, btnCameraSlip
+      ];
+
+      controls.forEach(el => {
+        if (!el) return;
+        el.disabled = !!flag;
+      });
+
+      if (flag) {
+        showGlobalBanner(message || claimConfig.webClosedMessage || "ระบบเว็บปิดชั่วคราว", "error");
+      } else {
+        if (claimConfig.webBannerMessage) showGlobalBanner(claimConfig.webBannerMessage + "\n\n" + (claimConfig.routeMessage || ""), "info");
+        else hideGlobalBanner();
+      }
     }
 
     async function fetchJsonWithRetry(url, options = {}, retries = 1) {
+      requireScriptUrl();
       try {
         const res = await fetch(url, {
           ...options,
@@ -1908,6 +1185,7 @@
     }
 
     async function postJson(payload) {
+      requireScriptUrl();
       const res = await fetch(SCRIPT_URL, {
         method: "POST",
         headers: { "Content-Type": "text/plain;charset=utf-8" },
@@ -1939,9 +1217,9 @@
         const raw = localStorage.getItem(REMEMBER_KEY);
         if (!raw) return;
         const saved = JSON.parse(raw);
-        if (saved?.email) loginEmailInput.value = saved.email;
-        if (saved?.password) loginPasswordInput.value = saved.password;
-        if (saved?.email || saved?.password) rememberPassword.checked = true;
+        if (saved && saved.email) loginEmailInput.value = saved.email;
+        if (saved && saved.password) loginPasswordInput.value = saved.password;
+        if ((saved && saved.email) || (saved && saved.password)) rememberPassword.checked = true;
       } catch (err) {
         localStorage.removeItem(REMEMBER_KEY);
       }
@@ -1975,9 +1253,7 @@
       renderHistory([]);
       renderEmptyStatusPage();
       clearForm();
-      if (!silent) {
-        setActiveView("loginView");
-      }
+      if (!silent) setActiveView("loginView");
     }
 
     function setSlipStatus(message, type = "ok") {
@@ -1994,20 +1270,20 @@
       const raw = String(text || "").trim();
       const safe = escapeHtml(raw || "-");
 
-      if (!raw) return `<span class="status-pill status-pill--yellow">รอดำเนินการ</span>`;
+      if (!raw) return '<span class="status-pill status-pill--yellow">รอดำเนินการ</span>';
       if (raw.includes("ดึงเมลแล้ว") || raw.includes("เสร็จ") || raw.includes("ใช้งานได้ปกติ") || raw.includes("สำเร็จ")) {
-        return `<span class="status-pill status-pill--green">${safe}</span>`;
+        return '<span class="status-pill status-pill--green">' + safe + '</span>';
       }
       if (raw.includes("รอตรวจสอบสลิป")) {
-        return `<span class="status-pill status-pill--blue">${safe}</span>`;
+        return '<span class="status-pill status-pill--blue">' + safe + '</span>';
       }
       if (raw.includes("กำลัง") || raw.includes("รอดำเนินการ") || raw.includes("ตรวจสอบ")) {
-        return `<span class="status-pill status-pill--yellow">${safe}</span>`;
+        return '<span class="status-pill status-pill--yellow">' + safe + '</span>';
       }
       if (raw.includes("ไม่ผ่าน") || raw.includes("ชื่อไม่ตรง") || raw.includes("ไม่เข้าเงื่อนไข") || raw.includes("สลิปปลอม")) {
-        return `<span class="status-pill status-pill--red">${safe}</span>`;
+        return '<span class="status-pill status-pill--red">' + safe + '</span>';
       }
-      return `<span class="status-pill status-pill--purple">${safe}</span>`;
+      return '<span class="status-pill status-pill--purple">' + safe + '</span>';
     }
 
     function renderConfigToUI() {
@@ -2018,6 +1294,8 @@
       bankAccountNoEl.textContent = claimConfig.bankAccountNo || "0628794251";
       bankAccountNameEl.textContent = claimConfig.bankAccountName || "นภัทรธมณฑ์ ฤทธิ์ชัยศักดิ์";
       supportLineEl.textContent = claimConfig.supportLine || "@467dlpti";
+      routeHelperText.innerText = claimConfig.routeMessage || claimConfig.customerNotice || "แจ้งได้ทั้งทางไลน์ และทางเว็บ";
+      routeStatusText.innerText = claimConfig.routeMessage || claimConfig.customerNotice || "แจ้งได้ทั้งทางไลน์ และทางเว็บ";
     }
 
     async function initClaimWindowConfig() {
@@ -2042,15 +1320,21 @@
         if (cfg.paymentNote) claimConfig.paymentNote = cfg.paymentNote;
         if (cfg.paymentRequireSlip) claimConfig.paymentRequireSlip = cfg.paymentRequireSlip;
         if (cfg.supportLine) claimConfig.supportLine = cfg.supportLine;
-        if (cfg.isOpenNow !== undefined && cfg.isOpenNow !== null) {
-          claimConfig.isOpenNow = !!cfg.isOpenNow;
-        } else {
-          claimConfig.isOpenNow = null;
-        }
+        if (cfg.isOpenNow !== undefined && cfg.isOpenNow !== null) claimConfig.isOpenNow = !!cfg.isOpenNow;
+
+        if (cfg.lineEnabled !== undefined) claimConfig.lineEnabled = !!cfg.lineEnabled;
+        if (cfg.webEnabled !== undefined) claimConfig.webEnabled = !!cfg.webEnabled;
+        if (cfg.customerNotice) claimConfig.customerNotice = cfg.customerNotice;
+        if (cfg.routeMessage) claimConfig.routeMessage = cfg.routeMessage;
+        if (cfg.webClosedMessage) claimConfig.webClosedMessage = cfg.webClosedMessage;
+        if (cfg.lineClosedMessage) claimConfig.lineClosedMessage = cfg.lineClosedMessage;
+        if (cfg.bothClosedMessage) claimConfig.bothClosedMessage = cfg.bothClosedMessage;
+        if (cfg.webBannerMessage) claimConfig.webBannerMessage = cfg.webBannerMessage;
 
         renderConfigToUI();
         updateClaimWindowState();
         syncPaymentSection();
+        setWebClosedState(!claimConfig.webEnabled, claimConfig.webClosedMessage || claimConfig.bothClosedMessage);
       } catch (err) {
         renderConfigToUI();
         updateClaimWindowState();
@@ -2091,7 +1375,7 @@
     }
 
     function updateNoteCounter() {
-      noteCounter.textContent = `${noteInput.value.length} / ${MAX_NOTE_LENGTH}`;
+      noteCounter.textContent = noteInput.value.length + " / " + MAX_NOTE_LENGTH;
     }
 
     function resetSlipPreview() {
@@ -2130,7 +1414,7 @@
       showToast("แนบสลิปเรียบร้อยแล้ว");
 
       const reader = new FileReader();
-      reader.onload = () => {
+      reader.onload = function() {
         slipPreview.src = reader.result;
         slipPreviewWrap.style.display = "flex";
         saveLastSlip(reader.result, file.name || "slip");
@@ -2155,7 +1439,7 @@
       if (raw.includes("ไม่ผ่าน")) activeIndex = 1;
 
       claimStepList.innerHTML = "";
-      steps.forEach((step, i) => {
+      steps.forEach(function(step, i) {
         const chip = document.createElement("div");
         chip.className = "step-chip" + (i <= activeIndex ? " active" : "");
         chip.textContent = step;
@@ -2181,15 +1465,14 @@
         return;
       }
 
-      items.forEach((item) => {
+      items.forEach(function(item) {
         const email = escapeHtml(maskEmail(item.email || "-"));
         const statusText = item.statusText || item.status || "รอดำเนินการ";
         const row = document.createElement("div");
         row.className = "live-item";
-        row.innerHTML = `
-          <span class="live-email">${email}</span>
-          <span class="live-status-text">${decorateStatusText(statusText)}</span>
-        `;
+        row.innerHTML =
+          '<span class="live-email">' + email + '</span>' +
+          '<span class="live-status-text">' + decorateStatusText(statusText) + '</span>';
         liveListEl.appendChild(row);
       });
     }
@@ -2201,7 +1484,7 @@
         return;
       }
 
-      items.forEach((item) => {
+      items.forEach(function(item) {
         const claimType = (item.claimType || "").toLowerCase() === "paid" ? "paid" : "free";
         const tagText = claimType === "paid" ? "แพ็กดูแล 19 บาท" : "เคลมฟรี";
         const safeEmail = escapeHtml(item.email || "-");
@@ -2213,20 +1496,19 @@
 
         const card = document.createElement("div");
         card.className = "result-item";
-        card.innerHTML = `
-          <div class="item-header">Request Status</div>
-          <div class="item-email">${safeEmail}</div>
-          <div class="item-tag ${claimType === "paid" ? "paid" : ""}">${escapeHtml(tagText)}</div>
-          <div class="item-meta">
-            <span>วันหมดอายุ: ${safeExpiry}</span>
-            <span>สมัครเมื่อ: ${safeYear}</span>
-            <span>คิวเคลม: ${safeQueue}</span>
-          </div>
-          <div class="item-meta">
-            <span>ล่าสุด: ${escapeHtml(formatThaiDateTime(lastAt))}</span>
-          </div>
-          <div class="item-body">${decorateStatusText(safeStatus)}</div>
-        `;
+        card.innerHTML =
+          '<div class="item-header">Request Status</div>' +
+          '<div class="item-email">' + safeEmail + '</div>' +
+          '<div class="item-tag ' + (claimType === "paid" ? "paid" : "") + '">' + escapeHtml(tagText) + '</div>' +
+          '<div class="item-meta">' +
+            '<span>วันหมดอายุ: ' + safeExpiry + '</span>' +
+            '<span>สมัครเมื่อ: ' + safeYear + '</span>' +
+            '<span>คิวเคลม: ' + safeQueue + '</span>' +
+          '</div>' +
+          '<div class="item-meta">' +
+            '<span>ล่าสุด: ' + escapeHtml(formatThaiDateTime(lastAt)) + '</span>' +
+          '</div>' +
+          '<div class="item-body">' + decorateStatusText(safeStatus) + '</div>';
         historyResults.appendChild(card);
       });
     }
@@ -2263,7 +1545,7 @@
           1
         );
 
-        if (isUnauthorizedMessage(data?.message)) {
+        if (isUnauthorizedMessage(data && data.message)) {
           await handleUnauthorizedResponse(data.message);
           renderHistory([]);
           return [];
@@ -2313,7 +1595,7 @@
         if (btn) {
           const original = btn.innerHTML;
           btn.innerHTML = "คัดลอกแล้ว ✓";
-          setTimeout(() => {
+          setTimeout(function() {
             btn.innerHTML = original;
           }, 1600);
         }
@@ -2326,14 +1608,18 @@
 
     function buildAdminMessage(entry) {
       return encodeURIComponent(
-        `สวัสดีค่ะ แอดมิน\nต้องการสอบถามสถานะเคลม\nอีเมล: ${entry.email || "-"}\nวันหมดอายุ: ${entry.expiry || "-"}\nปีสมัคร: ${entry.year || "-"}\nคิวเคลม: ${entry.queueNo || "-"}\nสถานะ: ${entry.statusText || "-"}`
+        "สวัสดีค่ะ แอดมิน\nต้องการสอบถามสถานะเคลม\nอีเมล: " + (entry.email || "-") +
+        "\nวันหมดอายุ: " + (entry.expiry || "-") +
+        "\nปีสมัคร: " + (entry.year || "-") +
+        "\nคิวเคลม: " + (entry.queueNo || "-") +
+        "\nสถานะ: " + (entry.statusText || "-")
       );
     }
 
     function fillMiniStats(current) {
-      miniQueueNo.textContent = current?.queueNo || "-";
-      miniClaimType.textContent = current?.claimType === "paid" ? "19฿" : (current?.claimType === "free" ? "ฟรี" : "-");
-      miniLastTime.textContent = formatShortThaiTime(current?.createdAt || current?.updatedAt || "");
+      miniQueueNo.textContent = current && current.queueNo ? current.queueNo : "-";
+      miniClaimType.textContent = current && current.claimType === "paid" ? "19฿" : (current && current.claimType === "free" ? "ฟรี" : "-");
+      miniLastTime.textContent = formatShortThaiTime(current && (current.createdAt || current.updatedAt) || "");
     }
 
     function renderEmptyStatusPage() {
@@ -2350,8 +1636,8 @@
       statusSummary.innerHTML = "";
       statusPageText.innerHTML = "";
 
-      const history = Array.isArray(res?.history) ? res.history : [];
-      const current = res?.current || (history.length ? history[0] : null);
+      const history = Array.isArray(res && res.history) ? res.history : [];
+      const current = (res && res.current) || (history.length ? history[0] : null);
 
       if (!current) {
         renderEmptyStatusPage();
@@ -2362,14 +1648,14 @@
       fillMiniStats(current);
 
       const claimLabel = current.claimType === "paid" ? "แพ็กดูแล 19 บาท" : "เคลมฟรีตามเงื่อนไข";
-      statusSummary.innerHTML = `<div class="summary-pill">คำขอล่าสุด: ${escapeHtml(claimLabel)}</div>`;
+      statusSummary.innerHTML = '<div class="summary-pill">คำขอล่าสุด: ' + escapeHtml(claimLabel) + '</div>';
       statusPageText.innerHTML =
         "<span class='status-strong'>" + decorateStatusText(current.statusText || "รอดำเนินการ") + "</span><br>" +
         "<span class='status-time'>เวลาแจ้งล่าสุด: " + escapeHtml(formatThaiDateTime(state.lastClaimAt)) + "</span>";
 
       renderClaimSteps(current.statusText || "");
 
-      history.forEach((item) => {
+      history.forEach(function(item) {
         const claimType = (item.claimType || "").toLowerCase() === "paid" ? "paid" : "free";
         const tagText = getClaimTypeLabel(claimType);
         const safeEmail = escapeHtml(item.email || "-");
@@ -2391,34 +1677,33 @@
 
         const card = document.createElement("div");
         card.className = "result-item";
-        card.innerHTML = `
-          <div class="item-header">Latest Claim</div>
-          <div class="item-email">${safeEmail}</div>
-          <div class="item-tag ${claimType === "paid" ? "paid" : ""}">${escapeHtml(tagText)}</div>
-          <div class="item-meta">
-            <span>วันหมดอายุ: ${safeExpiry}</span>
-            <span>สมัครเมื่อ: ${safeYear}</span>
-            <span>คิวเคลม: ${safeQueue}</span>
-          </div>
-          <div class="item-meta">
-            <span>เวลาแจ้งล่าสุด: ${escapeHtml(lastAt)}</span>
-          </div>
-          <div class="item-body">${decorateStatusText(safeStatus)}</div>
-          <div class="result-actions">
-            <button class="btn-copy">คัดลอกรายละเอียดคำขอ</button>
-            <button class="btn-link-small btn-contact-admin">ติดต่อแอดมินเกี่ยวกับเคสนี้</button>
-          </div>
-        `;
+        card.innerHTML =
+          '<div class="item-header">Latest Claim</div>' +
+          '<div class="item-email">' + safeEmail + '</div>' +
+          '<div class="item-tag ' + (claimType === "paid" ? "paid" : "") + '">' + escapeHtml(tagText) + '</div>' +
+          '<div class="item-meta">' +
+            '<span>วันหมดอายุ: ' + safeExpiry + '</span>' +
+            '<span>สมัครเมื่อ: ' + safeYear + '</span>' +
+            '<span>คิวเคลม: ' + safeQueue + '</span>' +
+          '</div>' +
+          '<div class="item-meta">' +
+            '<span>เวลาแจ้งล่าสุด: ' + escapeHtml(lastAt) + '</span>' +
+          '</div>' +
+          '<div class="item-body">' + decorateStatusText(safeStatus) + '</div>' +
+          '<div class="result-actions">' +
+            '<button class="btn-copy">คัดลอกรายละเอียดคำขอ</button>' +
+            '<button class="btn-link-small btn-contact-admin">ติดต่อแอดมินเกี่ยวกับเคสนี้</button>' +
+          '</div>';
 
         const btnCopy = card.querySelector(".btn-copy");
         const btnContact = card.querySelector(".btn-contact-admin");
 
-        btnCopy.addEventListener("click", () => {
+        btnCopy.addEventListener("click", function() {
           copyToClipboard(btnCopy, buildCopyText(entry));
         });
 
-        btnContact.addEventListener("click", () => {
-          window.open(`${SUPPORT_LINK_BASE}${encodeURIComponent(claimConfig.supportLine || "@467dlpti")}?text=${buildAdminMessage(entry)}`, "_blank");
+        btnContact.addEventListener("click", function() {
+          window.open(SUPPORT_LINK_BASE + encodeURIComponent(claimConfig.supportLine || "@467dlpti") + "?text=" + buildAdminMessage(entry), "_blank");
         });
 
         resultsDiv.appendChild(card);
@@ -2426,7 +1711,7 @@
     }
 
     function setActiveView(viewId) {
-      document.querySelectorAll(".view").forEach(view => {
+      document.querySelectorAll(".view").forEach(function(view) {
         view.classList.toggle("active", view.id === viewId);
       });
       updateHeroVisibility();
@@ -2488,6 +1773,11 @@
     }
 
     function validateLogin() {
+      if (state.webClosed) {
+        showAlert(topAlert, claimConfig.webClosedMessage || "ระบบเว็บปิดชั่วคราว", "warning");
+        return false;
+      }
+
       showAuthStatus("");
       loginEmailField.classList.remove("shake");
       loginPasswordField.classList.remove("shake");
@@ -2517,6 +1807,11 @@
     }
 
     function validateRegister() {
+      if (state.webClosed) {
+        showAlert(registerAlert, claimConfig.webClosedMessage || "ระบบเว็บปิดชั่วคราว", "warning");
+        return false;
+      }
+
       registerEmailField.classList.remove("shake");
       registerPasswordField.classList.remove("shake");
       registerConfirmPasswordField.classList.remove("shake");
@@ -2559,6 +1854,11 @@
       expiryField.classList.remove("shake");
       noteField.classList.remove("shake");
 
+      if (state.webClosed) {
+        showStatusError(claimConfig.webClosedMessage || "ระบบเว็บปิดชั่วคราว");
+        return false;
+      }
+
       if (!state.member || !state.token) {
         showAlert(topAlert, "กรุณาเข้าสู่ระบบก่อนใช้งาน", "warning");
         setActiveView("loginView");
@@ -2593,7 +1893,7 @@
       }
 
       if (note.length > MAX_NOTE_LENGTH) {
-        showStatusError(`ฝากข้อความได้ไม่เกิน ${MAX_NOTE_LENGTH} ตัวอักษร`);
+        showStatusError("ฝากข้อความได้ไม่เกิน " + MAX_NOTE_LENGTH + " ตัวอักษร");
         shake(noteField);
         return false;
       }
@@ -2624,6 +1924,12 @@
 
         let data = await postJson(payload);
         data = parseResponseLoose(data);
+
+        if (data.closed) {
+          setWebClosedState(true, data.message || claimConfig.webClosedMessage);
+          showAlert(topAlert, data.message || "ระบบเว็บปิดชั่วคราว", "warning", 6000);
+          return;
+        }
 
         if (!data.ok) {
           showAuthStatus(data.message || "เข้าสู่ระบบไม่สำเร็จ", "error");
@@ -2663,7 +1969,7 @@
         showAlert(topAlert, "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ", "error");
       } finally {
         hideLoadingOverlay();
-        btnLogin.disabled = false;
+        btnLogin.disabled = state.webClosed;
         state.authLock = false;
       }
     }
@@ -2688,6 +1994,12 @@
 
         let data = await postJson(payload);
         data = parseResponseLoose(data);
+
+        if (data.closed) {
+          setWebClosedState(true, data.message || claimConfig.webClosedMessage);
+          showAlert(registerAlert, data.message || "ระบบเว็บปิดชั่วคราว", "warning", 6000);
+          return;
+        }
 
         if (!data.ok) {
           showAlert(registerAlert, data.message || "สมัครสมาชิกไม่สำเร็จ", "error");
@@ -2728,12 +2040,17 @@
         showAlert(registerAlert, "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ", "error");
       } finally {
         hideLoadingOverlay();
-        btnRegister.disabled = false;
+        btnRegister.disabled = state.webClosed;
         state.authLock = false;
       }
     }
 
     async function handleForgotPassword() {
+      if (state.webClosed) {
+        showAlert(topAlert, claimConfig.webClosedMessage || "ระบบเว็บปิดชั่วคราว", "warning");
+        return;
+      }
+
       const email = normalizeEmail(loginEmailInput.value);
       if (!email || !loginEmailInput.checkValidity()) {
         showAlert(topAlert, "กรุณากรอกอีเมลก่อนกดลืมรหัสผ่าน", "warning");
@@ -2744,6 +2061,13 @@
       showLoadingOverlay();
       try {
         const data = await postJson({ action: "forgotPassword", email });
+
+        if (data.closed) {
+          setWebClosedState(true, data.message || claimConfig.webClosedMessage);
+          showAlert(topAlert, data.message || "ระบบเว็บปิดชั่วคราว", "warning", 6000);
+          return;
+        }
+
         if (!data || data.ok === false) {
           showAlert(topAlert, data.message || "ส่งรหัสรีเซ็ตรหัสผ่านทางอีเมลไม่สำเร็จ", "error");
           return;
@@ -2767,9 +2091,9 @@
           1
         );
 
-        if (isUnauthorizedMessage(data?.message) || data?.ok === false) {
+        if (isUnauthorizedMessage(data && data.message) || (data && data.ok === false)) {
           if (!silent) {
-            await handleUnauthorizedResponse(data?.message || "เซสชันหมดอายุ กรุณาเข้าสู่ระบบใหม่อีกครั้ง");
+            await handleUnauthorizedResponse((data && data.message) || "เซสชันหมดอายุ กรุณาเข้าสู่ระบบใหม่อีกครั้ง");
           }
           return false;
         }
@@ -2788,16 +2112,7 @@
     async function handleLogout() {
       const token = state.token || "";
       try {
-        if (token) {
-          const res = await postJson({ action: "logout", token });
-          if (isUnauthorizedMessage(res?.message)) {
-            clearLocalSession();
-            showAuthStatus("ออกจากระบบเรียบร้อยแล้วค่ะ", "info");
-            showAlert(topAlert, "ออกจากระบบเรียบร้อยแล้วค่ะ", "info");
-            showToast("ออกจากระบบแล้ว");
-            return;
-          }
-        }
+        if (token) await postJson({ action: "logout", token });
       } catch (err) {}
 
       clearLocalSession();
@@ -2816,7 +2131,7 @@
       updateNoteCounter();
       syncPaymentSection();
       state.submitLock = false;
-      btnSubmit.disabled = false;
+      btnSubmit.disabled = state.webClosed;
       btnSubmit.innerHTML = "<span>ส่งคำขอเคลม</span><span>↗</span>";
     }
 
@@ -2827,14 +2142,13 @@
       const claimType = year === String(claimConfig.paidYear) ? "แพ็กดูแล 19 บาท" : "เคลมฟรี";
       const hasSlip = activeSlipFile ? "แนบแล้ว" : "ไม่มี";
 
-      confirmSummary.innerHTML = `
-        <strong>อีเมล:</strong> ${escapeHtml(state.member?.email || "-")}<br>
-        <strong>วันหมดอายุ:</strong> ${escapeHtml(expiry || "-")}<br>
-        <strong>ปีสมัคร:</strong> ${escapeHtml(year || "-")}<br>
-        <strong>ประเภทเคลม:</strong> ${escapeHtml(claimType)}<br>
-        <strong>สลิป:</strong> ${escapeHtml(hasSlip)}<br>
-        <strong>ข้อความถึงแอดมิน:</strong> ${escapeHtml(note || "-")}
-      `;
+      confirmSummary.innerHTML =
+        "<strong>อีเมล:</strong> " + escapeHtml(state.member && state.member.email || "-") + "<br>" +
+        "<strong>วันหมดอายุ:</strong> " + escapeHtml(expiry || "-") + "<br>" +
+        "<strong>ปีสมัคร:</strong> " + escapeHtml(year || "-") + "<br>" +
+        "<strong>ประเภทเคลม:</strong> " + escapeHtml(claimType) + "<br>" +
+        "<strong>สลิป:</strong> " + escapeHtml(hasSlip) + "<br>" +
+        "<strong>ข้อความถึงแอดมิน:</strong> " + escapeHtml(note || "-");
 
       confirmModal.classList.add("show");
     }
@@ -2844,15 +2158,20 @@
     }
 
     async function fileToDataUrl(file) {
-      return new Promise((resolve, reject) => {
+      return new Promise(function(resolve, reject) {
         const reader = new FileReader();
-        reader.onload = () => resolve(reader.result);
+        reader.onload = function() { resolve(reader.result); };
         reader.onerror = reject;
         reader.readAsDataURL(file);
       });
     }
 
     async function doSubmitClaim() {
+      if (state.webClosed) {
+        showStatusError(claimConfig.webClosedMessage || "ระบบเว็บปิดชั่วคราว");
+        return;
+      }
+
       const expiry = normalizeText(expiryInput.value);
       const year = normalizeText(signupYearInput.value);
       const note = normalizeText(noteInput.value);
@@ -2890,24 +2209,31 @@
         const data = await postJson(payload);
         const elapsedSec = (performance.now() - startTime) / 1000;
 
-        if (isUnauthorizedMessage(data?.message)) {
+        if (data.closed) {
+          setWebClosedState(true, data.message || claimConfig.webClosedMessage);
+          showStatusError(data.message || "ระบบเว็บปิดชั่วคราว");
+          state.submitLock = false;
+          return;
+        }
+
+        if (isUnauthorizedMessage(data && data.message)) {
           await handleUnauthorizedResponse(data.message);
           return;
         }
 
         if (!data || data.ok === false) {
-          showStatusError(data?.message || "ส่งคำขอไม่สำเร็จ");
+          showStatusError(data && data.message || "ส่งคำขอไม่สำเร็จ");
           state.submitLock = false;
           return;
         }
 
         const current = data.current || null;
-        state.lastClaimAt = current?.createdAt || current?.updatedAt || "";
+        state.lastClaimAt = current && (current.createdAt || current.updatedAt) || "";
 
-        const claimType = current?.claimType || (year === String(claimConfig.paidYear) ? "paid" : "free");
+        const claimType = current && current.claimType || (year === String(claimConfig.paidYear) ? "paid" : "free");
         const claimLabel = claimType === "paid" ? "แพ็กดูแล 19 บาท" : "เคลมฟรีตามเงื่อนไข";
 
-        summaryDiv.innerHTML = `<div class="summary-pill">คำขอล่าสุด: ${escapeHtml(claimLabel)}</div>`;
+        summaryDiv.innerHTML = '<div class="summary-pill">คำขอล่าสุด: ' + escapeHtml(claimLabel) + '</div>';
         status.innerHTML =
           "<span class='status-strong'>" + escapeHtml(data.message || "ระบบรับคำขอเคลมของคุณแล้ว") + "</span><br>" +
           "<span class='status-time'>เวลาแจ้งล่าสุด: " + escapeHtml(formatThaiDateTime(state.lastClaimAt)) + "</span><br>" +
@@ -2938,7 +2264,7 @@
         showToast("ส่งคำขอสำเร็จแล้ว");
         state.submitLock = false;
 
-        setTimeout(() => {
+        setTimeout(function() {
           safeSetMemberView("statusView");
         }, 500);
       } catch (err) {
@@ -2947,7 +2273,7 @@
       } finally {
         state.isLoading = false;
         hideLoadingOverlay();
-        btnSubmit.disabled = false;
+        btnSubmit.disabled = state.webClosed;
         btnSubmit.innerHTML = "<span>ส่งคำขอเคลม</span><span>↗</span>";
       }
     }
@@ -2977,7 +2303,7 @@
     }
 
     function goSupport() {
-      window.open(`${SUPPORT_LINK_BASE}${encodeURIComponent(claimConfig.supportLine || "@467dlpti")}`, "_blank");
+      window.open(SUPPORT_LINK_BASE + encodeURIComponent(claimConfig.supportLine || "@467dlpti"), "_blank");
     }
 
     function togglePassword(targetId, btn) {
@@ -2988,24 +2314,26 @@
       btn.textContent = isPassword ? "ซ่อน" : "แสดง";
     }
 
-    document.querySelectorAll(".toggle-pass").forEach(btn => {
-      btn.addEventListener("click", () => togglePassword(btn.dataset.target, btn));
+    document.querySelectorAll(".toggle-pass").forEach(function(btn) {
+      btn.addEventListener("click", function() {
+        togglePassword(btn.dataset.target, btn);
+      });
     });
 
-    showRegisterBtn.addEventListener("click", () => {
+    showRegisterBtn.addEventListener("click", function() {
       setActiveView("registerView");
       showAuthStatus("");
     });
 
-    backToLoginBtn.addEventListener("click", () => {
+    backToLoginBtn.addEventListener("click", function() {
       setActiveView("loginView");
       showAuthStatus("");
     });
 
-    goClaimViewBtn.addEventListener("click", () => safeSetMemberView("claimView"));
-    goStatusViewBtn.addEventListener("click", () => safeSetMemberView("statusView"));
-    goClaimViewBtn2.addEventListener("click", () => safeSetMemberView("claimView"));
-    goStatusViewBtn2.addEventListener("click", () => safeSetMemberView("statusView"));
+    goClaimViewBtn.addEventListener("click", function() { safeSetMemberView("claimView"); });
+    goStatusViewBtn.addEventListener("click", function() { safeSetMemberView("statusView"); });
+    goClaimViewBtn2.addEventListener("click", function() { safeSetMemberView("claimView"); });
+    goStatusViewBtn2.addEventListener("click", function() { safeSetMemberView("statusView"); });
 
     btnLogin.addEventListener("click", handleLogin);
     btnRegister.addEventListener("click", handleRegister);
@@ -3014,20 +2342,20 @@
     btnRefreshStatus.addEventListener("click", refreshStatusPage);
     floatAdminBtn.addEventListener("click", goSupport);
 
-    btnPickSlip.addEventListener("click", () => slipInput.click());
-    btnCameraSlip.addEventListener("click", () => slipInputCamera.click());
+    btnPickSlip.addEventListener("click", function() { slipInput.click(); });
+    btnCameraSlip.addEventListener("click", function() { slipInputCamera.click(); });
 
-    slipInput.addEventListener("change", () => {
+    slipInput.addEventListener("change", function() {
       const file = slipInput.files && slipInput.files[0] ? slipInput.files[0] : null;
       setSlipFile(file, slipInput);
     });
 
-    slipInputCamera.addEventListener("change", () => {
+    slipInputCamera.addEventListener("change", function() {
       const file = slipInputCamera.files && slipInputCamera.files[0] ? slipInputCamera.files[0] : null;
       setSlipFile(file, slipInputCamera);
     });
 
-    btnViewLastSlip.addEventListener("click", () => {
+    btnViewLastSlip.addEventListener("click", function() {
       const last = loadLastSlip();
       if (!last || !last.dataUrl) {
         showToast("ยังไม่มีสลิปล่าสุด");
@@ -3040,56 +2368,62 @@
       showToast("แสดงสลิปล่าสุดแล้ว");
     });
 
-    btnRemoveSlip.addEventListener("click", () => {
+    btnRemoveSlip.addEventListener("click", function() {
       resetSlipPreview();
       showToast("ลบรูปสลิปแล้ว");
     });
 
-    btnClear.addEventListener("click", () => {
+    btnClear.addEventListener("click", function() {
       clearForm();
       showToast("ล้างฟอร์มแล้ว");
     });
 
     btnSubmit.addEventListener("click", handleSubmit);
-    btnCopyAccount.addEventListener("click", () => {
+    btnCopyAccount.addEventListener("click", function() {
       copyToClipboard(btnCopyAccount, claimConfig.bankAccountNo || "0628794251");
     });
 
     btnCancelConfirm.addEventListener("click", closeConfirmModal);
-    btnConfirmSubmit.addEventListener("click", async () => {
+    btnConfirmSubmit.addEventListener("click", async function() {
       closeConfirmModal();
       await doSubmitClaim();
     });
 
-    confirmModal.addEventListener("click", (e) => {
+    confirmModal.addEventListener("click", function(e) {
       if (e.target === confirmModal) closeConfirmModal();
     });
 
     registerPassword.addEventListener("input", updatePasswordStrengthUI);
     noteInput.addEventListener("input", updateNoteCounter);
     rememberPassword.addEventListener("change", saveRememberedLogin);
-    loginEmailInput.addEventListener("input", () => { if (rememberPassword.checked) saveRememberedLogin(); });
-    loginPasswordInput.addEventListener("input", () => { if (rememberPassword.checked) saveRememberedLogin(); });
+    loginEmailInput.addEventListener("input", function() { if (rememberPassword.checked) saveRememberedLogin(); });
+    loginPasswordInput.addEventListener("input", function() { if (rememberPassword.checked) saveRememberedLogin(); });
 
-    expiryInput.addEventListener("change", () => {
+    expiryInput.addEventListener("change", function() {
       if (expiryInput.value && !isValidFutureExpiry(expiryInput.value)) {
         showAlert(claimAlert, "วันหมดอายุต้องเป็นวันนี้หรือวันในอนาคต", "warning");
       }
     });
 
-    window.addEventListener("beforeunload", (e) => {
+    window.addEventListener("beforeunload", function(e) {
       if (!state.isLoading) return;
       e.preventDefault();
       e.returnValue = "ระบบกำลังส่งคำขอของคุณอยู่ หากออกจากหน้านี้อาจทำให้สถานะไม่ถูกบันทึก";
     });
 
-    window.addEventListener("load", async () => {
+    window.addEventListener("load", async function() {
       renderConfigToUI();
       updateNoteCounter();
       updatePasswordStrengthUI();
       loadRememberedLogin();
       updateHeroVisibility();
       renderEmptyStatusPage();
+
+      if (!SCRIPT_URL) {
+        showAlert(topAlert, "กรุณาใส่ SCRIPT_URL ของ Web App ก่อนใช้งาน", "warning", 0);
+        setActiveView("loginView");
+        return;
+      }
 
       await initClaimWindowConfig();
       updateClaimWindowState();
@@ -3107,7 +2441,7 @@
         }
       }
 
-      setInterval(async () => {
+      setInterval(async function() {
         await initClaimWindowConfig();
       }, CONFIG_POLL_INTERVAL);
 
