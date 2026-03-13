@@ -48,10 +48,10 @@
       position:fixed;
       inset:0;
       pointer-events:none;
-      opacity:.08;
+      opacity:.09;
       background-repeat:no-repeat;
-      background-position:center 80px;
-      background-size:min(84vw,380px);
+      background-position:center 72px;
+      background-size:min(86vw,390px);
       background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 420 420'><g fill='none' fill-rule='evenodd'><circle cx='210' cy='220' r='124' fill='%23efcfba'/><circle cx='118' cy='118' r='54' fill='%23ddb89c'/><circle cx='302' cy='118' r='54' fill='%23ddb89c'/><circle cx='118' cy='118' r='25' fill='%23fff3ea'/><circle cx='302' cy='118' r='25' fill='%23fff3ea'/><ellipse cx='170' cy='216' rx='15' ry='19' fill='%23524239'/><ellipse cx='250' cy='216' rx='15' ry='19' fill='%23524239'/><ellipse cx='210' cy='276' rx='42' ry='31' fill='%23fff8f3'/><ellipse cx='210' cy='262' rx='18' ry='13' fill='%23524239'/><path d='M186 294c11 13 37 13 48 0' stroke='%23cc918c' stroke-width='10' stroke-linecap='round'/><ellipse cx='144' cy='264' rx='25' ry='13' fill='%23efc1c8' opacity='.5'/><ellipse cx='276' cy='264' rx='25' ry='13' fill='%23efc1c8' opacity='.5'/></g></svg>");
     }
 
@@ -696,6 +696,12 @@
             <div class="line"><strong>ปีสมัคร:</strong> <span id="profileSignupYear">-</span></div>
           </div>
 
+          <div class="action-row" style="margin-top:10px;">
+            <button class="btn-secondary" id="btnCheckExpiry">
+              <span>เช็ควันหมดอายุ</span>
+            </button>
+          </div>
+
           <div class="field-group">
             <label class="field-label" for="expiryInput">วันหมดอายุสมาชิก</label>
             <div class="input-shell" id="expiryField">
@@ -832,6 +838,12 @@
             </div>
           </div>
 
+          <div class="action-row" style="margin-top:0;">
+            <button class="btn-secondary" id="btnCheckExpiryStatus">
+              <span>เช็ควันหมดอายุ</span>
+            </button>
+          </div>
+
           <div class="status-mini-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0 12px;">
             <div class="input-shell">
               <div style="font-size:.95rem;font-weight:800;color:#7a5d4b" id="miniQueueNo">-</div>
@@ -916,7 +928,7 @@
   </div>
 
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbykbCYxSuLxmw6-fHFe2eYNjTZkg4jhAzyTihLpjUhn5uDzkUZPqMpqJEYfU-XPAQ64Ow/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyxeJBulv7FJ2htqAQ5PP_KyFJlMF2LRLopmbpVMPK6XhcBqG8QucGvAv8a_vrgRsPshw/exec";
     const STATUS_POLL_INTERVAL = 30000;
     const CONFIG_POLL_INTERVAL = 30000;
     const MAX_NOTE_LENGTH = 500;
@@ -984,6 +996,8 @@
     const btnLogin = document.getElementById("btnLogin");
     const btnRegister = document.getElementById("btnRegister");
     const btnForgotPassword = document.getElementById("btnForgotPassword");
+    const btnCheckExpiry = document.getElementById("btnCheckExpiry");
+    const btnCheckExpiryStatus = document.getElementById("btnCheckExpiryStatus");
     const floatAdminBtn = document.getElementById("floatAdminBtn");
     const showRegisterBtn = document.getElementById("showRegisterBtn");
     const backToLoginBtn = document.getElementById("backToLoginBtn");
@@ -1206,6 +1220,11 @@
         const months = ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."];
         return d + " " + months[m - 1] + " " + (y + 543);
       }
+      const m = String(dateStr).match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+      if (m) {
+        const months = ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."];
+        return Number(m[1]) + " " + months[Number(m[2]) - 1] + " " + (Number(m[3]) + 543);
+      }
       return dateStr;
     }
 
@@ -1287,7 +1306,7 @@
 
       const controls = [
         btnLogin, btnRegister, btnForgotPassword, btnSubmit, btnClear,
-        btnPickSlip, btnCameraSlip
+        btnPickSlip, btnCameraSlip, btnCheckExpiry, btnCheckExpiryStatus
       ];
 
       controls.forEach(el => {
@@ -1415,6 +1434,9 @@
       const safe = escapeHtml(raw || "-");
 
       if (!raw) return '<span class="status-pill status-pill--yellow">รอดำเนินการ</span>';
+      if (raw.includes("อยู่ในกลุ่มของร้านปกติ")) {
+        return '<span class="status-pill status-pill--green">' + safe + '</span>';
+      }
       if (raw.includes("ดึงเมลแล้ว") || raw.includes("เสร็จ") || raw.includes("ใช้งานได้ปกติ") || raw.includes("สำเร็จ")) {
         return '<span class="status-pill status-pill--green">' + safe + '</span>';
       }
@@ -2387,6 +2409,17 @@
         }
 
         if (!data || data.ok === false) {
+          if (data.code === "ALREADY_IN_SHOP_GROUP") {
+            const expiryText = data.expiry ? ("วันหมดอายุ: " + formatThaiDate(data.expiry)) : "";
+            status.className = "status-ok";
+            status.innerHTML =
+              "<span class='status-strong'>อีเมลนี้อยู่ในกลุ่มของร้านปกติค่ะ</span><br>" +
+              (expiryText ? ("<span class='status-time'>" + escapeHtml(expiryText) + "</span>") : "");
+            showAlert(claimAlert, data.message || "อีเมลนี้อยู่ในกลุ่มของร้านปกติค่ะ", "info", 5000);
+            state.submitLock = false;
+            return;
+          }
+
           showStatusError(data && data.message || "ส่งคำขอไม่สำเร็จ");
           state.submitLock = false;
           return;
@@ -2467,6 +2500,46 @@
       }
     }
 
+    async function checkExpiryFromServer() {
+      if (!state.token || !state.member) {
+        showAlert(topAlert, "กรุณาเข้าสู่ระบบก่อนใช้งาน", "warning");
+        setActiveView("loginView");
+        return;
+      }
+
+      showLoadingOverlay();
+      try {
+        const data = await fetchJsonWithRetry(
+          SCRIPT_URL + "?action=expiryCheck&token=" + encodeURIComponent(state.token) + "&email=" + encodeURIComponent(state.member.email) + "&_t=" + Date.now(),
+          {},
+          1
+        );
+
+        if (isUnauthorizedMessage(data && data.message)) {
+          await handleUnauthorizedResponse(data.message);
+          return;
+        }
+
+        if (!data || data.ok === false) {
+          showAlert(claimAlert, (data && data.message) || "ไม่พบข้อมูลวันหมดอายุ", "warning", 5000);
+          showToast("ไม่พบข้อมูลวันหมดอายุ");
+          return;
+        }
+
+        const msg = "วันหมดอายุของคุณคือ " + formatThaiDate(data.expiry);
+        status.className = "status-ok";
+        status.innerHTML =
+          "<span class='status-strong'>" + escapeHtml(msg) + "</span><br>" +
+          "<span class='status-time'>อีเมล: " + escapeHtml(data.email || state.member.email) + "</span>";
+        showAlert(claimAlert, msg, "success", 4500);
+        showToast("เช็ควันหมดอายุแล้ว");
+      } catch (err) {
+        showAlert(claimAlert, "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ", "error", 4500);
+      } finally {
+        hideLoadingOverlay();
+      }
+    }
+
     function goSupport() {
       window.open(SUPPORT_LINK_BASE + encodeURIComponent(claimConfig.supportLine || "@467dlpti"), "_blank");
     }
@@ -2505,6 +2578,8 @@
     btnForgotPassword.addEventListener("click", handleForgotPassword);
     btnLogout.addEventListener("click", handleLogout);
     btnRefreshStatus.addEventListener("click", refreshStatusPage);
+    btnCheckExpiry.addEventListener("click", checkExpiryFromServer);
+    btnCheckExpiryStatus.addEventListener("click", checkExpiryFromServer);
     floatAdminBtn.addEventListener("click", goSupport);
 
     btnPickSlip.addEventListener("click", function() { slipInput.click(); });
