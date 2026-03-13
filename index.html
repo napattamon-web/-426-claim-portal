@@ -16,11 +16,15 @@
       --accent:#bf8f72;
       --accent-2:#e7c6b2;
       --accent-3:#f3ded0;
+      --accent-4:#fff4eb;
       --success:#6f8e63;
       --danger:#d77d7d;
       --warning:#c58e5e;
       --info:#7588b8;
       --purple:#a48cc9;
+      --pink:#e6aab7;
+      --peach:#f4c8b1;
+      --mint:#dcecdf;
       --shadow:0 20px 44px rgba(118,84,63,.10);
       --shadow-soft:0 12px 26px rgba(118,84,63,.08);
       --r-xl:30px;
@@ -36,11 +40,30 @@
       background:
         radial-gradient(circle at top left, rgba(231,198,178,.36), transparent 28%),
         radial-gradient(circle at top right, rgba(191,143,114,.14), transparent 22%),
+        radial-gradient(circle at bottom right, rgba(230,170,183,.12), transparent 20%),
         linear-gradient(180deg,#fffaf6 0%,#f8f1ea 100%);
       display:flex;
       justify-content:center;
       overflow-x:hidden;
       position:relative;
+    }
+
+    body::before,
+    body::after{
+      content:"";
+      position:fixed;
+      width:180px;height:180px;
+      border-radius:999px;
+      filter:blur(70px);
+      opacity:.22;
+      pointer-events:none;
+      z-index:0;
+    }
+    body::before{
+      left:-40px;top:100px;background:#ffd8df;
+    }
+    body::after{
+      right:-50px;bottom:120px;background:#f3d7c4;
     }
 
     .app{
@@ -64,6 +87,23 @@
     }
 
     .hero{padding:18px 16px;position:relative;overflow:hidden}
+    .hero::before{
+      content:"✦";
+      position:absolute;
+      right:18px;top:14px;
+      color:#e8c1b0;
+      font-size:1rem;
+      opacity:.9;
+    }
+    .hero::after{
+      content:"♡";
+      position:absolute;
+      left:18px;bottom:12px;
+      color:#e5b3bf;
+      font-size:1rem;
+      opacity:.85;
+    }
+
     .panel{padding:16px}
     .view{display:none;animation:fadeUp .24s ease}
     .view.active{display:block}
@@ -72,9 +112,16 @@
     .hero-top{display:flex;justify-content:flex-start;align-items:flex-start;gap:10px}
     .brand-wrap{display:flex;gap:12px;align-items:center;min-width:0;width:100%;justify-content:flex-start}
     .logo-shell{
-      width:70px;height:70px;border-radius:24px;padding:4px;
+      width:72px;height:72px;border-radius:24px;padding:4px;
       background:linear-gradient(135deg,#fffefc,#f4e7dc);
       box-shadow:var(--shadow-soft);flex-shrink:0;position:relative
+    }
+    .logo-shell::after{
+      content:"";
+      position:absolute;inset:-6px;
+      border-radius:28px;
+      border:1px dashed rgba(191,143,114,.25);
+      pointer-events:none;
     }
     .logo-img{width:100%;height:100%;display:block;object-fit:cover;border-radius:19px;background:#fff}
     .brand-copy{display:flex;flex-direction:column;gap:4px;min-width:0;align-items:flex-start;text-align:left}
@@ -119,6 +166,7 @@
       color:#8d6a55;
       font-weight:800;
       text-align:center;
+      box-shadow:0 8px 18px rgba(191,143,114,.08);
     }
 
     .claim-note.closed{
@@ -149,7 +197,7 @@
     .section-blurb{font-size:.84rem;line-height:1.65;color:var(--sub);margin-bottom:10px;text-align:center}
     .login-card,.register-card,.claim-card,.status-card,.success-card{
       border-radius:28px;
-      background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(253,247,242,.99));
+      background:linear-gradient(180deg, rgba(255,255,255,.96), rgba(253,247,242,.99));
       border:1px solid #efe0d4;
       padding:15px;
       box-shadow:inset 0 1px 0 rgba(255,255,255,.6);
@@ -157,6 +205,15 @@
       position:relative;
       overflow:hidden;
     }
+    .login-card::before,.register-card::before,.claim-card::before,.status-card::before{
+      content:"";
+      position:absolute;
+      top:-24px;right:-24px;
+      width:90px;height:90px;border-radius:999px;
+      background:radial-gradient(circle, rgba(244,200,177,.25), transparent 70%);
+      pointer-events:none;
+    }
+
     .success-card{margin-top:12px;display:none;background:linear-gradient(180deg,#fffdfb,#f9f2eb);border-style:dashed}
     .success-card.show{display:block}
     .success-title{font-size:1rem;font-weight:800;color:#755847;margin-bottom:6px}
@@ -176,6 +233,16 @@
       position:relative;margin-bottom:14px;padding:16px 14px 14px;border-radius:24px;border:1px solid #efdccd;
       background:linear-gradient(180deg, rgba(255,255,255,.88), rgba(255,247,241,.96));
       box-shadow:inset 0 1px 0 rgba(255,255,255,.85),0 10px 22px rgba(118,84,63,.06);overflow:hidden
+    }
+    .claim-top-frame::before,.status-top-frame::before{
+      content:"✿";
+      position:absolute;left:14px;top:10px;
+      color:#efc7b4;font-size:.9rem;
+    }
+    .claim-top-frame::after,.status-top-frame::after{
+      content:"✿";
+      position:absolute;right:14px;bottom:10px;
+      color:#efc7b4;font-size:.9rem;
     }
     .claim-only-title,.status-only-title{position:relative;font-size:1rem;font-weight:800;color:#755847;margin:0;text-align:center}
     .claim-only-sub,.status-only-sub{position:relative;margin-top:6px;font-size:.78rem;color:var(--sub);line-height:1.6}
@@ -225,17 +292,22 @@
     }
 
     .action-row{display:flex;gap:10px;margin-top:14px;justify-content:center}
-    .btn-primary,.btn-secondary,.btn-danger,.btn-link-small,.upload-btn,.copy-account-btn,.btn-copy,.step-chip{
+    .btn-primary,.btn-secondary,.btn-danger,.btn-link-small,.upload-btn,.copy-account-btn,.btn-copy,.step-chip,.btn-web-link{
       border-radius:999px;font-family:inherit;font-weight:800;cursor:pointer;transition:.2s ease
     }
     .btn-primary{
       flex:1;min-height:52px;border:0;background:linear-gradient(135deg,#d6b297,#b98665);
       color:#fffdfb;box-shadow:0 14px 24px rgba(126,89,66,.18);font-size:.96rem;display:inline-flex;align-items:center;justify-content:center;gap:8px
     }
+    .btn-primary:hover{transform:translateY(-1px)}
     .btn-primary:disabled{opacity:.65;cursor:default}
     .btn-secondary{min-height:52px;border:1px solid #e6d8cd;background:linear-gradient(180deg,#fffdfb,#f7efe8);color:var(--sub);padding:0 16px;font-size:.82rem}
     .btn-danger{min-height:52px;border:1px solid #f0cdcd;background:linear-gradient(180deg,#fff7f7,#ffefef);color:#c46a6a;padding:0 16px;font-size:.82rem}
     .btn-link-small{min-height:42px;border:1px solid #eadbcf;background:#fffaf6;color:#8f7868;padding:0 16px;font-size:.78rem;width:100%;margin-top:12px}
+    .btn-web-link{
+      min-height:42px;border:1px solid #e3d2c6;background:linear-gradient(180deg,#fffefc,#f9f1eb);color:#7c6254;
+      padding:0 16px;font-size:.78rem;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none
+    }
 
     .profile-box{
       margin-top:10px;border-radius:20px;border:1px solid #eadacd;background:linear-gradient(180deg,#fffaf6,#f9f0e9);padding:12px;display:grid;gap:8px;font-size:.82rem;text-align:center
@@ -303,6 +375,8 @@
     }
     .route-chip .emoji{font-size:.9rem}
     .route-cute-sub{margin-top:8px;font-size:.74rem;color:#a18878;line-height:1.6}
+    .route-web-link-wrap{margin-top:10px;display:none}
+    .route-web-link-wrap.show{display:block}
 
     .status-route-wrap{margin-top:0}
     .status-route-card{
@@ -311,6 +385,8 @@
     }
     .status-route-title{font-size:.8rem;font-weight:800;color:#8a6a59;margin-bottom:7px}
     .status-route-text{font-size:.76rem;color:#9a8679;line-height:1.7}
+    .status-route-link{margin-top:10px;display:none}
+    .status-route-link.show{display:block}
 
     #summary,#statusSummary{margin-top:8px;text-align:center;font-size:.78rem}
     .summary-pill{
@@ -695,7 +771,7 @@
 
                 <div class="preview-wrap" id="slipPreviewWrap">
                   <img id="slipPreview" class="preview-img" alt="ตัวอย่างสลิป" />
-                  <div class="preview-meta">
+                  <div class="preview-meta" style="display:grid;gap:8px;width:100%;">
                     <button type="button" class="btn-copy" id="btnViewLastSlip">ดูสลิปล่าสุด</button>
                     <button type="button" class="btn-copy" id="btnRemoveSlip">ลบรูปที่เลือก</button>
                   </div>
@@ -732,6 +808,9 @@
                 <span class="route-chip"><span class="emoji">🌐</span> ทางเว็บ</span>
               </div>
               <div class="route-cute-sub" id="routeHelperText">เลือกช่องทางที่สะดวกได้เลยนะคะ</div>
+              <div class="route-web-link-wrap" id="routeWebLinkWrap">
+                <a href="#" class="btn-web-link" id="routeWebLinkBtn" target="_blank" rel="noopener noreferrer">🌐 เปิดลิงก์เว็บเคลม</a>
+              </div>
             </div>
           </div>
 
@@ -757,6 +836,9 @@
               <div class="status-route-title">ช่องทางติดต่อสำหรับลูกค้า</div>
               <div class="status-route-text" id="routeStatusText">
                 แจ้งได้ทั้งทางไลน์ และทางเว็บ เลือกช่องทางที่สะดวกได้เลยค่ะ
+              </div>
+              <div class="status-route-link" id="statusRouteLinkWrap">
+                <a href="#" class="btn-web-link" id="statusRouteLinkBtn" target="_blank" rel="noopener noreferrer">🌐 เปิดลิงก์เว็บเคลม</a>
               </div>
             </div>
           </div>
@@ -845,7 +927,7 @@
   </div>
 
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyqSN6a5upJ6ZHRPp2B0PcrAF3yNTYO8sTeYYQpsg6ELXnLLIM7wxhGIq0EygCoWly82g/exec"; // ใส่ /exec ของ deployment ล่าสุด
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx6sbFk6NJ5zO9FYlcVpjXX2DspB9V2ohdzP2gEqBl2Zv9Tqw8EiKnazLe2G0RMIASDDQ/exec";
     const STATUS_POLL_INTERVAL = 30000;
     const CONFIG_POLL_INTERVAL = 30000;
     const MAX_NOTE_LENGTH = 500;
@@ -882,7 +964,8 @@
       webClosedMessage: "ขออภัยค่ะ ตอนนี้ระบบหน้าเว็บปิดชั่วคราว\nสามารถแจ้งเรื่องผ่านทางไลน์ได้ค่ะ",
       lineClosedMessage: "ขออภัยค่ะ ตอนนี้ระบบทางไลน์ปิดชั่วคราว\nสามารถแจ้งเรื่องผ่านทางเว็บได้ค่ะ",
       bothClosedMessage: "ขออภัยค่ะ ตอนนี้ระบบปิดชั่วคราวทั้งทางไลน์และทางเว็บ",
-      webBannerMessage: ""
+      webBannerMessage: "",
+      webAppUrl: ""
     };
 
     const state = {
@@ -974,6 +1057,10 @@
     const supportLineEl = document.getElementById("supportLine");
     const routeHelperText = document.getElementById("routeHelperText");
     const routeStatusText = document.getElementById("routeStatusText");
+    const routeWebLinkWrap = document.getElementById("routeWebLinkWrap");
+    const routeWebLinkBtn = document.getElementById("routeWebLinkBtn");
+    const statusRouteLinkWrap = document.getElementById("statusRouteLinkWrap");
+    const statusRouteLinkBtn = document.getElementById("statusRouteLinkBtn");
 
     const profileBox = document.getElementById("memberProfileBox");
     const profileEmail = document.getElementById("profileEmail");
@@ -1007,7 +1094,7 @@
 
     let activeSlipFile = null;
 
-    function normalizeEmail(value){ return String(value || "").trim().toLowerCase(); }
+    function normalizeEmail(value){ return String(value || "").replace(/[\u200B-\u200D\uFEFF]/g, "").replace(/\s+/g, "").trim().toLowerCase(); }
     function normalizeText(value){ return String(value || "").trim(); }
 
     function parseResponseLoose(data) {
@@ -1023,11 +1110,6 @@
 
     function requireScriptUrl() {
       if (!SCRIPT_URL) throw new Error("กรุณาใส่ SCRIPT_URL ก่อนใช้งาน");
-    }
-
-    function currentActiveViewId() {
-      const v = document.querySelector(".view.active");
-      return v ? v.id : "";
     }
 
     function updateHeroVisibility() {
@@ -1217,7 +1299,7 @@
 
       const controls = [
         btnLogin, btnRegister, btnForgotPassword, btnSubmit, btnClear,
-        showRegisterBtn, backToLoginBtn, btnPickSlip, btnCameraSlip
+        btnPickSlip, btnCameraSlip
       ];
 
       controls.forEach(el => {
@@ -1227,7 +1309,7 @@
 
       if (flag) {
         showGlobalBanner(message || claimConfig.webClosedMessage || "ระบบเว็บปิดชั่วคราว", "error");
-      } else {
+      } else if (!claimConfig.webBannerMessage) {
         hideGlobalBanner();
       }
     }
@@ -1360,6 +1442,21 @@
       return '<span class="status-pill status-pill--purple">' + safe + '</span>';
     }
 
+    function updateWebLinkButtons() {
+      const hasWebUrl = !!String(claimConfig.webAppUrl || "").trim();
+
+      routeWebLinkWrap.classList.toggle("show", hasWebUrl && !claimConfig.lineEnabled && claimConfig.webEnabled);
+      statusRouteLinkWrap.classList.toggle("show", hasWebUrl && !claimConfig.lineEnabled && claimConfig.webEnabled);
+
+      if (hasWebUrl) {
+        routeWebLinkBtn.href = claimConfig.webAppUrl;
+        statusRouteLinkBtn.href = claimConfig.webAppUrl;
+      } else {
+        routeWebLinkBtn.removeAttribute("href");
+        statusRouteLinkBtn.removeAttribute("href");
+      }
+    }
+
     function renderConfigToUI() {
       paymentTitleEl.textContent = claimConfig.paymentTitle || "ชำระค่าดูแล 19 บาท";
       paymentNoteEl.textContent = claimConfig.paymentNote || "";
@@ -1378,6 +1475,8 @@
         (claimConfig.lineEnabled && claimConfig.webEnabled)
           ? "แจ้งได้ทั้งทางไลน์ และทางเว็บ เลือกช่องทางที่สะดวกได้เลยค่ะ"
           : (claimConfig.routeMessage || "กรุณาใช้ช่องทางที่ระบบเปิดให้บริการอยู่ค่ะ");
+
+      updateWebLinkButtons();
     }
 
     async function initClaimWindowConfig() {
@@ -1412,11 +1511,18 @@
         if (cfg.lineClosedMessage) claimConfig.lineClosedMessage = cfg.lineClosedMessage;
         if (cfg.bothClosedMessage) claimConfig.bothClosedMessage = cfg.bothClosedMessage;
         if (cfg.webBannerMessage !== undefined) claimConfig.webBannerMessage = cfg.webBannerMessage;
+        if (cfg.webAppUrl !== undefined) claimConfig.webAppUrl = cfg.webAppUrl || "";
 
         renderConfigToUI();
         updateClaimWindowState();
         syncPaymentSection();
         setWebClosedState(!claimConfig.webEnabled, claimConfig.webClosedMessage || claimConfig.bothClosedMessage);
+
+        if (claimConfig.webBannerMessage && claimConfig.webEnabled) {
+          showGlobalBanner(claimConfig.webBannerMessage, "info");
+        } else if (claimConfig.webEnabled) {
+          hideGlobalBanner();
+        }
       } catch (err) {
         renderConfigToUI();
         updateClaimWindowState();
@@ -2008,6 +2114,14 @@
           const msg = data.message || "เข้าสู่ระบบไม่สำเร็จ";
           showAuthStatus(msg, "error");
           showAlert(topAlert, msg, "error");
+
+          if (data.code === "MEMBER_NOT_FOUND") {
+            setTimeout(() => {
+              registerEmail.value = payload.email;
+              setActiveView("registerView");
+              showAlert(registerAlert, "ไม่พบบัญชีสมาชิกนี้ กรุณาสมัครสมาชิกก่อน", "info", 4500);
+            }, 300);
+          }
           return;
         }
 
@@ -2077,6 +2191,14 @@
         }
 
         if (!data.ok) {
+          if (data.code === "ACCOUNT_EXISTS") {
+            loginEmailInput.value = payload.email;
+            setActiveView("loginView");
+            showAlert(topAlert, data.message || "อีเมลนี้เป็นสมาชิกอยู่แล้ว กรุณาเข้าสู่ระบบ", "info", 5000);
+            showToast("อีเมลนี้เป็นสมาชิกอยู่แล้ว");
+            return;
+          }
+
           showAlert(registerAlert, data.message || "สมัครสมาชิกไม่สำเร็จ", "error");
           return;
         }
@@ -2506,8 +2628,10 @@
         const ok = await fetchMemberMe(true);
         if (ok) {
           await fetchClaimHistory();
+          setActiveView("claimView");
         } else {
           clearLocalSession(true);
+          setActiveView("loginView");
         }
       }
 
