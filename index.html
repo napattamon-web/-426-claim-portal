@@ -1559,7 +1559,11 @@
   </div>
 
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyxYIzEB0NICHUg_u_5nbBAfU0iyQXZg9q-2ssHy2HaJA6Nd4PUoQbABrLPwqrI5yw5EQ/exec";
+    /* 426 SHOP WEB APP — patched front-end
+       Build: 2026-03-13 web-patch-session-guard-1
+    */
+
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbykbCYxSuLxmw6-fHFe2eYNjTZkg4jhAzyTihLpjUhn5uDzkUZPqMpqJEYfU-XPAQ64Ow/exec";
     const STATUS_POLL_INTERVAL = 30000;
     const CONFIG_POLL_INTERVAL = 30000;
     const MAX_NOTE_LENGTH = 500;
@@ -1719,6 +1723,11 @@
         return { ok: false, message: "ไม่สามารถอ่านข้อมูลจากเซิร์ฟเวอร์ได้" };
       }
       return { ...data, ok: data.ok === true };
+    }
+
+    function isUnauthorizedMessage(message) {
+      const msg = String(message || "").toLowerCase();
+      return msg.includes("unauthorized");
     }
 
     function updateHeroVisibility() {
@@ -1887,7 +1896,8 @@
         const res = await fetch(url, {
           ...options,
           method: options.method || "GET",
-          cache: "no-store"
+          cache: "no-store",
+          credentials: "omit"
         });
         if (!res.ok) throw new Error("HTTP " + res.status);
         return await res.json();
@@ -1901,7 +1911,9 @@
       const res = await fetch(SCRIPT_URL, {
         method: "POST",
         headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
+        cache: "no-store",
+        credentials: "omit"
       });
       const text = await res.text();
       try {
@@ -1951,6 +1963,20 @@
         return raw ? JSON.parse(raw) : null;
       } catch (err) {
         return null;
+      }
+    }
+
+    function clearLocalSession(silent = false) {
+      state.token = "";
+      state.member = null;
+      state.lastClaimAt = "";
+      localStorage.removeItem(TOKEN_KEY);
+      updateMemberProfileUI();
+      renderHistory([]);
+      renderEmptyStatusPage();
+      clearForm();
+      if (!silent) {
+        setActiveView("loginView");
       }
     }
 
@@ -2215,6 +2241,15 @@
       }
     }
 
+    async function handleUnauthorizedResponse(message, stayOnLogin = true) {
+      clearLocalSession(true);
+      if (stayOnLogin) {
+        setActiveView("loginView");
+        showAuthStatus("เซสชันหมดอายุ กรุณาเข้าสู่ระบบใหม่อีกครั้ง", "error");
+        showAlert(topAlert, message || "เซสชันหมดอายุ กรุณาเข้าสู่ระบบใหม่อีกครั้ง", "warning", 5000);
+      }
+    }
+
     async function fetchClaimHistory() {
       if (!state.token) {
         renderHistory([]);
@@ -2227,6 +2262,13 @@
           {},
           1
         );
+
+        if (isUnauthorizedMessage(data?.message)) {
+          await handleUnauthorizedResponse(data.message);
+          renderHistory([]);
+          return [];
+        }
+
         const items = data.history || [];
         renderHistory(items);
         return items;
@@ -2589,24 +2631,28 @@
           return;
         }
 
-        saveRememberedLogin();
-        state.token = data.token || "";
-        state.member = data.member || null;
-
-        if (state.token) localStorage.setItem(TOKEN_KEY, state.token);
-
-        if (!state.member && state.token) {
-          await fetchMemberMe();
-        } else {
-          updateMemberProfileUI();
-        }
-
-        if (!state.member && !state.token) {
-          showAuthStatus("เข้าสู่ระบบไม่สำเร็จ", "error");
-          showAlert(topAlert, "ไม่สามารถเข้าสู่ระบบได้ในขณะนี้ กรุณาลองใหม่อีกครั้ง", "error");
+        if (!data.token) {
+          showAuthStatus("เข้าสู่ระบบไม่สำเร็จ ระบบไม่ได้ส่ง token กลับมา", "error");
+          showAlert(topAlert, "เข้าสู่ระบบไม่สำเร็จ ระบบไม่ได้ส่ง token กลับมา", "error");
           return;
         }
 
+        state.token = String(data.token || "").trim();
+        localStorage.setItem(TOKEN_KEY, state.token);
+
+        const verified = await fetchMemberMe(true);
+        if (!verified) {
+          await handleUnauthorizedResponse("เข้าสู่ระบบไม่สำเร็จ กรุณาเข้าสู่ระบบใหม่อีกครั้ง");
+          return;
+        }
+
+        saveRememberedLogin();
+
+        if (!state.member && data.member) {
+          state.member = data.member;
+        }
+
+        updateMemberProfileUI();
         setActiveView("claimView");
         showAuthStatus("เข้าสู่ระบบสำเร็จค่ะ", "ok");
         showToast("เข้าสู่ระบบสำเร็จ");
@@ -2649,14 +2695,25 @@
         }
 
         registerSuccessCard.classList.add("show");
-        state.token = data.token || "";
+        state.token = String(data.token || "").trim();
+        if (state.token) localStorage.setItem(TOKEN_KEY, state.token);
+
         state.member = data.member || {
           email: payload.email,
           memberDate,
           signupYearThai: thaiYearFromYmd(memberDate)
         };
 
-        if (state.token) localStorage.setItem(TOKEN_KEY, state.token);
+        if (state.token) {
+          const verified = await fetchMemberMe(true);
+          if (!verified) {
+            await handleUnauthorizedResponse("สมัครสมาชิกสำเร็จ แต่เซสชันไม่สมบูรณ์ กรุณาเข้าสู่ระบบใหม่");
+            setActiveView("loginView");
+            loginEmailInput.value = payload.email;
+            loginPasswordInput.value = payload.password;
+            return;
+          }
+        }
 
         loginEmailInput.value = payload.email;
         loginPasswordInput.value = payload.password;
@@ -2701,7 +2758,7 @@
       }
     }
 
-    async function fetchMemberMe() {
+    async function fetchMemberMe(silent = false) {
       if (!state.token) return false;
       try {
         const data = await fetchJsonWithRetry(
@@ -2709,6 +2766,14 @@
           {},
           1
         );
+
+        if (isUnauthorizedMessage(data?.message) || data?.ok === false) {
+          if (!silent) {
+            await handleUnauthorizedResponse(data?.message || "เซสชันหมดอายุ กรุณาเข้าสู่ระบบใหม่อีกครั้ง");
+          }
+          return false;
+        }
+
         if (data && data.member) {
           state.member = data.member;
           updateMemberProfileUI();
@@ -2723,21 +2788,23 @@
     async function handleLogout() {
       const token = state.token || "";
       try {
-        if (token) await postJson({ action: "logout", token });
+        if (token) {
+          const res = await postJson({ action: "logout", token });
+          if (isUnauthorizedMessage(res?.message)) {
+            clearLocalSession();
+            showAuthStatus("ออกจากระบบเรียบร้อยแล้วค่ะ", "info");
+            showAlert(topAlert, "ออกจากระบบเรียบร้อยแล้วค่ะ", "info");
+            showToast("ออกจากระบบแล้ว");
+            return;
+          }
+        }
       } catch (err) {}
 
-      state.token = "";
-      state.member = null;
-      localStorage.removeItem(TOKEN_KEY);
-
-      clearForm();
-      updateMemberProfileUI();
+      clearLocalSession();
       setActiveView("loginView");
       showAuthStatus("ออกจากระบบเรียบร้อยแล้วค่ะ", "info");
       showAlert(topAlert, "ออกจากระบบเรียบร้อยแล้วค่ะ", "info");
       showToast("ออกจากระบบแล้ว");
-      renderHistory([]);
-      renderEmptyStatusPage();
     }
 
     function clearForm() {
@@ -2822,6 +2889,11 @@
         const startTime = performance.now();
         const data = await postJson(payload);
         const elapsedSec = (performance.now() - startTime) / 1000;
+
+        if (isUnauthorizedMessage(data?.message)) {
+          await handleUnauthorizedResponse(data.message);
+          return;
+        }
 
         if (!data || data.ok === false) {
           showStatusError(data?.message || "ส่งคำขอไม่สำเร็จ");
@@ -3026,9 +3098,12 @@
       setActiveView("loginView");
 
       if (state.token) {
-        const ok = await fetchMemberMe();
+        const ok = await fetchMemberMe(true);
         if (ok) {
           await fetchClaimHistory();
+        } else {
+          clearLocalSession(true);
+          setActiveView("loginView");
         }
       }
 
