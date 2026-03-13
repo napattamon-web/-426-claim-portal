@@ -896,6 +896,9 @@
       webClosed: false
     };
 
+    let userSelectedView = false;
+    let appBooted = false;
+
     const heroSection = document.getElementById("heroSection");
     const globalBanner = document.getElementById("globalBanner");
     const btnSubmit = document.getElementById("btnSubmit");
@@ -969,7 +972,6 @@
     const bankAccountNoEl = document.getElementById("bankAccountNo");
     const bankAccountNameEl = document.getElementById("bankAccountName");
     const supportLineEl = document.getElementById("supportLine");
-    const paymentQr = document.getElementById("paymentQr");
     const routeHelperText = document.getElementById("routeHelperText");
     const routeStatusText = document.getElementById("routeStatusText");
 
@@ -1023,6 +1025,11 @@
       if (!SCRIPT_URL) throw new Error("กรุณาใส่ SCRIPT_URL ก่อนใช้งาน");
     }
 
+    function currentActiveViewId() {
+      const v = document.querySelector(".view.active");
+      return v ? v.id : "";
+    }
+
     function updateHeroVisibility() {
       const loginActive = document.getElementById("loginView").classList.contains("active");
       const registerActive = document.getElementById("registerView").classList.contains("active");
@@ -1035,6 +1042,16 @@
       goStatusViewBtn.classList.toggle("active", !isClaim);
       goClaimViewBtn2.classList.toggle("active", isClaim);
       goStatusViewBtn2.classList.toggle("active", !isClaim);
+    }
+
+    function setActiveView(viewId, byUser = false) {
+      if (byUser) userSelectedView = true;
+      document.querySelectorAll(".view").forEach(function(view) {
+        view.classList.toggle("active", view.id === viewId);
+      });
+      updateHeroVisibility();
+      if (viewId === "claimView") setMemberPagePills("claim");
+      if (viewId === "statusView") setMemberPagePills("status");
     }
 
     function showLoadingOverlay() {
@@ -1213,6 +1230,15 @@
       } else {
         hideGlobalBanner();
       }
+    }
+
+    function buildLocalMemberFallback(email, displayName, memberDate, signupYearThai) {
+      return {
+        email: email || "",
+        displayName: displayName || "",
+        memberDate: memberDate || "",
+        signupYearThai: signupYearThai || thaiYearFromYmd(memberDate || "")
+      };
     }
 
     async function fetchJsonWithRetry(url, options = {}, retries = 1) {
@@ -1766,15 +1792,6 @@
       });
     }
 
-    function setActiveView(viewId) {
-      document.querySelectorAll(".view").forEach(function(view) {
-        view.classList.toggle("active", view.id === viewId);
-      });
-      updateHeroVisibility();
-      if (viewId === "claimView") setMemberPagePills("claim");
-      if (viewId === "statusView") setMemberPagePills("status");
-    }
-
     async function safeSetMemberView(viewId) {
       if (!state.token || !state.member) {
         showAlert(topAlert, "กรุณาเข้าสู่ระบบก่อนใช้งาน", "warning");
@@ -1782,7 +1799,7 @@
         return;
       }
 
-      setActiveView(viewId);
+      setActiveView(viewId, true);
 
       if (viewId === "statusView") {
         showLoadingOverlay();
@@ -1988,8 +2005,9 @@
         }
 
         if (!data.ok) {
-          showAuthStatus(data.message || "เข้าสู่ระบบไม่สำเร็จ", "error");
-          showAlert(topAlert, data.message || "เข้าสู่ระบบไม่สำเร็จ กรุณาตรวจสอบอีเมลและรหัสผ่านอีกครั้ง", "error");
+          const msg = data.message || "เข้าสู่ระบบไม่สำเร็จ";
+          showAuthStatus(msg, "error");
+          showAlert(topAlert, msg, "error");
           return;
         }
 
@@ -2002,18 +2020,19 @@
         state.token = String(data.token || "").trim();
         localStorage.setItem(TOKEN_KEY, state.token);
 
+        if (data.member) {
+          state.member = data.member;
+        } else {
+          state.member = buildLocalMemberFallback(payload.email, "", "", "");
+        }
+
         const verified = await fetchMemberMe(true);
-        if (!verified) {
+        if (!verified && !state.member) {
           await handleUnauthorizedResponse("เข้าสู่ระบบไม่สำเร็จ กรุณาเข้าสู่ระบบใหม่อีกครั้ง");
           return;
         }
 
         saveRememberedLogin();
-
-        if (!state.member && data.member) {
-          state.member = data.member;
-        }
-
         updateMemberProfileUI();
         setActiveView("claimView");
         showAuthStatus("เข้าสู่ระบบสำเร็จค่ะ", "ok");
@@ -2063,24 +2082,21 @@
         }
 
         registerSuccessCard.classList.add("show");
-        state.token = String(data.token || "").trim();
-        if (state.token) localStorage.setItem(TOKEN_KEY, state.token);
 
-        state.member = data.member || {
-          email: payload.email,
+        if (data.token) {
+          state.token = String(data.token || "").trim();
+          localStorage.setItem(TOKEN_KEY, state.token);
+        }
+
+        state.member = data.member || buildLocalMemberFallback(
+          payload.email,
+          payload.displayName,
           memberDate,
-          signupYearThai: thaiYearFromYmd(memberDate)
-        };
+          thaiYearFromYmd(memberDate)
+        );
 
         if (state.token) {
-          const verified = await fetchMemberMe(true);
-          if (!verified) {
-            await handleUnauthorizedResponse("สมัครสมาชิกสำเร็จ แต่เซสชันไม่สมบูรณ์ กรุณาเข้าสู่ระบบใหม่");
-            setActiveView("loginView");
-            loginEmailInput.value = payload.email;
-            loginPasswordInput.value = payload.password;
-            return;
-          }
+          await fetchMemberMe(true);
         }
 
         loginEmailInput.value = payload.email;
@@ -2159,9 +2175,9 @@
           updateMemberProfileUI();
           return true;
         }
-        return false;
+        return !!state.member;
       } catch (err) {
-        return false;
+        return !!state.member;
       }
     }
 
@@ -2293,7 +2309,7 @@
         status.innerHTML =
           "<span class='status-strong'>" + escapeHtml(data.message || "ระบบรับคำขอเคลมของคุณแล้ว") + "</span><br>" +
           "<span class='status-time'>เวลาแจ้งล่าสุด: " + escapeHtml(formatThaiDateTime(state.lastClaimAt)) + "</span><br>" +
-          "<span class='status-time'>ระบบใช้เวลา " + escapeHtml((elapsedSec < 0.1 ? "< 0.1" : elapsedSec.toFixed(1).replace(/\\.0$/, ""))) + " วินาที</span>";
+          "<span class='status-time'>ระบบใช้เวลา " + escapeHtml((elapsedSec < 0.1 ? "< 0.1" : elapsedSec.toFixed(1).replace(/\.0$/, ""))) + " วินาที</span>";
         status.className = "status-ok";
 
         const items = await fetchClaimHistory();
@@ -2377,12 +2393,12 @@
     });
 
     showRegisterBtn.addEventListener("click", function() {
-      setActiveView("registerView");
+      setActiveView("registerView", true);
       showAuthStatus("");
     });
 
     backToLoginBtn.addEventListener("click", function() {
-      setActiveView("loginView");
+      setActiveView("loginView", true);
       showAuthStatus("");
     });
 
@@ -2468,6 +2484,7 @@
     });
 
     window.addEventListener("load", async function() {
+      setActiveView("loginView");
       renderConfigToUI();
       updateNoteCounter();
       updatePasswordStrengthUI();
@@ -2477,7 +2494,7 @@
 
       if (!SCRIPT_URL) {
         showAlert(topAlert, "กรุณาใส่ SCRIPT_URL ของ Web App ก่อนใช้งาน", "warning", 0);
-        setActiveView("loginView");
+        appBooted = true;
         return;
       }
 
@@ -2485,17 +2502,20 @@
       updateClaimWindowState();
       await fetchTodayStatus(true);
 
-      setActiveView("loginView");
-
       if (state.token) {
         const ok = await fetchMemberMe(true);
         if (ok) {
           await fetchClaimHistory();
         } else {
           clearLocalSession(true);
-          setActiveView("loginView");
         }
       }
+
+      if (!userSelectedView && !state.token) {
+        setActiveView("loginView");
+      }
+
+      appBooted = true;
 
       setInterval(async function() {
         await initClaimWindowConfig();
