@@ -880,7 +880,7 @@
   </div>
 
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzhD4KnKETY7-DYD01gV4V84ZPcfAY6qhoO8oPc67Rn1DdgqKl260SSGG1Agur-X8urKA/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwxHaRnEfiFQ2hJANptVFA0pfZAWx4Qf7gF7dTFsHuHszgTtUor42Mf01Kx5IA_apF30Q/exec";
     const STATUS_POLL_INTERVAL = 30000;
     const CONFIG_POLL_INTERVAL = 30000;
     const MAX_NOTE_LENGTH = 500;
@@ -909,7 +909,6 @@
       paymentRequireSlip: "หากไม่แนบสลิป ระบบจะยังไม่รับเข้าระบบเคลมสำหรับรอบที่ต้องชำระ 19 บาท",
       supportLine: "@467dlpti",
       isOpenNow: null,
-
       lineEnabled: true,
       lineClaimEnabled: true,
       webEnabled: true,
@@ -1061,7 +1060,9 @@
     }
 
     function requireScriptUrl() {
-      if (!SCRIPT_URL) throw new Error("กรุณาใส่ SCRIPT_URL ก่อนใช้งาน");
+      if (!SCRIPT_URL || SCRIPT_URL === "PUT_YOUR_WEB_APP_URL_HERE") {
+        throw new Error("กรุณาใส่ SCRIPT_URL ก่อนใช้งาน");
+      }
     }
 
     function updateHeroVisibility() {
@@ -2246,7 +2247,6 @@
       }
 
       const expiry = normalizeText(expiryInput.value);
-      const year = normalizeText(signupYearInput.value);
       const note = normalizeText(noteInput.value);
 
       state.isLoading = true;
@@ -2303,7 +2303,7 @@
         const current = data.current || null;
         state.lastClaimAt = current && (current.createdAt || current.updatedAt) || "";
 
-        const claimType = current && current.claimType || (year === String(claimConfig.paidYear) ? "paid" : "free");
+        const claimType = current && current.claimType || "free";
         const claimLabel = claimType === "paid" ? "แพ็กดูแล 19 บาท" : "เคลมฟรีตามเงื่อนไข";
 
         summaryDiv.innerHTML = '<div class="summary-pill">คำขอล่าสุด: ' + escapeHtml(claimLabel) + '</div>';
@@ -2322,7 +2322,7 @@
         }
 
         if (data.todaySummary) {
-          renderLiveStatus(data.todaySummary);
+          renderLiveStatus(data.todaySummary.todaySummary || data.todaySummary);
         }
 
         noteInput.value = "";
@@ -2395,8 +2395,11 @@
         }
 
         if (data.expiry) {
-          expiryInput.value = data.expiry;
-          if (state.member) state.member.lastKnownExpiry = data.expiry;
+          const parts = data.expiry.split("/");
+          if (parts.length === 3) {
+            expiryInput.value = parts[2] + "-" + parts[1].padStart(2, "0") + "-" + parts[0].padStart(2, "0");
+          }
+          if (state.member) state.member.lastKnownExpiry = expiryInput.value;
         }
 
         showAlert(
@@ -2563,7 +2566,7 @@
       updateHeroVisibility();
       renderEmptyStatusPage();
 
-      if (!SCRIPT_URL) {
+      if (!SCRIPT_URL || SCRIPT_URL === "PUT_YOUR_WEB_APP_URL_HERE") {
         showAlert(topAlert, "กรุณาใส่ SCRIPT_URL ของ Web App ก่อนใช้งาน", "warning", 0);
         return;
       }
