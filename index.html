@@ -880,7 +880,7 @@
   </div>
 
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby4hR9KxFTewhhmEw34D_F29GOXmeiQLaFxuTOmzwC0eMfaHBStHvYJnLM7yScsihP_5w/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby-3WeD1lq5o-_Kt6QAvl7vCz0FDx4JxPwCyLbwNSOFh3V7XfsuFHFLwFe0Z6fNu6VqEQ/exec";
     const STATUS_POLL_INTERVAL = 30000;
     const CONFIG_POLL_INTERVAL = 30000;
     const MAX_NOTE_LENGTH = 500;
@@ -890,6 +890,7 @@
     const SUPPORT_LINK_BASE = "https://line.me/R/ti/p/";
     const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
     const LAST_SLIP_KEY = "shop426_last_slip_preview";
+    const WEB_CLAIM_PORTAL_URL = "https://napattamon-web.github.io/-426-claim-portal/";
 
     let claimConfig = {
       claimStartHour: 7,
@@ -917,8 +918,8 @@
       webClosedMessage: "ขออภัยค่ะ ตอนนี้ระบบหน้าเว็บปิดชั่วคราว\nสามารถแจ้งเรื่องผ่านทางไลน์ได้ค่ะ",
       bothClosedMessage: "ขออภัยค่ะ ตอนนี้ระบบปิดชั่วคราวทั้งทางไลน์และทางเว็บ",
       webBannerMessage: "",
-      webClaimLink: "",
-      lineClaimClosedMessage: ""
+      webClaimLink: WEB_CLAIM_PORTAL_URL,
+      lineClaimClosedMessage: "ช่องทางไลน์ปิดรับเคลมชั่วคราว กรุณาแจ้งผ่านเว็บ"
     };
 
     const state = {
@@ -2436,6 +2437,7 @@
 
         if (data.config) {
           claimConfig = { ...claimConfig, ...data.config };
+          if (!claimConfig.webClaimLink) claimConfig.webClaimLink = WEB_CLAIM_PORTAL_URL;
           renderConfigToUI();
           updateClaimWindowState();
           setWebClosedState(!claimConfig.webEnabled, claimConfig.webClosedMessage || claimConfig.bothClosedMessage);
