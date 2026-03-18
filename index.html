@@ -27,7 +27,6 @@
       --shadow-soft:0 12px 26px rgba(118,84,63,.08);
       --shadow-mini:0 8px 18px rgba(118,84,63,.08);
       --r-xl:30px;
-      --bottom-nav-h:84px;
     }
 
     *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -64,7 +63,7 @@
       width:100%;
       max-width:540px;
       min-height:100vh;
-      padding:16px 14px calc(var(--bottom-nav-h) + 22px);
+      padding:16px 14px 20px;
       display:flex;
       flex-direction:column;
       gap:14px;
@@ -280,6 +279,19 @@
       line-height:1.6
     }
 
+    .status-web-note{
+      margin-top:10px;
+      padding:10px 12px;
+      border-radius:16px;
+      border:1px solid #ecdacd;
+      background:linear-gradient(180deg,#fffaf6,#fdf1e9);
+      color:#8f7464;
+      font-size:.76rem;
+      font-weight:700;
+      line-height:1.6;
+      text-align:center;
+    }
+
     .warning-blink{
       display:flex;
       align-items:center;
@@ -429,14 +441,14 @@
       margin-top:14px;
       justify-content:center
     }
-    .btn-primary,.btn-secondary,.btn-danger,.btn-link-small,.upload-btn,.copy-account-btn,.btn-copy,.step-chip{
+    .btn-primary,.btn-secondary,.btn-danger,.btn-link-small,.upload-btn,.copy-account-btn,.btn-copy,.step-chip,.member-tab-btn{
       border-radius:999px;
       font-family:inherit;
       font-weight:800;
       cursor:pointer;
       transition:.18s ease
     }
-    .btn-primary:hover,.btn-secondary:hover,.btn-danger:hover,.btn-link-small:hover,.upload-btn:hover,.copy-account-btn:hover,.btn-copy:hover,.step-chip:hover{
+    .btn-primary:hover,.btn-secondary:hover,.btn-danger:hover,.btn-link-small:hover,.upload-btn:hover,.copy-account-btn:hover,.btn-copy:hover,.step-chip:hover,.member-tab-btn:hover{
       transform:translateY(-1px) scale(1.01);
     }
 
@@ -949,6 +961,28 @@
     .alert-box.info{background:#f2f6ff;color:#5c74ab;border-color:#d8e2ff}
     .alert-box.warning{background:#fff8ed;color:#9b7441;border-color:#f1dec0}
 
+    .member-page-tabs{
+      display:none;
+      gap:10px;
+      margin-top:14px;
+    }
+    .member-page-tabs.show{display:flex}
+    .member-tab-btn{
+      flex:1;
+      min-height:46px;
+      border:1px solid #ead9cc;
+      background:linear-gradient(180deg,#fffdfb,#f7efe8);
+      color:#8a7363;
+      font-size:.8rem;
+      font-weight:800;
+    }
+    .member-tab-btn.active{
+      color:#fff;
+      border-color:transparent;
+      background:linear-gradient(135deg,#d9b79d,#be8d70);
+      box-shadow:0 10px 20px rgba(118,84,63,.14);
+    }
+
     .modal-backdrop{
       position:fixed;
       inset:0;
@@ -988,7 +1022,7 @@
     .toast{
       position:fixed;
       left:50%;
-      bottom:calc(var(--bottom-nav-h) + 18px);
+      bottom:18px;
       transform:translateX(-50%) translateY(40px);
       padding:10px 18px;
       border-radius:999px;
@@ -1078,7 +1112,7 @@
     .float-admin{
       position:fixed;
       right:16px;
-      bottom:calc(var(--bottom-nav-h) + 14px);
+      bottom:18px;
       z-index:9997;
       width:62px;
       height:62px;
@@ -1093,47 +1127,6 @@
       padding:6px
     }
     .float-admin img{width:100%;height:100%;object-fit:contain;border-radius:999px}
-
-    .bottom-member-nav{
-      position:fixed;
-      left:50%;
-      transform:translateX(-50%);
-      bottom:10px;
-      width:min(520px, calc(100vw - 20px));
-      padding:10px;
-      border-radius:24px;
-      background:rgba(255,250,246,.96);
-      border:1px solid #eadccf;
-      box-shadow:0 18px 36px rgba(118,84,63,.16);
-      backdrop-filter:blur(12px);
-      display:none;
-      gap:10px;
-      z-index:9996;
-    }
-    .bottom-member-nav.show{display:flex}
-    .bottom-nav-btn{
-      flex:1;
-      min-height:46px;
-      border-radius:999px;
-      border:1px solid #ead9cc;
-      background:linear-gradient(180deg,#fffdfb,#f7efe8);
-      color:#8a7363;
-      font-family:inherit;
-      font-size:.8rem;
-      font-weight:800;
-      cursor:pointer;
-      transition:.18s ease;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:7px;
-    }
-    .bottom-nav-btn.active{
-      color:#fff;
-      border-color:transparent;
-      background:linear-gradient(135deg,#d9b79d,#be8d70);
-      box-shadow:0 10px 20px rgba(118,84,63,.14);
-    }
 
     .footer{
       margin-top:auto;
@@ -1159,23 +1152,18 @@
     @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
 
     @media (max-width:480px){
-      .app{padding:12px 12px calc(var(--bottom-nav-h) + 18px)}
+      .app{padding:12px 12px 16px}
       .action-row,.modal-actions{flex-direction:column}
-      .float-admin{width:58px;height:58px;right:12px;bottom:calc(var(--bottom-nav-h) + 10px)}
+      .float-admin{width:58px;height:58px;right:12px;bottom:14px}
       .live-item{gap:8px}
       .live-email{max-width:150px}
       .bank-minimal-top{flex-direction:column;align-items:stretch}
       .bank-card-name{text-align:center}
       .profile-cute-mini{grid-template-columns:1fr 1fr}
       .mini-card.email-card{grid-column:1/-1}
-      .bottom-member-nav{
-        width:calc(100vw - 16px);
-        bottom:8px;
-        padding:8px;
-      }
-      .bottom-nav-btn{min-height:44px;font-size:.77rem}
       .claim-hours{font-size:.84rem}
       .claim-hours-sub{font-size:.69rem}
+      .member-page-tabs{flex-direction:row}
     }
   </style>
 </head>
@@ -1205,7 +1193,7 @@
             <span class="claim-hours-emoji">⏰</span>
             <span id="claimTimeNote">เปิดรับเคลม จ.–ส. 07:00–19:00</span>
           </div>
-          <div class="claim-hours-sub">กรุณาแจ้งภายในเวลาที่ระบบเปิดรับเพื่อเข้าคิวได้เร็วขึ้น</div>
+          <div class="claim-hours-sub">แจ้งในช่วงเวลาที่เปิดรับ ระบบจะเข้าคิวได้เร็วขึ้น</div>
 
           <div class="badge" id="onlineStatus">
             <span class="badge-dot" id="onlineDot"></span>
@@ -1272,6 +1260,7 @@
             </div>
             <span class="live-date" id="liveDate"></span>
           </div>
+          <div class="status-web-note">เช็คสถานะจากหน้าเว็บได้เลย ไม่ต้องเข้าสู่ระบบ</div>
           <div class="live-list" id="liveList">
             <div class="live-empty">กำลังดึงสถานะเมลวันนี้...</div>
           </div>
@@ -1486,7 +1475,7 @@
         <div class="status-card">
           <div class="status-top-frame">
             <div class="status-only-title">สถานะการเคลม</div>
-            <div class="status-only-sub">ตรวจสอบคำขอล่าสุด และอัปเดตสถานะแบบน่ารักเรียลไทม์</div>
+            <div class="status-only-sub">ติดตามความคืบหน้าของคำขอได้จากหน้านี้เลย</div>
           </div>
 
           <div class="queue-card">
@@ -1540,6 +1529,7 @@
               </div>
               <span class="live-date" id="liveDate2"></span>
             </div>
+            <div class="status-web-note">ลูกค้าเช็คจากหน้าเว็บได้เลย ไม่ต้องเข้าสู่ระบบ</div>
             <div class="live-list" id="liveList2">
               <div class="live-empty">กำลังดึงสถานะเมลวันนี้...</div>
             </div>
@@ -1549,7 +1539,7 @@
           <div id="statusSummary"></div>
 
           <div class="step-card" id="claimStepCard" style="display:none;">
-            <div class="step-title">สถานะการเคลมล่าสุด</div>
+            <div class="step-title">ลำดับสถานะการเคลม</div>
             <div class="step-list" id="claimStepList"></div>
           </div>
 
@@ -1573,6 +1563,11 @@
           </div>
         </div>
       </section>
+
+      <div class="member-page-tabs" id="memberPageTabs">
+        <button type="button" class="member-tab-btn active" id="goClaimViewBtnBottom">แจ้งเคลม</button>
+        <button type="button" class="member-tab-btn" id="goStatusViewBtnBottom">สถานะการเคลม</button>
+      </div>
     </main>
 
     <footer class="footer">
@@ -1582,17 +1577,6 @@
       </div>
       <div class="copyright">426 SHOP · EST 2024</div>
     </footer>
-  </div>
-
-  <div class="bottom-member-nav" id="bottomMemberNav">
-    <button type="button" class="bottom-nav-btn active" id="goClaimViewBtnBottom">
-      <span>🧸</span>
-      <span>แจ้งเคลม</span>
-    </button>
-    <button type="button" class="bottom-nav-btn" id="goStatusViewBtnBottom">
-      <span>✨</span>
-      <span>สถานะการเคลม</span>
-    </button>
   </div>
 
   <button class="float-admin" id="floatAdminBtn" aria-label="ติดต่อแอดมิน">
@@ -1672,8 +1656,6 @@
       lineEnabled: true,
       lineClaimEnabled: true,
       webEnabled: true,
-      customerNotice: "",
-      routeMessage: "",
       webClosedMessage: "ขออภัยค่ะ ตอนนี้ระบบหน้าเว็บปิดชั่วคราว\nสามารถแจ้งเรื่องผ่านทางไลน์ได้ค่ะ",
       bothClosedMessage: "ขออภัยค่ะ ตอนนี้ระบบปิดชั่วคราวทั้งทางไลน์และทางเว็บ",
       webBannerMessage: "",
@@ -1719,7 +1701,7 @@
 
     const goClaimViewBtnBottom = document.getElementById("goClaimViewBtnBottom");
     const goStatusViewBtnBottom = document.getElementById("goStatusViewBtnBottom");
-    const bottomMemberNav = document.getElementById("bottomMemberNav");
+    const memberPageTabs = document.getElementById("memberPageTabs");
 
     const loginEmailInput = document.getElementById("loginEmail");
     const loginPasswordInput = document.getElementById("loginPassword");
@@ -1837,9 +1819,9 @@
       heroSection.style.display = (loginActive || registerActive) ? "" : "none";
     }
 
-    function updateBottomNavVisibility() {
+    function updateMemberTabsVisibility() {
       const show = !!(state.token && state.member);
-      bottomMemberNav.classList.toggle("show", show);
+      memberPageTabs.classList.toggle("show", show);
     }
 
     function setMemberBottomPills(active) {
@@ -1854,7 +1836,7 @@
         view.classList.toggle("active", view.id === viewId);
       });
       updateHeroVisibility();
-      updateBottomNavVisibility();
+      updateMemberTabsVisibility();
       if (viewId === "claimView") setMemberBottomPills("claim");
       if (viewId === "statusView") setMemberBottomPills("status");
     }
@@ -2176,7 +2158,7 @@
       renderHistory([]);
       renderEmptyStatusPage();
       clearForm();
-      updateBottomNavVisibility();
+      updateMemberTabsVisibility();
       if (!silent) setActiveView("loginView");
     }
 
@@ -2645,7 +2627,7 @@
       if (!state.member) {
         profileBox.style.display = "none";
         paymentSection.style.display = "none";
-        updateBottomNavVisibility();
+        updateMemberTabsVisibility();
         return;
       }
 
@@ -2659,7 +2641,7 @@
       }
 
       syncPaymentSection();
-      updateBottomNavVisibility();
+      updateMemberTabsVisibility();
     }
 
     function syncPaymentSection() {
@@ -3394,7 +3376,7 @@
       updateHeroVisibility();
       renderEmptyStatusPage();
       setCuteQueueStatus("");
-      updateBottomNavVisibility();
+      updateMemberTabsVisibility();
 
       if (!SCRIPT_URL || SCRIPT_URL === "PUT_YOUR_WEB_APP_URL_HERE") {
         showAlert(topAlert, "กรุณาใส่ SCRIPT_URL ของ Web App ก่อนใช้งาน", "warning", 0);
