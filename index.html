@@ -4,97 +4,95 @@
   <meta charset="UTF-8" />
   <title>426 SHOP – Member & Claim Center</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#120b0d" />
+  <meta name="theme-color" content="#12090b" />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     :root{
-      --bg:#120b0d;
-      --bg-2:#191013;
-      --card:rgba(31,20,23,.95);
-      --card-2:rgba(42,26,30,.96);
-      --line:#4a2c33;
-      --line-soft:#6b3c47;
+      --bg:#0f0709;
+      --bg-2:#180b0e;
+      --card:rgba(28,13,17,.90);
+      --card-2:rgba(39,18,24,.92);
+      --card-soft:rgba(255,255,255,.04);
+      --line:rgba(255,255,255,.08);
+      --line-strong:rgba(255,110,140,.28);
       --text:#ffeef1;
-      --sub:#d2aeb6;
-      --muted:#a27d85;
-      --accent:#d61f3f;
-      --accent-2:#ff4d6d;
-      --accent-3:#ffccd5;
-      --dark-btn:#2a2a30;
-      --shadow:0 18px 40px rgba(0,0,0,.34);
-      --shadow-soft:0 10px 24px rgba(0,0,0,.22);
-      --success:#91d4a3;
-      --danger:#ff8b9d;
-      --warning:#ffca8a;
-      --info:#caa4ff;
-      --r-xl:28px;
+      --sub:#d7b8bf;
+      --muted:#a98b92;
+      --accent:#ff4d6d;
+      --accent-2:#ff7a90;
+      --accent-3:#ffd0d9;
+      --success:#79d6a3;
+      --warning:#ffbd6f;
+      --danger:#ff7b92;
+      --info:#a6bfff;
+      --shadow:0 18px 48px rgba(0,0,0,.40);
+      --shadow-soft:0 10px 26px rgba(0,0,0,.28);
+      --glow:0 0 0 1px rgba(255,120,150,.10), 0 0 28px rgba(255,77,109,.10);
+      --r-xl:30px;
+      --r-lg:24px;
+      --r-md:18px;
+      --r-sm:14px;
     }
 
     *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
     html,body{margin:0;padding:0;min-height:100%}
-
     body{
       min-height:100vh;
       font-family:"Noto Sans Thai",system-ui,sans-serif;
       color:var(--text);
       background:
-        radial-gradient(circle at 20% 8%, rgba(255,90,120,.12), transparent 24%),
-        radial-gradient(circle at 80% 0%, rgba(255,255,255,.05), transparent 20%),
-        radial-gradient(circle at 50% 100%, rgba(130,20,35,.18), transparent 34%),
-        linear-gradient(180deg,#130b0d 0%, #1a1013 48%, #120b0d 100%);
-      display:flex;
-      justify-content:center;
+        radial-gradient(circle at 15% 10%, rgba(255,77,109,.16), transparent 18%),
+        radial-gradient(circle at 85% 12%, rgba(255,122,144,.10), transparent 16%),
+        radial-gradient(circle at 50% 110%, rgba(255,77,109,.12), transparent 26%),
+        linear-gradient(180deg,#12080a 0%,#17090c 42%,#0e0608 100%);
       overflow-x:hidden;
       position:relative;
+      display:flex;
+      justify-content:center;
     }
 
     body::before,
     body::after{
       content:"";
       position:fixed;
-      inset:auto;
-      width:340px;
-      height:340px;
-      border-radius:999px;
-      filter:blur(70px);
+      inset:-10%;
       pointer-events:none;
       z-index:0;
-      opacity:.18;
     }
+
     body::before{
-      top:-80px;
-      left:-80px;
-      background:rgba(255,90,120,.28);
+      background:
+        radial-gradient(circle at 20% 22%, rgba(255,255,255,.06), transparent 12%),
+        radial-gradient(circle at 72% 18%, rgba(255,255,255,.04), transparent 10%),
+        radial-gradient(circle at 48% 70%, rgba(255,255,255,.03), transparent 14%);
+      filter:blur(38px);
+      opacity:.9;
     }
+
     body::after{
-      right:-100px;
-      bottom:-80px;
-      background:rgba(255,255,255,.08);
+      background:
+        linear-gradient(90deg, transparent 0%, rgba(255,255,255,.02) 50%, transparent 100%);
+      filter:blur(60px);
+      opacity:.6;
     }
 
     .fog{
       position:fixed;
-      inset:0;
+      inset:auto -15% -8% -15%;
+      height:42vh;
       pointer-events:none;
       z-index:0;
-      overflow:hidden;
+      background:
+        radial-gradient(ellipse at 20% 90%, rgba(255,255,255,.06), transparent 35%),
+        radial-gradient(ellipse at 50% 100%, rgba(255,255,255,.05), transparent 38%),
+        radial-gradient(ellipse at 80% 92%, rgba(255,255,255,.04), transparent 33%);
+      filter:blur(28px);
+      animation:fogMove 18s ease-in-out infinite alternate;
     }
-    .fog span{
-      position:absolute;
-      display:block;
-      width:280px;
-      height:120px;
-      background:rgba(255,255,255,.04);
-      border-radius:999px;
-      filter:blur(26px);
-      animation:fogMove 18s linear infinite;
-    }
-    .fog span:nth-child(1){top:8%;left:-20%;animation-duration:22s}
-    .fog span:nth-child(2){top:34%;left:-25%;animation-duration:26s}
-    .fog span:nth-child(3){top:62%;left:-18%;animation-duration:30s}
+
     @keyframes fogMove{
-      from{transform:translateX(0)}
-      to{transform:translateX(150vw)}
+      from{transform:translateX(-14px) translateY(0)}
+      to{transform:translateX(16px) translateY(-8px)}
     }
 
     .app{
@@ -102,18 +100,18 @@
       max-width:540px;
       min-height:100vh;
       padding:16px 14px 18px;
+      position:relative;
+      z-index:1;
       display:flex;
       flex-direction:column;
       gap:14px;
-      position:relative;
-      z-index:1;
     }
 
     .shell-card{
-      background:var(--card);
+      background:linear-gradient(180deg, rgba(33,15,20,.94), rgba(21,10,14,.92));
       border:1px solid var(--line);
       box-shadow:var(--shadow);
-      backdrop-filter:blur(12px);
+      backdrop-filter:blur(14px);
       border-radius:var(--r-xl);
     }
 
@@ -121,183 +119,226 @@
       padding:18px 16px 16px;
       position:relative;
       overflow:hidden;
-      text-align:center;
+      box-shadow:var(--shadow), var(--glow);
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:auto -40px -60px auto;
+      width:180px;
+      height:180px;
+      border-radius:999px;
+      background:radial-gradient(circle, rgba(255,77,109,.16), transparent 70%);
+      filter:blur(8px);
+      pointer-events:none;
+    }
+
+    .panel{padding:16px}
+    .view{display:none;animation:fadeUp .24s ease}
+    .view.active{display:block}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+    .center-all{text-align:center;display:flex;flex-direction:column;align-items:center}
+
+    .brand-wrap{
       display:flex;
       flex-direction:column;
       align-items:center;
+      justify-content:center;
       gap:12px;
+      text-align:center;
+      width:100%;
     }
 
     .logo-shell{
-      width:90px;height:90px;border-radius:28px;padding:5px;
-      background:linear-gradient(135deg,#2b171c,#4b242d);
-      border:1px solid #6a3541;
-      box-shadow:0 12px 30px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.06);
-      flex-shrink:0;
+      width:92px;height:92px;border-radius:28px;padding:5px;
+      background:linear-gradient(145deg, rgba(255,255,255,.14), rgba(255,77,109,.16));
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,.04),
+        0 0 30px rgba(255,77,109,.16),
+        0 18px 34px rgba(0,0,0,.35);
       position:relative;
-    }
-    .logo-img{
-      width:100%;height:100%;
-      display:block;
-      object-fit:cover;
-      border-radius:22px;
-      background:#fff;
-      border:1px solid rgba(255,255,255,.08);
+      overflow:hidden;
     }
 
-    .brand-copy{
-      display:flex;
-      flex-direction:column;
-      gap:5px;
-      align-items:center;
+    .logo-shell::before{
+      content:"";
+      position:absolute;
+      inset:-30% -20% auto auto;
+      width:70px;height:70px;border-radius:999px;
+      background:radial-gradient(circle, rgba(255,255,255,.18), transparent 70%);
+      filter:blur(8px);
+      pointer-events:none;
+    }
+
+    .logo-img{
+      width:100%;height:100%;display:block;object-fit:cover;border-radius:22px;background:#fff;
+      border:1px solid rgba(255,255,255,.12);
+    }
+
+    .brand-title{
+      font-size:1.34rem;
+      font-weight:800;
+      line-height:1.1;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:#fff3f5;
       text-align:center;
     }
-    .brand-title{
-      font-size:1.32rem;
-      font-weight:800;
-      line-height:1.08;
-      letter-spacing:.06em;
-      text-transform:uppercase;
-      color:#fff4f6;
-    }
+
     .brand-sub{
-      font-size:.78rem;
-      color:#dcb8bf;
-      letter-spacing:.16em;
+      font-size:.77rem;
+      color:#ffb7c5;
+      letter-spacing:.18em;
       text-transform:uppercase;
+      text-align:center;
+    }
+
+    .hero-copy{
+      margin-top:12px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:10px;
+      text-align:center;
     }
 
     .badge{
-      padding:9px 14px;
+      padding:8px 12px;
       border-radius:999px;
       background:rgba(255,255,255,.05);
-      border:1px solid #54313a;
+      border:1px solid rgba(255,255,255,.08);
       display:inline-flex;
       align-items:center;
+      justify-content:center;
       gap:8px;
-      font-size:.78rem;
-      color:#ffdbe1;
-      box-shadow:var(--shadow-soft);
+      font-size:.76rem;
+      color:#ffd8e0;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
       white-space:nowrap;
     }
+
     .badge-dot{
-      width:8px;height:8px;border-radius:999px;
-      background:var(--success);
-      box-shadow:0 0 0 4px rgba(145,212,163,.12)
-    }
-    .badge.closed{
-      background:rgba(255,110,140,.08);
-      border-color:#6a3943;
-      color:#ffd0d9;
-    }
-    .badge-dot.offline{
-      background:var(--danger);
-      box-shadow:0 0 0 4px rgba(255,139,157,.14)
+      width:8px;height:8px;border-radius:999px;background:var(--success);
+      box-shadow:0 0 0 5px rgba(121,214,163,.12);
+      animation:pulseDot 1.6s ease-in-out infinite;
     }
 
-    .claim-time-banner{
+    @keyframes pulseDot{
+      0%,100%{transform:scale(1);opacity:1}
+      50%{transform:scale(1.15);opacity:.75}
+    }
+
+    .badge.closed{
+      background:rgba(255,123,146,.08);
+      border-color:rgba(255,123,146,.18);
+      color:#ffd1da;
+    }
+
+    .badge-dot.offline{
+      background:var(--danger);
+      box-shadow:0 0 0 5px rgba(255,123,146,.14);
+    }
+
+    .claim-banner{
       width:100%;
-      padding:12px 14px;
-      border-radius:18px;
-      background:linear-gradient(135deg,rgba(214,31,63,.18),rgba(255,77,109,.10));
-      border:1px solid #7a3342;
-      color:#fff0f3;
+      max-width:420px;
+      padding:12px 16px;
+      border-radius:20px;
+      background:
+        linear-gradient(135deg, rgba(255,77,109,.18), rgba(255,122,144,.10)),
+        rgba(255,255,255,.04);
+      border:1px solid rgba(255,122,144,.22);
+      color:#fff4f6;
       font-size:.84rem;
       font-weight:800;
-      line-height:1.6;
+      line-height:1.55;
       text-align:center;
-      box-shadow:0 10px 20px rgba(0,0,0,.16);
+      box-shadow:0 10px 24px rgba(0,0,0,.22), 0 0 24px rgba(255,77,109,.08);
+    }
+
+    .claim-banner small{
+      display:block;
+      margin-top:4px;
+      font-size:.72rem;
+      color:#ffccd6;
+      font-weight:700;
+      opacity:.96;
     }
 
     .global-banner{
       display:none;
       padding:12px 14px;
       border-radius:18px;
-      border:1px solid #6a3943;
-      background:linear-gradient(135deg,#2a171c,#321b21);
-      color:#ffdbe1;
+      border:1px solid rgba(255,122,144,.18);
+      background:linear-gradient(135deg, rgba(255,77,109,.12), rgba(255,255,255,.04));
+      color:#ffe7ec;
       font-size:.82rem;
       line-height:1.7;
       text-align:center;
       font-weight:700;
       white-space:pre-line;
+      box-shadow:var(--shadow-soft);
     }
     .global-banner.show{display:block}
     .global-banner.error{
-      border-color:#8f4352;
-      background:linear-gradient(135deg,#391c23,#2f161c);
-      color:#ffd2db;
-    }
-
-    .panel{padding:16px}
-    .view{display:none;animation:fadeUp .24s ease}
-    .view.active{display:block}
-    @keyframes fadeUp{
-      from{opacity:0;transform:translateY(8px)}
-      to{opacity:1;transform:translateY(0)}
+      border-color:rgba(255,123,146,.22);
+      background:linear-gradient(135deg, rgba(255,123,146,.14), rgba(255,255,255,.03));
+      color:#ffd7df;
     }
 
     .section-blurb{
-      font-size:.84rem;
-      line-height:1.7;
+      font-size:.83rem;
+      line-height:1.65;
       color:var(--sub);
       margin-bottom:10px;
-      text-align:center
+      text-align:center;
     }
-    .section-blurb.red{color:#ff8fa3;font-weight:800}
 
-    .login-card,.register-card,.claim-card,.status-card,.success-card{
-      border-radius:26px;
-      background:linear-gradient(180deg, rgba(40,24,28,.98), rgba(27,17,20,.98));
-      border:1px solid #4d2c34;
+    .tiny-subtitle{
+      margin-top:-2px;
+      margin-bottom:10px;
+      font-size:.75rem;
+      line-height:1.6;
+      color:#c9a8af;
+      text-align:center;
+    }
+
+    .login-card,.register-card,.claim-card,.status-card{
+      border-radius:28px;
+      background:linear-gradient(180deg, rgba(32,14,19,.96), rgba(20,9,13,.98));
+      border:1px solid rgba(255,255,255,.06);
       padding:15px;
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.03), var(--shadow-soft);
       text-align:center;
       position:relative;
       overflow:hidden;
     }
-    .success-card{
-      margin-top:12px;
-      display:none;
-      border-style:dashed
-    }
-    .success-card.show{display:block}
-    .success-title{
-      font-size:1rem;
-      font-weight:800;
-      color:#fff0f3;
-      margin-bottom:6px
-    }
-    .success-desc{
-      font-size:.8rem;
-      line-height:1.7;
-      color:var(--sub)
+
+    .login-card::before,.register-card::before,.claim-card::before,.status-card::before{
+      content:"";
+      position:absolute;
+      inset:auto -40px -40px auto;
+      width:120px;height:120px;border-radius:999px;
+      background:radial-gradient(circle, rgba(255,77,109,.12), transparent 72%);
+      pointer-events:none;
+      filter:blur(6px);
     }
 
-    .claim-top-frame,.status-top-frame{
-      position:relative;
-      margin-bottom:14px;
-      padding:16px 14px 14px;
-      border-radius:22px;
-      border:1px solid #56313a;
-      background:linear-gradient(180deg, rgba(49,28,33,.95), rgba(29,18,21,.98));
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.03),0 10px 22px rgba(0,0,0,.18);
-      overflow:hidden
-    }
-    .claim-only-title,.status-only-title{
-      position:relative;
-      font-size:1rem;
+    .top-mini-note{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:7px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      color:#ffcad4;
+      font-size:.73rem;
       font-weight:800;
-      color:#fff1f4;
-      margin:0;
-      text-align:center
-    }
-    .claim-only-sub,.status-only-sub{
-      position:relative;
-      margin-top:6px;
-      font-size:.78rem;
-      color:var(--sub);
-      line-height:1.6
+      margin-bottom:10px;
     }
 
     .field-group{
@@ -305,60 +346,54 @@
       flex-direction:column;
       gap:6px;
       margin-top:11px;
-      align-items:center
+      align-items:center;
     }
+
     .field-label{
       font-size:.78rem;
-      color:#f0ccd3;
+      color:#ffdbe2;
       font-weight:700;
       text-align:center;
-      width:100%
+      width:100%;
     }
 
     .input-shell{
       background:rgba(255,255,255,.04);
-      border:1.5px solid #4e2e37;
-      border-radius:18px;
+      border:1.5px solid rgba(255,255,255,.08);
+      border-radius:20px;
       padding:11px 12px;
       transition:.2s ease;
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.02);
       width:100%;
-      text-align:center
-    }
-    .input-shell:focus-within{
-      border-color:#a93c52;
-      box-shadow:0 0 0 4px rgba(214,31,63,.12);
-      background:rgba(255,255,255,.06)
-    }
-    .input-shell.note{
-      padding:9px 10px;
-      border-style:dashed
-    }
-    .input-shell.readonly{
-      background:rgba(255,255,255,.035);
-      border-style:dashed;
+      text-align:center;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.02);
     }
 
-    .password-shell{
-      display:flex;
-      align-items:center;
-      gap:8px
+    .input-shell:focus-within{
+      border-color:rgba(255,122,144,.34);
+      box-shadow:0 0 0 4px rgba(255,77,109,.10);
+      background:rgba(255,255,255,.06);
     }
-    .password-shell input{
-      flex:1;
-      min-width:0
+
+    .input-shell.note{
+      padding:10px 11px;
+      border-style:dashed;
+      background:rgba(255,255,255,.035);
     }
+
+    .password-shell{display:flex;align-items:center;gap:8px}
+    .password-shell input{flex:1;min-width:0}
+
     .toggle-pass{
-      border:0;
-      background:#3a2329;
-      color:#ffdfe5;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.06);
+      color:#ffdbe2;
       border-radius:999px;
       padding:7px 11px;
       font-size:.76rem;
       font-weight:800;
       cursor:pointer;
       white-space:nowrap;
-      flex-shrink:0
+      flex-shrink:0;
     }
 
     input[type="email"],input[type="password"],input[type="text"],input[type="date"],textarea{
@@ -367,21 +402,26 @@
       outline:0;
       background:transparent;
       font-family:inherit;
-      font-size:.96rem;
+      font-size:.95rem;
       color:var(--text);
-      text-align:center
+      text-align:center;
     }
+
+    input[readonly]{
+      cursor:default;
+      color:#fff2f4;
+      font-weight:700;
+    }
+
     input::placeholder,textarea::placeholder{
-      color:#9f7b84;
-      text-align:center
+      color:#a78991;
+      text-align:center;
     }
+
     textarea{
       resize:none;
       min-height:92px;
-      line-height:1.6
-    }
-    input[readonly]{
-      cursor:default;
+      line-height:1.6;
     }
 
     .remember-row{
@@ -393,31 +433,42 @@
       flex-wrap:wrap;
       font-size:.78rem;
       color:var(--sub);
-      text-align:center
+      text-align:center;
     }
+
     .remember-check{
       display:inline-flex;
       align-items:center;
       gap:8px;
       cursor:pointer;
-      user-select:none
+      user-select:none;
     }
+
     .remember-check input{
-      accent-color:#d61f3f;
-      width:16px;height:16px
+      accent-color:#ff5f7d;
+      width:16px;height:16px;
     }
 
     .password-rule,.password-strength{
       margin-top:2px;
       font-size:.72rem;
       line-height:1.5;
-      text-align:center
+      text-align:center;
     }
-    .password-rule{color:#ae8a92}
+
+    .password-rule{color:#b699a0}
     .password-strength{font-weight:800}
-    .strength-weak{color:#ff9dac}
-    .strength-medium{color:#ffd28e}
-    .strength-strong{color:#a8e0b4}
+    .strength-weak{color:#ff8aa0}
+    .strength-medium{color:#ffbf74}
+    .strength-strong{color:#88dcb0}
+
+    .note-counter{
+      margin-top:4px;
+      font-size:.73rem;
+      color:var(--sub);
+      text-align:center;
+      width:100%;
+    }
 
     .important-note{
       margin-top:10px;
@@ -427,315 +478,399 @@
       justify-content:center;
       padding:10px 12px;
       border-radius:18px;
-      border:1px solid #58323a;
-      background:#29171c;
-      color:#ffd7df;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.035);
+      color:#ffd3dc;
       font-size:.78rem;
       line-height:1.6;
-      text-align:center
+      text-align:center;
+    }
+
+    .danger-note{
+      margin-top:9px;
+      width:100%;
+      padding:9px 12px;
+      border-radius:16px;
+      border:1px solid rgba(255,123,146,.22);
+      background:rgba(255,123,146,.08);
+      color:#ffd4dd;
+      font-size:.76rem;
+      font-weight:800;
+      line-height:1.55;
+      text-align:center;
+      animation:softAlert 2.2s ease-in-out infinite;
+    }
+
+    @keyframes softAlert{
+      0%,100%{box-shadow:0 0 0 rgba(255,123,146,0)}
+      50%{box-shadow:0 0 0 6px rgba(255,123,146,.05)}
     }
 
     .action-row{
       display:flex;
       gap:10px;
       margin-top:14px;
-      justify-content:center
-    }
-
-    .action-row.compact{
-      gap:8px;
       justify-content:center;
-      align-items:center;
-      flex-wrap:nowrap;
     }
 
-    .btn-primary,.btn-secondary,.btn-danger,.btn-link-small,.upload-btn,.copy-account-btn,.btn-copy,.step-chip{
-      border-radius:999px;
+    .action-row.bottom-sticky{
+      margin-top:16px;
+      padding-top:12px;
+      border-top:1px dashed rgba(255,255,255,.08);
+    }
+
+    .btn-primary,.btn-secondary,.btn-danger,.btn-link-small,.upload-btn,.copy-account-btn,.btn-copy,.status-glow-btn{
+      border-radius:18px;
       font-family:inherit;
       font-weight:800;
       cursor:pointer;
-      transition:.2s ease
+      transition:.2s ease;
     }
+
     .btn-primary{
       flex:1;
       min-height:50px;
-      border:1px solid #7d3746;
-      background:linear-gradient(135deg,#d61f3f,#9f1630);
-      color:#fffdfb;
-      font-size:.94rem;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px
+      border:1px solid rgba(255,122,144,.26);
+      background:linear-gradient(135deg,#ff5978,#ff4265);
+      color:#fff;
+      font-size:.95rem;
     }
-    .btn-primary:disabled{opacity:.65;cursor:default}
+
+    .btn-primary:hover{transform:translateY(-1px);filter:brightness(1.03)}
+
     .btn-secondary{
       min-height:50px;
-      border:1px solid #4f3138;
-      background:linear-gradient(180deg,#2a1a1f,#211418);
-      color:#ffe6ea;
-      padding:0 16px;
-      font-size:.82rem
-    }
-    .btn-danger{
-      min-height:50px;
-      border:1px solid #6f3340;
-      background:linear-gradient(180deg,#361a21,#2c151b);
-      color:#ffbec9;
-      padding:0 16px;
-      font-size:.82rem
-    }
-    .btn-secondary.compact,
-    .btn-danger.compact{
-      min-height:40px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.05);
+      color:#ffe8ed;
       padding:0 14px;
-      font-size:.75rem;
-      flex:1;
-      max-width:148px;
+      font-size:.82rem;
     }
+
+    .btn-danger{
+      min-height:42px;
+      border:1px solid rgba(255,123,146,.20);
+      background:rgba(255,123,146,.08);
+      color:#ffd6de;
+      padding:0 14px;
+      font-size:.76rem;
+      flex:1;
+    }
+
     .btn-link-small{
       min-height:42px;
-      border:1px solid #513138;
-      background:#25161a;
-      color:#ffdfe5;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.04);
+      color:#ffdbe2;
       padding:0 16px;
       font-size:.78rem;
       width:100%;
-      margin-top:12px
-    }
-    .btn-link-small:hover,.btn-secondary:hover,.btn-danger:hover,.btn-primary:hover{
-      transform:translateY(-1px);
-      filter:brightness(1.04)
+      margin-top:12px;
     }
 
-    .blink-status-btn{
-      animation:softBlink 1.2s ease-in-out infinite;
-      border-color:#a34a5b !important;
-      box-shadow:0 0 0 0 rgba(255,77,109,.22);
-    }
-    @keyframes softBlink{
-      0%,100%{opacity:1;transform:scale(1)}
-      50%{opacity:.68;transform:scale(.985)}
+    .btn-status-go{
+      min-height:50px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.05);
+      color:#fff1f4;
+      padding:0 16px;
+      font-size:.84rem;
+      min-width:132px;
+      animation:blinkBtn 1.5s ease-in-out infinite;
     }
 
-    .member-mini-card{
+    @keyframes blinkBtn{
+      0%,100%{opacity:1;border-color:rgba(255,255,255,.10)}
+      50%{opacity:.86;border-color:rgba(255,122,144,.34)}
+    }
+
+    .profile-mini{
+      width:100%;
       margin-top:10px;
-      padding:10px 12px;
-      border-radius:18px;
-      border:1px solid #5b3440;
-      background:linear-gradient(180deg,#2a181d,#201317);
-      display:grid;
-      gap:8px;
-      text-align:center;
-    }
-    .member-mini-grid{
       display:grid;
       grid-template-columns:1fr 1fr;
       gap:8px;
     }
-    .member-chip{
-      border:1px solid #4e2f37;
+
+    .profile-chip{
+      padding:10px 10px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.08);
       background:rgba(255,255,255,.04);
-      border-radius:16px;
-      padding:9px 8px;
+      text-align:center;
+      min-height:74px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:4px;
     }
-    .member-chip-label{
-      font-size:.7rem;
-      color:#ba97a0;
-      margin-bottom:3px;
+
+    .profile-chip-label{
+      font-size:.71rem;
+      color:#bfa2aa;
       font-weight:700;
+      line-height:1.3;
     }
-    .member-chip-value{
-      font-size:.8rem;
-      color:#fff2f5;
+
+    .profile-chip-value{
+      font-size:.82rem;
+      color:#fff3f6;
       font-weight:800;
       line-height:1.4;
       word-break:break-word;
     }
 
-    .expiry-check-wrap{
+    .profile-email-box{
       margin-top:10px;
-      border-radius:20px;
-      border:1px solid #56333b;
-      background:linear-gradient(180deg,#28171c,#201216);
-      padding:12px;
-      display:grid;
-      gap:10px
-    }
-
-    .claim-warning-mini{
-      display:none;
-      margin-top:2px;
-      padding:9px 10px;
-      border-radius:14px;
-      background:rgba(255,180,120,.08);
-      border:1px solid #6f4e35;
-      color:#ffd7a6;
-      font-size:.74rem;
-      line-height:1.5;
-      font-weight:800;
+      padding:11px 12px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.04);
       text-align:center;
     }
-    .claim-warning-mini.show{display:block}
+
+    .profile-email-box .profile-chip-label{margin-bottom:4px}
+    .profile-email-box .profile-chip-value{font-size:.9rem}
+
+    .expiry-fixed-card{
+      margin-top:10px;
+      padding:12px 14px;
+      border-radius:20px;
+      border:1px solid rgba(121,214,163,.16);
+      background:linear-gradient(180deg, rgba(121,214,163,.08), rgba(255,255,255,.03));
+      text-align:center;
+    }
+
+    .expiry-fixed-label{
+      font-size:.74rem;
+      color:#cfe9d9;
+      font-weight:700;
+      margin-bottom:4px;
+    }
+
+    .expiry-fixed-value{
+      font-size:1rem;
+      font-weight:800;
+      color:#f7fff9;
+    }
+
+    .expiry-note{
+      margin-top:6px;
+      font-size:.72rem;
+      color:#b8d8c5;
+      line-height:1.5;
+    }
 
     .payment-section{display:none}
+
     .payment-card{
       margin-top:10px;
       padding:14px;
       border-radius:24px;
-      background:linear-gradient(180deg,#2b191e,#1f1216);
-      border:1px solid #57333c;
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025));
+      border:1px solid rgba(255,255,255,.08);
       text-align:center;
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.03),0 10px 20px rgba(0,0,0,.18)
     }
-    .payment-title{font-size:.98rem;font-weight:800;margin-bottom:4px;color:#fff1f4}
-    .payment-desc{font-size:.79rem;color:var(--sub);line-height:1.6;margin-bottom:12px;text-align:center}
+
+    .payment-title{
+      font-size:.98rem;
+      font-weight:800;
+      margin-bottom:4px;
+      color:#fff0f3;
+    }
+
+    .payment-desc{
+      font-size:.79rem;
+      color:var(--sub);
+      line-height:1.6;
+      margin-bottom:12px;
+      text-align:center;
+    }
 
     .bank-minimal{
       margin-bottom:14px;
       padding:14px;
       border-radius:22px;
-      border:1px solid #58333c;
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02))
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.035);
     }
+
     .bank-minimal-top{
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:10px;
-      margin-bottom:10px
+      margin-bottom:10px;
     }
+
     .bank-chip{
       display:inline-flex;
       align-items:center;
       gap:6px;
       padding:6px 10px;
       border-radius:999px;
-      background:#301b21;
-      border:1px solid #57313a;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
       font-size:.73rem;
       font-weight:800;
-      color:#ffdfe5
+      color:#ffdbe2;
     }
+
     .bank-card-name{
       font-size:.76rem;
       color:var(--sub);
       line-height:1.5;
-      text-align:left
+      text-align:left;
     }
+
     .bank-number-box{
       padding:14px 12px;
       border-radius:18px;
-      background:linear-gradient(180deg,#211317,#1b1013);
-      border:1px solid #53323a;
-      margin-bottom:10px
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      margin-bottom:10px;
     }
+
     .bank-number-label{
       font-size:.72rem;
       color:var(--sub);
       margin-bottom:4px;
-      letter-spacing:.04em
+      letter-spacing:.04em;
     }
+
     .bank-number{
       font-size:1.15rem;
       font-weight:800;
-      color:#fff1f4;
+      color:#fff2f5;
       letter-spacing:.08em;
-      word-break:break-all
+      word-break:break-all;
     }
 
     .copy-account-btn,.btn-copy{
       width:100%;
       min-height:42px;
-      border:1px solid #513139;
-      background:linear-gradient(180deg,#2b191e,#221419);
-      color:#ffe4e9;
-      font-size:.8rem
+      border:1px solid rgba(255,255,255,.09);
+      background:rgba(255,255,255,.05);
+      color:#ffe8ed;
+      font-size:.8rem;
     }
 
     .qr-wrap{
       margin-top:10px;
       padding:12px;
       border-radius:22px;
-      border:1px solid #57353d;
+      border:1px solid rgba(255,255,255,.08);
       background:rgba(255,255,255,.04);
-      text-align:center
+      text-align:center;
     }
+
     .qr-title{
       font-size:.86rem;
       font-weight:800;
-      color:#fff1f4;
-      margin-bottom:8px
+      color:#fff0f4;
+      margin-bottom:8px;
     }
+
     .qr-img{
       width:100%;
       max-width:260px;
       display:block;
       margin:0 auto;
       border-radius:18px;
-      border:1px solid #56343c;
+      border:1px solid rgba(255,255,255,.10);
       background:#fff;
-      box-shadow:0 12px 20px rgba(0,0,0,.18)
     }
+
     .qr-caption{
       margin-top:8px;
       font-size:.76rem;
       line-height:1.6;
       color:var(--sub);
-      text-align:center
+      text-align:center;
     }
 
     .uploader{
-      border:1.5px dashed #61404a;
+      border:1.5px dashed rgba(255,255,255,.10);
       border-radius:22px;
       padding:14px;
       background:rgba(255,255,255,.03);
       margin-top:12px;
       text-align:center;
-      position:relative
+      position:relative;
     }
+
     .uploader-top{
       display:flex;
       flex-direction:column;
       align-items:center;
       gap:8px;
-      text-align:center
+      text-align:center;
     }
-    .upload-title{font-size:.9rem;font-weight:800;color:#fff1f4}
-    .upload-sub{font-size:.76rem;color:var(--sub);line-height:1.55;text-align:center}
-    .upload-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+
+    .upload-title{
+      font-size:.9rem;
+      font-weight:800;
+      color:#fff0f4;
+    }
+
+    .upload-sub{
+      font-size:.76rem;
+      color:var(--sub);
+      line-height:1.55;
+      text-align:center;
+    }
+
+    .upload-row{
+      display:flex;
+      gap:8px;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+
     .upload-btn{
-      border:1px solid #6b3843;
+      border:1px solid rgba(255,255,255,.08);
       padding:11px 16px;
-      background:linear-gradient(135deg,#d61f3f,#9d1830);
-      color:#fff;
+      background:rgba(255,255,255,.05);
+      color:#ffe7ec;
       font-size:.84rem;
     }
+
     .upload-btn.secondary{
-      background:linear-gradient(135deg,#3a2329,#2a1a1f);
-      color:#ffe2e8;
-      border:1px solid #59343d
+      background:rgba(255,255,255,.035);
+      color:#ffd5de;
     }
-    .hidden-file-input{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none}
-    .file-name{margin-top:10px;font-size:.76rem;color:var(--sub);word-break:break-word;text-align:center}
+
+    .hidden-file-input{
+      position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;
+    }
+
+    .file-name{
+      margin-top:10px;
+      font-size:.76rem;
+      color:var(--sub);
+      word-break:break-word;
+      text-align:center;
+    }
 
     .upload-status{
       margin-top:10px;
       display:none;
       padding:10px 12px;
       border-radius:16px;
-      background:linear-gradient(180deg,#1f2c24,#18231c);
-      border:1px solid #2e5a39;
-      color:#b7edc1;
+      background:rgba(121,214,163,.10);
+      border:1px solid rgba(121,214,163,.18);
+      color:#d8f7e4;
       font-size:.78rem;
       font-weight:800;
-      line-height:1.6
+      line-height:1.6;
     }
+
     .upload-status.show{display:block}
     .upload-status.error{
-      background:linear-gradient(180deg,#351c22,#2a171c);
-      border-color:#7b3948;
-      color:#ffb9c6
+      background:rgba(255,123,146,.08);
+      border-color:rgba(255,123,146,.18);
+      color:#ffd8df;
     }
 
     .preview-wrap{
@@ -743,41 +878,42 @@
       display:none;
       flex-direction:column;
       align-items:center;
-      gap:10px
+      gap:10px;
     }
+
     .preview-img{
       width:100%;
       max-height:260px;
       object-fit:contain;
       border-radius:18px;
-      border:1px solid #57353d;
+      border:1px solid rgba(255,255,255,.08);
       background:#fff;
-      box-shadow:0 14px 24px rgba(0,0,0,.18)
     }
 
     .payment-require{
       margin-top:8px;
       font-size:.75rem;
-      color:#ffb2bf;
+      color:#ffd4dd;
       line-height:1.55;
-      text-align:center
+      text-align:center;
     }
 
     #summary,#statusSummary{
       margin-top:8px;
       text-align:center;
-      font-size:.78rem
+      font-size:.78rem;
     }
+
     .summary-pill{
       display:inline-flex;
       align-items:center;
       gap:6px;
       padding:7px 12px;
       border-radius:999px;
-      background:#2b191d;
-      border:1px solid #57323a;
-      color:#ffe4ea;
-      font-weight:800
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+      color:#fff0f4;
+      font-weight:800;
     }
 
     #status,#authStatus,#statusPageText{
@@ -786,59 +922,62 @@
       text-align:center;
       font-size:.82rem;
       line-height:1.7;
-      color:var(--sub)
+      color:var(--sub);
     }
-    .status-error{color:var(--danger)!important}
-    .status-ok{color:var(--success)!important}
-    .status-info{color:var(--info)!important}
-    .status-strong{font-weight:800;color:#fff2f6}
+
+    .status-error{color:#ffd2da!important}
+    .status-ok{color:#d7f8e5!important}
+    .status-info{color:#dbe4ff!important}
+    .status-strong{font-weight:800;color:var(--text)}
     .status-time{font-size:.76rem;color:var(--sub)}
 
-    #results,#historyResults{
-      margin-top:8px;
-      display:grid;
-      gap:8px
-    }
+    #results,#historyResults{margin-top:8px;display:grid;gap:8px}
+
     .result-item{
       border-radius:20px;
-      border:1px solid #56343c;
+      border:1px solid rgba(255,255,255,.08);
       background:rgba(255,255,255,.04);
-      padding:10px 12px 12px;
-      box-shadow:0 10px 20px rgba(0,0,0,.14);
-      text-align:center
+      padding:11px 12px 12px;
+      text-align:center;
     }
+
     .item-header{
       width:100%;
       font-size:.72rem;
-      color:#cba9b0;
+      color:#b998a1;
       letter-spacing:.12em;
       text-transform:uppercase;
       text-align:center;
-      margin-bottom:6px
+      margin-bottom:6px;
     }
+
     .item-email{
       width:100%;
       font-size:.9rem;
       font-weight:800;
       word-break:break-word;
-      text-align:center
+      text-align:center;
+      color:#fff2f5;
     }
+
     .item-tag{
       font-size:.72rem;
       padding:4px 9px;
       border-radius:999px;
-      background:#2f1b20;
-      border:1px solid #5a3540;
-      color:#ffe0e6;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+      color:#fff0f4;
       font-weight:800;
       margin:8px auto;
-      display:inline-flex
+      display:inline-flex;
     }
+
     .item-tag.paid{
-      background:#341f24;
-      border-color:#7d4150;
-      color:#ffc7d2
+      background:rgba(255,189,111,.10);
+      border-color:rgba(255,189,111,.18);
+      color:#ffe3be;
     }
+
     .item-meta{
       display:flex;
       flex-wrap:wrap;
@@ -847,137 +986,20 @@
       font-size:.76rem;
       color:var(--sub);
       margin-bottom:8px;
-      text-align:center
+      text-align:center;
     }
+
     .item-body{
       text-align:center;
       font-size:.84rem;
       line-height:1.65;
-      margin-bottom:8px
-    }
-    .result-actions{display:grid;gap:8px;margin-top:6px}
-
-    .step-card{
-      margin-top:12px;
-      padding:12px;
-      border-radius:20px;
-      border:1px solid #57343c;
-      background:linear-gradient(180deg,#29181d,#201216)
-    }
-    .step-title{
-      font-size:.84rem;
-      font-weight:800;
-      color:#fff1f4;
-      margin-bottom:10px
-    }
-    .step-list{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      justify-content:center
-    }
-    .step-chip{
-      min-height:34px;
-      padding:7px 12px;
-      border:1px solid #55323a;
-      background:#241519;
-      color:#d5b2ba;
-      font-size:.74rem;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center
-    }
-    .step-chip.active{
-      background:linear-gradient(135deg,#d61f3f,#97152d);
-      color:#fff;
-      border-color:#7d3644
+      margin-bottom:8px;
     }
 
-    .history-card,.realtime-card{
-      margin-top:12px;
-      padding:14px;
-      border-radius:24px;
-      background:linear-gradient(180deg, rgba(38,23,27,.98), rgba(27,17,20,.98));
-      border:1px solid #56333b;
-      box-shadow:var(--shadow-soft);
-      position:relative;
-      overflow:hidden
-    }
-    .history-header,.realtime-header{
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      gap:10px;
-      margin-bottom:10px;
-      flex-wrap:wrap
-    }
-    .history-title-left,.realtime-title-left{
-      display:flex;
-      align-items:center;
-      gap:7px;
-      justify-content:center
-    }
-    .live-dot{
-      width:9px;height:9px;border-radius:999px;
-      background:var(--accent-2);
-      box-shadow:0 0 0 4px rgba(255,77,109,.18);
-      animation:blinkDot 1.2s infinite;
-    }
-    @keyframes blinkDot{
-      0%,100%{opacity:1}
-      50%{opacity:.3}
-    }
-
-    .history-title-text,.realtime-title-text{
-      font-size:.88rem;
-      font-weight:800;
-      color:#fff0f3
-    }
-    .realtime-date{
-      width:100%;
-      font-size:.74rem;
-      color:var(--sub);
-      text-align:center
-    }
-
-    .live-list{
+    .result-actions{
       display:grid;
       gap:8px;
-      max-height:270px;
-      overflow-y:auto
-    }
-    .live-item{
-      display:flex;
-      justify-content:space-between;
-      gap:12px;
-      align-items:center;
-      padding:10px 12px;
-      border-radius:16px;
-      background:rgba(255,255,255,.04);
-      border:1px solid #57333b;
-      font-size:.8rem
-    }
-    .live-email{
-      font-weight:800;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
-      max-width:220px;
-      text-align:left;
-      flex:1
-    }
-    .live-status-text{
-      font-size:.77rem;
-      color:var(--sub);
-      white-space:nowrap;
-      text-align:right;
-      flex-shrink:0
-    }
-    .live-empty{
-      text-align:center;
-      font-size:.8rem;
-      color:var(--sub);
-      padding:8px 0
+      margin-top:6px;
     }
 
     .status-pill{
@@ -989,13 +1011,14 @@
       font-size:.72rem;
       font-weight:800;
       border:1px solid transparent;
-      line-height:1.2
+      line-height:1.2;
     }
-    .status-pill--green{background:#1f2d24;color:#b7efc3;border-color:#356743}
-    .status-pill--yellow{background:#30261b;color:#ffd58f;border-color:#6c5330}
-    .status-pill--red{background:#351c22;color:#ffbec9;border-color:#80404d}
-    .status-pill--blue{background:#271f34;color:#e2c7ff;border-color:#655189}
-    .status-pill--purple{background:#2d2132;color:#e5c9ff;border-color:#684b74}
+
+    .status-pill--green{background:rgba(121,214,163,.10);color:#d7f8e5;border-color:rgba(121,214,163,.18)}
+    .status-pill--yellow{background:rgba(255,189,111,.10);color:#ffe2bc;border-color:rgba(255,189,111,.18)}
+    .status-pill--red{background:rgba(255,123,146,.10);color:#ffd8df;border-color:rgba(255,123,146,.18)}
+    .status-pill--blue{background:rgba(166,191,255,.10);color:#e0e7ff;border-color:rgba(166,191,255,.16)}
+    .status-pill--purple{background:rgba(255,255,255,.05);color:#fff0f4;border-color:rgba(255,255,255,.08)}
 
     .alert-box{
       display:none;
@@ -1006,68 +1029,216 @@
       line-height:1.6;
       font-weight:700;
       border:1px solid transparent;
-      text-align:center
+      text-align:center;
     }
-    .alert-box.show{display:block}
-    .alert-box.success{background:#1f2c24;color:#b7edc1;border-color:#335a3d}
-    .alert-box.error{background:#351b21;color:#ffc0cb;border-color:#80404e}
-    .alert-box.info{background:#271f33;color:#dfc6ff;border-color:#635080}
-    .alert-box.warning{background:#33281c;color:#ffd39c;border-color:#6f5730}
 
-    .modal-backdrop{
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,.56);
-      display:none;
+    .alert-box.show{display:block}
+    .alert-box.success{background:rgba(121,214,163,.10);color:#ddf8e8;border-color:rgba(121,214,163,.18)}
+    .alert-box.error{background:rgba(255,123,146,.10);color:#ffd6de;border-color:rgba(255,123,146,.18)}
+    .alert-box.info{background:rgba(166,191,255,.10);color:#e0e8ff;border-color:rgba(166,191,255,.16)}
+    .alert-box.warning{background:rgba(255,189,111,.10);color:#ffe5bf;border-color:rgba(255,189,111,.18)}
+
+    .live-card{
+      margin-top:12px;
+      padding:14px;
+      border-radius:24px;
+      background:linear-gradient(180deg, rgba(38,17,22,.98), rgba(23,10,14,.98));
+      border:1px solid rgba(255,122,144,.16);
+      box-shadow:var(--shadow-soft), 0 0 24px rgba(255,77,109,.08);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .live-card::before{
+      content:"";
+      position:absolute;
+      inset:auto auto -44px -34px;
+      width:120px;height:120px;border-radius:999px;
+      background:radial-gradient(circle, rgba(255,77,109,.12), transparent 72%);
+      filter:blur(8px);
+      pointer-events:none;
+    }
+
+    .live-header{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:10px;
+      margin-bottom:10px;
+      flex-wrap:wrap;
+      text-align:center;
+    }
+
+    .live-title-left{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      justify-content:center;
+    }
+
+    .live-dot{
+      width:9px;height:9px;border-radius:999px;background:var(--accent);
+      box-shadow:0 0 0 6px rgba(255,77,109,.10);
+      animation:blinkLive 1.1s ease-in-out infinite;
+    }
+
+    @keyframes blinkLive{
+      0%,100%{opacity:1;transform:scale(1)}
+      50%{opacity:.55;transform:scale(1.12)}
+    }
+
+    .live-title-text{
+      font-size:.9rem;
+      font-weight:800;
+      color:#fff0f4;
+    }
+
+    .live-date{
+      width:100%;
+      font-size:.73rem;
+      color:#c7a7af;
+      text-align:center;
+    }
+
+    .live-sub{
+      width:100%;
+      font-size:.73rem;
+      color:#ffd4dc;
+      text-align:center;
+      line-height:1.55;
+      margin-top:-2px;
+    }
+
+    .live-list{
+      display:grid;
+      gap:8px;
+      max-height:270px;
+      overflow-y:auto;
+      padding-right:2px;
+    }
+
+    .live-list::-webkit-scrollbar{width:6px}
+    .live-list::-webkit-scrollbar-thumb{
+      background:rgba(255,255,255,.10);
+      border-radius:999px;
+    }
+
+    .live-item{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:center;
+      padding:10px 12px;
+      border-radius:16px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.06);
+      font-size:.8rem;
+    }
+
+    .live-email{
+      font-weight:800;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+      max-width:220px;
+      text-align:left;
+      flex:1;
+      color:#fff4f6;
+    }
+
+    .live-status-text{
+      font-size:.77rem;
+      color:var(--sub);
+      white-space:nowrap;
+      text-align:right;
+      flex-shrink:0;
+    }
+
+    .live-empty{
+      text-align:center;
+      font-size:.8rem;
+      color:var(--sub);
+      padding:8px 0;
+    }
+
+    .status-card .title-main,
+    .claim-card .title-main{
+      font-size:1rem;
+      font-weight:800;
+      color:#fff0f4;
+      margin:0;
+      text-align:center;
+    }
+
+    .title-sub{
+      margin-top:6px;
+      font-size:.78rem;
+      color:var(--sub);
+      line-height:1.6;
+    }
+
+    .step-card{
+      margin-top:12px;
+      padding:12px;
+      border-radius:20px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.04);
+    }
+
+    .step-title{
+      font-size:.84rem;
+      font-weight:800;
+      color:#fff0f4;
+      margin-bottom:10px;
+    }
+
+    .step-list{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      justify-content:center;
+    }
+
+    .step-chip{
+      min-height:34px;
+      padding:7px 12px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.04);
+      color:#ffdfe6;
+      font-size:.74rem;
+      display:inline-flex;
       align-items:center;
       justify-content:center;
-      padding:18px;
-      z-index:99998;
-      backdrop-filter:blur(6px)
-    }
-    .modal-backdrop.show{display:flex}
-    .modal-card{
-      width:100%;
-      max-width:360px;
-      background:#1f1317;
-      border:1px solid #57343c;
-      border-radius:24px;
-      box-shadow:0 18px 40px rgba(0,0,0,.34);
-      padding:18px;
-      text-align:center
-    }
-    .modal-title{font-size:1rem;font-weight:800;color:#fff1f4;margin-bottom:8px}
-    .modal-desc{font-size:.83rem;color:var(--sub);line-height:1.65;margin-bottom:14px}
-    .modal-summary{
-      border-radius:18px;
-      border:1px solid #56343c;
-      background:#26161a;
-      padding:12px;
-      font-size:.8rem;
-      line-height:1.7;
-      color:#ffe6ea;
-      text-align:center
-    }
-    .modal-actions{display:flex;gap:10px;margin-top:14px;justify-content:center}
-
-    .toast{
-      position:fixed;
-      left:50%;
-      bottom:18px;
-      transform:translateX(-50%) translateY(40px);
-      padding:10px 18px;
       border-radius:999px;
-      background:rgba(29,20,23,.96);
-      color:#fff;
-      font-size:.8rem;
-      font-weight:800;
-      opacity:0;
-      pointer-events:none;
-      transition:all .28s ease;
-      z-index:9999;
-      border:1px solid #59343d
     }
-    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+    .step-chip.active{
+      background:linear-gradient(135deg,#ff607d,#ff4767);
+      color:#fff;
+      border-color:transparent;
+    }
+
+    .admin-cta{
+      margin-top:12px;
+      display:flex;
+      gap:10px;
+    }
+
+    .admin-btn{
+      width:100%;
+      min-height:44px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.05);
+      color:#fff1f4;
+      font-weight:800;
+      font-family:inherit;
+      font-size:.82rem;
+      cursor:pointer;
+      transition:.2s ease;
+    }
+
+    .admin-btn:hover{transform:translateY(-1px)}
 
     .loading-overlay{
       position:fixed;
@@ -1077,50 +1248,167 @@
       justify-content:center;
       z-index:99999;
       padding:20px;
-      background:rgba(14,9,10,.88);
-      backdrop-filter:blur(8px)
+      background:rgba(11,5,7,.82);
+      backdrop-filter:blur(10px);
     }
+
     .loading-overlay.show{display:flex}
+
     .loading-card{
       width:100%;
-      max-width:300px;
-      border-radius:28px;
-      background:rgba(27,17,20,.98);
-      border:1px solid #56343c;
-      box-shadow:0 20px 54px rgba(0,0,0,.36);
-      padding:24px 18px 20px;
-      text-align:center
+      max-width:320px;
+      border-radius:30px;
+      background:linear-gradient(180deg, rgba(30,13,18,.98), rgba(17,8,11,.98));
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:0 22px 60px rgba(0,0,0,.45), 0 0 32px rgba(255,77,109,.08);
+      padding:24px 18px 22px;
+      text-align:center;
     }
-    .spinner{
-      width:62px;
-      height:62px;
-      margin:0 auto 12px;
+
+    .loader-ring{
+      width:88px;height:88px;margin:0 auto 12px;position:relative;
+      display:grid;place-items:center;
+    }
+
+    .loader-ring svg{
+      width:88px;height:88px;transform:rotate(-90deg)
+    }
+
+    .loader-ring .ring-bg{
+      stroke:rgba(255,255,255,.08);
+      stroke-width:7;
+      fill:none;
+    }
+
+    .loader-ring .ring-progress{
+      stroke:var(--accent);
+      stroke-width:7;
+      fill:none;
+      stroke-linecap:round;
+      stroke-dasharray:226;
+      stroke-dashoffset:226;
+      animation:ringProgress 2s linear infinite;
+      filter:drop-shadow(0 0 8px rgba(255,77,109,.35));
+    }
+
+    @keyframes ringProgress{
+      0%{stroke-dashoffset:226}
+      50%{stroke-dashoffset:72}
+      100%{stroke-dashoffset:226}
+    }
+
+    .loader-spin{
+      position:absolute;
+      inset:12px;
       border-radius:999px;
-      border:5px solid rgba(255,255,255,.08);
-      border-top-color:#ff4d6d;
-      animation:spin .85s linear infinite;
+      border:2px solid transparent;
+      border-top-color:rgba(255,255,255,.32);
+      border-right-color:rgba(255,255,255,.16);
+      animation:spin 1s linear infinite;
     }
-    .loading-percent{
+
+    .loader-percent{
+      position:absolute;
+      font-size:1rem;
+      font-weight:800;
+      color:#fff2f5;
+    }
+
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    .loading-title{
+      font-size:1rem;
+      font-weight:800;
+      color:#fff0f4;
+      text-align:center;
       margin-top:2px;
+    }
+
+    .loading-sub{
+      margin-top:8px;
+      font-size:.82rem;
+      color:#d4b6bd;
+      line-height:1.55;
+      text-align:center;
+    }
+
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:18px;
+      transform:translateX(-50%) translateY(40px);
+      padding:10px 18px;
+      border-radius:999px;
+      background:rgba(27,13,18,.96);
+      color:#fff;
       font-size:.8rem;
       font-weight:800;
-      color:#ffdbe2;
-      letter-spacing:.03em;
+      opacity:0;
+      pointer-events:none;
+      transition:all .28s ease;
+      z-index:9999;
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:var(--shadow-soft);
     }
-    @keyframes spin{to{transform:rotate(360deg)}}
-    .loading-title{
-      margin-top:8px;
-      font-size:.96rem;
+
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+    .modal-backdrop{
+      position:fixed;
+      inset:0;
+      background:rgba(11,5,7,.62);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      z-index:99998;
+      backdrop-filter:blur(6px)
+    }
+
+    .modal-backdrop.show{display:flex}
+
+    .modal-card{
+      width:100%;
+      max-width:360px;
+      background:linear-gradient(180deg, rgba(31,14,19,.98), rgba(18,8,11,.98));
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:24px;
+      box-shadow:0 18px 40px rgba(0,0,0,.35);
+      padding:18px;
+      text-align:center;
+      color:#fff0f4;
+    }
+
+    .modal-title{
+      font-size:1rem;
       font-weight:800;
-      color:#fff1f4;
+      color:#fff0f4;
+      margin-bottom:8px
+    }
+
+    .modal-desc{
+      font-size:.83rem;
+      color:var(--sub);
+      line-height:1.65;
+      margin-bottom:14px
+    }
+
+    .modal-summary{
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.04);
+      padding:12px;
+      font-size:.8rem;
+      line-height:1.7;
+      color:#ffe6eb;
       text-align:center
     }
-    .loading-sub{
-      margin-top:6px;
-      font-size:.82rem;
-      color:var(--sub);
-      line-height:1.55;
-      text-align:center
+
+    .modal-actions{
+      display:flex;
+      gap:10px;
+      margin-top:14px;
+      justify-content:center
     }
 
     .footer{
@@ -1129,10 +1417,12 @@
       flex-direction:column;
       align-items:center;
       gap:6px;
-      color:var(--sub);
+      color:#9d7c84;
       font-size:.74rem;
-      text-align:center
+      text-align:center;
+      padding-bottom:4px;
     }
+
     .support-pill{
       display:inline-flex;
       align-items:center;
@@ -1140,8 +1430,9 @@
       padding:7px 12px;
       border-radius:999px;
       background:rgba(255,255,255,.04);
-      border:1px solid #56343c
+      border:1px solid rgba(255,255,255,.08)
     }
+
     .copyright{
       letter-spacing:.16em;
       text-transform:uppercase;
@@ -1149,74 +1440,69 @@
     }
 
     .shake{animation:shake .4s;border-color:var(--danger)!important}
-    .btn-shake{animation:btnShake .45s}
     @keyframes shake{
       0%,100%{transform:translateX(0)}
       25%{transform:translateX(-4px)}
       75%{transform:translateX(4px)}
     }
-    @keyframes btnShake{
-      0%,100%{transform:translateX(0)}
-      20%{transform:translateX(-5px)}
-      40%{transform:translateX(5px)}
-      60%{transform:translateX(-4px)}
-      80%{transform:translateX(4px)}
+
+    .red-text{
+      color:#ff8094 !important;
+      font-weight:800;
     }
+
+    .hide{display:none!important}
 
     @media (max-width:480px){
       .app{padding:12px 12px 16px}
       .action-row,.modal-actions{flex-direction:column}
-      .action-row.compact{flex-direction:row}
-      .live-item{gap:8px}
-      .live-email{max-width:150px}
       .bank-minimal-top{flex-direction:column;align-items:stretch}
       .bank-card-name{text-align:center}
-      .member-mini-grid{grid-template-columns:1fr 1fr}
-      .btn-secondary.compact,
-      .btn-danger.compact{
-        max-width:none;
-      }
+      .profile-mini{grid-template-columns:1fr 1fr}
+      .live-item{gap:8px}
+      .live-email{max-width:150px}
+      .action-row.bottom-sticky{position:static}
     }
   </style>
 </head>
 <body>
-  <div class="fog">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
+  <div class="fog"></div>
 
   <div class="app">
     <section class="hero shell-card" id="heroSection">
-      <div class="logo-shell">
-        <img
-          class="logo-img"
-          src="https://img2.imgbiz.com/imgbiz/IMG_0923.jpeg"
-          alt="426 SHOP logo"
-          onerror="this.src='https://via.placeholder.com/120x120.png?text=426';"
-        />
-      </div>
-
-      <div class="brand-copy">
+      <div class="brand-wrap">
+        <div class="logo-shell">
+          <img
+            class="logo-img"
+            src="https://img2.imgbiz.com/imgbiz/IMG_0923.jpeg"
+            alt="426 SHOP logo"
+            onerror="this.src='https://via.placeholder.com/120x120.png?text=426';"
+          />
+        </div>
         <div class="brand-title">426 SHOP</div>
         <div class="brand-sub">MEMBER & CLAIM CENTER</div>
       </div>
 
-      <div class="badge" id="onlineStatus">
-        <span class="badge-dot" id="onlineDot"></span>
-        <span id="onlineText">สถานะ: เปิดรับเคลม</span>
-      </div>
+      <div class="hero-copy">
+        <div class="badge" id="onlineStatus">
+          <span class="badge-dot" id="onlineDot"></span>
+          <span id="onlineText">สถานะ: เปิดรับเคลม</span>
+        </div>
 
-      <div class="claim-time-banner" id="claimTimeNote">
-        เปิดรับแจ้งเคลม จันทร์–เสาร์<br />07.00–19.00 น.
+        <div class="claim-banner" id="claimTimeNote">
+          แจ้งเคลมได้ในช่วงเวลาที่กำหนด
+          <small>จันทร์–เสาร์ · 07:00–19:00 น.</small>
+        </div>
       </div>
     </section>
 
     <div class="global-banner shell-card" id="globalBanner"></div>
 
     <main class="panel shell-card">
+      <!-- LOGIN VIEW -->
       <section class="view active" id="loginView">
         <div class="section-blurb">เข้าสู่ระบบด้วยอีเมลและรหัสผ่านของคุณ</div>
+        <div class="tiny-subtitle">ล็อกอินเพื่อส่งคำขอเคลมและดูประวัติล่าสุดได้อย่างรวดเร็ว</div>
 
         <div class="login-card">
           <div id="topAlert" class="alert-box"></div>
@@ -1249,25 +1535,24 @@
           <div class="action-row">
             <button class="btn-primary" id="btnLogin">
               <span>เข้าสู่ระบบ</span>
-              <span>↗</span>
             </button>
           </div>
 
           <button type="button" class="btn-link-small" id="btnForgotPassword">ลืมรหัสผ่าน</button>
-
           <div id="authStatus"></div>
         </div>
 
-        <div class="section-blurb red" style="margin-top:12px;">ยังไม่มีสมาชิก?</div>
+        <div class="section-blurb red-text" style="margin-top:12px;">ยังไม่มีสมาชิก?</div>
         <button type="button" class="btn-link-small" id="showRegisterBtn">สมัครสมาชิกใหม่</button>
 
-        <div class="realtime-card" style="margin-top:12px;">
-          <div class="realtime-header">
-            <div class="realtime-title-left">
+        <div class="live-card">
+          <div class="live-header">
+            <div class="live-title-left">
               <span class="live-dot"></span>
-              <span class="realtime-title-text">สถานะเมลวันนี้แบบเรียลไทม์</span>
+              <span class="live-title-text">สถานะเมลวันนี้แบบเรียลไทม์</span>
             </div>
-            <span class="realtime-date" id="liveDate"></span>
+            <span class="live-date" id="liveDate"></span>
+            <div class="live-sub">อัปเดตคิวล่าสุดแบบเรียลไทม์</div>
           </div>
           <div class="live-list" id="liveList">
             <div class="live-empty">กำลังดึงสถานะเมลวันนี้...</div>
@@ -1275,6 +1560,7 @@
         </div>
       </section>
 
+      <!-- REGISTER VIEW -->
       <section class="view" id="registerView">
         <div class="section-blurb">สมัครสมาชิกด้วยอีเมลที่ใช้กับร้าน พร้อมตั้งรหัสผ่านใหม่</div>
 
@@ -1282,9 +1568,9 @@
           <div id="registerAlert" class="alert-box"></div>
 
           <div class="field-group">
-            <label class="field-label" for="registerDisplayName">ชื่อไลน์</label>
+            <label class="field-label" for="registerDisplayName">ชื่อไลน์ที่ใช้ติดต่อ</label>
             <div class="input-shell">
-              <input id="registerDisplayName" type="text" placeholder="เช่น Amp Drive" />
+              <input id="registerDisplayName" type="text" placeholder="เช่น amp.drive999" />
             </div>
           </div>
 
@@ -1303,7 +1589,7 @@
                 <button type="button" class="toggle-pass" data-target="registerPassword">แสดง</button>
               </div>
             </div>
-            <div class="password-rule">ต้องมีตัวพิมพ์ใหญ่ ตัวพิมพ์เล็ก ตัวเลข</div>
+            <div class="password-rule">ต้องมีตัวพิมพ์ใหญ่ ตัวพิมพ์เล็ก และตัวเลข</div>
             <div class="password-strength" id="registerPasswordStrength">ระดับรหัสผ่าน: -</div>
           </div>
 
@@ -1325,77 +1611,66 @@
           </div>
 
           <div class="important-note">
-            <strong>สำคัญ:</strong>
-            <span>กรอกวันที่สมัครหรือวันที่ต่ออายุล่าสุดตามข้อมูลจริง เพื่อให้ร้านใช้เป็นข้อมูลอ้างอิง</span>
+            กรุณากรอกวันที่สมัครหรือวันที่ต่ออายุล่าสุดตามข้อมูลจริงในระบบ
           </div>
 
           <div class="action-row">
             <button class="btn-primary" id="btnRegister">
               <span>สมัครสมาชิก</span>
-              <span>↗</span>
             </button>
           </div>
 
           <button type="button" class="btn-link-small" id="backToLoginBtn">กลับไปหน้าล็อกอิน</button>
         </div>
-
-        <div class="success-card" id="registerSuccessCard">
-          <div class="success-title">สมัครสมาชิกสำเร็จแล้ว</div>
-          <div class="success-desc">
-            ตอนนี้คุณสามารถใช้อีเมลและรหัสผ่านที่ตั้งไว้เข้าสู่ระบบได้ทันที<br />
-            หากลืมรหัสผ่าน สามารถกดขอรีเซ็ตได้จากหน้าล็อกอิน
-          </div>
-        </div>
       </section>
 
+      <!-- CLAIM VIEW -->
       <section class="view" id="claimView">
         <div class="claim-card">
-          <div class="claim-top-frame">
-            <div class="claim-only-title">รับแจ้งเคลมสำหรับสมาชิก</div>
-            <div class="claim-only-sub">กรอกข้อมูลให้ครบถ้วนเพื่อให้ระบบตรวจสอบและดำเนินการได้เร็วขึ้น</div>
-          </div>
+          <div class="title-main">ส่งคำขอเคลม</div>
+          <div class="title-sub">กรอกข้อมูลให้ครบถ้วนเพื่อให้ระบบตรวจสอบได้เร็วขึ้น</div>
 
           <div id="claimAlert" class="alert-box"></div>
 
-          <div class="member-mini-card" id="memberProfileBox" style="display:none;">
-            <div class="member-mini-grid">
-              <div class="member-chip">
-                <div class="member-chip-label">วันที่ในระบบ</div>
-                <div class="member-chip-value" id="profileMemberDate">-</div>
-              </div>
-              <div class="member-chip">
-                <div class="member-chip-label">ชื่อไลน์</div>
-                <div class="member-chip-value" id="profileDisplayName">-</div>
-              </div>
+          <div class="profile-email-box" id="memberProfileEmailBox" style="display:none;">
+            <div class="profile-chip-label">อีเมลสมาชิก</div>
+            <div class="profile-chip-value" id="profileEmail">-</div>
+          </div>
+
+          <div class="profile-mini" id="memberProfileBox" style="display:none;">
+            <div class="profile-chip">
+              <div class="profile-chip-label">วันที่ในระบบ</div>
+              <div class="profile-chip-value" id="profileMemberDate">-</div>
             </div>
-            <div class="member-chip">
-              <div class="member-chip-label">อีเมล</div>
-              <div class="member-chip-value" id="profileEmail">-</div>
+            <div class="profile-chip">
+              <div class="profile-chip-label">ชื่อไลน์</div>
+              <div class="profile-chip-value" id="profileLineName">-</div>
             </div>
           </div>
 
-          <div class="expiry-check-wrap">
-            <div class="field-group" style="margin-top:0;">
+          <div id="expiryAutoWrap" class="expiry-fixed-card hide">
+            <div class="expiry-fixed-label">วันหมดอายุที่บันทึกในระบบ</div>
+            <div class="expiry-fixed-value" id="expiryAutoText">-</div>
+            <div class="expiry-note">ระบบจะใช้วันหมดอายุจากข้อมูลที่บันทึกไว้ให้โดยอัตโนมัติ</div>
+          </div>
+
+          <div id="expiryPickerWrap">
+            <div class="field-group">
               <label class="field-label" for="expiryInput">วันหมดอายุสมาชิก</label>
-
-              <div class="input-shell readonly" id="expiryReadonlyShell" style="display:none;">
-                <input id="expiryReadonlyText" type="text" readonly value="" />
-              </div>
-
               <div class="input-shell" id="expiryField">
                 <input id="expiryInput" type="date" />
               </div>
             </div>
 
-            <div class="action-row" style="margin-top:0;">
+            <div class="action-row" style="margin-top:8px;">
               <button class="btn-secondary" id="btnCheckExpiry" type="button">เช็ควันหมดอายุ</button>
             </div>
 
-            <div class="claim-warning-mini show" id="claimTruthWarning">
-              ⚠️ แจ้งข้อมูลไม่ตรงจริง ระบบจะตัดสิทธิ์อัตโนมัติ
-            </div>
-
             <div id="expiryCheckResult" class="alert-box"></div>
+
+            <div class="danger-note">
+              ⚠️ หากแจ้งข้อมูลไม่ตรงกับความจริง จะถูกตัดสิทธิ์อัตโนมัติ
+            </div>
           </div>
 
           <div class="field-group payment-section" id="paymentSection">
@@ -1468,38 +1743,43 @@
             <div class="note-counter" id="noteCounter">0 / 500</div>
           </div>
 
-          <div class="action-row">
-            <button class="btn-primary" id="btnSubmit">
-              <span>ส่งคำขอเคลม</span>
-              <span>↗</span>
-            </button>
-            <button class="btn-secondary blink-status-btn" id="btnGoStatusInline">สถานะการเคลม</button>
-          </div>
-
           <div id="summary"></div>
           <div id="status"></div>
+
+          <div class="action-row bottom-sticky">
+            <button class="btn-primary" id="btnSubmit">
+              <span>ส่งคำขอเคลม</span>
+            </button>
+            <button class="btn-status-go" id="btnGoStatus">
+              <span>สถานะการเคลม</span>
+            </button>
+          </div>
         </div>
       </section>
 
+      <!-- STATUS VIEW -->
       <section class="view" id="statusView">
         <div class="status-card">
-          <div class="status-top-frame">
-            <div class="status-only-title">สถานะการเคลม</div>
-            <div class="status-only-sub">ตรวจสอบคำขอล่าสุดของคุณได้จากหน้านี้</div>
+          <div class="title-main">สถานะการเคลม</div>
+          <div class="title-sub">ตรวจสอบคำขอล่าสุดและดูประวัติการเคลมของคุณ</div>
+
+          <div class="action-row" style="margin-top:12px;">
+            <button class="btn-secondary" id="btnRefreshStatus">รีเฟรช</button>
+            <button class="btn-danger" id="btnLogout">ออกจากระบบ</button>
           </div>
 
-          <div class="status-mini-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0 12px;">
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0 12px;">
             <div class="input-shell">
-              <div style="font-size:.95rem;font-weight:800;color:#fff1f4" id="miniQueueNo">-</div>
-              <div style="margin-top:4px;font-size:.72rem;color:#b8949d;">คิวเคลมล่าสุด</div>
+              <div style="font-size:.95rem;font-weight:800;color:#fff2f5" id="miniQueueNo">-</div>
+              <div style="margin-top:4px;font-size:.72rem;color:#b6979f;">คิวล่าสุด</div>
             </div>
             <div class="input-shell">
-              <div style="font-size:.95rem;font-weight:800;color:#fff1f4" id="miniClaimType">-</div>
-              <div style="margin-top:4px;font-size:.72rem;color:#b8949d;">ประเภทเคลม</div>
+              <div style="font-size:.95rem;font-weight:800;color:#fff2f5" id="miniClaimType">-</div>
+              <div style="margin-top:4px;font-size:.72rem;color:#b6979f;">ประเภท</div>
             </div>
             <div class="input-shell">
-              <div style="font-size:.95rem;font-weight:800;color:#fff1f4" id="miniLastTime">-</div>
-              <div style="margin-top:4px;font-size:.72rem;color:#b8949d;">แจ้งล่าสุด</div>
+              <div style="font-size:.95rem;font-weight:800;color:#fff2f5" id="miniLastTime">-</div>
+              <div style="margin-top:4px;font-size:.72rem;color:#b6979f;">เวลา</div>
             </div>
           </div>
 
@@ -1507,33 +1787,26 @@
           <div id="statusSummary"></div>
 
           <div class="step-card" id="claimStepCard" style="display:none;">
-            <div class="step-title">สถานะการเคลมล่าสุด</div>
+            <div class="step-title">สถานะคำขอล่าสุด</div>
             <div class="step-list" id="claimStepList"></div>
           </div>
 
           <div id="results"></div>
 
-          <div class="history-card">
-            <div class="history-header">
-              <div class="history-title-left">
+          <div class="admin-cta">
+            <button class="admin-btn" id="btnContactAdmin">ติดต่อแอดมิน</button>
+          </div>
+
+          <div class="live-card" style="margin-top:12px;">
+            <div class="live-header">
+              <div class="live-title-left">
                 <span class="live-dot"></span>
-                <span class="history-title-text">สถานะคำขอของคุณ</span>
+                <span class="live-title-text">ประวัติสถานะคำขอ</span>
               </div>
             </div>
             <div id="historyResults">
               <div class="live-empty">ยังไม่มีสถานะคำขอ</div>
             </div>
-          </div>
-
-          <div class="action-row" style="margin-top:12px;">
-            <button class="btn-link-small" id="btnContactAdmin" style="margin-top:0;">
-              ติดต่อแอดมิน
-            </button>
-          </div>
-
-          <div class="action-row compact">
-            <button class="btn-secondary compact" id="btnRefreshStatus">รีเฟรชสถานะ</button>
-            <button class="btn-danger compact" id="btnLogout">ออกจากระบบ</button>
           </div>
         </div>
       </section>
@@ -1552,12 +1825,16 @@
 
   <div id="loadingOverlay" class="loading-overlay">
     <div class="loading-card">
-      <div class="spinner"></div>
-      <div class="loading-percent" id="loadingPercent">กำลังโหลด...</div>
-      <div class="loading-title">รอแป๊บนะคะ</div>
-      <div class="loading-sub">
-        กำลังประมวลผลคำขอของคุณ
+      <div class="loader-ring">
+        <svg viewBox="0 0 88 88" aria-hidden="true">
+          <circle class="ring-bg" cx="44" cy="44" r="36"></circle>
+          <circle class="ring-progress" cx="44" cy="44" r="36"></circle>
+        </svg>
+        <div class="loader-spin"></div>
+        <div class="loader-percent" id="loaderPercent">0%</div>
       </div>
+      <div class="loading-title">รอสักครู่นะคะ</div>
+      <div class="loading-sub">กำลังโหลดข้อมูลให้ค่ะ</div>
     </div>
   </div>
 
@@ -1581,16 +1858,17 @@
     const MAX_SLIP_SIZE = 3 * 1024 * 1024;
     const TOKEN_KEY = "shop426_member_token";
     const REMEMBER_KEY = "shop426_saved_login";
-    const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
     const LAST_SLIP_KEY = "shop426_last_slip_preview";
+    const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+    const ADMIN_CONTACT_URL = "https://lin.ee/gAh3wAH";
 
     let claimConfig = {
       claimStartHour: 7,
       claimEndHour: 19,
       claimOpenDays: [1,2,3,4,5,6],
-      claimOpenText: "เปิดรับแจ้งเคลม จันทร์–เสาร์ 07.00–19.00 น.",
-      claimClosedText: "ขณะนี้อยู่นอกเวลารับเคลม กรุณากลับมาใหม่ในช่วงเวลาที่กำหนด",
-      outOfTimeErrorText: "วันนี้ปิดรับแล้ว กรุณากลับมาเคลมในวันและเวลาที่กำหนด",
+      claimOpenText: "แจ้งเคลมได้ในช่วงเวลาที่กำหนด",
+      claimClosedText: "ขณะนี้อยู่นอกเวลารับเคลม กรุณากลับมาเคลมในช่วงเวลาที่กำหนด",
+      outOfTimeErrorText: "วันนี้ปิดรับแล้ว กรุณากลับมาใหม่ในเวลาที่กำหนด",
       paidYear: "2568",
       freeYear: "2569",
       packagePrice: 19,
@@ -1605,9 +1883,13 @@
       lineEnabled: true,
       lineClaimEnabled: true,
       webEnabled: true,
-      webClosedMessage: "ขออภัยค่ะ ตอนนี้ระบบหน้าเว็บปิดชั่วคราว\nสามารถแจ้งเรื่องผ่านทางไลน์ได้ค่ะ",
+      customerNotice: "",
+      routeMessage: "",
+      webClosedMessage: "ขออภัยค่ะ ตอนนี้ระบบหน้าเว็บปิดชั่วคราว",
       bothClosedMessage: "ขออภัยค่ะ ตอนนี้ระบบปิดชั่วคราวทั้งทางไลน์และทางเว็บ",
       webBannerMessage: "",
+      webClaimLink: "https://napattamon-web.github.io/-426-claim-portal/",
+      lineClaimClosedMessage: "",
       expiredAccountText: "บัญชีหมดอายุแล้ว หากต้องการใช้บริการต่อติดต่อแอดมิน"
     };
 
@@ -1620,16 +1902,22 @@
       submitLock: false,
       authLock: false,
       webClosed: false,
-      bootstrapLoaded: false
+      bootstrapLoaded: false,
+      loadingTimer: null,
+      fakePercent: 0
     };
 
     let userSelectedView = false;
-    let loadingPercentTimer = null;
-    let loadingPercentValue = 0;
-    let expiryLockedFromSystem = false;
+    let activeSlipFile = null;
 
     const heroSection = document.getElementById("heroSection");
     const globalBanner = document.getElementById("globalBanner");
+
+    const loginView = document.getElementById("loginView");
+    const registerView = document.getElementById("registerView");
+    const claimView = document.getElementById("claimView");
+    const statusView = document.getElementById("statusView");
+
     const btnSubmit = document.getElementById("btnSubmit");
     const btnLogout = document.getElementById("btnLogout");
     const btnRefreshStatus = document.getElementById("btnRefreshStatus");
@@ -1642,10 +1930,10 @@
     const btnRegister = document.getElementById("btnRegister");
     const btnForgotPassword = document.getElementById("btnForgotPassword");
     const btnCheckExpiry = document.getElementById("btnCheckExpiry");
+    const btnGoStatus = document.getElementById("btnGoStatus");
+    const btnContactAdmin = document.getElementById("btnContactAdmin");
     const showRegisterBtn = document.getElementById("showRegisterBtn");
     const backToLoginBtn = document.getElementById("backToLoginBtn");
-    const btnContactAdmin = document.getElementById("btnContactAdmin");
-    const btnGoStatusInline = document.getElementById("btnGoStatusInline");
 
     const loginEmailInput = document.getElementById("loginEmail");
     const loginPasswordInput = document.getElementById("loginPassword");
@@ -1657,11 +1945,8 @@
     const registerConfirmPassword = document.getElementById("registerConfirmPassword");
     const registerMemberDate = document.getElementById("registerMemberDate");
     const registerPasswordStrength = document.getElementById("registerPasswordStrength");
-    const registerSuccessCard = document.getElementById("registerSuccessCard");
 
     const expiryInput = document.getElementById("expiryInput");
-    const expiryReadonlyText = document.getElementById("expiryReadonlyText");
-    const expiryReadonlyShell = document.getElementById("expiryReadonlyShell");
     const noteInput = document.getElementById("noteInput");
     const slipInput = document.getElementById("slipInput");
     const slipInputCamera = document.getElementById("slipInputCamera");
@@ -1672,9 +1957,9 @@
     const registerPasswordField = document.getElementById("registerPasswordField");
     const registerConfirmPasswordField = document.getElementById("registerConfirmPasswordField");
     const registerMemberDateField = document.getElementById("registerMemberDateField");
-
     const expiryField = document.getElementById("expiryField");
     const noteField = document.getElementById("noteField");
+
     const paymentSection = document.getElementById("paymentSection");
     const fileName = document.getElementById("fileName");
     const slipStatusHint = document.getElementById("slipStatusHint");
@@ -1699,10 +1984,15 @@
     const bankAccountNameEl = document.getElementById("bankAccountName");
     const supportLineEl = document.getElementById("supportLine");
 
-    const profileBox = document.getElementById("memberProfileBox");
+    const memberProfileBox = document.getElementById("memberProfileBox");
+    const memberProfileEmailBox = document.getElementById("memberProfileEmailBox");
     const profileEmail = document.getElementById("profileEmail");
     const profileMemberDate = document.getElementById("profileMemberDate");
-    const profileDisplayName = document.getElementById("profileDisplayName");
+    const profileLineName = document.getElementById("profileLineName");
+
+    const expiryAutoWrap = document.getElementById("expiryAutoWrap");
+    const expiryAutoText = document.getElementById("expiryAutoText");
+    const expiryPickerWrap = document.getElementById("expiryPickerWrap");
 
     const miniQueueNo = document.getElementById("miniQueueNo");
     const miniClaimType = document.getElementById("miniClaimType");
@@ -1711,13 +2001,13 @@
     const onlineStatus = document.getElementById("onlineStatus");
     const onlineDot = document.getElementById("onlineDot");
     const onlineText = document.getElementById("onlineText");
-
     const liveDateEl = document.getElementById("liveDate");
     const liveListEl = document.getElementById("liveList");
 
     const toast = document.getElementById("toast");
     const loadingOverlay = document.getElementById("loadingOverlay");
-    const loadingPercent = document.getElementById("loadingPercent");
+    const loaderPercent = document.getElementById("loaderPercent");
+
     const topAlert = document.getElementById("topAlert");
     const registerAlert = document.getElementById("registerAlert");
     const claimAlert = document.getElementById("claimAlert");
@@ -1730,23 +2020,11 @@
     const claimStepCard = document.getElementById("claimStepCard");
     const claimStepList = document.getElementById("claimStepList");
 
-    let activeSlipFile = null;
-
     function normalizeEmail(value){ return String(value || "").trim().toLowerCase(); }
     function normalizeText(value){ return String(value || "").trim(); }
 
-    function shakeButton(btn){
-      if (!btn) return;
-      btn.classList.remove("btn-shake");
-      void btn.offsetWidth;
-      btn.classList.add("btn-shake");
-      setTimeout(() => btn.classList.remove("btn-shake"), 500);
-    }
-
     function parseResponseLoose(data) {
-      if (!data || typeof data !== "object") {
-        return { ok: false, message: "ไม่สามารถอ่านข้อมูลจากเซิร์ฟเวอร์ได้" };
-      }
+      if (!data || typeof data !== "object") return { ok: false, message: "ไม่สามารถอ่านข้อมูลจากเซิร์ฟเวอร์ได้" };
       return { ...data, ok: data.ok === true };
     }
 
@@ -1760,60 +2038,45 @@
       }
     }
 
-    function updateHeroVisibility() {
-      const loginActive = document.getElementById("loginView").classList.contains("active");
-      const registerActive = document.getElementById("registerView").classList.contains("active");
-      heroSection.style.display = (loginActive || registerActive) ? "" : "none";
-    }
-
     function setActiveView(viewId, byUser = false) {
       if (byUser) userSelectedView = true;
       document.querySelectorAll(".view").forEach(function(view) {
         view.classList.toggle("active", view.id === viewId);
       });
-      updateHeroVisibility();
+      heroSection.style.display = (viewId === "claimView" || viewId === "statusView") ? "none" : "";
     }
 
-    function startLoadingPercent() {
-      stopLoadingPercent(false);
-      loadingPercentValue = 0;
-      loadingPercent.textContent = "กำลังโหลด...";
-      loadingPercentTimer = setInterval(function() {
-        if (loadingPercentValue < 92) {
-          loadingPercentValue += Math.floor(Math.random() * 8) + 2;
-          if (loadingPercentValue > 92) loadingPercentValue = 92;
-          loadingPercent.textContent = "กำลังโหลด " + loadingPercentValue + "%";
-        }
-      }, 260);
+    function startLoadingAnimation() {
+      state.fakePercent = 0;
+      loaderPercent.textContent = "0%";
+      clearInterval(state.loadingTimer);
+      state.loadingTimer = setInterval(function() {
+        if (state.fakePercent >= 96) return;
+        const step = state.fakePercent < 40 ? 4 : state.fakePercent < 70 ? 2 : 1;
+        state.fakePercent += step;
+        if (state.fakePercent > 96) state.fakePercent = 96;
+        loaderPercent.textContent = state.fakePercent + "%";
+      }, 120);
     }
 
-    function stopLoadingPercent(done = true) {
-      if (loadingPercentTimer) {
-        clearInterval(loadingPercentTimer);
-        loadingPercentTimer = null;
-      }
-      if (done) {
-        loadingPercent.textContent = "กำลังโหลด 100%";
-        setTimeout(() => {
-          loadingPercent.textContent = "กำลังโหลด...";
-        }, 250);
-      } else {
-        loadingPercent.textContent = "กำลังโหลด...";
-      }
+    function finishLoadingAnimation() {
+      clearInterval(state.loadingTimer);
+      state.fakePercent = 100;
+      loaderPercent.textContent = "100%";
     }
 
     function showLoadingOverlay() {
       loadingOverlay.classList.add("show");
       document.body.style.overflow = "hidden";
-      startLoadingPercent();
+      startLoadingAnimation();
     }
 
     function hideLoadingOverlay() {
-      stopLoadingPercent(true);
-      setTimeout(() => {
+      finishLoadingAnimation();
+      setTimeout(function() {
         loadingOverlay.classList.remove("show");
         document.body.style.overflow = "";
-      }, 180);
+      }, 120);
     }
 
     function showToast(message = "เรียบร้อยแล้ว") {
@@ -1867,6 +2130,7 @@
       status.classList.add("status-error");
       status.textContent = message;
       showAlert(claimAlert, message, "error", 4500);
+      shake(btnSubmit);
     }
 
     function clearStatus() {
@@ -1883,8 +2147,12 @@
     function formatThaiDate(dateStr) {
       if (!dateStr) return "-";
       if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
-        const p = dateStr.split("-");
-        const y = Number(p[0]), m = Number(p[1]), d = Number(p[2]);
+        const [y,m,d] = dateStr.split("-").map(Number);
+        const months = ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."];
+        return d + " " + months[m - 1] + " " + (y + 543);
+      }
+      if (/^\d{2}\/\d{2}\/\d{4}$/.test(dateStr)) {
+        const [d,m,y] = dateStr.split("/").map(Number);
         const months = ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."];
         return d + " " + months[m - 1] + " " + (y + 543);
       }
@@ -1906,7 +2174,7 @@
       const yy = d.getFullYear() + 543;
       const hh = String(d.getHours()).padStart(2, "0");
       const mi = String(d.getMinutes()).padStart(2, "0");
-      return dd + " " + mm + " " + yy + " เวลา " + hh + ":" + mi;
+      return dd + " " + mm + " " + yy + " · " + hh + ":" + mi;
     }
 
     function formatShortThaiTime(value) {
@@ -1957,7 +2225,6 @@
       if (/[A-Z]/.test(password)) score++;
       if (/\d/.test(password)) score++;
       if (/[^A-Za-z0-9]/.test(password)) score++;
-
       if (!isStrongPassword(password)) return { text: "ระดับรหัสผ่าน: อ่อน", cls: "strength-weak" };
       if (score <= 4) return { text: "ระดับรหัสผ่าน: ปานกลาง", cls: "strength-medium" };
       return { text: "ระดับรหัสผ่าน: แข็งแรง", cls: "strength-strong" };
@@ -1971,24 +2238,21 @@
 
     function setWebClosedState(flag, message) {
       state.webClosed = !!flag;
+
       const controls = [
         btnLogin, btnRegister, btnForgotPassword, btnSubmit,
-        showRegisterBtn, backToLoginBtn, btnPickSlip, btnCameraSlip, btnCheckExpiry, btnGoStatusInline
+        showRegisterBtn, backToLoginBtn, btnPickSlip, btnCameraSlip, btnCheckExpiry, btnGoStatus
       ];
-
       controls.forEach(el => {
         if (!el) return;
-        el.disabled = !!flag;
+        el.disabled = !!flag && el !== btnGoStatus;
       });
 
       if (flag) {
         showGlobalBanner(message || claimConfig.webClosedMessage || "ระบบเว็บปิดชั่วคราว", "error");
       } else {
-        if (claimConfig.webBannerMessage) {
-          showGlobalBanner(claimConfig.webBannerMessage, "info");
-        } else {
-          hideGlobalBanner();
-        }
+        if (claimConfig.webBannerMessage) showGlobalBanner(claimConfig.webBannerMessage, "info");
+        else hideGlobalBanner();
       }
     }
 
@@ -1998,7 +2262,8 @@
         displayName: displayName || "",
         memberDate: memberDate || "",
         signupYearThai: signupYearThai || thaiYearFromYmd(memberDate || ""),
-        lastKnownExpiry: ""
+        lastKnownExpiry: "",
+        isExpired: false
       };
     }
 
@@ -2101,25 +2366,6 @@
       slipStatusHint.className = "upload-status";
     }
 
-    function setExpiryMode(expiryYMD, fromSystem = false) {
-      const hasExpiry = !!expiryYMD;
-      expiryLockedFromSystem = !!(fromSystem && hasExpiry);
-
-      if (expiryLockedFromSystem) {
-        expiryInput.value = expiryYMD;
-        expiryReadonlyText.value = formatThaiDate(expiryYMD);
-        expiryField.style.display = "none";
-        expiryReadonlyShell.style.display = "";
-        btnCheckExpiry.textContent = "อัปเดตวันหมดอายุ";
-      } else {
-        expiryReadonlyText.value = "";
-        expiryReadonlyShell.style.display = "none";
-        expiryField.style.display = "";
-        btnCheckExpiry.textContent = "เช็ควันหมดอายุ";
-        if (hasExpiry) expiryInput.value = expiryYMD;
-      }
-    }
-
     function decorateStatusText(text) {
       const raw = String(text || "").trim();
       const safe = escapeHtml(raw || "-");
@@ -2171,13 +2417,15 @@
         onlineStatus.classList.remove("closed");
         onlineDot.classList.remove("offline");
         onlineText.textContent = "สถานะ: เปิดรับเคลม";
-        claimTimeNote.textContent = claimConfig.claimOpenText || "เปิดรับแจ้งเคลม จันทร์–เสาร์ 07.00–19.00 น.";
       } else {
         onlineStatus.classList.add("closed");
         onlineDot.classList.add("offline");
         onlineText.textContent = "สถานะ: ปิดรับเคลม";
-        claimTimeNote.textContent = claimConfig.claimClosedText || "ขณะนี้อยู่นอกเวลารับเคลม กรุณากลับมาใหม่ในช่วงเวลาที่กำหนด";
       }
+
+      const openText = claimConfig.claimOpenText || "แจ้งเคลมได้ในช่วงเวลาที่กำหนด";
+      const compact = openText.length > 42 ? "แจ้งเคลมได้ตามช่วงเวลาที่ร้านกำหนด" : openText;
+      claimTimeNote.innerHTML = escapeHtml(compact) + '<small>จันทร์–เสาร์ · 07:00–19:00 น.</small>';
     }
 
     function updateNoteCounter() {
@@ -2203,7 +2451,6 @@
       if (!file.type.startsWith("image/")) {
         showStatusError("กรุณาแนบไฟล์รูปภาพสลิปเท่านั้น");
         setSlipStatus("รองรับเฉพาะไฟล์รูปภาพเท่านั้น", "error");
-        shakeButton(btnPickSlip);
         sourceInput.value = "";
         return;
       }
@@ -2211,7 +2458,6 @@
       if (file.size > MAX_SLIP_SIZE) {
         showStatusError("ไฟล์สลิปมีขนาดใหญ่เกิน 3 MB");
         setSlipStatus("ไฟล์สลิปมีขนาดใหญ่เกิน 3 MB", "error");
-        shakeButton(btnPickSlip);
         sourceInput.value = "";
         return;
       }
@@ -2231,7 +2477,7 @@
     }
 
     function renderClaimSteps(statusText = "") {
-      const steps = ["รับคำขอแล้ว", "รอตรวจสอบ", "ตรวจสอบสลิปแล้ว", "ดำเนินการเสร็จ"];
+      const steps = ["รับคำขอ", "ตรวจสอบ", "กำลังดำเนินการ", "เสร็จแล้ว"];
       let activeIndex = 0;
       const raw = String(statusText || "");
 
@@ -2242,7 +2488,7 @@
       }
 
       if (raw.includes("รอตรวจสอบ") || raw.includes("กำลัง") || raw.includes("รอดำเนินการ")) activeIndex = 1;
-      if (raw.includes("รอตรวจสอบสลิป") || raw.includes("ตรวจสอบสลิป") || raw.includes("ดึงเมล")) activeIndex = 2;
+      if (raw.includes("ตรวจสอบสลิป") || raw.includes("ดึงเมล")) activeIndex = 2;
       if (raw.includes("เสร็จ") || raw.includes("สำเร็จ") || raw.includes("ใช้งานได้ปกติ")) activeIndex = 3;
       if (raw.includes("ไม่ผ่าน")) activeIndex = 1;
 
@@ -2269,7 +2515,7 @@
       liveListEl.innerHTML = "";
 
       if (!items.length) {
-        liveListEl.innerHTML = '<div class="live-empty">วันนี้ยังไม่มีการแจ้งเคลมในระบบ</div>';
+        liveListEl.innerHTML = '<div class="live-empty">วันนี้ยังไม่มีรายการเคลมใหม่ในระบบ</div>';
         return;
       }
 
@@ -2310,7 +2556,7 @@
           '<div class="item-tag ' + (claimType === "paid" ? "paid" : "") + '">' + escapeHtml(tagText) + '</div>' +
           '<div class="item-meta">' +
             '<span>วันหมดอายุ: ' + safeExpiry + '</span>' +
-            '<span>ปีสมัคร: ' + safeYear + '</span>' +
+            '<span>สมัครเมื่อ: ' + safeYear + '</span>' +
             '<span>คิวเคลม: ' + safeQueue + '</span>' +
           '</div>' +
           '<div class="item-meta">' +
@@ -2377,7 +2623,7 @@
         "426 SHOP – รายละเอียดคำขอเคลม",
         "อีเมล: " + (entry.email || "-"),
         "วันหมดอายุ: " + (entry.expiry || "-"),
-        "ปีสมัคร: " + (entry.year || "-"),
+        "สมัครเมื่อ: " + (entry.year || "-"),
         "ประเภทเคลม: " + getClaimTypeLabel(entry.claimType),
         "คิวเคลม: " + (entry.queueNo || "-"),
         "เวลาแจ้งล่าสุด: " + (entry.lastAt || "-"),
@@ -2481,7 +2727,7 @@
         '<div class="item-tag ' + (claimType === "paid" ? "paid" : "") + '">' + escapeHtml(tagText) + '</div>' +
         '<div class="item-meta">' +
           '<span>วันหมดอายุ: ' + safeExpiry + '</span>' +
-          '<span>ปีสมัคร: ' + safeYear + '</span>' +
+          '<span>สมัครเมื่อ: ' + safeYear + '</span>' +
           '<span>คิวเคลม: ' + safeQueue + '</span>' +
         '</div>' +
         '<div class="item-meta">' +
@@ -2503,7 +2749,6 @@
     async function safeSetMemberView(viewId) {
       if (!state.token || !state.member) {
         showAlert(topAlert, "กรุณาเข้าสู่ระบบก่อนใช้งาน", "warning");
-        shakeButton(btnGoStatusInline);
         setActiveView("loginView");
         return;
       }
@@ -2523,22 +2768,33 @@
 
     function updateMemberProfileUI() {
       if (!state.member) {
-        profileBox.style.display = "none";
+        memberProfileBox.style.display = "none";
+        memberProfileEmailBox.style.display = "none";
         paymentSection.style.display = "none";
-        setExpiryMode("", false);
+        expiryAutoWrap.classList.add("hide");
+        expiryPickerWrap.classList.remove("hide");
         return;
       }
 
-      profileEmail.textContent = state.member.email || "-";
-      profileMemberDate.textContent = formatThaiDate(state.member.memberDate || "");
-      profileDisplayName.textContent = state.member.displayName || "ยังไม่ได้ระบุ";
-      profileBox.style.display = "grid";
+      const memberDate = state.member.memberDate || "";
+      const lineName = state.member.displayName || "-";
+      const email = state.member.email || "-";
 
-      const knownExpiry = state.member.lastKnownExpiry || "";
-      if (knownExpiry) {
-        setExpiryMode(knownExpiry, true);
+      profileEmail.textContent = email;
+      profileMemberDate.textContent = formatThaiDate(memberDate || "");
+      profileLineName.textContent = lineName;
+
+      memberProfileEmailBox.style.display = "block";
+      memberProfileBox.style.display = "grid";
+
+      if (state.member.lastKnownExpiry) {
+        expiryAutoText.textContent = formatThaiDate(state.member.lastKnownExpiry);
+        expiryAutoWrap.classList.remove("hide");
+        expiryPickerWrap.classList.add("hide");
+        expiryInput.value = state.member.lastKnownExpiry;
       } else {
-        setExpiryMode("", false);
+        expiryAutoWrap.classList.add("hide");
+        expiryPickerWrap.classList.remove("hide");
       }
 
       syncPaymentSection();
@@ -2557,7 +2813,6 @@
     function validateLogin() {
       if (state.webClosed) {
         showAlert(topAlert, claimConfig.webClosedMessage || "ระบบเว็บปิดชั่วคราว", "warning");
-        shakeButton(btnLogin);
         return false;
       }
 
@@ -2572,21 +2827,18 @@
         showAuthStatus("กรุณากรอกอีเมลให้ถูกต้อง", "error");
         showAlert(topAlert, "กรุณากรอกอีเมลให้ถูกต้อง", "error");
         shake(loginEmailField);
-        shakeButton(btnLogin);
         return false;
       }
       if (!password) {
         showAuthStatus("กรุณากรอกรหัสผ่าน", "error");
         showAlert(topAlert, "กรุณากรอกรหัสผ่าน", "error");
         shake(loginPasswordField);
-        shakeButton(btnLogin);
         return false;
       }
       if (password.length < 8) {
         showAuthStatus("รหัสผ่านต้องมีอย่างน้อย 8 ตัว", "error");
         showAlert(topAlert, "รหัสผ่านต้องมีอย่างน้อย 8 ตัว", "error");
         shake(loginPasswordField);
-        shakeButton(btnLogin);
         return false;
       }
       return true;
@@ -2595,7 +2847,6 @@
     function validateRegister() {
       if (state.webClosed) {
         showAlert(registerAlert, claimConfig.webClosedMessage || "ระบบเว็บปิดชั่วคราว", "warning");
-        shakeButton(btnRegister);
         return false;
       }
 
@@ -2612,25 +2863,21 @@
       if (!email || !registerEmail.checkValidity()) {
         showAlert(registerAlert, "กรุณากรอกอีเมลให้ถูกต้อง", "error");
         shake(registerEmailField);
-        shakeButton(btnRegister);
         return false;
       }
       if (!isStrongPassword(password)) {
         showAlert(registerAlert, "รหัสผ่านต้องมีตัวพิมพ์ใหญ่ ตัวพิมพ์เล็ก ตัวเลข และอย่างน้อย 8 ตัว", "error");
         shake(registerPasswordField);
-        shakeButton(btnRegister);
         return false;
       }
       if (password !== confirmPassword) {
         showAlert(registerAlert, "ยืนยันรหัสผ่านไม่ตรงกัน", "error");
         shake(registerConfirmPasswordField);
-        shakeButton(btnRegister);
         return false;
       }
       if (!memberDate) {
         showAlert(registerAlert, "กรุณาเลือกวันที่สมัคร / วันที่ต่ออายุล่าสุด", "error");
         shake(registerMemberDateField);
-        shakeButton(btnRegister);
         return false;
       }
       return true;
@@ -2639,7 +2886,6 @@
     function validateClaimForm() {
       const expiry = normalizeText(expiryInput.value);
       const note = normalizeText(noteInput.value);
-      const year = normalizeText(state.member && state.member.signupYearThai || "");
 
       clearStatus();
       expiryField.classList.remove("shake");
@@ -2647,54 +2893,51 @@
 
       if (state.webClosed) {
         showStatusError(claimConfig.webClosedMessage || "ระบบเว็บปิดชั่วคราว");
-        shakeButton(btnSubmit);
         return false;
       }
 
       if (!state.member || !state.token) {
         showAlert(topAlert, "กรุณาเข้าสู่ระบบก่อนใช้งาน", "warning");
-        shakeButton(btnSubmit);
         setActiveView("loginView");
         return false;
       }
 
       if (state.submitLock) {
         showAlert(claimAlert, "ระบบกำลังส่งคำขออยู่ กรุณารอสถานะก่อน", "warning");
-        shakeButton(btnSubmit);
+        return false;
+      }
+
+      if (state.member.isExpired) {
+        showStatusError(claimConfig.expiredAccountText || "บัญชีหมดอายุแล้ว หากต้องการใช้บริการต่อติดต่อแอดมิน");
         return false;
       }
 
       if (!state.isClaimOpen) {
         showStatusError(claimConfig.outOfTimeErrorText);
-        shakeButton(btnSubmit);
         return false;
       }
 
       if (!expiry) {
-        showStatusError("กรุณาเช็คหรือเลือกวันหมดอายุสมาชิก");
+        showStatusError("กรุณาระบุวันหมดอายุสมาชิก");
         shake(expiryField);
-        shakeButton(btnSubmit);
         return false;
       }
 
       if (!isValidFutureExpiry(expiry)) {
         showStatusError("วันหมดอายุต้องเป็นวันนี้หรือวันในอนาคต");
         shake(expiryField);
-        shakeButton(btnSubmit);
         return false;
       }
 
       if (note.length > MAX_NOTE_LENGTH) {
         showStatusError("ฝากข้อความได้ไม่เกิน " + MAX_NOTE_LENGTH + " ตัวอักษร");
         shake(noteField);
-        shakeButton(btnSubmit);
         return false;
       }
 
-      if (year === String(claimConfig.paidYear) && !activeSlipFile) {
+      if ((state.member.signupYearThai || "") === String(claimConfig.paidYear) && !activeSlipFile) {
         showStatusError(claimConfig.paymentRequireSlip || "กรุณาแนบสลิปก่อนส่งคำขอ");
         setSlipStatus("กรุณาแนบสลิปก่อนส่งคำขอ", "error");
-        shakeButton(btnSubmit);
         return false;
       }
 
@@ -2722,34 +2965,27 @@
         if (data.closed) {
           setWebClosedState(true, data.message || claimConfig.webClosedMessage);
           showAlert(topAlert, data.message || "ระบบเว็บปิดชั่วคราว", "warning", 6000);
-          shakeButton(btnLogin);
           return;
         }
 
         if (!data.ok) {
           const msg = data.message || "เข้าสู่ระบบไม่สำเร็จ";
           showAuthStatus(msg, "error");
-          showAlert(topAlert, msg, "error");
-          shakeButton(btnLogin);
+          showAlert(topAlert, msg, data.expired ? "warning" : "error");
+          shake(btnLogin);
           return;
         }
 
         if (!data.token) {
           showAuthStatus("เข้าสู่ระบบไม่สำเร็จ ระบบไม่ได้ส่ง token กลับมา", "error");
           showAlert(topAlert, "เข้าสู่ระบบไม่สำเร็จ ระบบไม่ได้ส่ง token กลับมา", "error");
-          shakeButton(btnLogin);
+          shake(btnLogin);
           return;
         }
 
         state.token = String(data.token || "").trim();
         localStorage.setItem(TOKEN_KEY, state.token);
-
-        if (data.member) {
-          state.member = data.member;
-        } else {
-          state.member = buildLocalMemberFallback(payload.email, "", "", "");
-        }
-
+        state.member = data.member || buildLocalMemberFallback(payload.email, "", "", "");
         saveRememberedLogin();
         updateMemberProfileUI();
         setActiveView("claimView");
@@ -2765,7 +3001,7 @@
       } catch (err) {
         showAuthStatus("เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ", "error");
         showAlert(topAlert, "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ", "error");
-        shakeButton(btnLogin);
+        shake(btnLogin);
       } finally {
         hideLoadingOverlay();
         btnLogin.disabled = state.webClosed;
@@ -2797,17 +3033,14 @@
         if (data.closed) {
           setWebClosedState(true, data.message || claimConfig.webClosedMessage);
           showAlert(registerAlert, data.message || "ระบบเว็บปิดชั่วคราว", "warning", 6000);
-          shakeButton(btnRegister);
           return;
         }
 
         if (!data.ok) {
           showAlert(registerAlert, data.message || "สมัครสมาชิกไม่สำเร็จ", "error");
-          shakeButton(btnRegister);
+          shake(btnRegister);
           return;
         }
-
-        registerSuccessCard.classList.add("show");
 
         if (data.token) {
           state.token = String(data.token || "").trim();
@@ -2836,7 +3069,7 @@
         }
       } catch (err) {
         showAlert(registerAlert, "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ", "error");
-        shakeButton(btnRegister);
+        shake(btnRegister);
       } finally {
         hideLoadingOverlay();
         btnRegister.disabled = state.webClosed;
@@ -2847,7 +3080,6 @@
     async function handleForgotPassword() {
       if (state.webClosed) {
         showAlert(topAlert, claimConfig.webClosedMessage || "ระบบเว็บปิดชั่วคราว", "warning");
-        shakeButton(btnForgotPassword);
         return;
       }
 
@@ -2855,7 +3087,6 @@
       if (!email || !loginEmailInput.checkValidity()) {
         showAlert(topAlert, "กรุณากรอกอีเมลก่อนกดลืมรหัสผ่าน", "warning");
         shake(loginEmailField);
-        shakeButton(btnForgotPassword);
         return;
       }
 
@@ -2866,21 +3097,20 @@
         if (data.closed) {
           setWebClosedState(true, data.message || claimConfig.webClosedMessage);
           showAlert(topAlert, data.message || "ระบบเว็บปิดชั่วคราว", "warning", 6000);
-          shakeButton(btnForgotPassword);
           return;
         }
 
         if (!data || data.ok === false) {
-          showAlert(topAlert, data.message || "ส่งคำขอรีเซ็ตรหัสผ่านไม่สำเร็จ", "error");
-          shakeButton(btnForgotPassword);
+          showAlert(topAlert, data.message || "รีเซ็ตรหัสผ่านไม่สำเร็จ", "error");
+          shake(btnForgotPassword);
           return;
         }
 
-        showAlert(topAlert, data.message || "ระบบส่งคำแนะนำรีเซ็ตรหัสผ่านไปยังอีเมลของคุณแล้ว", "success", 6000);
-        showToast("ส่งคำขอแล้ว");
+        showAlert(topAlert, data.message || "ระบบส่งรหัสไปยังอีเมลของคุณแล้ว", "success", 6000);
+        showToast("ส่งคำขอเรียบร้อยแล้ว");
       } catch (err) {
         showAlert(topAlert, "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ", "error");
-        shakeButton(btnForgotPassword);
+        shake(btnForgotPassword);
       } finally {
         hideLoadingOverlay();
       }
@@ -2896,9 +3126,7 @@
         );
 
         if (isUnauthorizedMessage(data && data.message) || (data && data.ok === false)) {
-          if (!silent) {
-            await handleUnauthorizedResponse((data && data.message) || "เซสชันหมดอายุ กรุณาเข้าสู่ระบบใหม่อีกครั้ง");
-          }
+          if (!silent) await handleUnauthorizedResponse((data && data.message) || "เซสชันหมดอายุ กรุณาเข้าสู่ระบบใหม่อีกครั้ง");
           return false;
         }
 
@@ -2927,36 +3155,36 @@
     }
 
     function clearForm() {
-      expiryInput.value = "";
       noteInput.value = "";
-      resetSlipPreview();
+      updateNoteCounter();
       clearStatus();
       summaryDiv.innerHTML = "";
-      updateNoteCounter();
-      syncPaymentSection();
-      state.submitLock = false;
-      btnSubmit.disabled = state.webClosed;
-      btnSubmit.innerHTML = "<span>ส่งคำขอเคลม</span><span>↗</span>";
       expiryCheckResult.className = "alert-box";
       expiryCheckResult.textContent = "";
+      state.submitLock = false;
+      btnSubmit.disabled = state.webClosed;
+      btnSubmit.innerHTML = "<span>ส่งคำขอเคลม</span>";
+
       if (state.member && state.member.lastKnownExpiry) {
-        setExpiryMode(state.member.lastKnownExpiry, true);
+        expiryInput.value = state.member.lastKnownExpiry;
       } else {
-        setExpiryMode("", false);
+        expiryInput.value = "";
+      }
+
+      if ((state.member && state.member.signupYearThai) !== String(claimConfig.paidYear)) {
+        resetSlipPreview();
       }
     }
 
     function openConfirmModal() {
       const expiry = normalizeText(expiryInput.value);
-      const year = normalizeText(state.member && state.member.signupYearThai || "");
       const note = normalizeText(noteInput.value);
-      const claimType = year === String(claimConfig.paidYear) ? "แพ็กดูแล 19 บาท" : "เคลมฟรี";
+      const claimType = (state.member && state.member.signupYearThai === String(claimConfig.paidYear)) ? "แพ็กดูแล 19 บาท" : "เคลมฟรี";
       const hasSlip = activeSlipFile ? "แนบแล้ว" : "ไม่มี";
 
       confirmSummary.innerHTML =
         "<strong>อีเมล:</strong> " + escapeHtml(state.member && state.member.email || "-") + "<br>" +
-        "<strong>วันหมดอายุ:</strong> " + escapeHtml(formatThaiDate(expiry) || "-") + "<br>" +
-        "<strong>ปีสมัคร:</strong> " + escapeHtml(year || "-") + "<br>" +
+        "<strong>วันหมดอายุ:</strong> " + escapeHtml(formatThaiDate(expiry || "-")) + "<br>" +
         "<strong>ประเภทเคลม:</strong> " + escapeHtml(claimType) + "<br>" +
         "<strong>สลิป:</strong> " + escapeHtml(hasSlip) + "<br>" +
         "<strong>ข้อความถึงแอดมิน:</strong> " + escapeHtml(note || "-");
@@ -2980,7 +3208,6 @@
     async function doSubmitClaim() {
       if (state.webClosed) {
         showStatusError(claimConfig.webClosedMessage || "ระบบเว็บปิดชั่วคราว");
-        shakeButton(btnSubmit);
         return;
       }
 
@@ -2994,8 +3221,8 @@
       btnSubmit.innerHTML = "<span>กำลังส่งคำขอ…</span>";
 
       status.innerHTML =
-        "ระบบกำลังส่งคำขอเคลมของคุณเข้าสู่ร้าน 426 SHOP...<br>" +
-        "<span class='status-time'>ระหว่างนี้แนะนำอย่าเพิ่งรีเฟรชหรือปิดหน้านี้ค่ะ</span>";
+        "ระบบกำลังส่งคำขอเคลมของคุณ...<br>" +
+        "<span class='status-time'>กรุณาอย่าปิดหน้านี้ระหว่างกำลังโหลด</span>";
 
       try {
         let slipData = "";
@@ -3024,20 +3251,23 @@
           setWebClosedState(true, data.message || claimConfig.webClosedMessage);
           showStatusError(data.message || "ระบบเว็บปิดชั่วคราว");
           state.submitLock = false;
-          shakeButton(btnSubmit);
+          return;
+        }
+
+        if (data.expired) {
+          showStatusError(data.message || claimConfig.expiredAccountText || "บัญชีหมดอายุแล้ว หากต้องการใช้บริการต่อติดต่อแอดมิน");
+          state.submitLock = false;
           return;
         }
 
         if (isUnauthorizedMessage(data && data.message)) {
           await handleUnauthorizedResponse(data.message);
-          shakeButton(btnSubmit);
           return;
         }
 
         if (!data || data.ok === false) {
           showStatusError(data && data.message || "ส่งคำขอไม่สำเร็จ");
           state.submitLock = false;
-          shakeButton(btnSubmit);
           return;
         }
 
@@ -3051,7 +3281,7 @@
         status.innerHTML =
           "<span class='status-strong'>" + escapeHtml(data.message || "ระบบรับคำขอเคลมของคุณแล้ว") + "</span><br>" +
           "<span class='status-time'>เวลาแจ้งล่าสุด: " + escapeHtml(formatThaiDateTime(state.lastClaimAt)) + "</span><br>" +
-          "<span class='status-time'>ระบบใช้เวลา " + escapeHtml((elapsedSec < 0.1 ? "< 0.1" : elapsedSec.toFixed(1).replace(/\.0$/, ""))) + " วินาที</span>";
+          "<span class='status-time'>ใช้เวลา " + escapeHtml((elapsedSec < 0.1 ? "< 0.1" : elapsedSec.toFixed(1).replace(/\.0$/, ""))) + " วินาที</span>";
         status.className = "status-ok";
 
         const items = await fetchClaimHistory();
@@ -3062,9 +3292,7 @@
           updateMemberProfileUI();
         }
 
-        if (data.todaySummary) {
-          renderLiveStatus(data.todaySummary.todaySummary || data.todaySummary);
-        }
+        if (data.todaySummary) renderLiveStatus(data.todaySummary.todaySummary || data.todaySummary);
 
         noteInput.value = "";
         updateNoteCounter();
@@ -3080,12 +3308,11 @@
       } catch (err) {
         showStatusError("เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ");
         state.submitLock = false;
-        shakeButton(btnSubmit);
       } finally {
         state.isLoading = false;
         hideLoadingOverlay();
         btnSubmit.disabled = state.webClosed;
-        btnSubmit.innerHTML = "<span>ส่งคำขอเคลม</span><span>↗</span>";
+        btnSubmit.innerHTML = "<span>ส่งคำขอเคลม</span>";
       }
     }
 
@@ -3098,7 +3325,6 @@
     async function refreshStatusPage() {
       if (!state.token) {
         setActiveView("loginView");
-        shakeButton(btnRefreshStatus);
         return;
       }
 
@@ -3109,7 +3335,7 @@
         showToast("รีเฟรชสถานะแล้ว");
       } catch (err) {
         statusPageText.innerHTML = "<span class='status-error'>รีเฟรชสถานะไม่สำเร็จ</span>";
-        shakeButton(btnRefreshStatus);
+        shake(btnRefreshStatus);
       } finally {
         hideLoadingOverlay();
       }
@@ -3118,7 +3344,6 @@
     async function handleCheckExpiry() {
       if (!state.token) {
         showAlert(topAlert, "กรุณาเข้าสู่ระบบก่อนใช้งาน", "warning");
-        shakeButton(btnCheckExpiry);
         return;
       }
 
@@ -3133,33 +3358,29 @@
         if (!data || data.ok === false) {
           if (isUnauthorizedMessage(data && data.message)) {
             await handleUnauthorizedResponse(data.message);
-            shakeButton(btnCheckExpiry);
             return;
           }
           showAlert(expiryCheckResult, data && data.message ? data.message : "เช็ควันหมดอายุไม่สำเร็จ", "error", 6000);
-          setExpiryMode("", false);
-          shakeButton(btnCheckExpiry);
+          shake(btnCheckExpiry);
           return;
         }
 
         if (data.expiryYMD) {
-          expiryInput.value = data.expiryYMD;
-          if (state.member) state.member.lastKnownExpiry = data.expiryYMD;
-          setExpiryMode(data.expiryYMD, true);
-        } else {
-          if (state.member) state.member.lastKnownExpiry = "";
-          setExpiryMode("", false);
+          if (state.member) {
+            state.member.lastKnownExpiry = data.expiryYMD;
+            state.member.isExpired = !!data.expired;
+          }
+          updateMemberProfileUI();
         }
 
-        showAlert(
-          expiryCheckResult,
-          data.message || (data.expiry ? "วันหมดอายุ: " + data.expiry : "ยังไม่พบวันหมดอายุ"),
-          data.found ? "success" : "info",
-          7000
-        );
+        if (data.expired) {
+          showAlert(expiryCheckResult, data.message || claimConfig.expiredAccountText, "warning", 7000);
+        } else {
+          showAlert(expiryCheckResult, data.message || "พบวันหมดอายุล่าสุดในระบบแล้วค่ะ", "success", 7000);
+        }
       } catch (err) {
         showAlert(expiryCheckResult, "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้ง", "error", 5000);
-        shakeButton(btnCheckExpiry);
+        shake(btnCheckExpiry);
       } finally {
         hideLoadingOverlay();
       }
@@ -3194,15 +3415,17 @@
           updateMemberProfileUI();
         }
 
-        if (Array.isArray(data.history)) {
-          renderHistory(data.history);
-        }
+        if (Array.isArray(data.history)) renderHistory(data.history);
 
         state.bootstrapLoaded = true;
         return data;
       } catch (err) {
         return null;
       }
+    }
+
+    function goContactAdmin() {
+      window.open(ADMIN_CONTACT_URL, "_blank");
     }
 
     document.querySelectorAll(".toggle-pass").forEach(function(btn) {
@@ -3221,22 +3444,17 @@
       showAuthStatus("");
     });
 
-    btnGoStatusInline.addEventListener("click", function() {
-      safeSetMemberView("statusView");
-    });
-
     btnLogin.addEventListener("click", handleLogin);
     btnRegister.addEventListener("click", handleRegister);
     btnForgotPassword.addEventListener("click", handleForgotPassword);
     btnLogout.addEventListener("click", handleLogout);
     btnRefreshStatus.addEventListener("click", refreshStatusPage);
     btnCheckExpiry.addEventListener("click", handleCheckExpiry);
+    btnContactAdmin.addEventListener("click", goContactAdmin);
 
-    if (btnContactAdmin) {
-      btnContactAdmin.addEventListener("click", function() {
-        window.open("https://lin.ee/gAh3wAH", "_blank");
-      });
-    }
+    btnGoStatus.addEventListener("click", function() {
+      safeSetMemberView("statusView");
+    });
 
     btnPickSlip.addEventListener("click", function() { slipInput.click(); });
     btnCameraSlip.addEventListener("click", function() { slipInputCamera.click(); });
@@ -3293,7 +3511,6 @@
     expiryInput.addEventListener("change", function() {
       if (expiryInput.value && !isValidFutureExpiry(expiryInput.value)) {
         showAlert(claimAlert, "วันหมดอายุต้องเป็นวันนี้หรือวันในอนาคต", "warning");
-        shakeButton(btnCheckExpiry);
       }
     });
 
@@ -3309,9 +3526,7 @@
       updateNoteCounter();
       updatePasswordStrengthUI();
       loadRememberedLogin();
-      updateHeroVisibility();
       renderEmptyStatusPage();
-      setExpiryMode("", false);
 
       if (!SCRIPT_URL || SCRIPT_URL === "PUT_YOUR_WEB_APP_URL_HERE") {
         showAlert(topAlert, "กรุณาใส่ SCRIPT_URL ของ Web App ก่อนใช้งาน", "warning", 0);
@@ -3319,25 +3534,19 @@
       }
 
       const boot = await bootstrapApp();
-      if (!boot) {
-        await fetchTodayStatus(true);
-      }
+      if (!boot) await fetchTodayStatus(true);
 
       if (state.token && !state.member) {
         const ok = await fetchMemberMe(true);
-        if (!ok) {
-          clearLocalSession(true);
-        }
+        if (!ok) clearLocalSession(true);
       }
 
-      if (!userSelectedView && !state.token) {
-        setActiveView("loginView");
-      }
+      if (!userSelectedView && !state.token) setActiveView("loginView");
 
       setInterval(async function() {
         const bootData = await bootstrapApp();
         if (!bootData) return;
-        if (document.getElementById("statusView").classList.contains("active") && Array.isArray(bootData.history)) {
+        if (statusView.classList.contains("active") && Array.isArray(bootData.history)) {
           renderLatestStatusPage({ history: bootData.history, current: bootData.history[0] || null });
         }
       }, CONFIG_POLL_INTERVAL);
