@@ -4,27 +4,27 @@
   <meta charset="UTF-8" />
   <title>426 SHOP – Member & Claim Center</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#12090b" />
+  <meta name="theme-color" content="#2a1318" />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     :root{
-      --bg:#12090b;
-      --bg2:#1b0c10;
-      --card:rgba(20,12,14,.86);
-      --card-2:rgba(31,16,19,.92);
-      --line:rgba(255,255,255,.10);
-      --line-soft:rgba(255,255,255,.06);
-      --text:#fff4f4;
-      --sub:#d2b7bc;
-      --accent:#e2354f;
-      --accent-2:#ff5d73;
-      --accent-3:#ffccd4;
-      --black:#0e0a0b;
-      --success:#8fd19e;
-      --danger:#ff8a9c;
-      --warning:#ffb36b;
-      --shadow:0 18px 44px rgba(0,0,0,.34);
-      --shadow-soft:0 10px 24px rgba(0,0,0,.22);
+      --bg:#fff7f8;
+      --bg-2:#fff0f2;
+      --card:rgba(255,250,251,.96);
+      --card-2:rgba(255,245,247,.98);
+      --line:#f1d5db;
+      --line-soft:#f8e6ea;
+      --text:#5d3940;
+      --sub:#a77f88;
+      --accent:#d94b67;
+      --accent-2:#f27d96;
+      --accent-3:#ffe1e8;
+      --dark:#3a1b22;
+      --success:#6f9b76;
+      --danger:#d96b80;
+      --warning:#d49b62;
+      --shadow:0 18px 38px rgba(151,77,96,.12);
+      --shadow-soft:0 10px 24px rgba(151,77,96,.08);
       --radius:28px;
     }
 
@@ -36,45 +36,40 @@
       font-family:"Noto Sans Thai",system-ui,sans-serif;
       color:var(--text);
       background:
-        radial-gradient(circle at 20% 15%, rgba(255,70,98,.18), transparent 22%),
-        radial-gradient(circle at 80% 10%, rgba(255,130,160,.12), transparent 18%),
-        radial-gradient(circle at 50% 75%, rgba(255,50,70,.08), transparent 26%),
-        linear-gradient(180deg,#14090c 0%,#180b0f 45%,#0f090a 100%);
+        radial-gradient(circle at 18% 14%, rgba(242,125,150,.18), transparent 22%),
+        radial-gradient(circle at 82% 12%, rgba(255,201,213,.34), transparent 26%),
+        radial-gradient(circle at 70% 86%, rgba(255,221,232,.52), transparent 24%),
+        linear-gradient(180deg,#fffafb 0%,#fff4f6 42%,#fff8f9 100%);
       overflow-x:hidden;
-      position:relative;
       display:flex;
       justify-content:center;
+      position:relative;
     }
 
     body::before,
     body::after{
       content:"";
       position:fixed;
-      inset:auto;
-      pointer-events:none;
-      z-index:0;
-      filter:blur(54px);
-      opacity:.45;
       border-radius:999px;
+      pointer-events:none;
+      filter:blur(56px);
+      z-index:0;
+      opacity:.55;
     }
 
     body::before{
-      width:260px;
-      height:260px;
-      top:40px;
-      left:-60px;
-      background:radial-gradient(circle, rgba(255,77,103,.36), transparent 65%);
+      width:240px;height:240px;
+      top:28px;left:-70px;
+      background:radial-gradient(circle, rgba(242,125,150,.22), transparent 66%);
     }
 
     body::after{
-      width:320px;
-      height:320px;
-      right:-80px;
-      bottom:60px;
-      background:radial-gradient(circle, rgba(255,103,133,.20), transparent 68%);
+      width:300px;height:300px;
+      right:-90px;bottom:40px;
+      background:radial-gradient(circle, rgba(255,207,220,.42), transparent 68%);
     }
 
-    .smoke{
+    .mist{
       position:fixed;
       inset:0;
       pointer-events:none;
@@ -82,23 +77,25 @@
       overflow:hidden;
     }
 
-    .smoke span{
+    .mist span{
       position:absolute;
       display:block;
       border-radius:999px;
-      background:radial-gradient(circle, rgba(255,255,255,.06), transparent 70%);
-      animation:floatSmoke linear infinite;
+      background:radial-gradient(circle, rgba(255,255,255,.58), rgba(255,255,255,0) 72%);
+      opacity:.36;
+      filter:blur(14px);
+      animation:mistFloat linear infinite;
     }
 
-    .smoke span:nth-child(1){width:220px;height:220px;left:8%;top:18%;animation-duration:16s}
-    .smoke span:nth-child(2){width:280px;height:280px;right:4%;top:28%;animation-duration:22s}
-    .smoke span:nth-child(3){width:190px;height:190px;left:18%;bottom:12%;animation-duration:18s}
-    .smoke span:nth-child(4){width:240px;height:240px;right:20%;bottom:8%;animation-duration:20s}
+    .mist span:nth-child(1){width:180px;height:80px;left:8%;top:16%;animation-duration:16s}
+    .mist span:nth-child(2){width:220px;height:100px;right:2%;top:34%;animation-duration:20s}
+    .mist span:nth-child(3){width:170px;height:74px;left:18%;bottom:14%;animation-duration:18s}
+    .mist span:nth-child(4){width:240px;height:96px;right:18%;bottom:8%;animation-duration:22s}
 
-    @keyframes floatSmoke{
-      0%{transform:translateY(0) translateX(0) scale(1)}
-      50%{transform:translateY(-16px) translateX(10px) scale(1.04)}
-      100%{transform:translateY(0) translateX(0) scale(1)}
+    @keyframes mistFloat{
+      0%{transform:translateX(0) translateY(0)}
+      50%{transform:translateX(10px) translateY(-8px)}
+      100%{transform:translateX(0) translateY(0)}
     }
 
     .app{
@@ -114,15 +111,15 @@
     }
 
     .glass{
-      background:linear-gradient(180deg, rgba(29,16,19,.94), rgba(18,10,12,.94));
+      background:linear-gradient(180deg, rgba(255,252,252,.96), rgba(255,246,248,.98));
       border:1px solid var(--line);
       box-shadow:var(--shadow);
-      backdrop-filter:blur(14px);
+      backdrop-filter:blur(12px);
       border-radius:var(--radius);
     }
 
     .hero{
-      padding:20px 16px 16px;
+      padding:20px 16px 18px;
       text-align:center;
       position:relative;
       overflow:hidden;
@@ -133,8 +130,8 @@
       position:absolute;
       inset:0;
       background:
-        radial-gradient(circle at 50% 0%, rgba(255,82,107,.12), transparent 34%),
-        linear-gradient(180deg, rgba(255,255,255,.02), transparent 50%);
+        radial-gradient(circle at 50% 0%, rgba(242,125,150,.18), transparent 34%),
+        linear-gradient(180deg, rgba(255,255,255,.26), transparent 52%);
       pointer-events:none;
     }
 
@@ -149,16 +146,16 @@
     }
 
     .logo-shell{
-      width:88px;
-      height:88px;
+      width:90px;
+      height:90px;
       padding:5px;
-      border-radius:28px;
-      background:linear-gradient(145deg,#2a161a,#11090b);
-      border:1px solid rgba(255,255,255,.10);
+      border-radius:30px;
+      background:linear-gradient(145deg,#fffdfd,#ffeef2);
+      border:1px solid #f4d9df;
       box-shadow:
-        0 14px 28px rgba(0,0,0,.28),
-        inset 0 1px 0 rgba(255,255,255,.08),
-        0 0 0 4px rgba(255,70,98,.06);
+        0 14px 28px rgba(151,77,96,.12),
+        inset 0 1px 0 rgba(255,255,255,.95),
+        0 0 0 5px rgba(255,232,238,.7);
     }
 
     .logo-shell img{
@@ -166,8 +163,8 @@
       height:100%;
       display:block;
       object-fit:cover;
-      border-radius:22px;
-      border:1px solid rgba(255,255,255,.10);
+      border-radius:24px;
+      border:1px solid #f0d8de;
     }
 
     .brand-title{
@@ -175,15 +172,14 @@
       font-weight:800;
       letter-spacing:.08em;
       text-transform:uppercase;
-      color:#fff7f8;
+      color:#6f3340;
     }
 
     .brand-sub{
       font-size:.78rem;
       letter-spacing:.18em;
       text-transform:uppercase;
-      color:#f0b4bd;
-      opacity:.96;
+      color:#b47b87;
     }
 
     .status-chip{
@@ -194,24 +190,31 @@
       gap:8px;
       padding:9px 14px;
       border-radius:999px;
-      background:linear-gradient(135deg, rgba(255,80,110,.12), rgba(255,255,255,.04));
-      border:1px solid rgba(255,255,255,.10);
+      background:linear-gradient(135deg,#fffdfd,#fff4f6);
+      border:1px solid #f0d7dd;
       font-size:.76rem;
-      color:#ffd7de;
-      font-weight:700;
+      color:#9f707a;
+      font-weight:800;
+      box-shadow:0 10px 20px rgba(151,77,96,.08);
+    }
+
+    .status-chip.closed{
+      background:linear-gradient(135deg,#fff3f5,#ffe8ec);
+      color:#cb6176;
+      border-color:#f0c8d1;
     }
 
     .status-dot{
       width:8px;
       height:8px;
       border-radius:999px;
-      background:#7dff9f;
-      box-shadow:0 0 0 5px rgba(125,255,159,.10);
+      background:#7bc38d;
+      box-shadow:0 0 0 5px rgba(123,195,141,.14);
     }
 
     .status-chip.closed .status-dot{
-      background:#ff8899;
-      box-shadow:0 0 0 5px rgba(255,136,153,.12);
+      background:#ef748b;
+      box-shadow:0 0 0 5px rgba(239,116,139,.14);
     }
 
     .claim-banner{
@@ -220,13 +223,13 @@
       width:100%;
       padding:12px 14px;
       border-radius:20px;
-      background:linear-gradient(135deg, rgba(226,53,79,.20), rgba(255,255,255,.03));
-      border:1px solid rgba(255,108,130,.34);
-      color:#fff5f6;
-      font-size:.85rem;
+      background:linear-gradient(135deg,#fff7f9,#ffeef2);
+      border:1px solid #f0d4db;
+      color:#8f5f68;
+      font-size:.84rem;
       line-height:1.55;
       font-weight:800;
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+      box-shadow:0 10px 20px rgba(151,77,96,.06);
     }
 
     .panel{padding:16px}
@@ -249,8 +252,8 @@
     .card{
       border-radius:26px;
       padding:16px;
-      background:linear-gradient(180deg, rgba(34,18,22,.96), rgba(18,10,12,.96));
-      border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,247,249,.98));
+      border:1px solid #f1d8de;
       box-shadow:var(--shadow-soft);
       text-align:center;
       position:relative;
@@ -261,14 +264,14 @@
       content:"";
       position:absolute;
       inset:0;
-      background:linear-gradient(180deg, rgba(255,255,255,.025), transparent 42%);
+      background:linear-gradient(180deg, rgba(255,255,255,.55), transparent 42%);
       pointer-events:none;
     }
 
     .mini-title{
       font-size:1rem;
       font-weight:800;
-      color:#fff5f6;
+      color:#713845;
       margin-bottom:6px;
       position:relative;
       z-index:1;
@@ -294,23 +297,24 @@
 
     .field label{
       font-size:.76rem;
-      color:#f0c9cf;
-      font-weight:700;
+      color:#9d7079;
+      font-weight:800;
       text-align:center;
     }
 
     .input-shell{
       width:100%;
       border-radius:18px;
-      border:1px solid rgba(255,255,255,.09);
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid #efd6dc;
+      background:linear-gradient(180deg,#fffdfd,#fff5f7);
       padding:12px 12px;
       transition:.18s ease;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.9);
     }
 
     .input-shell:focus-within{
-      border-color:rgba(255,103,133,.52);
-      box-shadow:0 0 0 4px rgba(255,77,103,.10);
+      border-color:#ee98aa;
+      box-shadow:0 0 0 4px rgba(242,125,150,.12);
     }
 
     input[type="email"],
@@ -330,7 +334,7 @@
 
     input::placeholder,
     textarea::placeholder{
-      color:#a9868f;
+      color:#bc949c;
       text-align:center;
     }
 
@@ -349,21 +353,21 @@
     .password-row input{flex:1}
 
     .toggle-pass{
-      border:1px solid rgba(255,255,255,.08);
-      background:rgba(255,255,255,.06);
-      color:#ffd9de;
+      border:1px solid #efd7dd;
+      background:#fff7f9;
+      color:#a36f79;
       border-radius:999px;
       min-height:36px;
       padding:0 12px;
       cursor:pointer;
-      font-weight:700;
+      font-weight:800;
       font-family:inherit;
     }
 
     .helper{
       margin-top:6px;
       font-size:.72rem;
-      color:#b99aa1;
+      color:#b28b93;
       line-height:1.55;
       text-align:center;
     }
@@ -380,7 +384,7 @@
     }
 
     .remember-row input{
-      accent-color:#ff4d67;
+      accent-color:#e96e87;
       width:16px;
       height:16px;
     }
@@ -406,48 +410,48 @@
 
     .btn-primary{
       flex:1;
-      background:linear-gradient(135deg,#ff4d67,#d82345);
+      background:linear-gradient(135deg,#ec7892,#d94b67);
       color:#fff;
-      border-color:rgba(255,255,255,.08);
+      border-color:#df6781;
     }
 
-    .btn-primary:hover{filter:brightness(1.05)}
+    .btn-primary:hover{filter:brightness(1.04)}
 
     .btn-secondary{
       flex:1;
-      background:linear-gradient(180deg,#241316,#190d0f);
-      color:#ffe5e9;
-      border-color:rgba(255,255,255,.10);
+      background:linear-gradient(180deg,#fffdfd,#fff1f4);
+      color:#8f6470;
+      border-color:#efd4db;
     }
 
     .btn-secondary.blink{
-      animation:softBlink 1.4s ease-in-out infinite;
+      animation:softBlink 1.5s ease-in-out infinite;
     }
 
     @keyframes softBlink{
-      0%,100%{box-shadow:0 0 0 rgba(255,70,98,0)}
-      50%{box-shadow:0 0 0 6px rgba(255,70,98,.10)}
+      0%,100%{box-shadow:0 0 0 rgba(236,120,146,0)}
+      50%{box-shadow:0 0 0 6px rgba(236,120,146,.12)}
     }
 
     .btn-ghost{
       width:100%;
       margin-top:12px;
       background:transparent;
-      color:#ffb8c2;
-      border-color:rgba(255,255,255,.08);
+      color:#d45773;
+      border-color:#efd3da;
     }
 
     .btn-link{
       margin-top:12px;
       font-size:.84rem;
-      color:#ffb6c0;
+      color:#d95d78;
       text-align:center;
       cursor:pointer;
-      font-weight:700;
+      font-weight:800;
     }
 
     .btn-link.red{
-      color:#ff8a9c;
+      color:#de4968;
     }
 
     .alert-box{
@@ -458,15 +462,15 @@
       font-size:.8rem;
       line-height:1.6;
       text-align:center;
-      font-weight:700;
+      font-weight:800;
       border:1px solid transparent;
     }
 
     .alert-box.show{display:block}
-    .alert-box.success{background:rgba(80,180,110,.12);color:#bff5cb;border-color:rgba(143,209,158,.24)}
-    .alert-box.error{background:rgba(255,90,110,.10);color:#ffc0c9;border-color:rgba(255,120,150,.22)}
-    .alert-box.info{background:rgba(255,255,255,.05);color:#f5d7dc;border-color:rgba(255,255,255,.08)}
-    .alert-box.warning{background:rgba(255,180,110,.10);color:#ffd2a0;border-color:rgba(255,179,107,.24)}
+    .alert-box.success{background:#f4fbf5;color:#5d8a65;border-color:#d9ebdc}
+    .alert-box.error{background:#fff3f5;color:#cf6077;border-color:#f4ccd5}
+    .alert-box.info{background:#fff8fa;color:#a57079;border-color:#f2dde2}
+    .alert-box.warning{background:#fff8ef;color:#c08a55;border-color:#f0dfc9}
 
     .member-cute{
       margin:10px auto 0;
@@ -484,21 +488,22 @@
     .member-pill{
       padding:10px 10px;
       border-radius:18px;
-      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-      border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg,#fffdfd,#fff5f7);
+      border:1px solid #f1d9df;
       text-align:center;
+      box-shadow:0 8px 16px rgba(151,77,96,.05);
     }
 
     .member-pill .k{
       font-size:.67rem;
-      color:#e8bfc6;
+      color:#b38791;
       margin-bottom:4px;
-      font-weight:700;
+      font-weight:800;
     }
 
     .member-pill .v{
       font-size:.82rem;
-      color:#fff6f7;
+      color:#6b3c47;
       font-weight:800;
       word-break:break-word;
       line-height:1.45;
@@ -517,8 +522,8 @@
       min-height:20px;
     }
 
-    .status-bar.error{color:#ffb4be}
-    .status-bar.ok{color:#caf7d3}
+    .status-bar.error{color:#cf6077}
+    .status-bar.ok{color:#5c8a66}
 
     .summary{
       margin-top:10px;
@@ -531,9 +536,9 @@
       justify-content:center;
       padding:8px 12px;
       border-radius:999px;
-      background:rgba(255,255,255,.05);
-      border:1px solid rgba(255,255,255,.08);
-      color:#ffe4e8;
+      background:#fff6f8;
+      border:1px solid #efd7dd;
+      color:#885a66;
       font-size:.77rem;
       font-weight:800;
     }
@@ -542,8 +547,8 @@
       margin-top:12px;
       padding:14px;
       border-radius:22px;
-      background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02));
-      border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg,#fffdfd,#fff4f6);
+      border:1px solid #f1d7de;
       box-shadow:var(--shadow-soft);
     }
 
@@ -552,8 +557,8 @@
     }
 
     @keyframes cardBlink{
-      0%,100%{border-color:rgba(255,255,255,.08)}
-      50%{border-color:rgba(255,95,118,.36)}
+      0%,100%{border-color:#f1d7de}
+      50%{border-color:#eea0b0}
     }
 
     .live-head{
@@ -568,18 +573,18 @@
     .live-title{
       font-size:.92rem;
       font-weight:800;
-      color:#fff4f5;
+      color:#7a4250;
     }
 
     .live-sub{
       font-size:.75rem;
-      color:#ffb8c1;
+      color:#b68089;
       line-height:1.55;
     }
 
     .live-date{
       font-size:.72rem;
-      color:#c7a9b0;
+      color:#c09aa2;
     }
 
     .live-list{
@@ -596,14 +601,14 @@
       gap:10px;
       padding:10px 12px;
       border-radius:16px;
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.06);
+      background:#fff9fa;
+      border:1px solid #f3dde2;
     }
 
     .live-email{
       font-size:.82rem;
       font-weight:800;
-      color:#fff5f6;
+      color:#74404c;
       overflow:hidden;
       text-overflow:ellipsis;
       white-space:nowrap;
@@ -623,11 +628,11 @@
       white-space:nowrap;
     }
 
-    .status-pill--green{background:rgba(80,180,110,.16);color:#caf8d3;border-color:rgba(143,209,158,.22)}
-    .status-pill--yellow{background:rgba(255,185,90,.14);color:#ffe0ad;border-color:rgba(255,179,107,.20)}
-    .status-pill--red{background:rgba(255,90,110,.14);color:#ffc2cb;border-color:rgba(255,138,156,.22)}
-    .status-pill--blue{background:rgba(255,255,255,.06);color:#ffe6ea;border-color:rgba(255,255,255,.10)}
-    .status-pill--purple{background:rgba(255,120,160,.14);color:#ffd0dc;border-color:rgba(255,120,160,.22)}
+    .status-pill--green{background:#eef8f0;color:#4f7a57;border-color:#d5e7d9}
+    .status-pill--yellow{background:#fff8ee;color:#a2763f;border-color:#f2dfc5}
+    .status-pill--red{background:#fff1f4;color:#c45b72;border-color:#f1c9d3}
+    .status-pill--blue{background:#fff7f9;color:#94656f;border-color:#efdae0}
+    .status-pill--purple{background:#fff4f7;color:#a16072;border-color:#efd0d9}
 
     .results,
     .history-results{
@@ -639,8 +644,8 @@
     .result-item{
       padding:12px;
       border-radius:20px;
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.08);
+      background:#fff9fa;
+      border:1px solid #f1d9df;
       text-align:center;
     }
 
@@ -648,14 +653,14 @@
       font-size:.7rem;
       letter-spacing:.14em;
       text-transform:uppercase;
-      color:#cbaab0;
+      color:#bf96a0;
       margin-bottom:6px;
     }
 
     .item-email{
       font-size:.9rem;
       font-weight:800;
-      color:#fff7f8;
+      color:#713c49;
       word-break:break-word;
     }
 
@@ -666,7 +671,7 @@
       flex-wrap:wrap;
       gap:8px;
       font-size:.75rem;
-      color:#d4b8bd;
+      color:#a67f88;
       line-height:1.5;
     }
 
@@ -675,26 +680,20 @@
       margin-top:8px;
       padding:5px 10px;
       border-radius:999px;
-      background:rgba(255,255,255,.05);
-      border:1px solid rgba(255,255,255,.08);
+      background:#fff5f7;
+      border:1px solid #efd7dd;
       font-size:.72rem;
       font-weight:800;
-      color:#ffe4e8;
+      color:#8d606a;
     }
 
     .item-tag.paid{
-      background:rgba(255,95,118,.12);
-      border-color:rgba(255,95,118,.22);
-      color:#ffd1d8;
+      background:#fff1f4;
+      border-color:#f1c8d2;
+      color:#c05b71;
     }
 
     .item-body{
-      margin-top:10px;
-    }
-
-    .result-actions{
-      display:grid;
-      gap:8px;
       margin-top:10px;
     }
 
@@ -708,7 +707,7 @@
       margin-top:8px;
       text-align:center;
       font-size:.78rem;
-      color:#ffb9c2;
+      color:#b87d88;
       line-height:1.55;
     }
 
@@ -720,7 +719,7 @@
       justify-content:center;
       z-index:99999;
       padding:20px;
-      background:rgba(10,6,7,.78);
+      background:rgba(255,246,248,.78);
       backdrop-filter:blur(8px);
     }
 
@@ -730,69 +729,37 @@
       width:100%;
       max-width:320px;
       border-radius:28px;
-      background:linear-gradient(180deg, rgba(28,14,18,.98), rgba(17,9,11,.98));
-      border:1px solid rgba(255,255,255,.08);
-      box-shadow:0 22px 60px rgba(0,0,0,.42);
+      background:rgba(255,255,255,.97);
+      border:1px solid #f1d7de;
+      box-shadow:0 22px 60px rgba(151,77,96,.18);
       padding:24px 18px 20px;
       text-align:center;
     }
 
-    .loader-ring{
-      width:86px;
-      height:86px;
+    .spinner{
+      width:66px;
+      height:66px;
       margin:0 auto 14px;
-      position:relative;
+      border-radius:999px;
+      border:6px solid #f2d9df;
+      border-top-color:#df5b77;
+      animation:spin .9s linear infinite;
     }
 
-    .loader-ring svg{
-      width:100%;
-      height:100%;
-      transform:rotate(-90deg);
-    }
-
-    .loader-ring .bg{
-      fill:none;
-      stroke:rgba(255,255,255,.08);
-      stroke-width:9;
-    }
-
-    .loader-ring .fg{
-      fill:none;
-      stroke:url(#ringGrad);
-      stroke-width:9;
-      stroke-linecap:round;
-      stroke-dasharray:251;
-      stroke-dashoffset:188;
-      animation:ringRun 1.2s ease-in-out infinite;
-    }
-
-    @keyframes ringRun{
-      0%{stroke-dashoffset:220}
-      50%{stroke-dashoffset:80}
-      100%{stroke-dashoffset:220}
-    }
-
-    .loader-percent{
-      position:absolute;
-      inset:0;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-weight:800;
-      color:#fff3f5;
-      font-size:1rem;
+    @keyframes spin{
+      to{transform:rotate(360deg)}
     }
 
     .loading-title{
       font-size:1.02rem;
       font-weight:800;
-      color:#fff6f7;
+      color:#74404c;
     }
 
     .loading-sub{
       margin-top:8px;
       font-size:.84rem;
-      color:#d5b8be;
+      color:#b08a93;
       line-height:1.65;
     }
 
@@ -801,9 +768,8 @@
       left:50%;
       bottom:18px;
       transform:translateX(-50%) translateY(40px);
-      background:rgba(27,16,19,.96);
-      color:#fff3f5;
-      border:1px solid rgba(255,255,255,.08);
+      background:rgba(96,58,67,.94);
+      color:#fff8f9;
       border-radius:999px;
       padding:10px 18px;
       font-size:.8rem;
@@ -812,6 +778,7 @@
       pointer-events:none;
       transition:.25s ease;
       z-index:9999;
+      box-shadow:0 12px 24px rgba(96,58,67,.18);
     }
 
     .toast.show{
@@ -822,7 +789,7 @@
     .modal-backdrop{
       position:fixed;
       inset:0;
-      background:rgba(0,0,0,.52);
+      background:rgba(90,60,68,.32);
       display:none;
       align-items:center;
       justify-content:center;
@@ -837,9 +804,9 @@
       width:100%;
       max-width:360px;
       border-radius:24px;
-      background:linear-gradient(180deg, rgba(30,15,19,.98), rgba(17,9,11,.98));
-      border:1px solid rgba(255,255,255,.08);
-      box-shadow:0 20px 54px rgba(0,0,0,.40);
+      background:linear-gradient(180deg,#fffdfd,#fff5f7);
+      border:1px solid #f0d5dc;
+      box-shadow:0 20px 54px rgba(151,77,96,.18);
       padding:18px;
       text-align:center;
     }
@@ -847,13 +814,13 @@
     .modal-title{
       font-size:1rem;
       font-weight:800;
-      color:#fff5f6;
+      color:#77414d;
       margin-bottom:8px;
     }
 
     .modal-desc{
       font-size:.82rem;
-      color:#d0b4ba;
+      color:#b0868f;
       line-height:1.6;
       margin-bottom:12px;
     }
@@ -861,9 +828,9 @@
     .modal-summary{
       padding:12px;
       border-radius:18px;
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.08);
-      color:#fff2f4;
+      background:#fff9fa;
+      border:1px solid #efdae0;
+      color:#72404b;
       font-size:.8rem;
       line-height:1.7;
     }
@@ -876,7 +843,7 @@
       gap:6px;
       align-items:center;
       text-align:center;
-      color:#a98b92;
+      color:#b68f97;
       font-size:.74rem;
     }
 
@@ -886,9 +853,9 @@
       gap:6px;
       padding:7px 12px;
       border-radius:999px;
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.08);
-      color:#f1d4d8;
+      background:#fff8fa;
+      border:1px solid #f1dbe0;
+      color:#8f6470;
     }
 
     .copyright{
@@ -910,7 +877,7 @@
   </style>
 </head>
 <body>
-  <div class="smoke">
+  <div class="mist">
     <span></span><span></span><span></span><span></span>
   </div>
 
@@ -938,7 +905,7 @@
       </div>
     </section>
 
-    <div class="glass hidden" id="globalBanner" style="padding:12px 14px;text-align:center;font-size:.82rem;line-height:1.7;color:#ffe3e7;"></div>
+    <div class="glass hidden" id="globalBanner" style="padding:12px 14px;text-align:center;font-size:.82rem;line-height:1.7;color:#9b6b74;"></div>
 
     <main class="glass panel">
       <!-- LOGIN -->
@@ -981,10 +948,22 @@
           <div id="authStatus" class="status-bar"></div>
         </div>
 
-        <div class="btn-link red" id="showRegisterBtn">ยังไม่มีสมาชิก?</div>
+        <div class="section-note" style="margin-top:12px;">ยังไม่มีสมาชิก?</div>
+        <button type="button" class="btn-ghost" id="showRegisterBtn">สมัครสมาชิกใหม่</button>
 
         <div class="login-live-note">
           เช็กสถานะเมลวันนี้จากหน้าเว็บได้เลย โดยไม่ต้องเข้าสู่ระบบ
+        </div>
+
+        <div class="live-card blink">
+          <div class="live-head">
+            <div class="live-title">สถานะเมลวันนี้แบบเรียลไทม์</div>
+            <div class="live-sub">อัปเดตล่าสุดของเมลที่แจ้งเข้าระบบวันนี้</div>
+            <div class="live-date" id="liveDate"></div>
+          </div>
+          <div class="live-list" id="liveList">
+            <div class="helper">กำลังดึงสถานะเมลวันนี้...</div>
+          </div>
         </div>
       </section>
 
@@ -1089,28 +1068,28 @@
 
           <div class="field hidden" id="paymentSection">
             <label>ชำระค่าดูแล</label>
-            <div class="card" style="padding:14px;background:rgba(255,255,255,.03);">
-              <div style="font-size:.95rem;font-weight:800;color:#fff4f6;" id="paymentTitle">ชำระค่าดูแล 19 บาท</div>
+            <div class="card" style="padding:14px;background:rgba(255,255,255,.55);">
+              <div style="font-size:.95rem;font-weight:800;color:#73404b;" id="paymentTitle">ชำระค่าดูแล 19 บาท</div>
               <div class="helper" style="margin-top:6px;" id="paymentNote">
                 สำหรับปีสมัครที่กำหนด ระบบจะให้ชำระ 19 บาท และแนบหลักฐานเพื่อเข้าคิวเคลม
               </div>
 
-              <div style="margin-top:12px;padding:12px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);">
-                <div style="font-size:.74rem;color:#e4c3c8;">ธนาคาร</div>
+              <div style="margin-top:12px;padding:12px;border-radius:18px;background:#fff8fa;border:1px solid #f1d9df;">
+                <div style="font-size:.74rem;color:#b48b94;">ธนาคาร</div>
                 <div style="margin-top:4px;font-weight:800;" id="bankName">ธ.กสิกร (KBank)</div>
-                <div style="margin-top:8px;font-size:.74rem;color:#e4c3c8;">เลขบัญชี</div>
+                <div style="margin-top:8px;font-size:.74rem;color:#b48b94;">เลขบัญชี</div>
                 <div style="margin-top:4px;font-size:1.1rem;font-weight:800;" id="bankAccountNo">0628794251</div>
-                <div style="margin-top:8px;font-size:.74rem;color:#e4c3c8;">ชื่อบัญชี</div>
+                <div style="margin-top:8px;font-size:.74rem;color:#b48b94;">ชื่อบัญชี</div>
                 <div style="margin-top:4px;font-weight:800;" id="bankAccountName">นภัทรธมณฑ์ ฤทธิ์ชัยศักดิ์</div>
                 <button type="button" class="btn-ghost" id="btnCopyAccount">คัดลอกเลขบัญชี</button>
               </div>
 
               <div style="margin-top:12px;">
-                <img id="paymentQr" src="https://img2.imgbiz.com/imgbiz/IMG_2680.jpeg" alt="QR Payment" style="width:100%;max-width:240px;border-radius:18px;border:1px solid rgba(255,255,255,.10);" />
+                <img id="paymentQr" src="https://img2.imgbiz.com/imgbiz/IMG_2680.jpeg" alt="QR Payment" style="width:100%;max-width:240px;border-radius:18px;border:1px solid #f1d6dd;" />
               </div>
 
-              <div style="margin-top:12px;padding:12px;border-radius:18px;border:1px dashed rgba(255,255,255,.14);">
-                <div style="font-size:.86rem;font-weight:800;color:#fff3f5;">แนบสลิปโอนเงิน</div>
+              <div style="margin-top:12px;padding:12px;border-radius:18px;border:1px dashed #efcfd7;background:#fffafb;">
+                <div style="font-size:.86rem;font-weight:800;color:#77414d;">แนบสลิปโอนเงิน</div>
                 <div class="helper">รองรับเฉพาะไฟล์รูปภาพ ขนาดไม่เกิน 3 MB</div>
 
                 <div class="action-row" style="margin-top:12px;">
@@ -1125,14 +1104,14 @@
                 <div class="alert-box" id="slipStatusHint"></div>
 
                 <div id="slipPreviewWrap" class="hidden" style="margin-top:12px;">
-                  <img id="slipPreview" alt="ตัวอย่างสลิป" style="width:100%;max-height:250px;object-fit:contain;border-radius:18px;border:1px solid rgba(255,255,255,.10);" />
+                  <img id="slipPreview" alt="ตัวอย่างสลิป" style="width:100%;max-height:250px;object-fit:contain;border-radius:18px;border:1px solid #efd8de;" />
                   <div class="action-row" style="margin-top:10px;">
                     <button type="button" class="btn-secondary" id="btnViewLastSlip">ดูสลิปล่าสุด</button>
                     <button type="button" class="btn-secondary" id="btnRemoveSlip">ลบรูปที่เลือก</button>
                   </div>
                 </div>
 
-                <div class="helper" id="paymentRequireSlip" style="margin-top:10px;color:#ffb8c2;">
+                <div class="helper" id="paymentRequireSlip" style="margin-top:10px;color:#cf6077;">
                   หากไม่แนบสลิป ระบบจะยังไม่รับเข้าระบบเคลมสำหรับรอบที่ต้องชำระ 19 บาท
                 </div>
               </div>
@@ -1162,17 +1141,6 @@
             <div class="helper">คุณยังไม่มีรายการเคลมในระบบ</div>
           </div>
 
-          <div class="live-card blink">
-            <div class="live-head">
-              <div class="live-title">สถานะเมลวันนี้แบบเรียลไทม์</div>
-              <div class="live-sub">เช็กอัปเดตจากหน้าเว็บได้เลย ไม่ต้องเข้าสู่ระบบ</div>
-              <div class="live-date" id="liveDate"></div>
-            </div>
-            <div class="live-list" id="liveList">
-              <div class="helper">กำลังดึงสถานะเมลวันนี้...</div>
-            </div>
-          </div>
-
           <div class="history-results" id="historyResults"></div>
 
           <div class="page-nav-bottom">
@@ -1198,19 +1166,7 @@
 
   <div id="loadingOverlay" class="loading-overlay">
     <div class="loading-card">
-      <div class="loader-ring">
-        <svg viewBox="0 0 100 100">
-          <defs>
-            <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#ff6d85"></stop>
-              <stop offset="100%" stop-color="#e2354f"></stop>
-            </linearGradient>
-          </defs>
-          <circle class="bg" cx="50" cy="50" r="40"></circle>
-          <circle class="fg" cx="50" cy="50" r="40"></circle>
-        </svg>
-        <div class="loader-percent" id="loaderPercent">0%</div>
-      </div>
+      <div class="spinner"></div>
       <div class="loading-title">รอสักครู่นะคะ</div>
       <div class="loading-sub">ระบบกำลังประมวลผลคำขอของคุณ กรุณาอย่ารีเฟรชหน้าจอระหว่างกำลังโหลด</div>
     </div>
@@ -1233,7 +1189,6 @@
     const TOKEN_KEY = "shop426_member_token";
     const REMEMBER_KEY = "shop426_saved_login";
     const LAST_SLIP_KEY = "shop426_last_slip_preview";
-    const SUPPORT_LINK_BASE = "https://line.me/R/ti/p/";
     const STATUS_POLL_INTERVAL = 30000;
     const CONFIG_POLL_INTERVAL = 30000;
     const MAX_NOTE_LENGTH = 500;
@@ -1258,8 +1213,6 @@
       paymentRequireSlip: "หากไม่แนบสลิป ระบบจะยังไม่รับเข้าระบบเคลมสำหรับรอบที่ต้องชำระ 19 บาท",
       supportLine: "@467dlpti",
       isOpenNow: true,
-      lineEnabled: true,
-      lineClaimEnabled: true,
       webEnabled: true,
       webClosedMessage: "ขออภัยค่ะ ตอนนี้ระบบหน้าเว็บปิดชั่วคราว",
       webBannerMessage: "",
@@ -1271,14 +1224,10 @@
       member: null,
       submitLock: false,
       authLock: false,
-      webClosed: false,
-      lastClaimAt: "",
-      isLoading: false
+      lastClaimAt: ""
     };
 
     let activeSlipFile = null;
-    let loaderTimer = null;
-    let loaderProgress = 0;
 
     const heroSection = document.getElementById("heroSection");
     const globalBanner = document.getElementById("globalBanner");
@@ -1359,7 +1308,6 @@
     const liveList = document.getElementById("liveList");
 
     const loadingOverlay = document.getElementById("loadingOverlay");
-    const loaderPercent = document.getElementById("loaderPercent");
     const toast = document.getElementById("toast");
     const confirmModal = document.getElementById("confirmModal");
     const confirmSummary = document.getElementById("confirmSummary");
@@ -1419,13 +1367,6 @@
         " เวลา " + String(d.getHours()).padStart(2,"0") + ":" + String(d.getMinutes()).padStart(2,"0");
     }
 
-    function formatShortThaiTime(dateStr){
-      if (!dateStr) return "-";
-      const d = new Date(dateStr);
-      if (isNaN(d.getTime())) return "-";
-      return String(d.getHours()).padStart(2,"0") + ":" + String(d.getMinutes()).padStart(2,"0");
-    }
-
     function maskEmail(email){
       if (!email) return "-";
       const parts = email.split("@");
@@ -1471,28 +1412,8 @@
       globalBanner.textContent = message;
     }
 
-    function startLoader(){
-      loaderProgress = 8;
-      loaderPercent.textContent = loaderProgress + "%";
-      loadingOverlay.classList.add("show");
-      loaderTimer = setInterval(() => {
-        if (loaderProgress < 92){
-          loaderProgress += Math.floor(Math.random() * 8) + 1;
-          if (loaderProgress > 92) loaderProgress = 92;
-          loaderPercent.textContent = loaderProgress + "%";
-        }
-      }, 220);
-    }
-
-    function stopLoader(){
-      clearInterval(loaderTimer);
-      loaderProgress = 100;
-      loaderPercent.textContent = "100%";
-      setTimeout(() => {
-        loadingOverlay.classList.remove("show");
-        loaderPercent.textContent = "0%";
-      }, 280);
-    }
+    function showLoading(){ loadingOverlay.classList.add("show"); }
+    function hideLoading(){ loadingOverlay.classList.remove("show"); }
 
     function saveRememberedLogin(){
       if (rememberPassword.checked){
@@ -1939,7 +1860,7 @@
       if (state.authLock) return;
       if (!validateLogin()) return;
       state.authLock = true;
-      startLoader();
+      showLoading();
 
       try{
         const data = await postJson({
@@ -1964,7 +1885,7 @@
       }catch(e){
         showAlert(topAlert, "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้ง", "error");
       }finally{
-        stopLoader();
+        hideLoading();
         state.authLock = false;
       }
     }
@@ -1973,7 +1894,7 @@
       if (state.authLock) return;
       if (!validateRegister()) return;
       state.authLock = true;
-      startLoader();
+      showLoading();
 
       try{
         const data = await postJson({
@@ -2002,7 +1923,7 @@
       }catch(e){
         showAlert(registerAlert, "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้ง", "error");
       }finally{
-        stopLoader();
+        hideLoading();
         state.authLock = false;
       }
     }
@@ -2014,7 +1935,7 @@
         return;
       }
 
-      startLoader();
+      showLoading();
       try{
         const data = await postJson({ action:"forgotPassword", email });
         if (!data || data.ok === false){
@@ -2025,7 +1946,7 @@
       }catch(e){
         showAlert(topAlert, "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้ง", "error");
       }finally{
-        stopLoader();
+        hideLoading();
       }
     }
 
@@ -2045,7 +1966,7 @@
       if (!validateClaimForm()) return;
 
       state.submitLock = true;
-      startLoader();
+      showLoading();
       status.className = "status-bar";
       status.innerHTML = "ระบบกำลังส่งคำขอของคุณเข้าสู่ร้าน 426 SHOP...";
 
@@ -2100,19 +2021,19 @@
         status.textContent = "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้ง";
         state.submitLock = false;
       }finally{
-        stopLoader();
+        hideLoading();
         state.submitLock = false;
       }
     }
 
     async function refreshStatus(){
-      startLoader();
+      showLoading();
       try{
         const history = await fetchHistory();
         renderLatestStatusPage(history);
         showToast("รีเฟรชสถานะแล้ว");
       }finally{
-        stopLoader();
+        hideLoading();
       }
     }
 
