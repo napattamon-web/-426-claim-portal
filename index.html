@@ -16,11 +16,14 @@
       --accent:#bf8f72;
       --accent-2:#e7c6b2;
       --accent-3:#f3ded0;
+      --accent-4:#fff5ee;
       --success:#6f8e63;
       --danger:#d77d7d;
       --warning:#c58e5e;
       --info:#7588b8;
       --purple:#a48cc9;
+      --pink:#eab8c7;
+      --cream:#fffaf6;
       --shadow:0 20px 44px rgba(118,84,63,.10);
       --shadow-soft:0 12px 26px rgba(118,84,63,.08);
       --r-xl:30px;
@@ -76,7 +79,26 @@
       border-radius:var(--r-xl);
     }
 
-    .hero{padding:18px 16px;position:relative;overflow:hidden}
+    .hero{
+      padding:18px 16px;
+      position:relative;
+      overflow:hidden;
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,.8), transparent 35%),
+        linear-gradient(180deg, rgba(255,251,247,.98), rgba(251,243,236,.98));
+    }
+
+    .hero::after{
+      content:"✦ ✿ ☁";
+      position:absolute;
+      right:16px;
+      top:12px;
+      font-size:14px;
+      color:#d7b39d;
+      opacity:.7;
+      letter-spacing:.2em;
+    }
+
     .panel{padding:16px}
     .view{display:none;animation:fadeUp .24s ease}
     .view.active{display:block}
@@ -85,9 +107,26 @@
     .hero-top{display:flex;justify-content:flex-start;align-items:flex-start;gap:10px}
     .brand-wrap{display:flex;gap:12px;align-items:center;min-width:0;width:100%;justify-content:flex-start}
     .logo-shell{
-      width:70px;height:70px;border-radius:24px;padding:4px;
+      width:72px;height:72px;border-radius:24px;padding:4px;
       background:linear-gradient(135deg,#fffefc,#f4e7dc);
       box-shadow:var(--shadow-soft);flex-shrink:0;position:relative
+    }
+    .logo-shell::after{
+      content:"♥";
+      position:absolute;
+      right:-4px;
+      top:-4px;
+      width:22px;
+      height:22px;
+      border-radius:999px;
+      background:#fff;
+      border:1px solid #f0ddd1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#d89caf;
+      font-size:11px;
+      box-shadow:0 8px 16px rgba(118,84,63,.08);
     }
     .logo-img{width:100%;height:100%;display:block;object-fit:cover;border-radius:19px;background:#fff}
     .brand-copy{display:flex;flex-direction:column;gap:4px;min-width:0;align-items:flex-start;text-align:left}
@@ -158,7 +197,14 @@
       color:#b95a5a;
     }
 
-    .section-blurb{font-size:.84rem;line-height:1.65;color:var(--sub);margin-bottom:10px;text-align:center}
+    .section-blurb{
+      font-size:.84rem;
+      line-height:1.65;
+      color:var(--sub);
+      margin-bottom:10px;
+      text-align:center
+    }
+
     .login-card,.register-card,.claim-card,.status-card,.success-card{
       border-radius:28px;
       background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(253,247,242,.99));
@@ -169,18 +215,56 @@
       position:relative;
       overflow:hidden;
     }
-    .success-card{margin-top:12px;display:none;background:linear-gradient(180deg,#fffdfb,#f9f2eb);border-style:dashed}
+
+    .login-card::before,
+    .register-card::before,
+    .claim-card::before,
+    .status-card::before{
+      content:"";
+      position:absolute;
+      inset:auto -30px -30px auto;
+      width:110px;
+      height:110px;
+      border-radius:999px;
+      background:radial-gradient(circle, rgba(239,214,198,.45), transparent 70%);
+      pointer-events:none;
+    }
+
+    .success-card{
+      margin-top:12px;
+      display:none;
+      background:linear-gradient(180deg,#fffdfb,#f9f2eb);
+      border-style:dashed
+    }
     .success-card.show{display:block}
     .success-title{font-size:1rem;font-weight:800;color:#755847;margin-bottom:6px}
     .success-desc{font-size:.8rem;line-height:1.7;color:var(--sub)}
 
-    .page-nav{display:flex;gap:10px;margin-bottom:12px}
+    .page-nav{
+      display:flex;
+      gap:8px;
+      margin-bottom:12px;
+      justify-content:center;
+      align-items:center;
+    }
     .page-pill{
-      flex:1;min-height:46px;border-radius:999px;border:1px solid #e8d9ce;
-      background:linear-gradient(180deg,#fffdfb,#f7efe8);color:#8c7464;font-size:.8rem;font-weight:800;cursor:pointer
+      flex:1;
+      min-height:38px;
+      max-width:160px;
+      border-radius:999px;
+      border:1px solid #e8d9ce;
+      background:linear-gradient(180deg,#fffdfb,#f7efe8);
+      color:#8c7464;
+      font-size:.74rem;
+      font-weight:800;
+      cursor:pointer;
+      padding:0 12px;
+      box-shadow:0 6px 12px rgba(118,84,63,.05);
     }
     .page-pill.active{
-      border-color:transparent;background:linear-gradient(135deg,#d9b79d,#be8d70);color:#fff;
+      border-color:transparent;
+      background:linear-gradient(135deg,#d9b79d,#be8d70);
+      color:#fff;
       box-shadow:0 10px 18px rgba(118,84,63,.12)
     }
 
@@ -189,6 +273,17 @@
       background:linear-gradient(180deg, rgba(255,255,255,.88), rgba(255,247,241,.96));
       box-shadow:inset 0 1px 0 rgba(255,255,255,.85),0 10px 22px rgba(118,84,63,.06);overflow:hidden
     }
+
+    .claim-top-frame::before,.status-top-frame::before{
+      content:"✿";
+      position:absolute;
+      left:14px;
+      top:10px;
+      font-size:14px;
+      color:#d8b39d;
+      opacity:.8;
+    }
+
     .claim-only-title,.status-only-title{position:relative;font-size:1rem;font-weight:800;color:#755847;margin:0;text-align:center}
     .claim-only-sub,.status-only-sub{position:relative;margin-top:6px;font-size:.78rem;color:var(--sub);line-height:1.6}
 
@@ -244,80 +339,45 @@
       flex:1;min-height:52px;border:0;background:linear-gradient(135deg,#d6b297,#b98665);
       color:#fffdfb;box-shadow:0 14px 24px rgba(126,89,66,.18);font-size:.96rem;display:inline-flex;align-items:center;justify-content:center;gap:8px
     }
+    .btn-primary:hover{transform:translateY(-1px)}
     .btn-primary:disabled{opacity:.65;cursor:default}
     .btn-secondary{min-height:52px;border:1px solid #e6d8cd;background:linear-gradient(180deg,#fffdfb,#f7efe8);color:var(--sub);padding:0 16px;font-size:.82rem}
     .btn-danger{min-height:52px;border:1px solid #f0cdcd;background:linear-gradient(180deg,#fff7f7,#ffefef);color:#c46a6a;padding:0 16px;font-size:.82rem}
     .btn-link-small{min-height:42px;border:1px solid #eadbcf;background:#fffaf6;color:#8f7868;padding:0 16px;font-size:.78rem;width:100%;margin-top:12px}
 
-    .member-identity-card{
+    .mini-member-card{
       margin-top:10px;
+      display:none;
+      grid-template-columns:repeat(2,1fr);
+      gap:8px;
+    }
+
+    .mini-member-item{
+      padding:10px 10px 9px;
       border-radius:18px;
-      border:1px solid #ead9cd;
-      background:linear-gradient(180deg,#fffdfb,#faf4ef);
-      padding:10px;
-      box-shadow:0 8px 16px rgba(118,84,63,.05);
+      border:1px solid #eadacd;
+      background:linear-gradient(180deg,#fffaf7,#f9f0e9);
+      box-shadow:0 6px 14px rgba(118,84,63,.05);
       text-align:center;
-      max-width:360px;
-      margin-left:auto;
-      margin-right:auto;
     }
-    .member-card-head{
-      text-align:center;
-      margin-bottom:8px;
+
+    .mini-member-item.wide{
+      grid-column:1 / -1;
     }
-    .member-card-badge{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:5px 10px;
-      border-radius:999px;
-      background:linear-gradient(135deg,#f9eee7,#fff8f4);
-      border:1px solid #ead8ca;
-      color:#8b6b59;
+
+    .mini-member-label{
       font-size:.68rem;
-      font-weight:800;
-      letter-spacing:.04em;
-    }
-    .member-card-title{
-      margin-top:6px;
-      font-size:.86rem;
-      font-weight:800;
-      color:#6d5243;
-    }
-    .member-card-sub{
-      margin-top:2px;
-      font-size:.7rem;
-      color:var(--sub);
-      line-height:1.45;
-    }
-    .member-card-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:7px;
-    }
-    .member-info-item{
-      border-radius:14px;
-      border:1px solid #eee0d5;
-      background:#fff;
-      padding:8px 6px;
-      min-height:62px;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-      box-shadow:0 4px 10px rgba(118,84,63,.04);
-    }
-    .member-info-label{
-      font-size:.64rem;
-      color:#9e8a7d;
-      font-weight:700;
+      color:#a18878;
       margin-bottom:4px;
+      font-weight:700;
+      letter-spacing:.03em;
     }
-    .member-info-value{
-      font-size:.76rem;
-      color:#5f493d;
+
+    .mini-member-value{
+      font-size:.8rem;
       font-weight:800;
-      line-height:1.35;
+      color:#755847;
+      line-height:1.45;
       word-break:break-word;
     }
 
@@ -491,41 +551,69 @@
       background:rgba(255,248,243,.90);backdrop-filter:blur(8px)
     }
     .loading-overlay.show{display:flex}
+
     .loading-card{
-      width:100%;max-width:320px;border-radius:28px;background:rgba(255,255,255,.97);border:1px solid #efe0d5;
-      box-shadow:0 20px 54px rgba(118,84,63,.14);padding:24px 18px 22px;text-align:center
+      width:100%;
+      max-width:320px;
+      border-radius:28px;
+      background:rgba(255,255,255,.97);
+      border:1px solid #efe0d5;
+      box-shadow:0 20px 54px rgba(118,84,63,.14);
+      padding:24px 18px 22px;
+      text-align:center;
     }
-    .spinner{
-      width:62px;height:62px;margin:0 auto 14px;border-radius:999px;border:6px solid #edd9ca;border-top-color:#b98e71;animation:spin .85s linear infinite
+
+    .loading-title{
+      font-size:1.08rem;
+      font-weight:800;
+      color:#7a5d4b;
+      text-align:center;
+      margin-top:12px;
     }
-    @keyframes spin{to{transform:rotate(360deg)}}
-    .loading-title{font-size:1.08rem;font-weight:800;color:#7a5d4b;text-align:center}
-    .loading-sub{margin-top:8px;font-size:.87rem;color:var(--sub);line-height:1.65;text-align:center}
+
+    .loading-sub{
+      margin-top:8px;
+      font-size:.87rem;
+      color:var(--sub);
+      line-height:1.65;
+      text-align:center;
+    }
 
     .loading-progress-wrap{
-      margin-top:14px;
       display:flex;
       flex-direction:column;
       align-items:center;
+      justify-content:center;
       gap:8px;
+      margin:0 auto 4px;
     }
+
     .loading-progress-ring{
-      width:64px;
-      height:64px;
+      width:74px;
+      height:74px;
       position:relative;
       display:grid;
       place-items:center;
+      animation:gentleFloat 1.6s ease-in-out infinite;
     }
+
+    @keyframes gentleFloat{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-2px)}
+    }
+
     .loading-progress-ring svg{
-      width:64px;
-      height:64px;
+      width:74px;
+      height:74px;
       transform:rotate(-90deg);
     }
+
     .loading-progress-ring circle.bg{
       fill:none;
       stroke:#efddd1;
       stroke-width:6;
     }
+
     .loading-progress-ring circle.fg{
       fill:none;
       stroke:#be8d70;
@@ -535,13 +623,14 @@
       stroke-dashoffset:175.9;
       transition:stroke-dashoffset .18s linear;
     }
+
     .loading-progress-center{
       position:absolute;
       inset:0;
       display:flex;
       align-items:center;
       justify-content:center;
-      font-size:.78rem;
+      font-size:.82rem;
       font-weight:800;
       color:#7d6252;
     }
@@ -562,14 +651,22 @@
     @media (max-width:480px){
       .app{padding:12px 12px 16px}
       .action-row,.modal-actions{flex-direction:column}
-      .page-nav{flex-direction:column}
+      .page-nav{
+        flex-direction:row;
+        gap:8px;
+      }
+      .page-pill{
+        max-width:none;
+        min-height:36px;
+        font-size:.72rem;
+      }
       .float-admin{width:58px;height:58px;right:12px;bottom:14px}
       .live-item{gap:8px}
       .live-email{max-width:150px}
       .bank-minimal-top{flex-direction:column;align-items:stretch}
       .bank-card-name{text-align:center}
       .route-cute-badges{flex-direction:column;align-items:center}
-      .member-card-grid{grid-template-columns:1fr}
+      .mini-member-card{grid-template-columns:1fr 1fr}
     }
   </style>
 </head>
@@ -677,14 +774,7 @@
           <div class="field-group">
             <label class="field-label" for="registerDisplayName">ชื่อไลน์</label>
             <div class="input-shell">
-              <input id="registerDisplayName" type="text" placeholder="เช่น Amp Drive" />
-            </div>
-          </div>
-
-          <div class="field-group">
-            <label class="field-label" for="registerAdminName">ชื่อแอดมินที่ดูแล</label>
-            <div class="input-shell">
-              <input id="registerAdminName" type="text" placeholder="เช่น แอดมินแอมป์" />
+              <input id="registerDisplayName" type="text" placeholder="เช่น AMP หรือชื่อที่ใช้ในไลน์" />
             </div>
           </div>
 
@@ -741,7 +831,7 @@
 
         <div class="success-card" id="registerSuccessCard">
           <div class="success-title">สมัครสมาชิกสำเร็จแล้ว</div>
-          <div class="success-desc" id="registerSuccessText">
+          <div class="success-desc">
             ตอนนี้คุณสามารถใช้อีเมลและรหัสผ่านที่ตั้งไว้เข้าสู่ระบบได้ทันที<br />
             หากลืมรหัสผ่าน สามารถกดส่งรหัสทางอีเมลได้จากหน้าล็อกอิน
           </div>
@@ -762,28 +852,18 @@
 
           <div id="claimAlert" class="alert-box"></div>
 
-          <div class="member-identity-card" id="memberProfileBox" style="display:none;">
-            <div class="member-card-head">
-              <div class="member-card-badge">ข้อมูลสมาชิก</div>
-              <div class="member-card-title">💌 โปรไฟล์สมาชิก</div>
-              <div class="member-card-sub">ข้อมูลล่าสุดจากระบบร้าน</div>
+          <div class="mini-member-card" id="memberProfileBox">
+            <div class="mini-member-item wide">
+              <div class="mini-member-label">อีเมลสมาชิก</div>
+              <div class="mini-member-value" id="profileEmail">-</div>
             </div>
-
-            <div class="member-card-grid">
-              <div class="member-info-item">
-                <div class="member-info-label">อีเมล</div>
-                <div class="member-info-value" id="profileEmail">-</div>
-              </div>
-
-              <div class="member-info-item">
-                <div class="member-info-label">วันที่ในระบบ</div>
-                <div class="member-info-value" id="profileMemberDate">-</div>
-              </div>
-
-              <div class="member-info-item">
-                <div class="member-info-label">ปีสมัคร</div>
-                <div class="member-info-value" id="profileSignupYear">-</div>
-              </div>
+            <div class="mini-member-item">
+              <div class="mini-member-label">วันที่ในระบบ</div>
+              <div class="mini-member-value" id="profileMemberDate">-</div>
+            </div>
+            <div class="mini-member-item">
+              <div class="mini-member-label">ปีสมัคร</div>
+              <div class="mini-member-value" id="profileSignupYear">-</div>
             </div>
           </div>
 
@@ -992,13 +1072,6 @@
 
   <div id="loadingOverlay" class="loading-overlay">
     <div class="loading-card">
-      <div class="spinner"></div>
-      <div class="loading-title">รอสักครู่นะคะ</div>
-      <div class="loading-sub">
-        ระบบกำลังประมวลผลคำขอของคุณ<br />
-        กรุณาอย่ารีเฟรชหน้าจอระหว่างกำลังโหลด
-      </div>
-
       <div class="loading-progress-wrap">
         <div class="loading-progress-ring">
           <svg viewBox="0 0 64 64">
@@ -1007,6 +1080,12 @@
           </svg>
           <div class="loading-progress-center" id="loadingProgressText">0%</div>
         </div>
+      </div>
+
+      <div class="loading-title">รอสักครู่นะคะ</div>
+      <div class="loading-sub">
+        ระบบกำลังประมวลผลคำขอของคุณ<br />
+        กรุณาอย่ารีเฟรชหน้าจอระหว่างกำลังโหลด
       </div>
     </div>
   </div>
@@ -1034,6 +1113,7 @@
     const SUPPORT_LINK_BASE = "https://line.me/R/ti/p/";
     const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
     const LAST_SLIP_KEY = "shop426_last_slip_preview";
+    const RING_CIRCUMFERENCE = 175.9;
 
     let claimConfig = {
       claimStartHour: 7,
@@ -1079,9 +1159,8 @@
     };
 
     let userSelectedView = false;
-    let activeSlipFile = null;
-    let loadingTimer = null;
-    let loadingProgress = 0;
+    let loadingProgressTimer = null;
+    let loadingProgressValue = 0;
 
     const heroSection = document.getElementById("heroSection");
     const globalBanner = document.getElementById("globalBanner");
@@ -1112,14 +1191,12 @@
     const rememberPassword = document.getElementById("rememberPassword");
 
     const registerDisplayName = document.getElementById("registerDisplayName");
-    const registerAdminName = document.getElementById("registerAdminName");
     const registerEmail = document.getElementById("registerEmail");
     const registerPassword = document.getElementById("registerPassword");
     const registerConfirmPassword = document.getElementById("registerConfirmPassword");
     const registerMemberDate = document.getElementById("registerMemberDate");
     const registerPasswordStrength = document.getElementById("registerPasswordStrength");
     const registerSuccessCard = document.getElementById("registerSuccessCard");
-    const registerSuccessText = document.getElementById("registerSuccessText");
 
     const expiryInput = document.getElementById("expiryInput");
     const noteInput = document.getElementById("noteInput");
@@ -1181,8 +1258,6 @@
 
     const toast = document.getElementById("toast");
     const loadingOverlay = document.getElementById("loadingOverlay");
-    const loadingProgressText = document.getElementById("loadingProgressText");
-    const loadingProgressCircle = document.getElementById("loadingProgressCircle");
     const topAlert = document.getElementById("topAlert");
     const registerAlert = document.getElementById("registerAlert");
     const claimAlert = document.getElementById("claimAlert");
@@ -1194,6 +1269,11 @@
 
     const claimStepCard = document.getElementById("claimStepCard");
     const claimStepList = document.getElementById("claimStepList");
+
+    const loadingProgressCircle = document.getElementById("loadingProgressCircle");
+    const loadingProgressText = document.getElementById("loadingProgressText");
+
+    let activeSlipFile = null;
 
     function normalizeEmail(value){ return String(value || "").trim().toLowerCase(); }
     function normalizeText(value){ return String(value || "").trim(); }
@@ -1239,52 +1319,41 @@
       if (viewId === "statusView") setMemberPagePills("status");
     }
 
-    function updateLoadingCircle(percent) {
-      const circumference = 175.9;
-      const offset = circumference - (percent / 100) * circumference;
+    function setLoadingProgress(percent){
+      const safe = Math.max(0, Math.min(100, percent || 0));
+      const offset = RING_CIRCUMFERENCE - ((safe / 100) * RING_CIRCUMFERENCE);
       if (loadingProgressCircle) {
-        loadingProgressCircle.style.strokeDashoffset = offset;
+        loadingProgressCircle.style.strokeDashoffset = offset.toFixed(1);
       }
       if (loadingProgressText) {
-        loadingProgressText.textContent = percent + "%";
+        loadingProgressText.textContent = safe + "%";
       }
-    }
-
-    function resetLoadingProgress() {
-      loadingProgress = 0;
-      updateLoadingCircle(0);
-    }
-
-    function animateLoadingProgress() {
-      clearInterval(loadingTimer);
-      resetLoadingProgress();
-      loadingTimer = setInterval(function() {
-        if (loadingProgress >= 92) return;
-        loadingProgress += Math.random() < 0.5 ? 3 : 5;
-        if (loadingProgress > 92) loadingProgress = 92;
-        updateLoadingCircle(loadingProgress);
-      }, 180);
-    }
-
-    function completeLoadingProgress() {
-      clearInterval(loadingTimer);
-      loadingProgress = 100;
-      updateLoadingCircle(100);
     }
 
     function showLoadingOverlay() {
+      clearInterval(loadingProgressTimer);
+      loadingProgressValue = 0;
+      setLoadingProgress(0);
       loadingOverlay.classList.add("show");
       document.body.style.overflow = "hidden";
-      animateLoadingProgress();
+
+      loadingProgressTimer = setInterval(function(){
+        if (loadingProgressValue < 88) {
+          loadingProgressValue += Math.floor(Math.random() * 8) + 3;
+          if (loadingProgressValue > 88) loadingProgressValue = 88;
+          setLoadingProgress(loadingProgressValue);
+        }
+      }, 180);
     }
 
     function hideLoadingOverlay() {
-      completeLoadingProgress();
-      setTimeout(function() {
+      clearInterval(loadingProgressTimer);
+      setLoadingProgress(100);
+      setTimeout(function(){
         loadingOverlay.classList.remove("show");
         document.body.style.overflow = "";
-        resetLoadingProgress();
-      }, 220);
+        setLoadingProgress(0);
+      }, 180);
     }
 
     function showToast(message = "เรียบร้อยแล้ว") {
@@ -1464,14 +1533,13 @@
       }
     }
 
-    function buildLocalMemberFallback(email, displayName, memberDate, signupYearThai, adminName) {
+    function buildLocalMemberFallback(email, displayName, memberDate, signupYearThai) {
       return {
         email: email || "",
         displayName: displayName || "",
         memberDate: memberDate || "",
         signupYearThai: signupYearThai || thaiYearFromYmd(memberDate || ""),
-        lastKnownExpiry: "",
-        adminName: adminName || ""
+        lastKnownExpiry: ""
       };
     }
 
@@ -2014,7 +2082,7 @@
       profileMemberDate.textContent = formatThaiDate(memberDate || "");
       profileSignupYear.textContent = signupYear || "-";
 
-      profileBox.style.display = "block";
+      profileBox.style.display = "grid";
       signupYearInput.value = signupYear;
       signupYearDisplay.value = signupYear || "";
 
@@ -2218,7 +2286,7 @@
         if (data.member) {
           state.member = data.member;
         } else {
-          state.member = buildLocalMemberFallback(payload.email, "", "", "", "");
+          state.member = buildLocalMemberFallback(payload.email, "", "", "");
         }
 
         saveRememberedLogin();
@@ -2256,7 +2324,6 @@
         const payload = {
           action: "register",
           displayName: normalizeText(registerDisplayName.value),
-          adminName: normalizeText(registerAdminName.value),
           email: normalizeEmail(registerEmail.value),
           password: normalizeText(registerPassword.value),
           memberDate
@@ -2277,10 +2344,6 @@
         }
 
         registerSuccessCard.classList.add("show");
-        registerSuccessText.innerHTML =
-          'ตอนนี้คุณสามารถใช้อีเมลและรหัสผ่านที่ตั้งไว้เข้าสู่ระบบได้ทันที<br />' +
-          'แอดมินที่ดูแล: <strong>' + escapeHtml(payload.adminName || "ยังไม่ได้ระบุ") + '</strong><br />' +
-          'หากลืมรหัสผ่าน สามารถกดส่งรหัสทางอีเมลได้จากหน้าล็อกอิน';
 
         if (data.token) {
           state.token = String(data.token || "").trim();
@@ -2291,8 +2354,7 @@
           payload.email,
           payload.displayName,
           memberDate,
-          thaiYearFromYmd(memberDate),
-          payload.adminName
+          thaiYearFromYmd(memberDate)
         );
 
         loginEmailInput.value = payload.email;
@@ -2423,6 +2485,7 @@
         "<strong>ประเภทเคลม:</strong> " + escapeHtml(claimType) + "<br>" +
         "<strong>สลิป:</strong> " + escapeHtml(hasSlip) + "<br>" +
         "<strong>ข้อความถึงแอดมิน:</strong> " + escapeHtml(note || "-");
+
       confirmModal.classList.add("show");
     }
 
@@ -2484,12 +2547,6 @@
         if (data.closed) {
           setWebClosedState(true, data.message || claimConfig.webClosedMessage);
           showStatusError(data.message || "ระบบเว็บปิดชั่วคราว");
-          state.submitLock = false;
-          return;
-        }
-
-        if (data.expired) {
-          showStatusError(data.message || claimConfig.expiredAccountText || "บัญชีหมดอายุแล้ว หากต้องการใช้บริการต่อติดต่อแอดมิน");
           state.submitLock = false;
           return;
         }
@@ -2613,7 +2670,7 @@
         showAlert(
           expiryCheckResult,
           data.message || (data.expiry ? "วันหมดอายุ: " + data.expiry : "ยังไม่พบวันหมดอายุ"),
-          data.found ? (data.expired ? "warning" : "success") : "info",
+          data.expired ? "warning" : (data.found ? "success" : "info"),
           7000
         );
       } catch (err) {
@@ -2773,7 +2830,6 @@
       loadRememberedLogin();
       updateHeroVisibility();
       renderEmptyStatusPage();
-      resetLoadingProgress();
 
       if (!SCRIPT_URL || SCRIPT_URL === "PUT_YOUR_WEB_APP_URL_HERE") {
         showAlert(topAlert, "กรุณาใส่ SCRIPT_URL ของ Web App ก่อนใช้งาน", "warning", 0);
