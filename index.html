@@ -334,6 +334,10 @@
       padding:9px 10px;
       border-style:dashed
     }
+    .input-shell.readonly{
+      background:rgba(255,255,255,.035);
+      border-style:dashed;
+    }
 
     .password-shell{
       display:flex;
@@ -375,6 +379,9 @@
       resize:none;
       min-height:92px;
       line-height:1.6
+    }
+    input[readonly]{
+      cursor:default;
     }
 
     .remember-row{
@@ -555,6 +562,21 @@
       display:grid;
       gap:10px
     }
+
+    .claim-warning-mini{
+      display:none;
+      margin-top:2px;
+      padding:9px 10px;
+      border-radius:14px;
+      background:rgba(255,180,120,.08);
+      border:1px solid #6f4e35;
+      color:#ffd7a6;
+      font-size:.74rem;
+      line-height:1.5;
+      font-weight:800;
+      text-align:center;
+    }
+    .claim-warning-mini.show{display:block}
 
     .payment-section{display:none}
     .payment-card{
@@ -1355,6 +1377,11 @@
           <div class="expiry-check-wrap">
             <div class="field-group" style="margin-top:0;">
               <label class="field-label" for="expiryInput">วันหมดอายุสมาชิก</label>
+
+              <div class="input-shell readonly" id="expiryReadonlyShell" style="display:none;">
+                <input id="expiryReadonlyText" type="text" readonly value="" />
+              </div>
+
               <div class="input-shell" id="expiryField">
                 <input id="expiryInput" type="date" />
               </div>
@@ -1362,6 +1389,10 @@
 
             <div class="action-row" style="margin-top:0;">
               <button class="btn-secondary" id="btnCheckExpiry" type="button">เช็ควันหมดอายุ</button>
+            </div>
+
+            <div class="claim-warning-mini show" id="claimTruthWarning">
+              ⚠️ แจ้งข้อมูลไม่ตรงจริง ระบบจะตัดสิทธิ์อัตโนมัติ
             </div>
 
             <div id="expiryCheckResult" class="alert-box"></div>
@@ -1543,7 +1574,7 @@
   </div>
 
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzIribl7vOcL9PfOIqk31UWY51N5uxtw9AA3yzCMborpM4I0kuEIANHIvNzNSwKxeW9mg/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby-3WeD1lq5o-_Kt6QAvl7vCz0FDx4JxPwCyLbwNSOFh3V7XfsuFHFLwFe0Z6fNu6VqEQ/exec";
     const STATUS_POLL_INTERVAL = 30000;
     const CONFIG_POLL_INTERVAL = 30000;
     const MAX_NOTE_LENGTH = 500;
@@ -1595,6 +1626,7 @@
     let userSelectedView = false;
     let loadingPercentTimer = null;
     let loadingPercentValue = 0;
+    let expiryLockedFromSystem = false;
 
     const heroSection = document.getElementById("heroSection");
     const globalBanner = document.getElementById("globalBanner");
@@ -1628,6 +1660,8 @@
     const registerSuccessCard = document.getElementById("registerSuccessCard");
 
     const expiryInput = document.getElementById("expiryInput");
+    const expiryReadonlyText = document.getElementById("expiryReadonlyText");
+    const expiryReadonlyShell = document.getElementById("expiryReadonlyShell");
     const noteInput = document.getElementById("noteInput");
     const slipInput = document.getElementById("slipInput");
     const slipInputCamera = document.getElementById("slipInputCamera");
@@ -2067,6 +2101,25 @@
       slipStatusHint.className = "upload-status";
     }
 
+    function setExpiryMode(expiryYMD, fromSystem = false) {
+      const hasExpiry = !!expiryYMD;
+      expiryLockedFromSystem = !!(fromSystem && hasExpiry);
+
+      if (expiryLockedFromSystem) {
+        expiryInput.value = expiryYMD;
+        expiryReadonlyText.value = formatThaiDate(expiryYMD);
+        expiryField.style.display = "none";
+        expiryReadonlyShell.style.display = "";
+        btnCheckExpiry.textContent = "อัปเดตวันหมดอายุ";
+      } else {
+        expiryReadonlyText.value = "";
+        expiryReadonlyShell.style.display = "none";
+        expiryField.style.display = "";
+        btnCheckExpiry.textContent = "เช็ควันหมดอายุ";
+        if (hasExpiry) expiryInput.value = expiryYMD;
+      }
+    }
+
     function decorateStatusText(text) {
       const raw = String(text || "").trim();
       const safe = escapeHtml(raw || "-");
@@ -2439,10 +2492,10 @@
           '<button class="btn-copy">คัดลอกรายละเอียดคำขอ</button>' +
         '</div>';
 
-        const btnCopy = card.querySelector(".btn-copy");
-        btnCopy.addEventListener("click", function() {
-          copyToClipboard(btnCopy, buildCopyText(entry));
-        });
+      const btnCopy = card.querySelector(".btn-copy");
+      btnCopy.addEventListener("click", function() {
+        copyToClipboard(btnCopy, buildCopyText(entry));
+      });
 
       resultsDiv.appendChild(card);
     }
@@ -2472,6 +2525,7 @@
       if (!state.member) {
         profileBox.style.display = "none";
         paymentSection.style.display = "none";
+        setExpiryMode("", false);
         return;
       }
 
@@ -2479,6 +2533,13 @@
       profileMemberDate.textContent = formatThaiDate(state.member.memberDate || "");
       profileDisplayName.textContent = state.member.displayName || "ยังไม่ได้ระบุ";
       profileBox.style.display = "grid";
+
+      const knownExpiry = state.member.lastKnownExpiry || "";
+      if (knownExpiry) {
+        setExpiryMode(knownExpiry, true);
+      } else {
+        setExpiryMode("", false);
+      }
 
       syncPaymentSection();
     }
@@ -2610,7 +2671,7 @@
       }
 
       if (!expiry) {
-        showStatusError("กรุณาเลือกวันหมดอายุสมาชิก");
+        showStatusError("กรุณาเช็คหรือเลือกวันหมดอายุสมาชิก");
         shake(expiryField);
         shakeButton(btnSubmit);
         return false;
@@ -2878,6 +2939,11 @@
       btnSubmit.innerHTML = "<span>ส่งคำขอเคลม</span><span>↗</span>";
       expiryCheckResult.className = "alert-box";
       expiryCheckResult.textContent = "";
+      if (state.member && state.member.lastKnownExpiry) {
+        setExpiryMode(state.member.lastKnownExpiry, true);
+      } else {
+        setExpiryMode("", false);
+      }
     }
 
     function openConfirmModal() {
@@ -2889,7 +2955,7 @@
 
       confirmSummary.innerHTML =
         "<strong>อีเมล:</strong> " + escapeHtml(state.member && state.member.email || "-") + "<br>" +
-        "<strong>วันหมดอายุ:</strong> " + escapeHtml(expiry || "-") + "<br>" +
+        "<strong>วันหมดอายุ:</strong> " + escapeHtml(formatThaiDate(expiry) || "-") + "<br>" +
         "<strong>ปีสมัคร:</strong> " + escapeHtml(year || "-") + "<br>" +
         "<strong>ประเภทเคลม:</strong> " + escapeHtml(claimType) + "<br>" +
         "<strong>สลิป:</strong> " + escapeHtml(hasSlip) + "<br>" +
@@ -3071,13 +3137,18 @@
             return;
           }
           showAlert(expiryCheckResult, data && data.message ? data.message : "เช็ควันหมดอายุไม่สำเร็จ", "error", 6000);
+          setExpiryMode("", false);
           shakeButton(btnCheckExpiry);
           return;
         }
 
         if (data.expiryYMD) {
           expiryInput.value = data.expiryYMD;
-          if (state.member) state.member.lastKnownExpiry = expiryInput.value;
+          if (state.member) state.member.lastKnownExpiry = data.expiryYMD;
+          setExpiryMode(data.expiryYMD, true);
+        } else {
+          if (state.member) state.member.lastKnownExpiry = "";
+          setExpiryMode("", false);
         }
 
         showAlert(
@@ -3240,6 +3311,7 @@
       loadRememberedLogin();
       updateHeroVisibility();
       renderEmptyStatusPage();
+      setExpiryMode("", false);
 
       if (!SCRIPT_URL || SCRIPT_URL === "PUT_YOUR_WEB_APP_URL_HERE") {
         showAlert(topAlert, "กรุณาใส่ SCRIPT_URL ของ Web App ก่อนใช้งาน", "warning", 0);
