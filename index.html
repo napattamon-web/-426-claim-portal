@@ -322,10 +322,6 @@
     }
     .input-shell:focus-within{border-color:#d6b39b;box-shadow:0 0 0 4px rgba(214,179,155,.14);background:#fff}
     .input-shell.note{padding:9px 10px;border-style:dashed;background:#fffaf7}
-    .input-shell.readonly{
-      background:linear-gradient(180deg,#fffaf6,#f9f0e9);
-      border-style:dashed;
-    }
 
     .password-shell{display:flex;align-items:center;gap:8px}
     .password-shell input{flex:1;min-width:0}
@@ -962,18 +958,18 @@
           <div class="expiry-check-wrap">
             <div class="field-group" style="margin-top:0;">
               <label class="field-label" for="expiryInput">วันหมดอายุสมาชิก</label>
-              <div class="input-shell readonly" id="expiryField">
-                <input id="expiryInput" type="text" readonly placeholder="กดปุ่มเช็ควันหมดอายุจากระบบ" />
+              <div class="input-shell" id="expiryField">
+                <input id="expiryInput" type="date" />
               </div>
             </div>
 
             <div class="expiry-caption">
-              ระบบจะดึงข้อมูลวันหมดอายุจากฐานข้อมูลอัตโนมัติ<br />
-              หากไม่พบข้อมูล กรุณาติดต่อแอดมิน
+              เลือกจากปฏิทินเพื่อช่วยลดการกรอกผิด<br />
+              ระบบจะจำวันที่ไว้ตามอีเมลของลูกค้าอัตโนมัติ
             </div>
 
             <div class="action-row" style="margin-top:0;">
-              <button class="btn-secondary" id="btnCheckExpiry" type="button">เช็ควันหมดอายุ</button>
+              <button class="btn-secondary" id="btnCheckExpiry" type="button">ดึงวันหมดอายุจากระบบ</button>
             </div>
 
             <div id="expiryCheckResult" class="alert-box"></div>
@@ -1225,6 +1221,7 @@
     const SUPPORT_LINK_BASE = "https://line.me/R/ti/p/";
     const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
     const LAST_SLIP_KEY = "shop426_last_slip_preview";
+    const LAST_EXPIRY_BY_EMAIL_KEY = "shop426_last_expiry_by_email";
     const RING_CIRCUMFERENCE = 175.9;
 
     let claimConfig = {
@@ -1574,7 +1571,7 @@
 
     function formatThaiToday() {
       const now = new Date();
-      const months = ["ม.ค.", "ก.พ.", "มี.ค.", "มี.ค.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."];
+      const months = ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."];
       return now.getDate() + " " + months[now.getMonth()] + " " + (now.getFullYear() + 543);
     }
 
@@ -1591,6 +1588,14 @@
     function thaiYearFromYmd(dateStr) {
       if (!dateStr || !/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return "";
       return String(Number(dateStr.slice(0, 4)) + 543);
+    }
+
+    function isValidFutureExpiry(dateStr) {
+      if (!dateStr) return false;
+      const selected = new Date(dateStr + "T00:00:00");
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      return selected >= today;
     }
 
     function isStrongPassword(password) {
@@ -1723,6 +1728,36 @@
       } catch (err) {
         return null;
       }
+    }
+
+    function loadExpiryMap() {
+      try {
+        const raw = localStorage.getItem(LAST_EXPIRY_BY_EMAIL_KEY);
+        return raw ? JSON.parse(raw) : {};
+      } catch (err) {
+        return {};
+      }
+    }
+
+    function saveExpiryMap(mapObj) {
+      try {
+        localStorage.setItem(LAST_EXPIRY_BY_EMAIL_KEY, JSON.stringify(mapObj || {}));
+      } catch (err) {}
+    }
+
+    function saveExpiryForEmail(email, ymd) {
+      const em = normalizeEmail(email);
+      if (!em || !ymd) return;
+      const map = loadExpiryMap();
+      map[em] = ymd;
+      saveExpiryMap(map);
+    }
+
+    function getSavedExpiryForEmail(email) {
+      const em = normalizeEmail(email);
+      if (!em) return "";
+      const map = loadExpiryMap();
+      return map[em] || "";
     }
 
     function clearLocalSession(silent = false) {
@@ -2242,11 +2277,9 @@
       signupYearInput.value = signupYear;
       signupYearDisplay.value = signupYear || "";
 
-      if (state.member.lastKnownExpiry) {
-        expiryInput.value = formatThaiDate(state.member.lastKnownExpiry);
-      } else {
-        expiryInput.value = "";
-      }
+      const savedLocalExpiry = getSavedExpiryForEmail(state.member.email || "");
+      const preferredExpiry = savedLocalExpiry || state.member.lastKnownExpiry || "";
+      expiryInput.value = preferredExpiry || "";
 
       syncPaymentSection();
     }
@@ -2365,7 +2398,13 @@
       }
 
       if (!expiry) {
-        showStatusError("ยังไม่พบวันหมดอายุในระบบ กรุณากดเช็ควันหมดอายุ หรือ ติดต่อแอดมิน");
+        showStatusError("กรุณาเลือกวันหมดอายุจากปฏิทินก่อนส่งคำขอ");
+        shake(expiryField);
+        return false;
+      }
+
+      if (!isValidFutureExpiry(expiry)) {
+        showStatusError("วันหมดอายุต้องเป็นวันนี้หรือวันในอนาคต");
         shake(expiryField);
         return false;
       }
@@ -2615,11 +2654,10 @@
       btnSubmit.innerHTML = "<span>ส่งคำขอเคลม</span><span>↗</span>";
       expiryCheckResult.className = "alert-box";
       expiryCheckResult.textContent = "";
-      if (state.member && state.member.lastKnownExpiry) {
-        expiryInput.value = formatThaiDate(state.member.lastKnownExpiry);
-      } else {
-        expiryInput.value = "";
-      }
+      const savedLocalExpiry = state.member ? getSavedExpiryForEmail(state.member.email || "") : "";
+      if (savedLocalExpiry) expiryInput.value = savedLocalExpiry;
+      else if (state.member && state.member.lastKnownExpiry) expiryInput.value = state.member.lastKnownExpiry;
+      else expiryInput.value = "";
     }
 
     function openConfirmModal() {
@@ -2631,7 +2669,7 @@
 
       confirmSummary.innerHTML =
         "<strong>อีเมล:</strong> " + escapeHtml(state.member && state.member.email || "-") + "<br>" +
-        "<strong>วันหมดอายุ:</strong> " + escapeHtml(expiry || "-") + "<br>" +
+        "<strong>วันหมดอายุ:</strong> " + escapeHtml(formatThaiDate(expiry) || "-") + "<br>" +
         "<strong>ปีสมัคร:</strong> " + escapeHtml(year || "-") + "<br>" +
         "<strong>ประเภทเคลม:</strong> " + escapeHtml(claimType) + "<br>" +
         "<strong>สลิป:</strong> " + escapeHtml(hasSlip) + "<br>" +
@@ -2653,29 +2691,14 @@
       });
     }
 
-    function ymdFromThaiDisplay(displayDate) {
-      const m = String(displayDate || "").match(/^(\d{1,2})\s(.+)\s(\d{4})$/);
-      if (!m) return "";
-      const d = parseInt(m[1], 10);
-      const monthMap = {
-        "ม.ค.":1,"ก.พ.":2,"มี.ค.":3,"เม.ย.":4,"พ.ค.":5,"มิ.ย.":6,
-        "ก.ค.":7,"ส.ค.":8,"ก.ย.":9,"ต.ค.":10,"พ.ย.":11,"ธ.ค.":12
-      };
-      const month = monthMap[m[2]] || 0;
-      const year = parseInt(m[3], 10) - 543;
-      if (!d || !month || !year) return "";
-      return year + "-" + String(month).padStart(2, "0") + "-" + String(d).padStart(2, "0");
-    }
-
     async function doSubmitClaim() {
       if (state.webClosed) {
         showStatusError(claimConfig.webClosedMessage || "ระบบเว็บปิดชั่วคราว");
         return;
       }
 
-      const expiryText = normalizeText(expiryInput.value);
+      const expiryYmd = normalizeText(expiryInput.value);
       const note = normalizeText(noteInput.value);
-      const expiryYmd = state.member && state.member.lastKnownExpiry ? state.member.lastKnownExpiry : ymdFromThaiDisplay(expiryText);
 
       state.isLoading = true;
       state.submitLock = true;
@@ -2733,6 +2756,10 @@
 
         const claimType = current && current.claimType || "free";
         const claimLabel = claimType === "paid" ? "แพ็กดูแล 19 บาท" : "เคลมฟรีตามเงื่อนไข";
+
+        if (state.member && state.member.email && expiryYmd) {
+          saveExpiryForEmail(state.member.email, expiryYmd);
+        }
 
         summaryDiv.innerHTML = '<div class="summary-pill">คำขอล่าสุด: ' + escapeHtml(claimLabel) + '</div>';
         status.innerHTML =
@@ -2820,18 +2847,15 @@
           return;
         }
 
-        if (data.expiry) {
-          expiryInput.value = data.expiry;
+        if (data.expiryYMD) {
+          expiryInput.value = data.expiryYMD;
           if (state.member) {
-            state.member.lastKnownExpiry = data.expiryYMD || state.member.lastKnownExpiry || "";
+            state.member.lastKnownExpiry = data.expiryYMD;
             state.member.isExpired = !!data.expired;
+            saveExpiryForEmail(state.member.email || "", data.expiryYMD);
           }
-        } else {
-          expiryInput.value = "";
-          if (state.member) {
-            state.member.lastKnownExpiry = "";
-            state.member.isExpired = false;
-          }
+        } else if (data.expiry) {
+          if (state.member) state.member.isExpired = !!data.expired;
         }
 
         showAlert(
@@ -2929,6 +2953,16 @@
     slipInputCamera.addEventListener("change", function() {
       const file = slipInputCamera.files && slipInputCamera.files[0] ? slipInputCamera.files[0] : null;
       setSlipFile(file, slipInputCamera);
+    });
+
+    expiryInput.addEventListener("change", function() {
+      const value = normalizeText(expiryInput.value);
+      if (!value) return;
+      if (state.member && state.member.email) {
+        saveExpiryForEmail(state.member.email, value);
+        state.member.lastKnownExpiry = value;
+      }
+      showToast("บันทึกวันหมดอายุไว้แล้ว");
     });
 
     btnViewLastSlip.addEventListener("click", function() {
