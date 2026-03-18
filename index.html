@@ -250,71 +250,74 @@
     .btn-link-small{min-height:42px;border:1px solid #eadbcf;background:#fffaf6;color:#8f7868;padding:0 16px;font-size:.78rem;width:100%;margin-top:12px}
 
     .member-identity-card{
-      margin-top:12px;
-      border-radius:22px;
+      margin-top:10px;
+      border-radius:18px;
       border:1px solid #ead9cd;
-      background:linear-gradient(180deg,#fffdfb,#faf3ee);
-      padding:12px;
-      box-shadow:0 10px 20px rgba(118,84,63,.05);
+      background:linear-gradient(180deg,#fffdfb,#faf4ef);
+      padding:10px;
+      box-shadow:0 8px 16px rgba(118,84,63,.05);
       text-align:center;
+      max-width:360px;
+      margin-left:auto;
+      margin-right:auto;
     }
     .member-card-head{
       text-align:center;
-      margin-bottom:10px;
+      margin-bottom:8px;
     }
     .member-card-badge{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      padding:6px 11px;
+      padding:5px 10px;
       border-radius:999px;
       background:linear-gradient(135deg,#f9eee7,#fff8f4);
       border:1px solid #ead8ca;
       color:#8b6b59;
-      font-size:.7rem;
+      font-size:.68rem;
       font-weight:800;
-      letter-spacing:.05em;
+      letter-spacing:.04em;
     }
     .member-card-title{
-      margin-top:7px;
-      font-size:.94rem;
+      margin-top:6px;
+      font-size:.86rem;
       font-weight:800;
       color:#6d5243;
     }
     .member-card-sub{
-      margin-top:3px;
-      font-size:.74rem;
+      margin-top:2px;
+      font-size:.7rem;
       color:var(--sub);
-      line-height:1.55;
+      line-height:1.45;
     }
     .member-card-grid{
       display:grid;
       grid-template-columns:repeat(3,1fr);
-      gap:8px;
+      gap:7px;
     }
     .member-info-item{
-      border-radius:16px;
+      border-radius:14px;
       border:1px solid #eee0d5;
       background:#fff;
-      padding:10px 8px;
-      min-height:72px;
+      padding:8px 6px;
+      min-height:62px;
       display:flex;
       flex-direction:column;
       justify-content:center;
       align-items:center;
-      box-shadow:0 6px 12px rgba(118,84,63,.04);
+      box-shadow:0 4px 10px rgba(118,84,63,.04);
     }
     .member-info-label{
-      font-size:.68rem;
+      font-size:.64rem;
       color:#9e8a7d;
       font-weight:700;
-      margin-bottom:5px;
+      margin-bottom:4px;
     }
     .member-info-value{
-      font-size:.82rem;
+      font-size:.76rem;
       color:#5f493d;
       font-weight:800;
-      line-height:1.45;
+      line-height:1.35;
       word-break:break-word;
     }
 
@@ -506,35 +509,39 @@
       align-items:center;
       gap:8px;
     }
-    .loading-battery{
+    .loading-progress-ring{
+      width:64px;
+      height:64px;
       position:relative;
-      width:54px;
-      height:24px;
-      border:2px solid #cfae97;
-      border-radius:7px;
-      background:#fffaf6;
-      padding:2px;
-      box-shadow:inset 0 1px 2px rgba(0,0,0,.04);
+      display:grid;
+      place-items:center;
     }
-    .loading-battery::after{
-      content:"";
+    .loading-progress-ring svg{
+      width:64px;
+      height:64px;
+      transform:rotate(-90deg);
+    }
+    .loading-progress-ring circle.bg{
+      fill:none;
+      stroke:#efddd1;
+      stroke-width:6;
+    }
+    .loading-progress-ring circle.fg{
+      fill:none;
+      stroke:#be8d70;
+      stroke-width:6;
+      stroke-linecap:round;
+      stroke-dasharray:175.9;
+      stroke-dashoffset:175.9;
+      transition:stroke-dashoffset .18s linear;
+    }
+    .loading-progress-center{
       position:absolute;
-      right:-6px;
-      top:6px;
-      width:4px;
-      height:8px;
-      border-radius:2px;
-      background:#cfae97;
-    }
-    .loading-battery-fill{
-      height:100%;
-      width:0%;
-      border-radius:4px;
-      background:linear-gradient(135deg,#d8b69d,#be8d70);
-      transition:width .18s linear;
-    }
-    .loading-progress-text{
-      font-size:.82rem;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:.78rem;
       font-weight:800;
       color:#7d6252;
     }
@@ -668,9 +675,9 @@
           <div id="registerAlert" class="alert-box"></div>
 
           <div class="field-group">
-            <label class="field-label" for="registerDisplayName">ชื่อสมัคร / ชื่อแสดงผล</label>
+            <label class="field-label" for="registerDisplayName">ชื่อไลน์</label>
             <div class="input-shell">
-              <input id="registerDisplayName" type="text" placeholder="เช่น คุณเอ" />
+              <input id="registerDisplayName" type="text" placeholder="เช่น Amp Drive" />
             </div>
           </div>
 
@@ -758,8 +765,8 @@
           <div class="member-identity-card" id="memberProfileBox" style="display:none;">
             <div class="member-card-head">
               <div class="member-card-badge">ข้อมูลสมาชิก</div>
-              <div class="member-card-title">💌 Member Profile</div>
-              <div class="member-card-sub">ข้อมูลล่าสุดจากระบบของร้าน</div>
+              <div class="member-card-title">💌 โปรไฟล์สมาชิก</div>
+              <div class="member-card-sub">ข้อมูลล่าสุดจากระบบร้าน</div>
             </div>
 
             <div class="member-card-grid">
@@ -993,10 +1000,13 @@
       </div>
 
       <div class="loading-progress-wrap">
-        <div class="loading-battery">
-          <div class="loading-battery-fill" id="loadingProgressFill"></div>
+        <div class="loading-progress-ring">
+          <svg viewBox="0 0 64 64">
+            <circle class="bg" cx="32" cy="32" r="28"></circle>
+            <circle class="fg" id="loadingProgressCircle" cx="32" cy="32" r="28"></circle>
+          </svg>
+          <div class="loading-progress-center" id="loadingProgressText">0%</div>
         </div>
-        <div class="loading-progress-text" id="loadingProgressText">0%</div>
       </div>
     </div>
   </div>
@@ -1014,7 +1024,7 @@
   </div>
 
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwBWiaeduDEvBxZdovjkSknXWttVEY0xGQv_5cdSGkHq-TxA9CTkyFILs91cO7KI8lGDQ/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzIribl7vOcL9PfOIqk31UWY51N5uxtw9AA3yzCMborpM4I0kuEIANHIvNzNSwKxeW9mg/exec";
     const STATUS_POLL_INTERVAL = 30000;
     const CONFIG_POLL_INTERVAL = 30000;
     const MAX_NOTE_LENGTH = 500;
@@ -1171,8 +1181,8 @@
 
     const toast = document.getElementById("toast");
     const loadingOverlay = document.getElementById("loadingOverlay");
-    const loadingProgressFill = document.getElementById("loadingProgressFill");
     const loadingProgressText = document.getElementById("loadingProgressText");
+    const loadingProgressCircle = document.getElementById("loadingProgressCircle");
     const topAlert = document.getElementById("topAlert");
     const registerAlert = document.getElementById("registerAlert");
     const claimAlert = document.getElementById("claimAlert");
@@ -1229,10 +1239,20 @@
       if (viewId === "statusView") setMemberPagePills("status");
     }
 
+    function updateLoadingCircle(percent) {
+      const circumference = 175.9;
+      const offset = circumference - (percent / 100) * circumference;
+      if (loadingProgressCircle) {
+        loadingProgressCircle.style.strokeDashoffset = offset;
+      }
+      if (loadingProgressText) {
+        loadingProgressText.textContent = percent + "%";
+      }
+    }
+
     function resetLoadingProgress() {
       loadingProgress = 0;
-      if (loadingProgressFill) loadingProgressFill.style.width = "0%";
-      if (loadingProgressText) loadingProgressText.textContent = "0%";
+      updateLoadingCircle(0);
     }
 
     function animateLoadingProgress() {
@@ -1242,16 +1262,14 @@
         if (loadingProgress >= 92) return;
         loadingProgress += Math.random() < 0.5 ? 3 : 5;
         if (loadingProgress > 92) loadingProgress = 92;
-        loadingProgressFill.style.width = loadingProgress + "%";
-        loadingProgressText.textContent = loadingProgress + "%";
+        updateLoadingCircle(loadingProgress);
       }, 180);
     }
 
     function completeLoadingProgress() {
       clearInterval(loadingTimer);
       loadingProgress = 100;
-      loadingProgressFill.style.width = "100%";
-      loadingProgressText.textContent = "100%";
+      updateLoadingCircle(100);
     }
 
     function showLoadingOverlay() {
@@ -2755,6 +2773,7 @@
       loadRememberedLogin();
       updateHeroVisibility();
       renderEmptyStatusPage();
+      resetLoadingProgress();
 
       if (!SCRIPT_URL || SCRIPT_URL === "PUT_YOUR_WEB_APP_URL_HERE") {
         showAlert(topAlert, "กรุณาใส่ SCRIPT_URL ของ Web App ก่อนใช้งาน", "warning", 0);
