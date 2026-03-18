@@ -274,29 +274,6 @@
       color:var(--sub)
     }
 
-    .page-nav{
-      display:flex;
-      gap:8px;
-      margin-bottom:12px;
-      justify-content:center;
-    }
-    .page-pill{
-      flex:1;
-      min-height:40px;
-      border-radius:999px;
-      border:1px solid #503039;
-      background:linear-gradient(180deg,#241519,#1b1114);
-      color:#d9b7be;
-      font-size:.78rem;
-      font-weight:800;
-      cursor:pointer;
-    }
-    .page-pill.active{
-      border-color:#7a3a47;
-      background:linear-gradient(135deg,#c81837,#8f142a);
-      color:#fff;
-    }
-
     .claim-top-frame,.status-top-frame{
       position:relative;
       margin-bottom:14px;
@@ -507,6 +484,16 @@
     .btn-link-small:hover,.btn-secondary:hover,.btn-danger:hover,.btn-primary:hover{
       transform:translateY(-1px);
       filter:brightness(1.04)
+    }
+
+    .blink-status-btn{
+      animation:softBlink 1.2s ease-in-out infinite;
+      border-color:#a34a5b !important;
+      box-shadow:0 0 0 0 rgba(255,77,109,.22);
+    }
+    @keyframes softBlink{
+      0%,100%{opacity:1;transform:scale(1)}
+      50%{opacity:.68;transform:scale(.985)}
     }
 
     .member-mini-card{
@@ -869,7 +856,7 @@
       border-color:#7d3644
     }
 
-    .history-card,.live-card,.realtime-card{
+    .history-card,.realtime-card{
       margin-top:12px;
       padding:14px;
       border-radius:24px;
@@ -879,7 +866,7 @@
       position:relative;
       overflow:hidden
     }
-    .history-header,.live-header,.realtime-header{
+    .history-header,.realtime-header{
       display:flex;
       justify-content:center;
       align-items:center;
@@ -887,7 +874,7 @@
       margin-bottom:10px;
       flex-wrap:wrap
     }
-    .history-title-left,.live-title-left,.realtime-title-left{
+    .history-title-left,.realtime-title-left{
       display:flex;
       align-items:center;
       gap:7px;
@@ -904,31 +891,15 @@
       50%{opacity:.3}
     }
 
-    .history-title-text,.live-title-text,.realtime-title-text{
+    .history-title-text,.realtime-title-text{
       font-size:.88rem;
       font-weight:800;
       color:#fff0f3
     }
-    .live-date,.realtime-date{
+    .realtime-date{
       width:100%;
       font-size:.74rem;
       color:var(--sub);
-      text-align:center
-    }
-
-    .status-web-note{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      margin:0 0 10px;
-      padding:8px 12px;
-      border-radius:999px;
-      background:rgba(255,255,255,.04);
-      border:1px solid #55313a;
-      color:#ffd7df;
-      font-size:.74rem;
-      font-weight:700;
-      line-height:1.5;
       text-align:center
     }
 
@@ -1150,16 +1121,23 @@
     }
 
     .shake{animation:shake .4s;border-color:var(--danger)!important}
+    .btn-shake{animation:btnShake .45s}
     @keyframes shake{
       0%,100%{transform:translateX(0)}
       25%{transform:translateX(-4px)}
       75%{transform:translateX(4px)}
     }
+    @keyframes btnShake{
+      0%,100%{transform:translateX(0)}
+      20%{transform:translateX(-5px)}
+      40%{transform:translateX(5px)}
+      60%{transform:translateX(-4px)}
+      80%{transform:translateX(4px)}
+    }
 
     @media (max-width:480px){
       .app{padding:12px 12px 16px}
       .action-row,.modal-actions{flex-direction:column}
-      .page-nav{flex-direction:row}
       .live-item{gap:8px}
       .live-email{max-width:150px}
       .bank-minimal-top{flex-direction:column;align-items:stretch}
@@ -1258,7 +1236,6 @@
             </div>
             <span class="realtime-date" id="liveDate"></span>
           </div>
-          <div class="status-web-note">เช็คสถานะจากหน้าเว็บได้เลย ไม่ต้องเข้าสู่ระบบ</div>
           <div class="live-list" id="liveList">
             <div class="live-empty">กำลังดึงสถานะเมลวันนี้...</div>
           </div>
@@ -1339,11 +1316,6 @@
       </section>
 
       <section class="view" id="claimView">
-        <div class="page-nav">
-          <button type="button" class="page-pill active" id="goClaimViewBtn">แจ้งเคลม</button>
-          <button type="button" class="page-pill" id="goStatusViewBtn">สถานะการเคลม</button>
-        </div>
-
         <div class="claim-card">
           <div class="claim-top-frame">
             <div class="claim-only-title">รับแจ้งเคลมสำหรับสมาชิก</div>
@@ -1459,7 +1431,7 @@
               <span>ส่งคำขอเคลม</span>
               <span>↗</span>
             </button>
-            <button class="btn-secondary" id="btnGoStatusInline">สถานะการเคลม</button>
+            <button class="btn-secondary blink-status-btn" id="btnGoStatusInline">สถานะการเคลม</button>
           </div>
 
           <div id="summary"></div>
@@ -1468,11 +1440,6 @@
       </section>
 
       <section class="view" id="statusView">
-        <div class="page-nav">
-          <button type="button" class="page-pill" id="goClaimViewBtn2">แจ้งเคลม</button>
-          <button type="button" class="page-pill active" id="goStatusViewBtn2">สถานะการเคลม</button>
-        </div>
-
         <div class="status-card">
           <div class="status-top-frame">
             <div class="status-only-title">สถานะการเคลม</div>
@@ -1544,7 +1511,7 @@
   <div id="loadingOverlay" class="loading-overlay">
     <div class="loading-card">
       <div class="spinner"></div>
-      <div class="loading-percent" id="loadingPercent">กำลังโหลด 0%</div>
+      <div class="loading-percent" id="loadingPercent">กำลังโหลด...</div>
       <div class="loading-title">รอสักครู่นะคะ</div>
       <div class="loading-sub">
         ระบบกำลังประมวลผลคำขอของคุณ<br />
@@ -1573,7 +1540,6 @@
     const MAX_SLIP_SIZE = 3 * 1024 * 1024;
     const TOKEN_KEY = "shop426_member_token";
     const REMEMBER_KEY = "shop426_saved_login";
-    const SUPPORT_LINK_BASE = "https://line.me/R/ti/p/";
     const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
     const LAST_SLIP_KEY = "shop426_last_slip_preview";
 
@@ -1598,13 +1564,9 @@
       lineEnabled: true,
       lineClaimEnabled: true,
       webEnabled: true,
-      customerNotice: "",
-      routeMessage: "",
       webClosedMessage: "ขออภัยค่ะ ตอนนี้ระบบหน้าเว็บปิดชั่วคราว\nสามารถแจ้งเรื่องผ่านทางไลน์ได้ค่ะ",
       bothClosedMessage: "ขออภัยค่ะ ตอนนี้ระบบปิดชั่วคราวทั้งทางไลน์และทางเว็บ",
       webBannerMessage: "",
-      webClaimLink: "",
-      lineClaimClosedMessage: "",
       expiredAccountText: "บัญชีหมดอายุแล้ว หากต้องการใช้บริการต่อติดต่อแอดมิน"
     };
 
@@ -1642,11 +1604,6 @@
     const backToLoginBtn = document.getElementById("backToLoginBtn");
     const btnContactAdmin = document.getElementById("btnContactAdmin");
     const btnGoStatusInline = document.getElementById("btnGoStatusInline");
-
-    const goClaimViewBtn = document.getElementById("goClaimViewBtn");
-    const goStatusViewBtn = document.getElementById("goStatusViewBtn");
-    const goClaimViewBtn2 = document.getElementById("goClaimViewBtn2");
-    const goStatusViewBtn2 = document.getElementById("goStatusViewBtn2");
 
     const loginEmailInput = document.getElementById("loginEmail");
     const loginPasswordInput = document.getElementById("loginPassword");
@@ -1734,6 +1691,14 @@
     function normalizeEmail(value){ return String(value || "").trim().toLowerCase(); }
     function normalizeText(value){ return String(value || "").trim(); }
 
+    function shakeButton(btn){
+      if (!btn) return;
+      btn.classList.remove("btn-shake");
+      void btn.offsetWidth;
+      btn.classList.add("btn-shake");
+      setTimeout(() => btn.classList.remove("btn-shake"), 500);
+    }
+
     function parseResponseLoose(data) {
       if (!data || typeof data !== "object") {
         return { ok: false, message: "ไม่สามารถอ่านข้อมูลจากเซิร์ฟเวอร์ได้" };
@@ -1757,28 +1722,18 @@
       heroSection.style.display = (loginActive || registerActive) ? "" : "none";
     }
 
-    function setMemberPagePills(active) {
-      const isClaim = active === "claim";
-      goClaimViewBtn.classList.toggle("active", isClaim);
-      goStatusViewBtn.classList.toggle("active", !isClaim);
-      goClaimViewBtn2.classList.toggle("active", isClaim);
-      goStatusViewBtn2.classList.toggle("active", !isClaim);
-    }
-
     function setActiveView(viewId, byUser = false) {
       if (byUser) userSelectedView = true;
       document.querySelectorAll(".view").forEach(function(view) {
         view.classList.toggle("active", view.id === viewId);
       });
       updateHeroVisibility();
-      if (viewId === "claimView") setMemberPagePills("claim");
-      if (viewId === "statusView") setMemberPagePills("status");
     }
 
     function startLoadingPercent() {
-      stopLoadingPercent();
+      stopLoadingPercent(false);
       loadingPercentValue = 0;
-      loadingPercent.textContent = "กำลังโหลด 0%";
+      loadingPercent.textContent = "กำลังโหลด...";
       loadingPercentTimer = setInterval(function() {
         if (loadingPercentValue < 92) {
           loadingPercentValue += Math.floor(Math.random() * 8) + 2;
@@ -1796,10 +1751,10 @@
       if (done) {
         loadingPercent.textContent = "กำลังโหลด 100%";
         setTimeout(() => {
-          loadingPercent.textContent = "กำลังโหลด 0%";
+          loadingPercent.textContent = "กำลังโหลด...";
         }, 250);
       } else {
-        loadingPercent.textContent = "กำลังโหลด 0%";
+        loadingPercent.textContent = "กำลังโหลด...";
       }
     }
 
@@ -2185,6 +2140,7 @@
       if (!file.type.startsWith("image/")) {
         showStatusError("กรุณาแนบไฟล์รูปภาพสลิปเท่านั้น");
         setSlipStatus("รองรับเฉพาะไฟล์รูปภาพเท่านั้น", "error");
+        shakeButton(btnPickSlip);
         sourceInput.value = "";
         return;
       }
@@ -2192,6 +2148,7 @@
       if (file.size > MAX_SLIP_SIZE) {
         showStatusError("ไฟล์สลิปมีขนาดใหญ่เกิน 3 MB");
         setSlipStatus("ไฟล์สลิปมีขนาดใหญ่เกิน 3 MB", "error");
+        shakeButton(btnPickSlip);
         sourceInput.value = "";
         return;
       }
@@ -2472,10 +2429,10 @@
           '<button class="btn-copy">คัดลอกรายละเอียดคำขอ</button>' +
         '</div>';
 
-      const btnCopy = card.querySelector(".btn-copy");
-      btnCopy.addEventListener("click", function() {
-        copyToClipboard(btnCopy, buildCopyText(entry));
-      });
+        const btnCopy = card.querySelector(".btn-copy");
+        btnCopy.addEventListener("click", function() {
+          copyToClipboard(btnCopy, buildCopyText(entry));
+        });
 
       resultsDiv.appendChild(card);
     }
@@ -2483,6 +2440,7 @@
     async function safeSetMemberView(viewId) {
       if (!state.token || !state.member) {
         showAlert(topAlert, "กรุณาเข้าสู่ระบบก่อนใช้งาน", "warning");
+        shakeButton(btnGoStatusInline);
         setActiveView("loginView");
         return;
       }
@@ -2528,6 +2486,7 @@
     function validateLogin() {
       if (state.webClosed) {
         showAlert(topAlert, claimConfig.webClosedMessage || "ระบบเว็บปิดชั่วคราว", "warning");
+        shakeButton(btnLogin);
         return false;
       }
 
@@ -2542,18 +2501,21 @@
         showAuthStatus("กรุณากรอกอีเมลให้ถูกต้อง", "error");
         showAlert(topAlert, "กรุณากรอกอีเมลให้ถูกต้อง", "error");
         shake(loginEmailField);
+        shakeButton(btnLogin);
         return false;
       }
       if (!password) {
         showAuthStatus("กรุณากรอกรหัสผ่าน", "error");
         showAlert(topAlert, "กรุณากรอกรหัสผ่าน", "error");
         shake(loginPasswordField);
+        shakeButton(btnLogin);
         return false;
       }
       if (password.length < 8) {
         showAuthStatus("รหัสผ่านต้องมีอย่างน้อย 8 ตัว", "error");
         showAlert(topAlert, "รหัสผ่านต้องมีอย่างน้อย 8 ตัว", "error");
         shake(loginPasswordField);
+        shakeButton(btnLogin);
         return false;
       }
       return true;
@@ -2562,6 +2524,7 @@
     function validateRegister() {
       if (state.webClosed) {
         showAlert(registerAlert, claimConfig.webClosedMessage || "ระบบเว็บปิดชั่วคราว", "warning");
+        shakeButton(btnRegister);
         return false;
       }
 
@@ -2578,21 +2541,25 @@
       if (!email || !registerEmail.checkValidity()) {
         showAlert(registerAlert, "กรุณากรอกอีเมลให้ถูกต้อง", "error");
         shake(registerEmailField);
+        shakeButton(btnRegister);
         return false;
       }
       if (!isStrongPassword(password)) {
         showAlert(registerAlert, "รหัสผ่านต้องมีตัวพิมพ์ใหญ่ ตัวพิมพ์เล็ก ตัวเลข และอย่างน้อย 8 ตัว", "error");
         shake(registerPasswordField);
+        shakeButton(btnRegister);
         return false;
       }
       if (password !== confirmPassword) {
         showAlert(registerAlert, "ยืนยันรหัสผ่านไม่ตรงกัน", "error");
         shake(registerConfirmPasswordField);
+        shakeButton(btnRegister);
         return false;
       }
       if (!memberDate) {
         showAlert(registerAlert, "กรุณาเลือกวันที่สมัคร / วันที่ต่ออายุล่าสุด", "error");
         shake(registerMemberDateField);
+        shakeButton(btnRegister);
         return false;
       }
       return true;
@@ -2609,46 +2576,54 @@
 
       if (state.webClosed) {
         showStatusError(claimConfig.webClosedMessage || "ระบบเว็บปิดชั่วคราว");
+        shakeButton(btnSubmit);
         return false;
       }
 
       if (!state.member || !state.token) {
         showAlert(topAlert, "กรุณาเข้าสู่ระบบก่อนใช้งาน", "warning");
+        shakeButton(btnSubmit);
         setActiveView("loginView");
         return false;
       }
 
       if (state.submitLock) {
         showAlert(claimAlert, "ระบบกำลังส่งคำขออยู่ กรุณารอสถานะก่อน", "warning");
+        shakeButton(btnSubmit);
         return false;
       }
 
       if (!state.isClaimOpen) {
         showStatusError(claimConfig.outOfTimeErrorText);
+        shakeButton(btnSubmit);
         return false;
       }
 
       if (!expiry) {
         showStatusError("กรุณาเลือกวันหมดอายุสมาชิก");
         shake(expiryField);
+        shakeButton(btnSubmit);
         return false;
       }
 
       if (!isValidFutureExpiry(expiry)) {
         showStatusError("วันหมดอายุต้องเป็นวันนี้หรือวันในอนาคต");
         shake(expiryField);
+        shakeButton(btnSubmit);
         return false;
       }
 
       if (note.length > MAX_NOTE_LENGTH) {
         showStatusError("ฝากข้อความได้ไม่เกิน " + MAX_NOTE_LENGTH + " ตัวอักษร");
         shake(noteField);
+        shakeButton(btnSubmit);
         return false;
       }
 
       if (year === String(claimConfig.paidYear) && !activeSlipFile) {
         showStatusError(claimConfig.paymentRequireSlip || "กรุณาแนบสลิปก่อนส่งคำขอ");
         setSlipStatus("กรุณาแนบสลิปก่อนส่งคำขอ", "error");
+        shakeButton(btnSubmit);
         return false;
       }
 
@@ -2676,6 +2651,7 @@
         if (data.closed) {
           setWebClosedState(true, data.message || claimConfig.webClosedMessage);
           showAlert(topAlert, data.message || "ระบบเว็บปิดชั่วคราว", "warning", 6000);
+          shakeButton(btnLogin);
           return;
         }
 
@@ -2683,12 +2659,14 @@
           const msg = data.message || "เข้าสู่ระบบไม่สำเร็จ";
           showAuthStatus(msg, "error");
           showAlert(topAlert, msg, "error");
+          shakeButton(btnLogin);
           return;
         }
 
         if (!data.token) {
           showAuthStatus("เข้าสู่ระบบไม่สำเร็จ ระบบไม่ได้ส่ง token กลับมา", "error");
           showAlert(topAlert, "เข้าสู่ระบบไม่สำเร็จ ระบบไม่ได้ส่ง token กลับมา", "error");
+          shakeButton(btnLogin);
           return;
         }
 
@@ -2716,6 +2694,7 @@
       } catch (err) {
         showAuthStatus("เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ", "error");
         showAlert(topAlert, "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ", "error");
+        shakeButton(btnLogin);
       } finally {
         hideLoadingOverlay();
         btnLogin.disabled = state.webClosed;
@@ -2747,11 +2726,13 @@
         if (data.closed) {
           setWebClosedState(true, data.message || claimConfig.webClosedMessage);
           showAlert(registerAlert, data.message || "ระบบเว็บปิดชั่วคราว", "warning", 6000);
+          shakeButton(btnRegister);
           return;
         }
 
         if (!data.ok) {
           showAlert(registerAlert, data.message || "สมัครสมาชิกไม่สำเร็จ", "error");
+          shakeButton(btnRegister);
           return;
         }
 
@@ -2784,6 +2765,7 @@
         }
       } catch (err) {
         showAlert(registerAlert, "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ", "error");
+        shakeButton(btnRegister);
       } finally {
         hideLoadingOverlay();
         btnRegister.disabled = state.webClosed;
@@ -2794,6 +2776,7 @@
     async function handleForgotPassword() {
       if (state.webClosed) {
         showAlert(topAlert, claimConfig.webClosedMessage || "ระบบเว็บปิดชั่วคราว", "warning");
+        shakeButton(btnForgotPassword);
         return;
       }
 
@@ -2801,6 +2784,7 @@
       if (!email || !loginEmailInput.checkValidity()) {
         showAlert(topAlert, "กรุณากรอกอีเมลก่อนกดลืมรหัสผ่าน", "warning");
         shake(loginEmailField);
+        shakeButton(btnForgotPassword);
         return;
       }
 
@@ -2811,11 +2795,13 @@
         if (data.closed) {
           setWebClosedState(true, data.message || claimConfig.webClosedMessage);
           showAlert(topAlert, data.message || "ระบบเว็บปิดชั่วคราว", "warning", 6000);
+          shakeButton(btnForgotPassword);
           return;
         }
 
         if (!data || data.ok === false) {
           showAlert(topAlert, data.message || "ส่งคำขอรีเซ็ตรหัสผ่านไม่สำเร็จ", "error");
+          shakeButton(btnForgotPassword);
           return;
         }
 
@@ -2823,6 +2809,7 @@
         showToast("ส่งคำขอแล้ว");
       } catch (err) {
         showAlert(topAlert, "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ", "error");
+        shakeButton(btnForgotPassword);
       } finally {
         hideLoadingOverlay();
       }
@@ -2917,6 +2904,7 @@
     async function doSubmitClaim() {
       if (state.webClosed) {
         showStatusError(claimConfig.webClosedMessage || "ระบบเว็บปิดชั่วคราว");
+        shakeButton(btnSubmit);
         return;
       }
 
@@ -2960,17 +2948,20 @@
           setWebClosedState(true, data.message || claimConfig.webClosedMessage);
           showStatusError(data.message || "ระบบเว็บปิดชั่วคราว");
           state.submitLock = false;
+          shakeButton(btnSubmit);
           return;
         }
 
         if (isUnauthorizedMessage(data && data.message)) {
           await handleUnauthorizedResponse(data.message);
+          shakeButton(btnSubmit);
           return;
         }
 
         if (!data || data.ok === false) {
           showStatusError(data && data.message || "ส่งคำขอไม่สำเร็จ");
           state.submitLock = false;
+          shakeButton(btnSubmit);
           return;
         }
 
@@ -3013,6 +3004,7 @@
       } catch (err) {
         showStatusError("เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้งค่ะ");
         state.submitLock = false;
+        shakeButton(btnSubmit);
       } finally {
         state.isLoading = false;
         hideLoadingOverlay();
@@ -3030,6 +3022,7 @@
     async function refreshStatusPage() {
       if (!state.token) {
         setActiveView("loginView");
+        shakeButton(btnRefreshStatus);
         return;
       }
 
@@ -3040,6 +3033,7 @@
         showToast("รีเฟรชสถานะแล้ว");
       } catch (err) {
         statusPageText.innerHTML = "<span class='status-error'>รีเฟรชสถานะไม่สำเร็จ</span>";
+        shakeButton(btnRefreshStatus);
       } finally {
         hideLoadingOverlay();
       }
@@ -3048,6 +3042,7 @@
     async function handleCheckExpiry() {
       if (!state.token) {
         showAlert(topAlert, "กรุณาเข้าสู่ระบบก่อนใช้งาน", "warning");
+        shakeButton(btnCheckExpiry);
         return;
       }
 
@@ -3062,9 +3057,11 @@
         if (!data || data.ok === false) {
           if (isUnauthorizedMessage(data && data.message)) {
             await handleUnauthorizedResponse(data.message);
+            shakeButton(btnCheckExpiry);
             return;
           }
           showAlert(expiryCheckResult, data && data.message ? data.message : "เช็ควันหมดอายุไม่สำเร็จ", "error", 6000);
+          shakeButton(btnCheckExpiry);
           return;
         }
 
@@ -3081,6 +3078,7 @@
         );
       } catch (err) {
         showAlert(expiryCheckResult, "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้ง", "error", 5000);
+        shakeButton(btnCheckExpiry);
       } finally {
         hideLoadingOverlay();
       }
@@ -3142,12 +3140,9 @@
       showAuthStatus("");
     });
 
-    goClaimViewBtn.addEventListener("click", function() { safeSetMemberView("claimView"); });
-    goStatusViewBtn.addEventListener("click", function() { safeSetMemberView("statusView"); });
-    goClaimViewBtn2.addEventListener("click", function() { safeSetMemberView("claimView"); });
-    goStatusViewBtn2.addEventListener("click", function() { safeSetMemberView("statusView"); });
-
-    btnGoStatusInline.addEventListener("click", function() { safeSetMemberView("statusView"); });
+    btnGoStatusInline.addEventListener("click", function() {
+      safeSetMemberView("statusView");
+    });
 
     btnLogin.addEventListener("click", handleLogin);
     btnRegister.addEventListener("click", handleRegister);
@@ -3217,6 +3212,7 @@
     expiryInput.addEventListener("change", function() {
       if (expiryInput.value && !isValidFutureExpiry(expiryInput.value)) {
         showAlert(claimAlert, "วันหมดอายุต้องเป็นวันนี้หรือวันในอนาคต", "warning");
+        shakeButton(btnCheckExpiry);
       }
     });
 
