@@ -85,17 +85,9 @@
     .hero-top{display:flex;justify-content:flex-start;align-items:flex-start;gap:10px}
     .brand-wrap{display:flex;gap:12px;align-items:center;min-width:0;width:100%;justify-content:flex-start}
     .logo-shell{
-      width:74px;height:74px;border-radius:24px;padding:4px;
+      width:70px;height:70px;border-radius:24px;padding:4px;
       background:linear-gradient(135deg,#fffefc,#f4e7dc);
       box-shadow:var(--shadow-soft);flex-shrink:0;position:relative
-    }
-    .logo-shell::after{
-      content:"✨";
-      position:absolute;
-      right:-4px;
-      top:-6px;
-      font-size:18px;
-      filter:drop-shadow(0 4px 8px rgba(0,0,0,.08));
     }
     .logo-img{width:100%;height:100%;display:block;object-fit:cover;border-radius:19px;background:#fff}
     .brand-copy{display:flex;flex-direction:column;gap:4px;min-width:0;align-items:flex-start;text-align:left}
@@ -177,14 +169,6 @@
       position:relative;
       overflow:hidden;
     }
-    .login-card::before,.register-card::before,.claim-card::before,.status-card::before{
-      content:"";
-      position:absolute;
-      width:120px;height:120px;
-      right:-30px;top:-30px;
-      background:radial-gradient(circle, rgba(255,236,223,.75), transparent 68%);
-      pointer-events:none;
-    }
     .success-card{margin-top:12px;display:none;background:linear-gradient(180deg,#fffdfb,#f9f2eb);border-style:dashed}
     .success-card.show{display:block}
     .success-title{font-size:1rem;font-weight:800;color:#755847;margin-bottom:6px}
@@ -260,7 +244,6 @@
       flex:1;min-height:52px;border:0;background:linear-gradient(135deg,#d6b297,#b98665);
       color:#fffdfb;box-shadow:0 14px 24px rgba(126,89,66,.18);font-size:.96rem;display:inline-flex;align-items:center;justify-content:center;gap:8px
     }
-    .btn-primary:hover{transform:translateY(-1px)}
     .btn-primary:disabled{opacity:.65;cursor:default}
     .btn-secondary{min-height:52px;border:1px solid #e6d8cd;background:linear-gradient(180deg,#fffdfb,#f7efe8);color:var(--sub);padding:0 16px;font-size:.82rem}
     .btn-danger{min-height:52px;border:1px solid #f0cdcd;background:linear-gradient(180deg,#fff7f7,#ffefef);color:#c46a6a;padding:0 16px;font-size:.82rem}
@@ -268,83 +251,70 @@
 
     .member-identity-card{
       margin-top:12px;
-      border-radius:26px;
+      border-radius:22px;
       border:1px solid #ead9cd;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.98), rgba(250,243,237,.98));
-      padding:16px;
-      box-shadow:
-        0 14px 26px rgba(118,84,63,.06),
-        inset 0 1px 0 rgba(255,255,255,.88);
-      text-align:left;
+      background:linear-gradient(180deg,#fffdfb,#faf3ee);
+      padding:12px;
+      box-shadow:0 10px 20px rgba(118,84,63,.05);
+      text-align:center;
     }
-
     .member-card-head{
       text-align:center;
-      margin-bottom:14px;
+      margin-bottom:10px;
     }
-
     .member-card-badge{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      padding:7px 12px;
+      padding:6px 11px;
       border-radius:999px;
-      background:linear-gradient(135deg,#f7ece4,#fff8f3);
+      background:linear-gradient(135deg,#f9eee7,#fff8f4);
       border:1px solid #ead8ca;
       color:#8b6b59;
-      font-size:.72rem;
+      font-size:.7rem;
       font-weight:800;
-      letter-spacing:.08em;
-      text-transform:uppercase;
+      letter-spacing:.05em;
     }
-
     .member-card-title{
-      margin-top:8px;
-      font-size:1.02rem;
+      margin-top:7px;
+      font-size:.94rem;
       font-weight:800;
       color:#6d5243;
-      letter-spacing:.02em;
     }
-
     .member-card-sub{
-      margin-top:4px;
-      font-size:.78rem;
+      margin-top:3px;
+      font-size:.74rem;
       color:var(--sub);
-      line-height:1.6;
+      line-height:1.55;
     }
-
     .member-card-grid{
       display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:10px;
+      grid-template-columns:repeat(3,1fr);
+      gap:8px;
     }
-
     .member-info-item{
-      border-radius:18px;
+      border-radius:16px;
       border:1px solid #eee0d5;
-      background:rgba(255,255,255,.94);
-      padding:12px 12px 11px;
-      min-height:82px;
+      background:#fff;
+      padding:10px 8px;
+      min-height:72px;
       display:flex;
       flex-direction:column;
       justify-content:center;
-      box-shadow:0 8px 16px rgba(118,84,63,.04);
+      align-items:center;
+      box-shadow:0 6px 12px rgba(118,84,63,.04);
     }
-
     .member-info-label{
-      font-size:.72rem;
+      font-size:.68rem;
       color:#9e8a7d;
       font-weight:700;
-      margin-bottom:6px;
-      letter-spacing:.03em;
+      margin-bottom:5px;
     }
-
     .member-info-value{
-      font-size:.92rem;
+      font-size:.82rem;
       color:#5f493d;
       font-weight:800;
-      line-height:1.5;
+      line-height:1.45;
       word-break:break-word;
     }
 
@@ -523,35 +493,48 @@
       box-shadow:0 20px 54px rgba(118,84,63,.14);padding:24px 18px 22px;text-align:center
     }
     .spinner{
-      width:64px;height:64px;margin:0 auto 14px;border-radius:999px;border:6px solid #edd9ca;border-top-color:#b98e71;animation:spin .85s linear infinite
+      width:62px;height:62px;margin:0 auto 14px;border-radius:999px;border:6px solid #edd9ca;border-top-color:#b98e71;animation:spin .85s linear infinite
     }
     @keyframes spin{to{transform:rotate(360deg)}}
     .loading-title{font-size:1.08rem;font-weight:800;color:#7a5d4b;text-align:center}
     .loading-sub{margin-top:8px;font-size:.87rem;color:var(--sub);line-height:1.65;text-align:center}
+
     .loading-progress-wrap{
       margin-top:14px;
-      width:100%;
-      text-align:center;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:8px;
     }
-    .loading-progress-bar{
-      width:100%;
-      height:10px;
-      border-radius:999px;
-      background:#f1e3d7;
-      overflow:hidden;
+    .loading-battery{
       position:relative;
+      width:54px;
+      height:24px;
+      border:2px solid #cfae97;
+      border-radius:7px;
+      background:#fffaf6;
+      padding:2px;
       box-shadow:inset 0 1px 2px rgba(0,0,0,.04);
     }
-    .loading-progress-fill{
+    .loading-battery::after{
+      content:"";
+      position:absolute;
+      right:-6px;
+      top:6px;
+      width:4px;
+      height:8px;
+      border-radius:2px;
+      background:#cfae97;
+    }
+    .loading-battery-fill{
       height:100%;
       width:0%;
-      border-radius:999px;
+      border-radius:4px;
       background:linear-gradient(135deg,#d8b69d,#be8d70);
       transition:width .18s linear;
     }
     .loading-progress-text{
-      margin-top:8px;
-      font-size:.85rem;
+      font-size:.82rem;
       font-weight:800;
       color:#7d6252;
     }
@@ -580,7 +563,6 @@
       .bank-card-name{text-align:center}
       .route-cute-badges{flex-direction:column;align-items:center}
       .member-card-grid{grid-template-columns:1fr}
-      .member-info-item{min-height:auto}
     }
   </style>
 </head>
@@ -686,9 +668,16 @@
           <div id="registerAlert" class="alert-box"></div>
 
           <div class="field-group">
-            <label class="field-label" for="registerDisplayName">ชื่อแสดงผล (ถ้ามี)</label>
+            <label class="field-label" for="registerDisplayName">ชื่อสมัคร / ชื่อแสดงผล</label>
             <div class="input-shell">
               <input id="registerDisplayName" type="text" placeholder="เช่น คุณเอ" />
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="registerAdminName">ชื่อแอดมินที่ดูแล</label>
+            <div class="input-shell">
+              <input id="registerAdminName" type="text" placeholder="เช่น แอดมินแอมป์" />
             </div>
           </div>
 
@@ -745,7 +734,7 @@
 
         <div class="success-card" id="registerSuccessCard">
           <div class="success-title">สมัครสมาชิกสำเร็จแล้ว</div>
-          <div class="success-desc">
+          <div class="success-desc" id="registerSuccessText">
             ตอนนี้คุณสามารถใช้อีเมลและรหัสผ่านที่ตั้งไว้เข้าสู่ระบบได้ทันที<br />
             หากลืมรหัสผ่าน สามารถกดส่งรหัสทางอีเมลได้จากหน้าล็อกอิน
           </div>
@@ -769,8 +758,8 @@
           <div class="member-identity-card" id="memberProfileBox" style="display:none;">
             <div class="member-card-head">
               <div class="member-card-badge">ข้อมูลสมาชิก</div>
-              <div class="member-card-title">Member Profile</div>
-              <div class="member-card-sub">ข้อมูลนี้อ้างอิงจากระบบร้านล่าสุด</div>
+              <div class="member-card-title">💌 Member Profile</div>
+              <div class="member-card-sub">ข้อมูลล่าสุดจากระบบของร้าน</div>
             </div>
 
             <div class="member-card-grid">
@@ -787,11 +776,6 @@
               <div class="member-info-item">
                 <div class="member-info-label">ปีสมัคร</div>
                 <div class="member-info-value" id="profileSignupYear">-</div>
-              </div>
-
-              <div class="member-info-item">
-                <div class="member-info-label">แอดมินที่ดูแล</div>
-                <div class="member-info-value" id="profileAdminName">แอดมินแอมป์</div>
               </div>
             </div>
           </div>
@@ -1003,14 +987,14 @@
     <div class="loading-card">
       <div class="spinner"></div>
       <div class="loading-title">รอสักครู่นะคะ</div>
-      <div class="loading-sub" id="loadingSubText">
+      <div class="loading-sub">
         ระบบกำลังประมวลผลคำขอของคุณ<br />
         กรุณาอย่ารีเฟรชหน้าจอระหว่างกำลังโหลด
       </div>
 
       <div class="loading-progress-wrap">
-        <div class="loading-progress-bar">
-          <div class="loading-progress-fill" id="loadingProgressFill"></div>
+        <div class="loading-battery">
+          <div class="loading-battery-fill" id="loadingProgressFill"></div>
         </div>
         <div class="loading-progress-text" id="loadingProgressText">0%</div>
       </div>
@@ -1085,8 +1069,9 @@
     };
 
     let userSelectedView = false;
-    let loadingProgressTimer = null;
-    let loadingProgressValue = 0;
+    let activeSlipFile = null;
+    let loadingTimer = null;
+    let loadingProgress = 0;
 
     const heroSection = document.getElementById("heroSection");
     const globalBanner = document.getElementById("globalBanner");
@@ -1117,12 +1102,14 @@
     const rememberPassword = document.getElementById("rememberPassword");
 
     const registerDisplayName = document.getElementById("registerDisplayName");
+    const registerAdminName = document.getElementById("registerAdminName");
     const registerEmail = document.getElementById("registerEmail");
     const registerPassword = document.getElementById("registerPassword");
     const registerConfirmPassword = document.getElementById("registerConfirmPassword");
     const registerMemberDate = document.getElementById("registerMemberDate");
     const registerPasswordStrength = document.getElementById("registerPasswordStrength");
     const registerSuccessCard = document.getElementById("registerSuccessCard");
+    const registerSuccessText = document.getElementById("registerSuccessText");
 
     const expiryInput = document.getElementById("expiryInput");
     const noteInput = document.getElementById("noteInput");
@@ -1170,7 +1157,6 @@
     const profileEmail = document.getElementById("profileEmail");
     const profileMemberDate = document.getElementById("profileMemberDate");
     const profileSignupYear = document.getElementById("profileSignupYear");
-    const profileAdminName = document.getElementById("profileAdminName");
 
     const miniQueueNo = document.getElementById("miniQueueNo");
     const miniClaimType = document.getElementById("miniClaimType");
@@ -1185,10 +1171,8 @@
 
     const toast = document.getElementById("toast");
     const loadingOverlay = document.getElementById("loadingOverlay");
-    const loadingSubText = document.getElementById("loadingSubText");
     const loadingProgressFill = document.getElementById("loadingProgressFill");
     const loadingProgressText = document.getElementById("loadingProgressText");
-
     const topAlert = document.getElementById("topAlert");
     const registerAlert = document.getElementById("registerAlert");
     const claimAlert = document.getElementById("claimAlert");
@@ -1200,8 +1184,6 @@
 
     const claimStepCard = document.getElementById("claimStepCard");
     const claimStepList = document.getElementById("claimStepList");
-
-    let activeSlipFile = null;
 
     function normalizeEmail(value){ return String(value || "").trim().toLowerCase(); }
     function normalizeText(value){ return String(value || "").trim(); }
@@ -1247,56 +1229,43 @@
       if (viewId === "statusView") setMemberPagePills("status");
     }
 
-    function startFakeLoadingProgress() {
-      stopFakeLoadingProgress();
-      loadingProgressValue = 0;
+    function resetLoadingProgress() {
+      loadingProgress = 0;
       if (loadingProgressFill) loadingProgressFill.style.width = "0%";
       if (loadingProgressText) loadingProgressText.textContent = "0%";
-
-      loadingProgressTimer = setInterval(function() {
-        if (loadingProgressValue < 82) {
-          loadingProgressValue += Math.random() < 0.35 ? 2 : 1;
-          if (loadingProgressValue > 82) loadingProgressValue = 82;
-          if (loadingProgressFill) loadingProgressFill.style.width = loadingProgressValue + "%";
-          if (loadingProgressText) loadingProgressText.textContent = loadingProgressValue + "%";
-        }
-      }, 120);
     }
 
-    function finishFakeLoadingProgress() {
-      stopFakeLoadingProgress();
-      loadingProgressValue = 100;
-      if (loadingProgressFill) loadingProgressFill.style.width = "100%";
-      if (loadingProgressText) loadingProgressText.textContent = "100%";
+    function animateLoadingProgress() {
+      clearInterval(loadingTimer);
+      resetLoadingProgress();
+      loadingTimer = setInterval(function() {
+        if (loadingProgress >= 92) return;
+        loadingProgress += Math.random() < 0.5 ? 3 : 5;
+        if (loadingProgress > 92) loadingProgress = 92;
+        loadingProgressFill.style.width = loadingProgress + "%";
+        loadingProgressText.textContent = loadingProgress + "%";
+      }, 180);
     }
 
-    function stopFakeLoadingProgress() {
-      if (loadingProgressTimer) {
-        clearInterval(loadingProgressTimer);
-        loadingProgressTimer = null;
-      }
+    function completeLoadingProgress() {
+      clearInterval(loadingTimer);
+      loadingProgress = 100;
+      loadingProgressFill.style.width = "100%";
+      loadingProgressText.textContent = "100%";
     }
 
-    function showLoadingOverlay(customText) {
-      if (customText && loadingSubText) loadingSubText.innerHTML = customText;
-      else if (loadingSubText) {
-        loadingSubText.innerHTML =
-          "ระบบกำลังประมวลผลคำขอของคุณ<br />" +
-          "กรุณาอย่ารีเฟรชหน้าจอระหว่างกำลังโหลด";
-      }
-
+    function showLoadingOverlay() {
       loadingOverlay.classList.add("show");
       document.body.style.overflow = "hidden";
-      startFakeLoadingProgress();
+      animateLoadingProgress();
     }
 
     function hideLoadingOverlay() {
-      finishFakeLoadingProgress();
+      completeLoadingProgress();
       setTimeout(function() {
         loadingOverlay.classList.remove("show");
         document.body.style.overflow = "";
-        if (loadingProgressFill) loadingProgressFill.style.width = "0%";
-        if (loadingProgressText) loadingProgressText.textContent = "0%";
+        resetLoadingProgress();
       }, 220);
     }
 
@@ -1477,14 +1446,14 @@
       }
     }
 
-    function buildLocalMemberFallback(email, displayName, memberDate, signupYearThai) {
+    function buildLocalMemberFallback(email, displayName, memberDate, signupYearThai, adminName) {
       return {
         email: email || "",
         displayName: displayName || "",
         memberDate: memberDate || "",
         signupYearThai: signupYearThai || thaiYearFromYmd(memberDate || ""),
         lastKnownExpiry: "",
-        adminName: "แอดมินแอมป์"
+        adminName: adminName || ""
       };
     }
 
@@ -1616,8 +1585,11 @@
       bankAccountNameEl.textContent = claimConfig.bankAccountName || "นภัทรธมณฑ์ ฤทธิ์ชัยศักดิ์";
       supportLineEl.textContent = claimConfig.supportLine || "@467dlpti";
 
-      routeHelperText.innerText = (claimConfig.routeMessage || "เลือกช่องทางที่สะดวกได้เลยนะคะ");
-      routeStatusText.innerText = (claimConfig.routeMessage || "กรุณาใช้ช่องทางที่ระบบเปิดให้บริการอยู่ค่ะ");
+      routeHelperText.innerText =
+        (claimConfig.routeMessage || "เลือกช่องทางที่สะดวกได้เลยนะคะ");
+
+      routeStatusText.innerText =
+        (claimConfig.routeMessage || "กรุณาใช้ช่องทางที่ระบบเปิดให้บริการอยู่ค่ะ");
     }
 
     function isWithinClaimWindowByBrowser() {
@@ -2020,10 +1992,9 @@
       const signupYear = state.member.signupYearThai || thaiYearFromYmd(memberDate) || "";
       state.member.signupYearThai = signupYear;
 
-      profileEmail.textContent = state.member.email || "amp.drive999@gmail.com";
-      profileMemberDate.textContent = formatThaiDate(memberDate || "") || "1 มี.ค. 2569";
-      profileSignupYear.textContent = signupYear || "2569";
-      profileAdminName.textContent = state.member.adminName || "แอดมินแอมป์";
+      profileEmail.textContent = state.member.email || "-";
+      profileMemberDate.textContent = formatThaiDate(memberDate || "");
+      profileSignupYear.textContent = signupYear || "-";
 
       profileBox.style.display = "block";
       signupYearInput.value = signupYear;
@@ -2166,6 +2137,11 @@
         return false;
       }
 
+      if (state.member && state.member.isExpired) {
+        showStatusError(claimConfig.expiredAccountText || "บัญชีหมดอายุแล้ว หากต้องการใช้บริการต่อติดต่อแอดมิน");
+        return false;
+      }
+
       if (note.length > MAX_NOTE_LENGTH) {
         showStatusError("ฝากข้อความได้ไม่เกิน " + MAX_NOTE_LENGTH + " ตัวอักษร");
         shake(noteField);
@@ -2224,7 +2200,7 @@
         if (data.member) {
           state.member = data.member;
         } else {
-          state.member = buildLocalMemberFallback(payload.email, "", "", "");
+          state.member = buildLocalMemberFallback(payload.email, "", "", "", "");
         }
 
         saveRememberedLogin();
@@ -2262,6 +2238,7 @@
         const payload = {
           action: "register",
           displayName: normalizeText(registerDisplayName.value),
+          adminName: normalizeText(registerAdminName.value),
           email: normalizeEmail(registerEmail.value),
           password: normalizeText(registerPassword.value),
           memberDate
@@ -2282,6 +2259,10 @@
         }
 
         registerSuccessCard.classList.add("show");
+        registerSuccessText.innerHTML =
+          'ตอนนี้คุณสามารถใช้อีเมลและรหัสผ่านที่ตั้งไว้เข้าสู่ระบบได้ทันที<br />' +
+          'แอดมินที่ดูแล: <strong>' + escapeHtml(payload.adminName || "ยังไม่ได้ระบุ") + '</strong><br />' +
+          'หากลืมรหัสผ่าน สามารถกดส่งรหัสทางอีเมลได้จากหน้าล็อกอิน';
 
         if (data.token) {
           state.token = String(data.token || "").trim();
@@ -2292,7 +2273,8 @@
           payload.email,
           payload.displayName,
           memberDate,
-          thaiYearFromYmd(memberDate)
+          thaiYearFromYmd(memberDate),
+          payload.adminName
         );
 
         loginEmailInput.value = payload.email;
@@ -2423,7 +2405,6 @@
         "<strong>ประเภทเคลม:</strong> " + escapeHtml(claimType) + "<br>" +
         "<strong>สลิป:</strong> " + escapeHtml(hasSlip) + "<br>" +
         "<strong>ข้อความถึงแอดมิน:</strong> " + escapeHtml(note || "-");
-
       confirmModal.classList.add("show");
     }
 
@@ -2451,10 +2432,7 @@
 
       state.isLoading = true;
       state.submitLock = true;
-      showLoadingOverlay(
-        "ระบบกำลังส่งคำขอเคลมของคุณ<br />" +
-        "กำลังตรวจสอบข้อมูลและแนบหลักฐานให้ครบถ้วนค่ะ"
-      );
+      showLoadingOverlay();
       btnSubmit.disabled = true;
       btnSubmit.innerHTML = "<span>กำลังส่งคำขอ…</span>";
 
@@ -2488,6 +2466,12 @@
         if (data.closed) {
           setWebClosedState(true, data.message || claimConfig.webClosedMessage);
           showStatusError(data.message || "ระบบเว็บปิดชั่วคราว");
+          state.submitLock = false;
+          return;
+        }
+
+        if (data.expired) {
+          showStatusError(data.message || claimConfig.expiredAccountText || "บัญชีหมดอายุแล้ว หากต้องการใช้บริการต่อติดต่อแอดมิน");
           state.submitLock = false;
           return;
         }
@@ -2562,7 +2546,7 @@
         return;
       }
 
-      showLoadingOverlay("กำลังรีเฟรชสถานะล่าสุดให้ค่ะ");
+      showLoadingOverlay();
       try {
         const items = await fetchClaimHistory();
         renderLatestStatusPage({ history: items, current: items[0] || null });
@@ -2580,7 +2564,7 @@
         return;
       }
 
-      showLoadingOverlay("กำลังตรวจสอบวันหมดอายุล่าสุดให้ค่ะ");
+      showLoadingOverlay();
       try {
         const data = await fetchJsonWithRetry(
           SCRIPT_URL + "?action=checkExpiry&token=" + encodeURIComponent(state.token) + "&_t=" + Date.now(),
@@ -2602,7 +2586,10 @@
           if (parts.length === 3) {
             expiryInput.value = parts[2] + "-" + parts[1].padStart(2, "0") + "-" + parts[0].padStart(2, "0");
           }
-          if (state.member) state.member.lastKnownExpiry = expiryInput.value;
+          if (state.member) {
+            state.member.lastKnownExpiry = expiryInput.value;
+            state.member.isExpired = !!data.expired;
+          }
         }
 
         showAlert(
@@ -2647,7 +2634,7 @@
         if (data.todaySummary) renderLiveStatus(data.todaySummary);
 
         if (data.member) {
-          state.member = { ...data.member, adminName: data.member.adminName || "แอดมินแอมป์" };
+          state.member = data.member;
           updateMemberProfileUI();
         }
 
