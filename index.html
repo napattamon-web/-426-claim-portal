@@ -305,7 +305,7 @@
       justify-content:center;
     }
 
-    .btn-primary,.btn-secondary,.btn-danger,.btn-link-small,.btn-mini,.btn-admin,.upload-btn{
+    .btn-primary,.btn-secondary,.btn-danger,.btn-link-small,.btn-mini,.btn-admin,.upload-btn,.btn-qr-cute{
       border-radius:999px;
       font-family:inherit;
       font-weight:800;
@@ -381,6 +381,21 @@
       display:flex;
       align-items:center;
       justify-content:center;
+    }
+
+    .btn-qr-cute{
+      min-height:38px;
+      padding:0 16px;
+      border:1px solid rgba(255,170,190,.22);
+      background:linear-gradient(180deg, rgba(255,122,155,.24), rgba(255,96,130,.12));
+      color:#fff4f7;
+      font-size:.76rem;
+      box-shadow:0 8px 18px rgba(0,0,0,.16);
+      letter-spacing:.01em;
+    }
+    .btn-qr-cute:hover{
+      transform:translateY(-1px);
+      filter:brightness(1.03);
     }
 
     .btn-blink{
@@ -719,24 +734,6 @@
     }
     .hidden-file-input{position:absolute;left:-9999px;opacity:0}
     .file-name{margin-top:10px;font-size:.76rem;color:var(--sub);word-break:break-word}
-    .upload-status{
-      margin-top:10px;
-      display:none;
-      padding:10px 12px;
-      border-radius:14px;
-      background:rgba(120,211,154,.10);
-      border:1px solid rgba(120,211,154,.16);
-      color:#d4f6df;
-      font-size:.77rem;
-      font-weight:800;
-      line-height:1.55;
-    }
-    .upload-status.show{display:block}
-    .upload-status.error{
-      background:rgba(255,129,129,.10);
-      border-color:rgba(255,129,129,.16);
-      color:#ffd5d5;
-    }
 
     .preview-wrap{
       margin-top:12px;
@@ -754,6 +751,23 @@
       border:1px solid rgba(255,255,255,.08);
     }
     .preview-meta{display:grid;gap:8px;width:100%}
+
+    .slip-bottom-box{
+      margin-top:12px;
+      display:none;
+      padding:12px 14px;
+      border-radius:16px;
+      font-size:.79rem;
+      line-height:1.65;
+      font-weight:800;
+      text-align:center;
+      border:1px solid transparent;
+    }
+    .slip-bottom-box.show{display:block}
+    .slip-bottom-box.success{background:rgba(120,211,154,.10);border-color:rgba(120,211,154,.18);color:#c8f4d6}
+    .slip-bottom-box.error{background:rgba(255,129,129,.10);border-color:rgba(255,129,129,.16);color:#ffd5d5}
+    .slip-bottom-box.info{background:rgba(154,183,255,.10);border-color:rgba(154,183,255,.16);color:#dbe6ff}
+    .slip-bottom-box.warning{background:rgba(255,187,99,.10);border-color:rgba(255,187,99,.18);color:#ffe2b7}
 
     .note-counter{
       margin-top:4px;
@@ -1149,6 +1163,7 @@
       .logo-shell{width:80px;height:80px}
       .notice-bar{font-size:.79rem}
       .btn-secondary.center-btn{width:100%;min-width:0}
+      .btn-qr-cute{width:auto;min-width:0}
     }
   </style>
 </head>
@@ -1378,7 +1393,7 @@
               </div>
 
               <div class="action-row center">
-                <button type="button" class="btn-secondary center-btn" id="btnToggleQr">ต้องการสแกน QR</button>
+                <button type="button" class="btn-qr-cute" id="btnToggleQr">✨ ต้องการสแกน QR</button>
               </div>
 
               <div class="qr-wrap" id="qrWrap">
@@ -1402,7 +1417,6 @@
                 <input id="slipInputCamera" class="hidden-file-input" type="file" accept="image/*" capture="environment" />
 
                 <div class="file-name" id="fileName">ยังไม่ได้เลือกไฟล์</div>
-                <div class="upload-status" id="slipStatusHint">แนบสลิปเรียบร้อยแล้ว</div>
 
                 <div class="preview-wrap" id="slipPreviewWrap">
                   <img id="slipPreview" class="preview-img" alt="ตัวอย่างสลิป" />
@@ -1412,6 +1426,8 @@
                   </div>
                 </div>
               </div>
+
+              <div id="slipBottomAlert" class="slip-bottom-box"></div>
             </div>
           </div>
 
@@ -1657,9 +1673,9 @@
     const slipInput = document.getElementById("slipInput");
     const slipInputCamera = document.getElementById("slipInputCamera");
     const fileName = document.getElementById("fileName");
-    const slipStatusHint = document.getElementById("slipStatusHint");
     const slipPreviewWrap = document.getElementById("slipPreviewWrap");
     const slipPreview = document.getElementById("slipPreview");
+    const slipBottomAlert = document.getElementById("slipBottomAlert");
 
     const summary = document.getElementById("summary");
     const status = document.getElementById("status");
@@ -1734,6 +1750,26 @@
       }
     }
 
+    function showSlipBottom(message, type="info", timeout=5000){
+      if (!slipBottomAlert) return;
+      slipBottomAlert.className = "slip-bottom-box show " + type;
+      slipBottomAlert.textContent = message || "";
+      if (timeout > 0){
+        clearTimeout(slipBottomAlert._timer);
+        slipBottomAlert._timer = setTimeout(() => {
+          slipBottomAlert.className = "slip-bottom-box";
+          slipBottomAlert.textContent = "";
+        }, timeout);
+      }
+    }
+
+    function clearSlipBottom(){
+      if (!slipBottomAlert) return;
+      clearTimeout(slipBottomAlert._timer);
+      slipBottomAlert.className = "slip-bottom-box";
+      slipBottomAlert.textContent = "";
+    }
+
     function shake(el){
       if (!el) return;
       el.classList.remove("shake");
@@ -1793,7 +1829,7 @@
       if (!value) return "-";
       const d = new Date(value);
       if (isNaN(d.getTime())) return value;
-      const months = ["ม.ค.","ก.พ.","มี.ค.","มี.ค.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."];
+      const months = ["ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."];
       const dd = d.getDate();
       const mm = months[d.getMonth()];
       const yy = d.getFullYear() + 543;
@@ -1890,16 +1926,6 @@
       if (!silent) setActiveView("loginView");
     }
 
-    function setSlipStatus(message, type="ok"){
-      slipStatusHint.textContent = message || "";
-      slipStatusHint.className = "upload-status show" + (type === "error" ? " error" : "");
-    }
-
-    function clearSlipStatus(){
-      slipStatusHint.textContent = "";
-      slipStatusHint.className = "upload-status";
-    }
-
     function resetSlipPreview(){
       activeSlipFile = null;
       slipInput.value = "";
@@ -1907,12 +1933,12 @@
       slipPreview.src = "";
       slipPreviewWrap.style.display = "none";
       fileName.textContent = "ยังไม่ได้เลือกไฟล์";
-      clearSlipStatus();
+      clearSlipBottom();
     }
 
     function applyQrVisibility(){
       qrWrap.classList.toggle("show", state.qrOpen);
-      btnToggleQr.textContent = state.qrOpen ? "ซ่อน QR" : "ต้องการสแกน QR";
+      btnToggleQr.textContent = state.qrOpen ? "💗 ซ่อน QR" : "✨ ต้องการสแกน QR";
       localStorage.setItem(LAST_QR_TOGGLE_KEY, state.qrOpen ? "1" : "0");
     }
 
@@ -1922,18 +1948,18 @@
         return;
       }
       if (!file.type.startsWith("image/")){
-        setSlipStatus("รองรับเฉพาะไฟล์รูปภาพเท่านั้น", "error");
+        showSlipBottom("รองรับเฉพาะไฟล์รูปภาพเท่านั้น", "error");
         shake(sourceInput === slipInput ? btnPickSlip : btnCameraSlip);
         return;
       }
       if (file.size > MAX_SLIP_SIZE){
-        setSlipStatus("ไฟล์สลิปมีขนาดใหญ่เกิน 3 MB", "error");
+        showSlipBottom("ไฟล์สลิปมีขนาดใหญ่เกิน 3 MB", "error");
         shake(sourceInput === slipInput ? btnPickSlip : btnCameraSlip);
         return;
       }
       activeSlipFile = file;
       fileName.textContent = file.name || "เลือกไฟล์แล้ว";
-      setSlipStatus("แนบสลิปเรียบร้อยแล้ว");
+      showSlipBottom("แนบสลิปเรียบร้อยแล้ว กรุณาตรวจสอบภาพก่อนส่งคำขอ", "success");
       showToast("แนบสลิปแล้ว");
 
       const reader = new FileReader();
@@ -2350,7 +2376,7 @@
 
       if (String(state.member.signupYearThai || "") === String(claimConfig.paidYear || "") && !activeSlipFile){
         showAlert(claimAlert, "กรุณาแนบสลิปก่อนส่งคำขอ", "error");
-        setSlipStatus("กรุณาแนบสลิปก่อนส่งคำขอ", "error");
+        showSlipBottom("กรุณาแนบสลิปก่อนส่งคำขอ", "error");
         shake(btnPickSlip);
         return false;
       }
@@ -2602,6 +2628,7 @@
 
         if (!data || data.ok === false){
           showAlert(claimAlert, data.message || "ส่งคำขอไม่สำเร็จ", "error");
+          showSlipBottom(data.message || "ส่งคำขอไม่สำเร็จ", "error");
           shake(btnSubmit);
           return;
         }
@@ -2630,6 +2657,8 @@
 
         if (String(state.member && state.member.signupYearThai || "") !== String(claimConfig.paidYear || "")){
           resetSlipPreview();
+        } else {
+          showSlipBottom("ระบบรับสลิปและส่งคำขอเรียบร้อยแล้ว สามารถดูสถานะต่อด้านล่างหรือในหน้าสถานะได้เลย", "success", 7000);
         }
 
         showAlert(claimAlert, "ส่งคำขอสำเร็จแล้ว และอัปเดตสถานะล่าสุดเรียบร้อย", "success", 5000);
@@ -2641,6 +2670,7 @@
 
       }catch(e){
         showAlert(claimAlert, "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้ง", "error");
+        showSlipBottom("เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้ง", "error");
         shake(btnSubmit);
       }finally{
         hideLoading();
@@ -2711,18 +2741,20 @@
     btnViewLastSlip.addEventListener("click", () => {
       const last = loadLastSlip();
       if (!last || !last.dataUrl){
+        showSlipBottom("ยังไม่มีสลิปล่าสุด", "info");
         showToast("ยังไม่มีสลิปล่าสุด");
         return;
       }
       slipPreview.src = last.dataUrl;
       slipPreviewWrap.style.display = "flex";
       fileName.textContent = last.name || "slip";
-      setSlipStatus("แสดงสลิปล่าสุดแล้ว");
+      showSlipBottom("แสดงสลิปล่าสุดแล้ว", "info");
       showToast("แสดงสลิปล่าสุดแล้ว");
     });
 
     btnRemoveSlip.addEventListener("click", () => {
       resetSlipPreview();
+      showSlipBottom("ลบรูปสลิปแล้ว", "warning");
       showToast("ลบรูปสลิปแล้ว");
     });
 
