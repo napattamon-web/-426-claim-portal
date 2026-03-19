@@ -172,6 +172,12 @@
       box-shadow:0 10px 24px rgba(0,0,0,.18);
     }
 
+    .hero-status-wrap{
+      margin-top:10px;
+      display:flex;
+      justify-content:center;
+    }
+
     .panel{padding:16px}
     .view{display:none;animation:fadeUp .24s ease}
     .view.active{display:block}
@@ -407,8 +413,7 @@
     .alert-box.warning{background:rgba(255,187,99,.10);border-color:rgba(255,187,99,.18);color:#ffe2b7}
 
     .status-mini{
-      margin-bottom:12px;
-      padding:10px 12px;
+      padding:10px 14px;
       border-radius:16px;
       background:rgba(255,255,255,.04);
       border:1px solid rgba(255,255,255,.06);
@@ -422,6 +427,8 @@
       gap:8px;
       min-height:44px;
       transition:.2s ease;
+      width:100%;
+      max-width:270px;
     }
 
     .status-mini .status-dot{
@@ -1240,6 +1247,7 @@
       .live-email{max-width:150px}
       .logo-shell{width:80px;height:80px}
       .notice-bar{font-size:.79rem}
+      .status-mini{max-width:100%}
     }
   </style>
 </head>
@@ -1263,6 +1271,13 @@
       <div class="notice-bar" id="claimTimeText">
         เปิดรับแจ้งเคลม วันจันทร์–เสาร์<br />เวลา 07.00–19.00 น.
       </div>
+
+      <div class="hero-status-wrap">
+        <div class="status-mini open" id="statusInlineBox">
+          <span class="status-dot" id="statusDot"></span>
+          <span id="onlineText">เปิดรับเคลมหน้าเว็บ</span>
+        </div>
+      </div>
     </section>
 
     <main class="panel shell-card">
@@ -1272,11 +1287,6 @@
 
         <div class="login-card">
           <div id="topAlert" class="alert-box"></div>
-
-          <div class="status-mini open" id="statusInlineBox">
-            <span class="status-dot" id="statusDot"></span>
-            <span id="onlineText">เปิดรับเคลมหน้าเว็บ</span>
-          </div>
 
           <div class="field-group">
             <label class="field-label" for="loginEmail">อีเมล</label>
