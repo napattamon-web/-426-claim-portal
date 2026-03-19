@@ -305,7 +305,7 @@
       justify-content:center;
     }
 
-    .btn-primary,.btn-secondary,.btn-danger,.btn-link-small,.btn-mini,.btn-admin{
+    .btn-primary,.btn-secondary,.btn-danger,.btn-link-small,.btn-mini,.btn-admin,.upload-btn{
       border-radius:999px;
       font-family:inherit;
       font-weight:800;
@@ -677,13 +677,15 @@
     }
 
     .qr-wrap{
-      margin-top:10px;
+      margin-top:12px;
       padding:12px;
       border-radius:20px;
       background:rgba(255,255,255,.04);
       border:1px solid rgba(255,255,255,.06);
       text-align:center;
+      display:none;
     }
+    .qr-wrap.show{display:block}
     .qr-title{font-size:.84rem;font-weight:800;color:#fff0f1;margin-bottom:8px}
     .qr-img{
       width:100%;
@@ -709,14 +711,11 @@
     .upload-sub{font-size:.75rem;color:var(--sub);line-height:1.55;margin-top:6px}
     .upload-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px}
     .upload-btn{
-      border-radius:999px;
       border:1px solid rgba(255,255,255,.08);
       padding:10px 14px;
       background:rgba(255,255,255,.05);
       color:#fff1f2;
       font-size:.8rem;
-      font-weight:800;
-      cursor:pointer;
     }
     .hidden-file-input{position:absolute;left:-9999px;opacity:0}
     .file-name{margin-top:10px;font-size:.76rem;color:var(--sub);word-break:break-word}
@@ -775,6 +774,7 @@
       color:#fff2f2;
       font-weight:800;
       font-size:.78rem;
+      margin:4px;
     }
 
     #status,#authStatus,#statusPageText{
@@ -959,11 +959,6 @@
       font-size:.84rem;
       line-height:1.65;
       margin-bottom:8px;
-    }
-    .result-actions{
-      display:grid;
-      gap:8px;
-      margin-top:6px;
     }
 
     .slip-status-row{
@@ -1382,7 +1377,11 @@
                 <button type="button" class="btn-link-small" id="btnCopyAccount">คัดลอกเลขบัญชี</button>
               </div>
 
-              <div class="qr-wrap">
+              <div class="action-row center">
+                <button type="button" class="btn-secondary center-btn" id="btnToggleQr">ต้องการสแกน QR</button>
+              </div>
+
+              <div class="qr-wrap" id="qrWrap">
                 <div class="qr-title">สแกน QR เพื่อชำระเงิน</div>
                 <img class="qr-img" id="paymentQr" src="https://img2.imgbiz.com/imgbiz/IMG_2680.jpeg" alt="QR Payment" />
                 <div class="qr-caption">ชำระเงินแล้วแนบสลิปด้านล่างเพื่อให้ระบบรับเข้าคิวเคลม</div>
@@ -1532,6 +1531,8 @@
     const TOKEN_KEY = "shop426_member_token";
     const REMEMBER_KEY = "shop426_saved_login";
     const LAST_SLIP_KEY = "shop426_last_slip_preview";
+    const LAST_VIEW_KEY = "shop426_last_view";
+    const LAST_QR_TOGGLE_KEY = "shop426_qr_open";
     const MAX_NOTE_LENGTH = 500;
     const MAX_SLIP_SIZE = 3 * 1024 * 1024;
     const STATUS_POLL_INTERVAL = 30000;
@@ -1566,7 +1567,8 @@
       isClaimOpen: true,
       authLock: false,
       submitLock: false,
-      webClosed: false
+      webClosed: false,
+      qrOpen: localStorage.getItem(LAST_QR_TOGGLE_KEY) === "1"
     };
 
     let activeSlipFile = null;
@@ -1622,6 +1624,7 @@
     const btnCopyAccount = document.getElementById("btnCopyAccount");
     const btnViewLastSlip = document.getElementById("btnViewLastSlip");
     const btnRemoveSlip = document.getElementById("btnRemoveSlip");
+    const btnToggleQr = document.getElementById("btnToggleQr");
 
     const showRegisterBtn = document.getElementById("showRegisterBtn");
     const backToLoginBtn = document.getElementById("backToLoginBtn");
@@ -1649,6 +1652,7 @@
     const bankAccountNo = document.getElementById("bankAccountNo");
     const bankAccountName = document.getElementById("bankAccountName");
     const supportLine = document.getElementById("supportLine");
+    const qrWrap = document.getElementById("qrWrap");
 
     const slipInput = document.getElementById("slipInput");
     const slipInputCamera = document.getElementById("slipInputCamera");
@@ -1696,10 +1700,19 @@
       return { ...data, ok: data.ok === true };
     }
 
+    function saveLastView(id){
+      localStorage.setItem(LAST_VIEW_KEY, id);
+    }
+
+    function getLastView(){
+      return localStorage.getItem(LAST_VIEW_KEY) || "loginView";
+    }
+
     function setActiveView(id){
       [loginView, registerView, claimView, statusView].forEach(v => v.classList.remove("active"));
       document.getElementById(id).classList.add("active");
       heroSection.style.display = (id === "loginView" || id === "registerView") ? "" : "none";
+      saveLastView(id);
     }
 
     function showToast(message="เรียบร้อยแล้ว"){
@@ -1780,7 +1793,7 @@
       if (!value) return "-";
       const d = new Date(value);
       if (isNaN(d.getTime())) return value;
-      const months = ["ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."];
+      const months = ["ม.ค.","ก.พ.","มี.ค.","มี.ค.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."];
       const dd = d.getDate();
       const mm = months[d.getMonth()];
       const yy = d.getFullYear() + 543;
@@ -1872,6 +1885,7 @@
       state.token = "";
       state.member = null;
       localStorage.removeItem(TOKEN_KEY);
+      localStorage.removeItem(LAST_VIEW_KEY);
       resetClaimUI();
       if (!silent) setActiveView("loginView");
     }
@@ -1894,6 +1908,12 @@
       slipPreviewWrap.style.display = "none";
       fileName.textContent = "ยังไม่ได้เลือกไฟล์";
       clearSlipStatus();
+    }
+
+    function applyQrVisibility(){
+      qrWrap.classList.toggle("show", state.qrOpen);
+      btnToggleQr.textContent = state.qrOpen ? "ซ่อน QR" : "ต้องการสแกน QR";
+      localStorage.setItem(LAST_QR_TOGGLE_KEY, state.qrOpen ? "1" : "0");
     }
 
     function setSlipFile(file, sourceInput){
@@ -1929,31 +1949,27 @@
       const raw = String(rawText || "").trim();
 
       if (!raw){
-        return { pillClass:"status-pill--yellow", label:"รอดำเนินการ", progress:20, step:1, slipLabel:"-" };
+        return { pillClass:"status-pill--yellow", label:"รอดำเนินการ", progress:20, step:1 };
       }
-
-      const lower = raw.toLowerCase();
-
       if (raw.includes("ตรวจสลิปไม่ผ่าน") || raw.includes("สลิปไม่ผ่าน") || raw.includes("ไม่ผ่าน")){
-        return { pillClass:"status-pill--red", label:raw, progress:28, step:1, slipLabel:"ไม่ผ่าน" };
+        return { pillClass:"status-pill--red", label:raw, progress:28, step:1 };
       }
       if (raw.includes("ตรวจสลิปผ่าน") || raw.includes("สลิปผ่าน")){
-        return { pillClass:"status-pill--green", label:raw, progress:60, step:2, slipLabel:"ผ่าน" };
+        return { pillClass:"status-pill--green", label:raw, progress:60, step:2 };
       }
       if (raw.includes("รอตรวจสอบสลิป") || raw.includes("ตรวจสอบสลิป")){
-        return { pillClass:"status-pill--blue", label:raw, progress:35, step:1, slipLabel:"รอตรวจ" };
+        return { pillClass:"status-pill--blue", label:raw, progress:35, step:1 };
       }
       if (raw.includes("ดึงเมลแล้ว") || raw.includes("เสร็จ") || raw.includes("สำเร็จ") || raw.includes("ใช้งานได้ปกติ")){
-        return { pillClass:"status-pill--green", label:raw, progress:100, step:3, slipLabel:"-" };
+        return { pillClass:"status-pill--green", label:raw, progress:100, step:3 };
       }
       if (raw.includes("กำลังดำเนินการ") || raw.includes("กำลัง")){
-        return { pillClass:"status-pill--orange", label:raw, progress:72, step:2, slipLabel:"-" };
+        return { pillClass:"status-pill--orange", label:raw, progress:72, step:2 };
       }
-      if (raw.includes("รอตรวจสอบ") || raw.includes("รอดำเนินการ") || lower.includes("pending")){
-        return { pillClass:"status-pill--yellow", label:raw, progress:40, step:1, slipLabel:"-" };
+      if (raw.includes("รอตรวจสอบ") || raw.includes("รอดำเนินการ")){
+        return { pillClass:"status-pill--yellow", label:raw, progress:40, step:1 };
       }
-
-      return { pillClass:"status-pill--purple", label:raw, progress:48, step:1, slipLabel:"-" };
+      return { pillClass:"status-pill--purple", label:raw, progress:48, step:1 };
     }
 
     function decorateStatusText(text){
@@ -2048,6 +2064,7 @@
         paymentSection.style.display = "none";
         resetSlipPreview();
       }
+      applyQrVisibility();
     }
 
     function resetClaimUI(){
@@ -2214,6 +2231,8 @@
 
       statusSummary.innerHTML =
         '<div class="summary-pill">คำขอล่าสุด: ' + escapeHtml(claimLabel) + '</div>' +
+        '<div class="summary-pill">คิวล่าสุด: #' + escapeHtml(current.queueNo || "-") + '</div>' +
+        '<div class="summary-pill">อัปเดต: ' + escapeHtml(formatShortThaiTime(current.updatedAt || current.createdAt || "")) + '</div>' +
         (slipHtml ? '<div style="margin-top:8px;">' + slipHtml + '</div>' : '');
 
       statusPageText.innerHTML =
@@ -2393,8 +2412,19 @@
         saveRememberedLogin();
         updateMemberUI();
         showToast("เข้าสู่ระบบสำเร็จ");
-        setActiveView("claimView");
+
+        const targetView = getLastView();
+        if (targetView === "statusView" || targetView === "claimView"){
+          setActiveView(targetView);
+        } else {
+          setActiveView("claimView");
+        }
+
         await bootstrapApp();
+
+        if (targetView === "statusView"){
+          await refreshStatusPage();
+        }
       }catch(e){
         showAlert(topAlert, "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้ง", "error");
         shake(btnLogin);
@@ -2586,7 +2616,10 @@
           renderLatestStatusPage({ history:[data.current], current:data.current });
         }
 
-        summary.innerHTML = '<div class="summary-pill">ส่งคำขอเรียบร้อยแล้ว</div>';
+        summary.innerHTML =
+          '<div class="summary-pill">ส่งคำขอเรียบร้อยแล้ว</div>' +
+          '<div class="summary-pill">สถานะถูกอัปเดตแล้ว</div>';
+
         status.innerHTML =
           "<span class='status-strong'>" + escapeHtml(data.message || "ระบบรับคำขอของคุณแล้ว") + "</span><br>" +
           "<span class='status-time'>สามารถติดตามสถานะได้จากหน้าสถานะการเคลม</span>";
@@ -2594,11 +2627,12 @@
 
         noteInput.value = "";
         updateNoteCounter();
+
         if (String(state.member && state.member.signupYearThai || "") !== String(claimConfig.paidYear || "")){
           resetSlipPreview();
         }
 
-        showAlert(claimAlert, "ส่งคำขอสำเร็จแล้ว", "success", 5000);
+        showAlert(claimAlert, "ส่งคำขอสำเร็จแล้ว และอัปเดตสถานะล่าสุดเรียบร้อย", "success", 5000);
         showToast("ส่งคำขอสำเร็จ");
         setTimeout(() => {
           setActiveView("statusView");
@@ -2655,6 +2689,11 @@
     btnGotoStatus.addEventListener("click", gotoStatus);
     btnSubmit.addEventListener("click", handleSubmit);
     btnCheckExpiry.addEventListener("click", handleCheckExpiry);
+
+    btnToggleQr.addEventListener("click", () => {
+      state.qrOpen = !state.qrOpen;
+      applyQrVisibility();
+    });
 
     btnPickSlip.addEventListener("click", () => slipInput.click());
     btnCameraSlip.addEventListener("click", () => slipInputCamera.click());
@@ -2722,15 +2761,18 @@
     loginPassword.addEventListener("input", () => { if (rememberPassword.checked) saveRememberedLogin(); });
 
     window.addEventListener("load", async () => {
-      setActiveView("loginView");
+      const rememberedView = getLastView();
+
       updateNoteCounter();
       updatePasswordStrengthUI();
       loadRememberedLogin();
       renderConfigToUI();
       updateClaimWindowState();
       resetClaimUI();
+      applyQrVisibility();
 
       if (!SCRIPT_URL){
+        setActiveView("loginView");
         showAlert(topAlert, "กรุณาใส่ SCRIPT_URL ก่อนใช้งาน", "warning", 0);
         return;
       }
@@ -2747,11 +2789,29 @@
           if (me && me.ok){
             state.member = me.member;
             updateMemberUI();
+
+            if (rememberedView === "statusView" || rememberedView === "claimView"){
+              setActiveView(rememberedView);
+            } else {
+              setActiveView("claimView");
+            }
+
+            if (rememberedView === "statusView"){
+              await refreshStatusPage();
+            }
           } else {
             clearLocalSession(true);
+            setActiveView("loginView");
           }
         }catch(e){
           clearLocalSession(true);
+          setActiveView("loginView");
+        }
+      } else {
+        if (rememberedView === "registerView"){
+          setActiveView("registerView");
+        } else {
+          setActiveView("loginView");
         }
       }
 
