@@ -31,8 +31,10 @@
       --radius-lg:22px;
       --radius-md:18px;
     }
+
     *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
     html,body{margin:0;padding:0;min-height:100%}
+
     body{
       min-height:100vh;
       font-family:"Noto Sans Thai",system-ui,sans-serif;
@@ -47,9 +49,12 @@
       overflow-x:hidden;
       position:relative;
     }
-    body::before, body::after{
+
+    body::before,
+    body::after{
       content:"";
       position:fixed;
+      inset:auto;
       pointer-events:none;
       z-index:0;
       filter:blur(36px);
@@ -63,7 +68,10 @@
       width:280px;height:280px;right:-70px;bottom:40px;
       background:radial-gradient(circle, rgba(255,255,255,.08), transparent 70%);
     }
-    .mist{position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden;}
+
+    .mist{
+      position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden;
+    }
     .mist span{
       position:absolute; display:block; border-radius:999px;
       background:radial-gradient(circle, rgba(255,255,255,.10), rgba(255,255,255,.02) 60%, transparent 78%);
@@ -81,7 +89,7 @@
 
     .app{
       width:100%;
-      max-width:560px;
+      max-width:540px;
       min-height:100vh;
       padding:14px 14px 18px;
       display:flex;
@@ -90,6 +98,7 @@
       position:relative;
       z-index:1;
     }
+
     .shell-card{
       background:linear-gradient(180deg, rgba(31,13,15,.96), rgba(24,10,12,.96));
       border:1px solid var(--line);
@@ -104,6 +113,7 @@
       position:relative;
       overflow:hidden;
     }
+
     .hero::before{
       content:"";
       position:absolute;
@@ -113,6 +123,7 @@
         linear-gradient(180deg, rgba(255,255,255,.015), transparent 40%);
       pointer-events:none;
     }
+
     .logo-shell{
       width:86px;height:86px;margin:0 auto 12px;
       padding:5px;border-radius:28px;
@@ -126,6 +137,7 @@
     .logo-shell img{
       width:100%;height:100%;object-fit:cover;border-radius:22px;display:block;background:#fff;
     }
+
     .brand-title{
       font-size:1.34rem;
       font-weight:800;
@@ -143,6 +155,7 @@
       text-transform:uppercase;
       text-align:center;
     }
+
     .notice-bar{
       margin:14px auto 0;
       width:100%;
@@ -157,40 +170,6 @@
       line-height:1.55;
       text-align:center;
       box-shadow:0 10px 24px rgba(0,0,0,.18);
-    }
-
-    .top-system-board{
-      margin-top:12px;
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:10px;
-    }
-    .sys-box{
-      border-radius:18px;
-      padding:11px 10px;
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.07);
-      text-align:center;
-      min-height:82px;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      gap:5px;
-    }
-    .sys-box.wide{grid-column:1/-1}
-    .sys-key{
-      font-size:.70rem;
-      color:var(--muted);
-      font-weight:800;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-    }
-    .sys-val{
-      font-size:.84rem;
-      font-weight:800;
-      color:#fff2f2;
-      line-height:1.5;
-      word-break:break-word;
     }
 
     .panel{padding:16px}
@@ -208,6 +187,7 @@
       text-align:center;
       margin-bottom:12px;
     }
+
     .login-card,.register-card,.claim-card,.status-card,.success-card{
       border-radius:26px;
       background:linear-gradient(180deg, rgba(42,17,20,.95), rgba(28,11,13,.98));
@@ -217,6 +197,7 @@
       position:relative;
       overflow:hidden;
     }
+
     .success-card{
       display:none;
       margin-top:12px;
@@ -234,6 +215,7 @@
       font-weight:700;
       text-align:center;
     }
+
     .input-shell{
       background:rgba(255,255,255,.035);
       border:1.5px solid rgba(255,255,255,.08);
@@ -247,6 +229,7 @@
       box-shadow:0 0 0 4px rgba(255,75,87,.12);
       background:rgba(255,255,255,.045);
     }
+
     .password-shell{display:flex;align-items:center;gap:8px}
     .password-shell input{flex:1;min-width:0}
     .toggle-pass{
@@ -262,7 +245,11 @@
       flex-shrink:0;
     }
 
-    input[type="email"], input[type="password"], input[type="text"], input[type="date"], textarea{
+    input[type="email"],
+    input[type="password"],
+    input[type="text"],
+    input[type="date"],
+    textarea{
       width:100%;
       border:0;
       outline:0;
@@ -279,6 +266,7 @@
       line-height:1.6;
       text-align:left;
     }
+
     .password-rule,.password-strength{
       margin-top:2px;
       font-size:.72rem;
@@ -313,7 +301,11 @@
       justify-content:center;
     }
 
-    .btn-primary,.btn-secondary,.btn-danger,.btn-link-small,.btn-mini,.btn-admin,.btn-cute-scan,.btn-soft-small{
+    .action-row.center{
+      justify-content:center;
+    }
+
+    .btn-primary,.btn-secondary,.btn-danger,.btn-link-small,.btn-mini,.btn-admin,.upload-btn,.btn-qr-cute,.btn-check-cute{
       border-radius:999px;
       font-family:inherit;
       font-weight:800;
@@ -321,6 +313,7 @@
       transition:.18s ease;
       border:1px solid transparent;
     }
+
     .btn-primary{
       min-height:50px;
       flex:1;
@@ -349,6 +342,7 @@
       color:#ffd0d0;
       font-size:.78rem;
     }
+
     .btn-mini{
       min-height:42px;
       padding:0 14px;
@@ -357,6 +351,7 @@
       color:#fff0f1;
       font-size:.78rem;
     }
+
     .btn-link-small{
       width:100%;
       margin-top:12px;
@@ -366,6 +361,7 @@
       color:#ffd7db;
       font-size:.78rem;
     }
+
     .btn-admin{
       width:100%;
       min-height:46px;
@@ -379,11 +375,45 @@
       align-items:center;
       justify-content:center;
     }
-    .btn-blink{animation:blinkGlow 1.25s ease-in-out infinite}
+
+    .btn-qr-cute{
+      min-height:34px;
+      padding:0 14px;
+      border:1px solid rgba(255,182,201,.24);
+      background:linear-gradient(180deg, rgba(255,167,191,.22), rgba(255,117,151,.12));
+      color:#fff5f7;
+      font-size:.72rem;
+      box-shadow:0 6px 14px rgba(0,0,0,.14);
+      letter-spacing:.01em;
+    }
+    .btn-qr-cute:hover{
+      transform:translateY(-1px);
+      filter:brightness(1.04);
+    }
+
+    .btn-check-cute{
+      min-height:34px;
+      padding:0 14px;
+      border:1px solid rgba(255,255,255,.10);
+      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      color:#ffeef0;
+      font-size:.72rem;
+      box-shadow:0 6px 14px rgba(0,0,0,.12);
+      letter-spacing:.01em;
+    }
+    .btn-check-cute:hover{
+      transform:translateY(-1px);
+      filter:brightness(1.04);
+    }
+
+    .btn-blink{
+      animation:blinkGlow 1.25s ease-in-out infinite;
+    }
     @keyframes blinkGlow{
       0%,100%{box-shadow:0 0 0 rgba(255,75,87,0)}
       50%{box-shadow:0 0 0 4px rgba(255,75,87,.12)}
     }
+
     .shake{animation:shake .36s}
     @keyframes shake{
       0%,100%{transform:translateX(0)}
@@ -391,29 +421,6 @@
       40%{transform:translateX(4px)}
       60%{transform:translateX(-3px)}
       80%{transform:translateX(3px)}
-    }
-
-    .btn-cute-scan{
-      min-height:38px;
-      padding:0 14px;
-      font-size:.77rem;
-      color:#fff0f1;
-      background:linear-gradient(180deg, rgba(255,115,132,.18), rgba(255,75,87,.10));
-      border:1px solid rgba(255,145,156,.22);
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:6px;
-      box-shadow:0 8px 18px rgba(0,0,0,.14);
-    }
-    .btn-cute-scan:hover{transform:translateY(-1px)}
-    .btn-soft-small{
-      min-height:38px;
-      padding:0 12px;
-      font-size:.75rem;
-      background:rgba(255,255,255,.04);
-      border-color:rgba(255,255,255,.08);
-      color:#ffe8ea;
     }
 
     .alert-box{
@@ -449,6 +456,7 @@
       border-color:rgba(255,129,129,.14);
       color:#ffd4d4;
     }
+
     .helper-red{
       margin-top:14px;
       text-align:center;
@@ -483,10 +491,28 @@
       0%,100%{transform:scale(1);opacity:1}
       50%{transform:scale(1.18);opacity:.82}
     }
-    .live-title{font-size:.90rem;font-weight:800;color:#fff2f2}
-    .live-date{width:100%;font-size:.73rem;color:var(--sub)}
-    .live-list{display:grid;gap:8px;max-height:260px;overflow-y:auto}
-    .live-empty{text-align:center;font-size:.8rem;color:var(--sub);padding:8px 0}
+    .live-title{
+      font-size:.90rem;
+      font-weight:800;
+      color:#fff2f2;
+    }
+    .live-date{
+      width:100%;
+      font-size:.73rem;
+      color:var(--sub);
+    }
+    .live-list{
+      display:grid;
+      gap:8px;
+      max-height:260px;
+      overflow-y:auto;
+    }
+    .live-empty{
+      text-align:center;
+      font-size:.8rem;
+      color:var(--sub);
+      padding:8px 0;
+    }
     .live-item{
       display:flex;
       justify-content:space-between;
@@ -508,6 +534,24 @@
     }
     .live-status-text{font-size:.77rem;color:var(--sub)}
 
+    .status-pill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:5px 10px;
+      border-radius:999px;
+      font-size:.72rem;
+      font-weight:800;
+      line-height:1.2;
+      border:1px solid transparent;
+    }
+    .status-pill--green{background:rgba(120,211,154,.10);border-color:rgba(120,211,154,.18);color:#c9f7d6}
+    .status-pill--yellow{background:rgba(255,187,99,.10);border-color:rgba(255,187,99,.18);color:#ffe4ba}
+    .status-pill--red{background:rgba(255,129,129,.10);border-color:rgba(255,129,129,.16);color:#ffd3d3}
+    .status-pill--blue{background:rgba(154,183,255,.10);border-color:rgba(154,183,255,.15);color:#deebff}
+    .status-pill--purple{background:rgba(209,171,255,.10);border-color:rgba(209,171,255,.15);color:#eedfff}
+    .status-pill--orange{background:rgba(255,150,95,.10);border-color:rgba(255,150,95,.16);color:#ffd7b8}
+
     .member-mini{
       display:none;
       margin-top:10px;
@@ -526,10 +570,18 @@
       justify-content:center;
       gap:4px;
     }
-    .member-pill.wide{grid-column:1/-1}
-    .member-key{font-size:.70rem;color:var(--muted);font-weight:700}
+    .member-pill.wide{grid-column:1 / -1}
+    .member-key{
+      font-size:.70rem;
+      color:var(--muted);
+      font-weight:700;
+    }
     .member-val{
-      font-size:.82rem;color:#fff1f2;font-weight:800;line-height:1.45;word-break:break-word;
+      font-size:.82rem;
+      color:#fff1f2;
+      font-weight:800;
+      line-height:1.45;
+      word-break:break-word;
     }
 
     .cute-tag{
@@ -554,8 +606,18 @@
       background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
       border:1px solid rgba(255,255,255,.06);
     }
-    .claim-head-title,.status-head-title{font-size:1rem;font-weight:800;color:#fff4f4;margin:0}
-    .claim-head-sub,.status-head-sub{margin-top:6px;font-size:.78rem;line-height:1.6;color:var(--sub)}
+    .claim-head-title,.status-head-title{
+      font-size:1rem;
+      font-weight:800;
+      color:#fff4f4;
+      margin:0;
+    }
+    .claim-head-sub,.status-head-sub{
+      margin-top:6px;
+      font-size:.78rem;
+      line-height:1.6;
+      color:var(--sub);
+    }
 
     .expiry-box{
       margin-top:10px;
@@ -598,76 +660,6 @@
       font-weight:800;
     }
 
-    .system-status-card{
-      margin-top:12px;
-      padding:13px;
-      border-radius:22px;
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.025));
-      border:1px solid rgba(255,255,255,.07);
-    }
-    .system-status-title{
-      text-align:center;
-      font-size:.86rem;
-      font-weight:800;
-      color:#fff3f3;
-      margin-bottom:10px;
-    }
-    .status-board{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:8px;
-    }
-    .board-item{
-      border-radius:16px;
-      padding:10px;
-      text-align:center;
-      background:rgba(255,255,255,.035);
-      border:1px solid rgba(255,255,255,.06);
-    }
-    .board-item.wide{grid-column:1/-1}
-    .board-key{
-      font-size:.69rem;
-      color:var(--muted);
-      font-weight:800;
-      text-transform:uppercase;
-      letter-spacing:.08em;
-      margin-bottom:4px;
-    }
-    .board-val{
-      font-size:.8rem;
-      font-weight:800;
-      color:#fff0f1;
-      line-height:1.5;
-    }
-
-    .next-step-card{
-      margin-top:12px;
-      padding:14px;
-      border-radius:22px;
-      background:linear-gradient(180deg, rgba(255,187,99,.08), rgba(255,255,255,.025));
-      border:1px solid rgba(255,187,99,.12);
-      text-align:center;
-    }
-    .next-step-title{
-      font-size:.86rem;
-      font-weight:800;
-      color:#fff1dc;
-      margin-bottom:7px;
-    }
-    .next-step-text{
-      font-size:.8rem;
-      line-height:1.7;
-      color:#ffe6c0;
-      white-space:pre-line;
-    }
-
-    .quick-action-row{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:8px;
-      margin-top:12px;
-    }
-
     .payment-section{display:none}
     .payment-card{
       margin-top:10px;
@@ -707,10 +699,6 @@
       word-break:break-all;
     }
 
-    .scan-toggle-wrap{
-      margin-top:10px;
-      text-align:center;
-    }
     .qr-wrap{
       margin-top:12px;
       padding:12px;
@@ -746,14 +734,11 @@
     .upload-sub{font-size:.75rem;color:var(--sub);line-height:1.55;margin-top:6px}
     .upload-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px}
     .upload-btn{
-      border-radius:999px;
       border:1px solid rgba(255,255,255,.08);
       padding:10px 14px;
       background:rgba(255,255,255,.05);
       color:#fff1f2;
       font-size:.8rem;
-      font-weight:800;
-      cursor:pointer;
     }
     .hidden-file-input{position:absolute;left:-9999px;opacity:0}
     .file-name{margin-top:10px;font-size:.76rem;color:var(--sub);word-break:break-word}
@@ -775,11 +760,22 @@
     }
     .preview-meta{display:grid;gap:8px;width:100%}
 
-    .slip-bottom-notice{
+    .slip-bottom-box{
       margin-top:12px;
-      display:grid;
-      gap:8px;
+      display:none;
+      padding:12px 14px;
+      border-radius:16px;
+      font-size:.79rem;
+      line-height:1.65;
+      font-weight:800;
+      text-align:center;
+      border:1px solid transparent;
     }
+    .slip-bottom-box.show{display:block}
+    .slip-bottom-box.success{background:rgba(120,211,154,.10);border-color:rgba(120,211,154,.18);color:#c8f4d6}
+    .slip-bottom-box.error{background:rgba(255,129,129,.10);border-color:rgba(255,129,129,.16);color:#ffd5d5}
+    .slip-bottom-box.info{background:rgba(154,183,255,.10);border-color:rgba(154,183,255,.16);color:#dbe6ff}
+    .slip-bottom-box.warning{background:rgba(255,187,99,.10);border-color:rgba(255,187,99,.18);color:#ffe2b7}
 
     .note-counter{
       margin-top:4px;
@@ -800,6 +796,7 @@
       color:#fff2f2;
       font-weight:800;
       font-size:.78rem;
+      margin:4px;
     }
 
     #status,#authStatus,#statusPageText{
@@ -832,9 +829,22 @@
       flex-wrap:wrap;
       margin-bottom:10px;
     }
-    .queue-no{font-size:1.3rem;font-weight:800;color:#fff3f4}
-    .queue-sub{font-size:.74rem;color:var(--sub);margin-top:4px}
-    .progress-wrap{margin-top:10px;display:grid;gap:8px}
+    .queue-no{
+      font-size:1.3rem;
+      font-weight:800;
+      color:#fff3f4;
+    }
+    .queue-sub{
+      font-size:.74rem;
+      color:var(--sub);
+      margin-top:4px;
+    }
+
+    .progress-wrap{
+      margin-top:10px;
+      display:grid;
+      gap:8px;
+    }
     .progress-bar{
       width:100%;
       height:10px;
@@ -973,23 +983,21 @@
       margin-bottom:8px;
     }
 
-    .status-pill{
-      display:inline-flex;
-      align-items:center;
+    .slip-status-row{
+      margin-top:10px;
+      display:flex;
       justify-content:center;
-      padding:5px 10px;
-      border-radius:999px;
-      font-size:.72rem;
-      font-weight:800;
-      line-height:1.2;
-      border:1px solid transparent;
-      margin:2px;
+      align-items:center;
+      gap:8px;
+      flex-wrap:wrap;
     }
-    .status-pill--green{background:rgba(120,211,154,.10);border-color:rgba(120,211,154,.18);color:#c9f7d6}
-    .status-pill--yellow{background:rgba(255,187,99,.10);border-color:rgba(255,187,99,.18);color:#ffe4ba}
-    .status-pill--red{background:rgba(255,129,129,.10);border-color:rgba(255,129,129,.16);color:#ffd3d3}
-    .status-pill--blue{background:rgba(154,183,255,.10);border-color:rgba(154,183,255,.15);color:#deebff}
-    .status-pill--purple{background:rgba(209,171,255,.10);border-color:rgba(209,171,255,.15);color:#eedfff}
+
+    .slip-note{
+      margin-top:8px;
+      font-size:.76rem;
+      color:#dbc6c9;
+      line-height:1.55;
+    }
 
     .history-card{
       margin-top:12px;
@@ -1012,7 +1020,8 @@
       display:flex;
       gap:10px;
     }
-    .bottom-pair .btn-primary,.bottom-pair .btn-secondary{min-height:50px}
+    .bottom-pair .btn-primary,
+    .bottom-pair .btn-secondary{min-height:50px}
 
     .modal-backdrop{
       position:fixed;
@@ -1094,6 +1103,7 @@
       padding:24px 18px 20px;
       text-align:center;
     }
+
     .spinner-wrap{
       width:92px;height:92px;
       margin:0 auto 12px;
@@ -1116,8 +1126,20 @@
       letter-spacing:.02em;
     }
     @keyframes spin{to{transform:rotate(360deg)}}
-    .loading-title{font-size:1rem;font-weight:800;color:#fff2f3;text-align:center}
-    .loading-sub{margin-top:6px;font-size:.82rem;color:var(--sub);line-height:1.55;text-align:center}
+
+    .loading-title{
+      font-size:1rem;
+      font-weight:800;
+      color:#fff2f3;
+      text-align:center;
+    }
+    .loading-sub{
+      margin-top:6px;
+      font-size:.82rem;
+      color:var(--sub);
+      line-height:1.55;
+      text-align:center;
+    }
 
     .footer{
       margin-top:auto;
@@ -1148,7 +1170,6 @@
       .live-email{max-width:150px}
       .logo-shell{width:80px;height:80px}
       .notice-bar{font-size:.79rem}
-      .top-system-board,.status-board,.quick-action-row{grid-template-columns:1fr 1fr}
     }
   </style>
 </head>
@@ -1171,29 +1192,6 @@
 
       <div class="notice-bar" id="claimTimeText">
         เปิดรับแจ้งเคลม วันจันทร์–เสาร์<br />เวลา 07.00–19.00 น.
-      </div>
-
-      <div class="top-system-board">
-        <div class="sys-box">
-          <div class="sys-key">เว็บ</div>
-          <div class="sys-val" id="sysWeb">-</div>
-        </div>
-        <div class="sys-box">
-          <div class="sys-key">ไลน์</div>
-          <div class="sys-val" id="sysLine">-</div>
-        </div>
-        <div class="sys-box">
-          <div class="sys-key">รับเคลมตอนนี้</div>
-          <div class="sys-val" id="sysClaimNow">-</div>
-        </div>
-        <div class="sys-box">
-          <div class="sys-key">เวลารับเคลม</div>
-          <div class="sys-val" id="sysHours">-</div>
-        </div>
-        <div class="sys-box wide">
-          <div class="sys-key">สถานะล่าสุดจากระบบ</div>
-          <div class="sys-val" id="sysLastSync">กำลังเชื่อมต่อ...</div>
-        </div>
       </div>
     </section>
 
@@ -1223,6 +1221,7 @@
                 <button type="button" class="toggle-pass" data-target="loginPassword">แสดง</button>
               </div>
             </div>
+            <div class="password-rule">ต้องมี A-Z, a-z และ 0-9 อย่างน้อย 8 ตัว</div>
           </div>
 
           <div class="remember-row">
@@ -1321,7 +1320,9 @@
 
         <div class="success-card" id="registerSuccessCard">
           <div class="success-title">สมัครสมาชิกสำเร็จแล้ว</div>
-          <div class="success-desc">ตอนนี้คุณสามารถใช้อีเมลและรหัสผ่านที่ตั้งไว้เข้าสู่ระบบได้ทันที</div>
+          <div class="success-desc">
+            ตอนนี้คุณสามารถใช้อีเมลและรหัสผ่านที่ตั้งไว้เข้าสู่ระบบได้ทันที
+          </div>
         </div>
       </section>
 
@@ -1334,32 +1335,6 @@
           </div>
 
           <div id="claimAlert" class="alert-box"></div>
-
-          <div class="system-status-card">
-            <div class="system-status-title">สถานะระบบตอนนี้</div>
-            <div class="status-board">
-              <div class="board-item">
-                <div class="board-key">เว็บ</div>
-                <div class="board-val" id="claimBoardWeb">-</div>
-              </div>
-              <div class="board-item">
-                <div class="board-key">ไลน์</div>
-                <div class="board-val" id="claimBoardLine">-</div>
-              </div>
-              <div class="board-item">
-                <div class="board-key">รับเคลม</div>
-                <div class="board-val" id="claimBoardOpenNow">-</div>
-              </div>
-              <div class="board-item">
-                <div class="board-key">เวลาทำการ</div>
-                <div class="board-val" id="claimBoardHours">-</div>
-              </div>
-              <div class="board-item wide">
-                <div class="board-key">ข้อความระบบ</div>
-                <div class="board-val" id="claimBoardMessage">พร้อมให้บริการ</div>
-              </div>
-            </div>
-          </div>
 
           <div class="member-mini" id="memberMiniBox">
             <div class="member-pill wide">
@@ -1390,7 +1365,9 @@
                 </div>
               </div>
 
-              <button class="btn-secondary" id="btnCheckExpiry" type="button">เช็ควันหมดอายุจากระบบ</button>
+              <div class="action-row center">
+                <button class="btn-check-cute" id="btnCheckExpiry" type="button">🔎 เช็ควันหมดอายุ</button>
+              </div>
               <div id="expiryCheckResult" class="alert-box"></div>
             </div>
 
@@ -1421,8 +1398,8 @@
                 <button type="button" class="btn-link-small" id="btnCopyAccount">คัดลอกเลขบัญชี</button>
               </div>
 
-              <div class="scan-toggle-wrap">
-                <button type="button" class="btn-cute-scan" id="btnToggleQr">🩷 ต้องการสแกน</button>
+              <div class="action-row center">
+                <button type="button" class="btn-qr-cute" id="btnToggleQr">🩷 ต้องการสแกน QR</button>
               </div>
 
               <div class="qr-wrap" id="qrWrap">
@@ -1433,7 +1410,9 @@
 
               <div class="uploader">
                 <div class="upload-title">แนบสลิปโอนเงิน</div>
-                <div class="upload-sub">รองรับ JPG, PNG, WEBP ขนาดไม่เกิน 3 MB</div>
+                <div class="upload-sub">
+                  รองรับ JPG, PNG, WEBP ขนาดไม่เกิน 3 MB
+                </div>
 
                 <div class="upload-row">
                   <button type="button" class="upload-btn" id="btnPickSlip">เลือกไฟล์สลิป</button>
@@ -1454,25 +1433,8 @@
                 </div>
               </div>
 
-              <div class="slip-bottom-notice">
-                <div class="alert-box" id="slipStatusHint"></div>
-                <div class="alert-box info show" id="slipGuideBox">
-                  หลังแนบสลิปแล้ว ระบบจะแจ้งสถานะให้อีกครั้งด้านล่างทุกครั้ง
-                </div>
-              </div>
+              <div id="slipBottomAlert" class="slip-bottom-box"></div>
             </div>
-          </div>
-
-          <div class="next-step-card" id="nextStepCard" style="display:none;">
-            <div class="next-step-title">สิ่งที่ต้องทำต่อ</div>
-            <div class="next-step-text" id="nextStepText">-</div>
-          </div>
-
-          <div class="quick-action-row">
-            <button class="btn-soft-small" id="btnQuickStatus">ดูสถานะล่าสุด</button>
-            <button class="btn-soft-small" id="btnQuickRefreshClaim">รีเฟรชข้อมูล</button>
-            <button class="btn-soft-small" id="btnQuickCheckExpiry">เช็ควันหมดอายุ</button>
-            <button class="btn-soft-small" id="btnQuickContact">ติดต่อแอดมิน</button>
           </div>
 
           <div id="summary"></div>
@@ -1493,32 +1455,6 @@
             <div class="status-head-sub">ดูคิวล่าสุด สถานะล่าสุด และประวัติคำขอได้จากหน้านี้</div>
           </div>
 
-          <div class="system-status-card">
-            <div class="system-status-title">สถานะระบบตอนนี้</div>
-            <div class="status-board">
-              <div class="board-item">
-                <div class="board-key">เว็บ</div>
-                <div class="board-val" id="statusBoardWeb">-</div>
-              </div>
-              <div class="board-item">
-                <div class="board-key">ไลน์</div>
-                <div class="board-val" id="statusBoardLine">-</div>
-              </div>
-              <div class="board-item">
-                <div class="board-key">รับเคลม</div>
-                <div class="board-val" id="statusBoardOpenNow">-</div>
-              </div>
-              <div class="board-item">
-                <div class="board-key">เวลาทำการ</div>
-                <div class="board-val" id="statusBoardHours">-</div>
-              </div>
-              <div class="board-item wide">
-                <div class="board-key">ข้อความระบบ</div>
-                <div class="board-val" id="statusBoardMessage">พร้อมให้บริการ</div>
-              </div>
-            </div>
-          </div>
-
           <div class="status-grid">
             <div class="mini-box">
               <strong id="miniQueueNo">-</strong>
@@ -1536,11 +1472,6 @@
 
           <div id="statusPageText"></div>
           <div id="statusSummary"></div>
-
-          <div class="next-step-card" id="statusNextStepCard" style="display:none;">
-            <div class="next-step-title">สิ่งที่ต้องทำต่อ</div>
-            <div class="next-step-text" id="statusNextStepText">-</div>
-          </div>
 
           <div class="queue-card" id="queueCard" style="display:none;">
             <div class="queue-head">
@@ -1563,18 +1494,21 @@
 
           <div id="results"></div>
 
-          <div class="quick-action-row">
-            <button class="btn-soft-small" id="btnRefreshStatus">รีเฟรช</button>
-            <button class="btn-soft-small" id="btnBackToClaim">กลับหน้าแจ้งเคลม</button>
-            <button class="btn-soft-small" id="btnStatusContact">ติดต่อแอดมิน</button>
-            <button class="btn-danger" id="btnLogout">ออกจากระบบ</button>
-          </div>
+          <a class="btn-admin" id="btnContactAdmin" href="https://lin.ee/gAh3wAH" target="_blank" rel="noopener">
+            ติดต่อแอดมินเกี่ยวกับเคสนี้
+          </a>
 
           <div class="history-card">
             <div class="history-title">ประวัติคำขอของคุณ</div>
             <div id="historyResults">
               <div class="live-empty">ยังไม่มีสถานะคำขอ</div>
             </div>
+          </div>
+
+          <div class="action-row">
+            <button class="btn-mini" id="btnBackToClaim">กลับหน้าแจ้งเคลม</button>
+            <button class="btn-mini" id="btnRefreshStatus">รีเฟรช</button>
+            <button class="btn-danger" id="btnLogout">ออกจากระบบ</button>
           </div>
         </div>
       </section>
@@ -1620,7 +1554,7 @@
     const REMEMBER_KEY = "shop426_saved_login";
     const LAST_SLIP_KEY = "shop426_last_slip_preview";
     const LAST_VIEW_KEY = "shop426_last_view";
-    const LAST_QR_OPEN_KEY = "shop426_qr_open";
+    const LAST_QR_TOGGLE_KEY = "shop426_qr_open";
     const MAX_NOTE_LENGTH = 500;
     const MAX_SLIP_SIZE = 3 * 1024 * 1024;
     const STATUS_POLL_INTERVAL = 30000;
@@ -1644,15 +1578,9 @@
       lineEnabled: true,
       lineClaimEnabled: true,
       webClosedMessage: "ขออภัยค่ะ ตอนนี้ระบบหน้าเว็บปิดชั่วคราว",
-      lineClaimClosedMessage: "",
-      bothClosedMessage: "ขออภัยค่ะ ตอนนี้ระบบปิดชั่วคราวทั้งทางไลน์และทางเว็บ",
       paymentTitle: "ชำระค่าดูแล 19 บาท",
       paymentNote: "สำหรับปีสมัครที่กำหนด ระบบจะให้ชำระ 19 บาท และแนบหลักฐานเพื่อเข้าคิวเคลม",
-      expiredAccountText: "บัญชีหมดอายุแล้ว หากต้องการใช้บริการต่อติดต่อแอดมิน",
-      webClaimLink: "",
-      customerNotice: "",
-      routeMessage: "",
-      supportMessage: ""
+      expiredAccountText: "บัญชีหมดอายุแล้ว หากต้องการใช้บริการต่อติดต่อแอดมิน"
     };
 
     const state = {
@@ -1662,11 +1590,7 @@
       authLock: false,
       submitLock: false,
       webClosed: false,
-      lineClosed: false,
-      currentView: localStorage.getItem(LAST_VIEW_KEY) || "loginView",
-      slipBottomMessage: "",
-      lastHistory: [],
-      lastCurrent: null
+      qrOpen: localStorage.getItem(LAST_QR_TOGGLE_KEY) === "1"
     };
 
     let activeSlipFile = null;
@@ -1682,24 +1606,6 @@
     const claimTimeText = document.getElementById("claimTimeText");
     const onlineText = document.getElementById("onlineText");
     const statusInlineBox = document.getElementById("statusInlineBox");
-
-    const sysWeb = document.getElementById("sysWeb");
-    const sysLine = document.getElementById("sysLine");
-    const sysClaimNow = document.getElementById("sysClaimNow");
-    const sysHours = document.getElementById("sysHours");
-    const sysLastSync = document.getElementById("sysLastSync");
-
-    const claimBoardWeb = document.getElementById("claimBoardWeb");
-    const claimBoardLine = document.getElementById("claimBoardLine");
-    const claimBoardOpenNow = document.getElementById("claimBoardOpenNow");
-    const claimBoardHours = document.getElementById("claimBoardHours");
-    const claimBoardMessage = document.getElementById("claimBoardMessage");
-
-    const statusBoardWeb = document.getElementById("statusBoardWeb");
-    const statusBoardLine = document.getElementById("statusBoardLine");
-    const statusBoardOpenNow = document.getElementById("statusBoardOpenNow");
-    const statusBoardHours = document.getElementById("statusBoardHours");
-    const statusBoardMessage = document.getElementById("statusBoardMessage");
 
     const loginEmail = document.getElementById("loginEmail");
     const loginPassword = document.getElementById("loginPassword");
@@ -1741,13 +1647,6 @@
     const btnViewLastSlip = document.getElementById("btnViewLastSlip");
     const btnRemoveSlip = document.getElementById("btnRemoveSlip");
     const btnToggleQr = document.getElementById("btnToggleQr");
-    const qrWrap = document.getElementById("qrWrap");
-
-    const btnQuickStatus = document.getElementById("btnQuickStatus");
-    const btnQuickRefreshClaim = document.getElementById("btnQuickRefreshClaim");
-    const btnQuickCheckExpiry = document.getElementById("btnQuickCheckExpiry");
-    const btnQuickContact = document.getElementById("btnQuickContact");
-    const btnStatusContact = document.getElementById("btnStatusContact");
 
     const showRegisterBtn = document.getElementById("showRegisterBtn");
     const backToLoginBtn = document.getElementById("backToLoginBtn");
@@ -1775,14 +1674,14 @@
     const bankAccountNo = document.getElementById("bankAccountNo");
     const bankAccountName = document.getElementById("bankAccountName");
     const supportLine = document.getElementById("supportLine");
+    const qrWrap = document.getElementById("qrWrap");
 
     const slipInput = document.getElementById("slipInput");
     const slipInputCamera = document.getElementById("slipInputCamera");
     const fileName = document.getElementById("fileName");
-    const slipStatusHint = document.getElementById("slipStatusHint");
-    const slipGuideBox = document.getElementById("slipGuideBox");
     const slipPreviewWrap = document.getElementById("slipPreviewWrap");
     const slipPreview = document.getElementById("slipPreview");
+    const slipBottomAlert = document.getElementById("slipBottomAlert");
 
     const summary = document.getElementById("summary");
     const status = document.getElementById("status");
@@ -1798,11 +1697,6 @@
     const claimProgressLabel = document.getElementById("claimProgressLabel");
     const claimStepCard = document.getElementById("claimStepCard");
     const claimStepList = document.getElementById("claimStepList");
-
-    const nextStepCard = document.getElementById("nextStepCard");
-    const nextStepText = document.getElementById("nextStepText");
-    const statusNextStepCard = document.getElementById("statusNextStepCard");
-    const statusNextStepText = document.getElementById("statusNextStepText");
 
     const miniQueueNo = document.getElementById("miniQueueNo");
     const miniClaimType = document.getElementById("miniClaimType");
@@ -1828,16 +1722,19 @@
       return { ...data, ok: data.ok === true };
     }
 
-    function persistView(id){
-      state.currentView = id;
+    function saveLastView(id){
       localStorage.setItem(LAST_VIEW_KEY, id);
+    }
+
+    function getLastView(){
+      return localStorage.getItem(LAST_VIEW_KEY) || "loginView";
     }
 
     function setActiveView(id){
       [loginView, registerView, claimView, statusView].forEach(v => v.classList.remove("active"));
       document.getElementById(id).classList.add("active");
-      persistView(id);
       heroSection.style.display = (id === "loginView" || id === "registerView") ? "" : "none";
+      saveLastView(id);
     }
 
     function showToast(message="เรียบร้อยแล้ว"){
@@ -1853,11 +1750,30 @@
       if (timeout > 0){
         clearTimeout(el._timer);
         el._timer = setTimeout(() => {
-          if (el.id === "slipGuideBox") return;
           el.className = "alert-box";
           el.textContent = "";
         }, timeout);
       }
+    }
+
+    function showSlipBottom(message, type="info", timeout=5000){
+      if (!slipBottomAlert) return;
+      slipBottomAlert.className = "slip-bottom-box show " + type;
+      slipBottomAlert.textContent = message || "";
+      if (timeout > 0){
+        clearTimeout(slipBottomAlert._timer);
+        slipBottomAlert._timer = setTimeout(() => {
+          slipBottomAlert.className = "slip-bottom-box";
+          slipBottomAlert.textContent = "";
+        }, timeout);
+      }
+    }
+
+    function clearSlipBottom(){
+      if (!slipBottomAlert) return;
+      clearTimeout(slipBottomAlert._timer);
+      slipBottomAlert.className = "slip-bottom-box";
+      slipBottomAlert.textContent = "";
     }
 
     function shake(el){
@@ -1885,7 +1801,9 @@
       clearInterval(loadingTimer);
       loadingPercent = 100;
       spinnerPercent.textContent = "100%";
-      setTimeout(() => loadingOverlay.classList.remove("show"), 180);
+      setTimeout(() => {
+        loadingOverlay.classList.remove("show");
+      }, 180);
     }
 
     function escapeHtml(str){
@@ -1992,7 +1910,9 @@
 
     function saveLastSlip(dataUrl, name="slip"){
       try{
-        localStorage.setItem(LAST_SLIP_KEY, JSON.stringify({ dataUrl, name, updatedAt:new Date().toISOString() }));
+        localStorage.setItem(LAST_SLIP_KEY, JSON.stringify({
+          dataUrl, name, updatedAt:new Date().toISOString()
+        }));
       }catch(e){}
     }
 
@@ -2003,40 +1923,13 @@
       }catch(e){ return null; }
     }
 
-    function saveQrState(isOpen){
-      localStorage.setItem(LAST_QR_OPEN_KEY, isOpen ? "1" : "0");
-    }
-
-    function loadQrState(){
-      return localStorage.getItem(LAST_QR_OPEN_KEY) === "1";
-    }
-
-    function setQrVisible(open){
-      qrWrap.classList.toggle("show", !!open);
-      btnToggleQr.textContent = open ? "🩷 ซ่อน QR" : "🩷 ต้องการสแกน";
-      saveQrState(!!open);
-    }
-
     function clearLocalSession(silent=false){
       state.token = "";
       state.member = null;
-      state.lastHistory = [];
-      state.lastCurrent = null;
       localStorage.removeItem(TOKEN_KEY);
+      localStorage.removeItem(LAST_VIEW_KEY);
       resetClaimUI();
       if (!silent) setActiveView("loginView");
-    }
-
-    function setSlipStatus(message, type="ok"){
-      slipStatusHint.textContent = message || "";
-      slipStatusHint.className = "alert-box show " + (type === "error" ? "error" : type === "warning" ? "warning" : type === "info" ? "info" : "success");
-      state.slipBottomMessage = message || "";
-    }
-
-    function clearSlipStatus(){
-      state.slipBottomMessage = "";
-      slipStatusHint.textContent = "";
-      slipStatusHint.className = "alert-box";
     }
 
     function resetSlipPreview(){
@@ -2046,7 +1939,13 @@
       slipPreview.src = "";
       slipPreviewWrap.style.display = "none";
       fileName.textContent = "ยังไม่ได้เลือกไฟล์";
-      clearSlipStatus();
+      clearSlipBottom();
+    }
+
+    function applyQrVisibility(){
+      qrWrap.classList.toggle("show", state.qrOpen);
+      btnToggleQr.textContent = state.qrOpen ? "🫶 ซ่อน QR" : "🩷 ต้องการสแกน QR";
+      localStorage.setItem(LAST_QR_TOGGLE_KEY, state.qrOpen ? "1" : "0");
     }
 
     function setSlipFile(file, sourceInput){
@@ -2055,18 +1954,18 @@
         return;
       }
       if (!file.type.startsWith("image/")){
-        setSlipStatus("รองรับเฉพาะไฟล์รูปภาพเท่านั้น", "error");
+        showSlipBottom("รองรับเฉพาะไฟล์รูปภาพเท่านั้น", "error");
         shake(sourceInput === slipInput ? btnPickSlip : btnCameraSlip);
         return;
       }
       if (file.size > MAX_SLIP_SIZE){
-        setSlipStatus("ไฟล์สลิปมีขนาดใหญ่เกิน 3 MB", "error");
+        showSlipBottom("ไฟล์สลิปมีขนาดใหญ่เกิน 3 MB", "error");
         shake(sourceInput === slipInput ? btnPickSlip : btnCameraSlip);
         return;
       }
       activeSlipFile = file;
       fileName.textContent = file.name || "เลือกไฟล์แล้ว";
-      setSlipStatus("แนบสลิปเรียบร้อยแล้ว กรุณาตรวจสอบตัวอย่างด้านล่างก่อนส่งคำขอ", "success");
+      showSlipBottom("แนบสลิปเรียบร้อยแล้ว กรุณาตรวจสอบภาพก่อนส่งคำขอ", "success");
       showToast("แนบสลิปแล้ว");
 
       const reader = new FileReader();
@@ -2078,84 +1977,55 @@
       reader.readAsDataURL(file);
     }
 
+    function classifyStatusText(rawText){
+      const raw = String(rawText || "").trim();
+
+      if (!raw){
+        return { pillClass:"status-pill--yellow", label:"รอดำเนินการ", progress:20, step:1 };
+      }
+      if (raw.includes("ตรวจสลิปไม่ผ่าน") || raw.includes("สลิปไม่ผ่าน") || raw.includes("ไม่ผ่าน")){
+        return { pillClass:"status-pill--red", label:raw, progress:28, step:1 };
+      }
+      if (raw.includes("ตรวจสลิปผ่าน") || raw.includes("สลิปผ่าน")){
+        return { pillClass:"status-pill--green", label:raw, progress:60, step:2 };
+      }
+      if (raw.includes("รอตรวจสอบสลิป") || raw.includes("ตรวจสอบสลิป")){
+        return { pillClass:"status-pill--blue", label:raw, progress:35, step:1 };
+      }
+      if (raw.includes("ดึงเมลแล้ว") || raw.includes("เสร็จ") || raw.includes("สำเร็จ") || raw.includes("ใช้งานได้ปกติ")){
+        return { pillClass:"status-pill--green", label:raw, progress:100, step:3 };
+      }
+      if (raw.includes("กำลังดำเนินการ") || raw.includes("กำลัง")){
+        return { pillClass:"status-pill--orange", label:raw, progress:72, step:2 };
+      }
+      if (raw.includes("รอตรวจสอบ") || raw.includes("รอดำเนินการ")){
+        return { pillClass:"status-pill--yellow", label:raw, progress:40, step:1 };
+      }
+      return { pillClass:"status-pill--purple", label:raw, progress:48, step:1 };
+    }
+
     function decorateStatusText(text){
-      const raw = String(text || "").trim();
-      const safe = escapeHtml(raw || "-");
-      if (!raw) return '<span class="status-pill status-pill--yellow">รอดำเนินการ</span>';
-      if (raw.includes("ดึงเมลแล้ว") || raw.includes("เสร็จ") || raw.includes("สำเร็จ") || raw.includes("ใช้งานได้ปกติ") || raw.includes("ปิดเคส")){
-        return '<span class="status-pill status-pill--green">' + safe + '</span>';
-      }
-      if (raw.includes("รอตรวจสอบสลิป") || raw.includes("สลิป")){
-        return '<span class="status-pill status-pill--blue">' + safe + '</span>';
-      }
-      if (raw.includes("กำลัง") || raw.includes("รอตรวจสอบ") || raw.includes("รอดำเนินการ") || raw.includes("ตรวจสอบ")){
-        return '<span class="status-pill status-pill--yellow">' + safe + '</span>';
-      }
-      if (raw.includes("ไม่ผ่าน") || raw.includes("ไม่เข้าเงื่อนไข")){
-        return '<span class="status-pill status-pill--red">' + safe + '</span>';
-      }
-      return '<span class="status-pill status-pill--purple">' + safe + '</span>';
+      const x = classifyStatusText(text);
+      return '<span class="status-pill ' + x.pillClass + '">' + escapeHtml(x.label) + '</span>';
     }
 
-    function decorateOpenClose(text, open){
-      if (open) return '<span class="status-pill status-pill--green">' + escapeHtml(text) + '</span>';
-      return '<span class="status-pill status-pill--red">' + escapeHtml(text) + '</span>';
+    function getSlipStatusText(item){
+      const raw = String((item && (item.slipStatus || item.slipText || item.slipResult)) || "").trim();
+      if (raw) return raw;
+
+      const statusText = String(item && item.statusText || "").trim();
+      if (statusText.includes("รอตรวจสอบสลิป")) return "รอตรวจสอบสลิป";
+      if (statusText.includes("ตรวจสลิปผ่าน") || statusText.includes("สลิปผ่าน")) return "ตรวจสลิปผ่านแล้ว";
+      if (statusText.includes("ตรวจสลิปไม่ผ่าน") || statusText.includes("สลิปไม่ผ่าน")) return "ตรวจสลิปไม่ผ่าน";
+      if ((item && item.claimType) === "paid") return "มีการใช้สลิปในรายการนี้";
+      return "";
     }
 
-    function buildHoursText(){
-      const s = String(claimConfig.claimStartHour || 7).padStart(2,"0");
-      const e = String(claimConfig.claimEndHour || 19).padStart(2,"0");
-      return `${s}:00 - ${e}:00`;
-    }
-
-    function getSystemMessageText(){
-      if (!claimConfig.webEnabled && !claimConfig.lineEnabled){
-        return claimConfig.bothClosedMessage || "ขออภัยค่ะ ตอนนี้ระบบปิดชั่วคราวทั้งทางเว็บและไลน์";
-      }
-      if (!claimConfig.webEnabled){
-        return claimConfig.webClosedMessage || "ขออภัยค่ะ ตอนนี้ระบบหน้าเว็บปิดชั่วคราว";
-      }
-      if (!claimConfig.lineEnabled){
-        return "ตอนนี้ช่องทางไลน์ปิดชั่วคราว";
-      }
-      if (!claimConfig.lineClaimEnabled){
-        return claimConfig.lineClaimClosedMessage || "ตอนนี้ไลน์ปิดรับเคลมชั่วคราว";
-      }
-      if (!state.isClaimOpen){
-        return claimConfig.outOfTimeErrorText || "วันนี้ปิดรับแล้ว กรุณากลับมาใหม่ในเวลาที่กำหนด";
-      }
-      return "พร้อมให้บริการ";
-    }
-
-    function renderSystemBoards(){
-      const webOn = !!claimConfig.webEnabled;
-      const lineOn = !!claimConfig.lineEnabled;
-      const claimOn = !!state.isClaimOpen;
-
-      const webHtml = decorateOpenClose(webOn ? "เปิด" : "ปิด", webOn);
-      const lineHtml = decorateOpenClose(lineOn ? "เปิด" : "ปิด", lineOn);
-      const claimHtml = decorateOpenClose(claimOn ? "เปิด" : "ปิด", claimOn);
-      const hours = buildHoursText();
-      const sysMsg = getSystemMessageText();
-      const nowText = "อัปเดต " + formatThaiDateTime(new Date().toISOString());
-
-      sysWeb.innerHTML = webHtml;
-      sysLine.innerHTML = lineHtml;
-      sysClaimNow.innerHTML = claimHtml;
-      sysHours.textContent = hours;
-      sysLastSync.textContent = nowText;
-
-      claimBoardWeb.innerHTML = webHtml;
-      claimBoardLine.innerHTML = lineHtml;
-      claimBoardOpenNow.innerHTML = claimHtml;
-      claimBoardHours.textContent = hours;
-      claimBoardMessage.textContent = sysMsg;
-
-      statusBoardWeb.innerHTML = webHtml;
-      statusBoardLine.innerHTML = lineHtml;
-      statusBoardOpenNow.innerHTML = claimHtml;
-      statusBoardHours.textContent = hours;
-      statusBoardMessage.textContent = sysMsg;
+    function decorateSlipStatus(item){
+      const slipText = getSlipStatusText(item);
+      if (!slipText) return "";
+      const x = classifyStatusText(slipText);
+      return '<span class="status-pill ' + x.pillClass + '">' + escapeHtml(slipText) + '</span>';
     }
 
     function renderConfigToUI(){
@@ -2166,7 +2036,6 @@
       bankAccountNo.textContent = claimConfig.bankAccountNo || "0628794251";
       bankAccountName.textContent = claimConfig.bankAccountName || "นภัทรธมณฑ์ ฤทธิ์ชัยศักดิ์";
       supportLine.textContent = claimConfig.supportLine || "@467dlpti";
-      renderSystemBoards();
     }
 
     function getEffectiveClaimOpenState(){
@@ -2182,7 +2051,6 @@
       state.isClaimOpen = getEffectiveClaimOpenState();
       onlineText.textContent = state.isClaimOpen ? "เปิดรับเคลม" : "ปิดรับเคลม";
       statusInlineBox.classList.toggle("closed", !state.isClaimOpen);
-      renderSystemBoards();
     }
 
     function updateNoteCounter(){
@@ -2195,7 +2063,6 @@
         expiryFixedBox.style.display = "none";
         expiryPickerBlock.style.display = "";
         paymentSection.style.display = "none";
-        nextStepCard.style.display = "none";
         return;
       }
 
@@ -2219,17 +2086,17 @@
       }
 
       syncPaymentSection();
-      renderNextStepForClaimForm();
     }
 
     function syncPaymentSection(){
       const year = normalizeText(state.member && state.member.signupYearThai || "");
-      const shouldShow = !!(year && year === String(claimConfig.paidYear));
-      paymentSection.style.display = shouldShow ? "block" : "none";
-      if (!shouldShow){
+      if (year && year === String(claimConfig.paidYear)){
+        paymentSection.style.display = "block";
+      } else {
+        paymentSection.style.display = "none";
         resetSlipPreview();
       }
-      setQrVisible(shouldShow ? loadQrState() : false);
+      applyQrVisibility();
     }
 
     function resetClaimUI(){
@@ -2251,9 +2118,6 @@
       miniQueueNo.textContent = "-";
       miniClaimType.textContent = "-";
       miniLastTime.textContent = "-";
-      nextStepCard.style.display = "none";
-      statusNextStepCard.style.display = "none";
-      setQrVisible(false);
     }
 
     async function fetchJson(url, options={}){
@@ -2297,8 +2161,6 @@
         updateMemberUI();
       }
       if (data && Array.isArray(data.history)){
-        state.lastHistory = data.history;
-        state.lastCurrent = data.history[0] || null;
         renderHistory(data.history);
         renderLatestStatusPage({ history:data.history, current:data.history[0] || null });
       }
@@ -2323,20 +2185,6 @@
       });
     }
 
-    function getClaimTypeText(item){
-      return (item.claimType || "").toLowerCase() === "paid" ? "แพ็กดูแล 19 บาท" : "เคลมฟรี";
-    }
-
-    function getSlipStatusText(statusText, claimType){
-      const s = String(statusText || "");
-      if ((claimType || "").toLowerCase() !== "paid") return "ไม่ต้องใช้สลิป";
-      if (s.includes("ไม่ผ่าน")) return "สลิปไม่ผ่าน";
-      if (s.includes("รอตรวจสอบสลิป")) return "รอตรวจสลิป";
-      if (s.includes("สลิปผ่าน")) return "สลิปผ่าน";
-      if (s.includes("ดึงเมลแล้ว") || s.includes("เสร็จ") || s.includes("สำเร็จ")) return "ตรวจแล้ว";
-      return "แนบแล้ว / รอตรวจ";
-    }
-
     function renderHistory(items){
       historyResults.innerHTML = "";
       if (!Array.isArray(items) || !items.length){
@@ -2346,11 +2194,12 @@
       items.forEach(item => {
         const claimType = (item.claimType || "").toLowerCase() === "paid" ? "paid" : "free";
         const tagText = claimType === "paid" ? "แพ็กดูแล 19 บาท" : "เคลมฟรี";
-        const slipText = getSlipStatusText(item.statusText || "", claimType);
+        const slipHtml = decorateSlipStatus(item);
+
         const card = document.createElement("div");
         card.className = "result-item";
         card.innerHTML =
-          '<div class="item-header">Request History</div>' +
+          '<div class="item-header">Request Status</div>' +
           '<div class="item-email">' + escapeHtml(item.email || "-") + '</div>' +
           '<div class="item-tag ' + (claimType === "paid" ? "paid" : "") + '">' + escapeHtml(tagText) + '</div>' +
           '<div class="item-meta">' +
@@ -2358,12 +2207,10 @@
             '<span>วันหมดอายุ ' + escapeHtml(item.expiry || "-") + '</span>' +
           '</div>' +
           '<div class="item-meta">' +
-            '<span>สลิป: ' + escapeHtml(slipText) + '</span>' +
-            '<span>แจ้งเมื่อ ' + escapeHtml(formatThaiDateTime(item.createdAt || "")) + '</span>' +
+            '<span>อัปเดต ' + escapeHtml(formatThaiDateTime(item.updatedAt || item.createdAt || "")) + '</span>' +
           '</div>' +
-          '<div class="item-body">' +
-            decorateStatusText(item.statusText || "รอดำเนินการ") +
-          '</div>';
+          '<div class="item-body">' + decorateStatusText(item.statusText || "รอดำเนินการ") + '</div>' +
+          (slipHtml ? '<div class="slip-status-row"><span style="font-size:.74rem;color:#cdb8bc;font-weight:700;">สถานะสลิป</span>' + slipHtml + '</div>' : '');
         historyResults.appendChild(card);
       });
     }
@@ -2376,17 +2223,8 @@
 
     function renderClaimSteps(statusText=""){
       const steps = ["รับคำขอแล้ว","รอตรวจสอบ","กำลังดำเนินการ","เสร็จแล้ว"];
-      let activeIndex = 0;
-      const raw = String(statusText || "");
-      if (!raw){
-        claimStepCard.style.display = "none";
-        claimStepList.innerHTML = "";
-        return;
-      }
-      if (raw.includes("รอตรวจสอบสลิป")) activeIndex = 1;
-      else if (raw.includes("กำลัง") || raw.includes("รอดำเนินการ") || raw.includes("รอตรวจสอบ")) activeIndex = 1;
-      else if (raw.includes("ดึงเมลแล้ว") || raw.includes("สลิปผ่าน")) activeIndex = 2;
-      else if (raw.includes("เสร็จ") || raw.includes("สำเร็จ") || raw.includes("ใช้งานได้ปกติ") || raw.includes("ปิดเคส")) activeIndex = 3;
+      const x = classifyStatusText(statusText);
+      let activeIndex = x.step;
 
       claimStepList.innerHTML = "";
       steps.forEach((step, i) => {
@@ -2397,70 +2235,13 @@
       });
       claimStepCard.style.display = "block";
 
-      const progressMap = [15, 40, 72, 100];
-      claimProgressFill.style.width = progressMap[activeIndex] + "%";
-      claimProgressLabel.textContent = steps[activeIndex];
-    }
-
-    function getNextStepMessage(current){
-      if (!current){
-        return "ยังไม่มีคำขอเคลมในระบบ\nกดกลับไปหน้าแจ้งเคลมเพื่อเริ่มรายการใหม่ได้เลย";
-      }
-      const s = String(current.statusText || "");
-      const claimType = String(current.claimType || "").toLowerCase();
-
-      if (claimType === "paid" && !activeSlipFile && s === ""){
-        return "กรุณาแนบสลิปก่อนส่งคำขอ\nเมื่อแนบแล้ว ระบบจะแจ้งสถานะให้ด้านล่างทันที";
-      }
-      if (s.includes("รอตรวจสอบสลิป")){
-        return "ตอนนี้ระบบรับสลิปของคุณแล้ว\nรอแอดมินตรวจสอบสลิปก่อนเข้าสู่ขั้นตอนถัดไป";
-      }
-      if (s.includes("ไม่ผ่าน")){
-        return "สลิปยังไม่ผ่านการตรวจสอบ\nกรุณาแนบสลิปใหม่ให้ชัดเจน แล้วส่งคำขออีกครั้ง";
-      }
-      if (s.includes("รอดำเนินการ") || s.includes("รอตรวจสอบ")){
-        return "ระบบรับคำขอของคุณแล้ว\nตอนนี้รอแอดมินตรวจสอบตามลำดับคิว";
-      }
-      if (s.includes("กำลัง")){
-        return "ตอนนี้แอดมินกำลังดำเนินการให้\nรอติดตามผลในหน้านี้ได้เลย";
-      }
-      if (s.includes("ดึงเมลแล้ว") || s.includes("เสร็จ") || s.includes("สำเร็จ") || s.includes("ปิดเคส")){
-        return "เคสนี้ดำเนินการเรียบร้อยแล้ว\nหากยังพบปัญหา สามารถติดต่อแอดมินได้ทันที";
-      }
-      return "ระบบรับข้อมูลของคุณแล้ว\nสามารถติดตามสถานะได้จากหน้านี้";
-    }
-
-    function renderNextStepForClaimForm(){
-      if (!state.member){
-        nextStepCard.style.display = "none";
-        return;
-      }
-      let text = "";
-      if (state.member.isExpired){
-        text = claimConfig.expiredAccountText || "บัญชีหมดอายุแล้ว หากต้องการใช้บริการต่อติดต่อแอดมิน";
-      } else if (!claimConfig.webEnabled && !claimConfig.lineEnabled){
-        text = claimConfig.bothClosedMessage || "ตอนนี้ระบบปิดทั้งเว็บและไลน์";
-      } else if (!claimConfig.webEnabled){
-        text = claimConfig.webClosedMessage || "ตอนนี้หน้าเว็บปิดชั่วคราว";
-      } else if (!state.isClaimOpen){
-        text = claimConfig.outOfTimeErrorText || "วันนี้ปิดรับแล้ว กรุณากลับมาใหม่ในเวลาที่กำหนด";
-      } else if (String(state.member.signupYearThai || "") === String(claimConfig.paidYear || "")){
-        text = activeSlipFile
-          ? "แนบสลิปเรียบร้อยแล้ว\nตรวจสอบข้อมูลแล้วกดส่งคำขอได้เลย"
-          : "บัญชีนี้ต้องแนบสลิปก่อนส่งคำขอ\nหากต้องการสแกน กดปุ่ม “ต้องการสแกน” ได้";
-      } else {
-        text = "กรอกวันหมดอายุและรายละเอียดให้ครบ\nจากนั้นกดส่งคำขอได้เลย";
-      }
-      nextStepText.textContent = text;
-      nextStepCard.style.display = "block";
+      claimProgressFill.style.width = x.progress + "%";
+      claimProgressLabel.textContent = steps[Math.min(activeIndex, steps.length - 1)];
     }
 
     function renderLatestStatusPage(res){
       const history = Array.isArray(res && res.history) ? res.history : [];
       const current = (res && res.current) || (history.length ? history[0] : null);
-
-      state.lastHistory = history;
-      state.lastCurrent = current;
 
       results.innerHTML = "";
       statusSummary.innerHTML = "";
@@ -2470,23 +2251,26 @@
         fillMiniStats(null);
         queueCard.style.display = "none";
         claimStepCard.style.display = "none";
-        statusNextStepCard.style.display = "block";
-        statusNextStepText.textContent = getNextStepMessage(null);
         results.innerHTML = '<div class="live-empty">คุณยังไม่มีรายการเคลมในระบบ</div>';
         return;
       }
 
       fillMiniStats(current);
 
-      const claimLabel = getClaimTypeText(current);
-      const slipText = getSlipStatusText(current.statusText || "", current.claimType || "");
-      statusSummary.innerHTML = '<div class="summary-pill">คำขอล่าสุด: ' + escapeHtml(claimLabel) + '</div>';
+      const claimLabel = current.claimType === "paid" ? "แพ็กดูแล 19 บาท" : "เคลมฟรีตามเงื่อนไข";
+      const slipText = getSlipStatusText(current);
+      const slipHtml = decorateSlipStatus(current);
+
+      statusSummary.innerHTML =
+        '<div class="summary-pill">คำขอล่าสุด: ' + escapeHtml(claimLabel) + '</div>' +
+        '<div class="summary-pill">คิวล่าสุด: #' + escapeHtml(current.queueNo || "-") + '</div>' +
+        '<div class="summary-pill">อัปเดต: ' + escapeHtml(formatShortThaiTime(current.updatedAt || current.createdAt || "")) + '</div>' +
+        (slipHtml ? '<div style="margin-top:8px;">' + slipHtml + '</div>' : '');
+
       statusPageText.innerHTML =
         "<span class='status-strong'>" + decorateStatusText(current.statusText || "รอดำเนินการ") + "</span><br>" +
-        "<span class='status-time'>รับเรื่องเมื่อ: " + escapeHtml(formatThaiDateTime(current.createdAt || current.updatedAt || "")) + "</span>";
-
-      statusNextStepCard.style.display = "block";
-      statusNextStepText.textContent = getNextStepMessage(current);
+        "<span class='status-time'>รับเรื่องเมื่อ: " + escapeHtml(formatThaiDateTime(current.createdAt || current.updatedAt || "")) + "</span>" +
+        (slipText ? "<br><span class='status-time'>สถานะสลิป: " + escapeHtml(slipText) + "</span>" : "");
 
       queueCard.style.display = "block";
       queueNumberBig.textContent = "#" + (current.queueNo || "-");
@@ -2505,17 +2289,16 @@
           '<span>คิวเคลม ' + escapeHtml(current.queueNo || "-") + '</span>' +
           '<span>วันหมดอายุ ' + escapeHtml(current.expiry || "-") + '</span>' +
         '</div>' +
-        '<div class="item-meta">' +
-          '<span>สถานะสลิป: ' + escapeHtml(slipText) + '</span>' +
-          '<span>อัปเดต ' + escapeHtml(formatThaiDateTime(current.updatedAt || current.createdAt || "")) + '</span>' +
-        '</div>' +
-        '<div class="item-body">' + decorateStatusText(current.statusText || "รอดำเนินการ") + '</div>';
+        '<div class="item-body">' + decorateStatusText(current.statusText || "รอดำเนินการ") + '</div>' +
+        (slipHtml ? '<div class="slip-status-row"><span style="font-size:.74rem;color:#cdb8bc;font-weight:700;">สถานะสลิป</span>' + slipHtml + '</div>' : '') +
+        (slipText ? '<div class="slip-note">' + escapeHtml(slipText) + '</div>' : '');
       results.appendChild(card);
     }
 
     function validateLogin(){
       const email = normalizeEmail(loginEmail.value);
       const password = normalizeText(loginPassword.value);
+
       if (!email || !loginEmail.checkValidity()){
         showAlert(topAlert, "กรุณากรอกอีเมลให้ถูกต้อง", "error");
         shake(loginEmailField);
@@ -2572,41 +2355,38 @@
         showAlert(topAlert, "กรุณาเข้าสู่ระบบก่อนใช้งาน", "warning");
         return false;
       }
-      if (state.submitLock){
-        showAlert(claimAlert, "กำลังส่งคำขออยู่ กรุณารอสักครู่", "warning");
-        return false;
-      }
+
       if (state.member && state.member.isExpired){
         showAlert(claimAlert, claimConfig.expiredAccountText || "บัญชีหมดอายุแล้ว หากต้องการใช้บริการต่อติดต่อแอดมิน", "warning", 7000);
         shake(claimAlert);
         return false;
       }
-      if (!claimConfig.webEnabled){
-        showAlert(claimAlert, claimConfig.webClosedMessage || "ขออภัยค่ะ ตอนนี้ระบบหน้าเว็บปิดชั่วคราว", "warning");
-        shake(btnSubmit);
-        return false;
-      }
+
       if (!state.isClaimOpen){
         showAlert(claimAlert, claimConfig.outOfTimeErrorText || "วันนี้ปิดรับแล้ว กรุณากลับมาใหม่ในเวลาที่กำหนด", "warning");
         shake(btnSubmit);
         return false;
       }
+
       if (!expiry){
         showAlert(claimAlert, "กรุณาระบุวันหมดอายุสมาชิก", "error");
         shake(expiryField);
         return false;
       }
+
       if (note.length > MAX_NOTE_LENGTH){
         showAlert(claimAlert, "ฝากข้อความได้ไม่เกิน " + MAX_NOTE_LENGTH + " ตัวอักษร", "error");
         shake(noteField);
         return false;
       }
+
       if (String(state.member.signupYearThai || "") === String(claimConfig.paidYear || "") && !activeSlipFile){
         showAlert(claimAlert, "กรุณาแนบสลิปก่อนส่งคำขอ", "error");
-        setSlipStatus("กรุณาแนบสลิปก่อนส่งคำขอ", "error");
+        showSlipBottom("กรุณาแนบสลิปก่อนส่งคำขอ", "error");
         shake(btnPickSlip);
         return false;
       }
+
       return true;
     }
 
@@ -2665,11 +2445,18 @@
         updateMemberUI();
         showToast("เข้าสู่ระบบสำเร็จ");
 
-        const preferred = localStorage.getItem(LAST_VIEW_KEY) || "claimView";
-        setActiveView(preferred === "statusView" ? "statusView" : "claimView");
+        const targetView = getLastView();
+        if (targetView === "statusView" || targetView === "claimView"){
+          setActiveView(targetView);
+        } else {
+          setActiveView("claimView");
+        }
 
         await bootstrapApp();
-        if (preferred === "statusView") await refreshStatusPage(true);
+
+        if (targetView === "statusView"){
+          await refreshStatusPage();
+        }
       }catch(e){
         showAlert(topAlert, "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้ง", "error");
         shake(btnLogin);
@@ -2800,33 +2587,28 @@
       return Array.isArray(data.history) ? data.history : [];
     }
 
-    async function refreshStatusPage(silent=false){
+    async function refreshStatusPage(){
       if (!state.token){
         setActiveView("loginView");
         return;
       }
-      if (!silent) showLoading();
+      showLoading();
       try{
         const items = await fetchClaimHistory();
-        state.lastHistory = items;
-        state.lastCurrent = items[0] || null;
         renderHistory(items);
         renderLatestStatusPage({ history:items, current:items[0] || null });
-        if (!silent) showToast("รีเฟรชแล้ว");
+        showToast("รีเฟรชแล้ว");
       }catch(e){
-        if (!silent){
-          showAlert(claimAlert, "รีเฟรชสถานะไม่สำเร็จ", "error");
-          shake(btnRefreshStatus);
-        }
+        showAlert(claimAlert, "รีเฟรชสถานะไม่สำเร็จ", "error");
+        shake(btnRefreshStatus);
       }finally{
-        if (!silent) hideLoading();
+        hideLoading();
       }
     }
 
     async function doSubmitClaim(){
       state.submitLock = true;
       btnSubmit.disabled = true;
-      btnConfirmSubmit.disabled = true;
       showLoading();
 
       try{
@@ -2852,10 +2634,7 @@
 
         if (!data || data.ok === false){
           showAlert(claimAlert, data.message || "ส่งคำขอไม่สำเร็จ", "error");
-          status.innerHTML = "<span class='status-error'>" + escapeHtml(data.message || "ส่งคำขอไม่สำเร็จ") + "</span>";
-          if (data && data.message && /สลิป/i.test(data.message)) {
-            setSlipStatus(data.message, "error");
-          }
+          showSlipBottom(data.message || "ส่งคำขอไม่สำเร็จ", "error");
           shake(btnSubmit);
           return;
         }
@@ -2866,42 +2645,43 @@
         }
 
         if (data.todaySummary) renderLiveStatus(data.todaySummary);
-
         if (data.current){
-          state.lastCurrent = data.current;
           renderLatestStatusPage({ history:[data.current], current:data.current });
         }
 
-        summary.innerHTML = '<div class="summary-pill">ส่งคำขอเรียบร้อยแล้ว</div>';
+        summary.innerHTML =
+          '<div class="summary-pill">ส่งคำขอเรียบร้อยแล้ว</div>' +
+          '<div class="summary-pill">สถานะถูกอัปเดตแล้ว</div>';
+
         status.innerHTML =
           "<span class='status-strong'>" + escapeHtml(data.message || "ระบบรับคำขอของคุณแล้ว") + "</span><br>" +
-          "<span class='status-time'>ระบบจะแจ้งสถานะให้ทุกครั้งที่มีการอัปเดต</span>";
+          "<span class='status-time'>สามารถติดตามสถานะได้จากหน้าสถานะการเคลม</span>";
         status.className = "status-ok";
-
-        if (String(state.member && state.member.signupYearThai || "") === String(claimConfig.paidYear || "")){
-          setSlipStatus("ระบบรับสลิปและคำขอของคุณแล้ว ตอนนี้รอแอดมินตรวจสอบสลิป", "success");
-        }
 
         noteInput.value = "";
         updateNoteCounter();
 
-        showAlert(claimAlert, "ส่งคำขอสำเร็จแล้ว", "success", 5000);
-        showToast("ส่งคำขอสำเร็จ");
+        if (String(state.member && state.member.signupYearThai || "") !== String(claimConfig.paidYear || "")){
+          resetSlipPreview();
+        } else {
+          showSlipBottom("ระบบรับสลิปและส่งคำขอเรียบร้อยแล้ว สามารถดูสถานะต่อด้านล่างหรือในหน้าสถานะได้เลย", "success", 7000);
+        }
 
-        setTimeout(async () => {
+        showAlert(claimAlert, "ส่งคำขอสำเร็จแล้ว และอัปเดตสถานะล่าสุดเรียบร้อย", "success", 5000);
+        showToast("ส่งคำขอสำเร็จ");
+        setTimeout(() => {
           setActiveView("statusView");
-          await refreshStatusPage(true);
-        }, 400);
+          refreshStatusPage();
+        }, 500);
 
       }catch(e){
         showAlert(claimAlert, "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้ง", "error");
-        status.innerHTML = "<span class='status-error'>เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้ง</span>";
+        showSlipBottom("เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้ง", "error");
         shake(btnSubmit);
       }finally{
         hideLoading();
         state.submitLock = false;
         btnSubmit.disabled = false;
-        btnConfirmSubmit.disabled = false;
       }
     }
 
@@ -2940,63 +2720,47 @@
     btnRegister.addEventListener("click", handleRegister);
     btnForgotPassword.addEventListener("click", handleForgotPassword);
     btnLogout.addEventListener("click", handleLogout);
-    btnRefreshStatus.addEventListener("click", () => refreshStatusPage(false));
+    btnRefreshStatus.addEventListener("click", refreshStatusPage);
     btnBackToClaim.addEventListener("click", backToClaim);
     btnGotoStatus.addEventListener("click", gotoStatus);
     btnSubmit.addEventListener("click", handleSubmit);
     btnCheckExpiry.addEventListener("click", handleCheckExpiry);
 
-    btnQuickStatus.addEventListener("click", gotoStatus);
-    btnQuickRefreshClaim.addEventListener("click", async () => {
-      showLoading();
-      try{
-        await bootstrapApp();
-        renderNextStepForClaimForm();
-        showToast("รีเฟรชข้อมูลแล้ว");
-      }finally{
-        hideLoading();
-      }
+    btnToggleQr.addEventListener("click", () => {
+      state.qrOpen = !state.qrOpen;
+      applyQrVisibility();
     });
-    btnQuickCheckExpiry.addEventListener("click", handleCheckExpiry);
-    btnQuickContact.addEventListener("click", () => window.open("https://lin.ee/gAh3wAH", "_blank"));
-    btnStatusContact.addEventListener("click", () => window.open("https://lin.ee/gAh3wAH", "_blank"));
 
     btnPickSlip.addEventListener("click", () => slipInput.click());
     btnCameraSlip.addEventListener("click", () => slipInputCamera.click());
 
-    btnToggleQr.addEventListener("click", () => {
-      const next = !qrWrap.classList.contains("show");
-      setQrVisible(next);
-    });
-
     slipInput.addEventListener("change", () => {
       const file = slipInput.files && slipInput.files[0] ? slipInput.files[0] : null;
       setSlipFile(file, slipInput);
-      renderNextStepForClaimForm();
     });
 
     slipInputCamera.addEventListener("change", () => {
       const file = slipInputCamera.files && slipInputCamera.files[0] ? slipInputCamera.files[0] : null;
       setSlipFile(file, slipInputCamera);
-      renderNextStepForClaimForm();
     });
 
     btnViewLastSlip.addEventListener("click", () => {
       const last = loadLastSlip();
       if (!last || !last.dataUrl){
+        showSlipBottom("ยังไม่มีสลิปล่าสุด", "info");
         showToast("ยังไม่มีสลิปล่าสุด");
         return;
       }
       slipPreview.src = last.dataUrl;
       slipPreviewWrap.style.display = "flex";
       fileName.textContent = last.name || "slip";
-      setSlipStatus("แสดงสลิปล่าสุดแล้ว", "info");
+      showSlipBottom("แสดงสลิปล่าสุดแล้ว", "info");
       showToast("แสดงสลิปล่าสุดแล้ว");
     });
 
     btnRemoveSlip.addEventListener("click", () => {
       resetSlipPreview();
-      renderNextStepForClaimForm();
+      showSlipBottom("ลบรูปสลิปแล้ว", "warning");
       showToast("ลบรูปสลิปแล้ว");
     });
 
@@ -3035,15 +2799,18 @@
     loginPassword.addEventListener("input", () => { if (rememberPassword.checked) saveRememberedLogin(); });
 
     window.addEventListener("load", async () => {
+      const rememberedView = getLastView();
+
       updateNoteCounter();
       updatePasswordStrengthUI();
       loadRememberedLogin();
       renderConfigToUI();
       updateClaimWindowState();
       resetClaimUI();
-      setQrVisible(loadQrState());
+      applyQrVisibility();
 
       if (!SCRIPT_URL){
+        setActiveView("loginView");
         showAlert(topAlert, "กรุณาใส่ SCRIPT_URL ก่อนใช้งาน", "warning", 0);
         return;
       }
@@ -3060,9 +2827,16 @@
           if (me && me.ok){
             state.member = me.member;
             updateMemberUI();
-            const preferred = localStorage.getItem(LAST_VIEW_KEY) || "claimView";
-            setActiveView(preferred === "statusView" ? "statusView" : "claimView");
-            if (preferred === "statusView") await refreshStatusPage(true);
+
+            if (rememberedView === "statusView" || rememberedView === "claimView"){
+              setActiveView(rememberedView);
+            } else {
+              setActiveView("claimView");
+            }
+
+            if (rememberedView === "statusView"){
+              await refreshStatusPage();
+            }
           } else {
             clearLocalSession(true);
             setActiveView("loginView");
@@ -3072,8 +2846,11 @@
           setActiveView("loginView");
         }
       } else {
-        const preferred = localStorage.getItem(LAST_VIEW_KEY) || "loginView";
-        setActiveView(preferred === "registerView" ? "registerView" : "loginView");
+        if (rememberedView === "registerView"){
+          setActiveView("registerView");
+        } else {
+          setActiveView("loginView");
+        }
       }
 
       setInterval(async () => {
@@ -3089,10 +2866,7 @@
           if (statusView.classList.contains("active") && data && Array.isArray(data.history)){
             renderHistory(data.history);
             renderLatestStatusPage({ history:data.history, current:data.history[0] || null });
-          } else if (statusView.classList.contains("active") && state.token) {
-            await refreshStatusPage(true);
           }
-          renderNextStepForClaimForm();
         }catch(e){}
       }, CONFIG_POLL_INTERVAL);
     });
