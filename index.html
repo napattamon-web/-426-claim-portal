@@ -262,7 +262,7 @@
     }
     .section-title-plain h2{
       margin:0;
-      font-size:1.10rem;
+      font-size:1.12rem;
       font-weight:800;
       color:#5c3140;
     }
@@ -306,8 +306,7 @@
     input[type="email"],
     input[type="password"],
     input[type="text"],
-    input[type="date"],
-    textarea{
+    input[type="date"]{
       width:100%;
       border:0;
       outline:0;
@@ -317,14 +316,7 @@
       color:var(--text);
       text-align:center;
     }
-    textarea{
-      resize:none;
-      min-height:74px;
-      line-height:1.52;
-      text-align:left;
-      font-size:.86rem;
-    }
-    input::placeholder,textarea::placeholder{color:#c09aaa}
+    input::placeholder{color:#c09aaa}
 
     .toggle-pass{
       border:1px solid #ffd4e4;
@@ -443,7 +435,6 @@
       border-color:#ffd8e5;
       color:#8d5f71;
       font-size:.82rem;
-      margin-top:10px;
       text-decoration:none;
       display:flex;
       align-items:center;
@@ -626,67 +617,6 @@
       text-align:center;
       font-weight:800;
     }
-
-    .swap-toggle-wrap{
-      margin-top:4px;
-      display:flex;
-      justify-content:center;
-    }
-    .swap-panel{
-      display:none;
-      margin-top:12px;
-      border-radius:20px;
-      padding:13px;
-      background:#fff;
-      border:1px solid #ffe4ee;
-    }
-    .swap-panel.show{display:block}
-    .swap-panel-title{
-      font-size:.88rem;
-      font-weight:800;
-      color:#5c3140;
-      text-align:center;
-      margin-bottom:4px;
-    }
-    .swap-panel-sub{
-      font-size:.74rem;
-      line-height:1.55;
-      color:var(--sub);
-      text-align:center;
-      margin-bottom:10px;
-    }
-    .swap-reason-row{display:grid;gap:8px;margin-top:10px}
-    .swap-reason-option{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      padding:10px 12px;
-      border-radius:16px;
-      background:#fffafd;
-      border:1px solid #ffe4ee;
-      font-size:.77rem;
-      color:#7b5062;
-      font-weight:700;
-      cursor:pointer;
-    }
-    .swap-reason-option input{
-      accent-color:#ff76a5;
-      width:16px;height:16px;flex:0 0 auto;
-    }
-    .swap-actions{display:flex;gap:8px;margin-top:12px}
-    .swap-result{
-      display:none;
-      margin-top:10px;
-      padding:11px 12px;
-      border-radius:16px;
-      background:#f2fff7;
-      border:1px solid #d9f6e7;
-      color:#3f9b6f;
-      text-align:center;
-    }
-    .swap-result.show{display:block}
-    .swap-result-title{font-size:.88rem;font-weight:800;margin-bottom:4px}
-    .swap-result-text{font-size:.77rem;line-height:1.6;white-space:pre-line}
 
     .payment-section{display:none}
     .payment-card{
@@ -1012,6 +942,69 @@
     .status-pill--blue{background:#f5f9ff;border-color:#dce8ff;color:#5b89d8}
     .status-pill--purple{background:#faf4ff;border-color:#eadcff;color:#8e69c7}
 
+    .status-bottom-actions{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-top:12px;
+    }
+
+    .swap-panel-status{
+      display:none;
+      margin-top:12px;
+      border-radius:20px;
+      padding:13px;
+      background:#fff;
+      border:1px solid #ffe4ee;
+    }
+    .swap-panel-status.show{display:block}
+    .swap-panel-title{
+      font-size:.88rem;
+      font-weight:800;
+      color:#5c3140;
+      text-align:center;
+      margin-bottom:4px;
+    }
+    .swap-panel-sub{
+      font-size:.74rem;
+      line-height:1.55;
+      color:var(--sub);
+      text-align:center;
+      margin-bottom:10px;
+    }
+    .swap-reason-row{display:grid;gap:8px;margin-top:10px}
+    .swap-reason-option{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius:16px;
+      background:#fffafd;
+      border:1px solid #ffe4ee;
+      font-size:.77rem;
+      color:#7b5062;
+      font-weight:700;
+      cursor:pointer;
+    }
+    .swap-reason-option input{
+      accent-color:#ff76a5;
+      width:16px;height:16px;flex:0 0 auto;
+    }
+    .swap-actions{display:flex;gap:8px;margin-top:12px}
+    .swap-result{
+      display:none;
+      margin-top:10px;
+      padding:11px 12px;
+      border-radius:16px;
+      background:#f2fff7;
+      border:1px solid #d9f6e7;
+      color:#3f9b6f;
+      text-align:center;
+    }
+    .swap-result.show{display:block}
+    .swap-result-title{font-size:.88rem;font-weight:800;margin-bottom:4px}
+    .swap-result-text{font-size:.77rem;line-height:1.6;white-space:pre-line}
+
     .bottom-pair{
       margin-top:16px;
       display:flex;
@@ -1160,7 +1153,7 @@
 
     @media (max-width:480px){
       .app{padding:12px 12px 16px}
-      .action-row,.modal-actions,.bottom-pair,.swap-actions{flex-direction:column}
+      .action-row,.modal-actions,.bottom-pair,.swap-actions,.status-bottom-actions{flex-direction:column;display:flex}
       .status-grid{grid-template-columns:repeat(3,1fr)}
       .member-mini{grid-template-columns:1fr 1fr}
       .live-email{max-width:150px}
@@ -1368,49 +1361,11 @@
                 </div>
               </div>
 
-              <div class="swap-toggle-wrap">
-                <div class="expiry-action-row">
-                  <button class="btn-soft-cute cute-blink" id="btnCheckExpiry" type="button">เช็ควันหมดอายุ</button>
-                  <button class="btn-soft-cute cute-blink" id="btnToggleSwapEmail" type="button">เปลี่ยนอีเมล</button>
-                </div>
+              <div class="expiry-action-row">
+                <button class="btn-soft-cute cute-blink" id="btnCheckExpiry" type="button">เช็ควันหมดอายุ</button>
               </div>
 
               <div id="expiryCheckResult" class="alert-box"></div>
-
-              <div class="swap-panel" id="swapEmailPanel">
-                <div class="swap-panel-title">เปลี่ยนอีเมลใช้งาน</div>
-                <div class="swap-panel-sub">
-                  ใช้กรณีต้องการเปลี่ยนอีเมลใหม่ หรืออีเมลเดิมติดข้อจำกัดการใช้งาน
-                </div>
-
-                <div class="field-group compact">
-                  <label class="field-label" for="swapNewEmail">อีเมลใหม่</label>
-                  <div class="input-shell compact" id="swapNewEmailField">
-                    <input id="swapNewEmail" type="email" placeholder="เช่น newmail@example.com" autocomplete="email" />
-                  </div>
-                </div>
-
-                <div class="swap-reason-row">
-                  <label class="swap-reason-option">
-                    <input type="radio" name="swapReason" value="ติดข้อจำกัด 12 เดือน" checked />
-                    <span>ติดข้อจำกัด 12 เดือน</span>
-                  </label>
-                  <label class="swap-reason-option">
-                    <input type="radio" name="swapReason" value="ต้องการเปลี่ยนเมลใช้งานใหม่" />
-                    <span>ต้องการเปลี่ยนเมลใช้งานใหม่</span>
-                  </label>
-                </div>
-
-                <div class="swap-actions">
-                  <button type="button" class="btn-secondary" id="btnCancelSwapEmail">ยกเลิก</button>
-                  <button type="button" class="btn-primary" id="btnConfirmSwapEmail">ยืนยันเปลี่ยนอีเมล</button>
-                </div>
-
-                <div class="swap-result" id="swapResultBox">
-                  <div class="swap-result-title">อัปเดตอีเมลเรียบร้อยแล้วค่ะ</div>
-                  <div class="swap-result-text" id="swapResultText">อัปเดตอีเมลเรียบร้อยแล้วค่ะ</div>
-                </div>
-              </div>
             </div>
 
             <div class="warning-note">
@@ -1524,9 +1479,47 @@
 
           <div id="results"></div>
 
-          <a class="btn-admin" id="btnContactAdmin" href="https://lin.ee/gAh3wAH" target="_blank" rel="noopener">
-            ติดต่อแอดมินเกี่ยวกับเคสนี้
-          </a>
+          <div class="status-bottom-actions">
+            <button type="button" class="btn-soft-cute cute-blink" id="btnToggleSwapEmailStatus">เปลี่ยนเมล</button>
+            <a class="btn-admin" id="btnContactAdmin" href="https://lin.ee/gAh3wAH" target="_blank" rel="noopener">
+              ติดต่อแอดมิน
+            </a>
+          </div>
+
+          <div class="swap-panel-status" id="swapEmailPanelStatus">
+            <div class="swap-panel-title">เปลี่ยนอีเมลใช้งาน</div>
+            <div class="swap-panel-sub">
+              ใช้กรณีต้องการเปลี่ยนอีเมลใหม่ หรืออีเมลเดิมติดข้อจำกัดการใช้งาน
+            </div>
+
+            <div class="field-group compact">
+              <label class="field-label" for="swapNewEmail">อีเมลใหม่</label>
+              <div class="input-shell compact" id="swapNewEmailField">
+                <input id="swapNewEmail" type="email" placeholder="เช่น newmail@example.com" autocomplete="email" />
+              </div>
+            </div>
+
+            <div class="swap-reason-row">
+              <label class="swap-reason-option">
+                <input type="radio" name="swapReason" value="ติดข้อจำกัด 12 เดือน" checked />
+                <span>ติดข้อจำกัด 12 เดือน</span>
+              </label>
+              <label class="swap-reason-option">
+                <input type="radio" name="swapReason" value="ต้องการเปลี่ยนเมลใช้งานใหม่" />
+                <span>ต้องการเปลี่ยนเมลใช้งานใหม่</span>
+              </label>
+            </div>
+
+            <div class="swap-actions">
+              <button type="button" class="btn-secondary" id="btnCancelSwapEmail">ยกเลิก</button>
+              <button type="button" class="btn-primary" id="btnConfirmSwapEmail">ยืนยันเปลี่ยนอีเมล</button>
+            </div>
+
+            <div class="swap-result" id="swapResultBox">
+              <div class="swap-result-title">อัปเดตข้อมูลให้เรียบร้อยแล้วค่ะ</div>
+              <div class="swap-result-text" id="swapResultText">อัปเดตข้อมูลให้เรียบร้อยแล้วค่ะ</div>
+            </div>
+          </div>
 
           <div class="action-row">
             <button class="btn-mini" id="btnBackToClaim">กลับหน้าแจ้งเคลม</button>
@@ -1572,7 +1565,7 @@
   </div>
 
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx1qo68leUtPihlJdotz0havnKZzManZisksDiE1uOsZ33xyPIFFIcLkufiAC6Sb8v9tA/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwTzz785LcIiyym27HEzL2Ylwhjwa5M68-3gSStDvriqSpMytGpnObjuF_H0KguPEEuqA/exec";
     const TOKEN_KEY = "shop426_member_token";
     const REMEMBER_KEY = "shop426_saved_login";
     const LAST_SLIP_KEY = "shop426_last_slip_preview";
@@ -1665,7 +1658,7 @@
     const btnViewLastSlip = document.getElementById("btnViewLastSlip");
     const btnRemoveSlip = document.getElementById("btnRemoveSlip");
     const btnToggleQr = document.getElementById("btnToggleQr");
-    const btnToggleSwapEmail = document.getElementById("btnToggleSwapEmail");
+    const btnToggleSwapEmailStatus = document.getElementById("btnToggleSwapEmailStatus");
     const btnCancelSwapEmail = document.getElementById("btnCancelSwapEmail");
     const btnConfirmSwapEmail = document.getElementById("btnConfirmSwapEmail");
 
@@ -1730,7 +1723,7 @@
     const btnCancelConfirm = document.getElementById("btnCancelConfirm");
     const btnConfirmSubmit = document.getElementById("btnConfirmSubmit");
 
-    const swapEmailPanel = document.getElementById("swapEmailPanel");
+    const swapEmailPanelStatus = document.getElementById("swapEmailPanelStatus");
     const swapNewEmail = document.getElementById("swapNewEmail");
     const swapNewEmailField = document.getElementById("swapNewEmailField");
     const swapResultBox = document.getElementById("swapResultBox");
@@ -1988,7 +1981,7 @@
       if (raw.includes("รอตรวจสอบสลิป")){
         return '<span class="status-pill status-pill--blue">' + safe + '</span>';
       }
-      if (raw.includes("กำลัง") || raw.includes("รอตรวจสอบ") || raw.includes("รอดำเนินการ") || raw.includes("ตรวจสอบ")){
+      if (raw.includes("รอตรวจสอบ") || raw.includes("รอดำเนินการ") || raw.includes("ตรวจสอบ")){
         return '<span class="status-pill status-pill--yellow">' + safe + '</span>';
       }
       if (raw.includes("ไม่ผ่าน") || raw.includes("ไม่เข้าเงื่อนไข")){
@@ -2075,18 +2068,18 @@
     }
 
     function resetSwapPanel(){
-      swapEmailPanel.classList.remove("show");
+      swapEmailPanelStatus.classList.remove("show");
       swapNewEmail.value = "";
       swapResultBox.classList.remove("show");
-      swapResultText.textContent = "อัปเดตอีเมลเรียบร้อยแล้วค่ะ";
+      swapResultText.textContent = "อัปเดตข้อมูลให้เรียบร้อยแล้วค่ะ";
       const firstReason = document.querySelector('input[name="swapReason"][value="ติดข้อจำกัด 12 เดือน"]');
       if (firstReason) firstReason.checked = true;
     }
 
     function toggleSwapPanel(force){
-      const shouldShow = typeof force === "boolean" ? force : !swapEmailPanel.classList.contains("show");
+      const shouldShow = typeof force === "boolean" ? force : !swapEmailPanelStatus.classList.contains("show");
       if (shouldShow){
-        swapEmailPanel.classList.add("show");
+        swapEmailPanelStatus.classList.add("show");
       } else {
         resetSwapPanel();
       }
@@ -2189,7 +2182,7 @@
     }
 
     function renderClaimSteps(statusText=""){
-      const steps = ["รับคำขอแล้ว","รอดำเนินการ","กำลังดำเนินการ","เสร็จแล้ว"];
+      const steps = ["รับคำขอแล้ว","รอดำเนินการ","เสร็จแล้ว"];
       let activeIndex = 0;
       const raw = String(statusText || "");
       if (!raw){
@@ -2197,9 +2190,14 @@
         claimStepList.innerHTML = "";
         return;
       }
-      if (raw.includes("รอตรวจสอบ") || raw.includes("กำลัง") || raw.includes("รอดำเนินการ")) activeIndex = 1;
-      if (raw.includes("ตรวจสอบสลิป")) activeIndex = 2;
-      if (raw.includes("ดึงเมลแล้ว") || raw.includes("เสร็จ") || raw.includes("สำเร็จ") || raw.includes("ใช้งานได้ปกติ")) activeIndex = 3;
+
+      if (raw.includes("ดึงเมลแล้ว") || raw.includes("เสร็จ") || raw.includes("สำเร็จ") || raw.includes("ใช้งานได้ปกติ")){
+        activeIndex = 2;
+      } else if (raw.includes("รอตรวจสอบ") || raw.includes("รอดำเนินการ") || raw.includes("ตรวจสอบ") || raw.includes("รอตรวจสอบสลิป")){
+        activeIndex = 1;
+      } else {
+        activeIndex = 0;
+      }
 
       claimStepList.innerHTML = "";
       steps.forEach((step, i) => {
@@ -2210,7 +2208,7 @@
       });
       claimStepCard.style.display = "block";
 
-      const progressMap = [15, 45, 72, 100];
+      const progressMap = [20, 60, 100];
       claimProgressFill.style.width = progressMap[activeIndex] + "%";
       claimProgressLabel.textContent = steps[activeIndex];
     }
@@ -2687,9 +2685,9 @@
         }
 
         swapResultBox.classList.add("show");
-        swapResultText.textContent = "อัปเดตอีเมลเรียบร้อยแล้วค่ะ";
+        swapResultText.textContent = "อัปเดตข้อมูลให้เรียบร้อยแล้วค่ะ";
         swapNewEmail.value = "";
-        showToast("อัปเดตอีเมลแล้ว");
+        showToast("อัปเดตข้อมูลแล้ว");
       }catch(e){
         showAlert(claimAlert, "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้ง", "error", 6000);
         shake(btnConfirmSwapEmail);
@@ -2738,7 +2736,7 @@
     btnGotoStatus.addEventListener("click", gotoStatus);
     btnSubmit.addEventListener("click", handleSubmit);
     btnCheckExpiry.addEventListener("click", handleCheckExpiry);
-    btnToggleSwapEmail.addEventListener("click", () => toggleSwapPanel());
+    btnToggleSwapEmailStatus.addEventListener("click", () => toggleSwapPanel());
     btnCancelSwapEmail.addEventListener("click", () => resetSwapPanel());
     btnConfirmSwapEmail.addEventListener("click", handleSwapEmail);
 
