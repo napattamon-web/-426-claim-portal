@@ -4,135 +4,112 @@
   <meta charset="UTF-8" />
   <title>426 SHOP – Member & Claim Center</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#1c0b0e" />
+  <meta name="theme-color" content="#18080b" />
   <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     :root{
-      --bg:#1c0b0e;
+      --bg:#18080b;
       --bg2:#2b1015;
       --card:#fff7f8;
-      --card-2:#fff1f4;
+      --card-2:#fff0f3;
       --surface:#ffffff;
       --surface-2:#fff5f7;
       --line:#f0d7dd;
-      --line-2:#ebc7d0;
-      --text:#5a2631;
-      --sub:#8e6570;
-      --muted:#b49099;
-      --primary:#ff5e7c;
-      --primary-2:#ff8ca3;
-      --accent:#ffd3de;
-      --success:#4cc38a;
-      --warning:#f4b14f;
-      --danger:#ef6f88;
-      --info:#7b9bff;
-      --shadow:0 18px 40px rgba(126,45,73,.16);
-      --shadow-soft:0 10px 22px rgba(126,45,73,.10);
+      --line-2:#e8c7cf;
+      --text:#5c2731;
+      --sub:#8e6770;
+      --muted:#b39199;
+      --primary:#ff5a77;
+      --primary-2:#ff87a0;
+      --accent:#ffd3dc;
+      --success:#4bc58c;
+      --warning:#f1b156;
+      --danger:#eb7188;
+      --info:#7b9dff;
+      --shadow:0 18px 40px rgba(79,18,33,.16);
+      --shadow-soft:0 10px 24px rgba(79,18,33,.10);
       --radius-xl:28px;
       --radius-lg:22px;
       --radius-md:16px;
-      --radius-sm:12px;
       --hero-text:#fff5f7;
-      --hero-sub:#ffd8e1;
-      --hero-glow:rgba(255,120,150,.16);
-      --grad-a:#ff6b88;
-      --grad-b:#ff9ab0;
-      --chip-bg:rgba(255,255,255,.18);
+      --hero-sub:#ffdbe3;
+      --grad-a:#ff5a77;
+      --grad-b:#ff8fa7;
+      --chip-bg:rgba(255,255,255,.14);
       --chip-border:rgba(255,255,255,.22);
-      --chip-text:#fff7fa;
+      --chip-text:#fff8fa;
+      --dot-1:rgba(255,255,255,.18);
+      --dot-2:rgba(255,255,255,.08);
+      --mesh-1:rgba(255,114,143,.18);
+      --mesh-2:rgba(255,182,197,.13);
     }
 
     body.theme-dark{
-      --bg:#17080b;
-      --bg2:#2a1015;
+      --bg:#18080b;
+      --bg2:#2b1015;
       --card:#fff7f8;
       --card-2:#fff0f3;
-      --surface:#fffefe;
-      --surface-2:#fff4f7;
-      --line:#efd5dc;
-      --line-2:#e8c5cf;
-      --text:#5d2530;
-      --sub:#916672;
-      --muted:#b49099;
-      --primary:#ff5878;
-      --primary-2:#ff8aa2;
-      --accent:#ffd1dc;
-      --success:#44bf84;
-      --warning:#efa947;
-      --danger:#eb6d86;
-      --info:#7999ff;
-      --shadow:0 18px 40px rgba(0,0,0,.18);
-      --shadow-soft:0 10px 22px rgba(0,0,0,.10);
+      --surface:#ffffff;
+      --surface-2:#fff5f7;
+      --line:#f0d7dd;
+      --line-2:#e8c7cf;
+      --text:#5c2731;
+      --sub:#8e6770;
+      --muted:#b39199;
+      --primary:#ff5a77;
+      --primary-2:#ff87a0;
+      --accent:#ffd3dc;
+      --success:#4bc58c;
+      --warning:#f1b156;
+      --danger:#eb7188;
+      --info:#7b9dff;
+      --shadow:0 18px 40px rgba(79,18,33,.16);
+      --shadow-soft:0 10px 24px rgba(79,18,33,.10);
       --hero-text:#fff5f7;
-      --hero-sub:#ffd5df;
-      --hero-glow:rgba(255,110,145,.16);
-      --grad-a:#ff5b79;
-      --grad-b:#ff8ca3;
+      --hero-sub:#ffdbe3;
+      --grad-a:#ff5a77;
+      --grad-b:#ff8fa7;
       --chip-bg:rgba(255,255,255,.14);
-      --chip-border:rgba(255,255,255,.20);
-      --chip-text:#fff7fa;
+      --chip-border:rgba(255,255,255,.22);
+      --chip-text:#fff8fa;
+      --dot-1:rgba(255,255,255,.18);
+      --dot-2:rgba(255,255,255,.08);
+      --mesh-1:rgba(255,114,143,.18);
+      --mesh-2:rgba(255,182,197,.13);
     }
 
     body.theme-light{
-      --bg:#fff8fa;
-      --bg2:#fffdfd;
+      --bg:#fff8f1;
+      --bg2:#fffdf9;
       --card:#ffffff;
-      --card-2:#fff7fa;
-      --surface:#fffefe;
-      --surface-2:#fff6f8;
-      --line:#f2dfe4;
-      --line-2:#eccfd7;
-      --text:#6a3946;
-      --sub:#936d78;
-      --muted:#b899a2;
-      --primary:#ff6f98;
-      --primary-2:#ff96b6;
-      --accent:#ffe1ea;
-      --success:#48c08a;
-      --warning:#f0b050;
-      --danger:#ea7693;
-      --info:#819bff;
-      --shadow:0 18px 40px rgba(237,136,170,.14);
-      --shadow-soft:0 10px 22px rgba(237,136,170,.10);
-      --hero-text:#6a2f3e;
-      --hero-sub:#94616e;
-      --hero-glow:rgba(255,135,168,.14);
-      --grad-a:#ffd6e3;
-      --grad-b:#fff0f5;
+      --card-2:#fffaf4;
+      --surface:#ffffff;
+      --surface-2:#fff8f0;
+      --line:#f3dfc8;
+      --line-2:#eed2b2;
+      --text:#744c34;
+      --sub:#9d7b62;
+      --muted:#bea28f;
+      --primary:#ff9a58;
+      --primary-2:#ffc78d;
+      --accent:#ffe6cc;
+      --success:#4ebf88;
+      --warning:#f1ad4d;
+      --danger:#ea8b73;
+      --info:#85a4ff;
+      --shadow:0 18px 40px rgba(181,124,73,.14);
+      --shadow-soft:0 10px 24px rgba(181,124,73,.09);
+      --hero-text:#734529;
+      --hero-sub:#9b6d50;
+      --grad-a:#ffe2bf;
+      --grad-b:#fff4e5;
       --chip-bg:rgba(255,255,255,.52);
-      --chip-border:rgba(255,185,205,.34);
-      --chip-text:#7a4050;
-    }
-
-    body.theme-pastel{
-      --bg:#fffafd;
-      --bg2:#fffefb;
-      --card:#ffffff;
-      --card-2:#fff9fc;
-      --surface:#fffefe;
-      --surface-2:#fff8fc;
-      --line:#efe4f5;
-      --line-2:#e5d6ef;
-      --text:#6d537d;
-      --sub:#967daa;
-      --muted:#b49fbe;
-      --primary:#d98bff;
-      --primary-2:#ff9fc9;
-      --accent:#f4e2ff;
-      --success:#63c69b;
-      --warning:#f0b669;
-      --danger:#ef89b1;
-      --info:#9a99ff;
-      --shadow:0 18px 40px rgba(191,140,236,.14);
-      --shadow-soft:0 10px 22px rgba(191,140,236,.10);
-      --hero-text:#6b557e;
-      --hero-sub:#937dac;
-      --hero-glow:rgba(214,148,255,.14);
-      --grad-a:#f3dcff;
-      --grad-b:#ffe8f2;
-      --chip-bg:rgba(255,255,255,.56);
-      --chip-border:rgba(219,180,255,.34);
-      --chip-text:#76558d;
+      --chip-border:rgba(255,213,175,.56);
+      --chip-text:#8f613f;
+      --dot-1:rgba(255,178,109,.22);
+      --dot-2:rgba(255,220,188,.18);
+      --mesh-1:rgba(255,191,128,.16);
+      --mesh-2:rgba(255,229,199,.22);
     }
 
     *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -142,10 +119,10 @@
       font-family:"Sarabun",system-ui,sans-serif;
       color:var(--text);
       background:
-        radial-gradient(circle at 0% 0%, rgba(255,255,255,.24), transparent 24%),
-        radial-gradient(circle at 100% 10%, rgba(255,255,255,.20), transparent 20%),
+        radial-gradient(circle at 0% 0%, var(--mesh-2), transparent 25%),
+        radial-gradient(circle at 100% 10%, var(--mesh-1), transparent 22%),
         linear-gradient(180deg,var(--bg),var(--bg2));
-      transition:background .25s ease,color .25s ease;
+      transition:background .22s ease,color .22s ease;
       overflow-x:hidden;
     }
 
@@ -156,44 +133,58 @@
     .ambient::after{
       content:"";
       position:absolute;
-      width:280px;height:280px;border-radius:50%;
-      filter:blur(70px); opacity:.26;
-      animation:floatBlur 9s ease-in-out infinite;
+      border-radius:50%;
+      filter:blur(70px);
+      opacity:.28;
+      animation:floatBlur 8s ease-in-out infinite;
     }
     .ambient::before{
+      width:320px;height:320px;
+      top:-90px; right:-90px;
       background:var(--primary);
-      top:-70px; right:-70px;
     }
     .ambient::after{
+      width:280px;height:280px;
+      left:-70px; bottom:-80px;
       background:var(--primary-2);
-      left:-80px; bottom:-90px;
-      animation-delay:1.3s;
+      animation-delay:1.2s;
+    }
+
+    .pattern{
+      position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden;
+      background-image:
+        radial-gradient(circle at 14% 20%, var(--dot-1) 0 2px, transparent 2.5px),
+        radial-gradient(circle at 84% 14%, var(--dot-2) 0 2px, transparent 2.5px),
+        radial-gradient(circle at 20% 74%, var(--dot-2) 0 2px, transparent 2.5px),
+        radial-gradient(circle at 70% 82%, var(--dot-1) 0 2px, transparent 2.5px),
+        linear-gradient(135deg, transparent 0 48%, rgba(255,255,255,.05) 48% 50%, transparent 50% 100%);
+      background-size: 180px 180px, 220px 220px, 200px 200px, 160px 160px, 28px 28px;
+      opacity:.55;
+    }
+
+    .ribbons{
+      position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden;
+    }
+    .ribbons span{
+      position:absolute;
+      display:block;
+      height:14px;
+      border-radius:999px;
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,.20), transparent);
+      filter:blur(1px);
+      opacity:.34;
+      animation:slideRibbon 11s linear infinite;
+    }
+    .ribbons span:nth-child(1){width:180px; top:14%; left:-120px; transform:rotate(-8deg)}
+    .ribbons span:nth-child(2){width:220px; top:40%; right:-160px; transform:rotate(10deg); animation-duration:14s}
+    .ribbons span:nth-child(3){width:160px; top:72%; left:-100px; transform:rotate(-12deg); animation-duration:13s}
+    @keyframes slideRibbon{
+      0%{transform:translateX(0) rotate(-8deg)}
+      100%{transform:translateX(820px) rotate(-8deg)}
     }
     @keyframes floatBlur{
       0%,100%{transform:translateY(0) translateX(0)}
-      50%{transform:translateY(14px) translateX(-10px)}
-    }
-
-    .sparkles{
-      position:fixed; inset:0; pointer-events:none; z-index:0;
-    }
-    .sparkles span{
-      position:absolute;
-      width:8px;height:8px;border-radius:50%;
-      background:linear-gradient(180deg,#fff,#ffffff80);
-      opacity:.35;
-      animation:twinkle 2.8s ease-in-out infinite;
-      transform-origin:center;
-    }
-    .sparkles span:nth-child(1){top:12%; left:12%}
-    .sparkles span:nth-child(2){top:19%; right:14%; animation-delay:.4s}
-    .sparkles span:nth-child(3){top:34%; left:82%; animation-delay:1.1s}
-    .sparkles span:nth-child(4){top:69%; left:10%; animation-delay:.7s}
-    .sparkles span:nth-child(5){top:81%; right:11%; animation-delay:1.6s}
-    .sparkles span:nth-child(6){top:56%; left:48%; animation-delay:.9s}
-    @keyframes twinkle{
-      0%,100%{opacity:.15; transform:scale(.8) rotate(0deg)}
-      50%{opacity:.55; transform:scale(1.3) rotate(30deg)}
+      50%{transform:translateY(16px) translateX(-12px)}
     }
 
     .app{
@@ -214,7 +205,7 @@
       border:1px solid var(--line);
       box-shadow:var(--shadow);
       border-radius:var(--radius-xl);
-      transition:transform .16s ease, box-shadow .16s ease, background .25s ease;
+      transition:transform .16s ease, box-shadow .16s ease;
       will-change:transform;
     }
     .glass:hover{transform:translateY(-1px)}
@@ -225,8 +216,7 @@
       overflow:hidden;
       padding:18px 16px 16px;
       text-align:center;
-      background:
-        linear-gradient(135deg,var(--grad-a),var(--grad-b));
+      background:linear-gradient(135deg,var(--grad-a),var(--grad-b));
       color:var(--hero-text);
       border-color:transparent;
     }
@@ -235,8 +225,9 @@
       position:absolute;
       inset:0;
       background:
-        radial-gradient(circle at 20% 15%, rgba(255,255,255,.18), transparent 26%),
-        radial-gradient(circle at 85% 18%, rgba(255,255,255,.16), transparent 22%);
+        radial-gradient(circle at 18% 18%, rgba(255,255,255,.22), transparent 24%),
+        radial-gradient(circle at 80% 20%, rgba(255,255,255,.18), transparent 22%),
+        linear-gradient(180deg, rgba(255,255,255,.10), transparent 34%);
       pointer-events:none;
     }
 
@@ -249,7 +240,7 @@
       z-index:2;
     }
     .theme-dot{
-      width:32px;height:32px;
+      width:34px;height:34px;
       border-radius:999px;
       border:1px solid var(--chip-border);
       background:var(--chip-bg);
@@ -262,17 +253,17 @@
       transition:.16s ease;
       backdrop-filter:blur(10px);
     }
-    .theme-dot:hover{transform:translateY(-1px) scale(1.05)}
+    .theme-dot:hover{transform:translateY(-1px) scale(1.04)}
     .theme-dot.active{
-      outline:2px solid rgba(255,255,255,.38);
-      box-shadow:0 10px 18px rgba(0,0,0,.10), 0 0 0 3px rgba(255,255,255,.12);
+      outline:2px solid rgba(255,255,255,.36);
+      box-shadow:0 10px 18px rgba(0,0,0,.10),0 0 0 3px rgba(255,255,255,.10);
     }
 
     .logo-shell{
       width:90px;height:90px;margin:0 auto 12px;
       padding:5px;border-radius:26px;
       background:rgba(255,255,255,.18);
-      border:1px solid rgba(255,255,255,.26);
+      border:1px solid rgba(255,255,255,.24);
       box-shadow:0 14px 28px rgba(0,0,0,.10);
       backdrop-filter:blur(8px);
     }
@@ -334,22 +325,22 @@
       width:10px;height:10px;border-radius:999px;display:inline-block;
     }
     .status-mini.open .status-dot{
-      background:#79ffb1;
+      background:#7affb5;
       animation:pulseGlow 1.2s ease-in-out infinite;
     }
     .status-mini.closed .status-dot{
-      background:#ff9cad;
+      background:#ff9faf;
       animation:pulseGlowRed 1.2s ease-in-out infinite;
     }
     @keyframes pulseGlow{
-      0%{box-shadow:0 0 0 0 rgba(121,255,177,.45)}
-      70%{box-shadow:0 0 0 8px rgba(121,255,177,0)}
-      100%{box-shadow:0 0 0 0 rgba(121,255,177,0)}
+      0%{box-shadow:0 0 0 0 rgba(122,255,181,.45)}
+      70%{box-shadow:0 0 0 8px rgba(122,255,181,0)}
+      100%{box-shadow:0 0 0 0 rgba(122,255,181,0)}
     }
     @keyframes pulseGlowRed{
-      0%{box-shadow:0 0 0 0 rgba(255,156,173,.45)}
-      70%{box-shadow:0 0 0 8px rgba(255,156,173,0)}
-      100%{box-shadow:0 0 0 0 rgba(255,156,173,0)}
+      0%{box-shadow:0 0 0 0 rgba(255,159,175,.45)}
+      70%{box-shadow:0 0 0 8px rgba(255,159,175,0)}
+      100%{box-shadow:0 0 0 0 rgba(255,159,175,0)}
     }
 
     .panel{padding:16px}
@@ -530,7 +521,7 @@
       min-height:42px;
       padding:0 14px;
       background:#fff1f4;
-      border-color:#f2c8d2;
+      border-color:#f3c8d2;
       color:var(--danger);
       font-size:.78rem;
     }
@@ -622,6 +613,24 @@
     .alert-box.info{background:#eef3ff;border-color:#d6defa;color:var(--info)}
     .alert-box.warning{background:#fff7ea;border-color:#f7dfb9;color:var(--warning)}
 
+    .signup-inline{
+      margin-top:14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      flex-wrap:wrap;
+      font-size:.84rem;
+      color:var(--sub);
+      text-align:center;
+    }
+    .signup-inline-text{font-weight:700}
+    .signup-inline .btn-soft-cute{
+      min-height:38px;
+      padding:0 16px;
+      font-size:.77rem;
+    }
+
     .live-card{
       margin-top:12px;
       padding:14px;
@@ -650,7 +659,7 @@
     }
     .live-title{font-size:.90rem;font-weight:800;color:var(--text)}
     .live-date{width:100%;font-size:.73rem;color:var(--sub)}
-    .live-list{display:grid;gap:8px;max-height:260px;overflow-y:auto}
+    .live-list{display:grid;gap:8px;max-height:270px;overflow-y:auto}
     .live-empty{text-align:center;font-size:.8rem;color:var(--sub);padding:8px 0}
     .live-item{
       display:flex;
@@ -664,6 +673,14 @@
       transition:.12s ease;
     }
     .live-item:hover{transform:translateY(-1px)}
+    .live-main{
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+      min-width:0;
+      flex:1;
+      text-align:left;
+    }
     .live-email{
       font-weight:800;
       font-size:.8rem;
@@ -671,9 +688,14 @@
       overflow:hidden;
       text-overflow:ellipsis;
       white-space:nowrap;
-      max-width:210px;
+      max-width:100%;
     }
-    .live-status-text{font-size:.77rem;color:var(--sub)}
+    .live-time{
+      font-size:.72rem;
+      color:var(--muted);
+      line-height:1.2;
+    }
+    .live-status-text{font-size:.77rem;color:var(--sub);flex-shrink:0}
 
     .member-mini{
       display:none;
@@ -907,7 +929,6 @@
       line-height:1.7;
       color:var(--sub);
     }
-    .status-strong{font-weight:800;color:var(--text)}
     .status-time{font-size:.75rem;color:var(--muted)}
 
     .status-grid{
@@ -1171,10 +1192,7 @@
       border-radius:18px;
       border:1px solid var(--line);
       background:
-        linear-gradient(90deg,
-          #fff7fa 22%,
-          #fff 40%,
-          #fff7fa 60%);
+        linear-gradient(90deg,#fff7fa 22%,#fff 40%,#fff7fa 60%);
       background-size:220% 100%;
       animation:skeletonMove .95s linear infinite;
     }
@@ -1362,26 +1380,26 @@
       .action-row,.modal-actions,.bottom-pair,.swap-actions{flex-direction:column;display:flex}
       .status-grid{grid-template-columns:repeat(3,1fr)}
       .member-mini{grid-template-columns:1fr 1fr}
-      .live-email{max-width:150px}
       .logo-shell{width:82px;height:82px}
       .expiry-action-row{gap:6px}
       .btn-soft-cute{padding:0 12px;font-size:.71rem}
       .status-bottom-actions{grid-template-columns:1fr 1fr}
+      .signup-inline{gap:8px}
+      .live-item{align-items:flex-start}
+      .live-status-text{padding-top:2px}
     }
   </style>
 </head>
 <body class="theme-dark">
   <div class="ambient"></div>
-  <div class="sparkles">
-    <span></span><span></span><span></span><span></span><span></span><span></span>
-  </div>
+  <div class="pattern"></div>
+  <div class="ribbons"><span></span><span></span><span></span></div>
 
   <div class="app">
     <section class="hero glass tap-card" id="heroSection">
       <div class="theme-corner">
-        <button class="theme-dot active" data-theme="dark" aria-label="แดงดำ">🌙</button>
-        <button class="theme-dot" data-theme="light" aria-label="สว่าง">☀️</button>
-        <button class="theme-dot" data-theme="pastel" aria-label="พาสเทล">🪻</button>
+        <button class="theme-dot active" data-theme="dark" aria-label="แดงดำ">◐</button>
+        <button class="theme-dot" data-theme="light" aria-label="ส้มครีม">◑</button>
       </div>
 
       <div class="logo-shell">
@@ -1446,10 +1464,10 @@
           <div id="authStatus"></div>
         </div>
 
-        <div class="section-blurb" style="margin-top:14px;margin-bottom:8px;font-weight:800;">
-          ยังไม่มีสมาชิก?
+        <div class="signup-inline">
+          <span class="signup-inline-text">ยังไม่มีบัญชี</span>
+          <button type="button" class="btn-soft-cute cute-blink" id="showRegisterBtn">สมัครสมาชิก</button>
         </div>
-        <button type="button" class="btn-link-small" id="showRegisterBtn">สมัครสมาชิกใหม่</button>
 
         <div class="live-card tap-card">
           <div class="live-header">
@@ -1786,7 +1804,7 @@
   </div>
 
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwTzz785LcIiyym27HEzL2Ylwhjwa5M68-3gSStDvriqSpMytGpnObjuF_H0KguPEEuqA/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx1qo68leUtPihlJdotz0havnKZzManZisksDiE1uOsZ33xyPIFFIcLkufiAC6Sb8v9tA/exec";
     const TOKEN_KEY = "shop426_member_token";
     const REMEMBER_KEY = "shop426_saved_login";
     const LAST_SLIP_KEY = "shop426_last_slip_preview";
@@ -1831,7 +1849,6 @@
     let activeSlipFile = null;
     let loadingTimer = null;
     let loadingPercent = 0;
-    let themeRotateTimer = null;
 
     const bodyEl = document.body;
     const heroSection = document.getElementById("heroSection");
@@ -2148,9 +2165,9 @@
       }catch(e){ return null; }
     }
 
-    function setTheme(theme, manual = true){
-      const safeTheme = ["dark","light","pastel"].includes(theme) ? theme : "dark";
-      bodyEl.classList.remove("theme-dark","theme-light","theme-pastel");
+    function setTheme(theme){
+      const safeTheme = ["dark","light"].includes(theme) ? theme : "dark";
+      bodyEl.classList.remove("theme-dark","theme-light");
       bodyEl.classList.add("theme-" + safeTheme);
       state.currentTheme = safeTheme;
       localStorage.setItem(THEME_KEY, safeTheme);
@@ -2161,21 +2178,9 @@
 
       const metaTheme = document.querySelector('meta[name="theme-color"]');
       if (metaTheme){
-        const colorMap = { dark:"#1c0b0e", light:"#fff8fa", pastel:"#fffafd" };
-        metaTheme.setAttribute("content", colorMap[safeTheme] || "#1c0b0e");
+        const colorMap = { dark:"#18080b", light:"#fff8f1" };
+        metaTheme.setAttribute("content", colorMap[safeTheme] || "#18080b");
       }
-
-      if (manual) restartAutoThemeRotate();
-    }
-
-    function restartAutoThemeRotate(){
-      clearInterval(themeRotateTimer);
-      const order = ["dark","light","pastel"];
-      themeRotateTimer = setInterval(() => {
-        const idx = order.indexOf(state.currentTheme);
-        const nextTheme = order[(idx + 1) % order.length];
-        setTheme(nextTheme, false);
-      }, 180000);
     }
 
     function clearLocalSession(silent=false){
@@ -2426,7 +2431,8 @@
 
     function renderLiveStatus(summaryObj){
       const items = summaryObj && Array.isArray(summaryObj.items) ? summaryObj.items : [];
-      liveDate.textContent = "อัปเดตล่าสุด: " + (summaryObj && summaryObj.updatedAt ? formatThaiDate(summaryObj.updatedAt) : formatThaiDate(new Date().toISOString()));
+      const stamp = summaryObj && summaryObj.updatedAt ? formatThaiDate(summaryObj.updatedAt) : formatThaiDate(new Date().toISOString());
+      liveDate.textContent = "อัปเดตล่าสุด: " + stamp;
       liveList.innerHTML = "";
       if (!items.length){
         liveList.innerHTML = '<div class="live-empty">วันนี้ยังไม่มีการอัปเดตในระบบ</div>';
@@ -2435,8 +2441,12 @@
       items.forEach(item => {
         const row = document.createElement("div");
         row.className = "live-item tap-card";
+        const timeText = formatThaiDateTime(item.createdAt || item.updatedAt || "");
         row.innerHTML =
-          '<span class="live-email">' + escapeHtml(maskEmail(item.email || "-")) + '</span>' +
+          '<div class="live-main">' +
+            '<span class="live-email">' + escapeHtml(maskEmail(item.email || "-")) + '</span>' +
+            '<span class="live-time">' + escapeHtml(timeText) + '</span>' +
+          '</div>' +
           '<span class="live-status-text">' + decorateStatusText(item.statusText || item.status || "รอดำเนินการ") + '</span>';
         liveList.appendChild(row);
       });
@@ -2998,7 +3008,7 @@
     });
 
     document.querySelectorAll(".theme-dot").forEach(btn => {
-      btn.addEventListener("click", () => setTheme(btn.dataset.theme, true));
+      btn.addEventListener("click", () => setTheme(btn.dataset.theme));
     });
 
     showRegisterBtn.addEventListener("click", () => setActiveView("registerView"));
@@ -3087,8 +3097,7 @@
     loginPassword.addEventListener("input", () => { if (rememberPassword.checked) saveRememberedLogin(); });
 
     window.addEventListener("load", async () => {
-      setTheme(state.currentTheme, false);
-      restartAutoThemeRotate();
+      setTheme(state.currentTheme);
 
       const savedView = getSavedView();
       if (state.token && (savedView === "claimView" || savedView === "statusView")) {
