@@ -268,9 +268,10 @@
     input::placeholder,textarea::placeholder{color:#a8898e}
     textarea{
       resize:none;
-      min-height:92px;
-      line-height:1.6;
+      min-height:68px;
+      line-height:1.55;
       text-align:left;
+      font-size:.84rem;
     }
 
     .password-rule,.password-strength{
@@ -866,9 +867,32 @@
     }
     .preview-meta{display:grid;gap:8px;width:100%}
 
+    .note-wrap-cute{
+      margin-top:10px;
+      padding:10px 10px 8px;
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.022));
+      border:1px solid rgba(255,255,255,.06);
+    }
+
+    .note-title-cute{
+      text-align:center;
+      font-size:.75rem;
+      font-weight:800;
+      color:#ffdce0;
+      margin-bottom:6px;
+    }
+
+    .note-shell-cute{
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:14px;
+      padding:8px 10px;
+    }
+
     .note-counter{
       margin-top:4px;
-      font-size:.73rem;
+      font-size:.70rem;
       color:var(--muted);
       text-align:right;
     }
@@ -1070,11 +1094,6 @@
       line-height:1.65;
       margin-bottom:8px;
     }
-    .result-actions{
-      display:grid;
-      gap:8px;
-      margin-top:6px;
-    }
 
     .history-card{
       margin-top:12px;
@@ -1239,14 +1258,6 @@
     }
     .copyright{letter-spacing:.16em;text-transform:uppercase}
 
-    .mini-action-row{
-      margin-top:10px;
-      display:flex;
-      justify-content:center;
-      gap:8px;
-      flex-wrap:wrap;
-    }
-
     .btn-tiny-cute{
       min-height:34px;
       padding:0 14px;
@@ -1266,6 +1277,40 @@
 
     .btn-tiny-cute:hover{
       filter:brightness(1.06);
+    }
+
+    .swap-below-expiry{
+      display:flex;
+      justify-content:center;
+      margin-top:2px;
+      margin-bottom:2px;
+    }
+
+    .btn-tiny-cute.blink-cute{
+      background:linear-gradient(180deg, rgba(255,111,146,.22), rgba(255,90,120,.11));
+      border-color:rgba(255,150,175,.24);
+      color:#fff1f4;
+      box-shadow:
+        0 0 0 rgba(255,120,150,0),
+        0 8px 18px rgba(0,0,0,.12);
+      animation:cuteBlink 1.25s ease-in-out infinite;
+    }
+
+    @keyframes cuteBlink{
+      0%,100%{
+        transform:translateY(0) scale(1);
+        box-shadow:
+          0 0 0 0 rgba(255,120,150,0),
+          0 8px 18px rgba(0,0,0,.12);
+        filter:brightness(1);
+      }
+      50%{
+        transform:translateY(-1px) scale(1.03);
+        box-shadow:
+          0 0 0 5px rgba(255,120,150,.10),
+          0 10px 22px rgba(255,95,130,.14);
+        filter:brightness(1.08);
+      }
     }
 
     .swap-note-box{
@@ -1537,15 +1582,6 @@
             </div>
           </div>
 
-          <div class="mini-action-row">
-            <button type="button" class="btn-tiny-cute" id="btnOpenSwapMail">เปลี่ยนอีเมลใช้งาน</button>
-          </div>
-
-          <div class="swap-result-card" id="swapResultCard">
-            <div class="swap-result-title">อัปเดตอีเมลเรียบร้อยแล้ว</div>
-            <div class="swap-result-desc" id="swapResultText">-</div>
-          </div>
-
           <div class="expiry-box">
             <div class="expiry-fixed" id="expiryFixedBox">
               วันหมดอายุในระบบ: <span id="expiryFixedText">-</span>
@@ -1566,15 +1602,24 @@
               <div id="expiryCheckResult" class="alert-box"></div>
             </div>
 
+            <div class="swap-below-expiry">
+              <button type="button" class="btn-tiny-cute blink-cute" id="btnOpenSwapMail">เปลี่ยนอีเมลใช้งาน</button>
+            </div>
+
             <div class="warning-note">
               ⚠️ หากแจ้งข้อมูลไม่ตรงกับความจริง ระบบจะตัดสิทธิ์อัตโนมัติ
             </div>
           </div>
 
-          <div class="field-group">
-            <label class="field-label" for="noteInput">ฝากข้อความถึงแอดมิน (ถ้ามี)</label>
-            <div class="input-shell" id="noteField">
-              <textarea id="noteInput" placeholder="เช่น หลุดจากกลุ่มเมื่อวาน รบกวนช่วยดึงกลับให้ด้วย"></textarea>
+          <div class="swap-result-card" id="swapResultCard">
+            <div class="swap-result-title">อัปเดตอีเมลเรียบร้อยแล้ว</div>
+            <div class="swap-result-desc" id="swapResultText">-</div>
+          </div>
+
+          <div class="note-wrap-cute">
+            <div class="note-title-cute">ฝากข้อความถึงแอดมิน</div>
+            <div class="note-shell-cute" id="noteField">
+              <textarea id="noteInput" placeholder="เช่น หลุดจากกลุ่มเมื่อวานค่ะ"></textarea>
             </div>
             <div class="note-counter" id="noteCounter">0 / 500</div>
           </div>
@@ -1793,7 +1838,7 @@
   </div>
 
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwPMSwlo_y9cbcj0DrpLKCe9meYddzwJoucJpv6uBYR6VNZ216SqOwBhHYlnPqEberyXw/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwTzz785LcIiyym27HEzL2Ylwhjwa5M68-3gSStDvriqSpMytGpnObjuF_H0KguPEEuqA/exec";
     const TOKEN_KEY = "shop426_member_token";
     const REMEMBER_KEY = "shop426_saved_login";
     const LAST_SLIP_KEY = "shop426_last_slip_preview";
@@ -2497,13 +2542,13 @@
       card.className = "result-item";
       card.innerHTML =
         '<div class="item-header">Current Claim</div>' +
-        '<div class="item-email">' + escapeHtml(current.email || "-") + '</div>' +
-        '<div class="item-tag ' + (claimType === "paid" ? "paid" : "") + '">' + escapeHtml(tagText) + '</div>' +
-        '<div class="item-meta">' +
-          '<span>คิวเคลม ' + escapeHtml(current.queueNo || "-") + '</span>' +
-          '<span>วันหมดอายุ ' + escapeHtml(current.expiry || "-") + '</span>' +
-        '</div>' +
-        '<div class="item-body">' + decorateStatusText(current.statusText || "รอดำเนินการ") + '</div>';
+          '<div class="item-email">' + escapeHtml(current.email || "-") + '</div>' +
+          '<div class="item-tag ' + (claimType === "paid" ? "paid" : "") + '">' + escapeHtml(tagText) + '</div>' +
+          '<div class="item-meta">' +
+            '<span>คิวเคลม ' + escapeHtml(current.queueNo || "-") + '</span>' +
+            '<span>วันหมดอายุ ' + escapeHtml(current.expiry || "-") + '</span>' +
+          '</div>' +
+          '<div class="item-body">' + decorateStatusText(current.statusText || "รอดำเนินการ") + '</div>';
       results.appendChild(card);
     }
 
