@@ -265,6 +265,10 @@
       color:var(--text);
       text-align:center;
     }
+    input[readonly]{
+      opacity:.82;
+      cursor:not-allowed;
+    }
     input::placeholder,textarea::placeholder{color:#a8898e}
     textarea{
       resize:none;
@@ -405,6 +409,7 @@
       font-weight:700;
       border:1px solid transparent;
       text-align:center;
+      white-space:pre-line;
     }
     .alert-box.show{display:block}
     .alert-box.success{background:rgba(120,211,154,.10);border-color:rgba(120,211,154,.18);color:#c8f4d6}
@@ -1578,6 +1583,10 @@
             ติดต่อแอดมินเกี่ยวกับเคสนี้
           </a>
 
+          <button class="btn-link-small" id="btnOpenSwapEmail" type="button">
+            สลับอีเมลสมาชิก
+          </button>
+
           <div class="history-card">
             <div class="history-title">ประวัติคำขอของคุณ</div>
             <div id="historyResults">
@@ -1628,8 +1637,38 @@
     </div>
   </div>
 
+  <div id="swapEmailModal" class="modal-backdrop">
+    <div class="modal-card">
+      <div class="modal-title">สลับอีเมลสมาชิก</div>
+      <div class="modal-desc">
+        ใช้สำหรับเปลี่ยนอีเมลเดิมเป็นอีเมลใหม่ในระบบ
+      </div>
+
+      <div id="swapEmailAlert" class="alert-box"></div>
+
+      <div class="field-group">
+        <label class="field-label" for="swapOldEmail">อีเมลเดิม</label>
+        <div class="input-shell" id="swapOldEmailField">
+          <input id="swapOldEmail" type="email" placeholder="old@example.com" readonly />
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="swapNewEmail">อีเมลใหม่</label>
+        <div class="input-shell" id="swapNewEmailField">
+          <input id="swapNewEmail" type="email" placeholder="new@example.com" />
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn-secondary" id="btnCloseSwapEmail">ยกเลิก</button>
+        <button type="button" class="btn-primary" id="btnConfirmSwapEmail">ยืนยันสลับเมล</button>
+      </div>
+    </div>
+  </div>
+
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby4TGpj7wtjAIUGwTLhasIVz3i_iV0gE4aIZ_O2Ln7gaBFp8ntttYKDbMIPfUGXhfY-oQ/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwPMSwlo_y9cbcj0DrpLKCe9meYddzwJoucJpv6uBYR6VNZ216SqOwBhHYlnPqEberyXw/exec";
     const TOKEN_KEY = "shop426_member_token";
     const REMEMBER_KEY = "shop426_saved_login";
     const LAST_SLIP_KEY = "shop426_last_slip_preview";
@@ -1792,6 +1831,16 @@
     const confirmSummary = document.getElementById("confirmSummary");
     const btnCancelConfirm = document.getElementById("btnCancelConfirm");
     const btnConfirmSubmit = document.getElementById("btnConfirmSubmit");
+
+    const btnOpenSwapEmail = document.getElementById("btnOpenSwapEmail");
+    const swapEmailModal = document.getElementById("swapEmailModal");
+    const swapEmailAlert = document.getElementById("swapEmailAlert");
+    const swapOldEmail = document.getElementById("swapOldEmail");
+    const swapNewEmail = document.getElementById("swapNewEmail");
+    const swapOldEmailField = document.getElementById("swapOldEmailField");
+    const swapNewEmailField = document.getElementById("swapNewEmailField");
+    const btnCloseSwapEmail = document.getElementById("btnCloseSwapEmail");
+    const btnConfirmSwapEmail = document.getElementById("btnConfirmSwapEmail");
 
     function normalizeEmail(v){ return String(v || "").trim().toLowerCase(); }
     function normalizeText(v){ return String(v || "").trim(); }
@@ -2035,39 +2084,22 @@
       reader.readAsDataURL(file);
     }
 
-    function normalizeClaimStatusText(rawText){
-      const raw = String(rawText || "").trim();
-      if (!raw) return "รอดำเนินการ";
-
-      if (/รอตรวจสอบสลิป/i.test(raw)){
-        return "รอดำเนินการ";
-      }
-
-      return raw;
-    }
-
     function decorateStatusText(text){
-      const normalized = normalizeClaimStatusText(text);
-      const safe = escapeHtml(normalized || "-");
-
-      if (!normalized) return '<span class="status-pill status-pill--yellow">รอดำเนินการ</span>';
-
-      if (normalized.includes("ดึงเมลแล้ว") || normalized.includes("เสร็จ") || normalized.includes("สำเร็จ") || normalized.includes("ใช้งานได้ปกติ")){
+      const raw = String(text || "").trim();
+      const safe = escapeHtml(raw || "-");
+      if (!raw) return '<span class="status-pill status-pill--yellow">รอดำเนินการ</span>';
+      if (raw.includes("ดึงเมลแล้ว") || raw.includes("เสร็จ") || raw.includes("สำเร็จ") || raw.includes("ใช้งานได้ปกติ")){
         return '<span class="status-pill status-pill--green">' + safe + '</span>';
       }
-
-      if (normalized.includes("กำลังดำเนินการ")){
+      if (raw.includes("รอตรวจสอบสลิป")){
         return '<span class="status-pill status-pill--blue">' + safe + '</span>';
       }
-
-      if (normalized.includes("กำลัง") || normalized.includes("รอตรวจสอบ") || normalized.includes("รอดำเนินการ") || normalized.includes("ตรวจสอบ")){
+      if (raw.includes("กำลัง") || raw.includes("รอตรวจสอบ") || raw.includes("รอดำเนินการ") || raw.includes("ตรวจสอบ")){
         return '<span class="status-pill status-pill--yellow">' + safe + '</span>';
       }
-
-      if (normalized.includes("ไม่ผ่าน") || normalized.includes("ไม่เข้าเงื่อนไข")){
+      if (raw.includes("ไม่ผ่าน") || raw.includes("ไม่เข้าเงื่อนไข")){
         return '<span class="status-pill status-pill--red">' + safe + '</span>';
       }
-
       return '<span class="status-pill status-pill--purple">' + safe + '</span>';
     }
 
@@ -2117,6 +2149,7 @@
         expiryFixedBox.style.display = "none";
         expiryPickerBlock.style.display = "";
         paymentSection.style.display = "none";
+        if (swapOldEmail) swapOldEmail.value = "";
         return;
       }
 
@@ -2124,6 +2157,10 @@
       profileMemberDate.textContent = formatThaiDate(state.member.memberDate || "");
       profileLineName.textContent = state.member.displayName || "-";
       memberMiniBox.style.display = "grid";
+
+      if (swapOldEmail){
+        swapOldEmail.value = state.member.email || "";
+      }
 
       if (state.member.lastKnownExpiry){
         expiryFixedText.textContent = formatThaiDate(state.member.lastKnownExpiry);
@@ -2276,25 +2313,17 @@
     }
 
     function renderClaimSteps(statusText=""){
-      const steps = ["รับคำขอแล้ว","รอดำเนินการ","กำลังดำเนินการ","เสร็จแล้ว"];
+      const steps = ["รับคำขอแล้ว","รอตรวจสอบ","กำลังดำเนินการ","เสร็จแล้ว"];
       let activeIndex = 0;
-      const raw = normalizeClaimStatusText(statusText);
-
+      const raw = String(statusText || "");
       if (!raw){
         claimStepCard.style.display = "none";
         claimStepList.innerHTML = "";
         return;
       }
-
-      if (raw.includes("รอดำเนินการ") || raw.includes("รอตรวจสอบ") || raw.includes("ตรวจสอบ")){
-        activeIndex = 1;
-      }
-      if (raw.includes("กำลังดำเนินการ") || raw.includes("ดึงเมลแล้ว")){
-        activeIndex = 2;
-      }
-      if (raw.includes("เสร็จ") || raw.includes("สำเร็จ") || raw.includes("ใช้งานได้ปกติ")){
-        activeIndex = 3;
-      }
+      if (raw.includes("รอตรวจสอบ") || raw.includes("กำลัง") || raw.includes("รอดำเนินการ")) activeIndex = 1;
+      if (raw.includes("ดึงเมลแล้ว") || raw.includes("ตรวจสอบสลิป")) activeIndex = 2;
+      if (raw.includes("เสร็จ") || raw.includes("สำเร็จ") || raw.includes("ใช้งานได้ปกติ")) activeIndex = 3;
 
       claimStepList.innerHTML = "";
       steps.forEach((step, i) => {
@@ -2305,7 +2334,7 @@
       });
       claimStepCard.style.display = "block";
 
-      const progressMap = [15, 45, 78, 100];
+      const progressMap = [15, 40, 72, 100];
       claimProgressFill.style.width = progressMap[activeIndex] + "%";
       claimProgressLabel.textContent = steps[activeIndex];
     }
@@ -2326,20 +2355,18 @@
         return;
       }
 
-      const normalizedStatus = normalizeClaimStatusText(current.statusText || "รอดำเนินการ");
-
       fillMiniStats(current);
 
       const claimLabel = current.claimType === "paid" ? "แพ็กดูแล 19 บาท" : "เคลมฟรีตามเงื่อนไข";
       statusSummary.innerHTML = '<div class="summary-pill">คำขอล่าสุด: ' + escapeHtml(claimLabel) + '</div>';
       statusPageText.innerHTML =
-        "<span class='status-strong'>" + decorateStatusText(normalizedStatus) + "</span><br>" +
+        "<span class='status-strong'>" + decorateStatusText(current.statusText || "รอดำเนินการ") + "</span><br>" +
         "<span class='status-time'>รับเรื่องเมื่อ: " + escapeHtml(formatThaiDateTime(current.createdAt || current.updatedAt || "")) + "</span>";
 
       queueCard.style.display = "block";
       queueNumberBig.textContent = "#" + (current.queueNo || "-");
       queueMetaText.textContent = "อัปเดตล่าสุด: " + formatThaiDateTime(current.updatedAt || current.createdAt || "");
-      renderClaimSteps(normalizedStatus);
+      renderClaimSteps(current.statusText || "");
 
       const claimType = (current.claimType || "").toLowerCase() === "paid" ? "paid" : "free";
       const tagText = claimType === "paid" ? "แพ็กดูแล 19 บาท" : "เคลมฟรี";
@@ -2353,7 +2380,7 @@
           '<span>คิวเคลม ' + escapeHtml(current.queueNo || "-") + '</span>' +
           '<span>วันหมดอายุ ' + escapeHtml(current.expiry || "-") + '</span>' +
         '</div>' +
-        '<div class="item-body">' + decorateStatusText(normalizedStatus) + '</div>';
+        '<div class="item-body">' + decorateStatusText(current.statusText || "รอดำเนินการ") + '</div>';
       results.appendChild(card);
     }
 
@@ -2466,6 +2493,22 @@
 
     function closeConfirmModal(){
       confirmModal.classList.remove("show");
+    }
+
+    function openSwapEmailModal(){
+      if (!state.member || !state.token){
+        setActiveView("loginView");
+        return;
+      }
+      swapOldEmail.value = state.member.email || "";
+      swapNewEmail.value = "";
+      swapEmailAlert.className = "alert-box";
+      swapEmailAlert.textContent = "";
+      swapEmailModal.classList.add("show");
+    }
+
+    function closeSwapEmailModal(){
+      swapEmailModal.classList.remove("show");
     }
 
     async function fileToDataUrl(file){
@@ -2606,6 +2649,75 @@
       setActiveView("loginView");
     }
 
+    async function handleSwapEmail(){
+      const oldEmail = normalizeEmail(swapOldEmail.value);
+      const newEmail = normalizeEmail(swapNewEmail.value);
+
+      if (!oldEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(oldEmail)){
+        showAlert(swapEmailAlert, "กรุณากรอกอีเมลเดิมให้ถูกต้อง", "error");
+        shake(swapOldEmailField);
+        return;
+      }
+
+      if (!newEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newEmail)){
+        showAlert(swapEmailAlert, "กรุณากรอกอีเมลใหม่ให้ถูกต้อง", "error");
+        shake(swapNewEmailField);
+        return;
+      }
+
+      if (oldEmail === newEmail){
+        showAlert(swapEmailAlert, "อีเมลใหม่ต้องไม่ซ้ำกับอีเมลเดิม", "error");
+        shake(swapNewEmailField);
+        return;
+      }
+
+      showLoading();
+      btnConfirmSwapEmail.disabled = true;
+
+      try{
+        const data = await postJson({
+          action: "swapEmail",
+          token: state.token,
+          oldEmail,
+          newEmail
+        });
+
+        if (!data || data.ok === false){
+          showAlert(swapEmailAlert, data.message || "สลับอีเมลไม่สำเร็จ", "error", 6000);
+          shake(btnConfirmSwapEmail);
+          return;
+        }
+
+        if (data.token){
+          state.token = String(data.token || "").trim();
+          localStorage.setItem(TOKEN_KEY, state.token);
+        }
+
+        if (data.member){
+          state.member = data.member;
+          updateMemberUI();
+        }
+
+        closeSwapEmailModal();
+        showToast("สลับอีเมลเรียบร้อยแล้ว");
+
+        if (data.swapSummary){
+          showAlert(claimAlert, data.swapSummary, "success", 7000);
+        } else {
+          showAlert(claimAlert, "สลับอีเมลเรียบร้อยแล้ว", "success", 5000);
+        }
+
+        await bootstrapApp();
+        setActiveView("claimView");
+      }catch(e){
+        showAlert(swapEmailAlert, "เกิดข้อผิดพลาดในการเชื่อมต่อ", "error", 5000);
+        shake(btnConfirmSwapEmail);
+      }finally{
+        hideLoading();
+        btnConfirmSwapEmail.disabled = false;
+      }
+    }
+
     async function handleCheckExpiry(){
       if (!state.token){
         setActiveView("loginView");
@@ -2640,10 +2752,7 @@
       if (!state.token) return [];
       const data = await fetchJson(SCRIPT_URL + "?action=history&token=" + encodeURIComponent(state.token) + "&_t=" + Date.now());
       if (!data || data.ok === false) return [];
-      return Array.isArray(data.history) ? data.history.map(item => ({
-        ...item,
-        statusText: normalizeClaimStatusText(item.statusText || item.status || "")
-      })) : [];
+      return Array.isArray(data.history) ? data.history : [];
     }
 
     async function refreshStatusPage(){
@@ -2707,34 +2816,18 @@
         }
 
         if (data.todaySummary) renderLiveStatus(data.todaySummary);
-
-        let currentForUI = data.current ? {
-          ...data.current,
-          statusText: normalizeClaimStatusText((data.current && data.current.statusText) || "รอดำเนินการ")
-        } : null;
-
-        if (currentForUI){
-          renderLatestStatusPage({ history:[currentForUI], current:currentForUI });
+        if (data.current){
+          renderLatestStatusPage({ history:[data.current], current:data.current });
         }
-
-        const isPaidClaim = String(state.member && state.member.signupYearThai || "") === String(claimConfig.paidYear || "");
 
         summary.innerHTML = '<div class="summary-pill">ส่งคำขอเรียบร้อยแล้ว</div>';
-
-        if (isPaidClaim){
-          status.innerHTML =
-            "<span class='status-strong'>" + escapeHtml(data.message || "ตรวจสลิปผ่านและรับคำขอเรียบร้อยแล้ว") + "</span><br>" +
-            "<span class='status-time'>สถานะล่าสุด: รอดำเนินการ</span>";
-        } else {
-          status.innerHTML =
-            "<span class='status-strong'>" + escapeHtml(data.message || "ระบบรับคำขอของคุณแล้ว") + "</span><br>" +
-            "<span class='status-time'>สามารถติดตามสถานะได้จากหน้าสถานะการเคลม</span>";
-        }
+        status.innerHTML =
+          "<span class='status-strong'>" + escapeHtml(data.message || "ระบบรับคำขอของคุณแล้ว") + "</span><br>" +
+          "<span class='status-time'>สามารถติดตามสถานะได้จากหน้าสถานะการเคลม</span>";
 
         noteInput.value = "";
         updateNoteCounter();
-
-        if (!isPaidClaim){
+        if (String(state.member && state.member.signupYearThai || "") !== String(claimConfig.paidYear || "")){
           resetSlipPreview();
         } else {
           setSlipStatus("ส่งคำขอพร้อมสลิปเรียบร้อยแล้ว");
@@ -2864,6 +2957,14 @@
 
     confirmModal.addEventListener("click", e => {
       if (e.target === confirmModal) closeConfirmModal();
+    });
+
+    btnOpenSwapEmail.addEventListener("click", openSwapEmailModal);
+    btnCloseSwapEmail.addEventListener("click", closeSwapEmailModal);
+    btnConfirmSwapEmail.addEventListener("click", handleSwapEmail);
+
+    swapEmailModal.addEventListener("click", e => {
+      if (e.target === swapEmailModal) closeSwapEmailModal();
     });
 
     registerPassword.addEventListener("input", updatePasswordStrengthUI);
