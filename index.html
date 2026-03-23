@@ -1281,7 +1281,6 @@
     </section>
 
     <main class="panel shell-card">
-      <!-- LOGIN -->
       <section class="view active" id="loginView">
         <div class="section-blurb">เข้าสู่ระบบด้วยอีเมลและรหัสผ่านของคุณ</div>
 
@@ -1337,7 +1336,6 @@
         </div>
       </section>
 
-      <!-- REGISTER -->
       <section class="view" id="registerView">
         <div class="section-blurb">สมัครสมาชิกด้วยอีเมลที่ใช้กับร้าน พร้อมตั้งรหัสผ่านใหม่</div>
 
@@ -1409,7 +1407,6 @@
         </div>
       </section>
 
-      <!-- CLAIM -->
       <section class="view" id="claimView">
         <div class="claim-card">
           <div class="claim-head">
@@ -1530,7 +1527,6 @@
         </div>
       </section>
 
-      <!-- STATUS -->
       <section class="view" id="statusView">
         <div class="status-card">
           <div class="status-head">
@@ -1633,7 +1629,7 @@
   </div>
 
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx1qo68leUtPihlJdotz0havnKZzManZisksDiE1uOsZ33xyPIFFIcLkufiAC6Sb8v9tA/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby4TGpj7wtjAIUGwTLhasIVz3i_iV0gE4aIZ_O2Ln7gaBFp8ntttYKDbMIPfUGXhfY-oQ/exec";
     const TOKEN_KEY = "shop426_member_token";
     const REMEMBER_KEY = "shop426_saved_login";
     const LAST_SLIP_KEY = "shop426_last_slip_preview";
@@ -2039,22 +2035,39 @@
       reader.readAsDataURL(file);
     }
 
+    function normalizeClaimStatusText(rawText){
+      const raw = String(rawText || "").trim();
+      if (!raw) return "รอดำเนินการ";
+
+      if (/รอตรวจสอบสลิป/i.test(raw)){
+        return "รอดำเนินการ";
+      }
+
+      return raw;
+    }
+
     function decorateStatusText(text){
-      const raw = String(text || "").trim();
-      const safe = escapeHtml(raw || "-");
-      if (!raw) return '<span class="status-pill status-pill--yellow">รอดำเนินการ</span>';
-      if (raw.includes("ดึงเมลแล้ว") || raw.includes("เสร็จ") || raw.includes("สำเร็จ") || raw.includes("ใช้งานได้ปกติ")){
+      const normalized = normalizeClaimStatusText(text);
+      const safe = escapeHtml(normalized || "-");
+
+      if (!normalized) return '<span class="status-pill status-pill--yellow">รอดำเนินการ</span>';
+
+      if (normalized.includes("ดึงเมลแล้ว") || normalized.includes("เสร็จ") || normalized.includes("สำเร็จ") || normalized.includes("ใช้งานได้ปกติ")){
         return '<span class="status-pill status-pill--green">' + safe + '</span>';
       }
-      if (raw.includes("รอตรวจสอบสลิป")){
+
+      if (normalized.includes("กำลังดำเนินการ")){
         return '<span class="status-pill status-pill--blue">' + safe + '</span>';
       }
-      if (raw.includes("กำลัง") || raw.includes("รอตรวจสอบ") || raw.includes("รอดำเนินการ") || raw.includes("ตรวจสอบ")){
+
+      if (normalized.includes("กำลัง") || normalized.includes("รอตรวจสอบ") || normalized.includes("รอดำเนินการ") || normalized.includes("ตรวจสอบ")){
         return '<span class="status-pill status-pill--yellow">' + safe + '</span>';
       }
-      if (raw.includes("ไม่ผ่าน") || raw.includes("ไม่เข้าเงื่อนไข")){
+
+      if (normalized.includes("ไม่ผ่าน") || normalized.includes("ไม่เข้าเงื่อนไข")){
         return '<span class="status-pill status-pill--red">' + safe + '</span>';
       }
+
       return '<span class="status-pill status-pill--purple">' + safe + '</span>';
     }
 
@@ -2263,17 +2276,25 @@
     }
 
     function renderClaimSteps(statusText=""){
-      const steps = ["รับคำขอแล้ว","รอตรวจสอบ","กำลังดำเนินการ","เสร็จแล้ว"];
+      const steps = ["รับคำขอแล้ว","รอดำเนินการ","กำลังดำเนินการ","เสร็จแล้ว"];
       let activeIndex = 0;
-      const raw = String(statusText || "");
+      const raw = normalizeClaimStatusText(statusText);
+
       if (!raw){
         claimStepCard.style.display = "none";
         claimStepList.innerHTML = "";
         return;
       }
-      if (raw.includes("รอตรวจสอบ") || raw.includes("กำลัง") || raw.includes("รอดำเนินการ")) activeIndex = 1;
-      if (raw.includes("ดึงเมลแล้ว") || raw.includes("ตรวจสอบสลิป")) activeIndex = 2;
-      if (raw.includes("เสร็จ") || raw.includes("สำเร็จ") || raw.includes("ใช้งานได้ปกติ")) activeIndex = 3;
+
+      if (raw.includes("รอดำเนินการ") || raw.includes("รอตรวจสอบ") || raw.includes("ตรวจสอบ")){
+        activeIndex = 1;
+      }
+      if (raw.includes("กำลังดำเนินการ") || raw.includes("ดึงเมลแล้ว")){
+        activeIndex = 2;
+      }
+      if (raw.includes("เสร็จ") || raw.includes("สำเร็จ") || raw.includes("ใช้งานได้ปกติ")){
+        activeIndex = 3;
+      }
 
       claimStepList.innerHTML = "";
       steps.forEach((step, i) => {
@@ -2284,7 +2305,7 @@
       });
       claimStepCard.style.display = "block";
 
-      const progressMap = [15, 40, 72, 100];
+      const progressMap = [15, 45, 78, 100];
       claimProgressFill.style.width = progressMap[activeIndex] + "%";
       claimProgressLabel.textContent = steps[activeIndex];
     }
@@ -2305,18 +2326,20 @@
         return;
       }
 
+      const normalizedStatus = normalizeClaimStatusText(current.statusText || "รอดำเนินการ");
+
       fillMiniStats(current);
 
       const claimLabel = current.claimType === "paid" ? "แพ็กดูแล 19 บาท" : "เคลมฟรีตามเงื่อนไข";
       statusSummary.innerHTML = '<div class="summary-pill">คำขอล่าสุด: ' + escapeHtml(claimLabel) + '</div>';
       statusPageText.innerHTML =
-        "<span class='status-strong'>" + decorateStatusText(current.statusText || "รอดำเนินการ") + "</span><br>" +
+        "<span class='status-strong'>" + decorateStatusText(normalizedStatus) + "</span><br>" +
         "<span class='status-time'>รับเรื่องเมื่อ: " + escapeHtml(formatThaiDateTime(current.createdAt || current.updatedAt || "")) + "</span>";
 
       queueCard.style.display = "block";
       queueNumberBig.textContent = "#" + (current.queueNo || "-");
       queueMetaText.textContent = "อัปเดตล่าสุด: " + formatThaiDateTime(current.updatedAt || current.createdAt || "");
-      renderClaimSteps(current.statusText || "");
+      renderClaimSteps(normalizedStatus);
 
       const claimType = (current.claimType || "").toLowerCase() === "paid" ? "paid" : "free";
       const tagText = claimType === "paid" ? "แพ็กดูแล 19 บาท" : "เคลมฟรี";
@@ -2330,7 +2353,7 @@
           '<span>คิวเคลม ' + escapeHtml(current.queueNo || "-") + '</span>' +
           '<span>วันหมดอายุ ' + escapeHtml(current.expiry || "-") + '</span>' +
         '</div>' +
-        '<div class="item-body">' + decorateStatusText(current.statusText || "รอดำเนินการ") + '</div>';
+        '<div class="item-body">' + decorateStatusText(normalizedStatus) + '</div>';
       results.appendChild(card);
     }
 
@@ -2617,7 +2640,10 @@
       if (!state.token) return [];
       const data = await fetchJson(SCRIPT_URL + "?action=history&token=" + encodeURIComponent(state.token) + "&_t=" + Date.now());
       if (!data || data.ok === false) return [];
-      return Array.isArray(data.history) ? data.history : [];
+      return Array.isArray(data.history) ? data.history.map(item => ({
+        ...item,
+        statusText: normalizeClaimStatusText(item.statusText || item.status || "")
+      })) : [];
     }
 
     async function refreshStatusPage(){
@@ -2681,18 +2707,34 @@
         }
 
         if (data.todaySummary) renderLiveStatus(data.todaySummary);
-        if (data.current){
-          renderLatestStatusPage({ history:[data.current], current:data.current });
+
+        let currentForUI = data.current ? {
+          ...data.current,
+          statusText: normalizeClaimStatusText((data.current && data.current.statusText) || "รอดำเนินการ")
+        } : null;
+
+        if (currentForUI){
+          renderLatestStatusPage({ history:[currentForUI], current:currentForUI });
         }
 
+        const isPaidClaim = String(state.member && state.member.signupYearThai || "") === String(claimConfig.paidYear || "");
+
         summary.innerHTML = '<div class="summary-pill">ส่งคำขอเรียบร้อยแล้ว</div>';
-        status.innerHTML =
-          "<span class='status-strong'>" + escapeHtml(data.message || "ระบบรับคำขอของคุณแล้ว") + "</span><br>" +
-          "<span class='status-time'>สามารถติดตามสถานะได้จากหน้าสถานะการเคลม</span>";
+
+        if (isPaidClaim){
+          status.innerHTML =
+            "<span class='status-strong'>" + escapeHtml(data.message || "ตรวจสลิปผ่านและรับคำขอเรียบร้อยแล้ว") + "</span><br>" +
+            "<span class='status-time'>สถานะล่าสุด: รอดำเนินการ</span>";
+        } else {
+          status.innerHTML =
+            "<span class='status-strong'>" + escapeHtml(data.message || "ระบบรับคำขอของคุณแล้ว") + "</span><br>" +
+            "<span class='status-time'>สามารถติดตามสถานะได้จากหน้าสถานะการเคลม</span>";
+        }
 
         noteInput.value = "";
         updateNoteCounter();
-        if (String(state.member && state.member.signupYearThai || "") !== String(claimConfig.paidYear || "")){
+
+        if (!isPaidClaim){
           resetSlipPreview();
         } else {
           setSlipStatus("ส่งคำขอพร้อมสลิปเรียบร้อยแล้ว");
