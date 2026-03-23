@@ -265,10 +265,6 @@
       color:var(--text);
       text-align:center;
     }
-    input[readonly]{
-      opacity:.82;
-      cursor:not-allowed;
-    }
     input::placeholder,textarea::placeholder{color:#a8898e}
     textarea{
       resize:none;
@@ -409,7 +405,6 @@
       font-weight:700;
       border:1px solid transparent;
       text-align:center;
-      white-space:pre-line;
     }
     .alert-box.show{display:block}
     .alert-box.success{background:rgba(120,211,154,.10);border-color:rgba(120,211,154,.18);color:#c8f4d6}
@@ -1244,6 +1239,111 @@
     }
     .copyright{letter-spacing:.16em;text-transform:uppercase}
 
+    .mini-action-row{
+      margin-top:10px;
+      display:flex;
+      justify-content:center;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+
+    .btn-tiny-cute{
+      min-height:34px;
+      padding:0 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      color:#ffecef;
+      font-size:.74rem;
+      font-weight:800;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:6px;
+      box-shadow:0 8px 18px rgba(0,0,0,.12);
+    }
+
+    .btn-tiny-cute:hover{
+      filter:brightness(1.06);
+    }
+
+    .swap-note-box{
+      margin-top:12px;
+      display:grid;
+      gap:8px;
+      text-align:left;
+    }
+
+    .swap-note-option{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 12px;
+      border-radius:14px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.06);
+      color:#ffe9eb;
+      font-size:.8rem;
+      font-weight:700;
+      cursor:pointer;
+    }
+
+    .swap-note-option input{
+      accent-color:#ff5964;
+      width:16px;
+      height:16px;
+      flex:0 0 auto;
+    }
+
+    .swap-note-caption{
+      margin-top:8px;
+      font-size:.73rem;
+      color:var(--muted);
+      line-height:1.6;
+      text-align:center;
+    }
+
+    .swap-mail-summary{
+      margin-top:12px;
+      padding:12px;
+      border-radius:16px;
+      background:rgba(255,255,255,.035);
+      border:1px solid rgba(255,255,255,.07);
+      font-size:.8rem;
+      line-height:1.7;
+      color:#ffe9eb;
+      text-align:center;
+    }
+
+    .swap-result-card{
+      margin-top:12px;
+      padding:12px;
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.025));
+      border:1px solid rgba(255,255,255,.07);
+      text-align:center;
+      display:none;
+    }
+
+    .swap-result-card.show{
+      display:block;
+    }
+
+    .swap-result-title{
+      font-size:.9rem;
+      font-weight:800;
+      color:#fff2f3;
+      margin-bottom:6px;
+    }
+
+    .swap-result-desc{
+      font-size:.78rem;
+      line-height:1.7;
+      color:var(--sub);
+      white-space:pre-line;
+    }
+
     @media (max-width:480px){
       .app{padding:12px 12px 16px}
       .action-row,.modal-actions,.bottom-pair{flex-direction:column}
@@ -1437,6 +1537,15 @@
             </div>
           </div>
 
+          <div class="mini-action-row">
+            <button type="button" class="btn-tiny-cute" id="btnOpenSwapMail">เปลี่ยนอีเมลใช้งาน</button>
+          </div>
+
+          <div class="swap-result-card" id="swapResultCard">
+            <div class="swap-result-title">อัปเดตอีเมลเรียบร้อยแล้ว</div>
+            <div class="swap-result-desc" id="swapResultText">-</div>
+          </div>
+
           <div class="expiry-box">
             <div class="expiry-fixed" id="expiryFixedBox">
               วันหมดอายุในระบบ: <span id="expiryFixedText">-</span>
@@ -1583,10 +1692,6 @@
             ติดต่อแอดมินเกี่ยวกับเคสนี้
           </a>
 
-          <button class="btn-link-small" id="btnOpenSwapEmail" type="button">
-            สลับอีเมลสมาชิก
-          </button>
-
           <div class="history-card">
             <div class="history-title">ประวัติคำขอของคุณ</div>
             <div id="historyResults">
@@ -1637,32 +1742,52 @@
     </div>
   </div>
 
-  <div id="swapEmailModal" class="modal-backdrop">
+  <div id="swapMailModal" class="modal-backdrop">
     <div class="modal-card">
-      <div class="modal-title">สลับอีเมลสมาชิก</div>
+      <div class="modal-title">เปลี่ยนอีเมลใช้งาน</div>
       <div class="modal-desc">
-        ใช้สำหรับเปลี่ยนอีเมลเดิมเป็นอีเมลใหม่ในระบบ
+        หากไม่ต้องการใช้เมลเดิม สามารถเปลี่ยนเป็นเมลใหม่ได้จากตรงนี้
       </div>
 
-      <div id="swapEmailAlert" class="alert-box"></div>
-
-      <div class="field-group">
+      <div class="field-group" style="margin-top:0;">
         <label class="field-label" for="swapOldEmail">อีเมลเดิม</label>
-        <div class="input-shell" id="swapOldEmailField">
-          <input id="swapOldEmail" type="email" placeholder="old@example.com" readonly />
+        <div class="input-shell">
+          <input id="swapOldEmail" type="email" placeholder="อีเมลเดิม" />
         </div>
       </div>
 
       <div class="field-group">
         <label class="field-label" for="swapNewEmail">อีเมลใหม่</label>
-        <div class="input-shell" id="swapNewEmailField">
-          <input id="swapNewEmail" type="email" placeholder="new@example.com" />
+        <div class="input-shell">
+          <input id="swapNewEmail" type="email" placeholder="อีเมลใหม่ที่ต้องการใช้" />
         </div>
       </div>
 
+      <div class="swap-note-box">
+        <label class="swap-note-option">
+          <input type="radio" name="swapReason" value="ติดข้อจำกัด 12 เดือน" checked />
+          <span>ติดข้อจำกัด 12 เดือน</span>
+        </label>
+
+        <label class="swap-note-option">
+          <input type="radio" name="swapReason" value="ต้องการเปลี่ยนเมลใช้งานใหม่" />
+          <span>ต้องการเปลี่ยนเมลใช้งานใหม่</span>
+        </label>
+      </div>
+
+      <div class="swap-note-caption">
+        ระบบจะย้ายการใช้งานไปยังอีเมลใหม่ให้ทันทีหลังยืนยัน
+      </div>
+
+      <div class="swap-mail-summary" id="swapMailSummary">
+        อีเมลเดิม: -<br>
+        อีเมลใหม่: -<br>
+        หมายเหตุ: -
+      </div>
+
       <div class="modal-actions">
-        <button type="button" class="btn-secondary" id="btnCloseSwapEmail">ยกเลิก</button>
-        <button type="button" class="btn-primary" id="btnConfirmSwapEmail">ยืนยันสลับเมล</button>
+        <button type="button" class="btn-secondary" id="btnCloseSwapMail">ปิด</button>
+        <button type="button" class="btn-primary" id="btnConfirmSwapMail">ยืนยันเปลี่ยนเมล</button>
       </div>
     </div>
   </div>
@@ -1832,15 +1957,15 @@
     const btnCancelConfirm = document.getElementById("btnCancelConfirm");
     const btnConfirmSubmit = document.getElementById("btnConfirmSubmit");
 
-    const btnOpenSwapEmail = document.getElementById("btnOpenSwapEmail");
-    const swapEmailModal = document.getElementById("swapEmailModal");
-    const swapEmailAlert = document.getElementById("swapEmailAlert");
+    const btnOpenSwapMail = document.getElementById("btnOpenSwapMail");
+    const swapMailModal = document.getElementById("swapMailModal");
+    const btnCloseSwapMail = document.getElementById("btnCloseSwapMail");
+    const btnConfirmSwapMail = document.getElementById("btnConfirmSwapMail");
     const swapOldEmail = document.getElementById("swapOldEmail");
     const swapNewEmail = document.getElementById("swapNewEmail");
-    const swapOldEmailField = document.getElementById("swapOldEmailField");
-    const swapNewEmailField = document.getElementById("swapNewEmailField");
-    const btnCloseSwapEmail = document.getElementById("btnCloseSwapEmail");
-    const btnConfirmSwapEmail = document.getElementById("btnConfirmSwapEmail");
+    const swapMailSummary = document.getElementById("swapMailSummary");
+    const swapResultCard = document.getElementById("swapResultCard");
+    const swapResultText = document.getElementById("swapResultText");
 
     function normalizeEmail(v){ return String(v || "").trim().toLowerCase(); }
     function normalizeText(v){ return String(v || "").trim(); }
@@ -2149,7 +2274,7 @@
         expiryFixedBox.style.display = "none";
         expiryPickerBlock.style.display = "";
         paymentSection.style.display = "none";
-        if (swapOldEmail) swapOldEmail.value = "";
+        swapResultCard.classList.remove("show");
         return;
       }
 
@@ -2157,10 +2282,6 @@
       profileMemberDate.textContent = formatThaiDate(state.member.memberDate || "");
       profileLineName.textContent = state.member.displayName || "-";
       memberMiniBox.style.display = "grid";
-
-      if (swapOldEmail){
-        swapOldEmail.value = state.member.email || "";
-      }
 
       if (state.member.lastKnownExpiry){
         expiryFixedText.textContent = formatThaiDate(state.member.lastKnownExpiry);
@@ -2212,6 +2333,8 @@
       miniLastTime.textContent = "-";
       qrWrap.classList.remove("show");
       btnToggleQr.textContent = "🌸 ต้องการสแกน QR";
+      swapResultCard.classList.remove("show");
+      swapResultText.textContent = "-";
     }
 
     async function fetchJson(url, options={}){
@@ -2495,20 +2618,71 @@
       confirmModal.classList.remove("show");
     }
 
-    function openSwapEmailModal(){
-      if (!state.member || !state.token){
-        setActiveView("loginView");
-        return;
-      }
-      swapOldEmail.value = state.member.email || "";
-      swapNewEmail.value = "";
-      swapEmailAlert.className = "alert-box";
-      swapEmailAlert.textContent = "";
-      swapEmailModal.classList.add("show");
+    function getSelectedSwapReason(){
+      const checked = document.querySelector('input[name="swapReason"]:checked');
+      return checked ? checked.value : "";
     }
 
-    function closeSwapEmailModal(){
-      swapEmailModal.classList.remove("show");
+    function updateSwapSummary(){
+      swapMailSummary.innerHTML =
+        "อีเมลเดิม: " + escapeHtml(normalizeEmail(swapOldEmail.value) || "-") + "<br>" +
+        "อีเมลใหม่: " + escapeHtml(normalizeEmail(swapNewEmail.value) || "-") + "<br>" +
+        "หมายเหตุ: " + escapeHtml(getSelectedSwapReason() || "-");
+    }
+
+    function openSwapMailModal(){
+      if (!state.member || !state.token){
+        setActiveView("loginView");
+        showAlert(topAlert, "กรุณาเข้าสู่ระบบก่อน", "warning");
+        return;
+      }
+
+      swapOldEmail.value = normalizeEmail((state.member && state.member.email) || "");
+      swapNewEmail.value = "";
+      updateSwapSummary();
+      swapMailModal.classList.add("show");
+    }
+
+    function closeSwapMailModal(){
+      swapMailModal.classList.remove("show");
+    }
+
+    function validateSwapMail(){
+      const oldEmail = normalizeEmail(swapOldEmail.value);
+      const newEmail = normalizeEmail(swapNewEmail.value);
+
+      if (!oldEmail){
+        showToast("กรุณากรอกอีเมลเดิม");
+        shake(swapOldEmail);
+        return false;
+      }
+
+      if (!newEmail){
+        showToast("กรุณากรอกอีเมลใหม่");
+        shake(swapNewEmail);
+        return false;
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(oldEmail)){
+        showToast("อีเมลเดิมไม่ถูกต้อง");
+        shake(swapOldEmail);
+        return false;
+      }
+
+      if (!emailRegex.test(newEmail)){
+        showToast("อีเมลใหม่ไม่ถูกต้อง");
+        shake(swapNewEmail);
+        return false;
+      }
+
+      if (oldEmail === newEmail){
+        showToast("อีเมลใหม่ต้องไม่ซ้ำกับอีเมลเดิม");
+        shake(swapNewEmail);
+        return false;
+      }
+
+      return true;
     }
 
     async function fileToDataUrl(file){
@@ -2649,75 +2823,6 @@
       setActiveView("loginView");
     }
 
-    async function handleSwapEmail(){
-      const oldEmail = normalizeEmail(swapOldEmail.value);
-      const newEmail = normalizeEmail(swapNewEmail.value);
-
-      if (!oldEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(oldEmail)){
-        showAlert(swapEmailAlert, "กรุณากรอกอีเมลเดิมให้ถูกต้อง", "error");
-        shake(swapOldEmailField);
-        return;
-      }
-
-      if (!newEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newEmail)){
-        showAlert(swapEmailAlert, "กรุณากรอกอีเมลใหม่ให้ถูกต้อง", "error");
-        shake(swapNewEmailField);
-        return;
-      }
-
-      if (oldEmail === newEmail){
-        showAlert(swapEmailAlert, "อีเมลใหม่ต้องไม่ซ้ำกับอีเมลเดิม", "error");
-        shake(swapNewEmailField);
-        return;
-      }
-
-      showLoading();
-      btnConfirmSwapEmail.disabled = true;
-
-      try{
-        const data = await postJson({
-          action: "swapEmail",
-          token: state.token,
-          oldEmail,
-          newEmail
-        });
-
-        if (!data || data.ok === false){
-          showAlert(swapEmailAlert, data.message || "สลับอีเมลไม่สำเร็จ", "error", 6000);
-          shake(btnConfirmSwapEmail);
-          return;
-        }
-
-        if (data.token){
-          state.token = String(data.token || "").trim();
-          localStorage.setItem(TOKEN_KEY, state.token);
-        }
-
-        if (data.member){
-          state.member = data.member;
-          updateMemberUI();
-        }
-
-        closeSwapEmailModal();
-        showToast("สลับอีเมลเรียบร้อยแล้ว");
-
-        if (data.swapSummary){
-          showAlert(claimAlert, data.swapSummary, "success", 7000);
-        } else {
-          showAlert(claimAlert, "สลับอีเมลเรียบร้อยแล้ว", "success", 5000);
-        }
-
-        await bootstrapApp();
-        setActiveView("claimView");
-      }catch(e){
-        showAlert(swapEmailAlert, "เกิดข้อผิดพลาดในการเชื่อมต่อ", "error", 5000);
-        shake(btnConfirmSwapEmail);
-      }finally{
-        hideLoading();
-        btnConfirmSwapEmail.disabled = false;
-      }
-    }
-
     async function handleCheckExpiry(){
       if (!state.token){
         setActiveView("loginView");
@@ -2771,6 +2876,64 @@
         shake(btnRefreshStatus);
       }finally{
         hideLoading();
+      }
+    }
+
+    async function handleSwapMail(){
+      if (!validateSwapMail()) return;
+      if (!state.token) return;
+
+      showLoading();
+      btnConfirmSwapMail.disabled = true;
+
+      try{
+        const oldEmail = normalizeEmail(swapOldEmail.value);
+        const newEmail = normalizeEmail(swapNewEmail.value);
+        const reason = getSelectedSwapReason();
+
+        const data = await postJson({
+          action: "swapEmail",
+          token: state.token,
+          oldEmail,
+          newEmail,
+          reason
+        });
+
+        if (!data || data.ok === false){
+          showToast((data && data.message) || "เปลี่ยนอีเมลไม่สำเร็จ");
+          shake(btnConfirmSwapMail);
+          return;
+        }
+
+        if (data.token){
+          state.token = String(data.token || "");
+          localStorage.setItem(TOKEN_KEY, state.token);
+        }
+
+        if (data.member){
+          state.member = data.member;
+          updateMemberUI();
+        }
+
+        swapResultCard.classList.add("show");
+        swapResultText.textContent =
+          (data.message || "เปลี่ยนอีเมลเรียบร้อยแล้ว") +
+          (data.swapSummary ? "\n\n" + data.swapSummary : "") +
+          "\n\nหมายเหตุ: " + reason;
+
+        closeSwapMailModal();
+        showToast("เปลี่ยนอีเมลเรียบร้อยแล้ว");
+
+        await bootstrapApp();
+        if (statusView.classList.contains("active")){
+          await refreshStatusPage();
+        }
+      }catch(e){
+        showToast("เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง");
+        shake(btnConfirmSwapMail);
+      }finally{
+        hideLoading();
+        btnConfirmSwapMail.disabled = false;
       }
     }
 
@@ -2959,13 +3122,35 @@
       if (e.target === confirmModal) closeConfirmModal();
     });
 
-    btnOpenSwapEmail.addEventListener("click", openSwapEmailModal);
-    btnCloseSwapEmail.addEventListener("click", closeSwapEmailModal);
-    btnConfirmSwapEmail.addEventListener("click", handleSwapEmail);
+    if (btnOpenSwapMail){
+      btnOpenSwapMail.addEventListener("click", openSwapMailModal);
+    }
 
-    swapEmailModal.addEventListener("click", e => {
-      if (e.target === swapEmailModal) closeSwapEmailModal();
+    if (btnCloseSwapMail){
+      btnCloseSwapMail.addEventListener("click", closeSwapMailModal);
+    }
+
+    if (btnConfirmSwapMail){
+      btnConfirmSwapMail.addEventListener("click", handleSwapMail);
+    }
+
+    if (swapOldEmail){
+      swapOldEmail.addEventListener("input", updateSwapSummary);
+    }
+
+    if (swapNewEmail){
+      swapNewEmail.addEventListener("input", updateSwapSummary);
+    }
+
+    document.querySelectorAll('input[name="swapReason"]').forEach(el => {
+      el.addEventListener("change", updateSwapSummary);
     });
+
+    if (swapMailModal){
+      swapMailModal.addEventListener("click", e => {
+        if (e.target === swapMailModal) closeSwapMailModal();
+      });
+    }
 
     registerPassword.addEventListener("input", updatePasswordStrengthUI);
     noteInput.addEventListener("input", updateNoteCounter);
