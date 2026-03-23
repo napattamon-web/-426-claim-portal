@@ -5,7 +5,6 @@
   <title>426 SHOP – Member & Claim Center</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#12090b" />
-  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     :root{
       --bg:#12090b;
@@ -57,7 +56,7 @@
     html,body{margin:0;padding:0;min-height:100%}
     body{
       min-height:100vh;
-      font-family:"Sarabun",system-ui,sans-serif;
+      font-family:Arial, Helvetica, sans-serif;
       color:var(--text);
       background:
         radial-gradient(circle at 0% 0%, rgba(255,92,124,.10), transparent 24%),
@@ -118,6 +117,41 @@
     .float-shapes span:nth-child(4){width:54px;height:18px;right:8%;bottom:14%;animation-duration:15s}
     .float-shapes span:nth-child(5){width:22px;height:22px;left:72%;top:62%;animation-duration:11s}
 
+    /* หัวใจ + ดาว พื้นหลัง */
+    .bg-icons{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:0;
+      overflow:hidden;
+    }
+    .bg-icons span{
+      position:absolute;
+      color:rgba(255,255,255,.12);
+      text-shadow:0 0 14px rgba(255,110,140,.12);
+      animation:floatIcon 10s ease-in-out infinite;
+      user-select:none;
+      font-weight:700;
+    }
+    .bg-icons span:nth-child(1){left:6%;top:8%;font-size:18px;animation-duration:11s}
+    .bg-icons span:nth-child(2){left:18%;top:24%;font-size:14px;animation-duration:9s}
+    .bg-icons span:nth-child(3){left:8%;top:48%;font-size:20px;animation-duration:12s}
+    .bg-icons span:nth-child(4){left:20%;top:74%;font-size:16px;animation-duration:10s}
+    .bg-icons span:nth-child(5){left:32%;top:14%;font-size:13px;animation-duration:8s}
+    .bg-icons span:nth-child(6){left:40%;top:58%;font-size:18px;animation-duration:13s}
+    .bg-icons span:nth-child(7){left:52%;top:10%;font-size:16px;animation-duration:10s}
+    .bg-icons span:nth-child(8){left:60%;top:34%;font-size:14px;animation-duration:9s}
+    .bg-icons span:nth-child(9){left:72%;top:18%;font-size:20px;animation-duration:12s}
+    .bg-icons span:nth-child(10){left:80%;top:52%;font-size:16px;animation-duration:8s}
+    .bg-icons span:nth-child(11){left:90%;top:12%;font-size:14px;animation-duration:9s}
+    .bg-icons span:nth-child(12){left:68%;top:76%;font-size:18px;animation-duration:11s}
+    .bg-icons span:nth-child(13){left:44%;top:82%;font-size:15px;animation-duration:10s}
+    .bg-icons span:nth-child(14){left:86%;top:82%;font-size:17px;animation-duration:12s}
+    .bg-icons span:nth-child(15){left:28%;top:90%;font-size:13px;animation-duration:8s}
+    .bg-icons span:nth-child(16){left:56%;top:66%;font-size:13px;animation-duration:7.5s}
+    .bg-icons span:nth-child(17){left:12%;top:92%;font-size:18px;animation-duration:11s}
+    .bg-icons span:nth-child(18){left:76%;top:64%;font-size:14px;animation-duration:9.5s}
+
     @keyframes floatBlur{
       0%,100%{transform:translateY(0) translateX(0)}
       50%{transform:translateY(18px) translateX(-10px)}
@@ -125,6 +159,10 @@
     @keyframes shapeDrift{
       0%,100%{transform:translateY(0) rotate(18deg)}
       50%{transform:translateY(-10px) rotate(28deg)}
+    }
+    @keyframes floatIcon{
+      0%,100%{transform:translateY(0) scale(1);opacity:.8}
+      50%{transform:translateY(-8px) scale(1.06);opacity:1}
     }
 
     .app{
@@ -224,9 +262,9 @@
       background:rgba(255,255,255,.15);
       border:1px solid rgba(255,255,255,.20);
       color:var(--hero-text);
-      font-size:.82rem;
-      font-weight:800;
-      line-height:1.55;
+      font-size:.85rem;
+      font-weight:700;
+      line-height:1.65;
       box-shadow:0 10px 18px rgba(0,0,0,.08);
       backdrop-filter:blur(10px);
     }
@@ -243,7 +281,7 @@
       display:flex;
       align-items:center;
       gap:8px;
-      font-size:.80rem;
+      font-size:.82rem;
       font-weight:800;
       background:rgba(255,255,255,.18);
       border:1px solid rgba(255,255,255,.24);
@@ -282,11 +320,12 @@
     }
 
     .section-blurb{
-      font-size:.84rem;
-      line-height:1.65;
+      font-size:.90rem;
+      line-height:1.7;
       color:var(--sub);
       text-align:center;
       margin-bottom:12px;
+      font-weight:700;
     }
 
     .card{
@@ -333,16 +372,17 @@
     }
     .section-title-plain h2{
       margin:0;
-      font-size:1.18rem;
+      font-size:1.30rem;
       font-weight:800;
-      color:var(--text);
-      line-height:1.35;
+      color:var(--primary-deep);
+      line-height:1.38;
     }
     .section-title-plain p{
-      margin:6px 0 0;
-      font-size:.79rem;
-      line-height:1.65;
+      margin:8px 0 0;
+      font-size:.87rem;
+      line-height:1.75;
       color:var(--sub);
+      font-weight:700;
     }
 
     .policy-box{
@@ -400,7 +440,7 @@
       flex:0 0 auto;
     }
     .policy-title{
-      font-size:.90rem;
+      font-size:1rem;
       font-weight:800;
       color:var(--primary-deep);
       letter-spacing:.01em;
@@ -409,13 +449,14 @@
     .policy-text{
       position:relative;
       z-index:1;
-      font-size:.80rem;
-      line-height:1.82;
+      font-size:.90rem;
+      line-height:1.9;
       color:var(--sub);
       text-align:center;
       white-space:normal;
       max-width:420px;
       margin:0 auto;
+      font-weight:700;
     }
 
     .field-group{
@@ -427,9 +468,9 @@
       z-index:1;
     }
     .field-label{
-      font-size:.78rem;
+      font-size:.80rem;
       color:var(--sub);
-      font-weight:700;
+      font-weight:800;
       text-align:center;
     }
 
@@ -459,12 +500,13 @@
       border:0;
       outline:0;
       background:transparent;
-      font-family:inherit;
-      font-size:.95rem;
+      font-family:Arial, Helvetica, sans-serif;
+      font-size:.96rem;
       color:var(--text);
       text-align:center;
+      font-weight:700;
     }
-    input::placeholder{color:var(--muted)}
+    input::placeholder{color:var(--muted);font-weight:600}
 
     .toggle-pass{
       border:1px solid #efdae2;
@@ -485,9 +527,10 @@
 
     .password-rule,.password-strength{
       margin-top:2px;
-      font-size:.72rem;
+      font-size:.74rem;
       text-align:center;
-      line-height:1.55;
+      line-height:1.6;
+      font-weight:700;
     }
     .password-rule{color:var(--muted)}
     .password-strength{font-weight:800}
@@ -506,9 +549,9 @@
       border:0;
       background:transparent;
       color:var(--sub);
-      font-family:inherit;
-      font-size:.72rem;
-      font-weight:700;
+      font-family:Arial, Helvetica, sans-serif;
+      font-size:.74rem;
+      font-weight:800;
       cursor:pointer;
       padding:2px 4px;
       border-radius:8px;
@@ -523,11 +566,12 @@
       margin-top:12px;
       display:flex;
       justify-content:center;
-      font-size:.78rem;
+      font-size:.80rem;
       color:var(--sub);
       text-align:center;
       position:relative;
       z-index:1;
+      font-weight:700;
     }
     .remember-check{
       display:inline-flex;
@@ -553,7 +597,7 @@
 
     .btn-primary,.btn-secondary,.btn-danger,.btn-link-small,.btn-mini,.btn-admin,.btn-soft-cute,.upload-btn,.btn-scan-toggle{
       border-radius:999px;
-      font-family:inherit;
+      font-family:Arial, Helvetica, sans-serif;
       font-weight:800;
       cursor:pointer;
       transition:.12s ease;
@@ -581,7 +625,7 @@
       flex:1;
       background:linear-gradient(180deg,var(--primary-3),var(--primary-2) 45%,var(--primary));
       color:#fff;
-      font-size:.93rem;
+      font-size:.96rem;
       box-shadow:0 12px 24px rgba(219,36,67,.20);
     }
     .btn-primary:disabled{opacity:.62;cursor:default}
@@ -592,7 +636,7 @@
       background:linear-gradient(180deg,#fff,#fff4f7);
       border-color:#efd7df;
       color:var(--sub);
-      font-size:.86rem;
+      font-size:.88rem;
       box-shadow:0 8px 18px rgba(219,36,67,.06);
     }
 
@@ -602,7 +646,7 @@
       background:linear-gradient(180deg,#fff1f4,#ffe4ea);
       border-color:#efc9d3;
       color:var(--danger);
-      font-size:.78rem;
+      font-size:.79rem;
       box-shadow:0 8px 18px rgba(222,96,114,.08);
     }
 
@@ -612,7 +656,7 @@
       background:linear-gradient(180deg,#fff,#fff4f7);
       border-color:#efd7df;
       color:var(--sub);
-      font-size:.78rem;
+      font-size:.79rem;
       box-shadow:0 8px 18px rgba(219,36,67,.06);
     }
 
@@ -623,7 +667,7 @@
       background:linear-gradient(180deg,#fff,#fff5f8);
       border-color:#efd7df;
       color:var(--sub);
-      font-size:.78rem;
+      font-size:.79rem;
       box-shadow:0 8px 18px rgba(219,36,67,.05);
     }
 
@@ -633,7 +677,7 @@
       background:linear-gradient(180deg,#fff,#fff4f7);
       border-color:#efd7df;
       color:var(--sub);
-      font-size:.77rem;
+      font-size:.78rem;
       text-decoration:none;
       display:flex;
       align-items:center;
@@ -649,7 +693,7 @@
       border:1px solid #efd7df;
       background:linear-gradient(180deg,#fff,#fff4f8);
       color:var(--sub);
-      font-size:.74rem;
+      font-size:.76rem;
       box-shadow:0 10px 18px rgba(219,36,67,.06);
       display:inline-flex;
       align-items:center;
@@ -681,11 +725,11 @@
     .alert-box{
       display:none;
       margin-top:10px;
-      padding:11px 12px;
+      padding:12px 14px;
       border-radius:16px;
-      font-size:.8rem;
-      line-height:1.55;
-      font-weight:700;
+      font-size:.87rem;
+      line-height:1.65;
+      font-weight:800;
       border:1px solid transparent;
       text-align:center;
       white-space:pre-line;
@@ -705,15 +749,15 @@
       justify-content:center;
       gap:10px;
       flex-wrap:wrap;
-      font-size:.84rem;
+      font-size:.90rem;
       color:var(--sub);
       text-align:center;
     }
-    .signup-inline-text{font-weight:700}
+    .signup-inline-text{font-weight:800}
     .signup-inline .btn-soft-cute{
       min-height:38px;
       padding:0 16px;
-      font-size:.77rem;
+      font-size:.79rem;
     }
 
     .live-card{
@@ -758,8 +802,8 @@
       0%,100%{transform:scale(1);opacity:1}
       50%{transform:scale(1.16);opacity:.82}
     }
-    .live-title{font-size:.90rem;font-weight:800;color:var(--text)}
-    .live-date{width:100%;font-size:.73rem;color:var(--sub)}
+    .live-title{font-size:.98rem;font-weight:800;color:var(--primary-deep)}
+    .live-date{width:100%;font-size:.78rem;color:var(--sub);font-weight:700}
     .live-list{
       display:grid;
       gap:8px;
@@ -768,7 +812,7 @@
       position:relative;
       z-index:1;
     }
-    .live-empty{text-align:center;font-size:.8rem;color:var(--sub);padding:8px 0}
+    .live-empty{text-align:center;font-size:.84rem;color:var(--sub);padding:8px 0;font-weight:700}
     .live-item{
       display:flex;
       justify-content:space-between;
@@ -791,7 +835,7 @@
     }
     .live-email{
       font-weight:800;
-      font-size:.8rem;
+      font-size:.83rem;
       color:var(--text);
       overflow:hidden;
       text-overflow:ellipsis;
@@ -799,11 +843,12 @@
       max-width:100%;
     }
     .live-time{
-      font-size:.72rem;
+      font-size:.74rem;
       color:var(--muted);
-      line-height:1.2;
+      line-height:1.3;
+      font-weight:700;
     }
-    .live-status-text{font-size:.77rem;color:var(--sub);flex-shrink:0}
+    .live-status-text{font-size:.79rem;color:var(--sub);flex-shrink:0}
 
     .member-mini{
       display:none;
@@ -839,9 +884,9 @@
     }
     .member-pill:hover{transform:translateY(-1px)}
     .member-pill.wide{grid-column:1 / -1}
-    .member-key{font-size:.70rem;color:var(--muted);font-weight:700}
+    .member-key{font-size:.72rem;color:var(--muted);font-weight:800}
     .member-val{
-      font-size:.82rem;
+      font-size:.84rem;
       color:var(--text);
       font-weight:800;
       line-height:1.45;
@@ -877,15 +922,15 @@
 
     .expiry-fixed{
       display:none;
-      padding:11px 12px;
+      padding:12px 14px;
       border-radius:16px;
       background:#fff;
       border:1px solid var(--line);
       text-align:center;
-      font-size:.85rem;
-      color:var(--text);
+      font-size:.90rem;
+      color:var(--primary-deep);
       font-weight:800;
-      line-height:1.6;
+      line-height:1.65;
       position:relative;
       z-index:1;
     }
@@ -893,8 +938,8 @@
       display:block;
       margin-top:4px;
       color:var(--muted);
-      font-size:.72rem;
-      font-weight:700;
+      font-size:.74rem;
+      font-weight:800;
     }
 
     .expiry-action-row{
@@ -913,9 +958,9 @@
       border-radius:16px;
       background:#fff6eb;
       border:1px solid #ffd9af;
-      color:var(--warning);
-      font-size:.77rem;
-      line-height:1.55;
+      color:#b86f18;
+      font-size:.80rem;
+      line-height:1.65;
       text-align:center;
       font-weight:800;
       position:relative;
@@ -945,8 +990,8 @@
       background:linear-gradient(180deg, rgba(255,92,124,.08), rgba(255,92,124,0));
       pointer-events:none;
     }
-    .payment-title{font-size:.95rem;font-weight:800;color:var(--text);margin-bottom:4px;position:relative;z-index:1}
-    .payment-desc{font-size:.78rem;color:var(--sub);line-height:1.6;margin-bottom:12px;position:relative;z-index:1}
+    .payment-title{font-size:1rem;font-weight:800;color:var(--primary-deep);margin-bottom:4px;position:relative;z-index:1}
+    .payment-desc{font-size:.84rem;color:var(--sub);line-height:1.7;margin-bottom:12px;position:relative;z-index:1;font-weight:700}
     .bank-box{
       border-radius:18px;
       border:1px solid var(--line);
@@ -963,15 +1008,15 @@
       background:#fff4f8;
       border:1px solid #f0d4de;
       color:var(--sub);
-      font-size:.73rem;
+      font-size:.75rem;
       font-weight:800;
       margin-bottom:8px;
     }
-    .bank-name{font-size:.77rem;color:var(--sub);line-height:1.5;margin-bottom:8px}
+    .bank-name{font-size:.80rem;color:var(--sub);line-height:1.55;margin-bottom:8px;font-weight:700}
     .bank-number{
-      font-size:1.12rem;
+      font-size:1.14rem;
       letter-spacing:.08em;
-      color:var(--text);
+      color:var(--primary-deep);
       font-weight:800;
       margin-bottom:10px;
       word-break:break-all;
@@ -984,7 +1029,7 @@
       background:linear-gradient(180deg,#fff,#fff4f8);
       border-color:#efd7df;
       color:var(--sub);
-      font-size:.74rem;
+      font-size:.76rem;
       box-shadow:0 8px 18px rgba(219,36,67,.06);
       display:inline-flex;align-items:center;justify-content:center;gap:6px;
     }
@@ -1001,7 +1046,7 @@
       z-index:1;
     }
     .qr-wrap.show{display:block}
-    .qr-title{font-size:.84rem;font-weight:800;color:var(--text);margin-bottom:8px}
+    .qr-title{font-size:.88rem;font-weight:800;color:var(--primary-deep);margin-bottom:8px}
     .qr-img{
       width:100%;
       max-width:240px;
@@ -1011,7 +1056,7 @@
       border:1px solid var(--line);
       background:#fff;
     }
-    .qr-caption{margin-top:8px;font-size:.75rem;line-height:1.55;color:var(--sub)}
+    .qr-caption{margin-top:8px;font-size:.78rem;line-height:1.6;color:var(--sub);font-weight:700}
 
     .uploader{
       margin-top:12px;
@@ -1023,19 +1068,19 @@
       position:relative;
       z-index:1;
     }
-    .upload-title{font-size:.88rem;font-weight:800;color:var(--text)}
-    .upload-sub{font-size:.75rem;color:var(--sub);line-height:1.55;margin-top:6px}
+    .upload-title{font-size:.90rem;font-weight:800;color:var(--primary-deep)}
+    .upload-sub{font-size:.78rem;color:var(--sub);line-height:1.6;margin-top:6px;font-weight:700}
     .upload-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px}
     .upload-btn{
       padding:10px 14px;
       background:linear-gradient(180deg,#fff,#fff4f8);
       border-color:#efd7df;
       color:var(--sub);
-      font-size:.8rem;
+      font-size:.82rem;
       box-shadow:0 8px 18px rgba(219,36,67,.06);
     }
     .hidden-file-input{position:absolute;left:-9999px;opacity:0}
-    .file-name{margin-top:10px;font-size:.76rem;color:var(--sub);word-break:break-word}
+    .file-name{margin-top:10px;font-size:.78rem;color:var(--sub);word-break:break-word;font-weight:700}
     .upload-status{
       margin-top:10px;
       display:none;
@@ -1044,9 +1089,9 @@
       background:#eefcf5;
       border:1px solid #caeedb;
       color:var(--success);
-      font-size:.77rem;
+      font-size:.79rem;
       font-weight:800;
-      line-height:1.55;
+      line-height:1.6;
       white-space:pre-line;
     }
     .upload-status.show{display:block}
@@ -1082,13 +1127,13 @@
       display:inline-flex;
       align-items:center;
       gap:6px;
-      padding:7px 12px;
+      padding:8px 14px;
       border-radius:999px;
       background:#fff;
       border:1px solid var(--line);
-      color:var(--text);
+      color:var(--primary-deep);
       font-weight:800;
-      font-size:.78rem;
+      font-size:.82rem;
       box-shadow:0 8px 14px rgba(219,36,67,.04);
     }
 
@@ -1096,13 +1141,14 @@
       min-height:20px;
       margin-top:8px;
       text-align:center;
-      font-size:.82rem;
+      font-size:.88rem;
       line-height:1.7;
       color:var(--sub);
       position:relative;
       z-index:1;
+      font-weight:700;
     }
-    .status-time{font-size:.75rem;color:var(--muted)}
+    .status-time{font-size:.78rem;color:var(--muted);font-weight:700}
 
     .status-grid{
       display:grid;
@@ -1136,18 +1182,20 @@
     .mini-box:hover{transform:translateY(-1px)}
     .mini-box strong{
       display:block;
-      font-size:.95rem;
-      color:var(--text);
+      font-size:1rem;
+      color:var(--primary-deep);
       position:relative;
       z-index:1;
+      font-weight:800;
     }
     .mini-box span{
       display:block;
       margin-top:4px;
-      font-size:.72rem;
+      font-size:.74rem;
       color:var(--muted);
       position:relative;
       z-index:1;
+      font-weight:800;
     }
 
     .queue-card{
@@ -1175,18 +1223,19 @@
     }
     .queue-card:hover{transform:translateY(-1px)}
     .queue-no{
-      font-size:1.32rem;
+      font-size:1.36rem;
       font-weight:800;
-      color:var(--text);
+      color:var(--primary-deep);
       position:relative;
       z-index:1;
     }
     .queue-sub{
-      font-size:.74rem;
+      font-size:.78rem;
       color:var(--sub);
       margin-top:4px;
       position:relative;
       z-index:1;
+      font-weight:700;
     }
 
     .progress-wrap{margin-top:10px;display:grid;gap:8px;position:relative;z-index:1}
@@ -1206,10 +1255,10 @@
       transition:width .08s ease;
     }
     .progress-label{
-      font-size:.75rem;
-      color:var(--sub);
+      font-size:.82rem;
+      color:var(--primary-deep);
       text-align:center;
-      font-weight:700;
+      font-weight:800;
     }
 
     .timeline-card{
@@ -1235,9 +1284,9 @@
       pointer-events:none;
     }
     .timeline-title{
-      font-size:.82rem;
+      font-size:.86rem;
       font-weight:800;
-      color:var(--text);
+      color:var(--primary-deep);
       text-align:center;
       margin-bottom:10px;
       position:relative;
@@ -1258,7 +1307,7 @@
       background:linear-gradient(180deg,#fff,#fff4f8);
       border:1px solid #efd7df;
       color:var(--sub);
-      font-size:.74rem;
+      font-size:.76rem;
       font-weight:800;
       display:flex;
       align-items:center;
@@ -1298,19 +1347,20 @@
     }
     .result-item:hover{transform:translateY(-1px)}
     .item-header{
-      font-size:.72rem;
+      font-size:.74rem;
       color:var(--muted);
       letter-spacing:.12em;
       text-transform:uppercase;
       margin-bottom:6px;
       position:relative;
       z-index:1;
+      font-weight:800;
     }
     .item-email{
-      font-size:.92rem;
+      font-size:.96rem;
       font-weight:800;
       word-break:break-word;
-      color:var(--text);
+      color:var(--primary-deep);
       position:relative;
       z-index:1;
     }
@@ -1322,7 +1372,7 @@
       background:#fff4f8;
       border:1px solid #efd7df;
       color:var(--sub);
-      font-size:.72rem;
+      font-size:.74rem;
       font-weight:800;
       position:relative;
       z-index:1;
@@ -1330,40 +1380,42 @@
     .item-tag.paid{
       background:#fff6eb;
       border-color:#ffd9af;
-      color:var(--warning);
+      color:#b86f18;
     }
     .item-meta{
       display:flex;
       flex-wrap:wrap;
       justify-content:center;
       gap:8px;
-      font-size:.75rem;
+      font-size:.78rem;
       color:var(--sub);
       margin-bottom:8px;
       position:relative;
       z-index:1;
+      font-weight:700;
     }
     .item-body{
-      font-size:.84rem;
+      font-size:.88rem;
       line-height:1.65;
       margin-bottom:8px;
       position:relative;
       z-index:1;
+      font-weight:700;
     }
 
     .status-pill{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      padding:5px 10px;
+      padding:6px 11px;
       border-radius:999px;
-      font-size:.72rem;
+      font-size:.75rem;
       font-weight:800;
       line-height:1.2;
       border:1px solid transparent;
     }
     .status-pill--green{background:#eefcf5;border-color:#caeedb;color:var(--success)}
-    .status-pill--yellow{background:#fff6eb;border-color:#ffd9af;color:var(--warning)}
+    .status-pill--yellow{background:#fff6eb;border-color:#ffd9af;color:#b86f18}
     .status-pill--red{background:#fff1f4;border-color:#f3c8d2;color:var(--danger)}
     .status-pill--blue{background:#eef3ff;border-color:#d6defa;color:var(--info)}
     .status-pill--purple{background:#f8efff;border-color:#e5d7f6;color:#ae6fe1}
@@ -1403,22 +1455,23 @@
     }
     .swap-panel-status.show{display:block}
     .swap-panel-title{
-      font-size:.88rem;
+      font-size:.92rem;
       font-weight:800;
-      color:var(--text);
+      color:var(--primary-deep);
       text-align:center;
       margin-bottom:4px;
       position:relative;
       z-index:1;
     }
     .swap-panel-sub{
-      font-size:.74rem;
-      line-height:1.55;
+      font-size:.78rem;
+      line-height:1.6;
       color:var(--sub);
       text-align:center;
       margin-bottom:10px;
       position:relative;
       z-index:1;
+      font-weight:700;
     }
     .swap-reason-row{display:grid;gap:8px;margin-top:10px;position:relative;z-index:1}
     .swap-reason-option{
@@ -1429,9 +1482,9 @@
       border-radius:16px;
       background:linear-gradient(180deg,#fff,#fff4f8);
       border:1px solid #efd7df;
-      font-size:.77rem;
+      font-size:.79rem;
       color:var(--sub);
-      font-weight:700;
+      font-weight:800;
       cursor:pointer;
       transition:.08s ease;
       box-shadow:0 8px 14px rgba(219,36,67,.04);
@@ -1455,8 +1508,8 @@
       z-index:1;
     }
     .swap-result.show{display:block}
-    .swap-result-title{font-size:.88rem;font-weight:800;margin-bottom:4px}
-    .swap-result-text{font-size:.77rem;line-height:1.6;white-space:pre-line}
+    .swap-result-title{font-size:.90rem;font-weight:800;margin-bottom:4px}
+    .swap-result-text{font-size:.79rem;line-height:1.6;white-space:pre-line;font-weight:700}
 
     .bottom-pair{
       margin-top:16px;
@@ -1538,19 +1591,20 @@
       background:linear-gradient(180deg, rgba(255,92,124,.08), rgba(255,92,124,0));
       pointer-events:none;
     }
-    .modal-title{font-size:1rem;font-weight:800;color:var(--text);margin-bottom:8px;position:relative;z-index:1}
-    .modal-desc{font-size:.83rem;color:var(--sub);line-height:1.65;margin-bottom:14px;position:relative;z-index:1}
+    .modal-title{font-size:1.02rem;font-weight:800;color:var(--primary-deep);margin-bottom:8px;position:relative;z-index:1}
+    .modal-desc{font-size:.85rem;color:var(--sub);line-height:1.7;margin-bottom:14px;position:relative;z-index:1;font-weight:700}
     .modal-summary{
       border-radius:18px;
       border:1px solid var(--line);
       background:#fff4f8;
       padding:12px;
-      font-size:.8rem;
-      line-height:1.7;
+      font-size:.82rem;
+      line-height:1.8;
       color:var(--sub);
       text-align:center;
       position:relative;
       z-index:1;
+      font-weight:700;
     }
     .modal-actions{display:flex;gap:10px;margin-top:14px;position:relative;z-index:1}
 
@@ -1563,8 +1617,8 @@
       border-radius:999px;
       background:#fff;
       border:1px solid var(--line);
-      color:var(--text);
-      font-size:.8rem;
+      color:var(--primary-deep);
+      font-size:.82rem;
       font-weight:800;
       opacity:0;
       pointer-events:none;
@@ -1635,25 +1689,26 @@
       position:absolute;
       font-size:.92rem;
       font-weight:800;
-      color:var(--text);
+      color:var(--primary-deep);
     }
     @keyframes spin{to{transform:rotate(360deg)}}
     .loading-title{
       font-size:.98rem;
       font-weight:800;
-      color:var(--text);
+      color:var(--primary-deep);
       text-align:center;
       position:relative;
       z-index:1;
     }
     .loading-sub{
       margin-top:4px;
-      font-size:.80rem;
+      font-size:.82rem;
       color:var(--sub);
-      line-height:1.5;
+      line-height:1.55;
       text-align:center;
       position:relative;
       z-index:1;
+      font-weight:700;
     }
 
     .footer{
@@ -1663,8 +1718,9 @@
       align-items:center;
       gap:6px;
       color:var(--sub);
-      font-size:.73rem;
+      font-size:.75rem;
       text-align:center;
+      font-weight:700;
     }
     .support-pill{
       display:inline-flex;
@@ -1685,14 +1741,15 @@
       .member-mini{grid-template-columns:1fr 1fr}
       .logo-shell{width:82px;height:82px}
       .expiry-action-row{gap:6px}
-      .btn-soft-cute{padding:0 12px;font-size:.71rem}
+      .btn-soft-cute{padding:0 12px;font-size:.72rem}
       .status-bottom-actions{grid-template-columns:1fr 1fr}
       .signup-inline{gap:8px}
       .live-item{align-items:flex-start}
       .live-status-text{padding-top:2px}
       .forgot-row{justify-content:center}
-      .policy-text{font-size:.78rem;line-height:1.78}
+      .policy-text{font-size:.82rem;line-height:1.85}
       .policy-line{width:26px}
+      .section-title-plain h2{font-size:1.18rem}
     }
   </style>
 </head>
@@ -1700,6 +1757,12 @@
   <div class="ambient"></div>
   <div class="pattern"></div>
   <div class="float-shapes"><span></span><span></span><span></span><span></span><span></span></div>
+
+  <div class="bg-icons" aria-hidden="true">
+    <span>♥</span><span>★</span><span>♥</span><span>★</span><span>♥</span><span>★</span>
+    <span>♥</span><span>★</span><span>♥</span><span>★</span><span>♥</span><span>★</span>
+    <span>♥</span><span>★</span><span>♥</span><span>★</span><span>♥</span><span>★</span>
+  </div>
 
   <div class="app">
     <section class="hero glass tap-card" id="heroSection">
@@ -1776,7 +1839,7 @@
         <div class="live-card tap-card">
           <div class="live-header">
             <div class="live-dot"></div>
-            <div class="live-title">สถานะเมลวันนี้แบบเรียลไทม์</div>
+            <div class="live-title">อัปเดตสถานะล่าสุดแบบเรียลไทม์</div>
             <div class="live-date" id="liveDate"></div>
           </div>
           <div class="live-list" id="liveList">
@@ -1813,7 +1876,7 @@
                 <button type="button" class="toggle-pass" data-target="registerPassword">แสดง</button>
               </div>
             </div>
-            <div class="password-rule">ต้องมีตัวพิมพ์ใหญ่ ตัวพิมพ์เล็ก ตัวเลข</div>
+            <div class="password-rule">ต้องมีตัวพิมพ์ใหญ่ ตัวพิมพ์เล็ก และตัวเลข</div>
             <div class="password-strength" id="registerPasswordStrength">ระดับรหัสผ่าน: -</div>
           </div>
 
@@ -1849,8 +1912,8 @@
         </div>
 
         <div class="card tap-card" id="registerSuccessCard" style="display:none;">
-          <div style="font-size:1rem;font-weight:800;color:var(--text);margin-bottom:6px;text-align:center;">สมัครสมาชิกสำเร็จแล้ว</div>
-          <div style="font-size:.8rem;line-height:1.7;color:var(--sub);text-align:center;">
+          <div style="font-size:1rem;font-weight:800;color:var(--primary-deep);margin-bottom:6px;text-align:center;">สมัครสมาชิกสำเร็จแล้ว</div>
+          <div style="font-size:.84rem;line-height:1.7;color:var(--sub);text-align:center;font-weight:700;">
             ตอนนี้คุณสามารถใช้อีเมลและรหัสผ่านที่ตั้งไว้เข้าสู่ระบบได้ทันที
           </div>
         </div>
@@ -1860,7 +1923,10 @@
         <div class="card tap-card">
           <div class="section-title-plain">
             <h2>ฟอร์มแจ้งเคลมสำหรับสมาชิก</h2>
-            <p>ส่งคำขอเคลม<br>กรอกข้อมูลให้ครบ เพื่อให้ร้านตรวจสอบและดำเนินการได้ไวขึ้น</p>
+            <p>
+              ส่งคำขอเคลมได้จากหน้านี้<br>
+              กรุณาตรวจสอบข้อมูลให้ถูกต้อง เพื่อให้ร้านดำเนินการได้รวดเร็วขึ้น
+            </p>
           </div>
 
           <div id="claimAlert" class="alert-box"></div>
@@ -1883,7 +1949,7 @@
           <div class="expiry-box">
             <div class="expiry-fixed" id="expiryFixedBox">
               วันหมดอายุในระบบ: <span id="expiryFixedText">-</span>
-              <small>ระบบจะใช้ข้อมูลนี้อัตโนมัติ</small>
+              <small>ระบบจะใช้ข้อมูลนี้ให้อัตโนมัติ</small>
             </div>
 
             <div id="expiryPickerBlock">
@@ -1902,7 +1968,7 @@
             </div>
 
             <div class="warning-note">
-              ⚠️ หากแจ้งข้อมูลไม่ตรงกับความจริง ระบบจะตัดสิทธิ์อัตโนมัติ
+              กรุณาแจ้งข้อมูลให้ตรงกับการใช้งานจริง เพื่อให้ระบบตรวจสอบและรับเรื่องได้ถูกต้อง
             </div>
           </div>
 
@@ -1910,7 +1976,7 @@
             <div class="payment-card tap-card">
               <div class="payment-title" id="paymentTitle">ชำระค่าดูแล 19 บาท</div>
               <div class="payment-desc" id="paymentNote">
-                สำหรับปีสมัครที่กำหนด ระบบจะให้ชำระ 19 บาท และแนบหลักฐานเพื่อเข้าคิวเคลม
+                สำหรับปีสมัครที่กำหนด กรุณาชำระค่าดูแลและแนบสลิปก่อนส่งคำขอ
               </div>
 
               <div class="bank-box">
@@ -1927,13 +1993,13 @@
               <div class="qr-wrap" id="qrWrap">
                 <div class="qr-title">สแกน QR เพื่อชำระเงิน</div>
                 <img class="qr-img" id="paymentQr" src="https://img2.imgbiz.com/imgbiz/IMG_2680.jpeg" alt="QR Payment" />
-                <div class="qr-caption">ชำระเงินแล้วแนบสลิปด้านล่างเพื่อให้ระบบรับเข้าคิวเคลม</div>
+                <div class="qr-caption">เมื่อชำระเงินแล้ว กรุณาแนบสลิปด้านล่างเพื่อส่งคำขอเข้าระบบ</div>
               </div>
 
               <div class="uploader">
                 <div class="upload-title">แนบสลิปโอนเงิน</div>
                 <div class="upload-sub">
-                  รองรับ JPG, PNG, WEBP ขนาดไม่เกิน 3 MB
+                  รองรับไฟล์ JPG, PNG, WEBP ขนาดไม่เกิน 3 MB
                 </div>
 
                 <div class="upload-row">
@@ -1986,7 +2052,10 @@
         <div class="card tap-card">
           <div class="section-title-plain">
             <h2>ตรวจสอบคำขอของคุณ</h2>
-            <p>สถานะการเคลม<br>ดูคิวล่าสุด และสถานะล่าสุด ได้จากหน้านี้</p>
+            <p>
+              ดูสถานะล่าสุดของคำขอได้ทันที<br>
+              ระบบจะแสดงคิวล่าสุด เวลาที่อัปเดต และความคืบหน้าปัจจุบัน
+            </p>
           </div>
 
           <div class="status-grid">
@@ -2036,7 +2105,7 @@
           <div class="swap-panel-status" id="swapEmailPanelStatus">
             <div class="swap-panel-title">เปลี่ยนอีเมลใช้งาน</div>
             <div class="swap-panel-sub">
-              ใช้กรณีต้องการเปลี่ยนอีเมลใหม่ หรืออีเมลเดิมติดข้อจำกัดการใช้งาน
+              ใช้กรณีต้องการเปลี่ยนอีเมลใหม่ หรืออีเมลเดิมติดข้อจำกัดในการใช้งาน
             </div>
 
             <div class="field-group">
@@ -2094,8 +2163,8 @@
         <div class="spinner-ring"></div>
         <div class="spinner-percent" id="spinnerPercent">0%</div>
       </div>
-      <div class="loading-title">กำลังโหลด</div>
-      <div class="loading-sub">กรุณารอสักครู่</div>
+      <div class="loading-title">กำลังโหลดข้อมูล</div>
+      <div class="loading-sub">กรุณารอสักครู่ ระบบกำลังประมวลผลให้ค่ะ</div>
     </div>
   </div>
 
@@ -2119,7 +2188,6 @@
   <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx1qo68leUtPihlJdotz0havnKZzManZisksDiE1uOsZ33xyPIFFIcLkufiAC6Sb8v9tA/exec";
 
-    // ใช้ sessionStorage เพื่อไม่ให้กลับมา auto-login หลังปิด/ออกจากระบบ
     const TOKEN_KEY = "shop426_member_token";
     const REMEMBER_KEY = "shop426_saved_login";
     const LAST_SLIP_KEY = "shop426_last_slip_preview";
@@ -2150,7 +2218,7 @@
       lineClaimEnabled: true,
       webClosedMessage: "ขออภัยค่ะ ตอนนี้ระบบหน้าเว็บปิดชั่วคราว",
       paymentTitle: "ชำระค่าดูแล 19 บาท",
-      paymentNote: "สำหรับปีสมัครที่กำหนด ระบบจะให้ชำระ 19 บาท และแนบหลักฐานเพื่อเข้าคิวเคลม",
+      paymentNote: "สำหรับปีสมัครที่กำหนด กรุณาชำระค่าดูแลและแนบสลิปก่อนส่งคำขอ",
       expiredAccountText: "บัญชีหมดอายุแล้ว หากต้องการใช้บริการต่อติดต่อแอดมิน"
     };
 
@@ -2509,11 +2577,7 @@
     function fastLogoutUI(){
       localStorage.removeItem(LAST_VIEW_KEY);
       clearLocalSession(true);
-
-      // ออกแล้วไม่ล็อกอินอัตโนมัติ และไม่ยิงกู้ session กลับ
       setActiveView("loginView", false);
-
-      // เก็บได้แค่ค่าที่ให้กรอกช่วยไว้ แต่ไม่เข้าสู่ระบบเอง
       showToast("ออกจากระบบแล้ว");
     }
 
@@ -3472,7 +3536,6 @@
     loginPassword.addEventListener("input", () => { if (rememberPassword.checked) saveRememberedLogin(); });
 
     window.addEventListener("load", async () => {
-      // ไม่ restore login อัตโนมัติจาก token เก่า
       state.token = "";
       sessionStorage.removeItem(TOKEN_KEY);
 
