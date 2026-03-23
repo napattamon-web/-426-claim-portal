@@ -347,18 +347,17 @@
 
     .policy-box{
       margin-top:16px;
-      padding:14px 14px;
-      border-radius:22px;
+      padding:16px 16px 15px;
+      border-radius:24px;
       background:
         linear-gradient(180deg,#fff9fb,#fff2f5),
         radial-gradient(circle at top right, rgba(255,92,124,.10), transparent 35%);
       border:1px solid #f2d6de;
       box-shadow:
         0 12px 22px rgba(177,15,34,.05),
-        inset 0 1px 0 rgba(255,255,255,.85);
+        inset 0 1px 0 rgba(255,255,255,.88);
       position:relative;
       z-index:1;
-      text-align:left;
       overflow:hidden;
     }
     .policy-box::before{
@@ -385,23 +384,38 @@
       background:linear-gradient(180deg, rgba(163,15,33,.08), rgba(163,15,33,0));
       pointer-events:none;
     }
+    .policy-head{
+      position:relative;
+      z-index:1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      margin-bottom:10px;
+    }
+    .policy-line{
+      height:1px;
+      width:42px;
+      background:linear-gradient(90deg, transparent, rgba(163,15,33,.22), transparent);
+      flex:0 0 auto;
+    }
     .policy-title{
-      font-size:.88rem;
+      font-size:.90rem;
       font-weight:800;
       color:var(--primary-deep);
-      margin-bottom:8px;
-      text-align:center;
-      position:relative;
-      z-index:1;
+      letter-spacing:.01em;
+      white-space:nowrap;
     }
     .policy-text{
-      font-size:.79rem;
-      line-height:1.75;
-      color:var(--sub);
-      text-align:center;
-      white-space:pre-line;
       position:relative;
       z-index:1;
+      font-size:.80rem;
+      line-height:1.82;
+      color:var(--sub);
+      text-align:center;
+      white-space:normal;
+      max-width:420px;
+      margin:0 auto;
     }
 
     .field-group{
@@ -1677,6 +1691,8 @@
       .live-item{align-items:flex-start}
       .live-status-text{padding-top:2px}
       .forgot-row{justify-content:center}
+      .policy-text{font-size:.78rem;line-height:1.78}
+      .policy-line{width:26px}
     }
   </style>
 </head>
@@ -1951,14 +1967,16 @@
           </div>
 
           <div class="policy-box">
-            <div class="policy-title">ข้อความจากทางร้าน</div>
+            <div class="policy-head">
+              <span class="policy-line"></span>
+              <div class="policy-title">ข้อความจากทางร้าน</div>
+              <span class="policy-line"></span>
+            </div>
             <div class="policy-text">
-ขอบคุณที่ไว้ใจใช้บริการกับร้านนะคะ
-
-ทางร้านตั้งใจทำระบบให้แจ้งงานง่าย
-เช็กสถานะสะดวก และตอบกลับไวที่สุด
-หากมีบางช่วงที่ใช้เวลาตรวจสอบเพิ่ม
-ขอขอบคุณลูกค้าที่รอและเข้าใจเสมอค่ะ
+              ขอบคุณที่ไว้ใจใช้บริการกับร้านนะคะ
+              ทางร้านตั้งใจทำระบบให้แจ้งงานง่าย เช็กสถานะสะดวก และตอบกลับไวที่สุด
+              หากมีบางช่วงที่ใช้เวลาตรวจสอบเพิ่ม
+              ขอขอบคุณลูกค้าที่รอและเข้าใจเสมอค่ะ
             </div>
           </div>
         </div>
@@ -2100,12 +2118,15 @@
 
   <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx1qo68leUtPihlJdotz0havnKZzManZisksDiE1uOsZ33xyPIFFIcLkufiAC6Sb8v9tA/exec";
+
+    // ใช้ sessionStorage เพื่อไม่ให้กลับมา auto-login หลังปิด/ออกจากระบบ
     const TOKEN_KEY = "shop426_member_token";
     const REMEMBER_KEY = "shop426_saved_login";
     const LAST_SLIP_KEY = "shop426_last_slip_preview";
     const LAST_VIEW_KEY = "shop426_last_view";
     const FAST_STATUS_KEY = "shop426_fast_status_cache";
     const BOOTSTRAP_CACHE_KEY = "shop426_bootstrap_cache";
+
     const STATUS_POLL_INTERVAL = 30000;
     const CONFIG_POLL_INTERVAL = 45000;
     const MAX_SLIP_SIZE = 3 * 1024 * 1024;
@@ -2134,7 +2155,7 @@
     };
 
     const state = {
-      token: localStorage.getItem(TOKEN_KEY) || "",
+      token: sessionStorage.getItem(TOKEN_KEY) || "",
       member: null,
       isClaimOpen: true,
       authLock: false,
@@ -2479,7 +2500,7 @@
       state.token = "";
       state.member = null;
       state.latestHistory = [];
-      localStorage.removeItem(TOKEN_KEY);
+      sessionStorage.removeItem(TOKEN_KEY);
       localStorage.removeItem(FAST_STATUS_KEY);
       resetClaimUI();
       if (!silent) setActiveView("loginView");
@@ -2488,7 +2509,11 @@
     function fastLogoutUI(){
       localStorage.removeItem(LAST_VIEW_KEY);
       clearLocalSession(true);
+
+      // ออกแล้วไม่ล็อกอินอัตโนมัติ และไม่ยิงกู้ session กลับ
       setActiveView("loginView", false);
+
+      // เก็บได้แค่ค่าที่ให้กรอกช่วยไว้ แต่ไม่เข้าสู่ระบบเอง
       showToast("ออกจากระบบแล้ว");
     }
 
@@ -2729,6 +2754,7 @@
 
     async function bootstrapApp(useCache=true){
       const tokenQuery = state.token ? "&token=" + encodeURIComponent(state.token) : "";
+
       if (useCache){
         const cached = safeGetLocal(BOOTSTRAP_CACHE_KEY, null);
         if (cached && cached.config){
@@ -3006,7 +3032,7 @@
         }
 
         state.token = String(data.token || "").trim();
-        localStorage.setItem(TOKEN_KEY, state.token);
+        sessionStorage.setItem(TOKEN_KEY, state.token);
         state.member = data.member || null;
         saveRememberedLogin();
         updateMemberUI();
@@ -3052,7 +3078,7 @@
 
         registerSuccessCard.style.display = "block";
         state.token = String(data.token || "").trim();
-        localStorage.setItem(TOKEN_KEY, state.token);
+        sessionStorage.setItem(TOKEN_KEY, state.token);
         state.member = data.member || null;
 
         loginEmail.value = normalizeEmail(registerEmail.value);
@@ -3101,18 +3127,22 @@
     }
 
     async function handleLogout(){
+      const oldToken = state.token;
       fastLogoutUI();
+
       try{
-        if (state.token){
-          navigator.sendBeacon && navigator.sendBeacon(SCRIPT_URL, JSON.stringify({ action:"logout", token:state.token }));
+        if (oldToken && navigator.sendBeacon){
+          const blob = new Blob([JSON.stringify({ action:"logout", token:oldToken })], { type:"text/plain;charset=utf-8" });
+          navigator.sendBeacon(SCRIPT_URL, blob);
         }
       }catch(e){}
+
       try{
-        if (state.token){
+        if (oldToken){
           fetch(SCRIPT_URL, {
             method:"POST",
             headers:{ "Content-Type":"text/plain;charset=utf-8" },
-            body:JSON.stringify({ action:"logout", token:state.token }),
+            body:JSON.stringify({ action:"logout", token:oldToken }),
             keepalive:true,
             cache:"no-store",
             credentials:"omit"
@@ -3307,7 +3337,7 @@
 
         if (data.token){
           state.token = String(data.token || "");
-          localStorage.setItem(TOKEN_KEY, state.token);
+          sessionStorage.setItem(TOKEN_KEY, state.token);
         }
 
         if (data.member){
@@ -3442,6 +3472,10 @@
     loginPassword.addEventListener("input", () => { if (rememberPassword.checked) saveRememberedLogin(); });
 
     window.addEventListener("load", async () => {
+      // ไม่ restore login อัตโนมัติจาก token เก่า
+      state.token = "";
+      sessionStorage.removeItem(TOKEN_KEY);
+
       const cachedBootstrap = safeGetLocal(BOOTSTRAP_CACHE_KEY, null);
       if (cachedBootstrap && cachedBootstrap.config){
         claimConfig = { ...claimConfig, ...cachedBootstrap.config };
@@ -3453,54 +3487,20 @@
         updateClaimWindowState();
       }
 
-      const savedView = getSavedView();
-      if (state.token && (savedView === "claimView" || savedView === "statusView")) {
-        setActiveView(savedView, false);
-      } else {
-        setActiveView("loginView", false);
-      }
-
       updatePasswordStrengthUI();
       loadRememberedLogin();
       resetClaimUI();
+      setActiveView("loginView", false);
 
       if (!SCRIPT_URL){
         showAlert(topAlert, "กรุณาใส่ SCRIPT_URL ก่อนใช้งาน", "warning", 0);
         return;
       }
 
-      if (state.token){
-        renderFastStatusImmediately();
-      }
-
       try{
         await bootstrapApp(true);
       }catch(e){
         console.warn("bootstrap failed", e);
-      }
-
-      if (state.token){
-        try{
-          const me = await fetchJson(SCRIPT_URL + "?action=me&token=" + encodeURIComponent(state.token) + "&_t=" + Date.now());
-          if (me && me.ok){
-            state.member = me.member;
-            updateMemberUI();
-            const nowView = getSavedView();
-            if (nowView === "statusView"){
-              setActiveView("statusView", false);
-              renderFastStatusImmediately();
-              refreshStatusPage(false);
-            } else {
-              setActiveView("claimView", false);
-            }
-          } else {
-            clearLocalSession(true);
-            setActiveView("loginView", false);
-          }
-        }catch(e){
-          clearLocalSession(true);
-          setActiveView("loginView", false);
-        }
       }
 
       setInterval(async () => {
