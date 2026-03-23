@@ -15,17 +15,17 @@
       --line:rgba(255,255,255,.08);
       --line-soft:rgba(255,255,255,.05);
       --text:#fff2f2;
-      --sub:#e4c8cc;
-      --muted:#b9989d;
-      --accent:#ff5f7a;
-      --accent-2:#ff8ea2;
-      --accent-3:#351317;
-      --accent-soft:rgba(255,95,122,.14);
-      --success:#86e0a7;
-      --warning:#ffca79;
-      --danger:#ff9494;
-      --info:#a7c1ff;
-      --shadow:0 20px 46px rgba(0,0,0,.34);
+      --sub:#d7b8bc;
+      --muted:#ab8b90;
+      --accent:#ff4b57;
+      --accent-2:#ff7882;
+      --accent-3:#2b1013;
+      --accent-soft:rgba(255,75,87,.12);
+      --success:#78d39a;
+      --warning:#ffbb63;
+      --danger:#ff8181;
+      --info:#9ab7ff;
+      --shadow:0 18px 42px rgba(0,0,0,.34);
       --shadow-soft:0 10px 26px rgba(0,0,0,.22);
       --radius-xl:28px;
       --radius-lg:22px;
@@ -40,10 +40,10 @@
       font-family:"Noto Sans Thai",system-ui,sans-serif;
       color:var(--text);
       background:
-        radial-gradient(circle at 15% 10%, rgba(255,95,122,.12), transparent 24%),
-        radial-gradient(circle at 80% 15%, rgba(255,155,170,.08), transparent 18%),
+        radial-gradient(circle at 15% 10%, rgba(255,90,100,.10), transparent 24%),
+        radial-gradient(circle at 80% 15%, rgba(255,120,130,.06), transparent 18%),
         radial-gradient(circle at 50% 85%, rgba(255,255,255,.03), transparent 20%),
-        linear-gradient(180deg,#170709 0%, #120607 48%, #1a0a0d 100%);
+        linear-gradient(180deg,#160709 0%, #120607 48%, #1a0a0c 100%);
       display:flex;
       justify-content:center;
       overflow-x:hidden;
@@ -54,17 +54,18 @@
     body::after{
       content:"";
       position:fixed;
+      inset:auto;
       pointer-events:none;
       z-index:0;
-      filter:blur(40px);
-      opacity:.24;
+      filter:blur(36px);
+      opacity:.22;
     }
     body::before{
-      width:250px;height:250px;left:-50px;top:80px;
-      background:radial-gradient(circle, rgba(255,110,135,.34), transparent 65%);
+      width:240px;height:240px;left:-40px;top:80px;
+      background:radial-gradient(circle, rgba(255,90,100,.34), transparent 65%);
     }
     body::after{
-      width:300px;height:300px;right:-80px;bottom:30px;
+      width:280px;height:280px;right:-70px;bottom:40px;
       background:radial-gradient(circle, rgba(255,255,255,.08), transparent 70%);
     }
 
@@ -118,7 +119,7 @@
       position:absolute;
       inset:0;
       background:
-        radial-gradient(circle at 50% 0%, rgba(255,130,150,.13), transparent 32%),
+        radial-gradient(circle at 50% 0%, rgba(255,130,140,.12), transparent 32%),
         linear-gradient(180deg, rgba(255,255,255,.015), transparent 40%);
       pointer-events:none;
     }
@@ -126,12 +127,12 @@
     .logo-shell{
       width:86px;height:86px;margin:0 auto 12px;
       padding:5px;border-radius:28px;
-      background:linear-gradient(180deg,#4b1920,#2f1115);
+      background:linear-gradient(180deg,#3f171a,#2b1013);
       border:1px solid rgba(255,255,255,.08);
       box-shadow:
         0 14px 26px rgba(0,0,0,.28),
         0 0 0 1px rgba(255,255,255,.03) inset,
-        0 0 30px rgba(255,95,122,.12);
+        0 0 30px rgba(255,75,87,.10);
     }
     .logo-shell img{
       width:100%;height:100%;object-fit:cover;border-radius:22px;display:block;background:#fff;
@@ -149,7 +150,7 @@
     .brand-sub{
       margin-top:4px;
       font-size:.80rem;
-      color:#efd7da;
+      color:#dfc3c6;
       letter-spacing:.16em;
       text-transform:uppercase;
       text-align:center;
@@ -161,9 +162,9 @@
       max-width:390px;
       padding:12px 14px;
       border-radius:18px;
-      border:1px solid rgba(255,140,160,.18);
-      background:linear-gradient(180deg, rgba(255,95,122,.17), rgba(255,95,122,.08));
-      color:#ffe7eb;
+      border:1px solid rgba(255,120,130,.18);
+      background:linear-gradient(180deg, rgba(255,85,96,.16), rgba(255,85,96,.08));
+      color:#ffe7e9;
       font-size:.82rem;
       font-weight:800;
       line-height:1.55;
@@ -214,32 +215,37 @@
     .success-desc{font-size:.8rem;line-height:1.7;color:var(--sub);text-align:center}
 
     .field-group{display:flex;flex-direction:column;gap:6px;margin-top:11px}
+    .field-group.compact{margin-top:8px}
     .field-label{
       font-size:.78rem;
-      color:#ffdfe3;
+      color:#ffd9dc;
       font-weight:700;
       text-align:center;
     }
 
     .input-shell{
-      background:rgba(255,255,255,.04);
+      background:rgba(255,255,255,.035);
       border:1.5px solid rgba(255,255,255,.08);
       border-radius:18px;
       padding:11px 12px;
       transition:.2s ease;
       box-shadow:inset 0 1px 0 rgba(255,255,255,.02);
     }
+    .input-shell.compact{
+      padding:8px 11px;
+      border-radius:16px;
+    }
     .input-shell:focus-within{
-      border-color:rgba(255,95,122,.50);
-      box-shadow:0 0 0 4px rgba(255,95,122,.12);
-      background:rgba(255,255,255,.05);
+      border-color:rgba(255,90,100,.46);
+      box-shadow:0 0 0 4px rgba(255,75,87,.12);
+      background:rgba(255,255,255,.045);
     }
 
     .password-shell{display:flex;align-items:center;gap:8px}
     .password-shell input{flex:1;min-width:0}
     .toggle-pass{
       border:1px solid rgba(255,255,255,.08);
-      background:rgba(255,255,255,.06);
+      background:rgba(255,255,255,.05);
       color:#ffe8ea;
       border-radius:999px;
       padding:7px 11px;
@@ -264,7 +270,14 @@
       color:var(--text);
       text-align:center;
     }
-    input::placeholder,textarea::placeholder{color:#ad8e94}
+    input::placeholder,textarea::placeholder{color:#a8898e}
+    textarea{
+      resize:none;
+      min-height:68px;
+      line-height:1.5;
+      text-align:left;
+      font-size:.86rem;
+    }
 
     .password-rule,.password-strength{
       margin-top:2px;
@@ -300,7 +313,7 @@
       justify-content:center;
     }
 
-    .btn-primary,.btn-secondary,.btn-danger,.btn-link-small,.btn-mini,.btn-admin{
+    .btn-primary,.btn-secondary,.btn-danger,.btn-link-small,.btn-mini,.btn-admin,.btn-soft-cute{
       border-radius:999px;
       font-family:inherit;
       font-weight:800;
@@ -310,13 +323,12 @@
     }
 
     .btn-primary{
-      min-height:52px;
+      min-height:50px;
       flex:1;
-      border-color:rgba(255,145,165,.18);
-      background:linear-gradient(180deg, #ff718c, #ef4060);
+      border-color:rgba(255,120,130,.15);
+      background:linear-gradient(180deg, #ff5a65, #eb3443);
       color:#fff;
-      font-size:.94rem;
-      box-shadow:0 10px 24px rgba(255,95,122,.20);
+      font-size:.93rem;
     }
     .btn-primary:hover{filter:brightness(1.05)}
     .btn-primary:disabled{opacity:.62;cursor:default}
@@ -324,7 +336,7 @@
     .btn-secondary{
       min-height:50px;
       flex:1;
-      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
       border-color:rgba(255,255,255,.08);
       color:#ffe8ea;
       font-size:.86rem;
@@ -342,7 +354,7 @@
     .btn-mini{
       min-height:42px;
       padding:0 14px;
-      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
       border-color:rgba(255,255,255,.08);
       color:#fff0f1;
       font-size:.78rem;
@@ -361,8 +373,8 @@
     .btn-admin{
       width:100%;
       min-height:46px;
-      background:linear-gradient(180deg, rgba(255,95,122,.18), rgba(255,95,122,.11));
-      border-color:rgba(255,145,165,.18);
+      background:linear-gradient(180deg, rgba(255,75,87,.18), rgba(255,75,87,.11));
+      border-color:rgba(255,120,130,.18);
       color:#ffe8ea;
       font-size:.82rem;
       margin-top:10px;
@@ -372,12 +384,36 @@
       justify-content:center;
     }
 
+    .btn-soft-cute{
+      min-height:34px;
+      padding:0 14px;
+      border:1px solid rgba(255,140,150,.18);
+      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      color:#fff0f1;
+      font-size:.73rem;
+      box-shadow:0 8px 18px rgba(0,0,0,.12);
+    }
+
     .btn-blink{
       animation:blinkGlow 1.25s ease-in-out infinite;
     }
     @keyframes blinkGlow{
-      0%,100%{box-shadow:0 0 0 rgba(255,95,122,0)}
-      50%{box-shadow:0 0 0 4px rgba(255,95,122,.12)}
+      0%,100%{box-shadow:0 0 0 rgba(255,75,87,0)}
+      50%{box-shadow:0 0 0 4px rgba(255,75,87,.12)}
+    }
+
+    .cute-blink{
+      animation:cuteBlink 1.35s ease-in-out infinite;
+    }
+    @keyframes cuteBlink{
+      0%,100%{
+        transform:translateY(0);
+        box-shadow:0 0 0 0 rgba(255,95,110,0);
+      }
+      50%{
+        transform:translateY(-1px);
+        box-shadow:0 0 0 5px rgba(255,95,110,.10);
+      }
     }
 
     .shake{animation:shake .36s}
@@ -399,6 +435,7 @@
       font-weight:700;
       border:1px solid transparent;
       text-align:center;
+      white-space:pre-line;
     }
     .alert-box.show{display:block}
     .alert-box.success{background:rgba(120,211,154,.10);border-color:rgba(120,211,154,.18);color:#c8f4d6}
@@ -497,7 +534,7 @@
       text-align:center;
       font-size:.84rem;
       font-weight:800;
-      color:#ff95a2;
+      color:#ff8f98;
     }
 
     .live-card{
@@ -519,7 +556,7 @@
     }
     .live-dot{
       width:9px;height:9px;border-radius:999px;background:var(--accent);
-      box-shadow:0 0 0 5px rgba(255,95,122,.14);
+      box-shadow:0 0 0 5px rgba(255,75,87,.14);
       animation:pulseDot 1.2s ease-in-out infinite;
     }
     @keyframes pulseDot{
@@ -618,33 +655,19 @@
       word-break:break-word;
     }
 
-    .claim-top-title,
-    .status-top-title{
-      text-align:center;
-      font-size:1rem;
-      font-weight:800;
-      color:#ffeef0;
-      margin-bottom:6px;
-      letter-spacing:.01em;
-    }
-
-    .claim-head,.status-head{
+    .section-title-plain{
       margin-bottom:12px;
       text-align:center;
-      padding:12px 10px 6px;
-      border-radius:22px;
-      background:transparent;
-      border:none;
     }
-    .claim-head-title,.status-head-title{
-      font-size:1rem;
-      font-weight:800;
-      color:#fff6f7;
+    .section-title-plain h2{
       margin:0;
+      font-size:1.05rem;
+      font-weight:800;
+      color:#fff5f5;
     }
-    .claim-head-sub,.status-head-sub{
-      margin-top:6px;
-      font-size:.78rem;
+    .section-title-plain p{
+      margin:6px 0 0;
+      font-size:.79rem;
       line-height:1.6;
       color:var(--sub);
     }
@@ -678,55 +701,13 @@
       font-weight:700;
     }
 
-    .action-inline-row{
+    .expiry-action-row{
       display:flex;
+      justify-content:center;
+      align-items:center;
       gap:8px;
-      justify-content:center;
-      align-items:center;
-      flex-wrap:nowrap;
+      flex-wrap:wrap;
       margin-top:2px;
-    }
-
-    .btn-tiny-cute{
-      min-height:36px;
-      padding:0 13px;
-      border-radius:999px;
-      border:1px solid rgba(255,170,185,.22);
-      background:linear-gradient(180deg, rgba(255,120,150,.20), rgba(255,96,128,.10));
-      color:#fff1f4;
-      font-size:.74rem;
-      font-weight:800;
-      cursor:pointer;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:6px;
-      box-shadow:
-        0 0 0 rgba(255,120,150,0),
-        0 8px 18px rgba(0,0,0,.12);
-      animation:cuteBlink 1.25s ease-in-out infinite;
-      white-space:nowrap;
-    }
-
-    .btn-tiny-cute:hover{
-      filter:brightness(1.06);
-    }
-
-    @keyframes cuteBlink{
-      0%,100%{
-        transform:translateY(0) scale(1);
-        box-shadow:
-          0 0 0 0 rgba(255,120,150,0),
-          0 8px 18px rgba(0,0,0,.12);
-        filter:brightness(1);
-      }
-      50%{
-        transform:translateY(-1px) scale(1.03);
-        box-shadow:
-          0 0 0 5px rgba(255,120,150,.10),
-          0 10px 22px rgba(255,95,130,.14);
-        filter:brightness(1.08);
-      }
     }
 
     .warning-note{
@@ -746,8 +727,8 @@
       margin-top:10px;
       padding:14px;
       border-radius:22px;
-      background:linear-gradient(180deg, rgba(255,95,122,.10), rgba(255,255,255,.025));
-      border:1px solid rgba(255,145,165,.14);
+      background:linear-gradient(180deg, rgba(255,75,87,.10), rgba(255,255,255,.025));
+      border:1px solid rgba(255,120,130,.14);
       text-align:center;
     }
     .payment-title{font-size:.95rem;font-weight:800;color:#fff0f1;margin-bottom:4px}
@@ -864,6 +845,7 @@
       font-size:.77rem;
       font-weight:800;
       line-height:1.55;
+      white-space:pre-line;
     }
     .upload-status.show{display:block}
     .upload-status.error{
@@ -889,6 +871,13 @@
     }
     .preview-meta{display:grid;gap:8px;width:100%}
 
+    .note-counter{
+      margin-top:4px;
+      font-size:.73rem;
+      color:var(--muted);
+      text-align:right;
+    }
+
     #summary,#statusSummary{margin-top:10px;text-align:center}
     .summary-pill{
       display:inline-flex;
@@ -911,6 +900,10 @@
       line-height:1.7;
       color:var(--sub);
     }
+    .status-error{color:#ffd2d2!important}
+    .status-ok{color:#c9f8d6!important}
+    .status-info{color:#dce6ff!important}
+    .status-strong{font-weight:800;color:#fff3f3}
     .status-time{font-size:.75rem;color:var(--muted)}
 
     .queue-card{
@@ -957,7 +950,7 @@
       height:100%;
       width:25%;
       border-radius:999px;
-      background:linear-gradient(90deg, #ff7690, #ff4b69);
+      background:linear-gradient(90deg, #ff6973, #ff3949);
       transition:width .25s ease;
     }
     .progress-label{
@@ -1001,7 +994,7 @@
       justify-content:center;
     }
     .timeline-chip.active{
-      background:linear-gradient(180deg, #ff6f89, #ef3d5d);
+      background:linear-gradient(180deg, #ff5e69, #ea3140);
       color:#fff;
       border-color:transparent;
     }
@@ -1090,6 +1083,86 @@
     }
     .bottom-pair .btn-primary,
     .bottom-pair .btn-secondary{min-height:50px}
+
+    .swap-toggle-wrap{
+      margin-top:4px;
+      display:flex;
+      justify-content:center;
+    }
+
+    .swap-panel{
+      display:none;
+      margin-top:12px;
+      border-radius:20px;
+      padding:13px;
+      background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.025));
+      border:1px solid rgba(255,255,255,.07);
+    }
+    .swap-panel.show{display:block}
+    .swap-panel-title{
+      font-size:.88rem;
+      font-weight:800;
+      color:#fff2f3;
+      text-align:center;
+      margin-bottom:4px;
+    }
+    .swap-panel-sub{
+      font-size:.74rem;
+      line-height:1.55;
+      color:var(--sub);
+      text-align:center;
+      margin-bottom:10px;
+    }
+    .swap-reason-row{
+      display:grid;
+      gap:8px;
+      margin-top:10px;
+    }
+    .swap-reason-option{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius:16px;
+      background:rgba(255,255,255,.035);
+      border:1px solid rgba(255,255,255,.06);
+      font-size:.77rem;
+      color:#ffe7e9;
+      font-weight:700;
+      cursor:pointer;
+    }
+    .swap-reason-option input{
+      accent-color:#ff5964;
+      width:16px;
+      height:16px;
+      flex:0 0 auto;
+    }
+    .swap-actions{
+      display:flex;
+      gap:8px;
+      margin-top:12px;
+    }
+    .swap-result{
+      display:none;
+      margin-top:10px;
+      padding:11px 12px;
+      border-radius:16px;
+      background:rgba(120,211,154,.10);
+      border:1px solid rgba(120,211,154,.16);
+      color:#d6f8e1;
+      text-align:center;
+    }
+    .swap-result.show{display:block}
+    .swap-result-title{
+      font-size:.88rem;
+      font-weight:800;
+      margin-bottom:4px;
+    }
+    .swap-result-text{
+      font-size:.77rem;
+      line-height:1.6;
+      white-space:pre-line;
+    }
 
     .modal-backdrop{
       position:fixed;
@@ -1230,93 +1303,16 @@
     }
     .copyright{letter-spacing:.16em;text-transform:uppercase}
 
-    .swap-note-box{
-      margin-top:12px;
-      display:grid;
-      gap:8px;
-      text-align:left;
-    }
-
-    .swap-note-option{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      padding:10px 12px;
-      border-radius:14px;
-      background:rgba(255,255,255,.03);
-      border:1px solid rgba(255,255,255,.06);
-      color:#ffe9eb;
-      font-size:.8rem;
-      font-weight:700;
-      cursor:pointer;
-    }
-
-    .swap-note-option input{
-      accent-color:#ff5964;
-      width:16px;
-      height:16px;
-      flex:0 0 auto;
-    }
-
-    .swap-note-caption{
-      margin-top:8px;
-      font-size:.73rem;
-      color:var(--muted);
-      line-height:1.6;
-      text-align:center;
-    }
-
-    .swap-mail-summary{
-      margin-top:12px;
-      padding:12px;
-      border-radius:16px;
-      background:rgba(255,255,255,.035);
-      border:1px solid rgba(255,255,255,.07);
-      font-size:.8rem;
-      line-height:1.7;
-      color:#ffe9eb;
-      text-align:center;
-    }
-
-    .swap-result-card{
-      margin-top:12px;
-      padding:12px;
-      border-radius:18px;
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.025));
-      border:1px solid rgba(255,255,255,.07);
-      text-align:center;
-      display:none;
-    }
-
-    .swap-result-card.show{
-      display:block;
-    }
-
-    .swap-result-title{
-      font-size:.9rem;
-      font-weight:800;
-      color:#fff2f3;
-      margin-bottom:6px;
-    }
-
-    .swap-result-desc{
-      font-size:.78rem;
-      line-height:1.7;
-      color:var(--sub);
-      white-space:pre-line;
-    }
-
     @media (max-width:480px){
       .app{padding:12px 12px 16px}
-      .action-row,.modal-actions,.bottom-pair{flex-direction:column}
+      .action-row,.modal-actions,.bottom-pair,.swap-actions{flex-direction:column}
       .status-grid{grid-template-columns:repeat(3,1fr)}
       .member-mini{grid-template-columns:1fr 1fr}
       .live-email{max-width:150px}
       .logo-shell{width:80px;height:80px}
       .notice-bar{font-size:.79rem}
       .status-mini{max-width:100%}
-      .action-inline-row{flex-direction:row}
-      .btn-tiny-cute{flex:1;min-width:0;font-size:.72rem;padding:0 10px}
+      .expiry-action-row{flex-direction:row}
     }
   </style>
 </head>
@@ -1478,10 +1474,9 @@
 
       <section class="view" id="claimView">
         <div class="claim-card">
-          <div class="claim-head">
-            <div class="claim-top-title">ฟอร์มแจ้งเคลมสำหรับสมาชิก</div>
-            <h2 class="claim-head-title">ส่งคำขอเคลม</h2>
-            <div class="claim-head-sub">กรอกข้อมูลให้ครบ เพื่อให้ร้านตรวจสอบและดำเนินการได้ไวขึ้น</div>
+          <div class="section-title-plain">
+            <h2>ฟอร์มแจ้งเคลมสำหรับสมาชิก</h2>
+            <p>ส่งคำขอเคลม<br>กรอกข้อมูลให้ครบ เพื่อให้ร้านตรวจสอบและดำเนินการได้ไวขึ้น</p>
           </div>
 
           <div id="claimAlert" class="alert-box"></div>
@@ -1514,22 +1509,55 @@
                   <input id="expiryInput" type="date" />
                 </div>
               </div>
-              <div id="expiryCheckResult" class="alert-box"></div>
-            </div>
 
-            <div class="action-inline-row">
-              <button class="btn-tiny-cute" id="btnCheckExpiry" type="button">เช็ควันหมดอายุ</button>
-              <button type="button" class="btn-tiny-cute" id="btnOpenSwapMail">เปลี่ยนเมลใช้งาน</button>
+              <div class="swap-toggle-wrap">
+                <div class="expiry-action-row">
+                  <button class="btn-soft-cute cute-blink" id="btnCheckExpiry" type="button">เช็ควันหมดอายุ</button>
+                  <button class="btn-soft-cute cute-blink" id="btnToggleSwapEmail" type="button">เปลี่ยนอีเมล</button>
+                </div>
+              </div>
+
+              <div id="expiryCheckResult" class="alert-box"></div>
+
+              <div class="swap-panel" id="swapEmailPanel">
+                <div class="swap-panel-title">เปลี่ยนอีเมลใช้งาน</div>
+                <div class="swap-panel-sub">
+                  ใช้กรณีต้องการเปลี่ยนอีเมลใหม่ หรืออีเมลเดิมติดข้อจำกัดการใช้งาน
+                </div>
+
+                <div class="field-group compact">
+                  <label class="field-label" for="swapNewEmail">อีเมลใหม่</label>
+                  <div class="input-shell compact" id="swapNewEmailField">
+                    <input id="swapNewEmail" type="email" placeholder="เช่น newmail@example.com" autocomplete="email" />
+                  </div>
+                </div>
+
+                <div class="swap-reason-row">
+                  <label class="swap-reason-option">
+                    <input type="radio" name="swapReason" value="ติดข้อจำกัด 12 เดือน" checked />
+                    <span>ติดข้อจำกัด 12 เดือน</span>
+                  </label>
+                  <label class="swap-reason-option">
+                    <input type="radio" name="swapReason" value="ต้องการเปลี่ยนเมลใช้งานใหม่" />
+                    <span>ต้องการเปลี่ยนเมลใช้งานใหม่</span>
+                  </label>
+                </div>
+
+                <div class="swap-actions">
+                  <button type="button" class="btn-secondary" id="btnCancelSwapEmail">ยกเลิก</button>
+                  <button type="button" class="btn-primary" id="btnConfirmSwapEmail">ยืนยันเปลี่ยนอีเมล</button>
+                </div>
+
+                <div class="swap-result" id="swapResultBox">
+                  <div class="swap-result-title">อัปเดตอีเมลเรียบร้อยแล้วค่ะ</div>
+                  <div class="swap-result-text" id="swapResultText">อัปเดตอีเมลเรียบร้อยแล้วค่ะ</div>
+                </div>
+              </div>
             </div>
 
             <div class="warning-note">
               ⚠️ หากแจ้งข้อมูลไม่ตรงกับความจริง ระบบจะตัดสิทธิ์อัตโนมัติ
             </div>
-          </div>
-
-          <div class="swap-result-card" id="swapResultCard">
-            <div class="swap-result-title">อัปเดตอีเมลเรียบร้อยแล้ว</div>
-            <div class="swap-result-desc" id="swapResultText">-</div>
           </div>
 
           <div class="payment-section" id="paymentSection">
@@ -1596,10 +1624,9 @@
 
       <section class="view" id="statusView">
         <div class="status-card">
-          <div class="status-head">
-            <div class="status-top-title">ตรวจสอบคำขอของคุณ</div>
-            <h2 class="status-head-title">สถานะการเคลม</h2>
-            <div class="status-head-sub">ดูคิวล่าสุดและสถานะล่าสุดได้จากหน้านี้</div>
+          <div class="section-title-plain">
+            <h2>ตรวจสอบคำขอของคุณ</h2>
+            <p>สถานะการเคลม<br>ดูคิวล่าสุด สถานะล่าสุด ได้จากหน้านี้</p>
           </div>
 
           <div class="status-grid">
@@ -1630,7 +1657,7 @@
               <div class="progress-bar">
                 <div class="progress-fill" id="claimProgressFill"></div>
               </div>
-              <div class="progress-label" id="claimProgressLabel">กำลังรอตรวจสอบ</div>
+              <div class="progress-label" id="claimProgressLabel">กำลังรอดำเนินการ</div>
             </div>
           </div>
 
@@ -1688,62 +1715,13 @@
     </div>
   </div>
 
-  <div id="swapMailModal" class="modal-backdrop">
-    <div class="modal-card">
-      <div class="modal-title">เปลี่ยนอีเมลใช้งาน</div>
-      <div class="modal-desc">
-        หากไม่ต้องการใช้เมลเดิม สามารถเปลี่ยนเป็นเมลใหม่ได้จากตรงนี้
-      </div>
-
-      <div class="field-group" style="margin-top:0;">
-        <label class="field-label" for="swapOldEmail">อีเมลเดิม</label>
-        <div class="input-shell">
-          <input id="swapOldEmail" type="email" placeholder="อีเมลเดิม" />
-        </div>
-      </div>
-
-      <div class="field-group">
-        <label class="field-label" for="swapNewEmail">อีเมลใหม่</label>
-        <div class="input-shell">
-          <input id="swapNewEmail" type="email" placeholder="อีเมลใหม่ที่ต้องการใช้" />
-        </div>
-      </div>
-
-      <div class="swap-note-box">
-        <label class="swap-note-option">
-          <input type="radio" name="swapReason" value="ติดข้อจำกัด 12 เดือน" checked />
-          <span>ติดข้อจำกัด 12 เดือน</span>
-        </label>
-
-        <label class="swap-note-option">
-          <input type="radio" name="swapReason" value="ต้องการเปลี่ยนเมลใช้งานใหม่" />
-          <span>ต้องการเปลี่ยนเมลใช้งานใหม่</span>
-        </label>
-      </div>
-
-      <div class="swap-note-caption">
-        ระบบจะย้ายการใช้งานไปยังอีเมลใหม่ให้ทันทีหลังยืนยัน
-      </div>
-
-      <div class="swap-mail-summary" id="swapMailSummary">
-        อีเมลเดิม: -<br>
-        อีเมลใหม่: -<br>
-        หมายเหตุ: -
-      </div>
-
-      <div class="modal-actions">
-        <button type="button" class="btn-secondary" id="btnCloseSwapMail">ปิด</button>
-        <button type="button" class="btn-primary" id="btnConfirmSwapMail">ยืนยันเปลี่ยนเมล</button>
-      </div>
-    </div>
-  </div>
-
   <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwTzz785LcIiyym27HEzL2Ylwhjwa5M68-3gSStDvriqSpMytGpnObjuF_H0KguPEEuqA/exec";
     const TOKEN_KEY = "shop426_member_token";
     const REMEMBER_KEY = "shop426_saved_login";
     const LAST_SLIP_KEY = "shop426_last_slip_preview";
     const LAST_VIEW_KEY = "shop426_last_view";
+    const MAX_NOTE_LENGTH = 500;
     const MAX_SLIP_SIZE = 3 * 1024 * 1024;
     const STATUS_POLL_INTERVAL = 30000;
     const CONFIG_POLL_INTERVAL = 30000;
@@ -1776,7 +1754,8 @@
       member: null,
       isClaimOpen: true,
       authLock: false,
-      submitLock: false
+      submitLock: false,
+      webClosed: false
     };
 
     let activeSlipFile = null;
@@ -1834,6 +1813,9 @@
     const btnViewLastSlip = document.getElementById("btnViewLastSlip");
     const btnRemoveSlip = document.getElementById("btnRemoveSlip");
     const btnToggleQr = document.getElementById("btnToggleQr");
+    const btnToggleSwapEmail = document.getElementById("btnToggleSwapEmail");
+    const btnCancelSwapEmail = document.getElementById("btnCancelSwapEmail");
+    const btnConfirmSwapEmail = document.getElementById("btnConfirmSwapEmail");
 
     const showRegisterBtn = document.getElementById("showRegisterBtn");
     const backToLoginBtn = document.getElementById("backToLoginBtn");
@@ -1896,14 +1878,10 @@
     const btnCancelConfirm = document.getElementById("btnCancelConfirm");
     const btnConfirmSubmit = document.getElementById("btnConfirmSubmit");
 
-    const btnOpenSwapMail = document.getElementById("btnOpenSwapMail");
-    const swapMailModal = document.getElementById("swapMailModal");
-    const btnCloseSwapMail = document.getElementById("btnCloseSwapMail");
-    const btnConfirmSwapMail = document.getElementById("btnConfirmSwapMail");
-    const swapOldEmail = document.getElementById("swapOldEmail");
+    const swapEmailPanel = document.getElementById("swapEmailPanel");
     const swapNewEmail = document.getElementById("swapNewEmail");
-    const swapMailSummary = document.getElementById("swapMailSummary");
-    const swapResultCard = document.getElementById("swapResultCard");
+    const swapNewEmailField = document.getElementById("swapNewEmailField");
+    const swapResultBox = document.getElementById("swapResultBox");
     const swapResultText = document.getElementById("swapResultText");
 
     function normalizeEmail(v){ return String(v || "").trim().toLowerCase(); }
@@ -2209,7 +2187,6 @@
         expiryFixedBox.style.display = "none";
         expiryPickerBlock.style.display = "";
         paymentSection.style.display = "none";
-        swapResultCard.classList.remove("show");
         return;
       }
 
@@ -2247,9 +2224,35 @@
       btnToggleQr.textContent = "🌸 ต้องการสแกน QR";
     }
 
+    function resetSwapPanel(){
+      if (!swapEmailPanel) return;
+      swapEmailPanel.classList.remove("show");
+      if (swapNewEmail) swapNewEmail.value = "";
+      if (swapResultBox) swapResultBox.classList.remove("show");
+      if (swapResultText) swapResultText.textContent = "อัปเดตอีเมลเรียบร้อยแล้วค่ะ";
+      const firstReason = document.querySelector('input[name="swapReason"][value="ติดข้อจำกัด 12 เดือน"]');
+      if (firstReason) firstReason.checked = true;
+    }
+
+    function toggleSwapPanel(force){
+      if (!swapEmailPanel) return;
+      const shouldShow = typeof force === "boolean" ? force : !swapEmailPanel.classList.contains("show");
+      if (shouldShow){
+        swapEmailPanel.classList.add("show");
+      } else {
+        resetSwapPanel();
+      }
+    }
+
+    function getSelectedSwapReason(){
+      const selected = document.querySelector('input[name="swapReason"]:checked');
+      return selected ? selected.value : "ติดข้อจำกัด 12 เดือน";
+    }
+
     function resetClaimUI(){
       expiryInput.value = "";
       resetSlipPreview();
+      resetSwapPanel();
       summary.innerHTML = "";
       status.innerHTML = "";
       results.innerHTML = "";
@@ -2265,8 +2268,6 @@
       miniLastTime.textContent = "-";
       qrWrap.classList.remove("show");
       btnToggleQr.textContent = "🌸 ต้องการสแกน QR";
-      swapResultCard.classList.remove("show");
-      swapResultText.textContent = "-";
     }
 
     async function fetchJson(url, options={}){
@@ -2340,7 +2341,7 @@
     }
 
     function renderClaimSteps(statusText=""){
-      const steps = ["รับคำขอแล้ว","รอตรวจสอบ","กำลังดำเนินการ","เสร็จแล้ว"];
+      const steps = ["รับคำขอแล้ว","รอดำเนินการ","กำลังดำเนินการ","เสร็จแล้ว"];
       let activeIndex = 0;
       const raw = String(statusText || "");
       if (!raw){
@@ -2361,7 +2362,7 @@
       });
       claimStepCard.style.display = "block";
 
-      const progressMap = [15, 42, 72, 100];
+      const progressMap = [15, 45, 72, 100];
       claimProgressFill.style.width = progressMap[activeIndex] + "%";
       claimProgressLabel.textContent = steps[activeIndex];
     }
@@ -2512,73 +2513,6 @@
 
     function closeConfirmModal(){
       confirmModal.classList.remove("show");
-    }
-
-    function getSelectedSwapReason(){
-      const checked = document.querySelector('input[name="swapReason"]:checked');
-      return checked ? checked.value : "";
-    }
-
-    function updateSwapSummary(){
-      swapMailSummary.innerHTML =
-        "อีเมลเดิม: " + escapeHtml(normalizeEmail(swapOldEmail.value) || "-") + "<br>" +
-        "อีเมลใหม่: " + escapeHtml(normalizeEmail(swapNewEmail.value) || "-") + "<br>" +
-        "หมายเหตุ: " + escapeHtml(getSelectedSwapReason() || "-");
-    }
-
-    function openSwapMailModal(){
-      if (!state.member || !state.token){
-        setActiveView("loginView");
-        showAlert(topAlert, "กรุณาเข้าสู่ระบบก่อน", "warning");
-        return;
-      }
-
-      swapOldEmail.value = normalizeEmail((state.member && state.member.email) || "");
-      swapNewEmail.value = "";
-      updateSwapSummary();
-      swapMailModal.classList.add("show");
-    }
-
-    function closeSwapMailModal(){
-      swapMailModal.classList.remove("show");
-    }
-
-    function validateSwapMail(){
-      const oldEmail = normalizeEmail(swapOldEmail.value);
-      const newEmail = normalizeEmail(swapNewEmail.value);
-
-      if (!oldEmail){
-        showToast("กรุณากรอกอีเมลเดิม");
-        shake(swapOldEmail);
-        return false;
-      }
-
-      if (!newEmail){
-        showToast("กรุณากรอกอีเมลใหม่");
-        shake(swapNewEmail);
-        return false;
-      }
-
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(oldEmail)){
-        showToast("อีเมลเดิมไม่ถูกต้อง");
-        shake(swapOldEmail);
-        return false;
-      }
-
-      if (!emailRegex.test(newEmail)){
-        showToast("อีเมลใหม่ไม่ถูกต้อง");
-        shake(swapNewEmail);
-        return false;
-      }
-
-      if (oldEmail === newEmail){
-        showToast("อีเมลใหม่ต้องไม่ซ้ำกับอีเมลเดิม");
-        shake(swapNewEmail);
-        return false;
-      }
-
-      return true;
     }
 
     async function fileToDataUrl(file){
@@ -2774,64 +2708,6 @@
       }
     }
 
-    async function handleSwapMail(){
-      if (!validateSwapMail()) return;
-      if (!state.token) return;
-
-      showLoading();
-      btnConfirmSwapMail.disabled = true;
-
-      try{
-        const oldEmail = normalizeEmail(swapOldEmail.value);
-        const newEmail = normalizeEmail(swapNewEmail.value);
-        const reason = getSelectedSwapReason();
-
-        const data = await postJson({
-          action: "swapEmail",
-          token: state.token,
-          oldEmail,
-          newEmail,
-          reason
-        });
-
-        if (!data || data.ok === false){
-          showToast((data && data.message) || "เปลี่ยนอีเมลไม่สำเร็จ");
-          shake(btnConfirmSwapMail);
-          return;
-        }
-
-        if (data.token){
-          state.token = String(data.token || "");
-          localStorage.setItem(TOKEN_KEY, state.token);
-        }
-
-        if (data.member){
-          state.member = data.member;
-          updateMemberUI();
-        }
-
-        swapResultCard.classList.add("show");
-        swapResultText.textContent =
-          (data.message || "เปลี่ยนอีเมลเรียบร้อยแล้ว") +
-          (data.swapSummary ? "\n\n" + data.swapSummary : "") +
-          "\n\nหมายเหตุ: " + reason;
-
-        closeSwapMailModal();
-        showToast("เปลี่ยนอีเมลเรียบร้อยแล้ว");
-
-        await bootstrapApp();
-        if (statusView.classList.contains("active")){
-          await refreshStatusPage();
-        }
-      }catch(e){
-        showToast("เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง");
-        shake(btnConfirmSwapMail);
-      }finally{
-        hideLoading();
-        btnConfirmSwapMail.disabled = false;
-      }
-    }
-
     async function doSubmitClaim(){
       state.submitLock = true;
       btnSubmit.disabled = true;
@@ -2910,6 +2786,74 @@
       }
     }
 
+    async function handleSwapEmail(){
+      if (!state.token || !state.member){
+        setActiveView("loginView");
+        return;
+      }
+
+      const newEmail = normalizeEmail(swapNewEmail.value);
+      const oldEmail = normalizeEmail(state.member.email || "");
+      const reason = getSelectedSwapReason();
+
+      if (!newEmail){
+        showAlert(claimAlert, "กรุณากรอกอีเมลใหม่ก่อน", "warning", 5000);
+        shake(swapNewEmailField);
+        return;
+      }
+
+      if (!swapNewEmail.checkValidity()){
+        showAlert(claimAlert, "กรุณากรอกอีเมลใหม่ให้ถูกต้อง", "error", 5000);
+        shake(swapNewEmailField);
+        return;
+      }
+
+      if (newEmail === oldEmail){
+        showAlert(claimAlert, "อีเมลใหม่ต้องไม่ซ้ำกับอีเมลเดิม", "warning", 5000);
+        shake(swapNewEmailField);
+        return;
+      }
+
+      showLoading();
+      try{
+        const data = await postJson({
+          action:"swapEmail",
+          token:state.token,
+          oldEmail,
+          newEmail,
+          reason
+        });
+
+        if (!data || data.ok === false){
+          showAlert(claimAlert, data.message || "เปลี่ยนอีเมลไม่สำเร็จ", "error", 6000);
+          shake(btnConfirmSwapEmail);
+          return;
+        }
+
+        if (data.token){
+          state.token = String(data.token || "");
+          localStorage.setItem(TOKEN_KEY, state.token);
+        }
+
+        if (data.member){
+          state.member = data.member;
+          updateMemberUI();
+        }
+
+        swapResultBox.classList.add("show");
+        swapResultText.textContent = "อัปเดตอีเมลเรียบร้อยแล้วค่ะ";
+        swapNewEmail.value = "";
+        showToast("อัปเดตอีเมลแล้ว");
+
+        if (data.todaySummary) renderLiveStatus(data.todaySummary);
+      }catch(e){
+        showAlert(claimAlert, "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้ง", "error", 6000);
+        shake(btnConfirmSwapEmail);
+      }finally{
+        hideLoading();
+      }
+    }
+
     function handleSubmit(){
       if (state.submitLock) return;
       updateClaimWindowState();
@@ -2950,6 +2894,9 @@
     btnGotoStatus.addEventListener("click", gotoStatus);
     btnSubmit.addEventListener("click", handleSubmit);
     btnCheckExpiry.addEventListener("click", handleCheckExpiry);
+    btnToggleSwapEmail.addEventListener("click", () => toggleSwapPanel());
+    btnCancelSwapEmail.addEventListener("click", () => resetSwapPanel());
+    btnConfirmSwapEmail.addEventListener("click", handleSwapEmail);
 
     btnPickSlip.addEventListener("click", () => slipInput.click());
     btnCameraSlip.addEventListener("click", () => slipInputCamera.click());
@@ -3014,36 +2961,6 @@
     confirmModal.addEventListener("click", e => {
       if (e.target === confirmModal) closeConfirmModal();
     });
-
-    if (btnOpenSwapMail){
-      btnOpenSwapMail.addEventListener("click", openSwapMailModal);
-    }
-
-    if (btnCloseSwapMail){
-      btnCloseSwapMail.addEventListener("click", closeSwapMailModal);
-    }
-
-    if (btnConfirmSwapMail){
-      btnConfirmSwapMail.addEventListener("click", handleSwapMail);
-    }
-
-    if (swapOldEmail){
-      swapOldEmail.addEventListener("input", updateSwapSummary);
-    }
-
-    if (swapNewEmail){
-      swapNewEmail.addEventListener("input", updateSwapSummary);
-    }
-
-    document.querySelectorAll('input[name="swapReason"]').forEach(el => {
-      el.addEventListener("change", updateSwapSummary);
-    });
-
-    if (swapMailModal){
-      swapMailModal.addEventListener("click", e => {
-        if (e.target === swapMailModal) closeSwapMailModal();
-      });
-    }
 
     registerPassword.addEventListener("input", updatePasswordStrengthUI);
     rememberPassword.addEventListener("change", saveRememberedLogin);
