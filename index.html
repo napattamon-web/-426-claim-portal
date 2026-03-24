@@ -4,227 +4,254 @@
   <meta charset="UTF-8" />
   <title>426 SHOP – Member & Claim Center</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#130708" />
-  <link href="https://fonts.googleapis.com/css2?family=Arial:wght@400;700&display=swap" rel="stylesheet" />
+  <meta name="theme-color" content="#12090b" />
   <style>
     :root{
-      --bg:#0f0909;
-      --bg-soft:#181010;
-      --card:rgba(28,18,18,.96);
-      --card-2:rgba(36,21,21,.98);
-      --line:rgba(255,255,255,.08);
-      --line-soft:rgba(255,255,255,.05);
-      --text:#fff5f5;
-      --sub:#d8c4c4;
-      --muted:#a98d8d;
-      --accent:#d92323;
-      --accent-2:#ff4a4a;
-      --accent-3:#2a1414;
-      --accent-soft:rgba(217,35,35,.12);
-      --success:#78d39a;
-      --warning:#ffbb63;
-      --danger:#ff8181;
-      --info:#9ab7ff;
-      --shadow:0 20px 42px rgba(0,0,0,.34);
-      --shadow-soft:0 10px 26px rgba(0,0,0,.22);
-      --radius-xl:28px;
-      --radius-lg:22px;
+      --bg:#12090b;
+      --bg2:#1a0d10;
+      --bg3:#260f14;
+
+      --card:#fffefe;
+      --card-2:#fff8f9;
+      --surface:#ffffff;
+      --surface-2:#fff6f8;
+      --surface-3:#fff1f4;
+
+      --line:#f2d8df;
+      --line-2:#ebc7d1;
+      --line-3:#f7e7ec;
+
+      --text:#37171d;
+      --sub:#7d5560;
+      --muted:#ad808c;
+
+      --primary:#a30f21;
+      --primary-2:#d81f40;
+      --primary-3:#ff5c7c;
+      --primary-deep:#690814;
+
+      --success:#42b985;
+      --warning:#f0a24c;
+      --danger:#de6072;
+      --info:#6c84ff;
+
+      --shadow:0 20px 48px rgba(52,14,25,.15);
+      --shadow-soft:0 10px 24px rgba(52,14,25,.09);
+      --shadow-cute:0 14px 30px rgba(216,31,64,.08);
+
+      --hero-text:#fff6f7;
+      --hero-sub:#f6d8df;
+
+      --grad-a:#130709;
+      --grad-b:#381018;
+      --grad-c:#73111f;
+
+      --radius-xl:30px;
+      --radius-lg:24px;
       --radius-md:18px;
+      --radius-sm:14px;
     }
 
     *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
     html,body{margin:0;padding:0;min-height:100%}
-
     body{
       min-height:100vh;
-      font-family:Arial, sans-serif;
+      font-family:Arial, Helvetica, sans-serif;
       color:var(--text);
       background:
-        radial-gradient(circle at 12% 10%, rgba(217,35,35,.14), transparent 24%),
-        radial-gradient(circle at 82% 14%, rgba(255,74,74,.10), transparent 18%),
-        radial-gradient(circle at 50% 85%, rgba(255,255,255,.03), transparent 20%),
-        linear-gradient(180deg,#100707 0%, #120909 45%, #160a0a 100%);
-      display:flex;
-      justify-content:center;
+        radial-gradient(circle at 0% 0%, rgba(255,92,124,.10), transparent 24%),
+        radial-gradient(circle at 100% 10%, rgba(163,15,33,.16), transparent 22%),
+        linear-gradient(180deg,var(--bg),var(--bg2) 56%,var(--bg3));
       overflow-x:hidden;
-      position:relative;
     }
 
-    body::before,
-    body::after{
+    .ambient{
+      position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden;
+    }
+    .ambient::before,.ambient::after{
       content:"";
-      position:fixed;
-      pointer-events:none;
-      z-index:0;
-      filter:blur(30px);
-      opacity:.22;
+      position:absolute;
+      border-radius:50%;
+      filter:blur(78px);
+      opacity:.18;
+      animation:floatBlur 11s ease-in-out infinite;
     }
-    body::before{
-      width:240px;height:240px;left:-40px;top:70px;
-      background:radial-gradient(circle, rgba(217,35,35,.30), transparent 65%);
+    .ambient::before{
+      width:320px;height:320px; top:-110px; right:-90px;
+      background:var(--primary);
     }
-    body::after{
-      width:280px;height:280px;right:-70px;bottom:30px;
-      background:radial-gradient(circle, rgba(255,255,255,.07), transparent 70%);
+    .ambient::after{
+      width:260px;height:260px; left:-70px; bottom:-90px;
+      background:var(--primary-3);
+      animation-delay:1.8s;
     }
 
-    .floating-hearts,
-    .floating-stars{
+    .pattern{
+      position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden;
+      background-image:
+        radial-gradient(circle at 14% 20%, rgba(255,255,255,.10) 0 2px, transparent 2.5px),
+        radial-gradient(circle at 84% 14%, rgba(255,255,255,.05) 0 2px, transparent 2.5px),
+        radial-gradient(circle at 20% 74%, rgba(255,255,255,.04) 0 2px, transparent 2.5px),
+        radial-gradient(circle at 70% 82%, rgba(255,255,255,.08) 0 2px, transparent 2.5px),
+        linear-gradient(135deg, transparent 0 48%, rgba(255,255,255,.025) 48% 50%, transparent 50% 100%);
+      background-size:180px 180px,220px 220px,200px 200px,160px 160px,28px 28px;
+      opacity:.42;
+    }
+
+    .float-shapes{
+      position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden;
+    }
+    .float-shapes span{
+      position:absolute;
+      display:block;
+      border-radius:28px;
+      background:linear-gradient(180deg, rgba(255,255,255,.13), rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.07);
+      transform:rotate(18deg);
+      animation:shapeDrift 12s ease-in-out infinite;
+      backdrop-filter:blur(6px);
+    }
+    .float-shapes span:nth-child(1){width:44px;height:44px;left:7%;top:14%}
+    .float-shapes span:nth-child(2){width:18px;height:18px;right:14%;top:25%;animation-duration:10s}
+    .float-shapes span:nth-child(3){width:26px;height:26px;left:11%;bottom:22%;animation-duration:13s}
+    .float-shapes span:nth-child(4){width:54px;height:18px;right:8%;bottom:14%;animation-duration:15s}
+    .float-shapes span:nth-child(5){width:22px;height:22px;left:72%;top:62%;animation-duration:11s}
+
+    /* หัวใจ + ดาว พื้นหลัง */
+    .bg-icons{
       position:fixed;
       inset:0;
       pointer-events:none;
       z-index:0;
       overflow:hidden;
     }
-
-    .floating-hearts span,
-    .floating-stars span{
+    .bg-icons span{
       position:absolute;
-      opacity:.12;
-      animation:floatUp linear infinite;
+      color:rgba(255,255,255,.12);
+      text-shadow:0 0 14px rgba(255,110,140,.12);
+      animation:floatIcon 10s ease-in-out infinite;
       user-select:none;
+      font-weight:700;
     }
+    .bg-icons span:nth-child(1){left:6%;top:8%;font-size:18px;animation-duration:11s}
+    .bg-icons span:nth-child(2){left:18%;top:24%;font-size:14px;animation-duration:9s}
+    .bg-icons span:nth-child(3){left:8%;top:48%;font-size:20px;animation-duration:12s}
+    .bg-icons span:nth-child(4){left:20%;top:74%;font-size:16px;animation-duration:10s}
+    .bg-icons span:nth-child(5){left:32%;top:14%;font-size:13px;animation-duration:8s}
+    .bg-icons span:nth-child(6){left:40%;top:58%;font-size:18px;animation-duration:13s}
+    .bg-icons span:nth-child(7){left:52%;top:10%;font-size:16px;animation-duration:10s}
+    .bg-icons span:nth-child(8){left:60%;top:34%;font-size:14px;animation-duration:9s}
+    .bg-icons span:nth-child(9){left:72%;top:18%;font-size:20px;animation-duration:12s}
+    .bg-icons span:nth-child(10){left:80%;top:52%;font-size:16px;animation-duration:8s}
+    .bg-icons span:nth-child(11){left:90%;top:12%;font-size:14px;animation-duration:9s}
+    .bg-icons span:nth-child(12){left:68%;top:76%;font-size:18px;animation-duration:11s}
+    .bg-icons span:nth-child(13){left:44%;top:82%;font-size:15px;animation-duration:10s}
+    .bg-icons span:nth-child(14){left:86%;top:82%;font-size:17px;animation-duration:12s}
+    .bg-icons span:nth-child(15){left:28%;top:90%;font-size:13px;animation-duration:8s}
+    .bg-icons span:nth-child(16){left:56%;top:66%;font-size:13px;animation-duration:7.5s}
+    .bg-icons span:nth-child(17){left:12%;top:92%;font-size:18px;animation-duration:11s}
+    .bg-icons span:nth-child(18){left:76%;top:64%;font-size:14px;animation-duration:9.5s}
 
-    .floating-hearts span{
-      color:#ff4c4c;
-      font-size:18px;
+    @keyframes floatBlur{
+      0%,100%{transform:translateY(0) translateX(0)}
+      50%{transform:translateY(18px) translateX(-10px)}
     }
-
-    .floating-stars span{
-      color:#fff2c8;
-      font-size:14px;
+    @keyframes shapeDrift{
+      0%,100%{transform:translateY(0) rotate(18deg)}
+      50%{transform:translateY(-10px) rotate(28deg)}
     }
-
-    .floating-hearts span:nth-child(1){left:6%;bottom:-20px;animation-duration:17s}
-    .floating-hearts span:nth-child(2){left:18%;bottom:-40px;animation-duration:20s}
-    .floating-hearts span:nth-child(3){left:34%;bottom:-10px;animation-duration:22s}
-    .floating-hearts span:nth-child(4){left:52%;bottom:-35px;animation-duration:18s}
-    .floating-hearts span:nth-child(5){left:71%;bottom:-25px;animation-duration:21s}
-    .floating-hearts span:nth-child(6){left:88%;bottom:-15px;animation-duration:19s}
-
-    .floating-stars span:nth-child(1){left:10%;top:10%;animation-duration:12s}
-    .floating-stars span:nth-child(2){left:28%;top:24%;animation-duration:14s}
-    .floating-stars span:nth-child(3){left:49%;top:13%;animation-duration:11s}
-    .floating-stars span:nth-child(4){left:67%;top:28%;animation-duration:15s}
-    .floating-stars span:nth-child(5){left:83%;top:16%;animation-duration:13s}
-
-    @keyframes floatUp{
-      0%{transform:translateY(0) scale(1);opacity:.08}
-      50%{opacity:.15}
-      100%{transform:translateY(-120vh) scale(1.15);opacity:0}
-    }
-
-    .mist{
-      position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden;
-    }
-    .mist span{
-      position:absolute; display:block; border-radius:999px;
-      background:radial-gradient(circle, rgba(255,255,255,.10), rgba(255,255,255,.02) 60%, transparent 78%);
-      filter:blur(10px); opacity:.18; animation:floatMist linear infinite;
-    }
-    .mist span:nth-child(1){width:220px;height:90px;left:-40px;top:22%;animation-duration:18s}
-    .mist span:nth-child(2){width:260px;height:120px;right:-60px;top:12%;animation-duration:24s}
-    .mist span:nth-child(3){width:180px;height:80px;left:10%;bottom:14%;animation-duration:21s}
-    .mist span:nth-child(4){width:240px;height:100px;right:12%;bottom:8%;animation-duration:27s}
-    @keyframes floatMist{
-      0%{transform:translateX(0) translateY(0)}
-      50%{transform:translateX(16px) translateY(-10px)}
-      100%{transform:translateX(0) translateY(0)}
+    @keyframes floatIcon{
+      0%,100%{transform:translateY(0) scale(1);opacity:.8}
+      50%{transform:translateY(-8px) scale(1.06);opacity:1}
     }
 
     .app{
+      position:relative;
+      z-index:1;
       width:100%;
       max-width:540px;
+      margin:0 auto;
       min-height:100vh;
-      padding:14px 14px 18px;
+      padding:14px 14px 20px;
       display:flex;
       flex-direction:column;
       gap:14px;
-      position:relative;
-      z-index:1;
     }
 
-    .shell-card{
-      background:linear-gradient(180deg, rgba(27,16,16,.98), rgba(19,12,12,.98));
+    .glass{
+      background:linear-gradient(180deg,var(--card),var(--card-2));
       border:1px solid var(--line);
       box-shadow:var(--shadow);
       border-radius:var(--radius-xl);
-      backdrop-filter:blur(10px);
+      transition:transform .12s ease, box-shadow .12s ease;
+      will-change:transform;
     }
+    .glass:hover{transform:translateY(-1px)}
+    .tap-card:active{transform:scale(.994)}
 
     .hero{
-      padding:20px 16px 16px;
-      text-align:center;
       position:relative;
       overflow:hidden;
+      padding:18px 16px 16px;
+      text-align:center;
+      background:linear-gradient(135deg,var(--grad-a),var(--grad-b) 56%,var(--grad-c));
+      color:var(--hero-text);
+      border-color:transparent;
     }
-
     .hero::before{
       content:"";
       position:absolute;
       inset:0;
       background:
-        radial-gradient(circle at 50% 0%, rgba(255,74,74,.12), transparent 32%),
-        linear-gradient(180deg, rgba(255,255,255,.015), transparent 40%);
+        radial-gradient(circle at 18% 18%, rgba(255,255,255,.14), transparent 24%),
+        radial-gradient(circle at 80% 20%, rgba(255,255,255,.10), transparent 22%),
+        linear-gradient(180deg, rgba(255,255,255,.07), transparent 34%);
+      pointer-events:none;
+    }
+    .hero::after{
+      content:"";
+      position:absolute;
+      right:-30px;
+      top:-30px;
+      width:120px;
+      height:120px;
+      border-radius:28px;
+      background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,0));
+      transform:rotate(26deg);
       pointer-events:none;
     }
 
     .logo-shell{
-      width:86px;height:86px;margin:0 auto 12px;
-      padding:5px;border-radius:28px;
-      background:linear-gradient(180deg,#391414,#231111);
-      border:1px solid rgba(255,255,255,.08);
-      box-shadow:
-        0 14px 26px rgba(0,0,0,.28),
-        0 0 0 1px rgba(255,255,255,.03) inset,
-        0 0 30px rgba(217,35,35,.16);
+      width:92px;height:92px;margin:0 auto 12px;
+      padding:5px;border-radius:26px;
+      background:rgba(255,255,255,.14);
+      border:1px solid rgba(255,255,255,.20);
+      box-shadow:0 14px 28px rgba(0,0,0,.12);
+      backdrop-filter:blur(8px);
+      animation:softBob 4.2s ease-in-out infinite;
     }
     .logo-shell img{
-      width:100%;height:100%;object-fit:cover;border-radius:22px;display:block;background:#fff;
+      width:100%;height:100%;object-fit:cover;border-radius:20px;display:block;background:#fff;
+    }
+    @keyframes softBob{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-3px)}
     }
 
     .brand-title{
-      font-size:1.38rem;
-      font-weight:700;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      color:#fff7f7;
       margin:0;
-      text-align:center;
+      font-size:1.42rem;
+      font-weight:800;
+      letter-spacing:.04em;
+      color:var(--hero-text);
     }
     .brand-sub{
       margin-top:4px;
-      font-size:.80rem;
-      color:#e0c7c7;
-      letter-spacing:.16em;
+      font-size:.79rem;
+      color:var(--hero-sub);
+      letter-spacing:.14em;
       text-transform:uppercase;
-      text-align:center;
     }
-
-    .theme-corner{
-      position:absolute;
-      top:12px;
-      right:12px;
-      z-index:2;
-      display:flex;
-      gap:8px;
-    }
-    .theme-icon-btn{
-      width:36px;
-      height:36px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.05);
-      color:#fff;
-      font-size:16px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      cursor:pointer;
-      box-shadow:0 10px 18px rgba(0,0,0,.18);
-      transition:transform .18s ease, filter .18s ease;
-    }
-    .theme-icon-btn:hover{transform:translateY(-1px);filter:brightness(1.05)}
 
     .notice-bar{
       margin:14px auto 0;
@@ -232,14 +259,14 @@
       max-width:390px;
       padding:12px 14px;
       border-radius:18px;
-      border:1px solid rgba(255,74,74,.18);
-      background:linear-gradient(180deg, rgba(217,35,35,.16), rgba(217,35,35,.08));
-      color:#ffe7e9;
-      font-size:.82rem;
+      background:rgba(255,255,255,.15);
+      border:1px solid rgba(255,255,255,.20);
+      color:var(--hero-text);
+      font-size:.85rem;
       font-weight:700;
-      line-height:1.55;
-      text-align:center;
-      box-shadow:0 10px 24px rgba(0,0,0,.18);
+      line-height:1.65;
+      box-shadow:0 10px 18px rgba(0,0,0,.08);
+      backdrop-filter:blur(10px);
     }
 
     .hero-status-wrap{
@@ -247,195 +274,446 @@
       display:flex;
       justify-content:center;
     }
+    .status-mini{
+      min-height:44px;
+      padding:10px 16px;
+      border-radius:999px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-size:.82rem;
+      font-weight:800;
+      background:rgba(255,255,255,.18);
+      border:1px solid rgba(255,255,255,.24);
+      color:var(--hero-text);
+      backdrop-filter:blur(10px);
+      box-shadow:0 10px 18px rgba(0,0,0,.06);
+    }
+    .status-dot{
+      width:10px;height:10px;border-radius:999px;display:inline-block;
+    }
+    .status-mini.open .status-dot{
+      background:#89ffc0;
+      animation:pulseGlow 1s ease-in-out infinite;
+    }
+    .status-mini.closed .status-dot{
+      background:#ff988f;
+      animation:pulseGlowRed 1s ease-in-out infinite;
+    }
+    @keyframes pulseGlow{
+      0%{box-shadow:0 0 0 0 rgba(137,255,192,.40)}
+      70%{box-shadow:0 0 0 8px rgba(137,255,192,0)}
+      100%{box-shadow:0 0 0 0 rgba(137,255,192,0)}
+    }
+    @keyframes pulseGlowRed{
+      0%{box-shadow:0 0 0 0 rgba(255,152,143,.40)}
+      70%{box-shadow:0 0 0 8px rgba(255,152,143,0)}
+      100%{box-shadow:0 0 0 0 rgba(255,152,143,0)}
+    }
 
     .panel{padding:16px}
-    .view{display:none;animation:fadeUp .24s ease}
+    .view{display:none;animation:fadeUp .16s ease}
     .view.active{display:block}
     @keyframes fadeUp{
-      from{opacity:0;transform:translateY(8px)}
+      from{opacity:0;transform:translateY(6px)}
       to{opacity:1;transform:translateY(0)}
     }
 
     .section-blurb{
-      font-size:.84rem;
-      line-height:1.65;
+      font-size:.90rem;
+      line-height:1.7;
       color:var(--sub);
       text-align:center;
       margin-bottom:12px;
+      font-weight:700;
     }
 
-    .login-card,.register-card,.claim-card,.status-card{
-      border-radius:26px;
-      background:linear-gradient(180deg, rgba(36,18,18,.98), rgba(24,12,12,.98));
+    .card{
+      background:linear-gradient(180deg,var(--surface),var(--surface-2));
       border:1px solid var(--line);
+      border-radius:26px;
       padding:15px;
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.03);
+      box-shadow:var(--shadow-soft);
+      transition:transform .12s ease, box-shadow .12s ease;
+      will-change:transform;
       position:relative;
       overflow:hidden;
     }
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(255,255,255,.44), transparent 28%);
+      pointer-events:none;
+    }
+    .card::after{
+      content:"";
+      position:absolute;
+      top:10px;
+      right:10px;
+      width:52px;
+      height:52px;
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(255,92,124,.08), rgba(255,92,124,0));
+      transform:rotate(18deg);
+      pointer-events:none;
+    }
+    .card:hover{
+      transform:translateY(-1px);
+      box-shadow:var(--shadow-soft), var(--shadow-cute);
+    }
+    .card:active{transform:scale(.994)}
 
-    .field-group{display:flex;flex-direction:column;gap:6px;margin-top:11px}
-    .field-label{
-      font-size:.78rem;
-      color:#ffd7d7;
+    .section-title-plain{
+      text-align:center;
+      margin-bottom:12px;
+      position:relative;
+      z-index:1;
+    }
+    .section-title-plain h2{
+      margin:0;
+      font-size:1.30rem;
+      font-weight:800;
+      color:var(--primary-deep);
+      line-height:1.38;
+    }
+    .section-title-plain p{
+      margin:8px 0 0;
+      font-size:.87rem;
+      line-height:1.75;
+      color:var(--sub);
       font-weight:700;
+    }
+
+    .policy-box{
+      margin-top:16px;
+      padding:16px 16px 15px;
+      border-radius:24px;
+      background:
+        linear-gradient(180deg,#fff9fb,#fff2f5),
+        radial-gradient(circle at top right, rgba(255,92,124,.10), transparent 35%);
+      border:1px solid #f2d6de;
+      box-shadow:
+        0 12px 22px rgba(177,15,34,.05),
+        inset 0 1px 0 rgba(255,255,255,.88);
+      position:relative;
+      z-index:1;
+      overflow:hidden;
+    }
+    .policy-box::before{
+      content:"";
+      position:absolute;
+      top:-16px;
+      right:-12px;
+      width:84px;
+      height:84px;
+      border-radius:24px;
+      transform:rotate(28deg);
+      background:linear-gradient(180deg, rgba(255,92,124,.10), rgba(255,92,124,0));
+      pointer-events:none;
+    }
+    .policy-box::after{
+      content:"";
+      position:absolute;
+      bottom:-18px;
+      left:-14px;
+      width:74px;
+      height:74px;
+      border-radius:22px;
+      transform:rotate(24deg);
+      background:linear-gradient(180deg, rgba(163,15,33,.08), rgba(163,15,33,0));
+      pointer-events:none;
+    }
+    .policy-head{
+      position:relative;
+      z-index:1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      margin-bottom:10px;
+    }
+    .policy-line{
+      height:1px;
+      width:42px;
+      background:linear-gradient(90deg, transparent, rgba(163,15,33,.22), transparent);
+      flex:0 0 auto;
+    }
+    .policy-title{
+      font-size:1rem;
+      font-weight:800;
+      color:var(--primary-deep);
+      letter-spacing:.01em;
+      white-space:nowrap;
+    }
+    .policy-text{
+      position:relative;
+      z-index:1;
+      font-size:.90rem;
+      line-height:1.9;
+      color:var(--sub);
+      text-align:center;
+      white-space:normal;
+      max-width:420px;
+      margin:0 auto;
+      font-weight:700;
+    }
+
+    .field-group{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      margin-top:11px;
+      position:relative;
+      z-index:1;
+    }
+    .field-label{
+      font-size:.80rem;
+      color:var(--sub);
+      font-weight:800;
       text-align:center;
     }
 
     .input-shell{
-      background:rgba(255,255,255,.035);
-      border:1.5px solid rgba(255,255,255,.08);
+      background:#fff;
+      border:1.5px solid var(--line-2);
       border-radius:18px;
       padding:11px 12px;
-      transition:.2s ease;
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.02);
+      transition:.12s ease;
+      box-shadow:0 2px 0 rgba(255,255,255,.84) inset;
     }
+    .input-shell.compact{padding:8px 11px;border-radius:16px}
     .input-shell:focus-within{
-      border-color:rgba(217,35,35,.46);
-      box-shadow:0 0 0 4px rgba(217,35,35,.10);
-      background:rgba(255,255,255,.045);
+      border-color:var(--primary-2);
+      box-shadow:0 0 0 4px rgba(219,36,67,.10);
+      transform:translateY(-1px);
     }
 
     .password-shell{display:flex;align-items:center;gap:8px}
     .password-shell input{flex:1;min-width:0}
-    .toggle-pass{
-      border:1px solid rgba(255,255,255,.08);
-      background:rgba(255,255,255,.05);
-      color:#ffe8ea;
-      border-radius:999px;
-      padding:7px 11px;
-      font-size:.76rem;
-      font-weight:700;
-      cursor:pointer;
-      white-space:nowrap;
-      flex-shrink:0;
-    }
 
     input[type="email"],
     input[type="password"],
     input[type="text"],
-    input[type="date"],
-    textarea{
+    input[type="date"]{
       width:100%;
       border:0;
       outline:0;
       background:transparent;
-      font-family:inherit;
-      font-size:.95rem;
+      font-family:Arial, Helvetica, sans-serif;
+      font-size:.96rem;
       color:var(--text);
       text-align:center;
+      font-weight:700;
     }
-    input::placeholder,textarea::placeholder{color:#a8898e}
-    textarea{
-      resize:none;
-      min-height:68px;
-      line-height:1.55;
-      text-align:left;
+    input::placeholder{color:var(--muted);font-weight:600}
+
+    .toggle-pass{
+      border:1px solid #efdae2;
+      background:linear-gradient(180deg,#fff,#fff2f6);
+      color:var(--sub);
+      border-radius:999px;
+      padding:7px 11px;
+      font-size:.76rem;
+      font-weight:800;
+      cursor:pointer;
+      white-space:nowrap;
+      flex-shrink:0;
+      transition:.12s ease;
+      box-shadow:0 8px 14px rgba(219,36,67,.06);
+      position:relative;
+      overflow:hidden;
     }
 
     .password-rule,.password-strength{
       margin-top:2px;
-      font-size:.72rem;
+      font-size:.74rem;
       text-align:center;
-      line-height:1.55;
+      line-height:1.6;
+      font-weight:700;
     }
     .password-rule{color:var(--muted)}
-    .password-strength{font-weight:700}
-    .strength-weak{color:#ff9a9a}
-    .strength-medium{color:#ffc170}
-    .strength-strong{color:#8fe4a8}
+    .password-strength{font-weight:800}
+    .strength-weak{color:var(--danger)}
+    .strength-medium{color:var(--warning)}
+    .strength-strong{color:var(--success)}
 
-    .forgot-wrap{
-      margin-top:8px;
-      text-align:center;
+    .forgot-row{
+      margin-top:6px;
+      display:flex;
+      justify-content:flex-end;
+      position:relative;
+      z-index:1;
+    }
+    .forgot-mini{
+      border:0;
+      background:transparent;
+      color:var(--sub);
+      font-family:Arial, Helvetica, sans-serif;
+      font-size:.74rem;
+      font-weight:800;
+      cursor:pointer;
+      padding:2px 4px;
+      border-radius:8px;
+      transition:.12s ease;
+    }
+    .forgot-mini:hover{
+      color:var(--primary-deep);
+      background:rgba(255,255,255,.45);
     }
 
-    .btn-primary,.btn-secondary,.btn-danger,.btn-link-small,.btn-mini,.btn-admin,.btn-cute{
-      border-radius:999px;
-      font-family:inherit;
+    .remember-row{
+      margin-top:12px;
+      display:flex;
+      justify-content:center;
+      font-size:.80rem;
+      color:var(--sub);
+      text-align:center;
+      position:relative;
+      z-index:1;
       font-weight:700;
+    }
+    .remember-check{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
       cursor:pointer;
-      transition:.18s ease;
+      user-select:none;
+    }
+    .remember-check input{
+      width:16px;height:16px;
+      accent-color:var(--primary);
+    }
+
+    .action-row{
+      display:flex;
+      gap:10px;
+      margin-top:14px;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      z-index:1;
+    }
+
+    .btn-primary,.btn-secondary,.btn-danger,.btn-link-small,.btn-mini,.btn-admin,.btn-soft-cute,.upload-btn,.btn-scan-toggle{
+      border-radius:999px;
+      font-family:Arial, Helvetica, sans-serif;
+      font-weight:800;
+      cursor:pointer;
+      transition:.12s ease;
       border:1px solid transparent;
+      position:relative;
+      overflow:hidden;
+    }
+    .btn-primary::before,.btn-secondary::before,.btn-danger::before,.btn-link-small::before,.btn-mini::before,.btn-admin::before,.btn-soft-cute::before,.upload-btn::before,.btn-scan-toggle::before,.toggle-pass::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(255,255,255,.34), rgba(255,255,255,0));
+      pointer-events:none;
+    }
+    .btn-primary:hover,.btn-secondary:hover,.btn-danger:hover,.btn-link-small:hover,.btn-mini:hover,.btn-admin:hover,.btn-soft-cute:hover,.upload-btn:hover,.btn-scan-toggle:hover,.toggle-pass:hover{
+      filter:brightness(1.03);
+      transform:translateY(-1px);
+    }
+    .btn-primary:active,.btn-secondary:active,.btn-danger:active,.btn-link-small:active,.btn-mini:active,.btn-admin:active,.btn-soft-cute:active,.upload-btn:active,.btn-scan-toggle:active,.toggle-pass:active{
+      transform:scale(.985);
     }
 
     .btn-primary{
       min-height:50px;
       flex:1;
-      border-color:rgba(255,74,74,.15);
-      background:linear-gradient(180deg, #e43131, #b91616);
+      background:linear-gradient(180deg,var(--primary-3),var(--primary-2) 45%,var(--primary));
       color:#fff;
-      font-size:.93rem;
-      box-shadow:0 12px 24px rgba(217,35,35,.18);
+      font-size:.96rem;
+      box-shadow:0 12px 24px rgba(219,36,67,.20);
     }
-    .btn-primary:hover{filter:brightness(1.05);transform:translateY(-1px)}
     .btn-primary:disabled{opacity:.62;cursor:default}
 
     .btn-secondary{
       min-height:50px;
       flex:1;
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      border-color:rgba(255,255,255,.08);
-      color:#ffe8ea;
-      font-size:.86rem;
+      background:linear-gradient(180deg,#fff,#fff4f7);
+      border-color:#efd7df;
+      color:var(--sub);
+      font-size:.88rem;
+      box-shadow:0 8px 18px rgba(219,36,67,.06);
     }
 
     .btn-danger{
       min-height:42px;
       padding:0 14px;
-      background:linear-gradient(180deg, rgba(255,129,129,.14), rgba(255,129,129,.08));
-      border-color:rgba(255,129,129,.16);
-      color:#ffd0d0;
-      font-size:.78rem;
+      background:linear-gradient(180deg,#fff1f4,#ffe4ea);
+      border-color:#efc9d3;
+      color:var(--danger);
+      font-size:.79rem;
+      box-shadow:0 8px 18px rgba(222,96,114,.08);
     }
 
     .btn-mini{
       min-height:42px;
       padding:0 14px;
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      border-color:rgba(255,255,255,.08);
-      color:#fff0f1;
-      font-size:.78rem;
+      background:linear-gradient(180deg,#fff,#fff4f7);
+      border-color:#efd7df;
+      color:var(--sub);
+      font-size:.79rem;
+      box-shadow:0 8px 18px rgba(219,36,67,.06);
     }
 
     .btn-link-small{
       width:100%;
       margin-top:12px;
       min-height:42px;
-      background:rgba(255,255,255,.03);
-      border-color:rgba(255,255,255,.07);
-      color:#ffd7db;
+      background:linear-gradient(180deg,#fff,#fff5f8);
+      border-color:#efd7df;
+      color:var(--sub);
+      font-size:.79rem;
+      box-shadow:0 8px 18px rgba(219,36,67,.05);
+    }
+
+    .btn-admin{
+      min-height:40px;
+      width:100%;
+      background:linear-gradient(180deg,#fff,#fff4f7);
+      border-color:#efd7df;
+      color:var(--sub);
       font-size:.78rem;
-    }
-
-    .btn-cute{
-      min-height:36px;
-      padding:0 14px;
-      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
-      border:1px solid rgba(255,255,255,.10);
-      color:#fff4f5;
-      font-size:.74rem;
-      box-shadow:0 8px 18px rgba(0,0,0,.16);
-    }
-
-    .btn-cute.blink{
-      animation:blinkGlow 1.25s ease-in-out infinite;
-    }
-
-    .status-actions-inline{
+      text-decoration:none;
       display:flex;
-      gap:8px;
       align-items:center;
       justify-content:center;
-      margin-top:12px;
+      padding:0 12px;
+      white-space:nowrap;
+      box-shadow:0 8px 18px rgba(219,36,67,.05);
     }
 
+    .btn-soft-cute{
+      min-height:36px;
+      padding:0 16px;
+      border:1px solid #efd7df;
+      background:linear-gradient(180deg,#fff,#fff4f8);
+      color:var(--sub);
+      font-size:.76rem;
+      box-shadow:0 10px 18px rgba(219,36,67,.06);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:6px;
+      white-space:nowrap;
+    }
+
+    .btn-blink{animation:blinkGlow 1.08s ease-in-out infinite}
+    .cute-blink{animation:cuteBlink 1.18s ease-in-out infinite}
     @keyframes blinkGlow{
-      0%,100%{box-shadow:0 0 0 rgba(217,35,35,0)}
-      50%{box-shadow:0 0 0 4px rgba(217,35,35,.10)}
+      0%,100%{box-shadow:0 12px 24px rgba(219,36,67,.12)}
+      50%{box-shadow:0 12px 24px rgba(219,36,67,.21),0 0 0 4px rgba(219,36,67,.08)}
+    }
+    @keyframes cuteBlink{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-1px); box-shadow:0 10px 18px rgba(219,36,67,.12),0 0 0 4px rgba(219,36,67,.06)}
     }
 
-    .shake{animation:shake .36s}
+    .shake{animation:shake .26s}
     @keyframes shake{
       0%,100%{transform:translateX(0)}
       20%{transform:translateX(-4px)}
@@ -447,96 +725,62 @@
     .alert-box{
       display:none;
       margin-top:10px;
-      padding:11px 12px;
+      padding:12px 14px;
       border-radius:16px;
-      font-size:.8rem;
-      line-height:1.6;
-      font-weight:700;
+      font-size:.87rem;
+      line-height:1.65;
+      font-weight:800;
       border:1px solid transparent;
       text-align:center;
+      white-space:pre-line;
+      position:relative;
+      z-index:1;
     }
     .alert-box.show{display:block}
-    .alert-box.success{background:rgba(120,211,154,.10);border-color:rgba(120,211,154,.18);color:#c8f4d6}
-    .alert-box.error{background:rgba(255,129,129,.10);border-color:rgba(255,129,129,.16);color:#ffd5d5}
-    .alert-box.info{background:rgba(154,183,255,.10);border-color:rgba(154,183,255,.16);color:#dbe6ff}
-    .alert-box.warning{background:rgba(255,187,99,.10);border-color:rgba(255,187,99,.18);color:#ffe2b7}
+    .alert-box.success{background:#eefcf5;border-color:#caeedb;color:var(--success)}
+    .alert-box.error{background:#fff1f4;border-color:#f3c8d2;color:var(--danger)}
+    .alert-box.info{background:#eef3ff;border-color:#d6defa;color:var(--info)}
+    .alert-box.warning{background:#fff6eb;border-color:#ffd9af;color:var(--warning)}
 
-    .status-mini{
-      padding:10px 14px;
-      border-radius:16px;
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.06);
-      text-align:center;
-      font-size:.80rem;
-      color:#ffe8ea;
-      font-weight:700;
+    .signup-inline{
+      margin-top:14px;
       display:flex;
       align-items:center;
       justify-content:center;
-      gap:8px;
-      min-height:44px;
-      transition:.2s ease;
-      width:100%;
-      max-width:270px;
-    }
-
-    .status-mini .status-dot{
-      width:10px;height:10px;border-radius:999px;display:inline-block;flex:0 0 auto;
-    }
-    .status-mini.open{
-      background:rgba(120,211,154,.10);
-      border-color:rgba(120,211,154,.20);
-      color:#d8ffe6;
-    }
-    .status-mini.open .status-dot{
-      background:#7dffab;
-      box-shadow:0 0 0 0 rgba(125,255,171,.55),0 0 10px rgba(125,255,171,.45);
-      animation:greenPulse 1.15s ease-in-out infinite;
-    }
-
-    .status-mini.closed{
-      background:linear-gradient(180deg, rgba(255,84,84,.18), rgba(255,84,84,.10));
-      border-color:rgba(255,110,110,.24);
-      color:#ffe1e1;
-      animation:redBlinkSoft 1.1s ease-in-out infinite;
-    }
-
-    .status-mini.closed .status-dot{
-      background:#ff6b6b;
-      box-shadow:0 0 10px rgba(255,107,107,.5);
-    }
-
-    @keyframes greenPulse{
-      0%{transform:scale(1);box-shadow:0 0 0 0 rgba(125,255,171,.55),0 0 10px rgba(125,255,171,.45)}
-      70%{transform:scale(1.12);box-shadow:0 0 0 8px rgba(125,255,171,0),0 0 16px rgba(125,255,171,.55)}
-      100%{transform:scale(1);box-shadow:0 0 0 0 rgba(125,255,171,0),0 0 10px rgba(125,255,171,.30)}
-    }
-
-    @keyframes redBlinkSoft{
-      0%,100%{box-shadow:0 0 0 0 rgba(255,90,90,0);filter:brightness(1)}
-      50%{box-shadow:0 0 0 4px rgba(255,90,90,.10);filter:brightness(1.08)}
-    }
-
-    .helper-red-inline{
-      margin-top:12px;
-      display:flex;
-      justify-content:center;
-      align-items:center;
       gap:10px;
       flex-wrap:wrap;
+      font-size:.90rem;
+      color:var(--sub);
       text-align:center;
-      color:#ffb1b1;
-      font-size:.82rem;
-      font-weight:700;
+    }
+    .signup-inline-text{font-weight:800}
+    .signup-inline .btn-soft-cute{
+      min-height:38px;
+      padding:0 16px;
+      font-size:.79rem;
     }
 
-    .live-card,.history-card,.policy-card{
+    .live-card{
       margin-top:12px;
       padding:14px;
       border-radius:24px;
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.025));
-      border:1px solid rgba(255,255,255,.07);
+      background:linear-gradient(180deg,var(--surface),var(--surface-2));
+      border:1px solid var(--line);
       box-shadow:var(--shadow-soft);
+      position:relative;
+      overflow:hidden;
+    }
+    .live-card::after{
+      content:"";
+      position:absolute;
+      left:-30px;
+      bottom:-34px;
+      width:100px;
+      height:100px;
+      border-radius:28px;
+      transform:rotate(28deg);
+      background:linear-gradient(180deg, rgba(255,92,124,.08), rgba(255,92,124,0));
+      pointer-events:none;
     }
     .live-header{
       display:flex;
@@ -546,38 +790,29 @@
       flex-wrap:wrap;
       margin-bottom:10px;
       text-align:center;
+      position:relative;
+      z-index:1;
     }
     .live-dot{
-      width:9px;height:9px;border-radius:999px;background:var(--accent);
-      box-shadow:0 0 0 5px rgba(217,35,35,.14);
-      animation:pulseDot 1.2s ease-in-out infinite;
+      width:9px;height:9px;border-radius:999px;background:var(--primary);
+      box-shadow:0 0 0 5px rgba(177,15,34,.10);
+      animation:pulseDot .95s ease-in-out infinite;
     }
     @keyframes pulseDot{
       0%,100%{transform:scale(1);opacity:1}
-      50%{transform:scale(1.18);opacity:.82}
+      50%{transform:scale(1.16);opacity:.82}
     }
-    .live-title{
-      font-size:.90rem;
-      font-weight:700;
-      color:#fff2f2;
-    }
-    .live-date{
-      width:100%;
-      font-size:.73rem;
-      color:var(--sub);
-    }
+    .live-title{font-size:.98rem;font-weight:800;color:var(--primary-deep)}
+    .live-date{width:100%;font-size:.78rem;color:var(--sub);font-weight:700}
     .live-list{
       display:grid;
       gap:8px;
-      max-height:260px;
+      max-height:270px;
       overflow-y:auto;
+      position:relative;
+      z-index:1;
     }
-    .live-empty{
-      text-align:center;
-      font-size:.8rem;
-      color:var(--sub);
-      padding:8px 0;
-    }
+    .live-empty{text-align:center;font-size:.84rem;color:var(--sub);padding:8px 0;font-weight:700}
     .live-item{
       display:flex;
       justify-content:space-between;
@@ -585,38 +820,35 @@
       gap:10px;
       padding:10px 12px;
       border-radius:16px;
-      background:rgba(255,255,255,.035);
-      border:1px solid rgba(255,255,255,.06);
-      transition:transform .18s ease, box-shadow .18s ease;
+      background:#fff;
+      border:1px solid var(--line);
+      transition:.12s ease;
     }
-    .live-item:hover{transform:translateY(-1px);box-shadow:0 10px 16px rgba(0,0,0,.12)}
+    .live-item:hover{transform:translateY(-1px)}
+    .live-main{
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+      min-width:0;
+      flex:1;
+      text-align:left;
+    }
     .live-email{
-      font-weight:700;
-      font-size:.8rem;
-      color:#ffe9eb;
+      font-weight:800;
+      font-size:.83rem;
+      color:var(--text);
       overflow:hidden;
       text-overflow:ellipsis;
       white-space:nowrap;
-      max-width:210px;
+      max-width:100%;
     }
-    .live-status-text{font-size:.77rem;color:var(--sub)}
-
-    .status-pill{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:5px 10px;
-      border-radius:999px;
-      font-size:.72rem;
+    .live-time{
+      font-size:.74rem;
+      color:var(--muted);
+      line-height:1.3;
       font-weight:700;
-      line-height:1.2;
-      border:1px solid transparent;
     }
-    .status-pill--green{background:rgba(120,211,154,.10);border-color:rgba(120,211,154,.18);color:#c9f7d6}
-    .status-pill--yellow{background:rgba(255,187,99,.10);border-color:rgba(255,187,99,.18);color:#ffe4ba}
-    .status-pill--red{background:rgba(255,129,129,.10);border-color:rgba(255,129,129,.16);color:#ffd3d3}
-    .status-pill--blue{background:rgba(154,183,255,.10);border-color:rgba(154,183,255,.15);color:#deebff}
-    .status-pill--purple{background:rgba(209,171,255,.10);border-color:rgba(209,171,255,.15);color:#eedfff}
+    .live-status-text{font-size:.79rem;color:var(--sub);flex-shrink:0}
 
     .member-mini{
       display:none;
@@ -627,122 +859,112 @@
     .member-pill{
       padding:10px 10px;
       border-radius:16px;
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.06);
+      background:#fff;
+      border:1px solid var(--line);
       text-align:center;
       min-height:70px;
       display:flex;
       flex-direction:column;
       justify-content:center;
       gap:4px;
+      transition:.12s ease;
+      position:relative;
+      overflow:hidden;
     }
+    .member-pill::before{
+      content:"";
+      position:absolute;
+      inset:auto auto -16px -16px;
+      width:44px;
+      height:44px;
+      border-radius:14px;
+      transform:rotate(25deg);
+      background:linear-gradient(180deg, rgba(255,92,124,.07), rgba(255,92,124,0));
+      pointer-events:none;
+    }
+    .member-pill:hover{transform:translateY(-1px)}
     .member-pill.wide{grid-column:1 / -1}
-    .member-key{
-      font-size:.70rem;
-      color:var(--muted);
-      font-weight:700;
-    }
+    .member-key{font-size:.72rem;color:var(--muted);font-weight:800}
     .member-val{
-      font-size:.82rem;
-      color:#fff1f2;
-      font-weight:700;
+      font-size:.84rem;
+      color:var(--text);
+      font-weight:800;
       line-height:1.45;
       word-break:break-word;
-    }
-
-    .claim-head-title,.status-head-title{
-      font-size:1.08rem;
-      font-weight:700;
-      color:#fff4f4;
-      margin:0;
-      text-align:center;
-    }
-    .claim-head-sub,.status-head-sub{
-      margin-top:6px;
-      font-size:.79rem;
-      line-height:1.6;
-      color:var(--sub);
-      text-align:center;
-    }
-
-    .hero-label-big{
-      font-size:.95rem;
-      font-weight:700;
-      text-align:center;
-      color:#ffdfe0;
-      margin-bottom:6px;
+      position:relative;
+      z-index:1;
     }
 
     .expiry-box{
       margin-top:10px;
       padding:12px;
       border-radius:20px;
-      background:rgba(255,255,255,.03);
-      border:1px solid rgba(255,255,255,.06);
+      background:linear-gradient(180deg,#fffafe,#fff4f8);
+      border:1px solid var(--line);
       display:grid;
       gap:10px;
+      position:relative;
+      z-index:1;
+      overflow:hidden;
     }
+    .expiry-box::after{
+      content:"";
+      position:absolute;
+      inset:auto -16px auto auto;
+      top:10px;
+      width:72px;
+      height:72px;
+      border-radius:20px;
+      transform:rotate(25deg);
+      background:linear-gradient(180deg, rgba(255,92,124,.07), rgba(255,92,124,0));
+      pointer-events:none;
+    }
+
     .expiry-fixed{
       display:none;
-      padding:11px 12px;
+      padding:12px 14px;
       border-radius:16px;
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.07);
+      background:#fff;
+      border:1px solid var(--line);
       text-align:center;
-      font-size:.85rem;
-      color:#fff1f1;
-      font-weight:700;
-      line-height:1.6;
+      font-size:.90rem;
+      color:var(--primary-deep);
+      font-weight:800;
+      line-height:1.65;
+      position:relative;
+      z-index:1;
     }
     .expiry-fixed small{
       display:block;
       margin-top:4px;
       color:var(--muted);
-      font-size:.72rem;
-      font-weight:700;
+      font-size:.74rem;
+      font-weight:800;
     }
 
-    .expiry-actions{
+    .expiry-action-row{
       display:flex;
       justify-content:center;
+      align-items:center;
       gap:8px;
-      flex-wrap:wrap;
-      margin-top:4px;
+      flex-wrap:nowrap;
+      margin-top:2px;
+      position:relative;
+      z-index:1;
     }
 
     .warning-note{
       padding:10px 12px;
       border-radius:16px;
-      background:rgba(255,187,99,.08);
-      border:1px solid rgba(255,187,99,.15);
-      color:#ffe6c4;
-      font-size:.77rem;
-      line-height:1.55;
+      background:#fff6eb;
+      border:1px solid #ffd9af;
+      color:#b86f18;
+      font-size:.80rem;
+      line-height:1.65;
       text-align:center;
-      font-weight:700;
-    }
-
-    .note-select-wrap{
-      margin-top:10px;
-      display:grid;
-      gap:8px;
-    }
-
-    .note-choice{
-      padding:10px 12px;
-      border-radius:16px;
-      background:rgba(255,255,255,.035);
-      border:1px solid rgba(255,255,255,.06);
-      font-size:.78rem;
-      color:#ffe9ea;
-      cursor:pointer;
-      transition:.18s ease;
-      text-align:center;
-      font-weight:700;
-    }
-    .note-choice:hover{
-      border-color:rgba(217,35,35,.20);
-      box-shadow:0 10px 16px rgba(0,0,0,.14);
+      font-weight:800;
+      position:relative;
+      z-index:1;
     }
 
     .payment-section{display:none}
@@ -750,103 +972,133 @@
       margin-top:10px;
       padding:14px;
       border-radius:22px;
-      background:linear-gradient(180deg, rgba(217,35,35,.10), rgba(255,255,255,.025));
-      border:1px solid rgba(255,74,74,.14);
+      background:linear-gradient(180deg,#fffafd,#fff2f6);
+      border:1px solid #f0d4de;
       text-align:center;
+      position:relative;
+      overflow:hidden;
     }
-    .payment-title{font-size:.95rem;font-weight:700;color:#fff0f1;margin-bottom:4px}
-    .payment-desc{font-size:.78rem;color:var(--sub);line-height:1.6;margin-bottom:12px}
+    .payment-card::after{
+      content:"";
+      position:absolute;
+      left:-20px;
+      top:-22px;
+      width:86px;
+      height:86px;
+      border-radius:24px;
+      transform:rotate(28deg);
+      background:linear-gradient(180deg, rgba(255,92,124,.08), rgba(255,92,124,0));
+      pointer-events:none;
+    }
+    .payment-title{font-size:1rem;font-weight:800;color:var(--primary-deep);margin-bottom:4px;position:relative;z-index:1}
+    .payment-desc{font-size:.84rem;color:var(--sub);line-height:1.7;margin-bottom:12px;position:relative;z-index:1;font-weight:700}
     .bank-box{
       border-radius:18px;
-      border:1px solid rgba(255,255,255,.07);
-      background:rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      background:#fff;
       padding:12px;
       margin-bottom:12px;
+      position:relative;
+      z-index:1;
     }
     .bank-chip{
       display:inline-flex;
       padding:6px 10px;
       border-radius:999px;
-      background:rgba(255,255,255,.05);
-      border:1px solid rgba(255,255,255,.06);
-      color:#ffe8ea;
-      font-size:.73rem;
-      font-weight:700;
+      background:#fff4f8;
+      border:1px solid #f0d4de;
+      color:var(--sub);
+      font-size:.75rem;
+      font-weight:800;
       margin-bottom:8px;
     }
-    .bank-name{font-size:.77rem;color:var(--sub);line-height:1.5;margin-bottom:8px}
+    .bank-name{font-size:.80rem;color:var(--sub);line-height:1.55;margin-bottom:8px;font-weight:700}
     .bank-number{
-      font-size:1.12rem;
+      font-size:1.14rem;
       letter-spacing:.08em;
-      color:#fff1f2;
-      font-weight:700;
+      color:var(--primary-deep);
+      font-weight:800;
       margin-bottom:10px;
       word-break:break-all;
+    }
+
+    .scan-toggle-row{margin-top:10px;display:flex;justify-content:center;position:relative;z-index:1}
+    .btn-scan-toggle{
+      min-height:34px;
+      padding:0 14px;
+      background:linear-gradient(180deg,#fff,#fff4f8);
+      border-color:#efd7df;
+      color:var(--sub);
+      font-size:.76rem;
+      box-shadow:0 8px 18px rgba(219,36,67,.06);
+      display:inline-flex;align-items:center;justify-content:center;gap:6px;
     }
 
     .qr-wrap{
       margin-top:10px;
       padding:12px;
       border-radius:20px;
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.06);
+      background:#fff;
+      border:1px solid var(--line);
       text-align:center;
       display:none;
+      position:relative;
+      z-index:1;
     }
     .qr-wrap.show{display:block}
-    .qr-title{font-size:.84rem;font-weight:700;color:#fff0f1;margin-bottom:8px}
+    .qr-title{font-size:.88rem;font-weight:800;color:var(--primary-deep);margin-bottom:8px}
     .qr-img{
       width:100%;
       max-width:240px;
       display:block;
       margin:0 auto;
       border-radius:18px;
-      border:1px solid rgba(255,255,255,.08);
+      border:1px solid var(--line);
       background:#fff;
     }
-    .qr-caption{margin-top:8px;font-size:.75rem;line-height:1.55;color:var(--sub)}
+    .qr-caption{margin-top:8px;font-size:.78rem;line-height:1.6;color:var(--sub);font-weight:700}
 
     .uploader{
       margin-top:12px;
       border-radius:20px;
-      border:1.5px dashed rgba(255,255,255,.14);
-      background:rgba(255,255,255,.03);
+      border:1.5px dashed #efd4de;
+      background:#fff;
       padding:14px;
       text-align:center;
       position:relative;
+      z-index:1;
     }
-    .upload-title{font-size:.88rem;font-weight:700;color:#fff0f1}
-    .upload-sub{font-size:.75rem;color:var(--sub);line-height:1.55;margin-top:6px}
+    .upload-title{font-size:.90rem;font-weight:800;color:var(--primary-deep)}
+    .upload-sub{font-size:.78rem;color:var(--sub);line-height:1.6;margin-top:6px;font-weight:700}
     .upload-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px}
     .upload-btn{
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.08);
       padding:10px 14px;
-      background:rgba(255,255,255,.05);
-      color:#fff1f2;
-      font-size:.8rem;
-      font-weight:700;
-      cursor:pointer;
+      background:linear-gradient(180deg,#fff,#fff4f8);
+      border-color:#efd7df;
+      color:var(--sub);
+      font-size:.82rem;
+      box-shadow:0 8px 18px rgba(219,36,67,.06);
     }
     .hidden-file-input{position:absolute;left:-9999px;opacity:0}
-    .file-name{margin-top:10px;font-size:.76rem;color:var(--sub);word-break:break-word}
+    .file-name{margin-top:10px;font-size:.78rem;color:var(--sub);word-break:break-word;font-weight:700}
     .upload-status{
       margin-top:10px;
       display:none;
       padding:10px 12px;
       border-radius:14px;
-      background:rgba(120,211,154,.10);
-      border:1px solid rgba(120,211,154,.16);
-      color:#d4f6df;
-      font-size:.77rem;
-      font-weight:700;
-      line-height:1.55;
+      background:#eefcf5;
+      border:1px solid #caeedb;
+      color:var(--success);
+      font-size:.79rem;
+      font-weight:800;
+      line-height:1.6;
+      white-space:pre-line;
     }
     .upload-status.show{display:block}
     .upload-status.error{
-      background:rgba(255,129,129,.10);
-      border-color:rgba(255,129,129,.16);
-      color:#ffd5d5;
+      background:#fff1f4;
+      border-color:#f3c8d2;
+      color:var(--danger);
     }
 
     .preview-wrap{
@@ -862,215 +1114,451 @@
       object-fit:contain;
       border-radius:18px;
       background:#fff;
-      border:1px solid rgba(255,255,255,.08);
+      border:1px solid var(--line);
     }
-    .preview-meta{display:grid;gap:8px;width:100%}
 
-    #summary,#statusSummary{margin-top:10px;text-align:center}
+    #summary,#statusSummary{
+      margin-top:10px;
+      text-align:center;
+      position:relative;
+      z-index:1;
+    }
     .summary-pill{
       display:inline-flex;
       align-items:center;
       gap:6px;
-      padding:7px 12px;
+      padding:8px 14px;
       border-radius:999px;
-      background:rgba(255,255,255,.05);
-      border:1px solid rgba(255,255,255,.07);
-      color:#fff2f2;
-      font-weight:700;
-      font-size:.78rem;
+      background:#fff;
+      border:1px solid var(--line);
+      color:var(--primary-deep);
+      font-weight:800;
+      font-size:.82rem;
+      box-shadow:0 8px 14px rgba(219,36,67,.04);
     }
 
     #status,#authStatus,#statusPageText{
       min-height:20px;
       margin-top:8px;
       text-align:center;
-      font-size:.82rem;
+      font-size:.88rem;
       line-height:1.7;
       color:var(--sub);
-    }
-    .status-strong{font-weight:700;color:#fff3f3}
-    .status-time{font-size:.75rem;color:var(--muted)}
-
-    .queue-card{
-      margin-top:12px;
-      padding:14px;
-      border-radius:22px;
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.025));
-      border:1px solid rgba(255,255,255,.07);
-      text-align:center;
-    }
-    .queue-head{
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      gap:8px;
-      flex-wrap:wrap;
-      margin-bottom:10px;
-    }
-    .queue-no{
-      font-size:1.3rem;
-      font-weight:700;
-      color:#fff3f4;
-    }
-    .queue-sub{
-      font-size:.74rem;
-      color:var(--sub);
-      margin-top:4px;
-    }
-
-    .progress-wrap{
-      margin-top:10px;
-      display:grid;
-      gap:8px;
-    }
-    .progress-bar{
-      width:100%;
-      height:10px;
-      border-radius:999px;
-      background:rgba(255,255,255,.06);
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,.04);
-    }
-    .progress-fill{
-      height:100%;
-      width:25%;
-      border-radius:999px;
-      background:linear-gradient(90deg, #ff6973, #d92323);
-      transition:width .25s ease;
-    }
-    .progress-label{
-      font-size:.75rem;
-      color:var(--sub);
-      text-align:center;
+      position:relative;
+      z-index:1;
       font-weight:700;
     }
-
-    .timeline-card{
-      margin-top:12px;
-      padding:12px;
-      border-radius:20px;
-      background:rgba(255,255,255,.03);
-      border:1px solid rgba(255,255,255,.06);
-    }
-    .timeline-title{
-      font-size:.82rem;
-      font-weight:700;
-      color:#fff0f1;
-      text-align:center;
-      margin-bottom:10px;
-    }
-    .timeline-list{
-      display:flex;
-      gap:8px;
-      justify-content:center;
-      flex-wrap:wrap;
-    }
-    .timeline-chip{
-      min-height:34px;
-      padding:7px 12px;
-      border-radius:999px;
-      background:rgba(255,255,255,.035);
-      border:1px solid rgba(255,255,255,.06);
-      color:#d9c2c5;
-      font-size:.74rem;
-      font-weight:700;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-    .timeline-chip.active{
-      background:linear-gradient(180deg, #e43131, #b91616);
-      color:#fff;
-      border-color:transparent;
-    }
+    .status-time{font-size:.78rem;color:var(--muted);font-weight:700}
 
     .status-grid{
       display:grid;
       grid-template-columns:repeat(3,1fr);
       gap:10px;
       margin:12px 0;
+      position:relative;
+      z-index:1;
     }
     .mini-box{
       padding:11px 8px;
       border-radius:16px;
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.06);
+      background:#fff;
+      border:1px solid var(--line);
       text-align:center;
+      transition:.12s ease;
+      position:relative;
+      overflow:hidden;
     }
+    .mini-box::before{
+      content:"";
+      position:absolute;
+      inset:auto auto -18px -18px;
+      width:44px;
+      height:44px;
+      border-radius:14px;
+      transform:rotate(26deg);
+      background:linear-gradient(180deg, rgba(255,92,124,.07), rgba(255,92,124,0));
+      pointer-events:none;
+    }
+    .mini-box:hover{transform:translateY(-1px)}
     .mini-box strong{
       display:block;
-      font-size:.95rem;
-      color:#fff2f3;
+      font-size:1rem;
+      color:var(--primary-deep);
+      position:relative;
+      z-index:1;
+      font-weight:800;
     }
     .mini-box span{
       display:block;
       margin-top:4px;
-      font-size:.72rem;
+      font-size:.74rem;
       color:var(--muted);
+      position:relative;
+      z-index:1;
+      font-weight:800;
+    }
+
+    .queue-card{
+      margin-top:10px;
+      padding:14px;
+      border-radius:22px;
+      background:#fff;
+      border:1px solid var(--line);
+      text-align:center;
+      transition:.12s ease;
+      position:relative;
+      z-index:1;
+      overflow:hidden;
+    }
+    .queue-card::after{
+      content:"";
+      position:absolute;
+      inset:auto -18px -20px auto;
+      width:84px;
+      height:84px;
+      border-radius:24px;
+      transform:rotate(28deg);
+      background:linear-gradient(180deg, rgba(255,92,124,.07), rgba(255,92,124,0));
+      pointer-events:none;
+    }
+    .queue-card:hover{transform:translateY(-1px)}
+    .queue-no{
+      font-size:1.36rem;
+      font-weight:800;
+      color:var(--primary-deep);
+      position:relative;
+      z-index:1;
+    }
+    .queue-sub{
+      font-size:.78rem;
+      color:var(--sub);
+      margin-top:4px;
+      position:relative;
+      z-index:1;
+      font-weight:700;
+    }
+
+    .progress-wrap{margin-top:10px;display:grid;gap:8px;position:relative;z-index:1}
+    .progress-bar{
+      width:100%;
+      height:10px;
+      border-radius:999px;
+      background:#fdebf1;
+      overflow:hidden;
+      border:1px solid var(--line);
+    }
+    .progress-fill{
+      height:100%;
+      width:25%;
+      border-radius:999px;
+      background:linear-gradient(90deg,var(--primary-3),var(--primary-2),var(--primary));
+      transition:width .08s ease;
+    }
+    .progress-label{
+      font-size:.82rem;
+      color:var(--primary-deep);
+      text-align:center;
+      font-weight:800;
+    }
+
+    .timeline-card{
+      margin-top:10px;
+      padding:12px;
+      border-radius:20px;
+      background:#fff;
+      border:1px solid var(--line);
+      position:relative;
+      z-index:1;
+      overflow:hidden;
+    }
+    .timeline-card::before{
+      content:"";
+      position:absolute;
+      top:-18px;
+      left:-18px;
+      width:68px;
+      height:68px;
+      border-radius:18px;
+      transform:rotate(25deg);
+      background:linear-gradient(180deg, rgba(255,92,124,.06), rgba(255,92,124,0));
+      pointer-events:none;
+    }
+    .timeline-title{
+      font-size:.86rem;
+      font-weight:800;
+      color:var(--primary-deep);
+      text-align:center;
+      margin-bottom:10px;
+      position:relative;
+      z-index:1;
+    }
+    .timeline-list{
+      display:flex;
+      gap:8px;
+      justify-content:center;
+      flex-wrap:wrap;
+      position:relative;
+      z-index:1;
+    }
+    .timeline-chip{
+      min-height:34px;
+      padding:7px 12px;
+      border-radius:999px;
+      background:linear-gradient(180deg,#fff,#fff4f8);
+      border:1px solid #efd7df;
+      color:var(--sub);
+      font-size:.76rem;
+      font-weight:800;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:.08s ease;
+      box-shadow:0 8px 14px rgba(219,36,67,.04);
+    }
+    .timeline-chip.active{
+      background:linear-gradient(180deg,var(--primary-3),var(--primary-2) 45%,var(--primary));
+      color:#fff;
+      border-color:transparent;
+      box-shadow:0 8px 18px rgba(177,15,34,.14);
     }
 
     .result-item{
       border-radius:20px;
-      border:1px solid rgba(255,255,255,.07);
-      background:rgba(255,255,255,.035);
+      border:1px solid var(--line);
+      background:#fff;
       padding:12px;
       margin-top:10px;
       text-align:center;
+      transition:.12s ease;
+      position:relative;
+      z-index:1;
+      overflow:hidden;
     }
+    .result-item::before{
+      content:"";
+      position:absolute;
+      inset:auto auto -18px -18px;
+      width:64px;
+      height:64px;
+      border-radius:20px;
+      transform:rotate(25deg);
+      background:linear-gradient(180deg, rgba(255,92,124,.07), rgba(255,92,124,0));
+      pointer-events:none;
+    }
+    .result-item:hover{transform:translateY(-1px)}
     .item-header{
-      font-size:.72rem;
+      font-size:.74rem;
       color:var(--muted);
       letter-spacing:.12em;
       text-transform:uppercase;
       margin-bottom:6px;
+      position:relative;
+      z-index:1;
+      font-weight:800;
     }
     .item-email{
-      font-size:.92rem;
-      font-weight:700;
+      font-size:.96rem;
+      font-weight:800;
       word-break:break-word;
-      color:#fff2f2;
+      color:var(--primary-deep);
+      position:relative;
+      z-index:1;
     }
     .item-tag{
       display:inline-flex;
       margin:8px auto;
       padding:5px 10px;
       border-radius:999px;
-      background:rgba(255,255,255,.05);
-      border:1px solid rgba(255,255,255,.06);
-      color:#ffe8ea;
-      font-size:.72rem;
-      font-weight:700;
+      background:#fff4f8;
+      border:1px solid #efd7df;
+      color:var(--sub);
+      font-size:.74rem;
+      font-weight:800;
+      position:relative;
+      z-index:1;
     }
     .item-tag.paid{
-      background:rgba(255,187,99,.10);
-      border-color:rgba(255,187,99,.18);
-      color:#ffe1b6;
+      background:#fff6eb;
+      border-color:#ffd9af;
+      color:#b86f18;
     }
     .item-meta{
       display:flex;
       flex-wrap:wrap;
       justify-content:center;
       gap:8px;
-      font-size:.75rem;
+      font-size:.78rem;
       color:var(--sub);
       margin-bottom:8px;
+      position:relative;
+      z-index:1;
+      font-weight:700;
     }
     .item-body{
-      font-size:.84rem;
+      font-size:.88rem;
       line-height:1.65;
       margin-bottom:8px;
+      position:relative;
+      z-index:1;
+      font-weight:700;
     }
+
+    .status-pill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:6px 11px;
+      border-radius:999px;
+      font-size:.75rem;
+      font-weight:800;
+      line-height:1.2;
+      border:1px solid transparent;
+    }
+    .status-pill--green{background:#eefcf5;border-color:#caeedb;color:var(--success)}
+    .status-pill--yellow{background:#fff6eb;border-color:#ffd9af;color:#b86f18}
+    .status-pill--red{background:#fff1f4;border-color:#f3c8d2;color:var(--danger)}
+    .status-pill--blue{background:#eef3ff;border-color:#d6defa;color:var(--info)}
+    .status-pill--purple{background:#f8efff;border-color:#e5d7f6;color:#ae6fe1}
+
+    .status-bottom-actions{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-top:12px;
+      align-items:center;
+      position:relative;
+      z-index:1;
+    }
+
+    .swap-panel-status{
+      display:none;
+      margin-top:12px;
+      border-radius:20px;
+      padding:13px;
+      background:#fff;
+      border:1px solid var(--line);
+      position:relative;
+      z-index:1;
+      overflow:hidden;
+    }
+    .swap-panel-status::after{
+      content:"";
+      position:absolute;
+      top:-18px;
+      right:-16px;
+      width:72px;
+      height:72px;
+      border-radius:22px;
+      transform:rotate(26deg);
+      background:linear-gradient(180deg, rgba(255,92,124,.07), rgba(255,92,124,0));
+      pointer-events:none;
+    }
+    .swap-panel-status.show{display:block}
+    .swap-panel-title{
+      font-size:.92rem;
+      font-weight:800;
+      color:var(--primary-deep);
+      text-align:center;
+      margin-bottom:4px;
+      position:relative;
+      z-index:1;
+    }
+    .swap-panel-sub{
+      font-size:.78rem;
+      line-height:1.6;
+      color:var(--sub);
+      text-align:center;
+      margin-bottom:10px;
+      position:relative;
+      z-index:1;
+      font-weight:700;
+    }
+    .swap-reason-row{display:grid;gap:8px;margin-top:10px;position:relative;z-index:1}
+    .swap-reason-option{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius:16px;
+      background:linear-gradient(180deg,#fff,#fff4f8);
+      border:1px solid #efd7df;
+      font-size:.79rem;
+      color:var(--sub);
+      font-weight:800;
+      cursor:pointer;
+      transition:.08s ease;
+      box-shadow:0 8px 14px rgba(219,36,67,.04);
+    }
+    .swap-reason-option:hover{transform:translateY(-1px)}
+    .swap-reason-option input{
+      accent-color:var(--primary);
+      width:16px;height:16px;flex:0 0 auto;
+    }
+    .swap-actions{display:flex;gap:8px;margin-top:12px;position:relative;z-index:1}
+    .swap-result{
+      display:none;
+      margin-top:10px;
+      padding:11px 12px;
+      border-radius:16px;
+      background:#eefcf5;
+      border:1px solid #caeedb;
+      color:var(--success);
+      text-align:center;
+      position:relative;
+      z-index:1;
+    }
+    .swap-result.show{display:block}
+    .swap-result-title{font-size:.90rem;font-weight:800;margin-bottom:4px}
+    .swap-result-text{font-size:.79rem;line-height:1.6;white-space:pre-line;font-weight:700}
 
     .bottom-pair{
       margin-top:16px;
       display:flex;
       gap:10px;
+      position:relative;
+      z-index:1;
+    }
+    .bottom-pair .btn-primary,
+    .bottom-pair .btn-secondary{min-height:50px}
+
+    .success-burst{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:99997;
+      display:none;
+    }
+    .success-burst.show{display:block}
+    .success-burst span{
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:10px;height:10px;
+      border-radius:999px;
+      background:var(--primary);
+      opacity:.85;
+      animation:burstOut .72s ease forwards;
+    }
+    .success-burst span:nth-child(2n){background:var(--primary-3)}
+    .success-burst span:nth-child(3n){background:var(--success)}
+    .success-burst span:nth-child(1){--x:-120px;--y:-80px}
+    .success-burst span:nth-child(2){--x:110px;--y:-90px}
+    .success-burst span:nth-child(3){--x:-140px;--y:20px}
+    .success-burst span:nth-child(4){--x:130px;--y:10px}
+    .success-burst span:nth-child(5){--x:-90px;--y:110px}
+    .success-burst span:nth-child(6){--x:100px;--y:120px}
+    .success-burst span:nth-child(7){--x:0px;--y:-130px}
+    .success-burst span:nth-child(8){--x:0px;--y:135px}
+    @keyframes burstOut{
+      0%{transform:translate(-50%,-50%) scale(.4); opacity:0}
+      20%{opacity:1}
+      100%{transform:translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(1.2); opacity:0}
     }
 
     .modal-backdrop{
       position:fixed;
       inset:0;
-      background:rgba(0,0,0,.52);
+      background:rgba(0,0,0,.16);
       display:none;
       align-items:center;
       justify-content:center;
@@ -1082,26 +1570,43 @@
     .modal-card{
       width:100%;
       max-width:360px;
-      background:linear-gradient(180deg, rgba(36,14,16,.98), rgba(24,10,12,.98));
-      border:1px solid rgba(255,255,255,.08);
+      background:#fff;
+      border:1px solid var(--line);
       border-radius:24px;
-      box-shadow:0 18px 40px rgba(0,0,0,.32);
+      box-shadow:var(--shadow);
       padding:18px;
       text-align:center;
+      position:relative;
+      overflow:hidden;
     }
-    .modal-title{font-size:1rem;font-weight:700;color:#fff1f2;margin-bottom:8px}
-    .modal-desc{font-size:.83rem;color:var(--sub);line-height:1.65;margin-bottom:14px}
+    .modal-card::after{
+      content:"";
+      position:absolute;
+      right:-18px;
+      top:-18px;
+      width:70px;
+      height:70px;
+      border-radius:20px;
+      transform:rotate(28deg);
+      background:linear-gradient(180deg, rgba(255,92,124,.08), rgba(255,92,124,0));
+      pointer-events:none;
+    }
+    .modal-title{font-size:1.02rem;font-weight:800;color:var(--primary-deep);margin-bottom:8px;position:relative;z-index:1}
+    .modal-desc{font-size:.85rem;color:var(--sub);line-height:1.7;margin-bottom:14px;position:relative;z-index:1;font-weight:700}
     .modal-summary{
       border-radius:18px;
-      border:1px solid rgba(255,255,255,.07);
-      background:rgba(255,255,255,.035);
+      border:1px solid var(--line);
+      background:#fff4f8;
       padding:12px;
-      font-size:.8rem;
-      line-height:1.7;
-      color:#ffe9eb;
+      font-size:.82rem;
+      line-height:1.8;
+      color:var(--sub);
       text-align:center;
+      position:relative;
+      z-index:1;
+      font-weight:700;
     }
-    .modal-actions{display:flex;gap:10px;margin-top:14px}
+    .modal-actions{display:flex;gap:10px;margin-top:14px;position:relative;z-index:1}
 
     .toast{
       position:fixed;
@@ -1110,15 +1615,18 @@
       transform:translateX(-50%) translateY(40px);
       padding:10px 18px;
       border-radius:999px;
-      background:rgba(18,7,8,.96);
-      border:1px solid rgba(255,255,255,.08);
-      color:#fff;
-      font-size:.8rem;
-      font-weight:700;
+      background:#fff;
+      border:1px solid var(--line);
+      color:var(--primary-deep);
+      font-size:.82rem;
+      font-weight:800;
       opacity:0;
       pointer-events:none;
-      transition:all .28s ease;
+      transition:all .16s ease;
       z-index:9999;
+      box-shadow:var(--shadow-soft);
+      max-width:92vw;
+      text-align:center;
     }
     .toast.show{
       opacity:1;
@@ -1133,91 +1641,74 @@
       justify-content:center;
       z-index:99999;
       padding:20px;
-      background:rgba(14,6,7,.80);
+      background:rgba(255,255,255,.12);
       backdrop-filter:blur(6px);
     }
     .loading-overlay.show{display:flex}
     .loading-card{
       width:100%;
-      max-width:290px;
-      border-radius:26px;
-      background:linear-gradient(180deg, rgba(35,14,16,.98), rgba(24,10,12,.98));
-      border:1px solid rgba(255,255,255,.08);
-      box-shadow:0 20px 54px rgba(0,0,0,.36);
-      padding:24px 18px 20px;
+      max-width:260px;
+      border-radius:24px;
+      background:#fff;
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+      padding:18px 16px 16px;
       text-align:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .loading-card::after{
+      content:"";
+      position:absolute;
+      left:-16px;
+      bottom:-16px;
+      width:70px;
+      height:70px;
+      border-radius:20px;
+      transform:rotate(28deg);
+      background:linear-gradient(180deg, rgba(255,92,124,.08), rgba(255,92,124,0));
+      pointer-events:none;
     }
 
     .spinner-wrap{
-      width:92px;height:92px;
-      margin:0 auto 12px;
+      width:78px;height:78px;
+      margin:0 auto 8px;
       position:relative;
       display:grid;
       place-items:center;
+      z-index:1;
     }
     .spinner-ring{
-      width:92px;height:92px;
+      width:78px;height:78px;
       border-radius:999px;
-      border:6px solid rgba(255,255,255,.08);
-      border-top-color:var(--accent);
-      animation:spin .65s linear infinite;
+      border:5px solid #fdebf1;
+      border-top-color:var(--primary);
+      animation:spin .42s linear infinite;
     }
     .spinner-percent{
       position:absolute;
-      font-size:1rem;
-      font-weight:700;
-      color:#fff4f5;
-      letter-spacing:.02em;
+      font-size:.92rem;
+      font-weight:800;
+      color:var(--primary-deep);
     }
     @keyframes spin{to{transform:rotate(360deg)}}
-
     .loading-title{
-      font-size:1rem;
-      font-weight:700;
-      color:#fff2f3;
+      font-size:.98rem;
+      font-weight:800;
+      color:var(--primary-deep);
       text-align:center;
+      position:relative;
+      z-index:1;
     }
     .loading-sub{
-      margin-top:6px;
+      margin-top:4px;
       font-size:.82rem;
       color:var(--sub);
       line-height:1.55;
       text-align:center;
-    }
-
-    .policy-card{
-      margin-top:14px;
       position:relative;
-      overflow:hidden;
-    }
-    .policy-card::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        radial-gradient(circle at 10% 20%, rgba(255,74,74,.10), transparent 22%),
-        radial-gradient(circle at 85% 80%, rgba(255,255,255,.05), transparent 20%);
-      pointer-events:none;
-    }
-    .policy-head{
-      text-align:center;
-      font-size:.9rem;
+      z-index:1;
       font-weight:700;
-      color:#fff0f1;
-      margin-bottom:8px;
-      position:relative;
-    }
-    .policy-text{
-      position:relative;
-      font-size:.82rem;
-      line-height:1.85;
-      color:#ffe7e9;
-      text-align:center;
-      border-radius:20px;
-      padding:14px 14px;
-      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025));
-      border:1px solid rgba(255,255,255,.08);
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.03);
     }
 
     .footer{
@@ -1227,8 +1718,9 @@
       align-items:center;
       gap:6px;
       color:var(--sub);
-      font-size:.73rem;
+      font-size:.75rem;
       text-align:center;
+      font-weight:700;
     }
     .support-pill{
       display:inline-flex;
@@ -1236,42 +1728,44 @@
       gap:6px;
       padding:7px 12px;
       border-radius:999px;
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.07);
+      background:#fff;
+      border:1px solid var(--line);
+      box-shadow:0 8px 14px rgba(219,36,67,.04);
     }
     .copyright{letter-spacing:.16em;text-transform:uppercase}
 
     @media (max-width:480px){
       .app{padding:12px 12px 16px}
-      .modal-actions,.bottom-pair{flex-direction:column}
+      .action-row,.modal-actions,.bottom-pair,.swap-actions{flex-direction:column;display:flex}
       .status-grid{grid-template-columns:repeat(3,1fr)}
       .member-mini{grid-template-columns:1fr 1fr}
-      .live-email{max-width:150px}
-      .logo-shell{width:80px;height:80px}
-      .notice-bar{font-size:.79rem}
-      .status-mini{max-width:100%}
-      .status-actions-inline,.expiry-actions,.helper-red-inline{flex-direction:column}
+      .logo-shell{width:82px;height:82px}
+      .expiry-action-row{gap:6px}
+      .btn-soft-cute{padding:0 12px;font-size:.72rem}
+      .status-bottom-actions{grid-template-columns:1fr 1fr}
+      .signup-inline{gap:8px}
+      .live-item{align-items:flex-start}
+      .live-status-text{padding-top:2px}
+      .forgot-row{justify-content:center}
+      .policy-text{font-size:.82rem;line-height:1.85}
+      .policy-line{width:26px}
+      .section-title-plain h2{font-size:1.18rem}
     }
   </style>
 </head>
 <body>
-  <div class="floating-hearts">
-    <span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span>
-  </div>
-  <div class="floating-stars">
-    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-  </div>
+  <div class="ambient"></div>
+  <div class="pattern"></div>
+  <div class="float-shapes"><span></span><span></span><span></span><span></span><span></span></div>
 
-  <div class="mist">
-    <span></span><span></span><span></span><span></span>
+  <div class="bg-icons" aria-hidden="true">
+    <span>♥</span><span>★</span><span>♥</span><span>★</span><span>♥</span><span>★</span>
+    <span>♥</span><span>★</span><span>♥</span><span>★</span><span>♥</span><span>★</span>
+    <span>♥</span><span>★</span><span>♥</span><span>★</span><span>♥</span><span>★</span>
   </div>
 
   <div class="app">
-    <section class="hero shell-card" id="heroSection">
-      <div class="theme-corner">
-        <button class="theme-icon-btn" type="button" title="ธีมเข้ม">🌙</button>
-      </div>
-
+    <section class="hero glass tap-card" id="heroSection">
       <div class="logo-shell">
         <img
           src="https://img2.imgbiz.com/imgbiz/IMG_0923.jpeg"
@@ -1294,11 +1788,11 @@
       </div>
     </section>
 
-    <main class="panel shell-card">
+    <main class="panel glass tap-card">
       <section class="view active" id="loginView">
         <div class="section-blurb">เข้าสู่ระบบด้วยอีเมลและรหัสผ่านของคุณ</div>
 
-        <div class="login-card">
+        <div class="card tap-card">
           <div id="topAlert" class="alert-box"></div>
 
           <div class="field-group">
@@ -1319,33 +1813,33 @@
             <div class="password-rule">ต้องมี A-Z, a-z และ 0-9 อย่างน้อย 8 ตัว</div>
           </div>
 
-          <div class="forgot-wrap">
-            <button type="button" class="btn-cute" id="btnForgotPassword">ลืมรหัสผ่าน</button>
+          <div class="forgot-row">
+            <button type="button" class="forgot-mini" id="btnForgotPassword">ลืมรหัสผ่าน</button>
           </div>
 
-          <div class="field-group" style="margin-top:12px;">
-            <label style="display:flex;align-items:center;justify-content:center;gap:8px;font-size:.78rem;color:var(--sub);cursor:pointer;">
+          <div class="remember-row">
+            <label class="remember-check">
               <input type="checkbox" id="rememberPassword" />
               <span>บันทึกอีเมลและรหัสผ่านไว้ในเครื่องนี้</span>
             </label>
           </div>
 
-          <div class="bottom-pair">
+          <div class="action-row">
             <button class="btn-primary" id="btnLogin">เข้าสู่ระบบ</button>
           </div>
 
           <div id="authStatus"></div>
         </div>
 
-        <div class="helper-red-inline">
-          <span>ยังไม่มีบัญชี</span>
-          <button type="button" class="btn-cute" id="showRegisterBtn">สมัครสมาชิก</button>
+        <div class="signup-inline">
+          <span class="signup-inline-text">ยังไม่มีบัญชี</span>
+          <button type="button" class="btn-soft-cute cute-blink" id="showRegisterBtn">สมัครสมาชิก</button>
         </div>
 
-        <div class="live-card">
+        <div class="live-card tap-card">
           <div class="live-header">
             <div class="live-dot"></div>
-            <div class="live-title">สถานะเรียลไทม์ล่าสุด</div>
+            <div class="live-title">อัปเดตสถานะล่าสุดแบบเรียลไทม์</div>
             <div class="live-date" id="liveDate"></div>
           </div>
           <div class="live-list" id="liveList">
@@ -1357,7 +1851,7 @@
       <section class="view" id="registerView">
         <div class="section-blurb">สมัครสมาชิกด้วยอีเมลที่ใช้กับร้าน พร้อมตั้งรหัสผ่านใหม่</div>
 
-        <div class="register-card">
+        <div class="card tap-card">
           <div id="registerAlert" class="alert-box"></div>
 
           <div class="field-group">
@@ -1382,7 +1876,7 @@
                 <button type="button" class="toggle-pass" data-target="registerPassword">แสดง</button>
               </div>
             </div>
-            <div class="password-rule">ต้องมีตัวพิมพ์ใหญ่ ตัวพิมพ์เล็ก ตัวเลข</div>
+            <div class="password-rule">ต้องมีตัวพิมพ์ใหญ่ ตัวพิมพ์เล็ก และตัวเลข</div>
             <div class="password-strength" id="registerPasswordStrength">ระดับรหัสผ่าน: -</div>
           </div>
 
@@ -1410,18 +1904,30 @@
             </div>
           </div>
 
-          <div class="bottom-pair">
+          <div class="action-row">
             <button class="btn-primary" id="btnRegister">สมัครสมาชิก</button>
-            <button type="button" class="btn-secondary" id="backToLoginBtn">กลับไปหน้าล็อกอิน</button>
+          </div>
+
+          <button type="button" class="btn-link-small" id="backToLoginBtn">กลับไปหน้าล็อกอิน</button>
+        </div>
+
+        <div class="card tap-card" id="registerSuccessCard" style="display:none;">
+          <div style="font-size:1rem;font-weight:800;color:var(--primary-deep);margin-bottom:6px;text-align:center;">สมัครสมาชิกสำเร็จแล้ว</div>
+          <div style="font-size:.84rem;line-height:1.7;color:var(--sub);text-align:center;font-weight:700;">
+            ตอนนี้คุณสามารถใช้อีเมลและรหัสผ่านที่ตั้งไว้เข้าสู่ระบบได้ทันที
           </div>
         </div>
       </section>
 
       <section class="view" id="claimView">
-        <div class="claim-card">
-          <div class="hero-label-big">ฟอร์มแจ้งเคลมสำหรับสมาชิก</div>
-          <h2 class="claim-head-title">ส่งคำขอเคลม</h2>
-          <div class="claim-head-sub">กรอกข้อมูลให้ครบ เพื่อให้ร้านตรวจสอบและดำเนินการได้ไวขึ้น</div>
+        <div class="card tap-card">
+          <div class="section-title-plain">
+            <h2>ฟอร์มแจ้งเคลมสำหรับสมาชิก</h2>
+            <p>
+              ส่งคำขอเคลมได้จากหน้านี้<br>
+              กรุณาตรวจสอบข้อมูลให้ถูกต้อง เพื่อให้ร้านดำเนินการได้รวดเร็วขึ้น
+            </p>
+          </div>
 
           <div id="claimAlert" class="alert-box"></div>
 
@@ -1443,7 +1949,7 @@
           <div class="expiry-box">
             <div class="expiry-fixed" id="expiryFixedBox">
               วันหมดอายุในระบบ: <span id="expiryFixedText">-</span>
-              <small>ระบบจะใช้ข้อมูลนี้อัตโนมัติ</small>
+              <small>ระบบจะใช้ข้อมูลนี้ให้อัตโนมัติ</small>
             </div>
 
             <div id="expiryPickerBlock">
@@ -1454,28 +1960,23 @@
                 </div>
               </div>
 
-              <div class="expiry-actions">
-                <button class="btn-cute blink" id="btnCheckExpiry" type="button">เช็ควันหมดอายุ</button>
+              <div class="expiry-action-row">
+                <button class="btn-soft-cute cute-blink" id="btnCheckExpiry" type="button">ตรวจวันหมดอายุ</button>
               </div>
+
               <div id="expiryCheckResult" class="alert-box"></div>
             </div>
 
             <div class="warning-note">
-              ⚠️ หากแจ้งข้อมูลไม่ตรงกับความจริง ระบบจะตัดสิทธิ์อัตโนมัติ
+              กรุณาแจ้งข้อมูลให้ตรงกับการใช้งานจริง เพื่อให้ระบบตรวจสอบและรับเรื่องได้ถูกต้อง
             </div>
           </div>
 
-          <div class="note-select-wrap">
-            <div class="field-label">หมายเหตุให้เลือก</div>
-            <button type="button" class="note-choice" data-note="ติดข้อจำกัด 12 เดือน">ติดข้อจำกัด 12 เดือน</button>
-            <button type="button" class="note-choice" data-note="ต้องการเปลี่ยนเมลใช้งานใหม่">ต้องการเปลี่ยนเมลใช้งานใหม่</button>
-          </div>
-
           <div class="payment-section" id="paymentSection">
-            <div class="payment-card">
+            <div class="payment-card tap-card">
               <div class="payment-title" id="paymentTitle">ชำระค่าดูแล 19 บาท</div>
               <div class="payment-desc" id="paymentNote">
-                สำหรับปีสมัครที่กำหนด ระบบจะให้ชำระ 19 บาท และแนบหลักฐานเพื่อเข้าคิวเคลม
+                สำหรับปีสมัครที่กำหนด กรุณาชำระค่าดูแลและแนบสลิปก่อนส่งคำขอ
               </div>
 
               <div class="bank-box">
@@ -1485,19 +1986,21 @@
                 <button type="button" class="btn-link-small" id="btnCopyAccount">คัดลอกเลขบัญชี</button>
               </div>
 
-              <div style="display:flex;justify-content:center;">
-                <button type="button" class="btn-cute" id="btnToggleQr">ต้องการสแกน QR</button>
+              <div class="scan-toggle-row">
+                <button type="button" class="btn-scan-toggle" id="btnToggleQr">สแกน QR</button>
               </div>
 
               <div class="qr-wrap" id="qrWrap">
                 <div class="qr-title">สแกน QR เพื่อชำระเงิน</div>
                 <img class="qr-img" id="paymentQr" src="https://img2.imgbiz.com/imgbiz/IMG_2680.jpeg" alt="QR Payment" />
-                <div class="qr-caption">ชำระเงินแล้วแนบสลิปด้านล่างเพื่อให้ระบบรับเข้าคิวเคลม</div>
+                <div class="qr-caption">เมื่อชำระเงินแล้ว กรุณาแนบสลิปด้านล่างเพื่อส่งคำขอเข้าระบบ</div>
               </div>
 
               <div class="uploader">
                 <div class="upload-title">แนบสลิปโอนเงิน</div>
-                <div class="upload-sub">รองรับ JPG, PNG, WEBP ขนาดไม่เกิน 3 MB</div>
+                <div class="upload-sub">
+                  รองรับไฟล์ JPG, PNG, WEBP ขนาดไม่เกิน 3 MB
+                </div>
 
                 <div class="upload-row">
                   <button type="button" class="upload-btn" id="btnPickSlip">เลือกไฟล์สลิป</button>
@@ -1512,7 +2015,7 @@
 
                 <div class="preview-wrap" id="slipPreviewWrap">
                   <img id="slipPreview" class="preview-img" alt="ตัวอย่างสลิป" />
-                  <div class="preview-meta">
+                  <div style="display:grid;gap:8px;width:100%;">
                     <button type="button" class="btn-link-small" id="btnViewLastSlip">ดูสลิปล่าสุด</button>
                     <button type="button" class="btn-link-small" id="btnRemoveSlip">ลบรูปที่เลือก</button>
                   </div>
@@ -1526,25 +2029,34 @@
 
           <div class="bottom-pair">
             <button class="btn-primary" id="btnSubmit">ส่งคำขอเคลม</button>
-            <button class="btn-secondary" id="btnGotoStatus">สถานะการเคลม</button>
+            <button class="btn-secondary btn-blink" id="btnGotoStatus">สถานะการเคลม</button>
           </div>
 
-          <div class="policy-card">
-            <div class="policy-head">ข้อความจากทางร้าน</div>
+          <div class="policy-box">
+            <div class="policy-head">
+              <span class="policy-line"></span>
+              <div class="policy-title">ข้อความจากทางร้าน</div>
+              <span class="policy-line"></span>
+            </div>
             <div class="policy-text">
-              ขอบคุณที่ไว้ใจใช้บริการกับร้านนะคะ<br><br>
-              ทางร้านตั้งใจทำระบบให้แจ้งงานง่าย เช็กสถานะสะดวก และตอบกลับไวที่สุด<br><br>
-              หากมีบางช่วงที่ใช้เวลาตรวจสอบเพิ่ม ขอขอบคุณลูกค้าที่รอและเข้าใจเสมอค่ะ
+              ขอบคุณที่ไว้ใจใช้บริการกับร้านนะคะ
+              ทางร้านตั้งใจทำระบบให้แจ้งงานง่าย เช็กสถานะสะดวก และตอบกลับไวที่สุด
+              หากมีบางช่วงที่ใช้เวลาตรวจสอบเพิ่ม
+              ขอขอบคุณลูกค้าที่รอและเข้าใจเสมอค่ะ
             </div>
           </div>
         </div>
       </section>
 
       <section class="view" id="statusView">
-        <div class="status-card">
-          <div class="hero-label-big">ตรวจสอบคำขอของคุณ</div>
-          <h2 class="status-head-title">สถานะการเคลม</h2>
-          <div class="status-head-sub">ดูคิวล่าสุดและสถานะล่าสุดได้จากหน้านี้</div>
+        <div class="card tap-card">
+          <div class="section-title-plain">
+            <h2>ตรวจสอบคำขอของคุณ</h2>
+            <p>
+              ดูสถานะล่าสุดของคำขอได้ทันที<br>
+              ระบบจะแสดงคิวล่าสุด เวลาที่อัปเดต และความคืบหน้าปัจจุบัน
+            </p>
+          </div>
 
           <div class="status-grid">
             <div class="mini-box">
@@ -1564,34 +2076,68 @@
           <div id="statusPageText"></div>
           <div id="statusSummary"></div>
 
-          <div class="queue-card" id="queueCard" style="display:none;">
-            <div class="queue-head">
-              <div class="queue-no" id="queueNumberBig">#-</div>
-            </div>
+          <div class="queue-card tap-card" id="queueCard" style="display:none;">
+            <div class="queue-no" id="queueNumberBig">#-</div>
             <div class="queue-sub" id="queueMetaText">ระบบรับคำขอของคุณแล้ว</div>
 
             <div class="progress-wrap">
               <div class="progress-bar">
                 <div class="progress-fill" id="claimProgressFill"></div>
               </div>
-              <div class="progress-label" id="claimProgressLabel">กำลังรอตรวจสอบ</div>
+              <div class="progress-label" id="claimProgressLabel">รอดำเนินการ</div>
             </div>
           </div>
 
-          <div class="timeline-card" id="claimStepCard" style="display:none;">
+          <div class="timeline-card tap-card" id="claimStepCard" style="display:none;">
             <div class="timeline-title">ความคืบหน้าล่าสุด</div>
             <div class="timeline-list" id="claimStepList"></div>
           </div>
 
           <div id="results"></div>
 
-          <div class="status-actions-inline">
-            <a class="btn-cute" id="btnContactAdmin" href="https://lin.ee/gAh3wAH" target="_blank" rel="noopener">
+          <div class="status-bottom-actions">
+            <button type="button" class="btn-soft-cute cute-blink" id="btnToggleSwapEmailStatus">เปลี่ยนเมล</button>
+            <a class="btn-admin cute-blink" id="btnContactAdmin" href="https://lin.ee/gAh3wAH" target="_blank" rel="noopener">
               ติดต่อแอดมิน
             </a>
           </div>
 
-          <div class="bottom-pair">
+          <div class="swap-panel-status" id="swapEmailPanelStatus">
+            <div class="swap-panel-title">เปลี่ยนอีเมลใช้งาน</div>
+            <div class="swap-panel-sub">
+              ใช้กรณีต้องการเปลี่ยนอีเมลใหม่ หรืออีเมลเดิมติดข้อจำกัดในการใช้งาน
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" for="swapNewEmail">อีเมลใหม่</label>
+              <div class="input-shell compact" id="swapNewEmailField">
+                <input id="swapNewEmail" type="email" placeholder="เช่น newmail@example.com" autocomplete="email" />
+              </div>
+            </div>
+
+            <div class="swap-reason-row">
+              <label class="swap-reason-option">
+                <input type="radio" name="swapReason" value="ติดข้อจำกัด 12 เดือน" checked />
+                <span>ติดข้อจำกัด 12 เดือน</span>
+              </label>
+              <label class="swap-reason-option">
+                <input type="radio" name="swapReason" value="ต้องการเปลี่ยนเมลใช้งานใหม่" />
+                <span>ต้องการเปลี่ยนเมลใช้งานใหม่</span>
+              </label>
+            </div>
+
+            <div class="swap-actions">
+              <button type="button" class="btn-secondary" id="btnCancelSwapEmail">ยกเลิก</button>
+              <button type="button" class="btn-primary" id="btnConfirmSwapEmail">ยืนยันเปลี่ยนอีเมล</button>
+            </div>
+
+            <div class="swap-result" id="swapResultBox">
+              <div class="swap-result-title">อัปเดตข้อมูลให้เรียบร้อยแล้วค่ะ</div>
+              <div class="swap-result-text" id="swapResultText">อัปเดตข้อมูลให้เรียบร้อยแล้วค่ะ</div>
+            </div>
+          </div>
+
+          <div class="action-row">
             <button class="btn-mini" id="btnBackToClaim">กลับหน้าแจ้งเคลม</button>
             <button class="btn-mini" id="btnRefreshStatus">รีเฟรช</button>
             <button class="btn-danger" id="btnLogout">ออกจากระบบ</button>
@@ -1617,8 +2163,8 @@
         <div class="spinner-ring"></div>
         <div class="spinner-percent" id="spinnerPercent">0%</div>
       </div>
-      <div class="loading-title">กำลังโหลด</div>
-      <div class="loading-sub">กรุณารอสักครู่</div>
+      <div class="loading-title">กำลังโหลดข้อมูล</div>
+      <div class="loading-sub">กรุณารอสักครู่ ระบบกำลังประมวลผลให้ค่ะ</div>
     </div>
   </div>
 
@@ -1634,15 +2180,24 @@
     </div>
   </div>
 
+  <div class="success-burst" id="successBurst">
+    <span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span>
+  </div>
+
   <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwTzz785LcIiyym27HEzL2Ylwhjwa5M68-3gSStDvriqSpMytGpnObjuF_H0KguPEEuqA/exec";
+
     const TOKEN_KEY = "shop426_member_token";
     const REMEMBER_KEY = "shop426_saved_login";
     const LAST_SLIP_KEY = "shop426_last_slip_preview";
     const LAST_VIEW_KEY = "shop426_last_view";
-    const MAX_SLIP_SIZE = 3 * 1024 * 1024;
+    const FAST_STATUS_KEY = "shop426_fast_status_cache";
+    const BOOTSTRAP_CACHE_KEY = "shop426_bootstrap_cache";
+
     const STATUS_POLL_INTERVAL = 30000;
-    const CONFIG_POLL_INTERVAL = 30000;
+    const CONFIG_POLL_INTERVAL = 45000;
+    const MAX_SLIP_SIZE = 3 * 1024 * 1024;
     const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
 
     let claimConfig = {
@@ -1663,16 +2218,17 @@
       lineClaimEnabled: true,
       webClosedMessage: "ขออภัยค่ะ ตอนนี้ระบบหน้าเว็บปิดชั่วคราว",
       paymentTitle: "ชำระค่าดูแล 19 บาท",
-      paymentNote: "สำหรับปีสมัครที่กำหนด ระบบจะให้ชำระ 19 บาท และแนบหลักฐานเพื่อเข้าคิวเคลม",
+      paymentNote: "สำหรับปีสมัครที่กำหนด กรุณาชำระค่าดูแลและแนบสลิปก่อนส่งคำขอ",
       expiredAccountText: "บัญชีหมดอายุแล้ว หากต้องการใช้บริการต่อติดต่อแอดมิน"
     };
 
     const state = {
-      token: localStorage.getItem(TOKEN_KEY) || "",
+      token: sessionStorage.getItem(TOKEN_KEY) || "",
       member: null,
       isClaimOpen: true,
       authLock: false,
-      submitLock: false
+      submitLock: false,
+      latestHistory: []
     };
 
     let activeSlipFile = null;
@@ -1688,7 +2244,6 @@
     const claimTimeText = document.getElementById("claimTimeText");
     const onlineText = document.getElementById("onlineText");
     const statusInlineBox = document.getElementById("statusInlineBox");
-    const statusDot = document.getElementById("statusDot");
 
     const loginEmail = document.getElementById("loginEmail");
     const loginPassword = document.getElementById("loginPassword");
@@ -1701,6 +2256,7 @@
     const registerMemberDate = document.getElementById("registerMemberDate");
     const registerAdminName = document.getElementById("registerAdminName");
     const registerPasswordStrength = document.getElementById("registerPasswordStrength");
+    const registerSuccessCard = document.getElementById("registerSuccessCard");
 
     const loginEmailField = document.getElementById("loginEmailField");
     const loginPasswordField = document.getElementById("loginPasswordField");
@@ -1712,7 +2268,6 @@
     const topAlert = document.getElementById("topAlert");
     const registerAlert = document.getElementById("registerAlert");
     const claimAlert = document.getElementById("claimAlert");
-    const authStatus = document.getElementById("authStatus");
 
     const btnLogin = document.getElementById("btnLogin");
     const btnRegister = document.getElementById("btnRegister");
@@ -1729,6 +2284,9 @@
     const btnViewLastSlip = document.getElementById("btnViewLastSlip");
     const btnRemoveSlip = document.getElementById("btnRemoveSlip");
     const btnToggleQr = document.getElementById("btnToggleQr");
+    const btnToggleSwapEmailStatus = document.getElementById("btnToggleSwapEmailStatus");
+    const btnCancelSwapEmail = document.getElementById("btnCancelSwapEmail");
+    const btnConfirmSwapEmail = document.getElementById("btnConfirmSwapEmail");
 
     const showRegisterBtn = document.getElementById("showRegisterBtn");
     const backToLoginBtn = document.getElementById("backToLoginBtn");
@@ -1785,11 +2343,18 @@
     const toast = document.getElementById("toast");
     const loadingOverlay = document.getElementById("loadingOverlay");
     const spinnerPercent = document.getElementById("spinnerPercent");
+    const successBurst = document.getElementById("successBurst");
 
     const confirmModal = document.getElementById("confirmModal");
     const confirmSummary = document.getElementById("confirmSummary");
     const btnCancelConfirm = document.getElementById("btnCancelConfirm");
     const btnConfirmSubmit = document.getElementById("btnConfirmSubmit");
+
+    const swapEmailPanelStatus = document.getElementById("swapEmailPanelStatus");
+    const swapNewEmail = document.getElementById("swapNewEmail");
+    const swapNewEmailField = document.getElementById("swapNewEmailField");
+    const swapResultBox = document.getElementById("swapResultBox");
+    const swapResultText = document.getElementById("swapResultText");
 
     function normalizeEmail(v){ return String(v || "").trim().toLowerCase(); }
     function normalizeText(v){ return String(v || "").trim(); }
@@ -1799,11 +2364,27 @@
       return { ...data, ok: data.ok === true };
     }
 
+    function safeSetLocal(key, value){
+      try{ localStorage.setItem(key, JSON.stringify(value)); }catch(e){}
+    }
+    function safeGetLocal(key, fallback){
+      try{
+        const raw = localStorage.getItem(key);
+        return raw ? JSON.parse(raw) : fallback;
+      }catch(e){
+        return fallback;
+      }
+    }
+
     function setActiveView(id, persist = true){
       [loginView, registerView, claimView, statusView].forEach(v => v.classList.remove("active"));
       document.getElementById(id).classList.add("active");
       heroSection.style.display = (id === "loginView" || id === "registerView") ? "" : "none";
       if (persist) localStorage.setItem(LAST_VIEW_KEY, id);
+
+      if (id === "statusView"){
+        renderFastStatusImmediately();
+      }
     }
 
     function getSavedView(){
@@ -1813,10 +2394,10 @@
     function showToast(message="เรียบร้อยแล้ว"){
       toast.textContent = message;
       toast.classList.add("show");
-      setTimeout(() => toast.classList.remove("show"), 1800);
+      setTimeout(() => toast.classList.remove("show"), 1400);
     }
 
-    function showAlert(el, message, type="info", timeout=4000){
+    function showAlert(el, message, type="info", timeout=3200){
       if (!el) return;
       el.className = "alert-box show " + type;
       el.textContent = message || "";
@@ -1842,12 +2423,12 @@
       loadingOverlay.classList.add("show");
       clearInterval(loadingTimer);
       loadingTimer = setInterval(() => {
-        if (loadingPercent < 92){
-          loadingPercent += Math.floor(Math.random() * 22) + 10;
-          if (loadingPercent > 92) loadingPercent = 92;
+        if (loadingPercent < 95){
+          loadingPercent += Math.floor(Math.random() * 18) + 10;
+          if (loadingPercent > 95) loadingPercent = 95;
           spinnerPercent.textContent = loadingPercent + "%";
         }
-      }, 90);
+      }, 60);
     }
 
     function hideLoading(){
@@ -1856,7 +2437,14 @@
       spinnerPercent.textContent = "100%";
       setTimeout(() => {
         loadingOverlay.classList.remove("show");
-      }, 120);
+      }, 50);
+    }
+
+    function showSuccessBurst(){
+      successBurst.classList.remove("show");
+      void successBurst.offsetWidth;
+      successBurst.classList.add("show");
+      setTimeout(() => successBurst.classList.remove("show"), 760);
     }
 
     function escapeHtml(str){
@@ -1979,10 +2567,18 @@
     function clearLocalSession(silent=false){
       state.token = "";
       state.member = null;
-      localStorage.removeItem(TOKEN_KEY);
-      localStorage.removeItem(REMEMBER_KEY);
+      state.latestHistory = [];
+      sessionStorage.removeItem(TOKEN_KEY);
+      localStorage.removeItem(FAST_STATUS_KEY);
       resetClaimUI();
       if (!silent) setActiveView("loginView");
+    }
+
+    function fastLogoutUI(){
+      localStorage.removeItem(LAST_VIEW_KEY);
+      clearLocalSession(true);
+      setActiveView("loginView", false);
+      showToast("ออกจากระบบแล้ว");
     }
 
     function setSlipStatus(message, type="ok"){
@@ -2038,16 +2634,13 @@
       const raw = String(text || "").trim();
       const safe = escapeHtml(raw || "-");
       if (!raw) return '<span class="status-pill status-pill--yellow">รอดำเนินการ</span>';
-      if (raw.includes("อยู่ในกลุ่มครอบครัวปกติ ไม่รับเคลม")){
-        return '<span class="status-pill status-pill--red">' + safe + '</span>';
-      }
       if (raw.includes("ดึงเมลแล้ว") || raw.includes("เสร็จ") || raw.includes("สำเร็จ") || raw.includes("ใช้งานได้ปกติ")){
         return '<span class="status-pill status-pill--green">' + safe + '</span>';
       }
       if (raw.includes("รอตรวจสอบสลิป")){
         return '<span class="status-pill status-pill--blue">' + safe + '</span>';
       }
-      if (raw.includes("กำลัง") || raw.includes("รอตรวจสอบ") || raw.includes("รอดำเนินการ") || raw.includes("ตรวจสอบ")){
+      if (raw.includes("รอตรวจสอบ") || raw.includes("รอดำเนินการ") || raw.includes("ตรวจสอบ")){
         return '<span class="status-pill status-pill--yellow">' + safe + '</span>';
       }
       if (raw.includes("ไม่ผ่าน") || raw.includes("ไม่เข้าเงื่อนไข")){
@@ -2130,12 +2723,36 @@
         resetSlipPreview();
       }
       qrWrap.classList.remove("show");
-      btnToggleQr.textContent = "ต้องการสแกน QR";
+      btnToggleQr.textContent = "สแกน QR";
+    }
+
+    function resetSwapPanel(){
+      swapEmailPanelStatus.classList.remove("show");
+      swapNewEmail.value = "";
+      swapResultBox.classList.remove("show");
+      swapResultText.textContent = "อัปเดตข้อมูลให้เรียบร้อยแล้วค่ะ";
+      const firstReason = document.querySelector('input[name="swapReason"][value="ติดข้อจำกัด 12 เดือน"]');
+      if (firstReason) firstReason.checked = true;
+    }
+
+    function toggleSwapPanel(force){
+      const shouldShow = typeof force === "boolean" ? force : !swapEmailPanelStatus.classList.contains("show");
+      if (shouldShow){
+        swapEmailPanelStatus.classList.add("show");
+      } else {
+        resetSwapPanel();
+      }
+    }
+
+    function getSelectedSwapReason(){
+      const selected = document.querySelector('input[name="swapReason"]:checked');
+      return selected ? selected.value : "ติดข้อจำกัด 12 เดือน";
     }
 
     function resetClaimUI(){
       expiryInput.value = "";
       resetSlipPreview();
+      resetSwapPanel();
       summary.innerHTML = "";
       status.innerHTML = "";
       results.innerHTML = "";
@@ -2150,7 +2767,24 @@
       miniClaimType.textContent = "-";
       miniLastTime.textContent = "-";
       qrWrap.classList.remove("show");
-      btnToggleQr.textContent = "ต้องการสแกน QR";
+      btnToggleQr.textContent = "สแกน QR";
+    }
+
+    function cacheFastStatus(history){
+      if (!Array.isArray(history) || !history.length) return;
+      safeSetLocal(FAST_STATUS_KEY, {
+        updatedAt: Date.now(),
+        history: history.slice(0, 5)
+      });
+    }
+
+    function renderFastStatusImmediately(){
+      const fast = safeGetLocal(FAST_STATUS_KEY, null);
+      if (fast && Array.isArray(fast.history) && fast.history.length){
+        renderLatestStatusPage({ history: fast.history, current: fast.history[0] || null });
+      } else if (state.latestHistory && state.latestHistory.length){
+        renderLatestStatusPage({ history: state.latestHistory, current: state.latestHistory[0] || null });
+      }
     }
 
     async function fetchJson(url, options={}){
@@ -2158,7 +2792,8 @@
         ...options,
         method: options.method || "GET",
         cache: "no-store",
-        credentials: "omit"
+        credentials: "omit",
+        keepalive: true
       });
       if (!res.ok) throw new Error("HTTP " + res.status);
       return await res.json();
@@ -2170,7 +2805,8 @@
         headers:{ "Content-Type":"text/plain;charset=utf-8" },
         body:JSON.stringify(payload),
         cache:"no-store",
-        credentials:"omit"
+        credentials:"omit",
+        keepalive:true
       });
       const text = await res.text();
       try{
@@ -2180,8 +2816,19 @@
       }
     }
 
-    async function bootstrapApp(){
+    async function bootstrapApp(useCache=true){
       const tokenQuery = state.token ? "&token=" + encodeURIComponent(state.token) : "";
+
+      if (useCache){
+        const cached = safeGetLocal(BOOTSTRAP_CACHE_KEY, null);
+        if (cached && cached.config){
+          claimConfig = { ...claimConfig, ...cached.config };
+          renderConfigToUI();
+          updateClaimWindowState();
+          if (cached.todaySummary) renderLiveStatus(cached.todaySummary);
+        }
+      }
+
       const data = await fetchJson(SCRIPT_URL + "?action=bootstrap&_t=" + Date.now() + tokenQuery);
       if (data && data.config){
         claimConfig = { ...claimConfig, ...data.config };
@@ -2194,15 +2841,23 @@
         updateMemberUI();
       }
       if (data && Array.isArray(data.history)){
+        state.latestHistory = data.history;
+        cacheFastStatus(data.history);
         renderLatestStatusPage({ history:data.history, current:data.history[0] || null });
       }
+
+      safeSetLocal(BOOTSTRAP_CACHE_KEY, {
+        config: data && data.config ? data.config : claimConfig,
+        todaySummary: data && data.todaySummary ? data.todaySummary : null
+      });
+
       return data;
     }
 
     function renderLiveStatus(summaryObj){
       const items = summaryObj && Array.isArray(summaryObj.items) ? summaryObj.items : [];
-      const updatedAt = summaryObj && summaryObj.updatedAt ? summaryObj.updatedAt : new Date().toISOString();
-      liveDate.textContent = "อัปเดตล่าสุด: " + formatThaiDateTime(updatedAt);
+      const stamp = summaryObj && summaryObj.updatedAt ? formatThaiDate(summaryObj.updatedAt) : formatThaiDate(new Date().toISOString());
+      liveDate.textContent = "อัปเดตล่าสุด: " + stamp;
       liveList.innerHTML = "";
       if (!items.length){
         liveList.innerHTML = '<div class="live-empty">วันนี้ยังไม่มีการอัปเดตในระบบ</div>';
@@ -2210,9 +2865,13 @@
       }
       items.forEach(item => {
         const row = document.createElement("div");
-        row.className = "live-item";
+        row.className = "live-item tap-card";
+        const timeText = formatThaiDateTime(item.createdAt || item.updatedAt || "");
         row.innerHTML =
-          '<span class="live-email">' + escapeHtml(maskEmail(item.email || "-")) + '</span>' +
+          '<div class="live-main">' +
+            '<span class="live-email">' + escapeHtml(maskEmail(item.email || "-")) + '</span>' +
+            '<span class="live-time">' + escapeHtml(timeText) + '</span>' +
+          '</div>' +
           '<span class="live-status-text">' + decorateStatusText(item.statusText || item.status || "รอดำเนินการ") + '</span>';
         liveList.appendChild(row);
       });
@@ -2225,16 +2884,23 @@
     }
 
     function renderClaimSteps(statusText=""){
-      const steps = ["รับคำขอแล้ว","รอตรวจสอบ","เสร็จแล้ว"];
+      const steps = ["รับคำขอแล้ว","รอดำเนินการ","เสร็จแล้ว"];
       let activeIndex = 0;
       const raw = String(statusText || "");
+
       if (!raw){
         claimStepCard.style.display = "none";
         claimStepList.innerHTML = "";
         return;
       }
-      if (raw.includes("รอตรวจสอบ") || raw.includes("รอดำเนินการ") || raw.includes("ตรวจสอบ")) activeIndex = 1;
-      if (raw.includes("ดึงเมลแล้ว") || raw.includes("เสร็จ") || raw.includes("สำเร็จ") || raw.includes("ใช้งานได้ปกติ")) activeIndex = 2;
+
+      if (raw.includes("ดึงเมลแล้ว") || raw.includes("เสร็จ") || raw.includes("สำเร็จ") || raw.includes("ใช้งานได้ปกติ")){
+        activeIndex = 2;
+      } else if (raw.includes("รอตรวจสอบ") || raw.includes("รอดำเนินการ") || raw.includes("ตรวจสอบ") || raw.includes("รอตรวจสอบสลิป")){
+        activeIndex = 1;
+      } else {
+        activeIndex = 0;
+      }
 
       claimStepList.innerHTML = "";
       steps.forEach((step, i) => {
@@ -2243,9 +2909,10 @@
         chip.textContent = step;
         claimStepList.appendChild(chip);
       });
+
       claimStepCard.style.display = "block";
 
-      const progressMap = [20, 60, 100];
+      const progressMap = [20, 62, 100];
       claimProgressFill.style.width = progressMap[activeIndex] + "%";
       claimProgressLabel.textContent = raw.includes("ดึงเมลแล้ว") ? "ดึงเมลแล้ว" : steps[activeIndex];
     }
@@ -2266,33 +2933,11 @@
         return;
       }
 
-      if (String(current.statusText || "").includes("อยู่ในกลุ่มครอบครัวปกติ ไม่รับเคลม")){
-        fillMiniStats(null);
-        queueCard.style.display = "none";
-        claimStepCard.style.display = "none";
-
-        statusSummary.innerHTML = '<div class="summary-pill">ไม่รับเข้าคิวเคลม</div>';
-        statusPageText.innerHTML =
-          "<span class='status-strong'>อยู่ในกลุ่มครอบครัวปกติ ไม่รับเคลม</span>";
-
-        results.innerHTML = `
-          <div class="result-item">
-            <div class="item-header">Claim Status</div>
-            <div class="item-email">${escapeHtml(current.email || "-")}</div>
-            <div class="item-body">
-              <span class="status-pill status-pill--red">อยู่ในกลุ่มครอบครัวปกติ ไม่รับเคลม</span>
-            </div>
-          </div>
-        `;
-        return;
-      }
-
       fillMiniStats(current);
 
       const claimLabel = current.claimType === "paid" ? "แพ็กดูแล 19 บาท" : "เคลมฟรีตามเงื่อนไข";
       statusSummary.innerHTML = '<div class="summary-pill">คำขอล่าสุด: ' + escapeHtml(claimLabel) + '</div>';
       statusPageText.innerHTML =
-        "<span class='status-strong'>" + decorateStatusText(current.statusText || "รอดำเนินการ") + "</span><br>" +
         "<span class='status-time'>รับเรื่องเมื่อ: " + escapeHtml(formatThaiDateTime(current.createdAt || current.updatedAt || "")) + "</span>";
 
       queueCard.style.display = "block";
@@ -2303,7 +2948,7 @@
       const claimType = (current.claimType || "").toLowerCase() === "paid" ? "paid" : "free";
       const tagText = claimType === "paid" ? "แพ็กดูแล 19 บาท" : "เคลมฟรี";
       const card = document.createElement("div");
-      card.className = "result-item";
+      card.className = "result-item tap-card";
       card.innerHTML =
         '<div class="item-header">Current Claim</div>' +
         '<div class="item-email">' + escapeHtml(current.email || "-") + '</div>' +
@@ -2451,19 +3096,15 @@
         }
 
         state.token = String(data.token || "").trim();
-        localStorage.setItem(TOKEN_KEY, state.token);
+        sessionStorage.setItem(TOKEN_KEY, state.token);
         state.member = data.member || null;
         saveRememberedLogin();
         updateMemberUI();
         showToast("เข้าสู่ระบบสำเร็จ");
 
         const savedView = getSavedView();
-        if (savedView === "statusView"){
-          setActiveView("statusView");
-        } else {
-          setActiveView("claimView");
-        }
-        await bootstrapApp();
+        setActiveView(savedView === "statusView" ? "statusView" : "claimView");
+        await bootstrapApp(false);
       }catch(e){
         showAlert(topAlert, "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้ง", "error");
         shake(btnLogin);
@@ -2499,8 +3140,9 @@
           return;
         }
 
+        registerSuccessCard.style.display = "block";
         state.token = String(data.token || "").trim();
-        localStorage.setItem(TOKEN_KEY, state.token);
+        sessionStorage.setItem(TOKEN_KEY, state.token);
         state.member = data.member || null;
 
         loginEmail.value = normalizeEmail(registerEmail.value);
@@ -2508,9 +3150,10 @@
         saveRememberedLogin();
 
         updateMemberUI();
+        showSuccessBurst();
         showToast("สมัครสมาชิกสำเร็จ");
         setActiveView("claimView");
-        await bootstrapApp();
+        await bootstrapApp(false);
       }catch(e){
         showAlert(registerAlert, "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้ง", "error");
         shake(btnRegister);
@@ -2537,7 +3180,7 @@
           shake(btnForgotPassword);
           return;
         }
-        showAlert(topAlert, data.message || "ระบบส่งคำแนะนำไปยังอีเมลของคุณแล้ว", "success", 6000);
+        showAlert(topAlert, data.message || "ระบบส่งคำแนะนำไปยังอีเมลของคุณแล้ว", "success", 5200);
         showToast("ส่งคำขอแล้ว");
       }catch(e){
         showAlert(topAlert, "เกิดข้อผิดพลาดในการเชื่อมต่อ", "error");
@@ -2548,16 +3191,28 @@
     }
 
     async function handleLogout(){
+      const oldToken = state.token;
+      fastLogoutUI();
+
       try{
-        if (state.token) await postJson({ action:"logout", token:state.token });
+        if (oldToken && navigator.sendBeacon){
+          const blob = new Blob([JSON.stringify({ action:"logout", token:oldToken })], { type:"text/plain;charset=utf-8" });
+          navigator.sendBeacon(SCRIPT_URL, blob);
+        }
       }catch(e){}
-      localStorage.removeItem(TOKEN_KEY);
-      localStorage.removeItem(LAST_VIEW_KEY);
-      state.token = "";
-      state.member = null;
-      resetClaimUI();
-      showToast("ออกจากระบบแล้ว");
-      setActiveView("loginView");
+
+      try{
+        if (oldToken){
+          fetch(SCRIPT_URL, {
+            method:"POST",
+            headers:{ "Content-Type":"text/plain;charset=utf-8" },
+            body:JSON.stringify({ action:"logout", token:oldToken }),
+            keepalive:true,
+            cache:"no-store",
+            credentials:"omit"
+          }).catch(() => {});
+        }
+      }catch(e){}
     }
 
     async function handleCheckExpiry(){
@@ -2569,7 +3224,7 @@
       try{
         const data = await fetchJson(SCRIPT_URL + "?action=checkExpiry&token=" + encodeURIComponent(state.token) + "&_t=" + Date.now());
         if (!data || data.ok === false){
-          showAlert(expiryCheckResult, data.message || "เช็ควันหมดอายุไม่สำเร็จ", "error", 6000);
+          showAlert(expiryCheckResult, data.message || "เช็ควันหมดอายุไม่สำเร็จ", "error", 5200);
           shake(btnCheckExpiry);
           return;
         }
@@ -2581,7 +3236,7 @@
             updateMemberUI();
           }
         }
-        showAlert(expiryCheckResult, data.message || "พบวันหมดอายุล่าสุดในระบบแล้วค่ะ", data.expired ? "warning" : "success", 7000);
+        showAlert(expiryCheckResult, data.message || "พบวันหมดอายุล่าสุดในระบบแล้วค่ะ", data.expired ? "warning" : "success", 6500);
       }catch(e){
         showAlert(expiryCheckResult, "เกิดข้อผิดพลาดในการเชื่อมต่อ", "error", 5000);
         shake(btnCheckExpiry);
@@ -2597,17 +3252,26 @@
       return Array.isArray(data.history) ? data.history : [];
     }
 
-    async function refreshStatusPage(){
+    async function refreshStatusPage(showLoader=false){
       if (!state.token){
         setActiveView("loginView");
         return;
       }
+
+      renderFastStatusImmediately();
+      if (showLoader) showLoading();
+
       try{
         const items = await fetchClaimHistory();
+        state.latestHistory = items;
+        cacheFastStatus(items);
         renderLatestStatusPage({ history:items, current:items[0] || null });
+        showToast("รีเฟรชแล้ว");
       }catch(e){
         showAlert(claimAlert, "รีเฟรชสถานะไม่สำเร็จ", "error");
         shake(btnRefreshStatus);
+      }finally{
+        if (showLoader) hideLoading();
       }
     }
 
@@ -2654,26 +3318,13 @@
 
         if (data.todaySummary) renderLiveStatus(data.todaySummary);
         if (data.current){
+          state.latestHistory = [data.current];
+          cacheFastStatus([data.current]);
           renderLatestStatusPage({ history:[data.current], current:data.current });
         }
 
-        const isFamilyNormal =
-          data.familyNormal === true ||
-          data.noQueue === true ||
-          String((data.current && data.current.statusText) || "").includes("อยู่ในกลุ่มครอบครัวปกติ ไม่รับเคลม");
-
-        if (isFamilyNormal){
-          summary.innerHTML = '<div class="summary-pill">ตรวจสอบแล้ว</div>';
-          status.innerHTML = "<span class='status-strong'>อยู่ในกลุ่มครอบครัวปกติ ไม่รับเคลม</span>";
-          showAlert(claimAlert, "อยู่ในกลุ่มครอบครัวปกติ ไม่รับเคลม", "warning", 5000);
-          resetSlipPreview();
-          return;
-        }
-
         summary.innerHTML = '<div class="summary-pill">ส่งคำขอเรียบร้อยแล้ว</div>';
-        status.innerHTML =
-          "<span class='status-strong'>" + escapeHtml(data.message || "ระบบรับคำขอของคุณแล้ว") + "</span><br>" +
-          "<span class='status-time'>สามารถติดตามสถานะได้จากหน้าสถานะการเคลม</span>";
+        status.textContent = data.message || "ระบบรับคำขอของคุณแล้ว";
 
         if (String(state.member && state.member.signupYearThai || "") !== String(claimConfig.paidYear || "")){
           resetSlipPreview();
@@ -2681,13 +3332,14 @@
           setSlipStatus("ส่งคำขอพร้อมสลิปเรียบร้อยแล้ว");
         }
 
-        showAlert(claimAlert, "ส่งคำขอสำเร็จแล้ว", "success", 5000);
+        showAlert(claimAlert, "ส่งคำขอสำเร็จแล้ว", "success", 4800);
+        showSuccessBurst();
         showToast("ส่งคำขอสำเร็จ");
 
         setTimeout(() => {
           setActiveView("statusView");
-          refreshStatusPage();
-        }, 500);
+          refreshStatusPage(false);
+        }, 180);
 
       }catch(e){
         if (String(state.member && state.member.signupYearThai || "") === String(claimConfig.paidYear || "")){
@@ -2703,6 +3355,73 @@
       }
     }
 
+    async function handleSwapEmail(){
+      if (!state.token || !state.member){
+        setActiveView("loginView");
+        return;
+      }
+
+      const newEmail = normalizeEmail(swapNewEmail.value);
+      const oldEmail = normalizeEmail(state.member.email || "");
+      const reason = getSelectedSwapReason();
+
+      if (!newEmail){
+        showAlert(claimAlert, "กรุณากรอกอีเมลใหม่ก่อน", "warning", 5000);
+        shake(swapNewEmailField);
+        return;
+      }
+
+      if (!swapNewEmail.checkValidity()){
+        showAlert(claimAlert, "กรุณากรอกอีเมลใหม่ให้ถูกต้อง", "error", 5000);
+        shake(swapNewEmailField);
+        return;
+      }
+
+      if (newEmail === oldEmail){
+        showAlert(claimAlert, "อีเมลใหม่ต้องไม่ซ้ำกับอีเมลเดิม", "warning", 5000);
+        shake(swapNewEmailField);
+        return;
+      }
+
+      showLoading();
+      try{
+        const data = await postJson({
+          action:"swapEmail",
+          token:state.token,
+          oldEmail,
+          newEmail,
+          reason
+        });
+
+        if (!data || data.ok === false){
+          showAlert(claimAlert, data.message || "เปลี่ยนอีเมลไม่สำเร็จ", "error", 6000);
+          shake(btnConfirmSwapEmail);
+          return;
+        }
+
+        if (data.token){
+          state.token = String(data.token || "");
+          sessionStorage.setItem(TOKEN_KEY, state.token);
+        }
+
+        if (data.member){
+          state.member = data.member;
+          updateMemberUI();
+        }
+
+        swapResultBox.classList.add("show");
+        swapResultText.textContent = "อัปเดตข้อมูลให้เรียบร้อยแล้วค่ะ";
+        swapNewEmail.value = "";
+        showSuccessBurst();
+        showToast("อัปเดตข้อมูลแล้ว");
+      }catch(e){
+        showAlert(claimAlert, "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้ง", "error", 6000);
+        shake(btnConfirmSwapEmail);
+      }finally{
+        hideLoading();
+      }
+    }
+
     function handleSubmit(){
       if (state.submitLock) return;
       updateClaimWindowState();
@@ -2712,7 +3431,7 @@
 
     function gotoStatus(){
       setActiveView("statusView");
-      refreshStatusPage();
+      refreshStatusPage(false);
     }
 
     function backToClaim(){
@@ -2731,12 +3450,6 @@
       btn.addEventListener("click", () => togglePassword(btn.dataset.target, btn));
     });
 
-    document.querySelectorAll(".note-choice").forEach(btn => {
-      btn.addEventListener("click", () => {
-        showToast(btn.dataset.note || "เลือกหมายเหตุแล้ว");
-      });
-    });
-
     showRegisterBtn.addEventListener("click", () => setActiveView("registerView"));
     backToLoginBtn.addEventListener("click", () => setActiveView("loginView"));
 
@@ -2744,18 +3457,21 @@
     btnRegister.addEventListener("click", handleRegister);
     btnForgotPassword.addEventListener("click", handleForgotPassword);
     btnLogout.addEventListener("click", handleLogout);
-    btnRefreshStatus.addEventListener("click", refreshStatusPage);
+    btnRefreshStatus.addEventListener("click", () => refreshStatusPage(false));
     btnBackToClaim.addEventListener("click", backToClaim);
     btnGotoStatus.addEventListener("click", gotoStatus);
     btnSubmit.addEventListener("click", handleSubmit);
     btnCheckExpiry.addEventListener("click", handleCheckExpiry);
+    btnToggleSwapEmailStatus.addEventListener("click", () => toggleSwapPanel());
+    btnCancelSwapEmail.addEventListener("click", () => resetSwapPanel());
+    btnConfirmSwapEmail.addEventListener("click", handleSwapEmail);
 
     btnPickSlip.addEventListener("click", () => slipInput.click());
     btnCameraSlip.addEventListener("click", () => slipInputCamera.click());
 
     btnToggleQr.addEventListener("click", () => {
       const isShow = qrWrap.classList.toggle("show");
-      btnToggleQr.textContent = isShow ? "ซ่อน QR" : "ต้องการสแกน QR";
+      btnToggleQr.textContent = isShow ? "ซ่อน QR" : "สแกน QR";
     });
 
     slipInput.addEventListener("change", () => {
@@ -2820,18 +3536,24 @@
     loginPassword.addEventListener("input", () => { if (rememberPassword.checked) saveRememberedLogin(); });
 
     window.addEventListener("load", async () => {
-      const savedView = getSavedView();
-      if (state.token && (savedView === "claimView" || savedView === "statusView")) {
-        setActiveView(savedView, false);
+      state.token = "";
+      sessionStorage.removeItem(TOKEN_KEY);
+
+      const cachedBootstrap = safeGetLocal(BOOTSTRAP_CACHE_KEY, null);
+      if (cachedBootstrap && cachedBootstrap.config){
+        claimConfig = { ...claimConfig, ...cachedBootstrap.config };
+        renderConfigToUI();
+        updateClaimWindowState();
+        if (cachedBootstrap.todaySummary) renderLiveStatus(cachedBootstrap.todaySummary);
       } else {
-        setActiveView("loginView", false);
+        renderConfigToUI();
+        updateClaimWindowState();
       }
 
       updatePasswordStrengthUI();
       loadRememberedLogin();
-      renderConfigToUI();
-      updateClaimWindowState();
       resetClaimUI();
+      setActiveView("loginView", false);
 
       if (!SCRIPT_URL){
         showAlert(topAlert, "กรุณาใส่ SCRIPT_URL ก่อนใช้งาน", "warning", 0);
@@ -2839,32 +3561,9 @@
       }
 
       try{
-        await bootstrapApp();
+        await bootstrapApp(true);
       }catch(e){
         console.warn("bootstrap failed", e);
-      }
-
-      if (state.token){
-        try{
-          const me = await fetchJson(SCRIPT_URL + "?action=me&token=" + encodeURIComponent(state.token) + "&_t=" + Date.now());
-          if (me && me.ok){
-            state.member = me.member;
-            updateMemberUI();
-            const nowView = getSavedView();
-            if (nowView === "statusView"){
-              setActiveView("statusView", false);
-              await refreshStatusPage();
-            } else {
-              setActiveView("claimView", false);
-            }
-          } else {
-            clearLocalSession(true);
-            setActiveView("loginView", false);
-          }
-        }catch(e){
-          clearLocalSession(true);
-          setActiveView("loginView", false);
-        }
       }
 
       setInterval(async () => {
@@ -2876,8 +3575,10 @@
 
       setInterval(async () => {
         try{
-          const data = await bootstrapApp();
+          const data = await bootstrapApp(true);
           if (statusView.classList.contains("active") && data && Array.isArray(data.history)){
+            state.latestHistory = data.history;
+            cacheFastStatus(data.history);
             renderLatestStatusPage({ history:data.history, current:data.history[0] || null });
           }
         }catch(e){}
