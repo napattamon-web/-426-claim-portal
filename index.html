@@ -864,6 +864,7 @@
     }
 
     .warning-note{
+      display:none;
       padding:10px 12px;
       border-radius:16px;
       background:#fff1f4;
@@ -876,6 +877,7 @@
       position:relative;
       z-index:1;
     }
+    .warning-note.show{display:block}
 
     .payment-section{display:none}
     .payment-card{
@@ -1780,8 +1782,8 @@
               <div id="expiryCheckResult" class="alert-box"></div>
             </div>
 
-            <div class="warning-note">
-              หากตรวจสอบแล้วไม่ตรงกับข้อมูลจริง ระบบตัดสิทธิ์อัตโนมัติ
+            <div class="warning-note" id="manualExpiryWarning">
+              ⚠️ หากตรวจสอบแล้วไม่ตรงกับข้อมูลจริง ตัดสิทธิ์อัตโนมัติ
             </div>
           </div>
 
@@ -2116,6 +2118,7 @@
     const expiryInput = document.getElementById("expiryInput");
     const expiryField = document.getElementById("expiryField");
     const expiryCheckResult = document.getElementById("expiryCheckResult");
+    const manualExpiryWarning = document.getElementById("manualExpiryWarning");
 
     const paymentSection = document.getElementById("paymentSection");
     const paymentTitle = document.getElementById("paymentTitle");
@@ -2196,6 +2199,16 @@
       return raw.includes("ใช้งานได้ปกติ") || raw.includes("อยู่ในกลุ่มของร้านปกติ") || raw.includes("อยู่ในกลุ่มครอบครัวของร้านปกติ");
     }
 
+    function updateManualExpiryWarning(){
+      const autoExpiryActive = expiryFixedBox.style.display === "block" && expiryPickerBlock.style.display === "none";
+      const hasManualDate = !!normalizeText(expiryInput.value);
+      if (!autoExpiryActive && hasManualDate && !state.inShopGroupNormal){
+        manualExpiryWarning.classList.add("show");
+      } else {
+        manualExpiryWarning.classList.remove("show");
+      }
+    }
+
     function setClaimNormalState(on, message){
       state.inShopGroupNormal = !!on;
 
@@ -2220,6 +2233,7 @@
       }
 
       syncPaymentSection();
+      updateManualExpiryWarning();
     }
 
     function setActiveView(id, persist = true){
@@ -2322,7 +2336,7 @@
       if (!value) return "-";
       const d = new Date(value);
       if (isNaN(d.getTime())) return value;
-      const months = ["ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."];
+      const months = ["ม.ค.","ก.พ.","มี.ค.","มี.ค.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."];
       const dd = d.getDate();
       const mm = months[d.getMonth()];
       const yy = d.getFullYear() + 543;
@@ -2536,6 +2550,7 @@
         expiryFixedBox.style.display = "none";
         expiryPickerBlock.style.display = "";
         paymentSection.style.display = "none";
+        updateManualExpiryWarning();
         return;
       }
 
@@ -2559,6 +2574,7 @@
       }
 
       syncPaymentSection();
+      updateManualExpiryWarning();
     }
 
     function syncPaymentSection(){
@@ -2623,6 +2639,7 @@
       state.inShopGroupNormal = false;
       claimAlert.className = "alert-box";
       claimAlert.textContent = "";
+      updateManualExpiryWarning();
     }
 
     function cacheFastStatus(history){
@@ -3394,6 +3411,9 @@
       const file = slipInputCamera.files && slipInputCamera.files[0] ? slipInputCamera.files[0] : null;
       setSlipFile(file, slipInputCamera);
     });
+
+    expiryInput.addEventListener("input", updateManualExpiryWarning);
+    expiryInput.addEventListener("change", updateManualExpiryWarning);
 
     btnViewLastSlip.addEventListener("click", () => {
       const last = loadLastSlip();
