@@ -1048,7 +1048,7 @@
     <footer class="footer">
       <div class="support-pill">
         <span>Support</span>
-        <span id="supportLine">@467dlpti</span>
+        <span id="supportLineFooter">@467dlpti</span>
       </div>
       <div class="copyright">426 SHOP · EST 2024</div>
     </footer>
@@ -1085,7 +1085,7 @@
   </div>
 
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwTzz785LcIiyym27HEzL2Ylwhjwa5M68-3gSStDvriqSpMytGpnObjuF_H0KguPEEuqA/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzeplleUHRRP4QUNwBmbA2orymFYXufpraSsF5O1oY013MigyZ6KdDyheC4LhFudAwB4w/exec";
 
     const TOKEN_KEY = "shop426_member_token";
     const REMEMBER_KEY = "shop426_saved_login";
@@ -1212,7 +1212,7 @@
     const bankName = document.getElementById("bankName");
     const bankAccountNo = document.getElementById("bankAccountNo");
     const bankAccountName = document.getElementById("bankAccountName");
-    const supportLine = document.getElementById("supportLine");
+    const supportLineFooter = document.getElementById("supportLineFooter");
     const qrWrap = document.getElementById("qrWrap");
 
     const slipInput = document.getElementById("slipInput");
@@ -1289,6 +1289,8 @@
         obj.groupMoveDate ||
         obj.familyMoveDateYMD ||
         obj.familyMoveDate ||
+        obj.normalGroupMoveDate ||
+        obj.normalGroupMoveDateYMD ||
         obj.move_date ||
         ""
       );
@@ -1299,15 +1301,18 @@
       return raw.includes("อยู่ในกลุ่มครอบครัวร้านปกติ")
         || raw.includes("อยู่ในกลุ่มครอบครัวของร้านปกติ")
         || raw.includes("อยู่ในกลุ่มของร้านปกติ")
+        || raw.includes("บัญชีนี้อยู่ในกลุ่มครอบครัวร้านปกติ")
         || raw.includes("ใช้งานได้ปกติ");
     }
 
     function renderMoveGroupInfo(){
       if (state.inShopGroupNormal && state.moveGroupDate){
-        familyMoveDateBox.innerHTML = "กำหนดวันย้ายกลุ่ม: " + escapeHtml(formatThaiDate(state.moveGroupDate));
+        familyMoveDateBox.innerHTML =
+          "บัญชีนี้อยู่ในกลุ่มครอบครัวร้านปกติค่ะ<br>กำหนดวันย้ายกลุ่ม: " +
+          escapeHtml(formatThaiDate(state.moveGroupDate));
         familyMoveDateBox.classList.add("show");
       } else if (state.inShopGroupNormal){
-        familyMoveDateBox.innerHTML = "บัญชีนี้อยู่ในกลุ่มครอบครัวร้านปกติ";
+        familyMoveDateBox.innerHTML = "บัญชีนี้อยู่ในกลุ่มครอบครัวร้านปกติค่ะ";
         familyMoveDateBox.classList.add("show");
       } else {
         familyMoveDateBox.textContent = "";
@@ -1333,8 +1338,10 @@
         paymentSection.style.display = "none";
         expiryPickerBlock.style.display = "none";
         expiryFixedBox.style.display = "block";
+
         summary.innerHTML = '<div class="normal-status-pill">สถานะบัญชีปกติ</div>';
         status.innerHTML = "";
+
         showAlert(
           claimAlert,
           message || "บัญชีนี้อยู่ในกลุ่มครอบครัวร้านปกติค่ะ",
@@ -1635,7 +1642,7 @@
       bankName.textContent = claimConfig.bankName || "ธ.กสิกร (KBank)";
       bankAccountNo.textContent = claimConfig.bankAccountNo || "0628794251";
       bankAccountName.textContent = claimConfig.bankAccountName || "นภัทรธมณฑ์ ฤทธิ์ชัยศักดิ์";
-      supportLine.textContent = claimConfig.supportLine || "@467dlpti";
+      supportLineFooter.textContent = claimConfig.supportLine || "@467dlpti";
     }
 
     function getEffectiveClaimOpenState(){
@@ -1960,7 +1967,7 @@
       const tagText = isNormalInShopStatusText(current.statusText || "") ? "ใช้งานปกติ" : (claimType === "paid" ? "แพ็กดูแล 19 บาท" : "เคลมฟรี");
 
       const moveHtml = state.moveGroupDate
-        ? '<div class="item-meta"><span>วันย้ายกลุ่ม ' + escapeHtml(formatThaiDate(state.moveGroupDate)) + '</span></div>'
+        ? '<div class="item-meta"><span>กำหนดวันย้ายกลุ่ม ' + escapeHtml(formatThaiDate(state.moveGroupDate)) + '</span></div>'
         : '';
 
       const card = document.createElement("div");
@@ -2262,9 +2269,14 @@
         setActiveView("loginView");
         return;
       }
+
       if (!silentMode) showLoading();
+
       try{
-        const data = await fetchJson(SCRIPT_URL + "?action=checkExpiry&token=" + encodeURIComponent(state.token) + "&_t=" + Date.now());
+        const data = await fetchJson(
+          SCRIPT_URL + "?action=checkExpiry&token=" + encodeURIComponent(state.token) + "&_t=" + Date.now()
+        );
+
         if (!data || data.ok === false){
           if (!silentMode){
             showAlert(expiryCheckResult, data.message || "เช็ควันหมดอายุไม่สำเร็จ", "error", 5200);
@@ -2273,12 +2285,18 @@
           return;
         }
 
-        const moveDate = getMoveGroupDateValue(data) || getMoveGroupDateValue(data.current) || getMoveGroupDateValue(data.member);
-        if (moveDate) state.moveGroupDate = moveDate;
+        const moveDate =
+          getMoveGroupDateValue(data) ||
+          getMoveGroupDateValue(data.current) ||
+          getMoveGroupDateValue(data.member);
+
+        state.moveGroupDate = moveDate || "";
 
         const normalMessage = "บัญชีนี้อยู่ในกลุ่มครอบครัวร้านปกติค่ะ";
 
-        if (data.current && isNormalInShopStatusText(data.current.statusText || "")){
+        if (
+          data.current && isNormalInShopStatusText(data.current.statusText || "")
+        ){
           if (data.expiryYMD){
             expiryInput.value = data.expiryYMD;
             if (state.member){
@@ -2302,7 +2320,7 @@
           return;
         }
 
-        if (data.inNormalGroup === true || data.familyGroup === true || data.transferGroup === true){
+        if (data.inNormalGroup === true || data.blocked === true){
           if (data.expiryYMD){
             expiryInput.value = data.expiryYMD;
             if (state.member){
@@ -2326,8 +2344,14 @@
         setClaimNormalState(false);
 
         if (!silentMode){
-          showAlert(expiryCheckResult, data.message || "พบวันหมดอายุล่าสุดในระบบแล้วค่ะ", data.expired ? "warning" : "success", 6500);
+          showAlert(
+            expiryCheckResult,
+            data.message || "พบวันหมดอายุล่าสุดในระบบแล้วค่ะ",
+            data.expired ? "warning" : "success",
+            6500
+          );
         }
+
       }catch(e){
         if (!silentMode){
           showAlert(expiryCheckResult, "เกิดข้อผิดพลาดในการเชื่อมต่อ", "error", 5000);
@@ -2408,12 +2432,24 @@
         if (moveDate) state.moveGroupDate = moveDate;
 
         if (data.current && isNormalInShopStatusText(data.current.statusText || "")){
+          const moveDateInner =
+            getMoveGroupDateValue(data) ||
+            getMoveGroupDateValue(data.current) ||
+            getMoveGroupDateValue(data.member);
+
+          state.moveGroupDate = moveDateInner || "";
           setClaimNormalState(true, data.message || "บัญชีนี้อยู่ในกลุ่มครอบครัวร้านปกติค่ะ");
           showToast("บัญชีใช้งานปกติ");
           return;
         }
 
-        if (data.inNormalGroup === true || data.blockClaim === true){
+        if (data.inNormalGroup === true || data.blocked === true){
+          const moveDateInner =
+            getMoveGroupDateValue(data) ||
+            getMoveGroupDateValue(data.current) ||
+            getMoveGroupDateValue(data.member);
+
+          state.moveGroupDate = moveDateInner || "";
           setClaimNormalState(true, data.message || "บัญชีนี้อยู่ในกลุ่มครอบครัวร้านปกติค่ะ");
           showToast("บัญชีใช้งานปกติ");
           return;
