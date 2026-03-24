@@ -30,7 +30,8 @@
       --primary-3:#ff5c7c;
       --primary-deep:#690814;
 
-      --success:#42b985;
+      --success:#21a366;
+      --success-2:#38c27a;
       --warning:#f0a24c;
       --danger:#de6072;
       --info:#6c84ff;
@@ -207,18 +208,6 @@
         linear-gradient(180deg, rgba(255,255,255,.07), transparent 34%);
       pointer-events:none;
     }
-    .hero::after{
-      content:"";
-      position:absolute;
-      right:-30px;
-      top:-30px;
-      width:120px;
-      height:120px;
-      border-radius:28px;
-      background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,0));
-      transform:rotate(26deg);
-      pointer-events:none;
-    }
 
     .logo-shell{
       width:92px;height:92px;margin:0 auto 12px;
@@ -345,23 +334,6 @@
       background:linear-gradient(180deg, rgba(255,255,255,.44), transparent 28%);
       pointer-events:none;
     }
-    .card::after{
-      content:"";
-      position:absolute;
-      top:10px;
-      right:10px;
-      width:52px;
-      height:52px;
-      border-radius:18px;
-      background:linear-gradient(180deg, rgba(255,92,124,.08), rgba(255,92,124,0));
-      transform:rotate(18deg);
-      pointer-events:none;
-    }
-    .card:hover{
-      transform:translateY(-1px);
-      box-shadow:var(--shadow-soft), var(--shadow-cute);
-    }
-    .card:active{transform:scale(.994)}
 
     .section-title-plain{
       text-align:center;
@@ -388,40 +360,12 @@
       margin-top:16px;
       padding:16px 16px 15px;
       border-radius:24px;
-      background:
-        linear-gradient(180deg,#fff9fb,#fff2f5),
-        radial-gradient(circle at top right, rgba(255,92,124,.10), transparent 35%);
+      background:linear-gradient(180deg,#fff9fb,#fff2f5);
       border:1px solid #f2d6de;
-      box-shadow:
-        0 12px 22px rgba(177,15,34,.05),
-        inset 0 1px 0 rgba(255,255,255,.88);
+      box-shadow:0 12px 22px rgba(177,15,34,.05), inset 0 1px 0 rgba(255,255,255,.88);
       position:relative;
       z-index:1;
       overflow:hidden;
-    }
-    .policy-box::before{
-      content:"";
-      position:absolute;
-      top:-16px;
-      right:-12px;
-      width:84px;
-      height:84px;
-      border-radius:24px;
-      transform:rotate(28deg);
-      background:linear-gradient(180deg, rgba(255,92,124,.10), rgba(255,92,124,0));
-      pointer-events:none;
-    }
-    .policy-box::after{
-      content:"";
-      position:absolute;
-      bottom:-18px;
-      left:-14px;
-      width:74px;
-      height:74px;
-      border-radius:22px;
-      transform:rotate(24deg);
-      background:linear-gradient(180deg, rgba(163,15,33,.08), rgba(163,15,33,0));
-      pointer-events:none;
     }
     .policy-head{
       position:relative;
@@ -452,7 +396,6 @@
       line-height:1.9;
       color:var(--sub);
       text-align:center;
-      white-space:normal;
       max-width:420px;
       margin:0 auto;
       font-weight:700;
@@ -556,10 +499,6 @@
       border-radius:8px;
       transition:.12s ease;
     }
-    .forgot-mini:hover{
-      color:var(--primary-deep);
-      background:rgba(255,255,255,.45);
-    }
 
     .remember-row{
       margin-top:12px;
@@ -603,20 +542,6 @@
       border:1px solid transparent;
       position:relative;
       overflow:hidden;
-    }
-    .btn-primary::before,.btn-secondary::before,.btn-danger::before,.btn-link-small::before,.btn-mini::before,.btn-admin::before,.btn-soft-cute::before,.upload-btn::before,.btn-scan-toggle::before,.toggle-pass::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:linear-gradient(180deg, rgba(255,255,255,.34), rgba(255,255,255,0));
-      pointer-events:none;
-    }
-    .btn-primary:hover,.btn-secondary:hover,.btn-danger:hover,.btn-link-small:hover,.btn-mini:hover,.btn-admin:hover,.btn-soft-cute:hover,.upload-btn:hover,.btn-scan-toggle:hover,.toggle-pass:hover{
-      filter:brightness(1.03);
-      transform:translateY(-1px);
-    }
-    .btn-primary:active,.btn-secondary:active,.btn-danger:active,.btn-link-small:active,.btn-mini:active,.btn-admin:active,.btn-soft-cute:active,.upload-btn:active,.btn-scan-toggle:active,.toggle-pass:active{
-      transform:scale(.985);
     }
 
     .btn-primary{
@@ -703,6 +628,22 @@
 
     .btn-blink{animation:blinkGlow 1.08s ease-in-out infinite}
     .cute-blink{animation:cuteBlink 1.18s ease-in-out infinite}
+    .normal-status-pill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:10px 18px;
+      min-height:42px;
+      border-radius:999px;
+      background:linear-gradient(180deg,#effff6,#dff8e9);
+      border:2px solid #79dba4;
+      color:#17834d;
+      font-size:.84rem;
+      font-weight:800;
+      box-shadow:0 10px 22px rgba(33,163,102,.12);
+      animation:normalPulse 1.15s ease-in-out infinite;
+    }
     @keyframes blinkGlow{
       0%,100%{box-shadow:0 12px 24px rgba(219,36,67,.12)}
       50%{box-shadow:0 12px 24px rgba(219,36,67,.21),0 0 0 4px rgba(219,36,67,.08)}
@@ -710,6 +651,16 @@
     @keyframes cuteBlink{
       0%,100%{transform:translateY(0)}
       50%{transform:translateY(-1px); box-shadow:0 10px 18px rgba(219,36,67,.12),0 0 0 4px rgba(219,36,67,.06)}
+    }
+    @keyframes normalPulse{
+      0%,100%{
+        transform:translateY(0);
+        box-shadow:0 10px 22px rgba(33,163,102,.12);
+      }
+      50%{
+        transform:translateY(-1px);
+        box-shadow:0 12px 24px rgba(33,163,102,.20), 0 0 0 4px rgba(56,194,122,.08);
+      }
     }
 
     .shake{animation:shake .26s}
@@ -739,7 +690,7 @@
     .alert-box.success{background:#eefcf5;border-color:#caeedb;color:var(--success)}
     .alert-box.error{background:#fff1f4;border-color:#f3c8d2;color:var(--danger)}
     .alert-box.info{background:#eef3ff;border-color:#d6defa;color:var(--info)}
-    .alert-box.warning{background:#fff6eb;border-color:#ffd9af;color:var(--warning)}
+    .alert-box.warning{background:#fff6eb;border-color:#ffd9af;color:#b86f18}
 
     .signup-inline{
       margin-top:14px;
@@ -768,18 +719,6 @@
       box-shadow:var(--shadow-soft);
       position:relative;
       overflow:hidden;
-    }
-    .live-card::after{
-      content:"";
-      position:absolute;
-      left:-30px;
-      bottom:-34px;
-      width:100px;
-      height:100px;
-      border-radius:28px;
-      transform:rotate(28deg);
-      background:linear-gradient(180deg, rgba(255,92,124,.08), rgba(255,92,124,0));
-      pointer-events:none;
     }
     .live-header{
       display:flex;
@@ -823,7 +762,6 @@
       border:1px solid var(--line);
       transition:.12s ease;
     }
-    .live-item:hover{transform:translateY(-1px)}
     .live-main{
       display:flex;
       flex-direction:column;
@@ -866,22 +804,7 @@
       flex-direction:column;
       justify-content:center;
       gap:4px;
-      transition:.12s ease;
-      position:relative;
-      overflow:hidden;
     }
-    .member-pill::before{
-      content:"";
-      position:absolute;
-      inset:auto auto -16px -16px;
-      width:44px;
-      height:44px;
-      border-radius:14px;
-      transform:rotate(25deg);
-      background:linear-gradient(180deg, rgba(255,92,124,.07), rgba(255,92,124,0));
-      pointer-events:none;
-    }
-    .member-pill:hover{transform:translateY(-1px)}
     .member-pill.wide{grid-column:1 / -1}
     .member-key{font-size:.72rem;color:var(--muted);font-weight:800}
     .member-val{
@@ -905,18 +828,6 @@
       position:relative;
       z-index:1;
       overflow:hidden;
-    }
-    .expiry-box::after{
-      content:"";
-      position:absolute;
-      inset:auto -16px auto auto;
-      top:10px;
-      width:72px;
-      height:72px;
-      border-radius:20px;
-      transform:rotate(25deg);
-      background:linear-gradient(180deg, rgba(255,92,124,.07), rgba(255,92,124,0));
-      pointer-events:none;
     }
 
     .expiry-fixed{
@@ -955,9 +866,9 @@
     .warning-note{
       padding:10px 12px;
       border-radius:16px;
-      background:#fff6eb;
-      border:1px solid #ffd9af;
-      color:#b86f18;
+      background:#fff1f4;
+      border:1px solid #f3c8d2;
+      color:#c7445e;
       font-size:.80rem;
       line-height:1.65;
       text-align:center;
@@ -976,18 +887,6 @@
       text-align:center;
       position:relative;
       overflow:hidden;
-    }
-    .payment-card::after{
-      content:"";
-      position:absolute;
-      left:-20px;
-      top:-22px;
-      width:86px;
-      height:86px;
-      border-radius:24px;
-      transform:rotate(28deg);
-      background:linear-gradient(180deg, rgba(255,92,124,.08), rgba(255,92,124,0));
-      pointer-events:none;
     }
     .payment-title{font-size:1rem;font-weight:800;color:var(--primary-deep);margin-bottom:4px;position:relative;z-index:1}
     .payment-desc{font-size:.84rem;color:var(--sub);line-height:1.7;margin-bottom:12px;position:relative;z-index:1;font-weight:700}
@@ -1167,18 +1066,6 @@
       position:relative;
       overflow:hidden;
     }
-    .mini-box::before{
-      content:"";
-      position:absolute;
-      inset:auto auto -18px -18px;
-      width:44px;
-      height:44px;
-      border-radius:14px;
-      transform:rotate(26deg);
-      background:linear-gradient(180deg, rgba(255,92,124,.07), rgba(255,92,124,0));
-      pointer-events:none;
-    }
-    .mini-box:hover{transform:translateY(-1px)}
     .mini-box strong{
       display:block;
       font-size:1rem;
@@ -1209,18 +1096,6 @@
       z-index:1;
       overflow:hidden;
     }
-    .queue-card::after{
-      content:"";
-      position:absolute;
-      inset:auto -18px -20px auto;
-      width:84px;
-      height:84px;
-      border-radius:24px;
-      transform:rotate(28deg);
-      background:linear-gradient(180deg, rgba(255,92,124,.07), rgba(255,92,124,0));
-      pointer-events:none;
-    }
-    .queue-card:hover{transform:translateY(-1px)}
     .queue-no{
       font-size:1.36rem;
       font-weight:800;
@@ -1269,18 +1144,6 @@
       position:relative;
       z-index:1;
       overflow:hidden;
-    }
-    .timeline-card::before{
-      content:"";
-      position:absolute;
-      top:-18px;
-      left:-18px;
-      width:68px;
-      height:68px;
-      border-radius:18px;
-      transform:rotate(25deg);
-      background:linear-gradient(180deg, rgba(255,92,124,.06), rgba(255,92,124,0));
-      pointer-events:none;
     }
     .timeline-title{
       font-size:.86rem;
@@ -1333,18 +1196,6 @@
       z-index:1;
       overflow:hidden;
     }
-    .result-item::before{
-      content:"";
-      position:absolute;
-      inset:auto auto -18px -18px;
-      width:64px;
-      height:64px;
-      border-radius:20px;
-      transform:rotate(25deg);
-      background:linear-gradient(180deg, rgba(255,92,124,.07), rgba(255,92,124,0));
-      pointer-events:none;
-    }
-    .result-item:hover{transform:translateY(-1px)}
     .item-header{
       font-size:.74rem;
       color:var(--muted);
@@ -1440,18 +1291,6 @@
       z-index:1;
       overflow:hidden;
     }
-    .swap-panel-status::after{
-      content:"";
-      position:absolute;
-      top:-18px;
-      right:-16px;
-      width:72px;
-      height:72px;
-      border-radius:22px;
-      transform:rotate(26deg);
-      background:linear-gradient(180deg, rgba(255,92,124,.07), rgba(255,92,124,0));
-      pointer-events:none;
-    }
     .swap-panel-status.show{display:block}
     .swap-panel-title{
       font-size:.92rem;
@@ -1488,7 +1327,6 @@
       transition:.08s ease;
       box-shadow:0 8px 14px rgba(219,36,67,.04);
     }
-    .swap-reason-option:hover{transform:translateY(-1px)}
     .swap-reason-option input{
       accent-color:var(--primary);
       width:16px;height:16px;flex:0 0 auto;
@@ -1578,18 +1416,6 @@
       position:relative;
       overflow:hidden;
     }
-    .modal-card::after{
-      content:"";
-      position:absolute;
-      right:-18px;
-      top:-18px;
-      width:70px;
-      height:70px;
-      border-radius:20px;
-      transform:rotate(28deg);
-      background:linear-gradient(180deg, rgba(255,92,124,.08), rgba(255,92,124,0));
-      pointer-events:none;
-    }
     .modal-title{font-size:1.02rem;font-weight:800;color:var(--primary-deep);margin-bottom:8px;position:relative;z-index:1}
     .modal-desc{font-size:.85rem;color:var(--sub);line-height:1.7;margin-bottom:14px;position:relative;z-index:1;font-weight:700}
     .modal-summary{
@@ -1655,18 +1481,6 @@
       text-align:center;
       position:relative;
       overflow:hidden;
-    }
-    .loading-card::after{
-      content:"";
-      position:absolute;
-      left:-16px;
-      bottom:-16px;
-      width:70px;
-      height:70px;
-      border-radius:20px;
-      transform:rotate(28deg);
-      background:linear-gradient(180deg, rgba(255,92,124,.08), rgba(255,92,124,0));
-      pointer-events:none;
     }
 
     .spinner-wrap{
@@ -1967,7 +1781,7 @@
             </div>
 
             <div class="warning-note">
-              กรุณาแจ้งข้อมูลให้ตรงกับการใช้งานจริง เพื่อให้ระบบตรวจสอบและรับเรื่องได้ถูกต้อง
+              หากตรวจสอบแล้วไม่ตรงกับข้อมูลจริง ระบบตัดสิทธิ์อัตโนมัติ
             </div>
           </div>
 
@@ -2379,7 +2193,7 @@
 
     function isNormalInShopStatusText(text){
       const raw = String(text || "").trim();
-      return raw.includes("ใช้งานได้ปกติ") || raw.includes("อยู่ในกลุ่มของร้านปกติ");
+      return raw.includes("ใช้งานได้ปกติ") || raw.includes("อยู่ในกลุ่มของร้านปกติ") || raw.includes("อยู่ในกลุ่มครอบครัวของร้านปกติ");
     }
 
     function setClaimNormalState(on, message){
@@ -2390,11 +2204,11 @@
         paymentSection.style.display = "none";
         expiryPickerBlock.style.display = "none";
         expiryFixedBox.style.display = "block";
-        summary.innerHTML = '<div class="summary-pill">สถานะบัญชีปกติ</div>';
+        summary.innerHTML = '<div class="normal-status-pill">สถานะบัญชีปกติ</div>';
         status.innerHTML = "";
         showAlert(
           claimAlert,
-          message || "บัญชีนี้อยู่ในกลุ่มของร้านปกติแล้วค่ะ\nยังใช้งานได้ตามปกติ จึงไม่ต้องแจ้งเคลมหรือเข้าคิวนะคะ",
+          message || "บัญชีนี้อยู่ในกลุ่มครอบครัวของร้านปกติค่ะ",
           "success",
           0
         );
@@ -2981,7 +2795,12 @@
           ? "ใช้งานปกติ"
           : (current.claimType === "paid" ? "แพ็กดูแล 19 บาท" : "เคลมฟรีตามเงื่อนไข");
 
-      statusSummary.innerHTML = '<div class="summary-pill">คำขอล่าสุด: ' + escapeHtml(claimLabel) + '</div>';
+      if (isNormalInShopStatusText(current.statusText || "")){
+        statusSummary.innerHTML = '<div class="normal-status-pill">สถานะบัญชีปกติ</div>';
+      } else {
+        statusSummary.innerHTML = '<div class="summary-pill">คำขอล่าสุด: ' + escapeHtml(claimLabel) + '</div>';
+      }
+
       statusPageText.innerHTML =
         "<span class='status-time'>รับเรื่องเมื่อ: " + escapeHtml(formatThaiDateTime(current.createdAt || current.updatedAt || "")) + "</span>";
 
@@ -3070,7 +2889,7 @@
       if (state.inShopGroupNormal){
         showAlert(
           claimAlert,
-          "บัญชีนี้อยู่ในกลุ่มของร้านปกติแล้วค่ะ\nไม่ต้องแจ้งเคลมหรือเข้าคิวนะคะ",
+          "บัญชีนี้อยู่ในกลุ่มครอบครัวของร้านปกติค่ะ",
           "success",
           0
         );
@@ -3295,7 +3114,7 @@
           return;
         }
 
-        const normalMessage = data.message || "บัญชีนี้อยู่ในกลุ่มของร้านปกติแล้วค่ะ\nไม่ต้องแจ้งเคลมหรือเข้าคิวนะคะ";
+        const normalMessage = "บัญชีนี้อยู่ในกลุ่มครอบครัวของร้านปกติค่ะ";
 
         if (data.current && isNormalInShopStatusText(data.current.statusText || "")){
           setClaimNormalState(true, normalMessage);
@@ -3398,7 +3217,7 @@
         }
 
         if (data.current && isNormalInShopStatusText(data.current.statusText || "")){
-          setClaimNormalState(true, "บัญชีนี้อยู่ในกลุ่มของร้านปกติแล้วค่ะ\nยังใช้งานได้ตามปกติ จึงไม่ต้องแจ้งเคลมหรือเข้าคิวนะคะ");
+          setClaimNormalState(true, "บัญชีนี้อยู่ในกลุ่มครอบครัวของร้านปกติค่ะ");
           showToast("บัญชีใช้งานปกติ");
           return;
         }
