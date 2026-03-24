@@ -117,7 +117,6 @@
     .float-shapes span:nth-child(4){width:54px;height:18px;right:8%;bottom:14%;animation-duration:15s}
     .float-shapes span:nth-child(5){width:22px;height:22px;left:72%;top:62%;animation-duration:11s}
 
-    /* หัวใจ + ดาว พื้นหลัง */
     .bg-icons{
       position:fixed;
       inset:0;
@@ -2027,7 +2026,7 @@
           <div id="summary"></div>
           <div id="status"></div>
 
-          <div class="bottom-pair">
+          <div class="bottom-pair" id="claimActionRow">
             <button class="btn-primary" id="btnSubmit">ส่งคำขอเคลม</button>
             <button class="btn-secondary btn-blink" id="btnGotoStatus">สถานะการเคลม</button>
           </div>
@@ -2228,7 +2227,8 @@
       isClaimOpen: true,
       authLock: false,
       submitLock: false,
-      latestHistory: []
+      latestHistory: [],
+      inShopGroupNormal: false
     };
 
     let activeSlipFile = null;
@@ -2324,6 +2324,7 @@
     const statusPageText = document.getElementById("statusPageText");
     const statusSummary = document.getElementById("statusSummary");
     const results = document.getElementById("results");
+    const claimActionRow = document.getElementById("claimActionRow");
 
     const queueCard = document.getElementById("queueCard");
     const queueNumberBig = document.getElementById("queueNumberBig");
@@ -2374,6 +2375,37 @@
       }catch(e){
         return fallback;
       }
+    }
+
+    function isNormalInShopStatusText(text){
+      const raw = String(text || "").trim();
+      return raw.includes("ใช้งานได้ปกติ") || raw.includes("อยู่ในกลุ่มของร้านปกติ");
+    }
+
+    function setClaimNormalState(on, message){
+      state.inShopGroupNormal = !!on;
+
+      if (state.inShopGroupNormal){
+        claimActionRow.style.display = "none";
+        paymentSection.style.display = "none";
+        expiryPickerBlock.style.display = "none";
+        expiryFixedBox.style.display = "block";
+        summary.innerHTML = '<div class="summary-pill">สถานะบัญชีปกติ</div>';
+        status.innerHTML = "";
+        showAlert(
+          claimAlert,
+          message || "บัญชีนี้อยู่ในกลุ่มของร้านปกติแล้วค่ะ\nยังใช้งานได้ตามปกติ จึงไม่ต้องแจ้งเคลมหรือเข้าคิวนะคะ",
+          "success",
+          0
+        );
+      } else {
+        claimActionRow.style.display = "flex";
+        claimAlert.className = "alert-box";
+        claimAlert.textContent = "";
+        summary.innerHTML = "";
+      }
+
+      syncPaymentSection();
     }
 
     function setActiveView(id, persist = true){
@@ -2568,6 +2600,7 @@
       state.token = "";
       state.member = null;
       state.latestHistory = [];
+      state.inShopGroupNormal = false;
       sessionStorage.removeItem(TOKEN_KEY);
       localStorage.removeItem(FAST_STATUS_KEY);
       resetClaimUI();
@@ -2715,6 +2748,10 @@
     }
 
     function syncPaymentSection(){
+      if (state.inShopGroupNormal){
+        paymentSection.style.display = "none";
+        return;
+      }
       const year = normalizeText(state.member && state.member.signupYearThai || "");
       if (year && year === String(claimConfig.paidYear)){
         paymentSection.style.display = "block";
@@ -2768,6 +2805,10 @@
       miniLastTime.textContent = "-";
       qrWrap.classList.remove("show");
       btnToggleQr.textContent = "สแกน QR";
+      claimActionRow.style.display = "flex";
+      state.inShopGroupNormal = false;
+      claimAlert.className = "alert-box";
+      claimAlert.textContent = "";
     }
 
     function cacheFastStatus(history){
@@ -2914,7 +2955,7 @@
 
       const progressMap = [20, 62, 100];
       claimProgressFill.style.width = progressMap[activeIndex] + "%";
-      claimProgressLabel.textContent = raw.includes("ดึงเมลแล้ว") ? "ดึงเมลแล้ว" : steps[activeIndex];
+      claimProgressLabel.textContent = raw.includes("ดึงเมลแล้ว") ? "ดึงเมลแล้ว" : (raw.includes("ใช้งานได้ปกติ") ? "เสร็จแล้ว" : steps[activeIndex]);
     }
 
     function renderLatestStatusPage(res){
@@ -2935,7 +2976,11 @@
 
       fillMiniStats(current);
 
-      const claimLabel = current.claimType === "paid" ? "แพ็กดูแล 19 บาท" : "เคลมฟรีตามเงื่อนไข";
+      const claimLabel =
+        isNormalInShopStatusText(current.statusText || "")
+          ? "ใช้งานปกติ"
+          : (current.claimType === "paid" ? "แพ็กดูแล 19 บาท" : "เคลมฟรีตามเงื่อนไข");
+
       statusSummary.innerHTML = '<div class="summary-pill">คำขอล่าสุด: ' + escapeHtml(claimLabel) + '</div>';
       statusPageText.innerHTML =
         "<span class='status-time'>รับเรื่องเมื่อ: " + escapeHtml(formatThaiDateTime(current.createdAt || current.updatedAt || "")) + "</span>";
@@ -2946,7 +2991,8 @@
       renderClaimSteps(current.statusText || "");
 
       const claimType = (current.claimType || "").toLowerCase() === "paid" ? "paid" : "free";
-      const tagText = claimType === "paid" ? "แพ็กดูแล 19 บาท" : "เคลมฟรี";
+      const tagText = isNormalInShopStatusText(current.statusText || "") ? "ใช้งานปกติ" : (claimType === "paid" ? "แพ็กดูแล 19 บาท" : "เคลมฟรี");
+
       const card = document.createElement("div");
       card.className = "result-item tap-card";
       card.innerHTML =
@@ -3018,6 +3064,16 @@
       if (!state.member || !state.token){
         setActiveView("loginView");
         showAlert(topAlert, "กรุณาเข้าสู่ระบบก่อนใช้งาน", "warning");
+        return false;
+      }
+
+      if (state.inShopGroupNormal){
+        showAlert(
+          claimAlert,
+          "บัญชีนี้อยู่ในกลุ่มของร้านปกติแล้วค่ะ\nไม่ต้องแจ้งเคลมหรือเข้าคิวนะคะ",
+          "success",
+          0
+        );
         return false;
       }
 
@@ -3105,6 +3161,10 @@
         const savedView = getSavedView();
         setActiveView(savedView === "statusView" ? "statusView" : "claimView");
         await bootstrapApp(false);
+
+        if (state.member && state.member.lastKnownExpiry){
+          await handleCheckExpiry(true);
+        }
       }catch(e){
         showAlert(topAlert, "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้ง", "error");
         shake(btnLogin);
@@ -3154,6 +3214,10 @@
         showToast("สมัครสมาชิกสำเร็จ");
         setActiveView("claimView");
         await bootstrapApp(false);
+
+        if (state.member && state.member.lastKnownExpiry){
+          await handleCheckExpiry(true);
+        }
       }catch(e){
         showAlert(registerAlert, "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้ง", "error");
         shake(btnRegister);
@@ -3215,19 +3279,34 @@
       }catch(e){}
     }
 
-    async function handleCheckExpiry(){
+    async function handleCheckExpiry(silentMode=false){
       if (!state.token){
         setActiveView("loginView");
         return;
       }
-      showLoading();
+      if (!silentMode) showLoading();
       try{
         const data = await fetchJson(SCRIPT_URL + "?action=checkExpiry&token=" + encodeURIComponent(state.token) + "&_t=" + Date.now());
         if (!data || data.ok === false){
-          showAlert(expiryCheckResult, data.message || "เช็ควันหมดอายุไม่สำเร็จ", "error", 5200);
-          shake(btnCheckExpiry);
+          if (!silentMode){
+            showAlert(expiryCheckResult, data.message || "เช็ควันหมดอายุไม่สำเร็จ", "error", 5200);
+            shake(btnCheckExpiry);
+          }
           return;
         }
+
+        const normalMessage = data.message || "บัญชีนี้อยู่ในกลุ่มของร้านปกติแล้วค่ะ\nไม่ต้องแจ้งเคลมหรือเข้าคิวนะคะ";
+
+        if (data.current && isNormalInShopStatusText(data.current.statusText || "")){
+          setClaimNormalState(true, normalMessage);
+          return;
+        }
+
+        if (data.statusText && isNormalInShopStatusText(data.statusText)){
+          setClaimNormalState(true, normalMessage);
+          return;
+        }
+
         if (data.expiryYMD){
           expiryInput.value = data.expiryYMD;
           if (state.member){
@@ -3236,12 +3315,19 @@
             updateMemberUI();
           }
         }
-        showAlert(expiryCheckResult, data.message || "พบวันหมดอายุล่าสุดในระบบแล้วค่ะ", data.expired ? "warning" : "success", 6500);
+
+        setClaimNormalState(false);
+
+        if (!silentMode){
+          showAlert(expiryCheckResult, data.message || "พบวันหมดอายุล่าสุดในระบบแล้วค่ะ", data.expired ? "warning" : "success", 6500);
+        }
       }catch(e){
-        showAlert(expiryCheckResult, "เกิดข้อผิดพลาดในการเชื่อมต่อ", "error", 5000);
-        shake(btnCheckExpiry);
+        if (!silentMode){
+          showAlert(expiryCheckResult, "เกิดข้อผิดพลาดในการเชื่อมต่อ", "error", 5000);
+          shake(btnCheckExpiry);
+        }
       }finally{
-        hideLoading();
+        if (!silentMode) hideLoading();
       }
     }
 
@@ -3308,6 +3394,12 @@
             showAlert(claimAlert, data.message || "ส่งคำขอไม่สำเร็จ", "error");
           }
           shake(btnSubmit);
+          return;
+        }
+
+        if (data.current && isNormalInShopStatusText(data.current.statusText || "")){
+          setClaimNormalState(true, "บัญชีนี้อยู่ในกลุ่มของร้านปกติแล้วค่ะ\nยังใช้งานได้ตามปกติ จึงไม่ต้องแจ้งเคลมหรือเข้าคิวนะคะ");
+          showToast("บัญชีใช้งานปกติ");
           return;
         }
 
@@ -3461,7 +3553,7 @@
     btnBackToClaim.addEventListener("click", backToClaim);
     btnGotoStatus.addEventListener("click", gotoStatus);
     btnSubmit.addEventListener("click", handleSubmit);
-    btnCheckExpiry.addEventListener("click", handleCheckExpiry);
+    btnCheckExpiry.addEventListener("click", () => handleCheckExpiry(false));
     btnToggleSwapEmailStatus.addEventListener("click", () => toggleSwapPanel());
     btnCancelSwapEmail.addEventListener("click", () => resetSwapPanel());
     btnConfirmSwapEmail.addEventListener("click", handleSwapEmail);
