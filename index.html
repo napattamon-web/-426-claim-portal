@@ -4,276 +4,270 @@
   <meta charset="UTF-8" />
   <title>426 SHOP – Member & Claim Center</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#F8FAFC" />
+  <meta name="theme-color" content="#FDFBF7" />
   
   <link rel="preload" href="https://img2.imgbiz.com/imgbiz/IMG_0923.jpeg" as="image">
   <link rel="preload" href="https://img2.imgbiz.com/imgbiz/IMG_2680.jpeg" as="image">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      /* Tech-Cute Palette */
-      --bg: #F8FAFC;
-      --surface: #FFFFFF;
-      --surface-glass: rgba(255, 255, 255, 0.85);
+      /* Elegant Warm Minimalist Palette */
+      --bg-main: #FDFBF7;        /* ครีมอ่อนๆ สบายตา */
+      --bg-card: #FFFFFF;
+      --bg-surface: #F5F2EB;     /* เบจเทาอ่อน */
       
-      --border: #E2E8F0;
-      --border-focus: #C4B5FD;
+      --border-light: #EAE3D9;
+      --border-focus: #D0B8B8;
 
-      --text-main: #334155;
-      --text-sub: #64748B;
-      --text-muted: #94A3B8;
+      /* Text Colors */
+      --text-dark: #4A403A;      /* น้ำตาลเข้ม แทนสีดำสนิท */
+      --text-sub: #7A706A;
+      --text-muted: #A39B96;
 
-      /* Primary Gradient: Purple to Pink (Tech + Cute) */
-      --primary: #8B5CF6; 
-      --primary-2: #A78BFA;
-      --secondary: #EC4899;
-      --accent: #38BDF8;
-
-      --success: #10B981;
-      --warning: #F59E0B;
-      --danger: #EF4444;
-      --info: #3B82F6;
-
-      --shadow-sm: 0 4px 15px rgba(139, 92, 246, 0.08);
-      --shadow-lg: 0 20px 40px rgba(139, 92, 246, 0.12);
+      /* Accent Colors (Dusty Rose / Muted Clay) */
+      --primary: #C08484;        /* ชมพูตุ่นๆ แนวผู้ใหญ่ */
+      --primary-hover: #A86F6F;
+      --primary-light: #F0E6E6;
       
-      --radius-sm: 12px;
-      --radius-md: 20px;
-      --radius-lg: 28px;
+      --secondary: #84A59D;      /* เขียวตุ่น Sage Green สำหรับจุดตัด */
+
+      /* Status Colors (Softened) */
+      --success: #6B9071;
+      --success-bg: #EDF3EE;
+      --warning: #D99C79;
+      --warning-bg: #FDF4ED;
+      --danger: #D27070;
+      --danger-bg: #FBECEC;
+      --info: #789BBA;
+      --info-bg: #EEF4F9;
+
+      --shadow-soft: 0 8px 24px rgba(184, 172, 165, 0.15);
+      --shadow-hover: 0 12px 32px rgba(184, 172, 165, 0.2);
       
-      --font-family: 'Nunito', 'Prompt', sans-serif;
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      
+      --font-th: 'Kanit', sans-serif;
+      --font-en: 'Outfit', sans-serif;
     }
 
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     html, body { margin: 0; padding: 0; min-height: 100%; }
+    
     body {
-      background-color: var(--bg);
-      color: var(--text-main);
-      font-family: var(--font-family);
+      background-color: var(--bg-main);
+      color: var(--text-dark);
+      font-family: var(--font-th);
       line-height: 1.6;
       overflow-x: hidden;
+      letter-spacing: 0.2px;
     }
 
-    /* Ambient Tech-Pastel Glow (Hardware Accelerated) */
-    .ambient-bg { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; background: #F8FAFC; }
-    .ambient-glow {
-      position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.4;
-      will-change: transform; transform: translateZ(0); animation: float 20s infinite alternate ease-in-out;
-    }
-    .glow-1 { width: 400px; height: 400px; top: -100px; left: -100px; background: #C4B5FD; }
-    .glow-2 { width: 350px; height: 350px; bottom: 10%; right: -50px; background: #FBCFE8; animation-delay: -5s; }
-    .glow-3 { width: 300px; height: 300px; top: 40%; left: 30%; background: #BAE6FD; animation-duration: 25s; opacity: 0.3; }
-
-    @keyframes float {
-      0% { transform: translate3d(0, 0, 0) scale(1); }
-      100% { transform: translate3d(30px, 40px, 0) scale(1.1); }
+    /* Subtle Background Pattern (Texture) */
+    .bg-pattern {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image: radial-gradient(var(--border-light) 1px, transparent 1px);
+      background-size: 32px 32px; opacity: 0.5;
     }
 
     .app {
-      position: relative; z-index: 1; width: 100%; max-width: 520px; margin: 0 auto;
-      min-height: 100vh; padding: 24px 16px; display: flex; flex-direction: column; gap: 20px;
+      position: relative; z-index: 1; width: 100%; max-width: 500px; margin: 0 auto;
+      min-height: 100vh; padding: 24px 20px; display: flex; flex-direction: column; gap: 20px;
     }
 
-    /* Glass Cards */
-    .glass-card {
-      background: var(--surface-glass); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-      border: 2px solid #FFFFFF; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);
-      transition: transform 0.2s ease, box-shadow 0.2s ease; padding: 24px;
+    /* Card Component */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-soft);
+      padding: 28px 24px;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
     }
-    .glass-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
 
     /* Hero Section */
-    .hero { text-align: center; display: flex; flex-direction: column; align-items: center; }
+    .hero { text-align: center; padding-bottom: 8px; }
     .logo-shell {
-      width: 90px; height: 90px; margin-bottom: 16px; border-radius: 50%;
-      background: var(--surface); padding: 4px; box-shadow: 0 10px 25px rgba(139, 92, 246, 0.2);
+      width: 84px; height: 84px; margin: 0 auto 16px; border-radius: var(--radius-md);
+      background: var(--bg-card); padding: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      border: 1px solid var(--border-light);
     }
-    .logo-shell img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+    .logo-shell img { width: 100%; height: 100%; object-fit: cover; border-radius: calc(var(--radius-md) - 4px); }
     
-    .brand-title { font-size: 1.6rem; font-weight: 800; margin: 0; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .brand-sub { font-size: 0.85rem; font-weight: 600; color: var(--text-sub); letter-spacing: 1px; margin-top: 4px; text-transform: uppercase; }
+    .brand-title { font-family: var(--font-en); font-size: 1.5rem; font-weight: 600; margin: 0; color: var(--text-dark); letter-spacing: 0.5px; }
+    .brand-sub { font-size: 0.85rem; font-weight: 400; color: var(--text-sub); letter-spacing: 1px; margin-top: 4px; text-transform: uppercase; }
 
     .status-mini {
-      display: inline-flex; align-items: center; gap: 8px; margin-top: 16px;
-      padding: 6px 16px; border-radius: 999px; background: var(--surface);
-      border: 1px solid var(--border); font-size: 0.85rem; font-weight: 600; color: var(--text-main);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+      display: inline-flex; align-items: center; gap: 8px; margin-top: 20px;
+      padding: 6px 16px; border-radius: 999px; background: var(--bg-card);
+      border: 1px solid var(--border-light); font-size: 0.85rem; font-weight: 500;
+      color: var(--text-sub);
     }
-    .status-dot { width: 10px; height: 10px; border-radius: 50%; }
-    .status-mini.open .status-dot { background: var(--success); box-shadow: 0 0 10px var(--success); animation: pulse 2s infinite; }
-    .status-mini.closed .status-dot { background: var(--danger); box-shadow: 0 0 10px var(--danger); }
-    @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.2); opacity: 0.7; } }
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .status-mini.open .status-dot { background: var(--success); }
+    .status-mini.closed .status-dot { background: var(--danger); }
 
     /* Views */
-    .view { display: none; animation: slideUp 0.3s ease-out; }
+    .view { display: none; animation: fadeIn 0.4s ease; }
     .view.active { display: block; }
-    @keyframes slideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-    .section-title { font-size: 1.2rem; font-weight: 700; text-align: center; margin: 0 0 8px; color: var(--text-main); }
-    .section-desc { font-size: 0.85rem; color: var(--text-sub); text-align: center; margin: 0 0 24px; }
+    .section-title { font-size: 1.25rem; font-weight: 500; text-align: center; margin: 0 0 6px; color: var(--text-dark); }
+    .section-desc { font-size: 0.9rem; color: var(--text-sub); text-align: center; margin: 0 0 28px; font-weight: 300; }
 
     /* Forms */
-    .field-group { margin-bottom: 16px; }
-    .field-label { display: block; font-size: 0.85rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px; padding-left: 4px; }
+    .field-group { margin-bottom: 20px; }
+    .field-label { display: block; font-size: 0.85rem; font-weight: 500; color: var(--text-dark); margin-bottom: 8px; }
     
     .input-shell {
-      background: var(--surface); border: 2px solid var(--border);
-      border-radius: var(--radius-md); padding: 12px 16px; display: flex; align-items: center;
+      background: var(--bg-surface); border: 1px solid transparent;
+      border-radius: var(--radius-md); padding: 14px 16px; display: flex; align-items: center;
       transition: all 0.2s ease;
     }
-    .input-shell:focus-within { border-color: var(--primary-2); box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.1); transform: translateY(-1px); }
+    .input-shell:focus-within { background: var(--bg-card); border-color: var(--border-focus); box-shadow: 0 0 0 3px var(--primary-light); }
     
-    input { width: 100%; border: 0; outline: 0; background: transparent; font-family: var(--font-family); font-size: 0.95rem; color: var(--text-main); font-weight: 500; }
-    input::placeholder { color: var(--text-muted); font-weight: 400; }
-    input[type="date"] { color: var(--primary); font-weight: 600; }
+    input { width: 100%; border: 0; outline: 0; background: transparent; font-family: var(--font-th); font-size: 0.95rem; color: var(--text-dark); }
+    input::placeholder { color: var(--text-muted); font-weight: 300; }
+    input[type="date"] { font-family: var(--font-en); color: var(--text-dark); }
     
     .password-shell { display: flex; width: 100%; align-items: center; }
     .password-shell input { flex: 1; }
-    .toggle-pass { border: 0; background: rgba(139, 92, 246, 0.1); color: var(--primary); padding: 4px 10px; border-radius: 8px; font-size: 0.75rem; font-weight: 700; cursor: pointer; transition: 0.2s; }
-    .toggle-pass:hover { background: var(--primary); color: #fff; }
+    .toggle-pass { border: 0; background: transparent; color: var(--primary); padding: 4px; font-size: 0.85rem; font-weight: 500; cursor: pointer; font-family: var(--font-th); }
+    .toggle-pass:hover { color: var(--primary-hover); }
 
-    .hint-text { font-size: 0.75rem; color: var(--text-muted); margin-top: 6px; padding-left: 4px; }
-    .forgot-link { display: block; text-align: right; font-size: 0.85rem; color: var(--primary); font-weight: 700; cursor: pointer; margin-top: -4px; margin-bottom: 16px; }
-    .remember-row { display: flex; justify-content: center; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--text-sub); font-weight: 600; margin-bottom: 24px; cursor: pointer; }
-    .remember-row input { accent-color: var(--primary); width: 18px; height: 18px; cursor: pointer; }
+    .hint-text { font-size: 0.8rem; color: var(--text-muted); margin-top: 8px; font-weight: 300; }
+    .forgot-link { display: block; text-align: right; font-size: 0.85rem; color: var(--text-sub); text-decoration: underline; cursor: pointer; margin-top: -8px; margin-bottom: 24px; }
+    .forgot-link:hover { color: var(--text-dark); }
+    
+    .remember-row { display: flex; justify-content: center; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--text-sub); margin-bottom: 28px; cursor: pointer; }
+    .remember-row input { accent-color: var(--primary); width: 16px; height: 16px; cursor: pointer; }
 
     /* Buttons */
     .action-row { display: flex; gap: 12px; flex-wrap: wrap; }
-    button { font-family: var(--font-family); cursor: pointer; border: 0; transition: all 0.2s ease; display: flex; align-items: center; justify-content: center; }
+    button { font-family: var(--font-th); cursor: pointer; border: 0; transition: all 0.2s ease; display: flex; align-items: center; justify-content: center; }
     
     .btn-primary {
-      width: 100%; min-height: 52px; border-radius: 999px; font-weight: 700; font-size: 1rem;
-      background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #fff;
-      box-shadow: 0 8px 20px rgba(236, 72, 153, 0.25);
+      width: 100%; min-height: 50px; border-radius: var(--radius-md); font-weight: 500; font-size: 1rem;
+      background: var(--primary); color: #fff; letter-spacing: 0.5px;
     }
-    .btn-primary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 12px 25px rgba(236, 72, 153, 0.35); }
-    .btn-primary:active:not(:disabled) { transform: scale(0.98); }
-    .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    .btn-primary:hover:not(:disabled) { background: var(--primary-hover); }
+    .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
 
     .btn-secondary {
-      width: 100%; min-height: 52px; border-radius: 999px; font-weight: 700; font-size: 0.95rem;
-      background: #FFFFFF; border: 2px solid var(--border); color: var(--text-main);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+      width: 100%; min-height: 50px; border-radius: var(--radius-md); font-weight: 500; font-size: 0.95rem;
+      background: var(--bg-card); border: 1px solid var(--border-focus); color: var(--primary);
     }
-    .btn-secondary:hover { border-color: var(--primary-2); color: var(--primary); }
+    .btn-secondary:hover { background: var(--primary-light); }
 
-    .btn-ghost { background: transparent; color: var(--text-sub); font-weight: 600; font-size: 0.85rem; text-decoration: underline; text-underline-offset: 4px; }
-    .btn-ghost:hover { color: var(--primary); }
+    .btn-ghost { background: transparent; color: var(--text-sub); font-weight: 400; font-size: 0.9rem; text-decoration: underline; text-underline-offset: 4px; }
+    .btn-ghost:hover { color: var(--text-dark); }
 
-    .btn-small { padding: 8px 16px; border-radius: 999px; font-size: 0.85rem; font-weight: 700; background: #FFFFFF; border: 2px solid var(--border); color: var(--text-main); }
-    .btn-small:hover { background: rgba(139, 92, 246, 0.05); border-color: var(--primary-2); color: var(--primary); }
+    .btn-small { padding: 8px 16px; border-radius: var(--radius-sm); font-size: 0.85rem; font-weight: 500; background: var(--bg-surface); border: 1px solid var(--border-light); color: var(--text-dark); }
+    .btn-small:hover { background: var(--primary-light); border-color: var(--border-focus); color: var(--primary); }
 
     /* Alerts */
     .alert-box {
-      display: none; padding: 12px 16px; border-radius: var(--radius-md); font-size: 0.85rem;
-      font-weight: 600; text-align: center; margin-bottom: 16px; line-height: 1.5; border: 2px solid transparent;
+      display: none; padding: 14px 16px; border-radius: var(--radius-md); font-size: 0.85rem;
+      font-weight: 400; text-align: center; margin-bottom: 20px; line-height: 1.6; border: 1px solid transparent;
     }
-    .alert-box.show { display: block; animation: slideUp 0.2s; }
-    .alert-box.error { background: #FEF2F2; border-color: #FECACA; color: var(--danger); }
-    .alert-box.success { background: #ECFDF5; border-color: #A7F3D0; color: var(--success); }
-    .alert-box.info { background: #EFF6FF; border-color: #BFDBFE; color: var(--info); }
-    .alert-box.warning { background: #FFFBEB; border-color: #FDE68A; color: var(--warning); }
+    .alert-box.show { display: block; animation: fadeIn 0.3s; }
+    .alert-box.error { background: var(--danger-bg); border-color: rgba(210, 112, 112, 0.2); color: var(--danger); }
+    .alert-box.success { background: var(--success-bg); border-color: rgba(107, 144, 113, 0.2); color: var(--success); }
+    .alert-box.info { background: var(--info-bg); border-color: rgba(120, 155, 186, 0.2); color: var(--info); }
+    .alert-box.warning { background: var(--warning-bg); border-color: rgba(217, 156, 121, 0.2); color: var(--warning); }
 
     /* Live Feed & Data */
-    .live-feed { margin-top: 24px; padding-top: 20px; border-top: 2px dashed var(--border); }
+    .live-feed { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border-light); }
     .feed-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
-    .feed-title { font-size: 0.95rem; font-weight: 800; color: var(--text-main); display: flex; align-items: center; gap: 8px; }
-    .feed-date { font-size: 0.75rem; color: var(--text-sub); font-weight: 600; background: var(--surface); padding: 4px 10px; border-radius: 12px; border: 1px solid var(--border); }
+    .feed-title { font-size: 0.95rem; font-weight: 500; color: var(--text-dark); }
+    .feed-date { font-size: 0.8rem; color: var(--text-muted); font-family: var(--font-en); }
     
-    .feed-list { display: flex; flex-direction: column; gap: 10px; max-height: 220px; overflow-y: auto; padding-right: 4px; }
+    .feed-list { display: flex; flex-direction: column; gap: 12px; max-height: 240px; overflow-y: auto; padding-right: 4px; }
     .feed-item {
-      display: flex; justify-content: space-between; align-items: center; padding: 14px;
-      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+      display: flex; justify-content: space-between; align-items: center; padding: 16px;
+      background: var(--bg-surface); border-radius: var(--radius-md);
     }
-    .feed-meta { display: flex; flex-direction: column; gap: 2px; }
-    .feed-email { font-size: 0.9rem; font-weight: 700; color: var(--text-main); }
-    .feed-time { font-size: 0.75rem; color: var(--text-muted); font-weight: 600; }
+    .feed-meta { display: flex; flex-direction: column; gap: 4px; }
+    .feed-email { font-size: 0.9rem; font-weight: 500; color: var(--text-dark); font-family: var(--font-en); }
+    .feed-time { font-size: 0.8rem; color: var(--text-muted); font-family: var(--font-en); }
 
-    .status-pill { padding: 4px 12px; border-radius: 8px; font-size: 0.75rem; font-weight: 700; }
-    .pill-green { background: #ECFDF5; color: var(--success); }
-    .pill-yellow { background: #FFFBEB; color: var(--warning); }
-    .pill-blue { background: #EFF6FF; color: var(--info); }
-    .pill-red { background: #FEF2F2; color: var(--danger); }
+    .status-pill { padding: 4px 12px; border-radius: var(--radius-sm); font-size: 0.8rem; font-weight: 500; }
+    .pill-green { background: var(--success-bg); color: var(--success); }
+    .pill-yellow { background: var(--warning-bg); color: var(--warning); }
+    .pill-blue { background: var(--info-bg); color: var(--info); }
+    .pill-red { background: var(--danger-bg); color: var(--danger); }
 
     /* Info Grid (Member) */
-    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
-    .info-box { background: var(--surface); border: 1px solid var(--border); padding: 14px; border-radius: var(--radius-md); text-align: center; }
-    .info-box.full { grid-column: 1 / -1; }
-    .info-label { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
-    .info-value { font-size: 0.95rem; font-weight: 800; color: var(--primary); word-break: break-all; }
+    .info-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 24px; }
+    .info-box { display: flex; justify-content: space-between; align-items: center; padding-bottom: 12px; border-bottom: 1px solid var(--border-light); }
+    .info-label { font-size: 0.85rem; font-weight: 400; color: var(--text-sub); }
+    .info-value { font-size: 0.9rem; font-weight: 500; color: var(--text-dark); font-family: var(--font-en); }
 
-    .panel-box { background: rgba(255, 255, 255, 0.5); border: 2px dashed var(--border); padding: 20px; border-radius: var(--radius-md); margin-bottom: 20px; text-align: center; }
+    .panel-box { background: var(--bg-card); border: 1px solid var(--border-light); padding: 20px; border-radius: var(--radius-md); margin-bottom: 24px; text-align: center; }
     
-    .bank-card { background: var(--surface); border: 1px solid var(--border); padding: 20px; border-radius: var(--radius-md); text-align: center; margin-bottom: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
-    .bank-number { font-size: 1.6rem; font-weight: 800; color: var(--text-main); letter-spacing: 1px; margin: 8px 0; font-family: 'Nunito', sans-serif; }
+    .bank-card { background: var(--bg-surface); padding: 20px; border-radius: var(--radius-md); text-align: center; margin-bottom: 16px; }
+    .bank-number { font-size: 1.5rem; font-weight: 500; color: var(--text-dark); letter-spacing: 1px; margin: 8px 0; font-family: var(--font-en); }
 
-    .qr-container { display: none; margin-top: 16px; text-align: center; animation: slideUp 0.3s; }
+    .qr-container { display: none; margin-top: 16px; text-align: center; animation: fadeIn 0.3s; }
     .qr-container.show { display: block; }
-    .qr-container img { max-width: 200px; border-radius: var(--radius-sm); border: 2px solid var(--border); padding: 4px; background: #fff; }
+    .qr-container img { max-width: 200px; border-radius: var(--radius-md); border: 1px solid var(--border-light); padding: 8px; background: #fff; }
 
-    .upload-zone { border: 2px dashed var(--border-focus); background: rgba(139, 92, 246, 0.03); border-radius: var(--radius-md); padding: 20px; text-align: center; }
+    .upload-zone { border: 1px dashed var(--border-focus); background: var(--primary-light); border-radius: var(--radius-md); padding: 24px 20px; text-align: center; }
     .hidden-input { display: none; }
-    .preview-img { max-width: 100%; max-height: 200px; border-radius: var(--radius-sm); margin-top: 16px; display: none; border: 2px solid var(--border); }
+    .preview-img { max-width: 100%; max-height: 200px; border-radius: var(--radius-sm); margin-top: 16px; display: none; border: 1px solid var(--border-light); }
 
     /* Status Page specific */
-    .big-queue { font-size: 3.5rem; font-weight: 800; color: var(--primary); line-height: 1; margin: 8px 0; background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .big-queue { font-size: 2.5rem; font-weight: 500; color: var(--text-dark); margin: 8px 0; font-family: var(--font-en); }
     
-    /* Sleek Tech Progress Bar */
-    .progress-track { width: 100%; height: 8px; background: var(--border); border-radius: 999px; margin: 20px 0 12px; overflow: hidden; position: relative; }
-    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent)); width: 0%; transition: width 0.8s cubic-bezier(0.25, 0.8, 0.25, 1); border-radius: 999px; }
+    .progress-track { width: 100%; height: 6px; background: var(--border-light); border-radius: 999px; margin: 24px 0 12px; overflow: hidden; position: relative; }
+    .progress-fill { height: 100%; background: var(--primary); width: 0%; transition: width 0.8s cubic-bezier(0.25, 0.8, 0.25, 1); border-radius: 999px; }
     
-    /* Loading Overlay (Tech + Cute) */
+    /* Loading Overlay (Elegant Ring) */
     .overlay {
-      position: fixed; inset: 0; background: rgba(248, 250, 252, 0.85); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      position: fixed; inset: 0; background: rgba(253, 251, 247, 0.85); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
       display: none; align-items: center; justify-content: center; z-index: 9999;
     }
     .overlay.show { display: flex; animation: fadeIn 0.2s; }
-    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
     
     .loader-card {
-      background: var(--surface); border: 2px solid #FFFFFF;
-      padding: 32px 24px; border-radius: var(--radius-lg); text-align: center; width: 280px; box-shadow: var(--shadow-lg);
+      background: var(--bg-card); border: 1px solid var(--border-light);
+      padding: 40px 32px; border-radius: var(--radius-lg); text-align: center; width: 280px; box-shadow: var(--shadow-soft);
     }
     
-    .tech-spinner {
-      width: 50px; height: 50px; margin: 0 auto 20px; border-radius: 50%;
-      border: 4px solid var(--border); border-top-color: var(--primary); border-right-color: var(--secondary);
-      animation: spin 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+    .elegant-spinner {
+      width: 40px; height: 40px; margin: 0 auto 24px; border-radius: 50%;
+      border: 3px solid var(--border-light); border-top-color: var(--primary);
+      animation: spin 1s ease-in-out infinite;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    .fake-bar { width: 100%; height: 6px; background: var(--border); border-radius: 999px; margin-top: 20px; overflow: hidden; }
-    .fake-bar-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent)); width: 0%; transition: width 0.3s ease-out; }
+    .fake-bar { width: 100%; height: 4px; background: var(--border-light); border-radius: 999px; margin-top: 24px; overflow: hidden; }
+    .fake-bar-fill { height: 100%; background: var(--primary); width: 0%; transition: width 0.3s ease-out; }
 
     /* Modal / Toast */
-    .modal-card { width: 90%; max-width: 340px; background: var(--surface); border: 2px solid #FFFFFF; border-radius: var(--radius-lg); padding: 24px; text-align: center; box-shadow: var(--shadow-lg); }
-    .modal-title { font-size: 1.2rem; font-weight: 800; color: var(--text-main); margin-bottom: 8px; }
-    .modal-desc { font-size: 0.9rem; color: var(--text-sub); margin-bottom: 20px; }
-    .modal-summary { background: rgba(139, 92, 246, 0.05); border: 1px dashed var(--border-focus); padding: 16px; border-radius: var(--radius-md); font-size: 0.85rem; line-height: 1.6; text-align: left; margin-bottom: 24px; font-weight: 600; color: var(--text-main); }
+    .modal-card { width: 90%; max-width: 360px; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 32px 24px; text-align: center; box-shadow: var(--shadow-hover); }
+    .modal-title { font-size: 1.2rem; font-weight: 500; color: var(--text-dark); margin-bottom: 12px; }
+    .modal-desc { font-size: 0.9rem; color: var(--text-sub); margin-bottom: 24px; font-weight: 300; }
+    .modal-summary { background: var(--bg-surface); padding: 16px; border-radius: var(--radius-md); font-size: 0.85rem; line-height: 1.6; text-align: left; margin-bottom: 28px; color: var(--text-dark); border: 1px solid var(--border-light); }
     
     .toast {
-      position: fixed; bottom: 30px; left: 50%; transform: translate(-50%, 20px);
-      background: var(--text-main); color: var(--surface); padding: 12px 24px;
-      border-radius: 999px; font-size: 0.9rem; font-weight: 700; box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-      opacity: 0; pointer-events: none; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 9999;
+      position: fixed; bottom: 32px; left: 50%; transform: translate(-50%, 20px);
+      background: var(--text-dark); color: #FFF; padding: 12px 24px;
+      border-radius: 999px; font-size: 0.9rem; font-weight: 400; box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      opacity: 0; pointer-events: none; transition: all 0.3s ease; z-index: 9999;
     }
     .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
-    .footer { text-align: center; font-size: 0.8rem; color: var(--text-muted); font-weight: 600; margin-top: auto; padding-top: 16px; }
-    
+    .footer { text-align: center; font-size: 0.85rem; color: var(--text-muted); font-weight: 300; margin-top: auto; padding-top: 20px; }
   </style>
 </head>
 <body>
-  <div class="ambient-bg">
-    <div class="ambient-glow glow-1"></div>
-    <div class="ambient-glow glow-2"></div>
-    <div class="ambient-glow glow-3"></div>
-  </div>
+  <div class="bg-pattern"></div>
 
   <div class="app">
     <section class="hero" id="heroSection">
@@ -289,9 +283,9 @@
       </div>
     </section>
 
-    <section class="view active glass-card" id="loginView">
-      <h2 class="section-title">เข้าสู่ระบบ ✨</h2>
-      <p class="section-desc">จัดการบัญชีและแจ้งข้อมูลแบบรวดเร็ว</p>
+    <section class="view active card" id="loginView">
+      <h2 class="section-title">เข้าสู่ระบบ</h2>
+      <p class="section-desc">จัดการบัญชีและแจ้งข้อมูลบริการ</p>
       
       <div id="topAlert" class="alert-box"></div>
       
@@ -313,32 +307,36 @@
       <a class="forgot-link" id="btnForgotPassword">ลืมรหัสผ่าน?</a>
       
       <label class="remember-row">
-        <input type="checkbox" id="rememberPassword" /> จำฉันไว้ในระบบ
+        <input type="checkbox" id="rememberPassword" /> จดจำการเข้าสู่ระบบ
       </label>
       
       <div class="action-row">
         <button class="btn-primary" id="btnLogin">เข้าสู่ระบบ</button>
-        <button class="btn-secondary" id="showRegisterBtn">สร้างบัญชีผู้ใช้ใหม่</button>
+      </div>
+
+      <div style="text-align:center; margin-top:24px;">
+        <span style="font-size:0.9rem; color:var(--text-sub);">ยังไม่มีบัญชีใช่หรือไม่?</span>
+        <button type="button" class="btn-ghost" id="showRegisterBtn" style="display:inline; margin-left:4px; padding:0;">สร้างบัญชีใหม่</button>
       </div>
 
       <div class="live-feed">
         <div class="feed-header">
-          <div class="feed-title"><span class="status-dot" style="background:var(--primary); box-shadow:0 0 8px var(--primary);"></span> อัปเดตล่าสุด</div>
+          <div class="feed-title">การอัปเดตล่าสุด</div>
           <div class="feed-date" id="liveDate">กำลังโหลด...</div>
         </div>
-        <div class="feed-list" id="liveList"><div style="text-align:center; color:var(--text-muted); font-size:0.85rem; padding:10px; font-weight:600;">เชื่อมต่อฐานข้อมูล...</div></div>
+        <div class="feed-list" id="liveList"><div style="text-align:center; color:var(--text-muted); font-size:0.9rem; padding:12px;">กำลังเชื่อมต่อฐานข้อมูล...</div></div>
       </div>
     </section>
 
-    <section class="view glass-card" id="registerView">
-      <h2 class="section-title">สมัครสมาชิก 🌸</h2>
-      <p class="section-desc">กรอกข้อมูลให้ครบถ้วนเพื่อเปิดใช้งาน</p>
+    <section class="view card" id="registerView">
+      <h2 class="section-title">สมัครสมาชิก</h2>
+      <p class="section-desc">กรุณากรอกข้อมูลเพื่อลงทะเบียน</p>
       
       <div id="registerAlert" class="alert-box"></div>
       
       <div class="field-group">
         <label class="field-label">ชื่อ Line ของท่าน</label>
-        <div class="input-shell"><input id="registerDisplayName" type="text" placeholder="ตัวอย่าง: คุณเอ" /></div>
+        <div class="input-shell"><input id="registerDisplayName" type="text" placeholder="ระบุชื่อที่ใช้ติดต่อ" /></div>
       </div>
       <div class="field-group">
         <label class="field-label">อีเมล</label>
@@ -353,7 +351,7 @@
           </div>
         </div>
         <div class="hint-text">ประกอบด้วย A-Z, a-z, 0-9 (8 หลักขึ้นไป)</div>
-        <div class="hint-text" id="registerPasswordStrength" style="font-weight:700;">ระดับความปลอดภัย: -</div>
+        <div class="hint-text" id="registerPasswordStrength">ระดับความปลอดภัย: -</div>
       </div>
       <div class="field-group">
         <label class="field-label">ยืนยันรหัสผ่าน</label>
@@ -373,52 +371,52 @@
         <div class="input-shell"><input id="registerAdminName" type="text" placeholder="ระบุชื่อแอดมิน" /></div>
       </div>
       
-      <div class="action-row" style="margin-top:24px;">
+      <div class="action-row" style="margin-top:32px;">
         <button class="btn-primary" id="btnRegister">ยืนยันการสมัคร</button>
       </div>
-      <div style="text-align:center; margin-top:16px;">
-        <button class="btn-ghost" id="backToLoginBtn">กลับไปหน้าล็อกอิน</button>
+      <div style="text-align:center; margin-top:20px;">
+        <button class="btn-ghost" id="backToLoginBtn">กลับไปหน้าเข้าสู่ระบบ</button>
       </div>
     </section>
 
-    <section class="view glass-card" id="claimView">
-      <h2 class="section-title">ฟอร์มแจ้งข้อมูล 📝</h2>
-      <p class="section-desc">โปรดตรวจสอบข้อมูลให้ถูกต้องก่อนส่ง</p>
+    <section class="view card" id="claimView">
+      <h2 class="section-title">ฟอร์มแจ้งข้อมูล</h2>
+      <p class="section-desc">โปรดตรวจสอบรายละเอียดให้ถูกต้อง</p>
       
       <div id="claimAlert" class="alert-box"></div>
       
       <div class="info-grid" id="memberMiniBox" style="display:none;">
-        <div class="info-box full"><div class="info-label">บัญชีอีเมล</div><div class="info-value" id="profileEmail">-</div></div>
-        <div class="info-box"><div class="info-label">วันที่ในระบบ</div><div class="info-value" id="profileMemberDate">-</div></div>
-        <div class="info-box"><div class="info-label">ชื่อ Line</div><div class="info-value" id="profileLineName">-</div></div>
+        <div class="info-box"><div class="info-label">บัญชีอีเมล</div><div class="info-value" id="profileEmail">-</div></div>
+        <div class="info-box"><div class="info-label">วันที่ลงทะเบียน</div><div class="info-value" id="profileMemberDate">-</div></div>
+        <div class="info-box"><div class="info-label">Line ID</div><div class="info-value" id="profileLineName">-</div></div>
       </div>
 
       <div class="panel-box">
-        <div id="expiryFixedBox" style="display:none;">
-          <div style="font-size:0.85rem; font-weight:700; color:var(--text-sub);">วันหมดอายุสมาชิก (ดึงอัตโนมัติ)</div>
-          <div style="font-size:1.2rem; font-weight:800; color:var(--primary); margin-top:4px;" id="expiryFixedText">-</div>
+        <div id="expiryFixedBox" style="display:none; text-align:left;">
+          <div style="font-size:0.85rem; color:var(--text-sub); margin-bottom:4px;">วันหมดอายุ (ยืนยันจากระบบ)</div>
+          <div style="font-size:1.1rem; font-weight:500; color:var(--text-dark);" id="expiryFixedText">-</div>
         </div>
         <div id="expiryPickerBlock">
-          <div class="field-group" style="margin-bottom:12px; text-align:left;">
+          <div class="field-group" style="margin-bottom:16px; text-align:left;">
             <label class="field-label">ระบุวันหมดอายุสมาชิก</label>
             <div class="input-shell"><input id="expiryInput" type="date" /></div>
           </div>
-          <button class="btn-small" style="width:100%;" id="btnCheckExpiry">ตรวจสอบข้อมูลในระบบ</button>
-          <div id="expiryCheckResult" class="alert-box" style="margin-top:12px;"></div>
+          <button class="btn-small" style="width:100%;" id="btnCheckExpiry">ดึงข้อมูลจากฐานข้อมูล</button>
+          <div id="expiryCheckResult" class="alert-box" style="margin-top:16px;"></div>
         </div>
-        <div id="familyMoveDateBox" class="alert-box info" style="margin-top:12px;"></div>
-        <div id="manualExpiryWarning" class="alert-box error" style="margin-top:12px;">⚠️ ข้อมูลไม่ตรงระบบอาจถูกระงับสิทธิ์</div>
+        <div id="familyMoveDateBox" class="alert-box info" style="margin-top:16px;"></div>
+        <div id="manualExpiryWarning" class="alert-box warning" style="margin-top:16px;">ข้อมูลไม่ตรงระบบอาจถูกพิจารณายกเลิกสิทธิ์</div>
       </div>
 
-      <div class="panel-box" id="paymentSection" style="display:none; background:var(--surface); border-color:var(--border-focus);">
-        <h3 style="font-size:1.1rem; font-weight:800; margin:0 0 4px; color:var(--primary);">ชำระค่าบริการ 19 บาท 💸</h3>
-        <p style="font-size:0.85rem; color:var(--text-sub); margin-bottom:16px;">แพ็กเกจการดูแล กรุณาโอนชำระและแนบสลิป</p>
+      <div class="panel-box" id="paymentSection" style="display:none; background:var(--bg-card); border-color:var(--border-focus);">
+        <h3 style="font-size:1.1rem; font-weight:500; margin:0 0 8px; color:var(--text-dark);">ชำระค่าบริการ 19 บาท</h3>
+        <p style="font-size:0.85rem; color:var(--text-sub); margin-bottom:20px;">แพ็กเกจการดูแล กรุณาโอนชำระและแนบสลิป</p>
         
         <div class="bank-card">
-          <div style="font-size:0.85rem; font-weight:700; color:var(--text-sub);" id="bankName">ธ.กสิกร (KBank)</div>
+          <div style="font-size:0.85rem; color:var(--text-sub);" id="bankName">ธ.กสิกร (KBank)</div>
           <div class="bank-number" id="bankAccountNo">0628794251</div>
-          <div style="font-size:0.85rem; font-weight:700;" id="bankAccountName">นภัทรธมณฑ์ ฤทธิ์ชัยศักดิ์</div>
-          <div style="display:flex; gap:8px; justify-content:center; margin-top:16px;">
+          <div style="font-size:0.85rem;" id="bankAccountName">นภัทรธมณฑ์ ฤทธิ์ชัยศักดิ์</div>
+          <div style="display:flex; gap:8px; justify-content:center; margin-top:20px;">
             <button class="btn-small" id="btnCopyAccount">คัดลอกเลขบัญชี</button>
             <button class="btn-small" id="btnToggleQr">QR Code</button>
           </div>
@@ -427,91 +425,92 @@
         <div class="qr-container" id="qrWrap"><img id="paymentQr" src="https://img2.imgbiz.com/imgbiz/IMG_2680.jpeg" alt="QR" /></div>
 
         <div class="upload-zone">
-          <div style="font-size:0.95rem; font-weight:800; margin-bottom:12px;">อัปโหลดหลักฐาน (Slip)</div>
-          <div style="display:flex; gap:8px; justify-content:center;">
+          <div style="font-size:0.95rem; font-weight:500; margin-bottom:16px; color:var(--text-dark);">อัปโหลดหลักฐานการโอน</div>
+          <div style="display:flex; gap:12px; justify-content:center;">
             <button class="btn-small" id="btnPickSlip" style="border-color:var(--primary); color:var(--primary);">เลือกไฟล์ภาพ</button>
             <button class="btn-small" id="btnCameraSlip">ใช้กล้องถ่าย</button>
           </div>
           <input id="slipInput" type="file" accept="image/*" class="hidden-input" />
           <input id="slipInputCamera" type="file" accept="image/*" capture="environment" class="hidden-input" />
-          <div style="font-size:0.8rem; font-weight:600; color:var(--primary-2); margin-top:12px;" id="fileName">ยังไม่เลือกไฟล์ (รองรับไม่เกิน 3MB)</div>
-          <div id="slipStatusHint" class="alert-box success" style="padding:8px; margin-top:8px;"></div>
+          <div style="font-size:0.85rem; color:var(--text-sub); margin-top:16px;" id="fileName">รองรับไฟล์ไม่เกิน 3MB</div>
+          <div id="slipStatusHint" class="alert-box success" style="padding:10px; margin-top:12px;"></div>
           
           <div class="preview-wrap" id="slipPreviewWrap">
             <img id="slipPreview" class="preview-img" alt="Preview" />
-            <div style="display:flex; gap:8px; justify-content:center; margin-top:12px; width:100%;">
-              <button class="btn-ghost" id="btnViewLastSlip" style="background:var(--bg); padding:6px 12px; border-radius:8px;">เรียกดูรูปล่าสุด</button>
-              <button class="btn-ghost" id="btnRemoveSlip" style="background:#FEF2F2; color:var(--danger); padding:6px 12px; border-radius:8px;">ลบรูป</button>
+            <div style="display:flex; gap:12px; justify-content:center; margin-top:16px; width:100%;">
+              <button class="btn-ghost" id="btnViewLastSlip">ดูไฟล์ล่าสุด</button>
+              <button class="btn-ghost" id="btnRemoveSlip" style="color:var(--danger);">ลบไฟล์</button>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="action-row">
-        <button class="btn-primary" id="btnSubmit">ดำเนินการส่งข้อมูล 🚀</button>
-        <button class="btn-secondary" id="btnGotoStatus">ตรวจสอบสถานะ</button>
+      <div class="action-row" id="claimActionRow">
+        <button class="btn-primary" id="btnSubmit">ดำเนินการส่งข้อมูล</button>
+        <button class="btn-secondary" id="btnGotoStatus">ตรวจสอบสถานะคำขอ</button>
       </div>
-      <div style="text-align:center; margin-top:16px;">
-        <button class="btn-ghost" style="color:var(--danger);" id="btnLogout">ออกจากระบบ</button>
+      
+      <div style="text-align:center; margin-top:32px; border-top:1px solid var(--border-light); padding-top:20px;">
+        <button class="btn-ghost" style="color:var(--text-muted);" id="btnLogout">ลงชื่อออก</button>
       </div>
     </section>
 
-    <section class="view glass-card" id="statusView">
-      <h2 class="section-title">สถานะคำขอ 🔎</h2>
-      <p class="section-desc" id="statusPageText">ระบบอัปเดตความคืบหน้าเรียลไทม์</p>
+    <section class="view card" id="statusView">
+      <h2 class="section-title">สถานะคำขอ</h2>
+      <p class="section-desc" id="statusPageText">อัปเดตความคืบหน้าแบบเรียลไทม์</p>
 
-      <div class="panel-box" id="queueCard" style="display:none; background:var(--surface); border-color:var(--border-focus); box-shadow:var(--shadow-sm);">
-        <div style="font-size:0.85rem; font-weight:700; color:var(--text-sub);">หมายเลขปฏิบัติการ</div>
+      <div class="panel-box" id="queueCard" style="display:none; text-align:left;">
+        <div style="font-size:0.85rem; color:var(--text-sub);">หมายเลขคิวของคุณ</div>
         <div class="big-queue" id="queueNumberBig">#-</div>
         <div class="status-pill pill-blue" style="margin-top:4px;" id="miniClaimType">Premium Package</div>
         
         <div class="progress-track"><div class="progress-fill" id="claimProgressFill"></div></div>
-        <div style="font-size:0.9rem; font-weight:800; color:var(--primary);" id="claimProgressLabel">รอดำเนินการ</div>
+        <div style="font-size:0.95rem; font-weight:500; color:var(--primary);" id="claimProgressLabel">รอดำเนินการ</div>
       </div>
 
       <div id="results">
-        <div style="text-align:center; padding:20px; color:var(--text-muted); font-weight:600;">ดึงข้อมูลจากเซิร์ฟเวอร์...</div>
+        <div style="text-align:center; padding:24px; color:var(--text-muted); font-weight:300;">กำลังดึงข้อมูล...</div>
       </div>
 
-      <div style="display:flex; gap:12px; margin:24px 0;">
+      <div style="display:flex; gap:12px; margin:32px 0 24px;">
         <button class="btn-secondary" id="btnRefreshStatus" style="flex:1;">รีเฟรชข้อมูล</button>
         <button class="btn-secondary" id="btnBackToClaim" style="flex:1;">กลับหน้าฟอร์ม</button>
       </div>
 
-      <div style="border-top:2px dashed var(--border); padding-top:20px;">
-        <div style="font-size:0.95rem; font-weight:800; margin-bottom:12px; text-align:center;">ฟังก์ชันเพิ่มเติม</div>
+      <div style="border-top:1px solid var(--border-light); padding-top:24px;">
+        <div style="font-size:0.95rem; font-weight:500; margin-bottom:16px; text-align:center;">ฟังก์ชันเพิ่มเติม</div>
         <div style="display:flex; gap:12px;">
-          <button class="btn-small" id="btnToggleSwapEmailStatus" style="flex:1;">สลับอีเมล</button>
+          <button class="btn-small" id="btnToggleSwapEmailStatus" style="flex:1;">แก้ไขอีเมล</button>
           <a href="https://lin.ee/gAh3wAH" target="_blank" class="btn-small" style="flex:1; text-decoration:none; text-align:center;">ติดต่อแอดมิน</a>
         </div>
 
-        <div id="swapEmailPanelStatus" style="display:none; margin-top:16px; background:var(--bg); padding:16px; border-radius:var(--radius-md); border:1px solid var(--border);">
-          <div style="font-weight:800; margin-bottom:12px; text-align:center; color:var(--primary);">ขอเปลี่ยนอีเมลใช้งาน</div>
+        <div id="swapEmailPanelStatus" style="display:none; margin-top:20px; background:var(--bg-surface); padding:20px; border-radius:var(--radius-md);">
+          <div style="font-weight:500; margin-bottom:16px; text-align:center; color:var(--text-dark);">คำขอแก้ไขอีเมลใช้งาน</div>
           <div class="field-group">
             <div class="input-shell"><input id="swapNewEmail" type="email" placeholder="ระบุอีเมลใหม่" /></div>
           </div>
-          <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:16px; font-size:0.85rem; font-weight:600; color:var(--text-sub);">
+          <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:24px; font-size:0.85rem; color:var(--text-sub);">
             <label style="display:flex; gap:8px; cursor:pointer;"><input type="radio" name="swapReason" value="ติดข้อจำกัด 12 เดือน" checked style="width:auto;" /> ติดเงื่อนไข 12 เดือน</label>
-            <label style="display:flex; gap:8px; cursor:pointer;"><input type="radio" name="swapReason" value="ต้องการเปลี่ยนใหม่" style="width:auto;" /> ขอเปลี่ยนใหม่</label>
+            <label style="display:flex; gap:8px; cursor:pointer;"><input type="radio" name="swapReason" value="ต้องการเปลี่ยนใหม่" style="width:auto;" /> ขอเปลี่ยนบัญชีใหม่</label>
           </div>
-          <div style="display:flex; gap:8px;">
-            <button class="btn-secondary" id="btnCancelSwapEmail" style="flex:1; min-height:40px;">ยกเลิก</button>
-            <button class="btn-primary" id="btnConfirmSwapEmail" style="flex:1; min-height:40px;">บันทึก</button>
+          <div style="display:flex; gap:12px;">
+            <button class="btn-secondary" id="btnCancelSwapEmail" style="flex:1; min-height:44px;">ยกเลิก</button>
+            <button class="btn-primary" id="btnConfirmSwapEmail" style="flex:1; min-height:44px;">บันทึก</button>
           </div>
-          <div id="swapResultBox" class="alert-box success" style="margin-top:12px;"></div>
+          <div id="swapResultBox" class="alert-box success" style="margin-top:16px;"></div>
         </div>
       </div>
       
-      <div style="text-align:center; margin-top:20px;">
-        <button class="btn-ghost" style="color:var(--danger);" id="btnLogoutStatus">ออกจากระบบ</button>
+      <div style="text-align:center; margin-top:32px;">
+        <button class="btn-ghost" style="color:var(--text-muted);" id="btnLogoutStatus">ลงชื่อออก</button>
       </div>
     </section>
 
     <footer class="footer">
-      <div style="display:inline-block; padding:8px 20px; background:var(--surface); border-radius:999px; border:1px solid var(--border); box-shadow:var(--shadow-sm); font-weight:700;">
-        Support Line: <span id="supportLineFooter" style="color:var(--primary);">@467dlpti</span>
+      <div style="font-size: 0.9rem; color: var(--text-dark); margin-bottom: 4px;">
+        Support: <span id="supportLineFooter" style="color:var(--primary); font-weight:500;">@467dlpti</span>
       </div>
-      <div style="margin-top:12px; font-weight:600; opacity:0.6;">426 SHOP · Modern Tech · EST 2024</div>
+      <div>426 SHOP · Member Services · EST 2024</div>
     </footer>
   </div>
 
@@ -519,28 +518,30 @@
 
   <div id="loadingOverlay" class="overlay">
     <div class="loader-card">
-      <div class="tech-spinner"></div>
-      <div style="font-size:1.1rem; font-weight:800; color:var(--text-main);">กำลังเชื่อมต่อระบบ</div>
-      <div style="font-size:0.85rem; font-weight:600; color:var(--text-sub); margin-top:4px;">รอแป๊บนึงน้า ✨</div>
+      <div class="elegant-spinner"></div>
+      <div style="font-size:1.1rem; font-weight:500; color:var(--text-dark);">กำลังประมวลผล</div>
+      <div style="font-size:0.9rem; color:var(--text-sub); margin-top:6px; font-weight:300;">กรุณารอสักครู่</div>
       <div class="fake-bar"><div class="fake-bar-fill" id="fakeProgress"></div></div>
     </div>
   </div>
 
   <div id="confirmModal" class="overlay">
     <div class="modal-card">
-      <h3 class="section-title">ยืนยันข้อมูล 💖</h3>
-      <p class="section-desc">ตรวจสอบรายละเอียดให้เป๊ะก่อนส่งน้า</p>
+      <h3 class="section-title">ยืนยันข้อมูล</h3>
+      <p class="section-desc">ตรวจสอบรายละเอียดให้ถูกต้องก่อนส่งข้อมูล</p>
       <div class="modal-summary" id="confirmSummary"></div>
-      <div style="display:flex; gap:12px; margin-top:24px;">
-        <button class="btn-secondary" id="btnCancelConfirm" style="flex:1;">กลับไปแก้</button>
-        <button class="btn-primary" id="btnConfirmSubmit" style="flex:1;">ยืนยันส่งเลย</button>
+      <div style="display:flex; gap:12px; margin-top:32px;">
+        <button class="btn-secondary" id="btnCancelConfirm" style="flex:1;">กลับไปแก้ไข</button>
+        <button class="btn-primary" id="btnConfirmSubmit" style="flex:1;">ยืนยันคำขอ</button>
       </div>
     </div>
   </div>
 
   <script>
+    // ---------------------------------------------------------
+    // 1. Constants & Config
+    // ---------------------------------------------------------
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyazkexGrcWWjDKaTSalHpCMWdn-dKLkmB6ss7Mbn8PJnRANkBlD35ORh9KceQxDnLV/exec";
-
     const TOKEN_KEY = "shop426_member_token";
     const REMEMBER_KEY = "shop426_saved_login";
     const LAST_SLIP_KEY = "shop426_last_slip_preview";
@@ -556,10 +557,10 @@
     let claimConfig = {
       claimStartHour: 7, claimEndHour: 19, claimOpenDays: [1,2,3,4,5,6],
       claimOpenText: "เปิดรับแจ้งเคลม วันจันทร์–เสาร์\nเวลา 07.00–19.00 น.",
-      outOfTimeErrorText: "ระบบปิดรับคำขอแล้วน้า กรุณาทำรายการในเวลาทำการค่ะ",
+      outOfTimeErrorText: "ระบบปิดรับคำขอ กรุณาทำรายการในเวลาทำการครับ",
       paidYear: "2568", packagePrice: 19,
       bankName: "ธ.กสิกร (KBank)", bankAccountNo: "0628794251", bankAccountName: "นภัทรธมณฑ์ ฤทธิ์ชัยศักดิ์",
-      supportLine: "@467dlpti", webEnabled: true, expiredAccountText: "บัญชีหมดอายุแล้วน้า ติดต่อแอดมินเพื่อต่ออายุได้เลยค่ะ"
+      supportLine: "@467dlpti", webEnabled: true, expiredAccountText: "บัญชีของท่านหมดอายุ กรุณาติดต่อแอดมิน"
     };
 
     const state = {
@@ -570,7 +571,9 @@
 
     let activeSlipFile = null;
 
-    // --- DOM Elements ---
+    // ---------------------------------------------------------
+    // 2. DOM Elements
+    // ---------------------------------------------------------
     const heroSection = document.getElementById("heroSection");
     const loginView = document.getElementById("loginView");
     const registerView = document.getElementById("registerView");
@@ -670,7 +673,9 @@
     const swapNewEmail = document.getElementById("swapNewEmail");
     const swapResultBox = document.getElementById("swapResultBox");
 
-    // --- Core Loading & Fetch API (Abort Controller 9s limit) ---
+    // ---------------------------------------------------------
+    // 3. Core Loading & Fetch Logic
+    // ---------------------------------------------------------
     let fallbackTimeoutTimer;
     
     function showLoading() {
@@ -680,17 +685,17 @@
         setTimeout(() => { fakeProgress.style.transition = 'width 0.4s ease-out'; fakeProgress.style.width = "85%"; }, 50);
       }
       clearTimeout(fallbackTimeoutTimer);
-      fallbackTimeoutTimer = setTimeout(() => { hideLoading(); showToast("ระบบประมวลผลนานผิดปกติ กรุณาลองใหม่น้า"); }, 9000);
+      fallbackTimeoutTimer = setTimeout(() => { hideLoading(); showToast("ระบบประมวลผลนานผิดปกติ กรุณาลองใหม่"); }, 10000);
     }
 
     function hideLoading() {
       clearTimeout(fallbackTimeoutTimer);
       if(fakeProgress) { fakeProgress.style.transition = 'width 0.2s ease-out'; fakeProgress.style.width = "100%"; }
-      setTimeout(() => { loadingOverlay.classList.remove("show"); }, 250);
+      setTimeout(() => { loadingOverlay.classList.remove("show"); }, 300);
     }
 
     async function fetchWithTimeout(resource, options = {}) {
-      const { timeout = 8500 } = options; 
+      const { timeout = 9500 } = options; 
       const controller = new AbortController();
       const id = setTimeout(() => controller.abort(), timeout);
       const response = await fetch(resource, { ...options, signal: controller.signal });
@@ -711,10 +716,12 @@
           method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload)
         });
         return await res.json();
-      } catch(e) { return { ok: false, message: "เครือข่ายมีปัญหา กรุณาลองใหม่ค่ะ" }; }
+      } catch(e) { return { ok: false, message: "เครือข่ายมีปัญหา กรุณาลองใหม่" }; }
     }
 
-    // --- Helpers ---
+    // ---------------------------------------------------------
+    // 4. Utility Functions
+    // ---------------------------------------------------------
     function normalizeEmail(v){ return String(v || "").trim().toLowerCase(); }
     function normalizeText(v){ return String(v || "").trim(); }
     function escapeHtml(str){ return String(str || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
@@ -754,7 +761,7 @@
     function setView(id, persist = true){
       [loginView, registerView, claimView, statusView].forEach(v => v.classList.remove("active"));
       document.getElementById(id).classList.add("active");
-      heroSection.style.display = (id === "loginView" || id === "registerView") ? "flex" : "none";
+      heroSection.style.display = (id === "loginView" || id === "registerView") ? "block" : "none";
       if (persist) localStorage.setItem(LAST_VIEW_KEY, id);
       if(id === "statusView" && state.latestHistory.length) renderStatusPage();
     }
@@ -769,8 +776,10 @@
       setTimeout(() => { el.className = "alert-box"; }, 5000);
     }
 
-    // --- Logic & Sync ---
-    async function syncData(full = true) {
+    // ---------------------------------------------------------
+    // 5. Data Sync & UI Updates
+    // ---------------------------------------------------------
+    async function syncData() {
       const q = state.token ? `&token=${encodeURIComponent(state.token)}` : "";
       const data = await safeGet(`${SCRIPT_URL}?action=bootstrap&_t=${Date.now()}${q}`);
       
@@ -794,11 +803,11 @@
           <div class="feed-item">
             <div class="feed-meta">
               <span class="feed-email">${escapeHtml(i.email?.replace(/^(...)(.*)(@.*)$/, "$1***$3") || "-")}</span>
-              <span class="feed-time">แจ้งเมื่อ ${formatTime(i.createdAt || i.updatedAt)}</span>
+              <span class="feed-time">อัปเดตเมื่อ ${formatTime(i.createdAt || i.updatedAt)}</span>
             </div>
             ${decorateStatus(i.statusText)}
           </div>
-        `).join('') || `<div style="text-align:center;font-size:0.85rem;color:var(--text-sub);padding:10px;font-weight:600;">ยังไม่มีการเคลื่อนไหวค่ะ</div>`;
+        `).join('') || `<div style="text-align:center;font-size:0.85rem;color:var(--text-muted);padding:10px;font-weight:400;">ยังไม่มีความเคลื่อนไหว</div>`;
       }
 
       if(Array.isArray(data?.history)) {
@@ -823,7 +832,7 @@
 
       if(state.inShopGroupNormal) {
         familyMoveDateBox.style.display = "block";
-        familyMoveDateBox.innerHTML = "✨ บัญชีนี้ใช้งานได้ปกติ" + (state.moveGroupDate ? `<br>กำหนดวันย้ายกลุ่ม: ${formatThaiDate(state.moveGroupDate)}` : "");
+        familyMoveDateBox.innerHTML = "สถานะ: บัญชีใช้งานได้ปกติ" + (state.moveGroupDate ? `<br>กำหนดวันย้ายกลุ่ม: ${formatThaiDate(state.moveGroupDate)}` : "");
         paymentSection.style.display = "none"; claimActionRow.style.display = "none";
       } else {
         const isPaid = state.member.signupYearThai === String(claimConfig.paidYear);
@@ -833,31 +842,33 @@
 
     function renderStatusPage() {
       const curr = state.latestHistory[0];
-      if(!curr) { results.innerHTML = `<div style="text-align:center;padding:24px;color:var(--text-sub);font-weight:700;">ยังไม่มีประวัติการทำรายการค่ะ</div>`; queueCard.style.display="none"; return; }
+      if(!curr) { results.innerHTML = `<div style="text-align:center;padding:24px;color:var(--text-muted);font-weight:400;">ยังไม่มีประวัติการทำรายการ</div>`; queueCard.style.display="none"; return; }
       
       queueCard.style.display = "block"; queueNumberBig.textContent = "#" + (curr.queueNo || "-");
       miniClaimType.textContent = curr.claimType === "paid" ? "Premium 19฿" : "Free Claim";
       
       const stat = curr.statusText || "";
       let w = "20%", clr = "var(--danger)", txt = "รอดำเนินการ";
-      if(stat.includes("เสร็จ") || stat.includes("ปกติ")) { w = "100%"; clr = "var(--success)"; txt = "เสร็จเรียบร้อย"; }
-      else if(stat.includes("ตรวจสอบ")) { w = "60%"; clr = "var(--info)"; txt = "กำลังตรวจสอบ"; }
+      if(stat.includes("เสร็จ") || stat.includes("ปกติ")) { w = "100%"; clr = "var(--success)"; txt = "ดำเนินการเรียบร้อย"; }
+      else if(stat.includes("ตรวจสอบ")) { w = "60%"; clr = "var(--info)"; txt = "กำลังตรวจสอบข้อมูล"; }
       
       claimProgressFill.style.width = w; claimProgressFill.style.background = clr;
       claimProgressLabel.textContent = txt; claimProgressLabel.style.color = clr;
 
       results.innerHTML = `
-        <div class="panel-box" style="background:var(--surface); border-color:var(--border); text-align:left; padding:16px;">
-          <div style="font-size:0.85rem; color:var(--text-sub); margin-bottom:8px; font-weight:700; text-transform:uppercase;">รายการปัจจุบัน</div>
-          <div style="font-size:1.1rem; font-weight:800; color:var(--text-main); margin-bottom:12px;">${escapeHtml(curr.email)}</div>
-          <div style="font-size:0.95rem; font-weight:700;">สถานะ: <span style="color:${clr};">${escapeHtml(stat||'รอดำเนินการ')}</span></div>
-          <div style="font-size:0.85rem; color:var(--text-sub); margin-top:8px; font-weight:600;">อัปเดต: ${formatThaiDate(curr.updatedAt || curr.createdAt)}</div>
-          <div style="font-size:0.85rem; color:var(--text-sub); margin-top:4px; font-weight:600;">หมดอายุ: ${curr.expiry || '-'}</div>
+        <div class="panel-box" style="text-align:left; padding:20px;">
+          <div style="font-size:0.85rem; color:var(--text-sub); margin-bottom:8px; font-weight:600;">ข้อมูลล่าสุด</div>
+          <div style="font-size:1.1rem; font-weight:600; color:var(--text-dark); margin-bottom:12px; font-family:var(--font-en);">${escapeHtml(curr.email)}</div>
+          <div style="font-size:0.95rem; font-weight:500;">สถานะ: <span style="color:${clr};">${escapeHtml(stat||'รอดำเนินการ')}</span></div>
+          <div style="font-size:0.85rem; color:var(--text-sub); margin-top:8px;">แจ้งเมื่อ: ${formatThaiDate(curr.updatedAt || curr.createdAt)}</div>
+          <div style="font-size:0.85rem; color:var(--text-sub); margin-top:4px;">หมดอายุ: ${curr.expiry || '-'}</div>
         </div>
       `;
     }
 
-    // --- Form Checks & Password ---
+    // ---------------------------------------------------------
+    // 6. Action Handlers (Login, Register, Claim)
+    // ---------------------------------------------------------
     document.querySelectorAll(".toggle-pass").forEach(b => b.onclick = () => {
       const i = document.getElementById(b.dataset.target); i.type = i.type === "password" ? "text" : "password"; b.textContent = i.type === "password" ? "ซ่อน" : "แสดง";
     });
@@ -866,28 +877,27 @@
       const v = registerPassword.value; let score = 0;
       if (v.length >= 8) score++; if (/[a-z]/.test(v)) score++; if (/[A-Z]/.test(v)) score++; if (/\d/.test(v)) score++;
       const el = registerPasswordStrength;
-      if (!PASSWORD_REGEX.test(v)) { el.textContent = "ความปลอดภัย: ต่ำ"; el.className = "hint-text alert-box error show"; }
-      else if (score <= 3) { el.textContent = "ความปลอดภัย: ปานกลาง"; el.className = "hint-text alert-box warning show"; }
-      else { el.textContent = "ความปลอดภัย: สูง"; el.className = "hint-text alert-box success show"; }
+      if (!PASSWORD_REGEX.test(v)) { el.textContent = "ความปลอดภัย: ต่ำ"; el.style.color = "var(--danger)"; }
+      else if (score <= 3) { el.textContent = "ความปลอดภัย: ปานกลาง"; el.style.color = "var(--warning)"; }
+      else { el.textContent = "ความปลอดภัย: สูง"; el.style.color = "var(--success)"; }
     };
 
-    // --- Action Handlers ---
     btnLogin.onclick = async () => {
       const email = loginEmail.value.trim().toLowerCase(); const pass = loginPassword.value;
-      if(!email || !pass) return showToast("กรุณากรอกข้อมูลให้ครบค่ะ");
+      if(!email || !pass) return showToast("กรุณากรอกข้อมูลให้ครบถ้วน");
       
       showLoading(); const res = await safePost({ action: "login", email, password: pass }); hideLoading();
 
       if(res?.ok) {
         state.token = res.token; sessionStorage.setItem(TOKEN_KEY, res.token);
         if(rememberPassword.checked) localStorage.setItem(REMEMBER_KEY, JSON.stringify({email, password:pass})); else localStorage.removeItem(REMEMBER_KEY);
-        showToast("เข้าสู่ระบบสำเร็จ ✨"); setView("claimView"); syncData();
+        showToast("เข้าสู่ระบบสำเร็จ"); setView("claimView"); syncData();
       } else { showAlert(topAlert, res?.message || "อีเมลหรือรหัสผ่านไม่ถูกต้อง", "error"); }
     };
 
     btnRegister.onclick = async () => {
       const email = registerEmail.value; const pass = registerPassword.value;
-      if(pass !== registerConfirmPassword.value) return showToast("รหัสผ่านยืนยันไม่ตรงกันค่ะ");
+      if(pass !== registerConfirmPassword.value) return showToast("รหัสผ่านยืนยันไม่ตรงกัน");
       
       showLoading();
       const res = await safePost({ action: "register", email, password: pass, displayName: registerDisplayName.value, memberDate: registerMemberDate.value, adminName: registerAdminName.value });
@@ -895,21 +905,20 @@
 
       if(res?.ok) {
         state.token = res.token; sessionStorage.setItem(TOKEN_KEY, res.token);
-        showToast("สร้างบัญชีเรียบร้อย 🌸"); setView("claimView"); syncData();
+        showToast("สมัครสมาชิกสำเร็จ"); setView("claimView"); syncData();
       } else { showAlert(registerAlert, res?.message || "ทำรายการไม่สำเร็จ", "error"); }
     };
 
     btnForgotPassword.onclick = async () => {
       const email = loginEmail.value.trim().toLowerCase();
-      if(!email) return showToast("กรุณาระบุอีเมลก่อนค่ะ");
+      if(!email) return showToast("กรุณาระบุอีเมลในช่องก่อน");
       showLoading(); const res = await safePost({ action: "forgotPassword", email }); hideLoading();
-      if(res?.ok) showAlert(topAlert, "ส่งคำแนะนำไปที่อีเมลแล้วค่ะ เช็คเมลน้า", "success"); else showAlert(topAlert, res?.message || "เกิดข้อผิดพลาด", "error");
+      if(res?.ok) showAlert(topAlert, "ส่งคำแนะนำไปที่อีเมลเรียบร้อยแล้ว", "success"); else showAlert(topAlert, res?.message || "เกิดข้อผิดพลาด", "error");
     };
 
-    const logoutHandler = () => { sessionStorage.clear(); localStorage.removeItem(FAST_STATUS_KEY); state.token = ""; state.member = null; setView("loginView"); showToast("ออกจากระบบแล้ว 👋"); };
+    const logoutHandler = () => { sessionStorage.clear(); localStorage.removeItem(FAST_STATUS_KEY); state.token = ""; state.member = null; setView("loginView"); showToast("ออกจากระบบเรียบร้อย"); };
     btnLogout.onclick = logoutHandler; btnLogoutStatus.onclick = logoutHandler;
 
-    // --- Claim & Submit ---
     btnPickSlip.onclick = () => slipInput.click();
     btnCameraSlip.onclick = () => slipInputCamera.click();
     const handleFile = (e) => {
@@ -917,7 +926,7 @@
       if(file) {
         activeSlipFile = file; fileName.textContent = file.name;
         const rd = new FileReader(); rd.onload = (ev) => { slipPreview.src = ev.target.result; slipPreviewWrap.style.display = "flex"; }; rd.readAsDataURL(file);
-        slipStatusHint.className = "alert-box success show"; slipStatusHint.textContent = "แนบรูปเรียบร้อย ✨"; showToast("แนบสลิปแล้ว");
+        slipStatusHint.className = "alert-box success show"; slipStatusHint.textContent = "อัปโหลดรูปเรียบร้อย"; showToast("เพิ่มหลักฐานแล้ว");
       }
     };
     slipInput.onchange = handleFile; slipInputCamera.onchange = handleFile;
@@ -927,16 +936,16 @@
       showLoading(); const d = await safeGet(`${SCRIPT_URL}?action=checkExpiry&token=${state.token}`); hideLoading();
       if(d?.ok) {
         if(d.expiryYMD) expiryInput.value = d.expiryYMD;
-        if(isNormalInShopStatusText(d.statusText || d.message)) { state.inShopGroupNormal = true; updateMemberUI(); showAlert(expiryCheckResult, "บัญชีใช้งานปกติ ไม่ต้องแจ้งเคลมค่ะ ✨", "success"); }
-        else { showAlert(expiryCheckResult, "ดึงข้อมูลล่าสุดเรียบร้อย", "success"); }
+        if(isNormalInShopStatusText(d.statusText || d.message)) { state.inShopGroupNormal = true; updateMemberUI(); showAlert(expiryCheckResult, "สถานะ: บัญชีใช้งานได้ปกติ", "success"); }
+        else { showAlert(expiryCheckResult, "ดึงข้อมูลสำเร็จ", "success"); }
       } else showAlert(expiryCheckResult, d?.message || "ไม่พบข้อมูล", "warning");
     };
 
     btnSubmit.onclick = () => {
-      if(!expiryInput.value) return showToast("กรุณาระบุวันหมดอายุค่ะ");
-      if(paymentSection.style.display === "block" && !activeSlipFile) return showToast("อย่าลืมแนบสลิปน้า 💸");
+      if(!expiryInput.value) return showToast("กรุณาระบุวันหมดอายุ");
+      if(paymentSection.style.display === "block" && !activeSlipFile) return showToast("กรุณาแนบสลิปชำระเงิน");
       
-      confirmSummary.innerHTML = `<strong>อีเมล:</strong> ${state.member?.email}<br><strong>วันหมดอายุ:</strong> ${formatThaiDate(expiryInput.value)}<br><strong>สลิป:</strong> ${activeSlipFile?'✅ อัปโหลดแล้ว':'❌ ไม่มีไฟล์'}`;
+      confirmSummary.innerHTML = `<strong>อีเมล:</strong> ${state.member?.email}<br><strong>วันหมดอายุ:</strong> ${formatThaiDate(expiryInput.value)}<br><strong>สลิป:</strong> ${activeSlipFile?'แนบแล้ว':'ไม่มี'}`;
       confirmModal.classList.add("show");
     };
 
@@ -950,30 +959,30 @@
       hideLoading();
 
       if(res?.ok) {
-        showToast("ส่งข้อมูลสำเร็จ! 🚀"); btnRemoveSlip.click(); setView("statusView"); syncData();
+        showToast("ดำเนินการสำเร็จ"); btnRemoveSlip.click(); setView("statusView"); syncData();
       } else { showAlert(claimAlert, res?.message || "เกิดข้อผิดพลาด", "error"); }
     };
 
-    // --- Extra Utilities ---
+    // --- Extra Navs & UI Utilities ---
     showRegisterBtn.onclick = () => setView("registerView"); backToLoginBtn.onclick = () => setView("loginView");
     btnGotoStatus.onclick = () => setView("statusView"); btnBackToClaim.onclick = () => setView("claimView");
-    btnRefreshStatus.onclick = () => { showLoading(); syncData().then(()=>hideLoading()); showToast("อัปเดตข้อมูลแล้ว"); };
+    btnRefreshStatus.onclick = () => { showLoading(); syncData().then(()=>hideLoading()); showToast("รีเฟรชข้อมูลแล้ว"); };
     
     btnToggleQr.onclick = () => document.getElementById("qrWrap").classList.toggle("show");
-    btnCopyAccount.onclick = () => { navigator.clipboard.writeText(claimConfig.bankAccountNo); showToast("คัดลอกเลขบัญชีแล้ว 📋"); };
+    btnCopyAccount.onclick = () => { navigator.clipboard.writeText(claimConfig.bankAccountNo); showToast("คัดลอกเลขบัญชีแล้ว"); };
     
-    btnViewLastSlip.onclick = () => { const l = safeGetLocal(LAST_SLIP_KEY, null); if(l?.dataUrl) { slipPreview.src = l.dataUrl; slipPreviewWrap.style.display="flex"; fileName.textContent="ไฟล์ล่าสุด: "+l.name; showToast("โหลดรูปล่าสุดมาให้แล้ว"); } else showToast("ไม่มีไฟล์เดิมค่ะ"); };
+    btnViewLastSlip.onclick = () => { const l = safeGetLocal(LAST_SLIP_KEY, null); if(l?.dataUrl) { slipPreview.src = l.dataUrl; slipPreviewWrap.style.display="flex"; fileName.textContent="ไฟล์เดิม: "+l.name; showToast("แสดงรูปเดิม"); } else showToast("ไม่มีไฟล์ล่าสุด"); };
 
     btnToggleSwapEmailStatus.onclick = () => { const el = swapEmailPanelStatus; el.style.display = el.style.display === "block" ? "none" : "block"; };
     btnCancelSwapEmail.onclick = () => swapEmailPanelStatus.style.display = "none";
     btnConfirmSwapEmail.onclick = async () => {
-      const newEmail = swapNewEmail.value; if(!newEmail) return showToast("กรุณาระบุอีเมลค่ะ");
+      const newEmail = swapNewEmail.value; if(!newEmail) return showToast("กรุณาระบุอีเมล");
       showLoading(); const res = await safePost({ action:"swapEmail", token:state.token, oldEmail:state.member.email, newEmail, reason:document.querySelector('input[name="swapReason"]:checked').value }); hideLoading();
-      if(res?.ok) { showToast("อัปเดตอีเมลสำเร็จ ✨"); swapEmailPanelStatus.style.display = "none"; state.token = res.token; sessionStorage.setItem(TOKEN_KEY, res.token); syncData(); }
+      if(res?.ok) { showToast("อัปเดตอีเมลสำเร็จ"); swapEmailPanelStatus.style.display = "none"; state.token = res.token; sessionStorage.setItem(TOKEN_KEY, res.token); syncData(); }
       else { swapResultBox.className = "alert-box error show"; swapResultBox.textContent = res?.message || "ทำรายการไม่สำเร็จ"; }
     };
 
-    // --- Background Polling (Eco-Mode) ---
+    // --- Lifecycle & Polling ---
     let poller;
     document.addEventListener("visibilitychange", () => {
       if(document.hidden) clearInterval(poller); else { syncData(); poller = setInterval(syncData, 30000); }
