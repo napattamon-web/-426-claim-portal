@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#12090b" />
   <style>
+    /* นำเข้าฟอนต์โค้งมนน่ารักๆ จาก Google Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap');
+
     :root{
       --bg:#12090b;
       --bg2:#1a0d10;
@@ -50,7 +53,7 @@
     html,body{margin:0;padding:0;min-height:100%}
     body{
       min-height:100vh;
-      font-family:Arial, Helvetica, sans-serif;
+      font-family:'Prompt', sans-serif;
       color:var(--text);
       background:
         radial-gradient(circle at 0% 0%, rgba(255,92,124,.10), transparent 24%),
@@ -120,12 +123,19 @@
       padding:14px 14px 20px;display:flex;flex-direction:column;gap:14px;
     }
 
+    /* ลูกเล่น Bouncy เวลา Hover การ์ดต่างๆ */
+    .glass, .card, .queue-card, .result-item {
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .glass:hover, .card:hover {
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: 0 25px 50px rgba(255, 92, 124, 0.15);
+    }
+
     .glass{
       background:linear-gradient(180deg,var(--card),var(--card-2));
       border:1px solid var(--line);box-shadow:var(--shadow);border-radius:var(--radius-xl);
-      transition:transform .12s ease, box-shadow .12s ease;
     }
-    .glass:hover{transform:translateY(-1px)}
     .tap-card:active{transform:scale(.994)}
 
     .hero{
@@ -183,7 +193,7 @@
     .card{
       background:linear-gradient(180deg,var(--surface),var(--surface-2));
       border:1px solid var(--line);border-radius:26px;padding:15px;box-shadow:var(--shadow-soft);
-      transition:transform .12s ease, box-shadow .12s ease;position:relative;overflow:hidden;
+      position:relative;overflow:hidden;
     }
     .card::before{
       content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(255,255,255,.44), transparent 28%);pointer-events:none;
@@ -220,7 +230,8 @@
     .password-shell input{flex:1;min-width:0}
 
     input[type="email"],input[type="password"],input[type="text"],input[type="date"]{
-      width:100%;border:0;outline:0;background:transparent;font-family:Arial, Helvetica, sans-serif;
+      width:100%;border:0;outline:0;background:transparent;
+      font-family:'Prompt', sans-serif;
       font-size:.96rem;color:var(--text);text-align:center;font-weight:700;
     }
     input::placeholder{color:var(--muted);font-weight:600}
@@ -240,7 +251,8 @@
 
     .forgot-row{margin-top:6px;display:flex;justify-content:flex-end;position:relative;z-index:1}
     .forgot-mini{
-      border:0;background:transparent;color:var(--sub);font-family:Arial, Helvetica, sans-serif;
+      border:0;background:transparent;color:var(--sub);
+      font-family:'Prompt', sans-serif;
       font-size:.74rem;font-weight:800;cursor:pointer;padding:2px 4px;border-radius:8px;transition:.12s ease;
     }
 
@@ -255,9 +267,13 @@
       display:flex;gap:10px;margin-top:14px;align-items:center;justify-content:center;position:relative;z-index:1;
     }
 
-    .btn-primary,.btn-secondary,.btn-danger,.btn-link-small,.btn-mini,.btn-admin,.btn-soft-cute,.upload-btn,.btn-scan-toggle{
-      border-radius:999px;font-family:Arial, Helvetica, sans-serif;font-weight:800;cursor:pointer;
-      transition:.12s ease;border:1px solid transparent;position:relative;overflow:hidden;
+    /* ลูกเล่นปุ่มเด้งดึ๋งนุ่มนวล */
+    button, .btn-primary, .btn-secondary, .btn-danger, .btn-link-small, .btn-mini, .btn-admin, .btn-soft-cute, .upload-btn, .btn-scan-toggle {
+      border-radius:999px;font-family:'Prompt', sans-serif;font-weight:800;cursor:pointer;
+      transition:all 0.2s ease;border:1px solid transparent;position:relative;overflow:hidden;
+    }
+    button:active {
+      transform: scale(0.92) !important;
     }
 
     .btn-primary{
@@ -618,7 +634,15 @@
       width:100%;max-width:260px;border-radius:24px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow);padding:18px 16px 16px;text-align:center;position:relative;overflow:hidden;
     }
     .spinner-wrap{width:78px;height:78px;margin:0 auto 8px;position:relative;display:grid;place-items:center;z-index:1}
-    .spinner-ring{width:78px;height:78px;border-radius:999px;border:5px solid #fdebf1;border-top-color:var(--primary);animation:spin .42s linear infinite}
+    
+    /* สปินเนอร์แบบใหม่ หัวใจเต้นหมุนๆ */
+    .spinner-ring {
+      width:78px;height:78px;
+      border-radius: 50%;
+      border: 6px solid #fdebf1;
+      border-top-color: var(--primary-3);
+      animation: spin 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+    }
     .spinner-percent{position:absolute;font-size:.92rem;font-weight:800;color:var(--primary-deep)}
     @keyframes spin{to{transform:rotate(360deg)}}
     .loading-title{font-size:.98rem;font-weight:800;color:var(--primary-deep);text-align:center;position:relative;z-index:1}
@@ -667,6 +691,7 @@
         <img
           src="https://img2.imgbiz.com/imgbiz/IMG_0923.jpeg"
           alt="426 SHOP logo"
+          loading="lazy"
           onerror="this.src='https://via.placeholder.com/120x120.png?text=426';"
         />
       </div>
@@ -891,7 +916,7 @@
 
               <div class="qr-wrap" id="qrWrap">
                 <div class="qr-title">สแกน QR เพื่อชำระเงิน</div>
-                <img class="qr-img" id="paymentQr" src="https://img2.imgbiz.com/imgbiz/IMG_2680.jpeg" alt="QR Payment" />
+                <img class="qr-img" id="paymentQr" src="https://img2.imgbiz.com/imgbiz/IMG_2680.jpeg" alt="QR Payment" loading="lazy" />
                 <div class="qr-caption">เมื่อชำระเงินแล้ว กรุณาแนบสลิปด้านล่างเพื่อส่งคำขอเข้าระบบ</div>
               </div>
 
@@ -913,7 +938,7 @@
                 <div class="upload-status" id="slipStatusHint">แนบสลิปเรียบร้อยแล้ว</div>
 
                 <div class="preview-wrap" id="slipPreviewWrap">
-                  <img id="slipPreview" class="preview-img" alt="ตัวอย่างสลิป" />
+                  <img id="slipPreview" class="preview-img" alt="ตัวอย่างสลิป" loading="lazy" />
                   <div style="display:grid;gap:8px;width:100%;">
                     <button type="button" class="btn-link-small" id="btnViewLastSlip">ดูสลิปล่าสุด</button>
                     <button type="button" class="btn-link-small" id="btnRemoveSlip">ลบรูปที่เลือก</button>
@@ -1099,6 +1124,62 @@
     const MAX_SLIP_SIZE = 3 * 1024 * 1024;
     const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
 
+    // --- ระบบป้องกันการหมุนค้าง (Timeout 20 วินาที) ---
+    const FETCH_TIMEOUT_MS = 20000; 
+
+    async function fetchWithTimeout(resource, options = {}) {
+      const { timeout = FETCH_TIMEOUT_MS } = options;
+      const controller = new AbortController();
+      const id = setTimeout(() => controller.abort(), timeout);
+      const response = await fetch(resource, {
+        ...options,
+        signal: controller.signal  
+      });
+      clearTimeout(id);
+      return response;
+    }
+
+    async function fetchJson(url, options={}){
+      try {
+        const res = await fetchWithTimeout(url, {
+          ...options,
+          method: options.method || "GET",
+          cache: "no-store",
+          credentials: "omit",
+          keepalive: true
+        });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        return await res.json();
+      } catch (error) {
+        if (error.name === 'AbortError') throw new Error("TIMEOUT");
+        throw error;
+      }
+    }
+
+    async function postJson(payload){
+      try {
+        const res = await fetchWithTimeout(SCRIPT_URL, {
+          method:"POST",
+          headers:{ "Content-Type":"text/plain;charset=utf-8" },
+          body:JSON.stringify(payload),
+          cache:"no-store",
+          credentials:"omit",
+          keepalive:true
+        });
+        const text = await res.text();
+        try{
+          return JSON.parse(text);
+        }catch(e){
+          return { ok:false, message:text || "ไม่สามารถอ่านข้อมูลจากเซิร์ฟเวอร์ได้" };
+        }
+      } catch (error) {
+        if (error.name === 'AbortError') {
+          return { ok: false, message: "การเชื่อมต่อใช้เวลานานเกินไป กรุณาลองกดใหม่อีกครั้งค่ะ" };
+        }
+        throw error;
+      }
+    }
+
     let claimConfig = {
       claimStartHour: 7,
       claimEndHour: 19,
@@ -1135,6 +1216,8 @@
     let activeSlipFile = null;
     let loadingTimer = null;
     let loadingPercent = 0;
+    let loadingMessageTimer1 = null;
+    let loadingMessageTimer2 = null;
 
     const heroSection = document.getElementById("heroSection");
     const loginView = document.getElementById("loginView");
@@ -1405,23 +1488,42 @@
       loadingPercent = 0;
       spinnerPercent.textContent = "0%";
       loadingOverlay.classList.add("show");
+      
+      const loadingSub = document.querySelector(".loading-sub");
+      if (loadingSub) loadingSub.textContent = "กรุณารอสักครู่ ระบบกำลังประมวลผลให้ค่ะ";
+      
       clearInterval(loadingTimer);
+      clearTimeout(loadingMessageTimer1);
+      clearTimeout(loadingMessageTimer2);
+
       loadingTimer = setInterval(() => {
         if (loadingPercent < 95){
-          loadingPercent += Math.floor(Math.random() * 18) + 10;
+          loadingPercent += Math.floor(Math.random() * 20) + 5; 
           if (loadingPercent > 95) loadingPercent = 95;
           spinnerPercent.textContent = loadingPercent + "%";
         }
-      }, 60);
+      }, 50);
+
+      loadingMessageTimer1 = setTimeout(() => {
+        if (loadingSub) loadingSub.textContent = "กำลังเชื่อมต่อกับฐานข้อมูล อาจใช้เวลาอีกนิดนึงนะคะ...";
+      }, 4000);
+      
+      loadingMessageTimer2 = setTimeout(() => {
+        if (loadingSub) loadingSub.textContent = "ระบบกำลังตรวจสอบข้อมูล เกือบเสร็จแล้วค่ะ...";
+      }, 9000);
     }
 
     function hideLoading(){
       clearInterval(loadingTimer);
+      clearTimeout(loadingMessageTimer1);
+      clearTimeout(loadingMessageTimer2);
+      
       loadingPercent = 100;
       spinnerPercent.textContent = "100%";
+      
       setTimeout(() => {
         loadingOverlay.classList.remove("show");
-      }, 50);
+      }, 250); 
     }
 
     function showSuccessBurst(){
@@ -1790,35 +1892,6 @@
       }
     }
 
-    async function fetchJson(url, options={}){
-      const res = await fetch(url, {
-        ...options,
-        method: options.method || "GET",
-        cache: "no-store",
-        credentials: "omit",
-        keepalive: true
-      });
-      if (!res.ok) throw new Error("HTTP " + res.status);
-      return await res.json();
-    }
-
-    async function postJson(payload){
-      const res = await fetch(SCRIPT_URL, {
-        method:"POST",
-        headers:{ "Content-Type":"text/plain;charset=utf-8" },
-        body:JSON.stringify(payload),
-        cache:"no-store",
-        credentials:"omit",
-        keepalive:true
-      });
-      const text = await res.text();
-      try{
-        return JSON.parse(text);
-      }catch(e){
-        return { ok:false, message:text || "ไม่สามารถอ่านข้อมูลจากเซิร์ฟเวอร์ได้" };
-      }
-    }
-
     async function bootstrapApp(useCache=true){
       const tokenQuery = state.token ? "&token=" + encodeURIComponent(state.token) : "";
 
@@ -1863,24 +1936,28 @@
     function renderLiveStatus(summaryObj){
       const items = summaryObj && Array.isArray(summaryObj.items) ? summaryObj.items : [];
       const stamp = summaryObj && summaryObj.updatedAt ? formatThaiDate(summaryObj.updatedAt) : formatThaiDate(new Date().toISOString());
+      
       liveDate.textContent = "อัปเดตล่าสุด: " + stamp;
-      liveList.innerHTML = "";
+      
       if (!items.length){
         liveList.innerHTML = '<div class="live-empty">วันนี้ยังไม่มีการอัปเดตในระบบ</div>';
         return;
       }
-      items.forEach(item => {
-        const row = document.createElement("div");
-        row.className = "live-item tap-card";
+
+      const htmlStrings = items.map(item => {
         const timeText = formatThaiDateTime(item.createdAt || item.updatedAt || "");
-        row.innerHTML =
-          '<div class="live-main">' +
-            '<span class="live-email">' + escapeHtml(maskEmail(item.email || "-")) + '</span>' +
-            '<span class="live-time">' + escapeHtml(timeText) + '</span>' +
-          '</div>' +
-          '<span class="live-status-text">' + decorateStatusText(item.statusText || item.status || "รอดำเนินการ") + '</span>';
-        liveList.appendChild(row);
+        return `
+          <div class="live-item tap-card">
+            <div class="live-main">
+              <span class="live-email">${escapeHtml(maskEmail(item.email || "-"))}</span>
+              <span class="live-time">${escapeHtml(timeText)}</span>
+            </div>
+            <span class="live-status-text">${decorateStatusText(item.statusText || item.status || "รอดำเนินการ")}</span>
+          </div>
+        `;
       });
+
+      liveList.innerHTML = htmlStrings.join('');
     }
 
     function fillMiniStats(current){
@@ -2706,33 +2783,3 @@
 
       if (!SCRIPT_URL){
         showAlert(topAlert, "กรุณาใส่ SCRIPT_URL ก่อนใช้งาน", "warning", 0);
-        return;
-      }
-
-      try{
-        await bootstrapApp(true);
-      }catch(e){
-        console.warn("bootstrap failed", e);
-      }
-
-      setInterval(async () => {
-        try{
-          const data = await fetchJson(SCRIPT_URL + "?action=todayStatus&_t=" + Date.now());
-          if (data && data.todaySummary) renderLiveStatus(data.todaySummary);
-        }catch(e){}
-      }, STATUS_POLL_INTERVAL);
-
-      setInterval(async () => {
-        try{
-          const data = await bootstrapApp(true);
-          if (statusView.classList.contains("active") && data && Array.isArray(data.history)){
-            state.latestHistory = data.history;
-            cacheFastStatus(data.history);
-            renderLatestStatusPage({ history:data.history, current:data.history[0] || null });
-          }
-        }catch(e){}
-      }, CONFIG_POLL_INTERVAL);
-    });
-  </script>
-</body>
-</html>
