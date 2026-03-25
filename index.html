@@ -5,44 +5,21 @@
   <title>426 SHOP – Member & Claim Center</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#12090b" />
+  
+  <link rel="preload" href="https://img2.imgbiz.com/imgbiz/IMG_0923.jpeg" as="image">
+  <link rel="preload" href="https://img2.imgbiz.com/imgbiz/IMG_2680.jpeg" as="image">
+
   <style>
     :root{
-      --bg:#12090b;
-      --bg2:#1a0d10;
-      --bg3:#260f14;
-
-      --card:#fffefe;
-      --card-2:#fff8f9;
-      --surface:#ffffff;
-      --surface-2:#fff6f8;
-
-      --line:#f2d8df;
-      --line-2:#ebc7d1;
-
-      --text:#37171d;
-      --sub:#7d5560;
-      --muted:#ad808c;
-
-      --primary:#a30f21;
-      --primary-2:#d81f40;
-      --primary-3:#ff5c7c;
-      --primary-deep:#690814;
-
-      --success:#21a366;
-      --warning:#f0a24c;
-      --danger:#de6072;
-      --info:#6c84ff;
-
-      --shadow:0 20px 48px rgba(52,14,25,.15);
-      --shadow-soft:0 10px 24px rgba(52,14,25,.09);
-
-      --hero-text:#fff6f7;
-      --hero-sub:#f6d8df;
-
-      --grad-a:#130709;
-      --grad-b:#381018;
-      --grad-c:#73111f;
-
+      --bg:#12090b; --bg2:#1a0d10; --bg3:#260f14;
+      --card:#fffefe; --card-2:#fff8f9; --surface:#ffffff; --surface-2:#fff6f8;
+      --line:#f2d8df; --line-2:#ebc7d1;
+      --text:#37171d; --sub:#7d5560; --muted:#ad808c;
+      --primary:#a30f21; --primary-2:#d81f40; --primary-3:#ff5c7c; --primary-deep:#690814;
+      --success:#21a366; --warning:#f0a24c; --danger:#de6072; --info:#6c84ff;
+      --shadow:0 20px 48px rgba(52,14,25,.15); --shadow-soft:0 10px 24px rgba(52,14,25,.09);
+      --hero-text:#fff6f7; --hero-sub:#f6d8df;
+      --grad-a:#130709; --grad-b:#381018; --grad-c:#73111f;
       --radius-xl:30px;
     }
 
@@ -61,8 +38,7 @@
 
     .ambient,.pattern,.float-shapes,.bg-icons{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
     .ambient::before,.ambient::after{
-      content:"";
-      position:absolute;border-radius:50%;filter:blur(78px);opacity:.18;animation:floatBlur 11s ease-in-out infinite;
+      content:""; position:absolute;border-radius:50%;filter:blur(78px);opacity:.18;animation:floatBlur 11s ease-in-out infinite;
     }
     .ambient::before{width:320px;height:320px;top:-110px;right:-90px;background:var(--primary)}
     .ambient::after{width:260px;height:260px;left:-70px;bottom:-90px;background:var(--primary-3);animation-delay:1.8s}
@@ -111,9 +87,15 @@
     .bg-icons span:nth-child(11){left:90%;top:12%;font-size:14px;animation-duration:9s}
     .bg-icons span:nth-child(12){left:68%;top:76%;font-size:18px;animation-duration:11s}
 
-    @keyframes floatBlur{0%,100%{transform:translateY(0) translateX(0)}50%{transform:translateY(18px) translateX(-10px)}}
-    @keyframes shapeDrift{0%,100%{transform:translateY(0) rotate(18deg)}50%{transform:translateY(-10px) rotate(28deg)}}
-    @keyframes floatIcon{0%,100%{transform:translateY(0) scale(1);opacity:.8}50%{transform:translateY(-8px) scale(1.06);opacity:1}}
+    /* 2. เพิ่ม GPU Acceleration เพื่อรีดเฟรมเรตและลดการใช้ CPU */
+    .ambient::before, .ambient::after, .float-shapes span, .bg-icons span, .logo-shell {
+      will-change: transform, opacity;
+      transform: translateZ(0);
+    }
+
+    @keyframes floatBlur{0%,100%{transform:translateY(0) translateX(0) translateZ(0)}50%{transform:translateY(18px) translateX(-10px) translateZ(0)}}
+    @keyframes shapeDrift{0%,100%{transform:translateY(0) rotate(18deg) translateZ(0)}50%{transform:translateY(-10px) rotate(28deg) translateZ(0)}}
+    @keyframes floatIcon{0%,100%{transform:translateY(0) scale(1) translateZ(0);opacity:.8}50%{transform:translateY(-8px) scale(1.06) translateZ(0);opacity:1}}
 
     .app{
       position:relative;z-index:1;width:100%;max-width:540px;margin:0 auto;min-height:100vh;
@@ -148,7 +130,7 @@
       box-shadow:0 14px 28px rgba(0,0,0,.12);backdrop-filter:blur(8px);animation:softBob 4.2s ease-in-out infinite;
     }
     .logo-shell img{width:100%;height:100%;object-fit:cover;border-radius:20px;display:block;background:#fff}
-    @keyframes softBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+    @keyframes softBob{0%,100%{transform:translateY(0) translateZ(0)}50%{transform:translateY(-3px) translateZ(0)}}
 
     .brand-title{margin:0;font-size:1.42rem;font-weight:800;letter-spacing:.04em;color:var(--hero-text)}
     .brand-sub{margin-top:4px;font-size:.79rem;color:var(--hero-sub);letter-spacing:.14em;text-transform:uppercase}
@@ -648,6 +630,10 @@
       .policy-text{font-size:.82rem;line-height:1.85}
       .policy-line{width:26px}
       .section-title-plain h2{font-size:1.18rem}
+      /* 2. ลดภาระการเบลอบนมือถือเพื่อให้ UI ไหลลื่นขึ้น */
+      .float-shapes span, .status-mini {
+        backdrop-filter: none; 
+      }
     }
   </style>
 </head>
@@ -1680,12 +1666,13 @@
         return;
       }
 
-      profileEmail.textContent = state.member.email || "-";
-      profileMemberDate.textContent = formatThaiDate(state.member.memberDate || "");
-      profileLineName.textContent = state.member.displayName || "-";
+      // 3. ปรับมาใช้ Optional Chaining (?.) และ Nullish Coalescing (??) 
+      profileEmail.textContent = state.member?.email ?? "-";
+      profileMemberDate.textContent = formatThaiDate(state.member?.memberDate ?? "");
+      profileLineName.textContent = state.member?.displayName ?? "-";
       memberMiniBox.style.display = "grid";
 
-      const lastExpiry = normalizeText(state.member.lastKnownExpiry || "");
+      const lastExpiry = normalizeText(state.member?.lastKnownExpiry ?? "");
       if (lastExpiry){
         expiryFixedText.textContent = formatThaiDate(lastExpiry);
         expiryFixedBox.style.display = "block";
@@ -1696,7 +1683,7 @@
         expiryPickerBlock.style.display = "";
       }
 
-      if (state.member.isExpired){
+      if (state.member?.isExpired){
         showAlert(claimAlert, claimConfig.expiredAccountText || "บัญชีหมดอายุแล้ว หากต้องการใช้บริการต่อติดต่อแอดมิน", "warning", 7000);
       }
 
@@ -1710,7 +1697,7 @@
         paymentSection.style.display = "none";
         return;
       }
-      const year = normalizeText(state.member && state.member.signupYearThai || "");
+      const year = normalizeText(state.member?.signupYearThai ?? "");
       if (year && year === String(claimConfig.paidYear)){
         paymentSection.style.display = "block";
       } else {
@@ -1834,13 +1821,13 @@
 
       const data = await fetchJson(SCRIPT_URL + "?action=bootstrap&_t=" + Date.now() + tokenQuery);
 
-      if (data && data.config){
+      if (data?.config){
         claimConfig = { ...claimConfig, ...data.config };
         renderConfigToUI();
         updateClaimWindowState();
       }
-      if (data && data.todaySummary) renderLiveStatus(data.todaySummary);
-      if (data && data.member){
+      if (data?.todaySummary) renderLiveStatus(data.todaySummary);
+      if (data?.member){
         state.member = data.member;
         const moveDate = getMoveGroupDateValue(data.member) || getMoveGroupDateValue(data);
         if (moveDate) state.moveGroupDate = moveDate;
@@ -1853,16 +1840,16 @@
       }
 
       safeSetLocal(BOOTSTRAP_CACHE_KEY, {
-        config: data && data.config ? data.config : claimConfig,
-        todaySummary: data && data.todaySummary ? data.todaySummary : null
+        config: data?.config ?? claimConfig,
+        todaySummary: data?.todaySummary ?? null
       });
 
       return data;
     }
 
     function renderLiveStatus(summaryObj){
-      const items = summaryObj && Array.isArray(summaryObj.items) ? summaryObj.items : [];
-      const stamp = summaryObj && summaryObj.updatedAt ? formatThaiDate(summaryObj.updatedAt) : formatThaiDate(new Date().toISOString());
+      const items = summaryObj?.items ?? [];
+      const stamp = summaryObj?.updatedAt ? formatThaiDate(summaryObj.updatedAt) : formatThaiDate(new Date().toISOString());
       liveDate.textContent = "อัปเดตล่าสุด: " + stamp;
       liveList.innerHTML = "";
       if (!items.length){
@@ -1884,9 +1871,9 @@
     }
 
     function fillMiniStats(current){
-      miniQueueNo.textContent = current && current.queueNo ? current.queueNo : "-";
-      miniClaimType.textContent = current && current.claimType === "paid" ? "19฿" : (current && current.claimType === "free" ? "ฟรี" : "-");
-      miniLastTime.textContent = formatShortThaiTime(current && (current.createdAt || current.updatedAt) || "");
+      miniQueueNo.textContent = current?.queueNo ?? "-";
+      miniClaimType.textContent = current?.claimType === "paid" ? "19฿" : (current?.claimType === "free" ? "ฟรี" : "-");
+      miniLastTime.textContent = formatShortThaiTime(current?.createdAt ?? current?.updatedAt ?? "");
     }
 
     function renderClaimSteps(statusText=""){
@@ -1924,8 +1911,8 @@
     }
 
     function renderLatestStatusPage(res){
-      const history = Array.isArray(res && res.history) ? res.history : [];
-      const current = (res && res.current) || (history.length ? history[0] : null);
+      const history = Array.isArray(res?.history) ? res.history : [];
+      const current = res?.current ?? (history.length ? history[0] : null);
 
       results.innerHTML = "";
       statusSummary.innerHTML = "";
@@ -2055,7 +2042,7 @@
         return false;
       }
 
-      if (state.member && state.member.isExpired){
+      if (state.member?.isExpired){
         showAlert(claimAlert, claimConfig.expiredAccountText || "บัญชีหมดอายุแล้ว หากต้องการใช้บริการต่อติดต่อแอดมิน", "warning", 7000);
         shake(claimAlert);
         return false;
@@ -2073,7 +2060,7 @@
         return false;
       }
 
-      if (String(state.member.signupYearThai || "") === String(claimConfig.paidYear || "") && !activeSlipFile){
+      if (String(state.member?.signupYearThai ?? "") === String(claimConfig.paidYear ?? "") && !activeSlipFile){
         setSlipStatus("กรุณาแนบสลิปก่อนส่งคำขอ", "error");
         shake(btnPickSlip);
         return false;
@@ -2084,10 +2071,10 @@
 
     function openConfirmModal(){
       const expiry = normalizeText(expiryInput.value);
-      const claimType = String(state.member && state.member.signupYearThai || "") === String(claimConfig.paidYear || "") ? "แพ็กดูแล 19 บาท" : "เคลมฟรี";
+      const claimType = String(state.member?.signupYearThai ?? "") === String(claimConfig.paidYear ?? "") ? "แพ็กดูแล 19 บาท" : "เคลมฟรี";
       const hasSlip = activeSlipFile ? "แนบแล้ว" : "ไม่มี";
       confirmSummary.innerHTML =
-        "<strong>อีเมล:</strong> " + escapeHtml(state.member && state.member.email || "-") + "<br>" +
+        "<strong>อีเมล:</strong> " + escapeHtml(state.member?.email ?? "-") + "<br>" +
         "<strong>วันหมดอายุ:</strong> " + escapeHtml(formatThaiDate(expiry)) + "<br>" +
         "<strong>ประเภทเคลม:</strong> " + escapeHtml(claimType) + "<br>" +
         "<strong>สลิป:</strong> " + escapeHtml(hasSlip);
@@ -2144,7 +2131,7 @@
         setActiveView(savedView === "statusView" ? "statusView" : "claimView");
         await bootstrapApp(false);
 
-        if (state.member && state.member.lastKnownExpiry){
+        if (state.member?.lastKnownExpiry){
           await handleCheckExpiry(true);
         }
       }catch(e){
@@ -2200,7 +2187,7 @@
         setActiveView("claimView");
         await bootstrapApp(false);
 
-        if (state.member && state.member.lastKnownExpiry){
+        if (state.member?.lastKnownExpiry){
           await handleCheckExpiry(true);
         }
       }catch(e){
@@ -2419,7 +2406,7 @@
         const data = await postJson(payload);
 
         if (!data || data.ok === false){
-          if (String(state.member && state.member.signupYearThai || "") === String(claimConfig.paidYear || "")){
+          if (String(state.member?.signupYearThai ?? "") === String(claimConfig.paidYear ?? "")){
             setSlipStatus(data.message || "ส่งคำขอไม่สำเร็จ", "error");
           } else {
             showAlert(claimAlert, data.message || "ส่งคำขอไม่สำเร็จ", "error");
@@ -2470,7 +2457,7 @@
         summary.innerHTML = '<div class="summary-pill">ส่งคำขอเรียบร้อยแล้ว</div>';
         status.textContent = data.message || "ระบบรับคำขอของคุณแล้ว";
 
-        if (String(state.member && state.member.signupYearThai || "") !== String(claimConfig.paidYear || "")){
+        if (String(state.member?.signupYearThai ?? "") !== String(claimConfig.paidYear ?? "")){
           resetSlipPreview();
         } else {
           setSlipStatus("ส่งคำขอพร้อมสลิปเรียบร้อยแล้ว");
@@ -2486,7 +2473,7 @@
         }, 180);
 
       }catch(e){
-        if (String(state.member && state.member.signupYearThai || "") === String(claimConfig.paidYear || "")){
+        if (String(state.member?.signupYearThai ?? "") === String(claimConfig.paidYear ?? "")){
           setSlipStatus("เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้ง", "error");
         } else {
           showAlert(claimAlert, "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้ง", "error");
@@ -2684,12 +2671,50 @@
     loginEmail.addEventListener("input", () => { if (rememberPassword.checked) saveRememberedLogin(); });
     loginPassword.addEventListener("input", () => { if (rememberPassword.checked) saveRememberedLogin(); });
 
+    // 4. ระบบ Polling แบบใหม่ อิงตาม Visibility ของหน้าจอเพื่อประหยัดแบตเตอรี่และดาต้า
+    let statusPollTimer;
+    let configPollTimer;
+
+    function startPolling() {
+      statusPollTimer = setInterval(async () => {
+        try{
+          const data = await fetchJson(SCRIPT_URL + "?action=todayStatus&_t=" + Date.now());
+          if (data?.todaySummary) renderLiveStatus(data.todaySummary);
+        }catch(e){}
+      }, STATUS_POLL_INTERVAL);
+
+      configPollTimer = setInterval(async () => {
+        try{
+          const data = await bootstrapApp(true);
+          if (statusView.classList.contains("active") && Array.isArray(data?.history)){
+            state.latestHistory = data.history;
+            cacheFastStatus(data.history);
+            renderLatestStatusPage({ history:data.history, current:data.history[0] || null });
+          }
+        }catch(e){}
+      }, CONFIG_POLL_INTERVAL);
+    }
+
+    function stopPolling() {
+      clearInterval(statusPollTimer);
+      clearInterval(configPollTimer);
+    }
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        stopPolling();
+      } else {
+        bootstrapApp(true); // รีเฟรชข้อมูลเบาๆ 1 รอบเมื่อเปิดกลับมา
+        startPolling();
+      }
+    });
+
     window.addEventListener("load", async () => {
       state.token = "";
       sessionStorage.removeItem(TOKEN_KEY);
 
       const cachedBootstrap = safeGetLocal(BOOTSTRAP_CACHE_KEY, null);
-      if (cachedBootstrap && cachedBootstrap.config){
+      if (cachedBootstrap?.config){
         claimConfig = { ...claimConfig, ...cachedBootstrap.config };
         renderConfigToUI();
         updateClaimWindowState();
@@ -2715,23 +2740,8 @@
         console.warn("bootstrap failed", e);
       }
 
-      setInterval(async () => {
-        try{
-          const data = await fetchJson(SCRIPT_URL + "?action=todayStatus&_t=" + Date.now());
-          if (data && data.todaySummary) renderLiveStatus(data.todaySummary);
-        }catch(e){}
-      }, STATUS_POLL_INTERVAL);
-
-      setInterval(async () => {
-        try{
-          const data = await bootstrapApp(true);
-          if (statusView.classList.contains("active") && data && Array.isArray(data.history)){
-            state.latestHistory = data.history;
-            cacheFastStatus(data.history);
-            renderLatestStatusPage({ history:data.history, current:data.history[0] || null });
-          }
-        }catch(e){}
-      }, CONFIG_POLL_INTERVAL);
+      // เริ่มการดึงข้อมูลครั้งแรก
+      startPolling();
     });
   </script>
 </body>
