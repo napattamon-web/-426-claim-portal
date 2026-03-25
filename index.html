@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>426 SHOP – Member & Claim Center</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#111111" />
+  <meta name="theme-color" content="#111827" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,45 +15,45 @@
 
   <style>
     :root{
-      --bg:#f6f7f9;
-      --bg2:#eef1f5;
-      --bg3:#e8ebf0;
+      --bg:#f4f7fb;
+      --bg2:#edf2f8;
+      --bg3:#e7edf5;
 
       --card:#ffffff;
-      --card-2:#fbfcfe;
+      --card-2:#fbfdff;
       --surface:#ffffff;
-      --surface-2:#f9fbfd;
+      --surface-2:#f8fbff;
 
-      --line:#e4e8ee;
-      --line-2:#d8dee7;
+      --line:#dfe7f1;
+      --line-2:#d1dceb;
 
-      --text:#101418;
-      --sub:#5c6773;
-      --muted:#8b96a3;
+      --text:#0f1722;
+      --sub:#5f6b7a;
+      --muted:#8d99aa;
 
-      --primary:#ff0033;
-      --primary-2:#ff304f;
-      --primary-3:#ff5d73;
-      --primary-deep:#b80025;
+      --primary:#ff2d55;
+      --primary-2:#6b7cff;
+      --primary-3:#7fd6ff;
+      --primary-deep:#131a24;
 
-      --success:#1ea969;
-      --warning:#d9922e;
-      --danger:#db4d5f;
-      --info:#4a7dff;
+      --success:#19b36b;
+      --warning:#d99b32;
+      --danger:#e05c73;
+      --info:#5f7dff;
 
-      --dark:#0f1115;
-      --dark-2:#171a21;
-      --dark-3:#20242d;
+      --dark:#0d1117;
+      --dark-2:#151b24;
+      --dark-3:#1d2632;
 
-      --shadow:0 18px 42px rgba(15,17,21,.10);
-      --shadow-soft:0 10px 24px rgba(15,17,21,.06);
+      --shadow:0 18px 44px rgba(13,17,23,.10);
+      --shadow-soft:0 10px 24px rgba(13,17,23,.06);
 
       --hero-text:#ffffff;
-      --hero-sub:#d7dde7;
+      --hero-sub:#dce6f4;
 
-      --grad-a:#0f1115;
-      --grad-b:#171a21;
-      --grad-c:#242a35;
+      --grad-a:#0d1117;
+      --grad-b:#171e29;
+      --grad-c:#243244;
 
       --radius-xl:28px;
     }
@@ -75,8 +75,8 @@
       font-family:'Prompt', sans-serif;
       color:var(--text);
       background:
-        radial-gradient(circle at 0% 0%, rgba(255,0,51,.05), transparent 24%),
-        radial-gradient(circle at 100% 10%, rgba(74,125,255,.05), transparent 22%),
+        radial-gradient(circle at 0% 0%, rgba(95,125,255,.08), transparent 24%),
+        radial-gradient(circle at 100% 10%, rgba(127,214,255,.09), transparent 24%),
         linear-gradient(180deg,var(--bg),var(--bg2) 58%,var(--bg3));
       overflow-x:hidden;
       text-rendering:optimizeLegibility;
@@ -96,7 +96,7 @@
       content:"";
       position:absolute;
       border-radius:50%;
-      filter:blur(72px);
+      filter:blur(68px);
       opacity:.12;
       animation:floatBlur 14s ease-in-out infinite;
       will-change:transform;
@@ -107,7 +107,7 @@
       height:260px;
       top:-80px;
       right:-70px;
-      background:#ff0033;
+      background:#6b7cff;
     }
 
     .ambient::after{
@@ -115,16 +115,16 @@
       height:220px;
       left:-50px;
       bottom:-70px;
-      background:#4a7dff;
+      background:#7fd6ff;
       animation-delay:2s;
     }
 
     .pattern{
       background-image:
-        linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
-      background-size:28px 28px;
-      opacity:.18;
+        linear-gradient(rgba(255,255,255,.10) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.10) 1px, transparent 1px);
+      background-size:26px 26px;
+      opacity:.16;
       mix-blend-mode:soft-light;
     }
 
@@ -132,8 +132,8 @@
       position:absolute;
       display:block;
       border-radius:20px;
-      background:linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.03));
-      border:1px solid rgba(255,255,255,.16);
+      background:linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.04));
+      border:1px solid rgba(255,255,255,.18);
       transform:rotate(18deg);
       animation:shapeDrift 15s ease-in-out infinite;
       backdrop-filter:blur(4px);
@@ -148,7 +148,7 @@
 
     .bg-icons span{
       position:absolute;
-      color:rgba(255,255,255,.12);
+      color:rgba(255,255,255,.13);
       animation:floatIcon 12s ease-in-out infinite;
       user-select:none;
       font-weight:700;
@@ -172,12 +172,10 @@
       0%,100%{transform:translateY(0) translateX(0)}
       50%{transform:translateY(12px) translateX(-8px)}
     }
-
     @keyframes shapeDrift{
       0%,100%{transform:translateY(0) rotate(18deg)}
       50%{transform:translateY(-8px) rotate(24deg)}
     }
-
     @keyframes floatIcon{
       0%,100%{transform:translateY(0) scale(1);opacity:.8}
       50%{transform:translateY(-6px) scale(1.04);opacity:1}
@@ -204,7 +202,7 @@
 
     .glass:hover, .card:hover{
       transform:translateY(-2px);
-      box-shadow:0 18px 34px rgba(15,17,21,.12);
+      box-shadow:0 18px 34px rgba(13,17,23,.12);
     }
 
     .glass{
@@ -222,12 +220,12 @@
       padding:20px 16px 18px;
       text-align:center;
       background:
-        radial-gradient(circle at 15% 18%, rgba(255,255,255,.10), transparent 22%),
-        radial-gradient(circle at 82% 20%, rgba(255,0,51,.18), transparent 16%),
+        radial-gradient(circle at 20% 18%, rgba(127,214,255,.16), transparent 20%),
+        radial-gradient(circle at 82% 20%, rgba(107,124,255,.18), transparent 16%),
         linear-gradient(135deg,var(--grad-a),var(--grad-b) 58%,var(--grad-c));
       color:var(--hero-text);
       border-color:transparent;
-      box-shadow:0 18px 36px rgba(15,17,21,.18);
+      box-shadow:0 18px 36px rgba(13,17,23,.18);
       content-visibility:auto;
       contain:layout paint style;
     }
@@ -423,7 +421,7 @@
       border-radius:22px;
       background:linear-gradient(180deg,#fbfcfe,#f5f8fb);
       border:1px solid #e7ecf2;
-      box-shadow:0 8px 18px rgba(15,17,21,.04), inset 0 1px 0 rgba(255,255,255,.88);
+      box-shadow:0 8px 18px rgba(13,17,23,.04), inset 0 1px 0 rgba(255,255,255,.88);
       position:relative;
       z-index:1;
       overflow:hidden;
@@ -498,7 +496,7 @@
 
     .input-shell:focus-within{
       border-color:var(--info);
-      box-shadow:0 0 0 4px rgba(74,125,255,.10);
+      box-shadow:0 0 0 4px rgba(95,125,255,.10);
       transform:translateY(-1px);
     }
 
@@ -542,7 +540,7 @@
       white-space:nowrap;
       flex-shrink:0;
       transition:.12s ease;
-      box-shadow:0 6px 12px rgba(15,17,21,.04);
+      box-shadow:0 6px 12px rgba(13,17,23,.04);
     }
 
     .password-rule,.password-strength{
@@ -635,15 +633,15 @@
     .btn-primary{
       min-height:50px;
       flex:1;
-      background:linear-gradient(180deg,var(--primary-3),var(--primary-2) 45%,var(--primary));
+      background:linear-gradient(180deg,#7fd6ff,#6b7cff 50%,#4d62ff);
       color:#fff;
       font-size:.96rem;
-      box-shadow:0 10px 22px rgba(255,0,51,.18);
+      box-shadow:0 10px 22px rgba(95,125,255,.22);
     }
 
     .btn-primary:hover{
       transform:translateY(-1px);
-      box-shadow:0 12px 24px rgba(255,0,51,.22);
+      box-shadow:0 12px 24px rgba(95,125,255,.28);
     }
 
     .btn-primary:disabled{
@@ -658,7 +656,7 @@
       border-color:#e4e8ee;
       color:var(--sub);
       font-size:.88rem;
-      box-shadow:0 8px 18px rgba(15,17,21,.04);
+      box-shadow:0 8px 18px rgba(13,17,23,.04);
     }
 
     .btn-danger{
@@ -668,7 +666,7 @@
       border-color:#f1d4d8;
       color:var(--danger);
       font-size:.79rem;
-      box-shadow:0 8px 18px rgba(219,77,95,.07);
+      box-shadow:0 8px 18px rgba(224,92,115,.07);
     }
 
     .btn-mini{
@@ -678,7 +676,7 @@
       border-color:#e4e8ee;
       color:var(--sub);
       font-size:.79rem;
-      box-shadow:0 8px 18px rgba(15,17,21,.04);
+      box-shadow:0 8px 18px rgba(13,17,23,.04);
     }
 
     .btn-link-small{
@@ -689,7 +687,7 @@
       border-color:#e4e8ee;
       color:var(--sub);
       font-size:.79rem;
-      box-shadow:0 8px 18px rgba(15,17,21,.04);
+      box-shadow:0 8px 18px rgba(13,17,23,.04);
     }
 
     .btn-admin{
@@ -705,7 +703,7 @@
       justify-content:center;
       padding:0 12px;
       white-space:nowrap;
-      box-shadow:0 8px 18px rgba(15,17,21,.04);
+      box-shadow:0 8px 18px rgba(13,17,23,.04);
     }
 
     .btn-soft-cute{
@@ -715,7 +713,7 @@
       background:linear-gradient(180deg,#fff,#f7f9fc);
       color:var(--sub);
       font-size:.76rem;
-      box-shadow:0 8px 16px rgba(15,17,21,.04);
+      box-shadow:0 8px 16px rgba(13,17,23,.04);
       display:inline-flex;
       align-items:center;
       justify-content:center;
@@ -760,13 +758,13 @@
     .family-info-box.show{display:block}
 
     @keyframes blinkGlow{
-      0%,100%{box-shadow:0 10px 20px rgba(255,0,51,.10)}
-      50%{box-shadow:0 10px 20px rgba(255,0,51,.16),0 0 0 4px rgba(255,0,51,.05)}
+      0%,100%{box-shadow:0 10px 20px rgba(95,125,255,.10)}
+      50%{box-shadow:0 10px 20px rgba(95,125,255,.18),0 0 0 4px rgba(95,125,255,.05)}
     }
 
     @keyframes cuteBlink{
       0%,100%{transform:translateY(0)}
-      50%{transform:translateY(-1px);box-shadow:0 10px 18px rgba(74,125,255,.10),0 0 0 4px rgba(74,125,255,.04)}
+      50%{transform:translateY(-1px);box-shadow:0 10px 18px rgba(127,214,255,.14),0 0 0 4px rgba(127,214,255,.05)}
     }
 
     @keyframes normalPulse{
@@ -852,8 +850,8 @@
       width:9px;
       height:9px;
       border-radius:999px;
-      background:var(--primary);
-      box-shadow:0 0 0 5px rgba(255,0,51,.08);
+      background:var(--info);
+      box-shadow:0 0 0 5px rgba(95,125,255,.08);
       animation:pulseDot 1.05s ease-in-out infinite;
     }
 
@@ -901,7 +899,7 @@
       border-radius:16px;
       background:#fff;
       border:1px solid var(--line);
-      box-shadow:0 4px 10px rgba(15,17,21,.03);
+      box-shadow:0 4px 10px rgba(13,17,23,.03);
     }
 
     .live-main{
@@ -954,7 +952,7 @@
       flex-direction:column;
       justify-content:center;
       gap:4px;
-      box-shadow:0 4px 10px rgba(15,17,21,.03);
+      box-shadow:0 4px 10px rgba(13,17,23,.03);
     }
 
     .member-pill.wide{grid-column:1 / -1}
@@ -1079,7 +1077,7 @@
       margin-bottom:12px;
       position:relative;
       z-index:1;
-      box-shadow:0 4px 10px rgba(15,17,21,.03);
+      box-shadow:0 4px 10px rgba(13,17,23,.03);
     }
 
     .bank-chip{
@@ -1126,7 +1124,7 @@
       border-color:#e4e8ee;
       color:var(--sub);
       font-size:.76rem;
-      box-shadow:0 8px 18px rgba(15,17,21,.04);
+      box-shadow:0 8px 18px rgba(13,17,23,.04);
       display:inline-flex;
       align-items:center;
       justify-content:center;
@@ -1213,7 +1211,7 @@
       border-color:#e4e8ee;
       color:var(--sub);
       font-size:.82rem;
-      box-shadow:0 8px 18px rgba(15,17,21,.04);
+      box-shadow:0 8px 18px rgba(13,17,23,.04);
     }
 
     .hidden-file-input{
@@ -1287,7 +1285,7 @@
       color:var(--dark);
       font-weight:800;
       font-size:.82rem;
-      box-shadow:0 6px 12px rgba(15,17,21,.04);
+      box-shadow:0 6px 12px rgba(13,17,23,.04);
     }
 
     #status,#authStatus,#statusPageText{
@@ -1325,7 +1323,7 @@
       text-align:center;
       position:relative;
       overflow:hidden;
-      box-shadow:0 4px 10px rgba(15,17,21,.03);
+      box-shadow:0 4px 10px rgba(13,17,23,.03);
     }
 
     .mini-box strong{
@@ -1397,7 +1395,7 @@
       height:100%;
       width:25%;
       border-radius:999px;
-      background:linear-gradient(90deg,var(--primary-3),var(--primary-2),var(--primary));
+      background:linear-gradient(90deg,#7fd6ff,#6b7cff,#4d62ff);
       transition:width .08s ease;
     }
 
@@ -1417,7 +1415,7 @@
       position:relative;
       z-index:1;
       overflow:hidden;
-      box-shadow:0 4px 10px rgba(15,17,21,.03);
+      box-shadow:0 4px 10px rgba(13,17,23,.03);
     }
 
     .timeline-title{
@@ -1452,14 +1450,14 @@
       align-items:center;
       justify-content:center;
       transition:.08s ease;
-      box-shadow:0 6px 12px rgba(15,17,21,.04);
+      box-shadow:0 6px 12px rgba(13,17,23,.04);
     }
 
     .timeline-chip.active{
-      background:linear-gradient(180deg,var(--primary-3),var(--primary-2) 45%,var(--primary));
+      background:linear-gradient(180deg,#7fd6ff,#6b7cff 50%,#4d62ff);
       color:#fff;
       border-color:transparent;
-      box-shadow:0 8px 18px rgba(255,0,51,.14);
+      box-shadow:0 8px 18px rgba(95,125,255,.18);
     }
 
     .result-item{
@@ -1472,7 +1470,7 @@
       position:relative;
       z-index:1;
       overflow:hidden;
-      box-shadow:0 4px 10px rgba(15,17,21,.03);
+      box-shadow:0 4px 10px rgba(13,17,23,.03);
     }
 
     .item-header{
@@ -1575,7 +1573,7 @@
       position:relative;
       z-index:1;
       overflow:hidden;
-      box-shadow:0 4px 10px rgba(15,17,21,.03);
+      box-shadow:0 4px 10px rgba(13,17,23,.03);
     }
 
     .swap-panel-status.show{display:block}
@@ -1622,7 +1620,7 @@
       font-weight:800;
       cursor:pointer;
       transition:.08s ease;
-      box-shadow:0 6px 12px rgba(15,17,21,.04);
+      box-shadow:0 6px 12px rgba(13,17,23,.04);
     }
 
     .swap-reason-option input{
@@ -1723,7 +1721,7 @@
     .modal-backdrop{
       position:fixed;
       inset:0;
-      background:rgba(15,17,21,.12);
+      background:rgba(13,17,23,.12);
       display:none;
       align-items:center;
       justify-content:center;
@@ -1856,7 +1854,7 @@
       height:82px;
       border-radius:50%;
       border:6px solid #edf1f5;
-      border-top-color:var(--primary);
+      border-top-color:var(--info);
       animation:spin .82s linear infinite;
       will-change:transform;
     }
@@ -1911,7 +1909,7 @@
       border-radius:999px;
       background:#fff;
       border:1px solid var(--line);
-      box-shadow:0 6px 12px rgba(15,17,21,.04);
+      box-shadow:0 6px 12px rgba(13,17,23,.04);
     }
 
     .copyright{
@@ -2399,8 +2397,9 @@
     const MAX_SLIP_SIZE = 3 * 1024 * 1024;
     const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
 
-    // จำกัดเวลา request ไม่เกิน 10 วินาที
     const FETCH_TIMEOUT_MS = 10000;
+    const LOGIN_FAST_HIDE_MS = 550;
+    const WARMUP_ACTION = "ping";
 
     async function fetchWithTimeout(resource, options = {}) {
       const { timeout = FETCH_TIMEOUT_MS } = options;
@@ -2457,6 +2456,46 @@
         }
         throw error;
       }
+    }
+
+    let warmupStarted = false;
+    let warmupPromise = null;
+
+    function sleep(ms){
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    function startWarmup(){
+      if (warmupStarted) return warmupPromise;
+      warmupStarted = true;
+
+      warmupPromise = fetchWithTimeout(
+        SCRIPT_URL + "?action=" + encodeURIComponent(WARMUP_ACTION) + "&_t=" + Date.now(),
+        {
+          method:"GET",
+          cache:"no-store",
+          credentials:"omit",
+          keepalive:true,
+          timeout:5000
+        }
+      ).catch(() => null);
+
+      return warmupPromise;
+    }
+
+    function scheduleBackgroundAuthHydration(preferStatusView=false){
+      bootstrapApp(false).catch(() => {});
+      if (state.member && state.member.lastKnownExpiry){
+        handleCheckExpiry(true).catch(() => {});
+      }
+      if (preferStatusView){
+        refreshStatusPage(false).catch(() => {});
+      }
+    }
+
+    async function hideLoadingSoon(minDelay = LOGIN_FAST_HIDE_MS){
+      await sleep(minDelay);
+      hideLoading();
     }
 
     let claimConfig = {
@@ -3474,7 +3513,6 @@
       });
     }
 
-    // เร็วขึ้น: login สำเร็จแล้วเข้า view ทันที ไม่รอ bootstrap
     async function handleLogin(){
       if (state.authLock) return;
       if (!validateLogin()) return;
@@ -3484,6 +3522,8 @@
       showLoading();
 
       try{
+        startWarmup();
+
         let data = await postJson({
           action:"login",
           email:normalizeEmail(loginEmail.value),
@@ -3492,6 +3532,7 @@
         data = parseResponseLoose(data);
 
         if (!data.ok){
+          hideLoading();
           showAlert(topAlert, data.message || "เข้าสู่ระบบไม่สำเร็จ", "error");
           shake(btnLogin);
           return;
@@ -3509,23 +3550,24 @@
         showToast("เข้าสู่ระบบสำเร็จ");
 
         const savedView = getSavedView();
-        setActiveView(savedView === "statusView" ? "statusView" : "claimView");
+        const goStatus = savedView === "statusView";
 
-        // ซ่อน loading เร็ว
-        hideLoading();
+        setActiveView(goStatus ? "statusView" : "claimView");
 
-        // โหลดข้อมูลต่อด้านหลัง
-        bootstrapApp(false).catch(() => {});
-        if (state.member && state.member.lastKnownExpiry){
-          handleCheckExpiry(true).catch(() => {});
-        }
-        if (savedView === "statusView") {
-          refreshStatusPage(false).catch(() => {});
-        }
+        if (goStatus) renderFastStatusImmediately();
+
+        hideLoadingSoon(420);
+        scheduleBackgroundAuthHydration(goStatus);
 
       }catch(e){
         hideLoading();
-        showAlert(topAlert, e && e.message === "TIMEOUT" ? "ระบบใช้เวลานานเกิน 10 วินาที กรุณาลองใหม่อีกครั้ง" : "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้ง", "error");
+        showAlert(
+          topAlert,
+          e && e.message === "TIMEOUT"
+            ? "ระบบใช้เวลานานเกิน 10 วินาที กรุณาลองใหม่อีกครั้ง"
+            : "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้ง",
+          "error"
+        );
         shake(btnLogin);
       }finally{
         btnLogin.disabled = false;
@@ -3542,6 +3584,8 @@
       showLoading();
 
       try{
+        startWarmup();
+
         let data = await postJson({
           action:"register",
           displayName:normalizeText(registerDisplayName.value),
@@ -3553,6 +3597,7 @@
         data = parseResponseLoose(data);
 
         if (!data.ok){
+          hideLoading();
           showAlert(registerAlert, data.message || "สมัครสมาชิกไม่สำเร็จ", "error");
           shake(btnRegister);
           return;
@@ -3573,17 +3618,21 @@
         updateMemberUI();
         showSuccessBurst();
         showToast("สมัครสมาชิกสำเร็จ");
+
         setActiveView("claimView");
 
-        hideLoading();
+        hideLoadingSoon(450);
+        scheduleBackgroundAuthHydration(false);
 
-        bootstrapApp(false).catch(() => {});
-        if (state.member && state.member.lastKnownExpiry){
-          handleCheckExpiry(true).catch(() => {});
-        }
       }catch(e){
         hideLoading();
-        showAlert(registerAlert, e && e.message === "TIMEOUT" ? "ระบบใช้เวลานานเกิน 10 วินาที กรุณาลองใหม่อีกครั้ง" : "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้ง", "error");
+        showAlert(
+          registerAlert,
+          e && e.message === "TIMEOUT"
+            ? "ระบบใช้เวลานานเกิน 10 วินาที กรุณาลองใหม่อีกครั้ง"
+            : "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้ง",
+          "error"
+        );
         shake(btnRegister);
       }finally{
         btnRegister.disabled = false;
@@ -4060,6 +4109,12 @@
     loginEmail.addEventListener("input", () => { if (rememberPassword.checked) saveRememberedLogin(); });
     loginPassword.addEventListener("input", () => { if (rememberPassword.checked) saveRememberedLogin(); });
 
+    [loginEmail, loginPassword, registerEmail, registerPassword].forEach(el => {
+      if (!el) return;
+      el.addEventListener("focus", startWarmup, { once:true });
+      el.addEventListener("input", startWarmup, { once:true });
+    });
+
     async function warmBootstrapInBackground(){
       try{
         await bootstrapApp(true);
@@ -4100,6 +4155,10 @@
           warmBootstrapInBackground();
         }, 300);
       }
+
+      setTimeout(() => {
+        startWarmup();
+      }, 250);
     });
 
     window.addEventListener("pageshow", () => {
